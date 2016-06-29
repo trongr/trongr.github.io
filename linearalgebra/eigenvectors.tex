@@ -1,0 +1,92 @@
+\documentclass[11pt]{article}
+\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb,amsfonts,amsthm} 
+\usepackage{epstopdf}
+
+% Computer Concrete
+%\usepackage{concmath}
+%\usepackage[T1]{fontenc}
+
+% Times variants
+%
+%\usepackage{mathptmx}
+%\usepackage[T1]{fontenc}
+%
+%\usepackage[T1]{fontenc}
+%\usepackage{stix}
+%
+% Needs to typeset using LuaLaTeX:
+%\usepackage{unicode-math}
+%\setmainfont{XITS}
+%\setmathfont{XITS Math}
+
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{conj}[thm]{Conjecture}
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{e.g.}[thm]{Example}
+\newtheorem*{keywords}{Keywords}
+
+\theoremstyle{remark}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{note}[thm]{Note}
+
+\title{Eigenvectors and Eigenvalues}
+\author{N. Trong}
+\date{\today}                                           % Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+%\section{}
+%\subsection{}
+
+\begin{prop}
+Eigenvectors corresponding to distinct eigenvalues are linearly independent.
+\end{prop}
+
+\begin{proof}
+Easy to show for two eigenvectors, then use induction.
+\end{proof}
+
+\begin{conj}
+A matrix $A$ is diagonalizable iff the dimensions of its eigenspaces---i.e. the geometric multiplicities over all its eigenvalues---add up to the size of $A$. In this case the geometric multiplicity of each eigenvalue is equal to its algebraic multiplicity.
+\end{conj}
+
+\begin{prop}
+Let $T$ be a linear operator on a finite-dimensional vector space $V$, and let $\beta$ be an ordered basis for $V$. Then $\lambda$ is an eigenvalue of $T$ iff it is an eigenvalue of $[T]_\beta$.
+\end{prop}
+
+\begin{cor}
+Similar matrices have the same eigenvalues, but not necessarily the same eigenvectors.
+\end{cor}
+
+\begin{prop}
+If $v$ is an eigenvector of $A$ corresponding to eigenvalue $\lambda$, and $B$ is similar to $A$ under change of coordinates matrix $Q$, then $Qv$ is an eigenvector of $B$ corresponding to the same eigenvalue $\lambda$.  Another way of saying this is that change of coordinates preserves eigenvalues and eigenvectors.
+\end{prop}
+
+\begin{proof}
+Let $A = Q^{-1}BQ$. Then
+\begin{align*}
+Av &= Q^{-1}BQv \\
+QAv &= BQv \\
+\lambda Qv &= BQv,
+\end{align*}
+so $Qv$ is an eigenvector corresponding to $\lambda$ of $B$.
+\end{proof}
+
+\begin{keywords}
+Eigenvectors, eigenvalues, differential operator, eigenfunctions, algebraic and geometric multiplicities, change of coordinates matrix.
+\end{keywords}
+
+\end{document}  
