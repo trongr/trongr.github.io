@@ -1,0 +1,83 @@
+\documentclass[12pt]{article}
+\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb,amsfonts,amsthm} 
+\usepackage{epstopdf}
+
+% Computer Concrete
+%\usepackage{concmath}
+%\usepackage[T1]{fontenc}
+
+% Times variants
+%
+%\usepackage{mathptmx}
+%\usepackage[T1]{fontenc}
+%
+%\usepackage[T1]{fontenc}
+%\usepackage{stix}
+%
+% Needs to typeset using LuaLaTeX:
+%\usepackage{unicode-math}
+%\setmainfont{XITS}
+%\setmathfont{XITS Math}
+
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{question}[theorem]{Question}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem*{keywords}{Keywords}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{note}[theorem]{Note}
+
+\title{Polynomial Approximation and Sequences of Functions}
+\author{N. Trong}
+\date{\today}                                           % Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+
+\begin{theorem}[Taylor's Theorem]
+If $f', \ldots, f^{(n+1)}$ are defined on $[a, x]$, then 
+$$f(x) = f(a) + f'(a)(x - a) + \cdots + \frac{f^{(n)}(a)}{n!}(x - a)^n + R_n(x)$$
+where $R_n(x) = \frac{f^{(n+1)}(t)}{(n+1)!}(x - a)^{n+1}$ for some $t$ in $(a, x)$.
+\end{theorem}
+
+\begin{note}
+The Mean Value Theorem is a special case of Taylor's Theorem:
+$$f(b) = f(a) + f'(c)(b - a)$$
+for some $c$ between $a$ and $b$.
+\end{note}
+
+\begin{theorem}
+Uniform convergence of functions preserves continuity, i.e. if $f_n$ are continuous and approach $f$ uniformly, then $f$ is continuous.
+\end{theorem}
+
+\begin{question}
+What about differentiability, i.e. if $f_n$ are differentiable and approach $f$ uniformly, is $f$ always differentiable, and is $\lim f_n' = f'$? 
+\end{question}
+
+\begin{example}
+No to the second question: the functions $f_n(x) = \frac{1}{n} \sin(nx)$ converge uniformly to the zero function, which \textit{is} differentiable. But, the limit of the derivatives don't exist. What about just differentiability? 
+\end{example}
+
+
+
+\begin{keywords}
+Taylor's Theorem, Taylor polynomial, error / remainder term, Cauchy, Lagrange, integral form, point-wise, uniform convergence, metric space, Cauchy criterion, Koch snowflake.
+\end{keywords}
+
+\end{document}

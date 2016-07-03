@@ -1,4 +1,4 @@
-\documentclass[11pt]{article}
+\documentclass[12pt]{article}
 \usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
 \geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
 %\geometry{landscape}                % Activate for for rotated page geometry
@@ -6,6 +6,7 @@
 \usepackage{graphicx}
 \usepackage{amsmath,amssymb,amsfonts,amsthm} 
 \usepackage{epstopdf}
+\usepackage{cleveref}
 
 % Computer Concrete
 %\usepackage{concmath}
@@ -27,20 +28,21 @@
 \DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
 
 \theoremstyle{plain}
-\newtheorem{thm}{Theorem}
-\newtheorem{cor}[thm]{Corollary}
-\newtheorem{lem}[thm]{Lemma}
-\newtheorem{prop}[thm]{Proposition}
-\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{question}[theorem]{Question}
 
 \theoremstyle{definition}
-\newtheorem{defn}[thm]{Definition}
-\newtheorem{e.g.}[thm]{Example}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
 \newtheorem*{keywords}{Keywords}
 
 \theoremstyle{remark}
-\newtheorem{rem}[thm]{Remark}
-\newtheorem{note}[thm]{Note}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{note}[theorem]{Note}
 
 \title{Eigenvectors and Eigenvalues}
 \author{N. Trong}
@@ -51,29 +53,39 @@
 %\section{}
 %\subsection{}
 
-\begin{prop}
+\begin{proposition}\label{eigenindependence}
 Eigenvectors corresponding to distinct eigenvalues are linearly independent.
-\end{prop}
+\end{proposition}
 
 \begin{proof}
 Easy to show for two eigenvectors, then use induction.
 \end{proof}
 
-\begin{conj}
+\begin{theorem}\label{diagonalizable}
+A linear operator $T$ on a finite-dimensional vector space $V$ is diagonalizable iff there exists an ordered basis $\beta$ for $V$ consisting of eigenvectors of $T$. Furthermore, if $T$ is diagonalizable, $\beta = \{v_1,\ldots, v_n\}$ is an ordered basis of eigenvectors of $T$, and $D = [T]_\beta$, then $D$ is a diagonal matrix and $D_{jj}$ is the eigenvalue corresponding to $v_j$ for $1 \leq j \leq n$.
+\end{theorem}
+
+Proof in the book.
+
+\begin{corollary}
 A matrix $A$ is diagonalizable iff the dimensions of its eigenspaces---i.e. the geometric multiplicities over all its eigenvalues---add up to the size of $A$. In this case the geometric multiplicity of each eigenvalue is equal to its algebraic multiplicity.
-\end{conj}
+\end{corollary}
 
-\begin{prop}
+\begin{proof}
+By \Cref{eigenindependence}, the eigenspaces are linearly independent. If their dimensions added up to less than $n$, we'd have too few eigenvectors to make a basis for $V$, and by \Cref{diagonalizable} $A$ would not be diagonalizable. If they added up to more than $n$, we'd have too many linearly independent vectors in $V$. Conversely if they do add up to $n$, then the union of bases for the eigenspaces forms an eigenbasis for $V$, and $A$ is diagonalizable. 
+\end{proof}
+
+\begin{proposition}
 Let $T$ be a linear operator on a finite-dimensional vector space $V$, and let $\beta$ be an ordered basis for $V$. Then $\lambda$ is an eigenvalue of $T$ iff it is an eigenvalue of $[T]_\beta$.
-\end{prop}
+\end{proposition}
 
-\begin{cor}
+\begin{corollary}
 Similar matrices have the same eigenvalues, but not necessarily the same eigenvectors.
-\end{cor}
+\end{corollary}
 
-\begin{prop}
+\begin{proposition}
 If $v$ is an eigenvector of $A$ corresponding to eigenvalue $\lambda$, and $B$ is similar to $A$ under change of coordinates matrix $Q$, then $Qv$ is an eigenvector of $B$ corresponding to the same eigenvalue $\lambda$.  Another way of saying this is that change of coordinates preserves eigenvalues and eigenvectors.
-\end{prop}
+\end{proposition}
 
 \begin{proof}
 Let $A = Q^{-1}BQ$. Then
@@ -82,11 +94,119 @@ Av &= Q^{-1}BQv \\
 QAv &= BQv \\
 \lambda Qv &= BQv,
 \end{align*}
-so $Qv$ is an eigenvector corresponding to $\lambda$ of $B$.
+so $Qv$ is an eigenvector of $B$ corresponding to $\lambda$.
+\end{proof}
+
+\begin{definition}\label{determinantofoperator}
+Let $T$ be a linear operator on a finite-dimensional vector space $V$. Define the determinant of $T$ to be $\det T = \det([T]_\beta)$ for any ordered basis $\beta$ for $V$.
+\end{definition}
+
+\begin{note}
+Since the determinant is multiplicative, for any two bases $\beta$ and $\alpha$ we have
+\begin{align*}
+\det([T]_\beta) &= \det(Q^{-1} [T]_\alpha Q) \\
+&= \det Q^{-1} \det([T]_\alpha) \det Q \\
+&= \det([T]_\alpha),
+\end{align*}
+where $Q = [I]^\alpha_\beta$ is the change of basis matrix from $\beta$ to $\alpha$, and therefore $\det T$ is well defined, i.e. it's independent of the choice of basis.
+\end{note}
+
+\begin{proposition}\label{changeofbasislinear}
+Change of basis is a linear operation, i.e. $$[T + \lambda U]_\beta = [T]_\beta + \lambda[U]_\beta.$$
+\end{proposition}
+
+\begin{proof}
+Let $v$ be a vector, $\beta = \{v_1,\ldots, v_n\}$, and $T(v) = \sum a_i v_i, U(v) = \sum b_i v_i$. We want to show that
+\begin{align*}
+[T + \lambda U]_\beta [v]_\beta &= ([T]_\beta + \lambda[U]_\beta)[v]_\beta \\
+[T(v) + \lambda U(v)]_\beta &= [T(v)]_\beta + \lambda[U(v)]_\beta.
+\end{align*}
+The RHS is $[a_i] + \lambda [b_i]$, which is the same as the LHS: $[a_i + \lambda b_i]$.
+\end{proof}
+
+\begin{proposition}
+For any scalar $\lambda$ and any ordered basis $\beta$ for $V$, $\det(T - \lambda I_V) = \det([T]_\beta - \lambda I)$.
+\end{proposition}
+
+\begin{proof}
+Follows from \Cref{determinantofoperator} and \Cref{changeofbasislinear}.
+\end{proof}
+
+\begin{proposition}
+A linear operator $T$ on a finite-dimensional vector space is invertible iff zero is not an eigenvalue of $T$.
+\end{proposition}
+
+\begin{proof}
+If zero is an eigenvalue of $T$, then $\det(T - 0 \cdot I) = 0$, and $T$ is not invertible. Conversely, if $T$ is not invertible, then there exists a nonzero vector $v$ s.t. $T(v) = 0 = 0 \cdot v$, and so 0 is an eigenvalue and $v$ is an eigenvector of $T$.
+\end{proof}
+
+\begin{proposition}
+Let $T$ be an invertible linear operator. Then a scalar $\lambda$ is an eigenvalue of $T$ iff $\lambda^{-1}$ is an eigenvalue of $T^{-1}$. Note that by the previous proposition $\lambda$ is nonzero, so $\lambda^{-1}$ exists.
+\end{proposition}
+
+\begin{proof}
+Apply $T^{-1}$ to both sides of $T(v) = \lambda v$.
+\end{proof}
+
+\begin{proposition}
+The eigenvalues of an upper triangular matrix $M$ are the diagonal entries of $M$.
+\end{proposition}
+
+\begin{proof}
+Follows from the fact that the determinant of an upper triangular matrix is the product of its diagonal entries.
+\end{proof}
+
+\begin{definition}
+A scalar matrix is a square matrix of the form $\lambda I$ for some scalar $\lambda$.
+\end{definition}
+
+\begin{proposition}
+If square matrix $A$ is similar to a scalar matrix $\lambda I$, then $A = \lambda I$.
+\end{proposition}
+
+\begin{proof}
+If $A$ is similar to $\lambda I$, that means there is an invertible matrix $Q$ s.t. $A = Q^{-1} \lambda I Q = \lambda I$.
+\end{proof}
+
+\begin{proposition}
+A diagonalizable matrix $A$ having only one eigenvalue is a scalar matrix.
+\end{proposition}
+
+\begin{proof}
+If $A$ is diagonalizable, this means $A$ is similar to a diagonal matrix, whose diagonal entries are its eigenvalues. Since $A$ only has one eigenvalue $\lambda$, the diagonal entries are all equal to $\lambda$.
+\end{proof}
+
+\begin{example}
+$\begin{bmatrix}
+1 & 1 \\
+0 & 1 \\
+\end{bmatrix}$ is not diagonalizable.
+\end{example}
+
+\begin{proposition}
+Similar matrices have the same characteristic polynomial.
+\end{proposition}
+
+\begin{proof}
+Let $A = Q^{-1} B Q$. Then 
+\begin{align*}
+\det(A - tI) &= \det(Q^{-1} B Q - Q^{-1} tI Q) \\
+&= \det(Q^{-1}(B - tI)Q) \\
+&= \det(Q^{-1})\det(B - tI)\det(Q) \\
+&= \det(B - tI).\qedhere
+\end{align*}
+\end{proof}
+
+\begin{corollary}
+The definition of the characteristic polynomial of a linear operator on a finite-dimensional vector space $V$ is independent of the choice of basis for $V$.
+\end{corollary}
+
+\begin{proof}
+Follows immediately from the fact that similar matrices are the same linear operator expressed under different bases.
 \end{proof}
 
 \begin{keywords}
-Eigenvectors, eigenvalues, differential operator, eigenfunctions, algebraic and geometric multiplicities, change of coordinates matrix.
+Eigenvectors, eigenvalues, eigenspace, eigenbasis, differential operator, eigenfunctions, algebraic and geometric multiplicities, change of coordinates matrix, scalar matrix, characteristic polynomial.
 \end{keywords}
 
-\end{document}  
+\end{document}
