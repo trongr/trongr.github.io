@@ -4,11 +4,18 @@
 %\geometry{landscape}                % Activate for for rotated page geometry
 %\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
 \usepackage{graphicx}
+\graphicspath{{images/}}
 \usepackage{amsmath,amssymb,amsfonts,amsthm} 
 \usepackage{epstopdf}
+\usepackage{epigraph}
 
 % Computer Concrete
 %\usepackage{concmath}
+%\usepackage[T1]{fontenc}
+
+% garamond
+%\usepackage[cmintegrals,cmbraces]{newtxmath}
+%\usepackage{ebgaramond-maths}
 %\usepackage[T1]{fontenc}
 
 % Times variants
@@ -38,17 +45,22 @@
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{example}[theorem]{Example}
 \newtheorem*{keywords}{Keywords}
+\newtheorem*{sources}{Sources}
 
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}
 \newtheorem{note}[theorem]{Note}
 
-\title{Polynomial Approximation and Sequences of Functions}
+\title{Polynomial Approximation and Sequences}
 \author{N. Trong}
 \date{\today}                                           % Activate to display a given date or no date
 
 \begin{document}
 \maketitle
+
+%\epigraph{\textit{}}{}
+
+\part{Polynomial Approximation}
 
 \begin{theorem}[Taylor's Theorem]
 If $f', \ldots, f^{(n+1)}$ are defined on $[a, x]$, then 
@@ -62,9 +74,15 @@ $$f(b) = f(a) + f'(c)(b - a)$$
 for some $c$ between $a$ and $b$.
 \end{note}
 
-\begin{theorem}
+\part{Sequences}
+
+\begin{theorem}[Uniform Limit Theorem]
 Uniform convergence of functions preserves continuity, i.e. if $f_n$ are continuous and approach $f$ uniformly, then $f$ is continuous.
 \end{theorem}
+
+\begin{proposition}
+The uniform limit of uniformly continuous functions is uniformly continuous.
+\end{proposition}
 
 \begin{question}
 What about differentiability, i.e. if $f_n$ are differentiable and approach $f$ uniformly, is $f$ always differentiable, and is $\lim f_n' = f'$? 
@@ -74,10 +92,56 @@ What about differentiability, i.e. if $f_n$ are differentiable and approach $f$ 
 No to the second question: the functions $f_n(x) = \frac{1}{n} \sin(nx)$ converge uniformly to the zero function, which \textit{is} differentiable. But, the limit of the derivatives don't exist. What about just differentiability? 
 \end{example}
 
+\centerline{\includegraphics[scale=1]{uniformconvergence1}}
 
+\begin{example}
+Still No, e.g. the functions $f_n(x) = \sqrt{x^2 + 1/n}$ converge uniformly to $f = |x|$, which is not differentiable at zero.
+\end{example}
+
+\centerline{\includegraphics[scale=0.5]{uniformconvergence2}}
+
+\begin{example}[Weierstrass function]
+The Weierstrass function $$f(x) = \sum^\infty_{k=0} a^k \cos(b^k \pi x),$$ for appropriate values $a$ and $b$, is the uniform limit of $$f_n = \sum^n_{k=0} a^k \cos(b^k \pi x),$$ but is nowhere differentiable.
+\end{example}
+
+\centerline{\includegraphics[scale=0.5]{nodiff1}}
+
+\begin{question}
+Is the Koch snowflake nowhere differentiable?
+\end{question}
+
+Yes. Proof?
+
+\centerline{\includegraphics[scale=0.5]{biomimicry-koch-snowflake}}
+
+\begin{definition}
+Let $\{a_n\}$ be a sequence, and $0 \leq a < b \leq 1$. Let $N(n; a, b)$ be the number of integers $j \leq n$ s.t. $a_j \in [a, b].$ A sequence $\{a_n\}$ of numbers in $[0, 1]$ is called uniformly distributed in $[0, 1]$ if $$\lim_{n \to \infty} \frac{N(n; a, b)}{n} = b - a$$ for all $a, b,$ s.t. $0 \leq a < b \leq 1.$
+\end{definition}
+
+\begin{proposition}
+If $s$ is a step function on $[0, 1]$, and $\{a_n\}$ is uniformly distributed in $[0, 1]$, then $$\int_0^1 s = \lim_{n\to\infty} \frac{s(a_1) + \cdots + s(a_n)}{n}.$$
+\end{proposition}
+
+\begin{proof}
+Let $\{\Delta_1, \ldots, \Delta_m\}$ be a partition of $[0, 1]$ corresponding to the steps in $s.$ Then (with a slight abuse of notation) we have 
+\begin{align*}
+\int_0^1 s &= \sum_{i=1}^m s(\Delta_i) \Delta_i \\
+&= \sum_{i=1}^m s(\Delta_i) \lim_{n \to \infty} \frac{1}{n} N(n; \Delta_i) \\
+&= \lim_{n \to \infty} \frac{1}{n} \sum_{i=1}^m s(\Delta_i) N(n; \Delta_i) \\
+&= \lim_{n \to \infty} \frac{1}{n} \sum_{i=1}^n s(a_i).\qedhere
+\end{align*}
+\end{proof}
+
+\begin{proposition}
+If $f$ is integrable on $[0, 1]$, and $\{a_n\}$ is uniformly distributed in $[0, 1]$, then $$\int_0^1 f = \lim_{n\to\infty} \frac{f(a_1) + \cdots + f(a_n)}{n}.$$
+\end{proposition}
+
+\begin{proof}[Sketch]
+Since $f$ is integrable, there is a step function $s$ such that $\int_0^1 f$ is close to $\int_0^1 s$, which is close to $\frac{s(a_1) + \cdots + s(a_n)}{n}$, which is close to $\frac{f(a_1) + \cdots + f(a_n)}{n}$.
+\end{proof}
 
 \begin{keywords}
-Taylor's Theorem, Taylor polynomial, error / remainder term, Cauchy, Lagrange, integral form, point-wise, uniform convergence, metric space, Cauchy criterion, Koch snowflake.
+Taylor's Theorem, Taylor polynomial, error / remainder term, Cauchy, Lagrange, integral form, point-wise, uniform convergence, metric space, Cauchy criterion, Koch snowflake, Weierstrass function, uniformly distributed / equidistributed sequence.
 \end{keywords}
 
 \end{document}
