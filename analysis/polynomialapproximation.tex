@@ -13,15 +13,10 @@
 %\usepackage{concmath}
 %\usepackage[T1]{fontenc}
 
-% garamond
-%\usepackage[cmintegrals,cmbraces]{newtxmath}
-%\usepackage{ebgaramond-maths}
-%\usepackage[T1]{fontenc}
-
 % Times variants
 %
-%\usepackage{mathptmx}
-%\usepackage[T1]{fontenc}
+\usepackage{mathptmx}
+\usepackage[T1]{fontenc}
 %
 %\usepackage[T1]{fontenc}
 %\usepackage{stix}
@@ -30,6 +25,11 @@
 %\usepackage{unicode-math}
 %\setmainfont{XITS}
 %\setmathfont{XITS Math}
+
+% garamond
+%\usepackage[cmintegrals,cmbraces]{newtxmath}
+%\usepackage{ebgaramond-maths}
+%\usepackage[T1]{fontenc}
 
 \DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
 
@@ -52,7 +52,7 @@
 \newtheorem{note}[theorem]{Note}
 
 \title{Polynomial Approximation and Sequences}
-\author{N. Trong}
+\author{Nhan Trong}
 \date{\today}                                           % Activate to display a given date or no date
 
 \begin{document}
@@ -61,6 +61,10 @@
 %\epigraph{\textit{}}{}
 
 \part{Polynomial Approximation}
+
+\begin{keywords}
+Taylor's Theorem, Taylor polynomial, error / remainder term, Cauchy, Lagrange, integral form.
+\end{keywords}
 
 \begin{theorem}[Taylor's Theorem]
 If $f', \ldots, f^{(n+1)}$ are defined on $[a, x]$, then 
@@ -75,6 +79,10 @@ for some $c$ between $a$ and $b$.
 \end{note}
 
 \part{Sequences}
+
+\begin{keywords}
+Uniform Limit Theorem, point-wise, uniform convergence, metric space, Cauchy criterion, Koch snowflake, Weierstrass function, uniformly distributed / equidistributed sequence.
+\end{keywords}
 
 \begin{theorem}[Uniform Limit Theorem]
 Uniform convergence of functions preserves continuity, i.e. if $f_n$ are continuous and approach $f$ uniformly, then $f$ is continuous.
@@ -92,19 +100,19 @@ What about differentiability, i.e. if $f_n$ are differentiable and approach $f$ 
 No to the second question: the functions $f_n(x) = \frac{1}{n} \sin(nx)$ converge uniformly to the zero function, which \textit{is} differentiable. But, the limit of the derivatives don't exist. What about just differentiability? 
 \end{example}
 
-\centerline{\includegraphics[scale=1]{uniformconvergence1}}
+\centerline{\includegraphics[width=1.0\textwidth]{uniformconvergence1}}
 
 \begin{example}
 Still No, e.g. the functions $f_n(x) = \sqrt{x^2 + 1/n}$ converge uniformly to $f = |x|$, which is not differentiable at zero.
 \end{example}
 
-\centerline{\includegraphics[scale=0.5]{uniformconvergence2}}
+\centerline{\includegraphics[width=1.0\textwidth]{uniformconvergence2}}
 
 \begin{example}[Weierstrass function]
 The Weierstrass function $$f(x) = \sum^\infty_{k=0} a^k \cos(b^k \pi x),$$ for appropriate values $a$ and $b$, is the uniform limit of $$f_n = \sum^n_{k=0} a^k \cos(b^k \pi x),$$ but is nowhere differentiable.
 \end{example}
 
-\centerline{\includegraphics[scale=0.5]{nodiff1}}
+\centerline{\includegraphics[width=1.0\textwidth]{nodiff1}}
 
 \begin{question}
 Is the Koch snowflake nowhere differentiable?
@@ -112,7 +120,7 @@ Is the Koch snowflake nowhere differentiable?
 
 Yes. Proof?
 
-\centerline{\includegraphics[scale=0.5]{biomimicry-koch-snowflake}}
+\centerline{\includegraphics[width=1.0\textwidth]{biomimicry-koch-snowflake}}
 
 \begin{definition}
 Let $\{a_n\}$ be a sequence, and $0 \leq a < b \leq 1$. Let $N(n; a, b)$ be the number of integers $j \leq n$ s.t. $a_j \in [a, b].$ A sequence $\{a_n\}$ of numbers in $[0, 1]$ is called uniformly distributed in $[0, 1]$ if $$\lim_{n \to \infty} \frac{N(n; a, b)}{n} = b - a$$ for all $a, b,$ s.t. $0 \leq a < b \leq 1.$
@@ -123,7 +131,7 @@ If $s$ is a step function on $[0, 1]$, and $\{a_n\}$ is uniformly distributed in
 \end{proposition}
 
 \begin{proof}
-Let $\{\Delta_1, \ldots, \Delta_m\}$ be a partition of $[0, 1]$ corresponding to the steps in $s.$ Then (with a slight abuse of notation) we have 
+Let $\Delta_1, \ldots, \Delta_m$ be a partition of $[0, 1]$ corresponding to the steps in $s.$ Then (with a slight abuse of notation) we have 
 \begin{align*}
 \int_0^1 s &= \sum_{i=1}^m s(\Delta_i) \Delta_i \\
 &= \sum_{i=1}^m s(\Delta_i) \lim_{n \to \infty} \frac{1}{n} N(n; \Delta_i) \\
@@ -139,9 +147,5 @@ If $f$ is integrable on $[0, 1]$, and $\{a_n\}$ is uniformly distributed in $[0,
 \begin{proof}[Sketch]
 Since $f$ is integrable, there is a step function $s$ such that $\int_0^1 f$ is close to $\int_0^1 s$, which is close to $\frac{s(a_1) + \cdots + s(a_n)}{n}$, which is close to $\frac{f(a_1) + \cdots + f(a_n)}{n}$.
 \end{proof}
-
-\begin{keywords}
-Taylor's Theorem, Taylor polynomial, error / remainder term, Cauchy, Lagrange, integral form, point-wise, uniform convergence, metric space, Cauchy criterion, Koch snowflake, Weierstrass function, uniformly distributed / equidistributed sequence.
-\end{keywords}
 
 \end{document}
