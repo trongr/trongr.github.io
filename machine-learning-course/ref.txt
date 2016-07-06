@@ -1,0 +1,1 @@
+C:\Software\Octave-3.6.4\bin\octave-3.6.4.exe -i --line-editing
