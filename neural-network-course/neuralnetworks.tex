@@ -3,12 +3,14 @@
 \geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
 %\geometry{landscape}                % Activate for for rotated page geometry
 %\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{float}
 \usepackage{graphicx}
 \graphicspath{{images/}}
-\usepackage{amsmath,amssymb,amsfonts,amsthm} 
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
 \usepackage{epstopdf}
 \usepackage{cleveref}
 \usepackage{epigraph}
+\usepackage{url}
 
 % Computer Concrete
 %\usepackage{concmath}
@@ -45,9 +47,9 @@
 \theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{example}[theorem]{Example}
-\newtheorem*{keywords}{Keywords}
-\newtheorem*{sources}{Sources}
-\newtheorem*{todo}{TODO}
+\newtheorem{keywords}{Keywords}
+\newtheorem{reference}{Reference}
+\newtheorem{todo}{TODO}
 
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}
@@ -62,10 +64,28 @@
 
 %\epigraph{\textit{}}{}
 
-
+\part{Different Types of Neurons and Learning}
 
 \begin{keywords}
-
+Fruit flies, MNIST, TIMIT, linear, binary threshold, rectified / linear threshold, logistic, stochastic binary neurons, supervised, unsupervised, reinforcement learning.
 \end{keywords}
+
+\begin{question}
+How many other neurons does a neuron talk to? Do they change neighbours?
+\end{question}
+
+\begin{note}
+``Goal of unsupervised learning: provides a compact, low-dimensional representation of the input,'' like Pied Piper's compression algorithm using neural networks!
+\end{note}
+
+\part{Neural Network Architectures}
+
+\begin{keywords}
+Feed forward, recurrent, symmetrically connected neural network, perceptrons, convexity condition.
+\end{keywords}
+
+\begin{reference}
+\url{http://www.cs.toronto.edu/~rgrosse/csc321/homework.html}.
+\end{reference}
 
 \end{document}
