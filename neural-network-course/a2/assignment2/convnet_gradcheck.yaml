@@ -1,0 +1,18 @@
+input_image_size_y: 16
+input_image_size_x: 16
+input_num_channels : 1
+
+network:
+  - name : conv1
+    type : CONVOLUTIONAL
+    num_channels : 2
+    kernel_size: 3
+    stride: 1
+    padding: 1
+    init_wt : 0.1
+    convolve_method: 'method2'
+
+  - name : output
+    type : FC
+    num_channels : 10
+    init_wt : 0.1

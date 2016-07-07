@@ -1,0 +1,62 @@
+max_epochs: 10
+batch_size: 100
+data_path: usps.npz
+checkpoint_file: convnet2.npz
+performance_stats: convnet2_stats.npy
+input_image_size_y: 16
+input_image_size_x: 16
+input_num_channels : 1
+display: True
+display_after: 10
+network:
+  - name : conv1
+    type : CONVOLUTIONAL
+    num_channels : 16
+    kernel_size: 5
+    stride: 1
+    padding: 2
+    init_wt : 0.1
+    epsilon: 0.05
+    momentum: 0.9
+    l2_decay: 0.0001
+    convolve_method: 'method1'
+
+  - name : maxpool1
+    type : MAXPOOL
+    num_channels : 16
+    kernel_size: 2
+    stride: 2
+
+  - name : conv2
+    type : CONVOLUTIONAL
+    num_channels : 32
+    kernel_size: 5
+    stride: 1
+    padding: 2
+    init_wt : 0.1
+    epsilon: 0.05
+    momentum: 0.9
+    l2_decay: 0.0001
+    convolve_method: 'method1'
+
+  - name : maxpool2
+    type : MAXPOOL
+    num_channels : 32
+    kernel_size: 2
+    stride: 2
+
+  - name : fc1
+    type : FC
+    num_channels : 512
+    init_wt : 0.02
+    epsilon: 0.02
+    momentum: 0.9
+    l2_decay: 0.0001
+
+  - name : output
+    type : FC
+    num_channels : 10
+    init_wt : 0.02
+    epsilon: 0.02
+    momentum: 0.9
+    l2_decay: 0.0001

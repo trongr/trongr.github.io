@@ -1,0 +1,26 @@
+max_epochs: 25
+batch_size: 100
+data_path: usps.npz
+checkpoint_file: net_1layer.npz
+performance_stats: net_1layer_stats.npy
+input_image_size_y: 16
+input_image_size_x: 16
+input_num_channels: 1
+display: True
+display_after: 20
+network:
+  - name : fc1
+    type : FC
+    num_channels : 512
+    init_wt : 0.05
+    epsilon: 0.02
+    momentum: 0.9
+    l2_decay: 0.0001
+
+  - name : output
+    type : FC
+    num_channels : 10
+    init_wt : 0.01
+    epsilon: 0.02
+    momentum: 0.9
+    l2_decay: 0.0001

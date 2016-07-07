@@ -18,8 +18,8 @@
 
 % Times variants
 %
-\usepackage{mathptmx}
-\usepackage[T1]{fontenc}
+%\usepackage{mathptmx}
+%\usepackage[T1]{fontenc}
 %
 %\usepackage[T1]{fontenc}
 %\usepackage{stix}
@@ -43,12 +43,10 @@
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{conjecture}[theorem]{Conjecture}
 \newtheorem{question}[theorem]{Question}
+\newtheorem{definition}[theorem]{Definition}
 
 \theoremstyle{definition}
-\newtheorem{definition}[theorem]{Definition}
 \newtheorem{example}[theorem]{Example}
-\newtheorem{keywords}{Keywords}
-\newtheorem{reference}{Reference}
 \newtheorem{todo}{TODO}
 
 \theoremstyle{remark}
@@ -62,13 +60,9 @@
 \begin{document}
 \maketitle
 
-%\epigraph{\textit{}}{}
+\epigraph{Pipey. \textit{Looks like you want to compress a movie file, can I help? You know with Pied Piper's revolutionary neural network optimized sharded data distribution system, it's just six clicks away, follow meeee!}}{Silicon Valley}
 
 \part{Different Types of Neurons and Learning}
-
-\begin{keywords}
-Fruit flies, MNIST, TIMIT, linear, binary threshold, rectified / linear threshold, logistic, stochastic binary neurons, supervised, unsupervised, reinforcement learning.
-\end{keywords}
 
 \begin{question}
 How many other neurons does a neuron talk to? Do they change neighbours?
@@ -78,14 +72,53 @@ How many other neurons does a neuron talk to? Do they change neighbours?
 ``Goal of unsupervised learning: provides a compact, low-dimensional representation of the input,'' like Pied Piper's compression algorithm using neural networks!
 \end{note}
 
+\section{Keywords}
+
+Fruit flies, MNIST, TIMIT, linear, binary threshold, rectified / linear threshold, logistic, stochastic binary neurons, supervised, unsupervised, reinforcement learning.
+
 \part{Neural Network Architectures}
 
-\begin{keywords}
-Feed forward, recurrent, symmetrically connected neural network, perceptrons, convexity condition.
-\end{keywords}
+\section{Keywords}
 
-\begin{reference}
-\url{http://www.cs.toronto.edu/~rgrosse/csc321/homework.html}.
-\end{reference}
+Feed forward, recurrent, symmetrically connected neural network, perceptrons, convexity condition.
+
+\part{Perceptron Learning Algorithm}
+
+\begin{todo}
+Proof of why perceptron learning works is very sketchy! Need more details.
+\end{todo}
+
+\part{Linear Neuron Learning Algorithm}
+
+\begin{definition}
+Given a training case $x$ and a weight vector $w$, the neuron's estimate $h$ of the desired output is $$h(x, w) = \sum_{i}^{} w_i x_i = w^T x.$$ Define the cost function $J$ to be the squared difference error $$J = \sum_{x}^{} (h - y)^2.$$ Finally the goal of learning is to minimize $J$: $$\min_{w} J.$$
+\end{definition}
+
+Actually that was using notation from Andrew Ng's class. In this course it is:
+
+\begin{definition}
+Given a training case $x_n$ and a weight vector $w$, the neuron's estimate $y_n$ of the desired output is $$y_n = \sum_{i}^{} w_i x_{ni} = w^T x_n.$$ Define the cost function $E_n$ to be the squared difference error $$E_n = \frac{1}{2}(t_n - y_n)^2,$$ where $t_n$ is the target output, i.e. the ``ground-truth'', and define the total error to be $$E = \sum_{n}^{} E_n.$$ Finally the goal of learning is to minimize $E$: $$\min_{w} E.$$
+\end{definition}
+
+\section{Delta Rule: Learning by Gradient Descent}
+
+The error partials are 
+$$\frac{\partial E}{\partial w_i} = \frac{1}{2} \sum_n \frac{dE_n}{dy_n} \frac{\partial y_n}{\partial w_i} = - \sum_n (t_n - y_n) x_{ni}.$$
+The Delta Rule / Gradient Descent says that we should change $w_i$ in the opposite direction as the change in error along $w_i$, give or take a learning rate $\alpha$:
+$$\Delta w_i = - \alpha \frac{\partial E}{\partial w_i} = \sum_n \alpha (t_n - y_n) x_{ni},$$ i.e. $\alpha$ tells us how much to change, and the negative sign tells us which direction to go, namely the opposite direction. E.g. if $\frac{\partial E}{\partial w_i} > 0,$ that means the error goes up as $w_i$ increases, so we want to decrease $w_i$ to make it go down, and vice versa: always go in the opposite direction as $\frac{\partial E}{\partial w_i},$ hence the negative sign.
+
+\section{Keywords}
+
+Linear neurons / linear filters, iterative / programmatic VS analytic / mathematical approach, Delta Rule / Gradient Descent, batch VS online.
+
+\begin{thebibliography}{99}
+
+\bibitem{hinton}
+Geoffrey E. Hinton's Neural Networks video lectures.
+
+\bibitem{csc321}
+\url{http://www.cs.toronto.edu/~rgrosse/csc321/}
+
+\end{thebibliography}
 
 \end{document}
