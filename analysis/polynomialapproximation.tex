@@ -15,8 +15,8 @@
 
 % Times variants
 %
-\usepackage{mathptmx}
-\usepackage[T1]{fontenc}
+%\usepackage{mathptmx}
+%\usepackage[T1]{fontenc}
 %
 %\usepackage[T1]{fontenc}
 %\usepackage{stix}
@@ -44,21 +44,24 @@
 \theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{example}[theorem]{Example}
-\newtheorem*{keywords}{Keywords}
-\newtheorem*{sources}{Sources}
+\newtheorem{keywords}{Keywords}
+\newtheorem{sources}{Sources}
 
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}
 \newtheorem{note}[theorem]{Note}
+
+\newcommand{\defeq}{\overset{\mathrm{def}}{=}}
 
 \title{Polynomial Approximation and Sequences}
 \author{Nhan Trong}
 \date{\today}                                           % Activate to display a given date or no date
 
 \begin{document}
+\sloppy
 \maketitle
 
-%\epigraph{\textit{}}{}
+\epigraph{\textit{In mathematics you don't understand things. You just get used to them.}}{John von Neumann}
 
 \part{Polynomial Approximation}
 
@@ -81,7 +84,7 @@ for some $c$ between $a$ and $b$.
 \part{Sequences}
 
 \begin{keywords}
-Uniform Limit Theorem, point-wise, uniform convergence, metric space, Cauchy criterion, Koch snowflake, Weierstrass function, uniformly distributed / equidistributed sequence.
+Uniform Limit Theorem, point-wise, uniform convergence, metric space, Cauchy criterion, Koch snowflake, Weierstrass function, uniformly distributed / equidistributed sequence, Bolzano-Weierstrass / Sequential Compactness Theorem.
 \end{keywords}
 
 \begin{theorem}[Uniform Limit Theorem]
@@ -146,6 +149,20 @@ If $f$ is integrable on $[0, 1]$, and $\{a_n\}$ is uniformly distributed in $[0,
 
 \begin{proof}[Sketch]
 Since $f$ is integrable, there is a step function $s$ such that $\int_0^1 f$ is close to $\int_0^1 s$, which is close to $\frac{s(a_1) + \cdots + s(a_n)}{n}$, which is close to $\frac{f(a_1) + \cdots + f(a_n)}{n}$.
+\end{proof}
+
+\begin{theorem}[Bolzano-Weierstrass / Sequential Compactness Theorem]
+An infinite sequence contained in a closed interval $I$ has a limit point in $I.$
+\end{theorem}
+
+\begin{proposition}
+Let $f$ be a function defined on $[0, 1]$ such that $\lim\limits_{y\to a} f(y)$ exists for all $a \in [0, 1]$. Then for any $\epsilon > 0$ there are only finitely many points $a \in [0, 1]$ with $$|\lim\limits_{y\to a} f(y) - f(a)| > \epsilon.$$
+\end{proposition}
+
+\begin{proof}
+Suppose that there are infinitely many such points $a.$ Then by the Bolzano-Weierstrass Theorem, these points have a limit $x \in [0, 1].$ Let $$L \defeq \lim\limits_{y \to x} f(y) = \lim\limits_{a\to x} f(a).$$
+
+The condition $$|\lim\limits_{y\to a} f(y) - f(a)| > \epsilon$$ means that for $y$ close to $a$, $f(y)$ is far from $f(a).$ Similarly $\lim\limits_{a \to x} f(a) = L$ means that for $a$ close to $x,$ $f(a)$ is close to $L.$ Together this means that for $y$ close to $x$ and $y$ close to $a$ for some $a$, we have that $f(y)$ is far from $L$, but this contradicts the fact that $L = \lim\limits_{y \to x} f(y),$ i.e. for all $y$ close to $x$, $f(y)$ is close to $L.$
 \end{proof}
 
 \end{document}
