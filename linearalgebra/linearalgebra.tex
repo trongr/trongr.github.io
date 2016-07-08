@@ -3,10 +3,18 @@
 \geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
 %\geometry{landscape}                % Activate for for rotated page geometry
 %\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{caption} % lets you put \caption{} for empty caption in figure
+\usepackage{float}
 \usepackage{graphicx}
+\graphicspath{{images/}}
 \usepackage{amsmath,amssymb,amsfonts,amsthm} 
 \usepackage{epstopdf}
-\usepackage{cleveref}
+\usepackage{epigraph}
+\usepackage{url}
+\usepackage{mathtools}
+\usepackage{tikz-cd}
+\usepackage{hyperref}
+%\usepackage{cleveref}
 
 % Computer Concrete
 %\usepackage{concmath}
@@ -14,8 +22,8 @@
 
 % Times variants
 %
-\usepackage{mathptmx}
-\usepackage[T1]{fontenc}
+%\usepackage{mathptmx}
+%\usepackage[T1]{fontenc}
 %
 %\usepackage[T1]{fontenc}
 %\usepackage{stix}
@@ -34,28 +42,68 @@
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{conjecture}[theorem]{Conjecture}
 \newtheorem{question}[theorem]{Question}
+\newtheorem{definition}[theorem]{Definition}
 
 \theoremstyle{definition}
-\newtheorem{definition}[theorem]{Definition}
 \newtheorem{example}[theorem]{Example}
-\newtheorem*{keywords}{Keywords}
 
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}
 \newtheorem{note}[theorem]{Note}
 
-\title{Eigenvectors and Eigenvalues}
+%\newcommand{\defeq}{\coloneqq}
+\newcommand*{\defeq}{\mathrel{\vcenter{\baselineskip0.5ex \lineskiplimit0pt
+                     \hbox{\scriptsize.}\hbox{\scriptsize.}}}
+                     =}
+\newcommand{\N}{\mathbf N} 
+\newcommand{\Q}{\mathbf Q} 
+\newcommand{\R}{\mathbf R}
+
+\DeclareMathOperator{\tr}{tr}
+
+\title{Linear Algebra}
 \author{Nhan Trong}
-\date{\today}                                           % Activate to display a given date or no date
+\date{June 28, 2016---\today}
 
 \begin{document}
 \maketitle
-%\section{}
-%\subsection{}
 
-\begin{keywords}
-Eigenvectors, eigenvalues, eigenspace, eigenbasis, differential operator, eigenfunctions, algebraic and geometric multiplicities, change of coordinates matrix, scalar matrix, characteristic polynomial.
-\end{keywords}
+\epigraph{\textit{Be wary of gorgeous view.}}{Dark Souls}
+
+\tableofcontents % remember to compile twice to update table of contents
+
+\part{Linear Transformations and Matrices}
+
+\epigraph{\textit{Just imagine $\R^n$, then let $n = 14$.}}{Well known math joke}
+
+\section{Special Matrix Functions}
+
+\begin{proposition}\label{tracecommutative}
+If $A$ and $B$ are square matrices, then $\tr(AB) = \tr(BA)$ and $\tr A = \tr A^t.$
+\end{proposition}
+
+\section{Change of Coordinate Matrix}
+
+\begin{proposition}\label{matrixbasisrep}
+Let $B$ be an $n \times n$ invertible matrix. Then the map $\Phi_B: M_{n\times n}(F) \longrightarrow M_{n\times n}(F)$ defined by $\Phi_B(A) = B^{-1} A B$ is an isomorphism.
+\end{proposition}
+
+\begin{proposition}
+For any invertible matrix $B$ there exist bases $\beta, \gamma$ s.t. $B = [I]^\beta_\gamma,$ i.e. every invertible matrix is a change of coordinates matrix.
+\end{proposition}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=.7\textwidth]{377px-3d_basis_transformation}
+\end{figure}
+
+\section*{Keywords}
+
+Change of coordinates matrix, basis representation, trace.
+
+\part{Eigenvectors and Eigenvalues}
+
+\epigraph{\textit{Eigervalves: $E_m(K)$}}{The Big Bang Theory}
 
 \begin{proposition}\label{eigenindependence}
 Eigenvectors corresponding to distinct eigenvalues are linearly independent.
@@ -76,7 +124,7 @@ A matrix $A$ is diagonalizable iff the dimensions of its eigenspaces---i.e. the 
 \end{corollary}
 
 \begin{proof}
-By \Cref{eigenindependence}, the eigenspaces are linearly independent. If their dimensions added up to less than $n$, we'd have too few eigenvectors to make a basis for $V$, and by \Cref{diagonalizable} $A$ would not be diagonalizable. If they added up to more than $n$, we'd have too many linearly independent vectors in $V$. Conversely if they do add up to $n$, then the union of bases for the eigenspaces forms an eigenbasis for $V$, and $A$ is diagonalizable. 
+By Proposition \ref{eigenindependence}, the eigenspaces are linearly independent. If their dimensions added up to less than $n$, we'd have too few eigenvectors to make a basis for $V$, and by Theorem \ref{diagonalizable}, $A$ would not be diagonalizable. If they added up to more than $n$, we'd have too many linearly independent vectors in $V$. Conversely if they do add up to $n$, then the union of bases for the eigenspaces forms an eigenbasis for $V$, and $A$ is diagonalizable. 
 \end{proof}
 
 \begin{proposition}
@@ -116,7 +164,7 @@ where $Q = [I]^\alpha_\beta$ is the change of basis matrix from $\beta$ to $\alp
 \end{note}
 
 \begin{proposition}\label{changeofbasislinear}
-Change of basis is a linear operation, i.e. $$[T + \lambda U]_\beta = [T]_\beta + \lambda[U]_\beta.$$
+Representation of a matrix with respect to a basis is a linear operation, i.e. $$[T + \lambda U]_\beta = [T]_\beta + \lambda[U]_\beta.$$ In fact it's an isomorphism. For a fixed basis $\beta$ this transformation is usually written $\Phi_\beta: \mathcal{L}(V) \longrightarrow M_{n\times n}(F).$ See Proposition \ref{matrixbasisrep}.
 \end{proposition}
 
 \begin{proof}
@@ -128,15 +176,19 @@ Let $v$ be a vector, $\beta = \{v_1,\ldots, v_n\}$, and $T(v) = \sum a_i v_i, U(
 The RHS is $[a_i] + \lambda [b_i]$, which is the same as the LHS: $[a_i + \lambda b_i]$.
 \end{proof}
 
+\begin{note}
+Analogously, the standard representation of a vector space $V$ with respect to a basis $\beta$ is $\phi_\beta: V \longrightarrow F^n.$ And it's also an isomorphism.
+\end{note}
+
 \begin{proposition}
 For any scalar $\lambda$ and any ordered basis $\beta$ for $V$, $\det(T - \lambda I_V) = \det([T]_\beta - \lambda I)$.
 \end{proposition}
 
 \begin{proof}
-Follows from \Cref{determinantofoperator} and \Cref{changeofbasislinear}.
+Follows from Definition \ref{determinantofoperator} and Proposition \ref{changeofbasislinear}.
 \end{proof}
 
-\begin{proposition}
+\begin{proposition}[Eigenvalue condition for invertibility]
 A linear operator $T$ on a finite-dimensional vector space is invertible iff zero is not an eigenvalue of $T$.
 \end{proposition}
 
@@ -165,7 +217,7 @@ A scalar matrix is a square matrix of the form $\lambda I$ for some scalar $\lam
 \end{definition}
 
 \begin{proposition}
-If square matrix $A$ is similar to a scalar matrix $\lambda I$, then $A = \lambda I$.
+If a square matrix $A$ is similar to a scalar matrix $\lambda I$, then $A = \lambda I$.
 \end{proposition}
 
 \begin{proof}
@@ -208,5 +260,95 @@ The definition of the characteristic polynomial of a linear operator on a finite
 \begin{proof}
 Follows immediately from the fact that similar matrices are the same linear operator expressed under different bases.
 \end{proof}
+
+\begin{proposition}
+Let $T$ be a linear operator on a finite dimensional vector space $V$ over a field $F$. Let $\beta$ be an ordered basis for $V$, and let $A = [T]_\beta$. Then a vector $v \in V$ is an eigenvector of $T$ corresponding to $\lambda$ iff $\phi_\beta(v)$ is an eigenvector of $A$ corresponding to $\lambda$.
+\end{proposition}
+
+\begin{figure}[H]
+$$\begin{tikzcd}
+V \arrow{r}{T} \arrow[swap]{d}{\phi_\beta} & V \arrow{d}{\phi_\beta} \\
+F^n \arrow[swap]{r}{L_A} & F^n
+\end{tikzcd}$$
+\end{figure}
+
+\begin{proof}
+TODO.
+\end{proof}
+
+\section{Eigenvectors and Some Special Functions}
+
+\begin{lemma}
+A square matrix has the same determinant as its transpose.
+\end{lemma}
+
+\begin{proposition}
+A square matrix has the same characteristic polynomial as its transpose.
+\end{proposition}
+
+\begin{proposition}
+If $x$ is an eigenvector of $T$ corresponding to $\lambda$, then for any positive integer $m$, $x$ is an eigenvector of $T^m$ corresponding to $\lambda^m$.
+\end{proposition}
+
+\begin{proof}
+Linearity of $T$ and induction.
+\end{proof}
+
+\begin{note}
+The same holds for matrices. It's always the same!
+\end{note}
+
+\begin{proposition}
+Similar matrices have the same trace.
+\end{proposition}
+
+\begin{proof}
+Follows from Proposition \ref{tracecommutative}.
+\end{proof}
+
+\begin{corollary}
+Define the trace of a linear operator $T$ on a finite dimensional vector space as $\tr [T]_\beta$ for any basis $\beta$. This is then well defined by the previous Proposition.
+\end{corollary}
+
+\begin{proposition}
+Let $T$ be the linear operator on $M_{n\times n}(\R)$ defined by $T(A) = A^t.$ Then $\pm 1$ are the only eigenvalues of $T.$ The eigenvectors of $T$ corresponding to $\pm 1$ are symmetric and antisymmetric matrices, respectively.
+\end{proposition}
+
+\begin{example}
+In two dimensions, an ordered basis for $M_{2 \times 2}(\R)$ consisting of eigenvectors of $T$ so that $[T]_\beta$ is a diagonal matrix is 
+$$\beta = \left\{ 
+\begin{bmatrix}
+1 & 0 \\
+0 & 0
+\end{bmatrix},
+\begin{bmatrix}
+0 & 0 \\
+0 & 1
+\end{bmatrix},
+\begin{bmatrix}
+0 & 1 \\
+1 & 0
+\end{bmatrix},
+\begin{bmatrix}
+0 & 1 \\
+-1 & 0
+\end{bmatrix}
+\right\}.$$
+The first three matrices are symmetric and correspond to the eigenvalue $+1$, while the last is skew-symmetric and corresponds to $-1.$
+\end{example}
+
+\begin{example}
+More generally, in $n$ dimensions an eigenbasis consists of symmetric matrices of the form $A$ that has zeroes everywhere except a single $1$ along the diagonal, and symmetric matrices of the form $B$ with zeroes everywhere except a $1$ in two opposite entries $B_{ij}$ and $B_{ji}$, and finally anti-symmetric matrices of the form $C$ with zeroes everywhere except a $-1$ and a $+1$ in two opposite entries $C_{ij}$ and $C_{ji}$, where the $-1$ is in the lower left half and the $+1$ in the upper right half of $C$. There are $n$ matrices of type $A$, $(n^2 - n) / 2$ each of type $B$ and $C$, for a total of $n^2,$ as expected.
+\end{example}
+
+\section*{Keywords}
+
+Eigenvectors, eigenvalues, eigenspace, eigenbasis, differential operator, eigenfunctions, algebraic and geometric multiplicities, scalar matrix, characteristic polynomial, skew / anti-symmetric matrix.
+
+\begin{thebibliography}{99}
+
+\bibitem{FIS} Linear Algebra by Friedberg, Insel, and Spence.
+
+\end{thebibliography}
 
 \end{document}

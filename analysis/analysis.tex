@@ -10,6 +10,7 @@
 \usepackage{epstopdf}
 \usepackage{epigraph}
 \usepackage{url}
+\usepackage{mathtools}
 
 % Computer Concrete
 %\usepackage{concmath}
@@ -53,14 +54,17 @@
 \newtheorem{remark}[theorem]{Remark}
 \newtheorem{note}[theorem]{Note}
 
-\newcommand{\defeq}{\overset{\mathrm{def}}{=}}
+%\newcommand{\defeq}{\coloneqq}
+\newcommand*{\defeq}{\mathrel{\vcenter{\baselineskip0.5ex \lineskiplimit0pt
+                     \hbox{\scriptsize.}\hbox{\scriptsize.}}}
+                     =}
 \newcommand{\N}{\mathbf N} 
 \newcommand{\Q}{\mathbf Q} 
 \newcommand{\R}{\mathbf R}
 
 \title{Polynomial Approximation, Sequences, and Series}
 \author{Nhan Trong}
-\date{\today}                                           % Activate to display a given date or no date
+\date{July 3, 2016---\today}                                           % Activate to display a given date or no date
 
 \begin{document}
 \sloppy
@@ -193,6 +197,8 @@ Another way to see this is to let $a_n$ be the convergent subsequence given by B
 $$|f(y_n) - L| \geq |f(y_n) - f(a_n)| - |f(a_n) - L|$$ 
 says $|f(y_n) - L|$ is big, thus contradiction.
 \end{proof}
+
+\epigraph{\textit{Aside from rigor, is this proof correct?}}{Math.StackExchange 2016}
 
 \begin{theorem}
 A limitful function on $[0, 1]$ has at most countably many discontinuities.

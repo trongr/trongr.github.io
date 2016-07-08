@@ -1,0 +1,5 @@
+\contentsline {part}{I\hspace {1em}Linear Transformations and Matrices}{1}{part.1}
+\contentsline {section}{\numberline {1}Special Matrix Functions}{2}{section.1}
+\contentsline {section}{\numberline {2}Change of Coordinate Matrix}{2}{section.2}
+\contentsline {part}{II\hspace {1em}Eigenvectors and Eigenvalues}{2}{part.2}
+\contentsline {section}{\numberline {3}Eigenvectors and Some Special Functions}{6}{section.3}
