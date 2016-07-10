@@ -1,5 +1,7 @@
 \documentclass[12pt]{article}
-\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\usepackage[
+    marginparwidth=2.5cm, marginparsep=3mm
+]{geometry} % See geometry.pdf to learn the layout options. There are lots.
 \geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
 %\geometry{landscape}                % Activate for for rotated page geometry
 %\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
@@ -15,6 +17,10 @@
 \usepackage{tikz-cd}
 \usepackage{hyperref}
 %\usepackage{cleveref}
+\usepackage{mdframed}
+\usepackage{marginnote}
+\renewcommand*{\marginfont}{\footnotesize}
+\reversemarginpar
 
 % Computer Concrete
 %\usepackage{concmath}
@@ -113,9 +119,11 @@ Eigenvectors corresponding to distinct eigenvalues are linearly independent.
 Easy to show for two eigenvectors, then use induction.
 \end{proof}
 
+\begin{mdframed}
 \begin{theorem}\label{diagonalizable}
 A linear operator $T$ on a finite-dimensional vector space $V$ is diagonalizable iff there exists an ordered basis $\beta$ for $V$ consisting of eigenvectors of $T$. Furthermore, if $T$ is diagonalizable, $\beta = \{v_1,\ldots, v_n\}$ is an ordered basis of eigenvectors of $T$, and $D = [T]_\beta$, then $D$ is a diagonal matrix and $D_{jj}$ is the eigenvalue corresponding to $v_j$ for $1 \leq j \leq n$.
 \end{theorem}
+\end{mdframed}
 
 Proof in the book.
 
@@ -188,9 +196,11 @@ For any scalar $\lambda$ and any ordered basis $\beta$ for $V$, $\det(T - \lambd
 Follows from Definition \ref{determinantofoperator} and Proposition \ref{changeofbasislinear}.
 \end{proof}
 
-\begin{proposition}[Eigenvalue condition for invertibility]
-A linear operator $T$ on a finite-dimensional vector space is invertible iff zero is not an eigenvalue of $T$.
+\begin{mdframed}
+\begin{proposition}[Eigenvalues and invertibility]
+A linear operator $T$ on a finite-dimensional vector space is invertible iff its eigenvalues are nonzero.
 \end{proposition}
+\end{mdframed}
 
 \begin{proof}
 If zero is an eigenvalue of $T$, then $\det(T - 0 \cdot I) = 0$, and $T$ is not invertible. Conversely, if $T$ is not invertible, then there exists a nonzero vector $v$ s.t. $T(v) = 0 = 0 \cdot v$, and so 0 is an eigenvalue and $v$ is an eigenvector of $T$.
@@ -211,33 +221,6 @@ The eigenvalues of an upper triangular matrix $M$ are the diagonal entries of $M
 \begin{proof}
 Follows from the fact that the determinant of an upper triangular matrix is the product of its diagonal entries.
 \end{proof}
-
-\begin{definition}
-A scalar matrix is a square matrix of the form $\lambda I$ for some scalar $\lambda$.
-\end{definition}
-
-\begin{proposition}
-If a square matrix $A$ is similar to a scalar matrix $\lambda I$, then $A = \lambda I$.
-\end{proposition}
-
-\begin{proof}
-If $A$ is similar to $\lambda I$, that means there is an invertible matrix $Q$ s.t. $A = Q^{-1} \lambda I Q = \lambda I$.
-\end{proof}
-
-\begin{proposition}
-A diagonalizable matrix $A$ having only one eigenvalue is a scalar matrix.
-\end{proposition}
-
-\begin{proof}
-If $A$ is diagonalizable, this means $A$ is similar to a diagonal matrix, whose diagonal entries are its eigenvalues. Since $A$ only has one eigenvalue $\lambda$, the diagonal entries are all equal to $\lambda$.
-\end{proof}
-
-\begin{example}
-$\begin{bmatrix}
-1 & 1 \\
-0 & 1 \\
-\end{bmatrix}$ is not diagonalizable.
-\end{example}
 
 \begin{proposition}
 Similar matrices have the same characteristic polynomial.
@@ -276,7 +259,7 @@ F^n \arrow[swap]{r}{L_A} & F^n
 TODO.
 \end{proof}
 
-\section{Eigenvectors and Some Special Functions}
+\section{Eigenvectors and Some Special Functions and Matrices}
 
 \begin{lemma}
 A square matrix has the same determinant as its transpose.
@@ -307,7 +290,7 @@ Follows from Proposition \ref{tracecommutative}.
 \end{proof}
 
 \begin{corollary}
-Define the trace of a linear operator $T$ on a finite dimensional vector space as $\tr [T]_\beta$ for any basis $\beta$. This is then well defined by the previous Proposition.
+Define the trace of a linear operator $T$ on a finite dimensional vector space as $\tr [T]_\beta$ for any basis $\beta$. This is well defined by the previous Proposition.
 \end{corollary}
 
 \begin{proposition}
@@ -339,6 +322,40 @@ The first three matrices are symmetric and correspond to the eigenvalue $+1$, wh
 
 \begin{example}
 More generally, in $n$ dimensions an eigenbasis consists of symmetric matrices of the form $A$ that has zeroes everywhere except a single $1$ along the diagonal, and symmetric matrices of the form $B$ with zeroes everywhere except a $1$ in two opposite entries $B_{ij}$ and $B_{ji}$, and finally anti-symmetric matrices of the form $C$ with zeroes everywhere except a $-1$ and a $+1$ in two opposite entries $C_{ij}$ and $C_{ji}$, where the $-1$ is in the lower left half and the $+1$ in the upper right half of $C$. There are $n$ matrices of type $A$, $(n^2 - n) / 2$ each of type $B$ and $C$, for a total of $n^2,$ as expected.
+\end{example}
+
+\subsection{Scalar Matrices}
+
+\begin{definition}
+A scalar matrix is a square matrix of the form $\lambda I$ for some scalar $\lambda$.
+\end{definition}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=.2\textwidth]{scalarmatrix}
+\end{figure}
+
+\begin{proposition}
+If a square matrix $A$ is similar to a scalar matrix $\lambda I$, then $A = \lambda I$.
+\end{proposition}
+
+\begin{proof}
+If $A$ is similar to $\lambda I$, that means there is an invertible matrix $Q$ s.t. $A = Q^{-1} \lambda I Q = \lambda I$.
+\end{proof}
+
+\begin{proposition}
+A diagonalizable matrix $A$ having only one eigenvalue is a scalar matrix.
+\end{proposition}
+
+\begin{proof}
+If $A$ is diagonalizable, this means $A$ is similar to a diagonal matrix, whose diagonal entries are its eigenvalues. Since $A$ only has one eigenvalue $\lambda$, the diagonal entries are all equal to $\lambda$.
+\end{proof}
+
+\begin{example}
+$\begin{bmatrix}
+1 & 1 \\
+0 & 1 \\
+\end{bmatrix}$ is not diagonalizable.
 \end{example}
 
 \section*{Keywords}

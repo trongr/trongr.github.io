@@ -1,5 +1,7 @@
 \documentclass[12pt]{article}
-\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\usepackage[
+    marginparwidth=2.5cm, marginparsep=3mm
+]{geometry}                % See geometry.pdf to learn the layout options. There are lots.
 \geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
 %\geometry{landscape}                % Activate for for rotated page geometry
 %\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
@@ -8,10 +10,16 @@
 \graphicspath{{images/}}
 \usepackage{amsmath,amssymb,amsfonts,amsthm}
 \usepackage{epstopdf}
-\usepackage{cleveref}
 \usepackage{epigraph}
 \usepackage{url}
 \usepackage{mathtools}
+\usepackage{tikz-cd}
+\usepackage{hyperref}
+%\usepackage{cleveref}
+\usepackage[linewidth=0.2mm]{mdframed}
+\usepackage{marginnote}
+\renewcommand*{\marginfont}{\footnotesize}
+\reversemarginpar
 
 % Computer Concrete
 %\usepackage{concmath}
@@ -64,6 +72,8 @@
 
 \epigraph{Pipey. \textit{Looks like you want to compress a movie file, can I help? You know with Pied Piper's revolutionary neural network optimized sharded data distribution system, it's just six clicks away, follow meeee!}}{Silicon Valley}
 
+\tableofcontents % remember to compile twice to update table of contents
+
 \part{Different Types of Neurons and Learning}
 
 \begin{question}
@@ -74,13 +84,13 @@ How many other neurons does a neuron talk to? Do they change neighbours?
 ``Goal of unsupervised learning: provides a compact, low-dimensional representation of the input,'' like Pied Piper's compression algorithm using neural networks!
 \end{note}
 
-\section{Keywords}
+\section*{Keywords}
 
 Fruit flies, MNIST, TIMIT, linear, binary threshold, rectified / linear threshold, logistic, stochastic binary neurons, supervised, unsupervised, reinforcement learning.
 
 \part{Neural Network Architectures}
 
-\section{Keywords}
+\section*{Keywords}
 
 Feed forward, recurrent, symmetrically connected neural network, perceptrons, convexity condition.
 
@@ -90,7 +100,7 @@ Feed forward, recurrent, symmetrically connected neural network, perceptrons, co
 Proof of why perceptron learning works is very sketchy! Need more details.
 \end{todo}
 
-\section{Binary Threshold Neurons McCulloch–Pitts}
+\section{Binary Threshold Neurons / McCulloch-Pitts}
 
 Used in Perceptrons.
 
@@ -139,7 +149,7 @@ Perceptrons can't learn patterns if they're subject to transformations that form
 Details?
 \end{question}
 
-\section{Keywords}
+\section*{Keywords}
 
 Data space, weight space, Group Invariance Theorem.
 
@@ -159,15 +169,16 @@ $$\Delta w_i = - \alpha \frac{\partial E}{\partial w_i} = \sum_n \alpha (t_n - y
 \section{Error Surface of a Linear Neuron}
 
 \begin{question}
-IIRC feature normalization should help with slow learning due to unscaled data? What about pathological cases like this, called the Rosenbrock Valley?
+IIRC feature normalization should help with slow learning due to unscaled data? What about pathological cases like this?
 \end{question}
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=1.0\textwidth]{slowlearrning}
+\caption{Rosenbrock Valley.}
 \end{figure}
 
-\section{Keywords}
+\section*{Keywords}
 
 Linear neurons / linear filters, iterative / computational VS analytic / mathematical approach, Delta Rule / Gradient Descent, batch VS online, error surface, extended weight space, Rosenbrock function.
 
@@ -181,7 +192,13 @@ $$y = \frac{1}{1 + e^{-z}}$$ where $z = w^T x.$ The function $y(z)$ is also know
 $$E = \frac{1}{2} \sum_n (t_n - y_n)^2.$$
 \end{definition}
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=.7\textwidth]{Logistic-curve}
+\end{figure}
+
 \begin{proposition}
+\label{simpleerrorderivatives}
 The estimator derivatives are
 $$\frac{\partial y}{\partial w_i} = \frac{dy}{dz} \frac{\partial z}{\partial w_i} 
 = y(1 - y) x_i,$$ and so the error derivatives are
@@ -190,15 +207,70 @@ $$\frac{\partial E}{\partial w_i} = \sum_n \frac{dE_n}{dy_n} \frac{\partial y_n}
 
 \section{Learning with Hidden Units}
 
+\subsection{Simplifying Notations}
 
+\marginnote{Deliberately conflating a neuron $y_j$ with layer $j$.}
+In a neural networking using logistic neurons with hidden layers, the neurons $y_n$ are arranged in layers, with neurons in each layer receiving input from every neuron in the layer below, and outputting to every neuron in the layer above it. To simplify notations, $y_i$ is used to denote any neuron in a fixed row $i$, and $y_j$ to denote any neuron in the layer $j$ above it.
+
+The weights controlling how neurons in row $i$ act on neurons in row $j$ are $w_{ij}$, where $i$ ranges over the neurons in row $i$ and $j$ ranges over neurons in row $j$. Furthermore, $w_{ij}$ is also used to denote the weight of neuron $y_i$ on neuron $y_j$, so that e.g. the logit for neuron $y_j$ is $$z_j = w_{-} y_{-} + \cdots + w_{ij} y_{i} + \cdots + w_{-} y_{-},$$ where each unnamed $w_{-} y_{-}$ is a weight and neuron in row $i$, and we're only interested in the weight and neuron $w_{ij} y_{i}$, so we give them names $ij$ and $i$.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1.0\textwidth]{backprop}
+\caption{Model and main equations for Backpropagation.}
+\end{figure}
 
 \section{Backpropagation Algorithm}
 
+\begin{mdframed}
+Given an error $E$ and a training case $x = y_1,$ we want to compute the errors of $E$ due to $y_n$ for all neurons $y_n$, i.e. we want to compute $\frac{\partial E}{\partial w_{ij}}$ for all $ij$. With these partial derivatives calculated over all training cases, we can then apply Gradient Descent or some other optimization algorithm to \textit{compute} the minimum weights $W.$
+\footnote{Keep in mind that there is a weight matrix $w$ for each pair of layers $i$ and $j,$ where each entry $w_{ij}$ corresponds to the connection between neuron $y_i$ in layer $i$ and neuron $y_j$ in layer $j.$ \\ Therefore the weights of all connections together form a three-dimensional matrix $W.$}
+\end{mdframed}
 
+\subsection{Analytic Solution vs Random Perturbation}
 
-\section{Keywords}
+\marginnote{Is this right?}
+An alternative to using Backpropagation is to randomly perturb the weights and see how each change affects the error, but that's a lot slower than solving for the optimal solution analytically, since you have to perturb the weights a large number of times just to see which change was the best.
 
-Sigmoid function, logit, Backpropagation Algorithm.
+\subsection{Deriving the Error Derivatives}
+
+\begin{definition}
+For quick reference, once again the logit and estimator of neuron $y_j$ in layer $j$ are:
+\begin{align*}
+z_j &= w^T x = w_- y_- + \cdots + w_{ij} y_i + \cdots + w_- y_- \\
+y_j &= \frac{1}{1 + e^{-z_j}}.
+\end{align*}
+And the total error of the neural network is:
+$$E = \frac{1}{2} \sum_n (t_n - y_n)^2.$$
+\end{definition}
+
+\begin{mdframed}
+\begin{proposition}
+\marginnote{It's like a recursive Chain Rule.}
+The error derivatives for a logistic neural network with hidden units are:
+\begin{align}
+\frac{\partial E}{\partial z_j} &= \frac{\partial E}{\partial y_j} \frac{dy_j}{dz_j} = y_j (1 - y_j)  \frac{\partial E}{\partial y_j} \\
+\frac{\partial E}{\partial y_i} &= \sum_j \frac{\partial E}{\partial z_j} \frac{\partial z_j}{\partial y_i} = \sum_j w_{ij} \frac{\partial E}{\partial z_j} \\
+\frac{\partial E}{\partial w_{ij}} &= \frac{\partial E}{\partial z_j} \frac{\partial z_j}{\partial w_{ij}} = y_i \frac{\partial E}{\partial z_j}.
+\end{align}
+\end{proposition}
+\end{mdframed}
+
+These equations are simple applications of the Chain Rule. But what could they possibly mean?!
+
+\subsection{Meaning of the Error Derivatives and How to use them}
+
+At layer $i$, consider $E$ as a function of the $z_j$'s in layer $j$. Since $z_j$ depend on $y_i$, by the Chain Rule we have the second equation: 
+$$\frac{\partial E}{\partial y_i} = \sum_j \frac{\partial E}{\partial z_j} \frac{\partial z_j}{\partial y_i} = \sum_j w_{ij} \frac{\partial E}{\partial z_j}.$$ 
+To calculate $ \frac{\partial E}{\partial z_j}$, we use equation (1): 
+$$\frac{\partial E}{\partial z_j} = \frac{\partial E}{\partial y_j} \frac{dy_j}{dz_j} = y_j (1 - y_j)  \frac{\partial E}{\partial y_j},$$
+which requires $\frac{\partial E}{\partial y_j},$ so we use equation (2) again to level up, and so on until the top output layer.
+
+In practice we'd start at the top and calculate down, and along the way down we use the third equation to calculate $\frac{\partial E}{\partial w_{ij}}$. Once we have all of those we use the Delta Rule above to calculate the necessary weight changes: $$\Delta w_{ij} = - \alpha \frac{\partial E}{\partial w_{ij}}.$$
+
+\section*{Keywords}
+
+Sigmoid function, logit, Backpropagation Algorithm, weight perturbation, evolution.
 
 \begin{thebibliography}{99}
 
@@ -207,6 +279,9 @@ Geoffrey E. Hinton's Neural Networks video lectures.
 
 \bibitem{csc321}
 \url{http://www.cs.toronto.edu/~rgrosse/csc321/}
+
+\bibitem{imagesources}
+Images from the Internet.
 
 \end{thebibliography}
 

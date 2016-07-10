@@ -1,5 +1,7 @@
 \documentclass[12pt]{article}
-\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\usepackage[
+    marginparwidth=2.5cm, marginparsep=3mm
+]{geometry} % See geometry.pdf to learn the layout options. There are lots.
 \geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
 %\geometry{landscape}                % Activate for for rotated page geometry
 %\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
@@ -15,6 +17,10 @@
 \usepackage{tikz-cd}
 \usepackage{hyperref}
 %\usepackage{cleveref} % there's a bug in hyperref that makes it conflict with amsthm
+\usepackage[linewidth=0.2mm]{mdframed}
+\usepackage{marginnote}
+\renewcommand*{\marginfont}{\footnotesize}
+\reversemarginpar
 
 % Computer Concrete
 %\usepackage{concmath}
@@ -47,6 +53,7 @@
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{conjecture}[theorem]{Conjecture}
 \newtheorem{question}[theorem]{Question}
+\newtheorem{exercise}[theorem]{Exercise}
 \newtheorem{definition}[theorem]{Definition}
 
 \theoremstyle{definition}
