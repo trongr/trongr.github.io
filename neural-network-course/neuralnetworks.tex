@@ -229,8 +229,8 @@ Given an error $E$ and a training case $x = y_1,$ we want to compute the errors 
 
 \subsection{Analytic Solution vs Random Perturbation}
 
-\marginnote{Is this right?}
-An alternative to using Backpropagation is to randomly perturb the weights and see how each change affects the error, but that's a lot slower than solving for the optimal solution analytically, since you have to perturb the weights a large number of times just to see which change was the best.
+\marginnote{A kind of reinforcement learning.}
+An alternative to using Backpropagation is to randomly perturb the weights and see how each change affects the error, but that's a lot slower than solving for the optimal solution analytically, since you have to test a single weight change on \textit{all} training cases to see if that change made an improvement on the error.
 
 \subsection{Deriving the Error Derivatives}
 
@@ -266,11 +266,43 @@ To calculate $ \frac{\partial E}{\partial z_j}$, we use equation (1):
 $$\frac{\partial E}{\partial z_j} = \frac{\partial E}{\partial y_j} \frac{dy_j}{dz_j} = y_j (1 - y_j)  \frac{\partial E}{\partial y_j},$$
 which requires $\frac{\partial E}{\partial y_j},$ so we use equation (2) again to level up, and so on until the top output layer.
 
-In practice we'd start at the top and calculate down, and along the way down we use the third equation to calculate $\frac{\partial E}{\partial w_{ij}}$. Once we have all of those we use the Delta Rule above to calculate the necessary weight changes: $$\Delta w_{ij} = - \alpha \frac{\partial E}{\partial w_{ij}}.$$
+In practice we'd start at the top and calculate down, and along the way down we use the third equation to calculate $\frac{\partial E}{\partial w_{ij}}$. Once we have all of those we use the Delta Rule to calculate the necessary weight changes: $$\Delta w_{ij} = - \alpha \frac{\partial E}{\partial w_{ij}}.$$
+
+\subsection{Optimization Issues}
+
+\begin{question}
+How often to update weights: online, full batch, mini batch.
+\end{question}
+
+\begin{question}
+How much to update weights via $\alpha$ learning rate: fixed, adaptive, adaptive per connection, alternatives to Steepest Descent.
+\end{question}
+
+\subsection{Generalization Issues / overfitting}
+
+\marginnote{Hey, polynomial approximation!}
+Ways to reduce overfitting: weight decay, weight sharing, early stopping, model averaging, Bayesian fitting of neural nets, dropout, generative pre-training.
 
 \section*{Keywords}
 
-Sigmoid function, logit, Backpropagation Algorithm, weight perturbation, evolution.
+Sigmoid function, logit, Backpropagation Algorithm, weight perturbation, evolution, overfitting, sampling error.
+
+\section{Application: learning to predict the next word}
+
+\begin{example}
+Learn $ArB$ to guess $B$ given $A$ and $r$.
+\end{example}
+
+\begin{figure}[H]
+\marginnote{Why 6 neurons? Cross validate to choose the best number?}
+\centering
+\includegraphics[width=1.0\textwidth]{familytree}
+\caption{Six-neuron hidden layer for distributed encoding of Person 1. The 24 squares in each neuron are the weights of its inputs, corresponding to the 24 English and Italians.}
+\end{figure}
+
+\begin{example}
+Another application of $ArB$ is to guess the probability of $ArB$ being correct given $A, r,$ and $B.$ Need both correct and incorrect training cases for learning.
+\end{example}
 
 \begin{thebibliography}{99}
 
