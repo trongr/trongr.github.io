@@ -304,6 +304,74 @@ Learn $ArB$ to guess $B$ given $A$ and $r$.
 Another application of $ArB$ is to guess the probability of $ArB$ being correct given $A, r,$ and $B.$ Need both correct and incorrect training cases for learning.
 \end{example}
 
+\section{Digression: Philosophy of Learning}
+
+Feature theory: a concept is a set of semantic features. Structuralist theory: meaning of a concept lies in its relationships to other concepts. 
+
+Hinton: why not both?
+
+\begin{question}
+How to implement relational knowledge in a neural net? Maybe many neurons per concept and one neuron reused in multiple concepts.
+\end{question}
+
+\begin{question}
+Why not all neurons in all concepts? Maybe cause then you'd have no relations? Kinda woolly at the moment.
+\end{question}
+
+\section{Digression: Softmax Output Function and Cross-Entropy Cost Function}
+
+\begin{definition}
+A softmax group $G$ is a group of output neurons whose outputs use the softmax activation function defined by $$y_i = \frac{e^{z_i}}{\sum\limits_{j\in G} e^{z_j}},$$ so that the outputs sum to $1.$ The cost function is given by $$C = - \sum_j t_j \log y_j.$$
+\end{definition}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1.0\textwidth]{softmaxgroup}
+\end{figure}
+
+\begin{mdframed}
+\begin{proposition}
+By the Quotient Rule, the derivatives are
+\begin{align*}
+\frac{\partial y_i}{\partial z_i} &= y_i(1 - y_i) \\
+\frac{\partial y_i}{\partial z_j} &= -y_i y_j,
+\end{align*}
+or more fancy-like using the Kronecker Delta:
+$$\frac{\partial y_i}{\partial z_j} = y_i(\delta_{ij} - y_j).$$
+\end{proposition}
+\end{mdframed}
+
+\begin{mdframed}
+\begin{proposition}
+The derivatives of the cost function are:
+$$\frac{\partial C}{\partial z_i} = y_i - t_i.$$
+\end{proposition}
+\end{mdframed}
+
+\begin{proof}
+Apply the Chain Rule:
+$$\frac{\partial C}{\partial z_i} = - \sum_j t_j \frac{\partial \log y_j}{\partial z_i} = - \sum_j t_j \frac{\partial \log y_j}{\partial y_j} \frac{\partial y_j}{\partial z_i}.$$
+Using our formula for $\frac{\partial y_j}{\partial z_i},$ we get 
+$$\frac{\partial C}{\partial z_i} = - \sum_j \frac{t_j}{y_j} y_j(\delta_{ij} - y_i) = - \sum_j t_j (\delta_{ij} - y_i).$$
+Recall that this is a multiclass classification problem, and so exactly one of the $t_j$'s is 1 and the rest are zero. Therefore:
+$$\frac{\partial C}{\partial z_i} = - t_i (1 - y_i) + \sum_{j\neq i} t_j y_i = - t_i + y_i \sum_j t_j = y_i - t_i.\qedhere$$
+\end{proof}
+
+\subsection{Application: Multiclass Classification using Softmax and Cross Entropy}
+
+Suppose an input $x$ belongs to class $i \in G.$ That means $t_i = 1$ and $t_j = 0$ for all other $j \in G.$ It also means that $y_i$---which represents the probability of the input belonging to class $i$---should be high, and the cost function $$C = - \sum_j t_j \log y_j = - \log y_i$$ encapsulates that idea: if $y_i$ is high, then we've guessed correctly and $C$ is low; otherwise $y_i$ is low, and we've guessed incorrectly and $C$ should be high---hence the negative sign.\marginnote{Why $\log$?}
+
+\section{Speech Recognition}
+
+\epigraph{\textit{People use their understanding of the meaning of the utterance to hear the right words. We do this unconsciously when we wreck a nice beach.}}{Geoffrey Hinton}
+
+\subsection{Trigram method}
+
+Take a huge amount of text and count frequencies of all triples of words. Use these frequencies to calculate 
+$$\frac{p(c|a,b)}{p(d|a,b)} = \frac{\mathrm{count}(abc)}{\mathrm{count}(abd)}.$$
+
+Fall back to digram if trigram frequencies too low.
+
 \begin{thebibliography}{99}
 
 \bibitem{hinton}
@@ -313,7 +381,7 @@ Geoffrey E. Hinton's Neural Networks video lectures.
 \url{http://www.cs.toronto.edu/~rgrosse/csc321/}
 
 \bibitem{imagesources}
-Images from the Internet.
+Images and other things from the Internet.
 
 \end{thebibliography}
 
