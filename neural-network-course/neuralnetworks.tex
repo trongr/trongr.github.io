@@ -52,6 +52,8 @@
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{conjecture}[theorem]{Conjecture}
 \newtheorem{question}[theorem]{Question}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{problem}[theorem]{Problem}
 \newtheorem{definition}[theorem]{Definition}
 
 \theoremstyle{definition}
@@ -359,11 +361,29 @@ $$\frac{\partial C}{\partial z_i} = - t_i (1 - y_i) + \sum_{j\neq i} t_j y_i = -
 
 \subsection{Application: Multiclass Classification using Softmax and Cross Entropy}
 
-Suppose an input $x$ belongs to class $i \in G.$ That means $t_i = 1$ and $t_j = 0$ for all other $j \in G.$ It also means that $y_i$---which represents the probability of the input belonging to class $i$---should be high, and the cost function $$C = - \sum_j t_j \log y_j = - \log y_i$$ encapsulates that idea: if $y_i$ is high, then we've guessed correctly and $C$ is low; otherwise $y_i$ is low, and we've guessed incorrectly and $C$ should be high---hence the negative sign.\marginnote{Why $\log$?}
+Suppose an input $x$ belongs to class $i \in G.$ That means $t_i = 1$ and $t_j = 0$ for all other $j \in G.$ It also means that $y_i$---which represents the probability of the input belonging to class $i$---should be high, and the cost $$\marginnote{Why $\log$? Maybe cause it gives nice derivatives like $\frac{\partial C}{\partial z_i} = y_i - t_i.$}
+C = - \sum_j t_j \log y_j = - \log y_i$$ encapsulates that idea: if $y_i$ is high, then we've guessed correctly and $C$ is low; otherwise $y_i$ is low, and we've guessed incorrectly and $C$ should be high---hence the negative sign.
 
-\section{Speech Recognition}
+\begin{note}
+\marginnote{Ah, this is why.}
+The reason we use $\log$ is that when the answer is $t_i = 1$, and we guess $y_i$ very close to zero, i.e. we've guessed very wrong, we want the cost to be very high, and we can see that from the graph of log: when $y_i$ is close to zero, $\log y_i$ is very negative and so $- \log y_i$ is very large, i.e. it's a big cost. And vice versa, if the answer is $1$ and we guess close to 1, then the cost is very nearly zero.
+\end{note}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{figure_logarithmic_function}
+\caption{Natural log}
+\end{figure}
+
+\begin{question}
+What happens when $t_i = 0$, and we guess right with $y_i$ close to zero, or we guess wrong with $y_i$ close to one? The cost function $C$ seems to ignore those guesses. Shouldn't we punish those neurons that produce false positives and award ones that produce true negatives?
+\end{question}
+
+\section{Application: Speech Recognition}
 
 \epigraph{\textit{People use their understanding of the meaning of the utterance to hear the right words. We do this unconsciously when we wreck a nice beach.}}{Geoffrey Hinton}
+
+Speech recognizers have to know which words are likely to come next and which are not. 
 
 \subsection{Trigram method}
 
@@ -372,13 +392,60 @@ $$\frac{p(c|a,b)}{p(d|a,b)} = \frac{\mathrm{count}(abc)}{\mathrm{count}(abd)}.$$
 
 Fall back to digram if trigram frequencies too low.
 
+\begin{note}[Drawbacks]
+Trigram doesn't understand similarity between words.
+\end{note}
+
+\begin{todo}
+Need to do extra readings on the rest of the speech recognition lectures. Not a lot of details there.
+\end{todo}
+
+\epigraph{\textit{I will travel across the land,\\
+Searching far and wide,\\
+Each pokemon to understand\\
+The power that's inside.\\
+Pokemon! Gotta catch 'em all!
+}}{Pokemon}
+
+\part{Assignment 1: Learning Distributed Word Representations}
+
+\begin{note}
+Gonna use the Winter 2015 version of CSC321 cause they use Python instead of MATLAB.
+\end{note}
+
+\begin{problem}
+Predict a word given a sequence of preceding words. Will need to build a neural net that can represent words well.
+\end{problem}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1.0\textwidth]{zacefron}
+\caption{Funny slide from handout.}
+\end{figure}
+
+\section{Network Architecture / Language Model}
+
+Let $K$ be the number of words in our dictionary, $D$ be the number (also called the Embedding Dimension) of neurons for each word in the Embedding Layer, and let $H$ be the number of neurons in the Hidden Layer. 
+
+\begin{note}
+Note that the final output layer has $K$ neurons, with each output $y_k$ corresponding to the probability that the $k$-th word is the answer we're looking for, i.e. the $k$-th word is the word following the three input words.
+\end{note}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1.0\textwidth]{neuralnetlanguagemodel}
+\end{figure}
+
 \begin{thebibliography}{99}
 
 \bibitem{hinton}
 Geoffrey E. Hinton's Neural Networks video lectures.
 
-\bibitem{csc321}
+\bibitem{2015csc321}
 \url{http://www.cs.toronto.edu/~rgrosse/csc321/}
+
+\bibitem{2014csc321}
+\url{http://www.cs.toronto.edu/~tijmen/csc321/}
 
 \bibitem{imagesources}
 Images and other things from the Internet.
