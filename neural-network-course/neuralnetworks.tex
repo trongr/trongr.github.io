@@ -20,6 +20,8 @@
 \usepackage{marginnote}
 \renewcommand*{\marginfont}{\footnotesize}
 \reversemarginpar
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily}
 
 % Computer Concrete
 %\usepackage{concmath}
@@ -425,16 +427,24 @@ Predict a word given a sequence of preceding words. Will need to build a neural 
 
 \section{Network Architecture / Language Model}
 
-Let $K$ be the number of words in our dictionary, $D$ be the number (also called the Embedding Dimension) of neurons for each word in the Embedding Layer, and let $H$ be the number of neurons in the Hidden Layer. 
-
-\begin{note}
-Note that the final output layer has $K$ neurons, with each output $y_k$ corresponding to the probability that the $k$-th word is the answer we're looking for, i.e. the $k$-th word is the word following the three input words.
-\end{note}
+Let $K = 250$ be the number of words in our dictionary, $D = 16$ be the number (also called the Embedding Dimension) of neurons for each word in the Embedding Layer, and let $H = 180$ be the number of neurons in the Hidden Layer. Note that the final output layer has $K$ neurons, with each output $y_k$ corresponding to the probability that the $k$-th word is the answer we're looking for, i.e. the $k$-th word is the word following the three input words.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=1.0\textwidth]{neuralnetlanguagemodel}
+\caption{In the assignment code \lstinline|embed_to_hid_weights| and \lstinline|hid_to_output_weights| are transposed, so you have $H \times 3D$ and $K \times H$ matrices instead.}
 \end{figure}
+
+\marginnote{An example of trade off between time (spent training the parameters) and space (to store the full lookup table).}
+In the word embedding layer, we can just train one embedding model instead of three, one for each word. So in total the trainable parameters in the network is $$KD + (3DH + H) + (HK + K) = 58070,$$ with $H$ extra bias parameters for the hidden layer and $K$ bias parameters for the output layer. On the other hand, if we wanted to store all $4$-gram frequencies explicitly, then we'd need $$K^4 = 250^4 = 3906250000$$ entries in the lookup table.
+
+\part{Object Recognition: Convolutional Neural Networks for Digit Recognition}
+
+\section{Replicated Features}
+
+\section{Backpropagation with Weight Constraints}
+
+\part{Assignment 2: Convolutional Neural Networks for Digit Recognition}
 
 \begin{thebibliography}{99}
 
