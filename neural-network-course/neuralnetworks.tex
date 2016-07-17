@@ -66,6 +66,21 @@
 \newtheorem{remark}[theorem]{Remark}
 \newtheorem{note}[theorem]{Note}
 
+\newcommand*{\defeq}{\mathrel{\vcenter{\baselineskip0.5ex \lineskiplimit0pt
+                     \hbox{\scriptsize.}\hbox{\scriptsize.}}}
+                     =}
+\newcommand{\N}{\mathbf N} 
+\newcommand{\Q}{\mathbf Q} 
+\newcommand{\R}{\mathbf R}
+
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator*{\sumtext}{sum}
+
+\apptocmd{\lim}{\limits}{}{}
+\apptocmd{\sum}{\limits}{}{}
+\apptocmd{\prod}{\limits}{}{}
+\apptocmd{\sumtext}{\limits}{}{}
+
 \title{Neural Networks Notes}
 \author{Nhan Trong}
 \date{July 6, 2016---\today}                                           % Activate to display a given date or no date
@@ -432,11 +447,92 @@ Let $K = 250$ be the number of words in our dictionary, $D = 16$ be the number (
 \begin{figure}[H]
 \centering
 \includegraphics[width=1.0\textwidth]{neuralnetlanguagemodel}
-\caption{In the assignment code \lstinline|embed_to_hid_weights| and \lstinline|hid_to_output_weights| are transposed, so you have $H \times 3D$ and $K \times H$ matrices instead.}
+\caption{Note that for implementation reasons \lstinline|embed_to_hid_weights| and \lstinline|hid_to_output_weights| are transposed, so you have $H \times 3D$ and $K \times H$ matrices instead of $3D \times H$ and $H \times K$.}
 \end{figure}
 
 \marginnote{An example of trade off between time (spent training the parameters) and space (to store the full lookup table).}
 In the word embedding layer, we can just train one embedding model instead of three, one for each word. So in total the trainable parameters in the network is $$KD + (3DH + H) + (HK + K) = 58070,$$ with $H$ extra bias parameters for the hidden layer and $K$ bias parameters for the output layer. On the other hand, if we wanted to store all $4$-gram frequencies explicitly, then we'd need $$K^4 = 250^4 = 3906250000$$ entries in the lookup table.
+
+\section{Mini-batch Backpropagation}
+
+The general backpropagation algorithm remains the same, but since our architecture is made up of different kinds of neurons (using different activation functions: unweighted linear in the embedding layer, logistic in the hidden layer, and softmax in the output layer) our derivatives are slightly different. In addition, the starter assignment code uses mini-batch, so we'll also show vectorized implementations of the derivatives.
+
+\subsection{Output Layer}
+
+Let $y_j$ be a neuron in the output layer and $z_j$ be its logit. Then the loss derivatives are the same as before:
+$$\frac{\partial C}{\partial z_j} = y_j - t_j.$$
+We can denote the matrix form as a row vector\marginnote{It's often pretty useful to check matrix dimensions, so we'll denote them by $\sim$.}
+$$\frac{\partial C}{\partial Z_j} = Y_j - T_j \sim 1 \times K$$
+of length $K,$ where the subscript just tells us which layer it is, in this case $j$ for output. Mini-batch requires that we calculate this derivative for $m = 100$ training cases, say, so the loss derivative 
+$$\frac{\partial C}{\partial Z_j} = Y_j - T_j \sim m \times K$$ 
+is in fact an $m \times K$ matrix, where $K = 250$ is the number of neurons in the output layer, which is also the number of words in our dictionary.
+
+\subsection{Hidden Layer}
+
+Let $y_h$ be a neuron in the hidden layer, $z_h$ be its logit, and $w_{jh}$ be its weight to one of the output neurons $y_j$. In particular we have
+\begin{align*}
+z_j &= \sum_h w_{jh} y_h\\
+y_h &= \frac{1}{1 + e^{-z_h}}\\
+z_h &= \sum_e w_{he} y_e
+\end{align*}
+where $y_e$ and $w_e$ are some neuron and its weight in the embedding layer. Then
+$$\frac{\partial C}{\partial z_h} = \frac{\partial C}{\partial y_h} \frac{\partial y_h}{\partial z_h},$$
+and apply the Chain Rule, remembering that all the $z_j$'s in the output layer depend on $y_h$:
+$$\frac{\partial C}{\partial z_h} = \frac{\partial y_h}{\partial z_h} \sum_j \frac{\partial C}{\partial z_j} \frac{\partial z_j}{\partial y_h} = y_h (1 - y_h) \sum_j w_{jh} \frac{\partial C}{\partial z_j}.$$ Here we also used a very nice and useful derivative so it's worth writing down:
+\begin{mdframed}
+\begin{proposition}
+\marginnote{Sometimes we'll also confuse $d$ with $\partial.$}
+If $y = \frac{1}{1 + e^{-z}}$, then $$\frac{\partial y}{\partial z} = y (1 - y).$$
+\end{proposition}
+\end{mdframed}
+
+Back on topic: let $W_h$ be the $K \times H$ weight matrix from the hidden layer to the output layer, so e.g. the first column of $W_h$ would be weights over the hidden layer neurons going into neuron 1 in the output layer. Let $Y_h$ be the $m\times H$ matrix of activations of the hidden layer for the $m$ mini-batch, so e.g. the first row of $Y_h$ contains the $y_h$ values of the hidden layer neurons on the first training case. Then the matrix form of $\frac{\partial C}{\partial z_h}$ is
+$$\frac{\partial C}{\partial Z_h} = Y_h * (1 - Y_h) * \left(\frac{\partial C}{\partial Z_j}W_h\right) \sim m \times H,$$
+where $*$ denotes element-wise multiplication.
+
+The derivatives of $C$ with respect to the hidden to output weights are
+$$\frac{\partial C}{\partial w_{jh}} = \frac{\partial C}{\partial z_j} \frac{\partial z_j}{\partial w_{jh}} = y_h \frac{\partial C}{\partial z_j}.$$
+In matrix form, this becomes
+$$\frac{\partial C}{\partial W_h} = \frac{\partial C}{\partial Z_j}^T Y_h \sim K \times H.$$
+\marginnote{Sanity check: $\frac{\partial C}{\partial W_h}$ is $K \times H,$ the same size as $W_h.$}This last formula needs a bit of explanation: recall that $\frac{\partial C}{\partial Z_j}$ is an $m\times K$ matrix, and that $Y_h$ is an $m\times H$ matrix. Therefore the entries of $\frac{\partial C}{\partial W_h}$ are of the form 
+$$\left(\frac{\partial C}{\partial W_h}\right)_{jh} = \sum_m y_h \frac{\partial C}{\partial z_j},$$
+i.e. we're summing all the partial derivatives $\frac{\partial C}{\partial w_{jh}}$ over the mini-batch. This is because when we do Gradient Descent, the Delta Rule says that
+$$\Delta w_{jh} = - \alpha \frac{\partial C}{\partial w_{jh}}$$
+for one training case, so the change in $w_{jh}$ over all training cases is
+$$\Delta w_{jh} = - \alpha \sum_m \frac{\partial C}{\partial w_{jh}}.$$
+
+\subsection{Hidden Layer Bias Units}
+
+Let $b_h$ be a bias unit in the hidden layer going into neuron $y_j$ in the output layer. Then 
+$$\frac{\partial C}{\partial b_h} = \frac{\partial C}{\partial z_j} \frac{\partial z_j}{\partial b_h} = \frac{\partial C}{\partial z_j},$$
+since $\frac{\partial z_j}{\partial b_h} = 1.$ Similar to the weight derivatives, we also want to sum these over the $m$ training cases, so
+$$\frac{\partial C}{\partial b_h} = \sum_m \frac{\partial C}{\partial z_j},$$ which in matrix form is
+$$\frac{\partial C}{\partial B_h} = \left(\sumtext_\text{rows}\frac{\partial C}{\partial Z_j}\right)^T \sim K \times 1,$$
+where $\sumtext_\text{rows} A$ sums a matrix $A$ over its rows, so in particular $\sumtext_\text{rows} A$ is a row vector.\footnote{Similarly $\sumtext_\text{cols} A$ is a column vector. In NumPy this is \lstinline|sum(A, 0)| and \lstinline|sum(A, 1)|, respectively.}
+
+\begin{note}
+An alternative to treating bias units separately from normal neurons is to add a constant feature 1 in each input layer going in to the next layer.
+\end{note}
+
+\subsection{Embedding Layer}
+
+Similar to the previous layer, let $y_e$ be a neuron in the embedding layer, $z_e$ be its logit, $w_{he}$ be its weight to neuron $y_h$ in the hidden layer. There is one difference: for reasons still unclear to me in this layer the starter code uses a linear activation function:\marginnote{Question. Why is this better than other activation functions?} $$y_e = z_e = \sum_i w_i y_i,$$ where $i$ ranges over the neurons per context word in the input layer. In particular this means $\frac{\partial y_e}{\partial z_e} = 1,$ and so
+$$\frac{\partial C}{\partial z_e} = \frac{\partial C}{\partial y_e} \frac{\partial y_e}{\partial z_e} = \sum_h \frac{\partial C}{\partial z_h} \frac{\partial z_h}{\partial y_e} = \sum_h w_{he} \frac{\partial C}{\partial z_h}.$$
+In matrix form this is
+$$\frac{\partial C}{\partial Z_e} = \frac{\partial C}{\partial Z_h} W_e \sim m \times 3D.$$
+
+The weight derivatives are
+$$\frac{\partial C}{\partial w_{he}} = \frac{\partial C}{\partial z_h} \frac{\partial z_h}{\partial w_{he}} = y_e \frac{\partial C}{\partial z_h},$$
+which in matrix form is
+$$\frac{\partial C}{\partial W_e} = \frac{\partial C}{\partial Z_h}^T Y_e \sim H \times 3D,$$
+which is the same size $W_e.$
+
+\subsection{Embedding Layer Bias Units}
+
+Let $b_e$ be the bias weight going into neuron $y_h$ in the hidden layer. Then as usual
+$$\frac{\partial C}{\partial b_e} = \frac{\partial C}{\partial z_h} \frac{\partial z_h}{\partial b_e} = \frac{\partial C}{\partial z_h},$$
+which has matrix form
+$$\frac{\partial C}{\partial B_e} = \left(\sumtext_{\text{rows}} \frac{\partial C}{\partial Z_h}\right)^T \sim H \times 1.$$
 
 \part{Object Recognition: Convolutional Neural Networks for Digit Recognition}
 

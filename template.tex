@@ -75,6 +75,12 @@
 \newcommand{\R}{\mathbf R}
 
 \DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator*{\sumtext}{sum} % e.g. for matrix sum by column / row.
+
+\apptocmd{\lim}{\limits}{}{}
+\apptocmd{\sum}{\limits}{}{}
+\apptocmd{\prod}{\limits}{}{}
+\apptocmd{\sumtext}{\limits}{}{}
 
 \title{}
 \author{Nhan Trong}

@@ -1,3 +1,4 @@
+import sys
 import collections
 import cPickle
 import numpy as np
@@ -180,12 +181,12 @@ class Model(object):
             expanded_target_batch - each row is the indicator vector for a target word,
                 i.e. the (i, j) entry is 1 if the i'th word is j, and 0 otherwise.
 
-        dC / dz_j = y_j - t_j
+        The loss derivative is dC / dz_j = y_j - t_j
         """
 
         ###########################   YOUR CODE HERE  ##############################
 
-        np.subtract(output_activations, expanded_target_batch)
+        return np.subtract(output_activations, expanded_target_batch)
 
         ############################################################################
 
@@ -195,6 +196,7 @@ class Model(object):
         by calling indicator_matrix on the targets for the batch."""
         return -np.sum(expanded_target_batch * np.log(output_activations + TINY))
 
+    # forward propagation:
     def compute_activations(self, inputs):
         """Compute the activations on a batch given the inputs. Returns an Activations instance.
         You should try to read and understand this function, since this will give you clues for
@@ -215,6 +217,7 @@ class Model(object):
         # Hidden layer
         inputs_to_hid = np.dot(embedding_layer_state, self.params.embed_to_hid_weights.T) + \
                         self.params.hid_bias
+
         # Apply logistic activation function
         hidden_layer_state = 1. / (1. + np.exp(-inputs_to_hid))
 
@@ -256,6 +259,7 @@ class Model(object):
 
         ###########################   YOUR CODE HERE  ##############################
 
+        # mach
 
         ############################################################################
 
