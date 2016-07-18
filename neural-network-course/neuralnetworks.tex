@@ -503,7 +503,7 @@ $$\Delta w_{jh} = - \alpha \sum_m \frac{\partial C}{\partial w_{jh}}.$$
 
 \subsection{Hidden Layer Bias Units}
 
-Let $b_h$ be a bias unit in the hidden layer going into neuron $y_j$ in the output layer. Then 
+Let $b_h$ be the bias unit in the hidden layer going into neuron $y_j$ in the output layer. Then 
 $$\frac{\partial C}{\partial b_h} = \frac{\partial C}{\partial z_j} \frac{\partial z_j}{\partial b_h} = \frac{\partial C}{\partial z_j},$$
 since $\frac{\partial z_j}{\partial b_h} = 1.$ Similar to the weight derivatives, we also want to sum these over the $m$ training cases, so
 $$\frac{\partial C}{\partial b_h} = \sum_m \frac{\partial C}{\partial z_j},$$ which in matrix form is
@@ -525,7 +525,7 @@ The weight derivatives are
 $$\frac{\partial C}{\partial w_{he}} = \frac{\partial C}{\partial z_h} \frac{\partial z_h}{\partial w_{he}} = y_e \frac{\partial C}{\partial z_h},$$
 which in matrix form is
 $$\frac{\partial C}{\partial W_e} = \frac{\partial C}{\partial Z_h}^T Y_e \sim H \times 3D,$$
-which is the same size $W_e.$
+which is the same size as $W_e.$
 
 \subsection{Embedding Layer Bias Units}
 

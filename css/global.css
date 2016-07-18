@@ -1,0 +1,44 @@
+body {
+    font-family: times, "Times New Roman", georgia;
+    font-size: 1.2em;
+}
+
+#content {
+    margin:0 auto;
+    max-width: 600px;
+}
+
+h1 {
+    color: red;
+}
+
+p {
+
+}
+
+img {
+    width: 100%;
+}
+
+figcaption {
+    width: 100%;
+    text-align: center;
+}
+
+.epigraph {
+    max-width: 300px;
+    float: right;
+    margin: 0 0 20px 0;
+}
+
+.epigraph .quote {
+    font-style: italic;
+}
+
+.epigraph .author {
+    text-align: right;
+}
+
+.clearboth {
+    clear: both;
+}

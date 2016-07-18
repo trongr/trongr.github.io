@@ -259,7 +259,11 @@ class Model(object):
 
         ###########################   YOUR CODE HERE  ##############################
 
-        # mach
+        hid_to_output_weights_grad = np.dot(loss_derivative.T, activations.hidden_layer)
+        output_bias_grad = np.sum(loss_derivative, 0).T
+
+        embed_to_hid_weights_grad = np.dot(hid_deriv.T, activations.embedding_layer)
+        hid_bias_grad = np.sum(hid_deriv, 0).T
 
         ############################################################################
 

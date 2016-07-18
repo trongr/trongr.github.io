@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>math notes and stuff</title>
+<link rel="stylesheet" href="../css/global.css">
+
+<!-- this config must be before MathJax.js: -->
+<script src="../js/mathjax.config.js"></script>
+<!-- for offline use: -->
+<!-- <script src="../js/MathJax/MathJax.js"></script> -->
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+
+</head>
+<body>
+
+<div id="content">
+
+<h1>Analysis</h1>
+
+<hr>
+
+<div class="epigraph">
+    <div class="quote">Be wary of gorgeous view.</div><hr>
+    <div class="author">Dark Souls</div>
+</div>
+<div class="clearboth"></div>
+
+<h1>Infinite Series</h1>
+
+<p><b>Definition.</b> <i>The sequence $a_n$ is summable if the
+sequence $$s_n = a_1 + \cdots + a_n$$ converges. In this case
+$\lim\limits_{n\to \infty} s_n$ is denoted by
+$\sum\limits_{n=1}^\infty a_n.$</i></p>
+
+<h1>Cauchy Criterion</h1>
+
+<p><b>Proposition.</b> <i>The sequence $a_n$ is summable iff
+$$\lim_{m,n\to \infty} a_n + \cdots + a_m = 0.$$</i></p>
+
+<p><i>Proof.</i> Partial sums are a Cauchy sequence. &#8718;</p>
+
+<figure>
+    <img src="images/2000px-Cauchy_sequence_illustration.png">
+    <figcaption>A Cauchy sequence.</figcaption>
+</figure>
+
+<h1>Vanishing Condition</h1>
+
+<p><b>Proposition.</b> <i>If $a_n$ is summable, then
+$$\lim_{n\to\infty} a_n = 0.$$</i></p>
+
+<p><b>Nonexample.</b> The sequence $1, -1, 1, -1, \ldots$ is not
+summable.</p>
+
+<p><b>Noncounterexample.</b> The vanishing condition is necessary, but
+not sufficient for summability, e.g. the harmonic series $$\sum_{n}
+\frac{1}{n}$$ is not convergent even though the terms go to zero.</p>
+
+<figure>
+    <img src="images/Integral_Test.png">
+    <figcaption>Harmonic Series nonconvergent because log is unbounded.</figcaption>
+</figure>
+
+<p><b>Example of convergent series.</b> The geometric series is
+convergent for $|r| < 1$: $$\sum_{n=0}^\infty r^n = \frac{1}{1 - r}.$$
+For $|r| \geq 1,$ the series isn't convergent because the terms aren't
+vanishing.</p>
+
+<figure>
+    <img src="images/proof-without-words-halves.gif">
+    <figcaption>You can also visualize this on a line like in Zeno's Paradox.</figcaption>
+</figure>
+
+<h1>Boundedness Criterion</h1>
+
+<p><b>Proposition.</b> <i>A nonnegative sequence $a_n$ is summable iff
+the partial sums $s_n$ is bounded.</i></p>
+
+<h1>Comparison Tests</h1>
+
+<p><b>Theorem.</b> <i>Suppose that $0 \leq a_n \leq b_n$ for all $n$. If
+$\sum\limits_n b_n$ converges, then so does $\sum\limits_n a_n.$</i></p>
+
+<p>Useful for comparing series by orders of magnitude:</p>
+
+<p><b>Example.</b> The sum $$\sum_n \frac{2 + \sin^3(n + 1)}{2^n +
+n^2}$$ converges by comparison with $$\sum_n \frac{1}{2^n},$$ which is
+a geometric series. Similarly $$\sum_n \frac{n+1}{n^2+1}$$ is not
+convergent because its terms are of the same order of magnitude as
+those of the harmonic series $$\sum_n \frac{1}{n}.$$</p>
+
+<p><b>Theorem.</b> <i>If $a_n, b_n > 0$ and $\lim\limits_{n\to\infty}
+\frac{a_n}{b_n}$ is a nonzero constant, then $\sum\limits_n a_n$ converges
+iff $\sum\limits_n b_n$ converges.</i></p>
+
+<p><b>Theorem: Ratio Test.</b> <i>Let $a_n > 0$ for all $n,$ and
+suppose that $$\lim_{n\to\infty} \frac{a_{n+1}}{a_n} = r.$$ Then
+$\sum\limits_{n} a_n$ converges if $r < 1$. On the other hand, if $r >
+1$, then the terms do not vanish and the series does not
+converge.</i></p>
+
+<h1>Reference</h1>
+
+<ol>
+<li>Most all images from the Web.</li>
+<li>Spivak's Calculus.</li>
+</ol>
+
+</div>
+</body>
+</html>
