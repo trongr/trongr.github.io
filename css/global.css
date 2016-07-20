@@ -1,5 +1,6 @@
 body {
     font-family: times, "Times New Roman", georgia;
+    /* font-family: georgia, times, "Times New Roman"; */
     font-size: 1.2em;
 }
 
@@ -13,7 +14,8 @@ h1 {
 }
 
 p {
-
+    text-align: justify;
+    text-justify: inter-word;
 }
 
 img {
