@@ -47,13 +47,6 @@ The function $y(z)$ is also called the Heaviside / unit step function.
 
 <h1>Limitations of the Binary Threshold Neuron</h1>
 
-<p><b>Proposition.</b> <i>A single binary threshold neuron cannot learn the XOR function, because geometrically its truth table represented on a plane is not linearly separable.</i></p>
-
-<figure>
-    <img src="images/linSepXor.png">
-    <figcaption></figcaption>
-</figure>
-
 <h1>Group Invariance Theorem</h1>
 
 <p><b>Proposition.</b> <i>A single binary threshold neuron cannot
@@ -63,6 +56,11 @@ perceptrons can't learn patterns if they're subject to transformations
 that form a group, e.g. translations with wrap-around.</i></p>
 
 <p>TODO. Details?</p>
+
+<figure>
+    <img src="images/linSepXor.png">
+    <figcaption></figcaption>
+</figure>
 
 <h1>Linear Neuron Learning Algorithm</h1>
 
@@ -299,8 +297,8 @@ encapsulates that idea: if $y_i$ is high, then we've guessed correctly
 and $C$ is low; otherwise $y_i$ is low, and we've guessed incorrectly
 and $C$ should be high---hence the negative sign.</p>
 
-<p>Why $\log$?  Maybe cause it gives nice derivatives like
-$\frac{\partial C}{\partial z_i} = y_i - t_i.$</p>
+<p><b>Question.</b> <i>Why $\log$?  Maybe cause it gives nice derivatives like
+$\frac{\partial C}{\partial z_i} = y_i - t_i.$</i></p>
 
 <p>The reason we use $\log$ is that when the answer is $t_i = 1,$ and
 we guess $y_i$ very close to zero, i.e. we've guessed very wrong, we
