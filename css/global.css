@@ -1,5 +1,6 @@
 body {
     font-family: times, "Times New Roman", georgia;
+    /* font-family: georgia, times, "Times New Roman"; */
     font-size: 1.2em;
 }
 
@@ -10,10 +11,12 @@ body {
 
 h1 {
     color: red;
+    text-align: left;
 }
 
 p {
-
+    text-align: justify;
+    text-justify: inter-word;
 }
 
 img {
