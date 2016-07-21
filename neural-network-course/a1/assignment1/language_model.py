@@ -365,7 +365,7 @@ class Model(object):
             pylab.text(mapped_X[i, 0], mapped_X[i, 1], w)
         pylab.xlim(mapped_X[:, 0].min(), mapped_X[:, 0].max())
         pylab.ylim(mapped_X[:, 1].min(), mapped_X[:, 1].max())
-
+        pylab.show()
 
 
 _train_inputs = None

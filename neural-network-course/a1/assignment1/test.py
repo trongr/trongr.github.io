@@ -9,7 +9,11 @@ def load_data():
 def test_gradient():
     checking.check_gradients()
 
-def train():
-    model = lm.train(16, 128)
+def train(embedding_dim, hidden_layer_size):
+    return lm.train(embedding_dim, hidden_layer_size)
 
-train()
+def tsne_plot():
+    model = train(16, 128)
+    model.tsne_plot()
+
+tsne_plot()
