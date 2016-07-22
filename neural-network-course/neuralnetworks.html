@@ -322,8 +322,7 @@ one? The cost function $C$ seems to ignore those guesses. Shouldn't we
 punish those neurons that produce false positives and award ones that
 produce true negatives?</i></p>
 
-<h1>Application: Speech Recognition</h1>
-
+<h1>Application: Speech Recognition: word prediction</h1>
 
 <div class="epigraph">
     <div class="quote">People use their understanding of the meaning
@@ -333,8 +332,8 @@ produce true negatives?</i></p>
 </div>
 <div class="clearboth"></div>
 
-<p>Speech recognizers have to know which words are likely to come next
-and which are not.</p>
+<p><b>Problem.</b> <i>Speech recognizers have to know which words are likely to come next
+and which are not.</i></p>
 
 <h1>Trigram method</h1>
 
@@ -346,7 +345,8 @@ words. Use these frequencies to calculate $$\frac{p(c|a,b)}{p(d|a,b)}
 
 <p><b>Drawback.</b> Trigram doesn't understand similarity between words.</p>
 
-<p>TODO. Need to do extra readings on the rest of the speech recognition lectures. Not a lot of details there.</p>
+<p>Need to do extra readings on the rest of the speech recognition
+lectures. Not a lot of details there.</p>
 
 <div class="epigraph">
     <div class="quote">
@@ -359,6 +359,10 @@ words. Use these frequencies to calculate $$\frac{p(c|a,b)}{p(d|a,b)}
     <div class="author">Pokemon</div>
 </div>
 <div class="clearboth"></div>
+
+<p>
+    Turns out it's part of the assignment:
+</p>
 
 <h1>Assignment 1: Learning Distributed Word Representations</h1>
 
@@ -607,11 +611,12 @@ output layer associates each trigram with the fourth target word.</p>
 </p>
 
 <p>
-    To summarize, to optimize $C,$ the weights in the hidden to output
-    layer must move towards the activation $Y_h.$ In particular, if we
-    feed the network many similar trigrams and target words, the
-    weights $W_h$ in the hidden layer will move towards those similar
-    activation vectors $Y_h$ and come to resemble their mean.
+    To summarize, to optimize $C,$ some weights in the hidden to
+    output layer must move towards the activation $Y_h.$ In
+    particular, if we feed the network many similar trigrams and
+    target words, a certain set of weights $w_j$ in the hidden layer
+    will move towards those activation vectors $Y_h$ and come to
+    resemble their mean.
 </p>
 
 <h2>Hidden Layer / Trigram Embedding</h2>
@@ -634,16 +639,16 @@ output layer associates each trigram with the fourth target word.</p>
 <p>
     The hidden layer activation
 
-    $$y_h = \frac{1}{1 + e^{-z_h}}.$$
+    $$y_h = \frac{1}{1 + e^{-z_h}}$$
 
     says that neuron $y_h$ is activated, i.e. close to 1, if
 
     $$z_h = \sum_e w_{he} y_e = w_h^T Y_e$$
 
     is large, if $w_h$ is close to $Y_e.$ In other words, in order to
-    properly represent a trigram as a certain activation vector $Y_h,$
-    the weights $w_h$ for certain hidden neurons must move closer to
-    the embedding activation $Y_e.$
+    make a trigram map to the correct activation vector $Y_h,$ the
+    weights $w_h$ for certain hidden neurons must move closer to the
+    embedding activation $Y_e.$
 </p>
 
 <h2>Embedding layer</h2>
@@ -670,8 +675,15 @@ output layer associates each trigram with the fourth target word.</p>
 
     and in addition each module takes a separate word as input. But
     other than that, the idea is the same: $y_e$ is high if $w_e$ is
-    similar to $Y_k,$ and so in order to properly represent a word $Y_k,$
-    the weights $w_e$ must move towards the vector $Y_k.$*
+    similar to $Y_k,$ and so in order to properly represent a word
+    $Y_k,$ certain weights $w_e$ must move towards the vector $Y_k.$*
+</p>
+
+<p>
+    <b>Note.</b> We've only talked about the high neurons and what
+    happens to the weights going into them. The low neurons are also
+    similar: the weights going into those must move away from the
+    input activation.
 </p>
 
 <hr>
@@ -687,13 +699,41 @@ representations?</i></p>
 <p>
     As we've seen, training the neural network simply means making a
     certain set of weights in a layer move closer to those inputs that
-    give the right answer. For example, say you feed a network the
-    same set of trigram ABC, and a target word D over and over, the
-    input to embedding weights $W_e$ will move towards the best
-    encoding for A, B, and C. This means that the encodings for A, B,
-    and C at any point in time are likely to be close to each other,
-    which answers the original question: proximity in embedding space
-    represents how often the words appear together in the text.
+    give the right answer, while at the same time making the remaining
+    weights move away from those inputs. So let's consider what
+    happens when we train a network on a set of trigrams ABC whose
+    target word is a fixed word D. The hidden to output weights $W_h$
+    will want to map all of these ABC's to the same class D, so $W_h$
+    will move towards their mean encoding. In the embedding layer, the
+    embedding to hidden weights $W_e$ will want to map these word
+    embeddings to the same trigram representation, so $W_e$ will move
+    towards their mean encoding.
+</p>
+
+<div class="aside">
+    * Hinton mentioned this as one of the drawbacks of the trigram
+    method without using a neural network, and this is the fix.
+</div>
+
+<p>
+    In the input layer, the input to embedding weights will be
+    slightly different: in addition to having to encode each word, the
+    weights $W_k$ will also have to encode the word's position in the
+    trigram sequence. This is because we're making the embedding layer
+    take the letters A, B, C as input in order, and the weights $W_k$
+    are aware of this ordering by definition.*
+</p>
+
+<p>
+    Therefore the answer to the question is: proximity in embedding
+    space represents how often words appear together, and in which
+    order before a target word. E.g. if we feed the neural network the
+    two phrases "the cat is cute" and "all dogs are cute" over and
+    over, the words "the" and "cat" will be close to each other, as
+    well as the words "cat" and "dogs". The first case because "the"
+    and "cat" appear together often before the target word "cute", and
+    the second case because "cat" and "dogs" appear in the same
+    position before the target word "cute".
 </p>
 
 <p><b>Question.</b> <i>How does using an unweighted linear activator
