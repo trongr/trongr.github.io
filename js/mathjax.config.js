@@ -12,9 +12,6 @@ window.MathJax = {
     TeX: {
         Macros: {
             count: "\\mathop{\\rm count}\\limits",
-            liml: "\\mathop{\\liml}\\limits",
-            prodl: "\\mathop{\\prod}\\limits",
-            suml: "\\mathop{\\sum}\\limits",
             sumtext: "\\mathop{\\rm sum}\\limits"
         }
     }

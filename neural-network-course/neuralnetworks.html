@@ -108,7 +108,7 @@ $$E = \frac{1}{2} \sum_n (t_n - y_n)^2.$$
 
 <figure>
     <img src="images/Logistic-curve.png">
-    <figcaption></figcaption>
+    <figcaption>A logistic curve</figcaption>
 </figure>
 
 <p><b>Proposition.</b> <i>The estimator derivatives are
@@ -152,6 +152,9 @@ With these partial derivatives calculated over all training cases, we
 can then apply Gradient Descent or some other optimization algorithm
 to <i>compute</i> the minimum weights $W.$
 </p>
+
+<p><b>Question.</b> <i>Is there any other optimization algorithm?
+Numerical ones?</i></p>
 
 <p>Keep in mind that there is a weight matrix $w$ for each pair of
 layers $i$ and $j,$ where each entry $w_{ij}$ corresponds to the
@@ -262,7 +265,7 @@ moment.</i></p>
 
 <hr>
 
-<p><b>Proposition</b> <i>By the Quotient Rule, the derivatives are
+<p><b>Proposition.</b> <i>By the Quotient Rule, the derivatives are
 \begin{align*}
 \frac{\partial y_i}{\partial z_i} &= y_i(1 - y_i) \\
 \frac{\partial y_i}{\partial z_j} &= -y_i y_j,
@@ -532,7 +535,177 @@ layer. Then as usual $$\frac{\partial C}{\partial b_e} =
 $$\frac{\partial C}{\partial B_e} = \left(\sumtext_{\text{rows}}
 \frac{\partial C}{\partial Z_h}\right)^T \sim H \times 1.$$</p>
 
-<h1>Object Recognition: Convolutional Neural Networks for Digit Recognition</h1>
+<h1>Some Unanswered Questions</h1>
+
+<p><b>Question.</b> <i>What exactly is each layer doing?</i></p>
+
+<p>From the bottom up: each word embedding encodes a word in a new
+distributed representation. The hidden layer then learns those trigram
+representations, i.e. it's encoding the entire trigram. Finally the
+output layer associates each trigram with the fourth target word.</p>
+
+<p><b>Question.</b> <i>OK, but how exactly are they doing it?</i></p>
+
+<p>
+    Let's take a closer look at what each layer is doing. From the top down:
+</p>
+
+<h2>Output layer</h2>
+
+<figure>
+    <img src="images/words_hidden_to_output.png">
+    <figcaption></figcaption>
+</figure>
+
+<div class="aside">
+    * which coincidentally makes all the other $y_i$'s in the output
+    layer close to 0, because we defined $y_i =
+    \frac{e^{z_i}}{\sum\limits_{j\in G} e^{z_j}}.$ OK, maybe not
+    coincidentally: we defined it that way so it would have this
+    property of unit probability measure.
+</div>
+
+<p>
+    Let's assume for a particular training case belongs in class $j,$ i.e.
+    that $t_j = 1$ and $t_i = 0$ for all other $i$'s. In that case
+    the cross entropy function
+    $$C = - \sum_j t_j \log y_j$$
+    is optimized, i.e. close to zero, if $\log y_j$ is close to zero, and therefore
+    if $y_j$ is close to 1.*
+</p>
+
+<div class="aside">
+    * This is a property of the inner / dot product of two vectors:
+    vectors that are similar, i.e. close together, have roughly bigger dot
+    products, and vectors that are farther apart have roughly smaller dot
+    products. E.g.
+
+    $$(10, 0) \cdot (11, 0) = 110$$
+
+    is large positive, perpendicular vectors have zero dot product:
+
+    $$(10, 0) \cdot (0, 10) = 0,$$
+
+    while
+
+    $$(10, 0) \cdot (-10, 0) = -100$$
+
+    is small / large negative. You can see why this is so by
+    considering the definition of the dot product for the case $n =
+    1,$ and generalize component-wise.
+</div>
+
+<p>
+    This means that $e^{z_j}$ and therefore
+
+    $$z_j = \sum_h w_{jh} y_h = w_j^T Y_h$$
+
+    must be large, where $y_h$ are the neurons in the hidden layer and
+    $w_{jh}$ are their weights going into the output
+    layer. Geometrically, this means that the weight vector $w_j =
+    (w_{jh})$ must be close to the hidden layer activation $Y_h.$*
+</p>
+
+<p>
+    To summarize, to optimize $C,$ the weights in the hidden to output
+    layer must move towards the activation $Y_h.$ In particular, if we
+    feed the network many similar trigrams and target words, the
+    weights $W_h$ in the hidden layer will move towards those similar
+    activation vectors $Y_h$ and come to resemble their mean.
+</p>
+
+<h2>Hidden Layer / Trigram Embedding</h2>
+
+<figure>
+    <img src="images/words_embed_to_hidden.png">
+    <figcaption></figcaption>
+</figure>
+
+<p>
+    In the previous layer, we assumed that the hidden layer faithfully
+    represents trigram embeddings. If it didn't, training the network
+    will have to take care of that. In other words, to optimize $C,$
+    at the hidden layer we have to optimize trigram embedding, i.e. by
+    training the embedding to hidden layer weights to make sure that
+    correct inputs from the embedding layer map to correct hidden
+    layer activation.
+</p>
+
+<p>
+    The hidden layer activation
+
+    $$y_h = \frac{1}{1 + e^{-z_h}}.$$
+
+    says that neuron $y_h$ is activated, i.e. close to 1, if
+
+    $$z_h = \sum_e w_{he} y_e = w_h^T Y_e$$
+
+    is large, if $w_h$ is close to $Y_e.$ In other words, in order to
+    properly represent a trigram as a certain activation vector $Y_h,$
+    the weights $w_h$ for certain hidden neurons must move closer to
+    the embedding activation $Y_e.$
+</p>
+
+<h2>Embedding layer</h2>
+
+<figure>
+    <img src="images/words_input_to_embed.png">
+    <figcaption></figcaption>
+</figure>
+
+<div class="aside">
+    * It's still not clear to me how using an unweighted linear
+    activator would differ from a logistic activator. The only
+    difference I can see is that logistic gives you a bounded
+    activation range $(0, 1),$ while linear gives you an unbounded
+    range $(-\infty, \infty),$ but that shouldn't matter as far as
+    backpropagation is concerned. Probably wrong.
+</div>
+
+<p>
+    This layer is a little different because the activation is
+    unweighted linear:
+
+    $$y_e = z_e = \sum_k w_{ek} y_k = w_e^T Y_k,$$
+
+    and in addition each module takes a separate word as input. But
+    other than that, the idea is the same: $y_e$ is high if $w_e$ is
+    similar to $Y_k,$ and so in order to properly represent a word $Y_k,$
+    the weights $w_e$ must move towards the vector $Y_k.$*
+</p>
+
+<hr>
+
+<p>
+    Now to answer the question:
+</p>
+
+<p><b>Question.</b> <i>What does it mean when two words are close
+together in the embedding layer, i.e. have similar distributed word
+representations?</i></p>
+
+<p>
+    As we've seen, training the neural network simply means making a
+    certain set of weights in a layer move closer to those inputs that
+    give the right answer. For example, say you feed a network the
+    same set of trigram ABC, and a target word D over and over, the
+    input to embedding weights $W_e$ will move towards the best
+    encoding for A, B, and C. This means that the encodings for A, B,
+    and C at any point in time are likely to be close to each other,
+    which answers the original question: proximity in embedding space
+    represents how often the words appear together in the text.
+</p>
+
+<p><b>Question.</b> <i>How does using an unweighted linear activator
+in the embedding layer differ from using say a logistic activator? Can
+we replace one by the other and still achieve similar results?</i></p>
+
+I have a feeling they shouldn't differ in theory, but I'm not sure. TODO!
+
+<hr>
+
+<h1>Object Recognition: Convolutional Neural Networks for Digit
+Recognition</h1>
 
 <h1>Replicated Features</h1>
 
@@ -546,7 +719,7 @@ $$\frac{\partial C}{\partial B_e} = \left(\sumtext_{\text{rows}}
 <li>Geoffrey E. Hinton's Neural Networks video lectures.</li>
 <li>http://www.cs.toronto.edu/~rgrosse/csc321/</li>
 <li>http://www.cs.toronto.edu/~tijmen/csc321/</li>
-<li>Images and other things from the Internet.</li>
+<li>Images from the Internet.</li>
 </ol>
 
 </div>
