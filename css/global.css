@@ -15,12 +15,13 @@ a {
 }
 
 h1 {
-    color: #FFBA26;
+    color: #FFD557;
     text-align: left;
 }
 
 h2 {
-    color: #FFC65C;
+    color: #FFC457;
+    font-style: italic;
 }
 
 p {
@@ -29,11 +30,11 @@ p {
 }
 
 b {
-    color: #FF5454;
+    color: #FF4D4D;
 }
 
 i {
-    color: #68E38D;
+    color: #9CFFB9;
 }
 
 img {
@@ -54,6 +55,8 @@ figcaption {
 
 .epigraph .quote {
     font-style: italic;
+    text-align: justify;
+    text-justify: inter-word;
 }
 
 .epigraph .author {
@@ -73,4 +76,8 @@ figcaption {
 
 .clearboth {
     clear: both;
+}
+
+.center {
+    text-align: center;
 }

@@ -24,7 +24,233 @@
 </div>
 <div class="clearboth"></div>
 
+<h1>Polynomial Approximation</h1>
+
+<figure>
+    <img src="images/MH8onJG.png">
+    <figcaption>Mathematical Approximation. Everything is an
+    approximation!</figcaption>
+</figure>
+
+<p>
+    <b>Theorem: Taylor's Theorem.</b> <i>If $f', \ldots, f^{(n+1)}$
+are defined on $[a, x],$ then $$f(x) = f(a) + f'(a)(x - a) + \cdots +
+\frac{f^{(n)}(a)}{n!}(x - a)^n + R_n(x)$$ where $R_n(x) =
+\frac{f^{(n+1)}(t)}{(n+1)!}(x - a)^{n+1}$ for some $t$ in $(a,
+x).$</i>
+</p>
+
+<p>
+    <b>Note.</b> The Mean Value Theorem is a special case of Taylor's Theorem:
+$$f(b) = f(a) + f'(c)(b - a)$$
+for some $c$ between $a$ and $b.$
+</p>
+
+<h1>Sequences</h1>
+
+<figure>
+    <img src="images/numbers.jpg">
+    <figcaption>LOST</figcaption>
+</figure>
+
+<p>
+    <b>Monotone Convergence Theorem.</b> <i>A sequence which is
+    increasing and bounded above by a supremum converges to the
+    supremum. Similarly a decreasing lower-bounded sequence
+    converges to its infimum.</i>
+</p>
+
+<p>
+    <b>Theorem: Uniform Limit Theorem.</b> <i>Uniform convergence of functions preserves
+    continuity, i.e. if $f_n$ are continuous and approach $f$
+    uniformly, then $f$ is continuous.</i>
+</p>
+
+<p>
+    <b>Proposition.</b> <i>The uniform limit of uniformly continuous
+    functions is uniformly continuous.</i>
+</p>
+
+<p>
+    <b>Question.</b> <i>What about differentiability, i.e. if $f_n$
+    are differentiable and approach $f$ uniformly, is $f$ always
+    differentiable, and is $\lim f_n' = f'$?</i>
+</p>
+
+<p>
+    <b>Example.</b> No to the second question: the functions $f_n(x) =
+    \frac{1}{n} \sin(nx)$ converge uniformly to the zero function,
+    which \textit{is} differentiable. But, the limit of the
+    derivatives don't exist. What about just differentiability?
+</p>
+
+<figure>
+    <img src="images/uniformconvergence1.jpg">
+    <figcaption></figcaption>
+</figure>
+
+<p>
+    <b>Example.</b> Still No, e.g. the functions $f_n(x) = \sqrt{x^2 +
+    1/n}$ converge uniformly to $f = |x|,$ which is not differentiable
+    at zero.
+</p>
+
+<figure>
+    <img src="images/uniformconvergence2.png">
+    <figcaption></figcaption>
+</figure>
+
+<p>
+    <b>Example.</b> The Weierstrass function $$f(x) =
+    \sum^\infty_{k=0} a^k \cos(b^k \pi x),$$ for appropriate values
+    $a$ and $b,$ is the uniform limit of $$f_n = \sum^n_{k=0} a^k
+    \cos(b^k \pi x),$$ but is nowhere differentiable.
+</p>
+
+<figure>
+    <img src="images/nodiff1.jpg">
+    <figcaption></figcaption>
+</figure>
+
+<p>
+    <b>Question.</b> <i>Is the Koch snowflake nowhere
+    differentiable?</i>
+</p>
+
+Yes. Proof?
+
+<figure>
+    <img src="images/biomimicry-koch-snowflake.jpg">
+    <figcaption></figcaption>
+</figure>
+
+<p>
+    <b>Definition.</b> <i>Let $\{a_n\}$ be a sequence, and $0 \leq a <
+    b \leq 1.$ Let $N(n; a, b)$ be the number of integers $j \leq n$
+    s.t. $a_j \in [a, b].$ A sequence $\{a_n\}$ of numbers in $[0, 1]$
+    is called uniformly distributed in $[0, 1]$ if $$\lim_{n \to
+    \infty} \frac{N(n; a, b)}{n} = b - a$$ for all $a, b,$ s.t. $0
+    \leq a < b \leq 1.$</i>
+</p>
+
+<p>
+    <b>Proposition.</b> <i>If $s$ is a step function on $[0, 1],$ and
+    $\{a_n\}$ is uniformly distributed in $[0, 1],$ then $$\int_0^1 s
+    = \lim_{n\to\infty} \frac{s(a_1) + \cdots + s(a_n)}{n}.$$</i>
+</p>
+
+<p>
+    <i>Proof.</i>
+Let $\Delta_1, \ldots, \Delta_m$ be a partition of $[0, 1]$ corresponding to the steps in $s.$ Then (with a slight abuse of notation) we have
+\begin{align*}
+\int_0^1 s &= \sum_{i=1}^m s(\Delta_i) \Delta_i \\
+&= \sum_{i=1}^m s(\Delta_i) \lim_{n \to \infty} \frac{1}{n} N(n; \Delta_i) \\
+&= \lim_{n \to \infty} \frac{1}{n} \sum_{i=1}^m s(\Delta_i) N(n; \Delta_i) \\
+&= \lim_{n \to \infty} \frac{1}{n} \sum_{i=1}^n s(a_i).
+\end{align*}
+</p>
+
+<p>
+    <b>Proposition.</b> <i>If $f$ is integrable on $[0, 1],$ and
+    $\{a_n\}$ is uniformly distributed in $[0, 1],$ then $$\int_0^1 f
+    = \lim_{n\to\infty} \frac{f(a_1) + \cdots + f(a_n)}{n}.$$</i>
+</p>
+
+<p>
+    <i>Proof.</i>  Since $f$ is integrable, there is a step function
+$s$ such that $\int_0^1 f$ is close to $\int_0^1 s,$ which is close to
+$\frac{s(a_1) + \cdots + s(a_n)}{n},$ which is close to $\frac{f(a_1)
++ \cdots + f(a_n)}{n}.$
+</p>
+
+<h1>Bolzano-Weierstrass Theorem</h1>
+
+<p>
+    <b>Theorem: Bolzano-Weierstrass Theorem.</b> <i>An infinite
+    sequence contained in a closed interval $I$ has a limit point in
+    $I.$</i>
+</p>
+
+<figure>
+    <img src="images/Bolzano–Weierstrass_theorem_-_step_7.png">
+    <figcaption></figcaption>
+</figure>
+
+Proof uses the Nested Interval Theorem:
+
+<p>
+    <b>Theorem: Nested Interval Theorem.</b> <i>The intersection of closed nested intervals is nonempty. If the
+    interval lengths tend to zero, then the intersection is a
+    point. Otherwise it's a closed interval.</i>
+</p>
+
+<figure>
+    <img src="images/511px-Illustration_nested_intervals.png">
+    <figcaption></figcaption>
+</figure>
+
+<p>
+    <b>Definition.</b> <i>A function $f$ defined on an interval $I$ is
+    called limitful if $\lim\limits_{y\to a} f(y)$ exists for all $a
+    \in I.$</i>
+</p>
+
+<p>
+    <b>Proposition.</b> <i>Let $f$ be a limitful function on $[0,
+    1].$ Then for any $\epsilon > 0$ there are only finitely many
+    points $a \in [0, 1]$ with $$|\lim\limits_{y\to a} f(y) - f(a)| >
+    \epsilon.$$</i>
+</p>
+
+<p>
+    <i>Proof.</i> Suppose that there are infinitely many such points
+    $a.$ Then by the Bolzano-Weierstrass Theorem, these points have a
+    limit $x \in [0, 1].$ Let $$L := \lim\limits_{y \to x} f(y) =
+    \lim\limits_{a\to x} f(a).$$
+</p>
+
+<p>
+    The condition $$|\lim\limits_{y\to a} f(y) - f(a)| > \epsilon$$
+    means that for $y$ close to $a,$ $f(y)$ is far from $f(a).$
+    Similarly $\lim\limits_{a \to x} f(a) = L$ means that for $a$
+    close to $x,$ $f(a)$ is close to $L.$ Together this means that for
+    $y$ close to $x$ and $y$ close to $a$ for some $a,$ we have that
+    $f(y)$ is far from $L,$ but this contradicts the fact that $L =
+    \lim\limits_{y \to x} f(y),$ i.e. for all $y$ close to $x,$ $f(y)$
+    is close to $L.$
+</p>
+
+<p>
+    <i>Proof 2.</i> Another way to see this is to let $a_n$ be the
+convergent subsequence given by Bolzano-Weierstrass, and choose $y_n$
+close to $a_n$ so that $|f(y_n) - f(a_n)|$ is big. Since $|f(a_n) -
+L|$ is small, the triangle inequality $$|f(y_n) - L| \geq |f(y_n) -
+f(a_n)| - |f(a_n) - L|$$ says $|f(y_n) - L|$ is big, thus
+contradiction.
+</p>
+
+<p>
+    <b>Theorem.</b> <i>A limitful function on $[0, 1]$ has at most
+    countably many discontinuities.</i>
+</p>
+
+<p>
+    <i>Proof.</i> By the previous Proposition, for each $\epsilon_q >
+    0$ there are at most finitely many points $a$
+    s.t. $$|\lim\limits_{y\to a} f(y) - f(a)| > \epsilon_q.$$ Taking a
+    sequence $\epsilon_q \in \mathbf Q$ converging to zero, we have countably
+    many such points $a.$
+</p>
+
+<p>
+    <b>Corollary.</b> <i>
+If $f$ has only removable discontinuities, then $f$ is continuous except at countably many points. In particular, $f$ cannot be discontinuous everywhere.
+</i>
+</p>
+
 <h1>Infinite Series</h1>
+
+<img src="images/quote-infinite-growth-of-material-consumption-in-a-finite-world-is-an-impossibility-e-f-schumacher-52-17-01.jpg">
 
 <p><b>Definition.</b> <i>The sequence $a_n$ is summable if the
 sequence $$s_n = a_1 + \cdots + a_n$$ converges. In this case
@@ -35,8 +261,6 @@ $\sum\limits_{n=1}^\infty a_n.$</i></p>
 
 <p><b>Proposition.</b> <i>The sequence $a_n$ is summable iff
 $$\lim_{m,n\to \infty} a_n + \cdots + a_m = 0.$$</i></p>
-
-<p><i>Proof.</i> Partial sums are a Cauchy sequence. &#8718;</p>
 
 <figure>
     <img src="images/2000px-Cauchy_sequence_illustration.png">
@@ -70,6 +294,11 @@ vanishing.</p>
     <figcaption>You can also visualize this on a line like in Zeno's Paradox.</figcaption>
 </figure>
 
+<figure>
+    <img src="images/zeno-paradox-arrow.png">
+    <figcaption></figcaption>
+</figure>
+
 <h1>Boundedness Criterion</h1>
 
 <p><b>Proposition.</b> <i>A nonnegative sequence $a_n$ is summable iff
@@ -77,7 +306,7 @@ the partial sums $s_n$ is bounded.</i></p>
 
 <h1>Comparison Tests</h1>
 
-<p><b>Theorem.</b> <i>Suppose that $0 \leq a_n \leq b_n$ for all $n$. If
+<p><b>Theorem.</b> <i>Suppose that $0 \leq a_n \leq b_n$ for all $n.$ If
 $\sum\limits_n b_n$ converges, then so does $\sum\limits_n a_n.$</i></p>
 
 <p>Useful for comparing series by orders of magnitude:</p>
@@ -93,10 +322,215 @@ those of the harmonic series $$\sum_n \frac{1}{n}.$$</p>
 iff $\sum\limits_n b_n$ converges.</i></p>
 
 <p><b>Theorem: Ratio Test.</b> <i>Let $a_n > 0$ for all $n,$ and
-suppose that $$\lim_{n\to\infty} \frac{a_{n+1}}{a_n} = r.$$ Then
-$\sum\limits_{n} a_n$ converges if $r < 1$. On the other hand, if $r >
-1$, then the terms do not vanish and the series does not
-converge.</i></p>
+suppose that $$\lim_{n\to\infty} \frac{a_{n+1}}{a_n} = r.$$ Then the
+series
+
+$$\sum\limits_{n} a_n \text{ is } \begin{cases}
+\text{convergent if $r < 1$} \\
+\text{divergent if $r > 1$} \\
+\text{insurgent if $r = 1.$}
+\end{cases}$$
+</i></p>
+
+<div class="epigraph">
+     <div class="quote">
+        <img src="images/divergent-trilogy-covers.png">
+     </div><hr><div class="author">Sadly, insurgent is not a technical
+     term. Yet.</div>
+</div><div class="clearboth"></div>
+
+<p>
+    <b>Example.</b> The harmonic series has ratio
+
+    $$\lim_{n\to\infty} \frac{a_{n+1}}{a_n} = 1,$$
+
+    but is divergent. On the other hand the series
+
+    $$\sum_n \frac{1}{n^2}$$
+
+    also has ratio 1 but is convergent, by the integral test.
+</p>
+
+<p>
+    <b>Theorem: Integral Test.</b> <i>Suppose $f$ is positive and
+    decreasing on $[1, \infty],$ and that $f(n) = a_n$ for all
+    n. Then $\sum a_n$ converges iff the limit
+
+    $$\int_1^\infty f = \lim_{A\to\infty} \int_1^A f$$
+
+    exists.</i>
+</p>
+
+<div class="aside">
+    * <b>Question.</b> What is the sum of this series? The integral
+    has such a nice form when it exists: $\int_1^\infty \frac{1}{x^p}
+    dx = \frac{1}{p-1}.$ Not to be confused with the geometric series
+    $\sum_n r^n = \frac{1}{1 - r}.$
+</div>
+
+<p>
+    <b>Example.</b> Convergence of the series*
+
+    $$\sum_n \frac{1}{n^p}$$
+
+    for $p > 0$ depends on the existence of the integral
+
+    \begin{align*}
+    \int_1^\infty \frac{1}{x^p} dx &= \lim_{A\to\infty} \int_1^A \frac{1}{x^p} dx \\
+                                   &= \lim_{A\to\infty} \begin{cases}
+                                   -\frac{1}{p-1} \frac{1}{A^{p-1}} + \frac{1}{p-1} & \text{ if } p \neq 1 \\
+                                   \log A                                           & \text{ if } p = 1
+                                   \end{cases}
+    \end{align*}
+
+    which exists iff $p > 1.$ In particular the harmonic series
+    diverges and $\sum_n \frac{1}{n^2}$ converges.
+</p>
+
+<h2>Absolute and Conditional Convergence</h2>
+
+<p>
+    <b>Definition.</b> <i>A series $\sum a_n$ is absolutely
+    convergent if $\sum |a_n|$ converges.</i>
+</p>
+
+<p>
+    <b>Absolute Convegence Theorem.</b> <i>Every absolutely convergent
+    series is convergent. Moreover, a series is absolutely convergent
+    iff the series formed from its positive and negative terms both
+    converge.</i>
+</p>
+
+<p>
+    <b>Note.</b> Let $\sum p_n$ and $\sum q_n$ be the series made of
+    positive and negative terms of $\sum a_n.$ If $\sum a_n$ is
+    conditionally convergent, i.e. it converges but not absolutely,
+    then by the Absolute Convergence Theorem, one of $\sum p_n$ and
+    $\sum q_n$ must diverge. In fact, they must both diverge, because
+    otherwise one converges and one diverges, i.e. one has bounded and
+    the other has unbounded partial sums, so $\sum a_n$ has unbounded
+    partial sums and $\sum a_n$ diverges, contradicting that it
+    converges.
+</p>
+
+<div class="aside">
+    <img src="images/alternatingseries.png">
+    Alternating series converging to zero.
+</div>
+
+<p>
+    <b>Theorem: Leibniz's Alternating Series Theorem.</b> <i>Suppose that
+
+    $$a_1 \geq a_2 \geq \cdots \geq 0$$
+
+    and that
+
+    $$\lim_{n\to\infty} a_n = 0.$$
+
+    Then the series
+
+    $$\sum_n (-1)^{n+1} a_n = a_1 - a_2 + a_3 - \cdots$$
+
+    converges.</i>
+</p>
+
+<p>
+    <b>Rearrangement Theorem for Conditionally Convergent
+    Series.</b> <i>If $\sum a_n$ converges but not absolutely, then
+    for any number $\alpha$ there is a rearrangement $b_n$ of
+    $a_n$ s.t. $\sum b_n = \alpha.$</i>
+</p>
+
+<p>
+    <i>Proof.</i> By the previous note, $\sum a_n$ contains infinitely
+    many positive and negative terms. In addition, the positive and
+    negative sums are divergent, so they can reach any positive or
+    negative number $\alpha.$ Once you're close to $\alpha$ you can
+    rearrange the terms to make it go a little over, and then a little
+    under, and so on, converging to $\alpha,$ a bit like the picture
+    above.
+</p>
+
+<p>
+    Note that you need both positive and negative series to be
+    divergent, because otherwise, say $\sum p_n = N$ is convergent,
+    then you could pick $\alpha > N$ and any rearranged partial sums
+    of $\sum a_n$ could never reach $\alpha.$
+</p>
+
+<p>
+    <b>Rearrangement Theorem for Absolutely Convergent
+    Series.</b> <i>If $\sum a_n$ converges absolutely and $b_n$ is any
+    rearrangement of $a_n,$ then $\sum b_n$ also converges
+    absolutely and $$\sum a_n = \sum b_n.$$</i>
+</p>
+
+<p>
+    <b>Note.</b> If $\sum a_n$ converges absolutely, that doesn't mean
+    $$\sum |a_n| = \sum a_n.$$ E.g. the series
+
+    $$\frac{1}{2} - \frac{1}{4} + \frac{1}{8} - \cdots = \frac{1}{3}$$
+
+    is absolutely convergent, with absolute sum
+
+    $$\frac{1}{2} + \frac{1}{4} + \frac{1}{8} + \cdots = 1.$$
+
+    The way you calculate the first sum is as follows: split the
+    series into its positive and negative terms:
+
+    \begin{align*}
+    S \equiv \sum a_n^+ &= \frac{1}{2} + \frac{1}{2^3} + \frac{1}{2^5} \cdots \\
+    T \equiv \sum a_n^- &= -\frac{1}{2^2} - \frac{1}{2^4} + \frac{1}{2^6} \cdots \\
+                        &= -\frac{1}{2}\left(\frac{1}{2} + \frac{1}{2^3} + \frac{1}{2^5} \cdots\right) \\
+                        &= -\frac{S}{2}.
+    \end{align*}
+
+    Now compute the absolute series in terms of S:
+
+    \begin{align*}
+    1 = \sum |a_n| &= \sum a_n^+ - \sum a_n^- \\
+    1 &= S - T = S + \frac{S}{2} \\
+    S &= \frac{2}{3}.
+    \end{align*}
+
+    Next compute T:
+
+    \begin{align*}
+    1 &= S - T = \frac{2}{3} - T \\
+    T &= -\frac{1}{3},
+    \end{align*}
+
+    and finally:
+
+    \begin{align*}
+    \sum a_n = S + T = \frac{2}{3} - \frac{1}{3} = \frac{1}{3}.
+    \end{align*}
+</p>
+
+<p>
+    <b>Note.</b> We used in the last example a fact that should
+    probably be proved:
+</p>
+
+<div class="aside">
+    * <b>Question.</b> Do we need convergence of $\sum a_n$ here? Or does it follow
+    from convergence of the two positive and negative series?
+</div>
+
+<p>
+    <b>Conjecture.</b> <i>Let $\sum a_n$ be a convergent* series
+    s.t. $\sum a_n^+$ and $\sum a_n^-$ are both convergent. Then
+
+    $$\sum a_n = \sum a_n^+ + \sum a_n^-.$$</i>
+</p>
+
+<p>
+    <b>Theorem: product of absolutely convergent series.</b> <i>If
+    $\sum a_n$ and $\sum b_n$ are absolutely convergent, and $c_n$ is
+    any sequence containing the products $a_i b_j$ for all $i, j,$ then
+
+    $$\sum c_n = \sum a_n \cdot \sum b_n.$$</i>
+</p>
 
 <h1>Reference</h1>
 

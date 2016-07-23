@@ -18,6 +18,11 @@
 
 <hr>
 
+<figure>
+    <img src="images/tumblr_o93093O4Uo1qzbd7vo1_500.jpg">
+    <figcaption></figcaption>
+</figure>
+
 <div class="epigraph">
     <div class="quote">Pipey. Looks like you want to compress a movie
     file, can I help? You know with Pied Piper's revolutionary neural
@@ -412,7 +417,7 @@ our derivatives are slightly different. In addition, the starter
 assignment code uses mini-batch, so we'll also show vectorized
 implementations of the derivatives.</p>
 
-<h1>Output Layer</h1>
+<h2>Output Layer</h2>
 
 <p>Let $y_j$ be a neuron in the output layer and $z_j$ be its
 logit. Then the loss derivatives are the same as before:
@@ -430,7 +435,7 @@ dictionary.</p>
 <p><b>Notation.</b> It's often pretty useful to check matrix dimensions, so we'll
 denote them by $\sim.$</p>
 
-<h1>Hidden Layer</h1>
+<h2>Hidden Layer</h2>
 
 <p>Let $y_h$ be a neuron in the hidden layer, $z_h$ be its logit, and
 $w_{jh}$ be its weight to one of the output neurons $y_j.$ In
@@ -484,7 +489,7 @@ training cases is $$\Delta w_{jh} = - \alpha \sum_m \frac{\partial
 C}{\partial w_{jh}}.$$ As a sanity check: $\frac{\partial C}{\partial
 W_h}$ is $K \times H,$ the same size as $W_h.$</p>
 
-<h1>Hidden Layer Bias Units</h1>
+<h2>Hidden Layer Bias Units</h2>
 
 <p>Let $b_h$ be the bias unit in the hidden layer going into neuron
 $y_j$ in the output layer. Then $$\frac{\partial C}{\partial b_h} =
@@ -505,7 +510,7 @@ respectively.</p>
 neurons is to add a constant feature 1 in each input layer going in to
 the next layer.</p>
 
-<h1>Embedding Layer</h1>
+<h2>Embedding Layer</h2>
 
 <p>Similar to the previous layer, let $y_e$ be a neuron in the
 embedding layer, $z_e$ be its logit, $w_{he}$ be its weight to neuron
@@ -530,7 +535,7 @@ y_e \frac{\partial C}{\partial z_h},$$ which in matrix form is
 $$\frac{\partial C}{\partial W_e} = \frac{\partial C}{\partial Z_h}^T
 Y_e \sim H \times 3D,$$ which is the same size as $W_e.$</p>
 
-<h1>Embedding Layer Bias Units</h1>
+<h2>Embedding Layer Bias Units</h2>
 
 <p>Let $b_e$ be the bias weight going into neuron $y_h$ in the hidden
 layer. Then as usual $$\frac{\partial C}{\partial b_e} =
@@ -550,6 +555,11 @@ output layer associates each trigram with the fourth target word.</p>
 
 <p><b>Question.</b> <i>OK, but how exactly are they doing it?</i></p>
 
+<figure>
+    <img src="images/deeper.jpg">
+    <figcaption></figcaption>
+</figure>
+
 <p>
     Let's take a closer look at what each layer is doing. From the top down:
 </p>
@@ -558,7 +568,9 @@ output layer associates each trigram with the fourth target word.</p>
 
 <figure>
     <img src="images/words_hidden_to_output.png">
-    <figcaption></figcaption>
+    <figcaption>Note that $w_j$ is used to denote a single weight
+    vector going into $y_j,$ while $W_h$ denotes all weight vectors
+    going into the output layer as a matrix.</figcaption>
 </figure>
 
 <div class="aside">
@@ -570,10 +582,12 @@ output layer associates each trigram with the fourth target word.</p>
 </div>
 
 <p>
-    Let's assume for a particular training case belongs in class $j,$ i.e.
+    Let's assume a particular training case belongs in class $j,$ i.e.
     that $t_j = 1$ and $t_i = 0$ for all other $i$'s. In that case
     the cross entropy function
+
     $$C = - \sum_j t_j \log y_j$$
+
     is optimized, i.e. close to zero, if $\log y_j$ is close to zero, and therefore
     if $y_j$ is close to 1.*
 </p>
@@ -710,17 +724,20 @@ representations?</i></p>
     towards their mean encoding.
 </p>
 
+<h2>Position-aware Trigram!</h2>
+
 <div class="aside">
-    * Hinton mentioned this as one of the drawbacks of the trigram
-    method without using a neural network, and this is the fix.
+    * Hinton mentioned earlier the inability to recognize relative
+    position as one of the drawbacks of the trigram method without
+    using a neural network, and this is the fix.
 </div>
 
 <p>
-    In the input layer, the input to embedding weights will be
-    slightly different: in addition to having to encode each word, the
-    weights $W_k$ will also have to encode the word's position in the
-    trigram sequence. This is because we're making the embedding layer
-    take the letters A, B, C as input in order, and the weights $W_k$
+    In the input layer, the input to embedding weights $W_k$ will be
+    slightly different: in addition to having to encode each word,
+    $W_k$ will also have to encode the word's position in the trigram
+    sequence. This is because we're making the embedding layer take
+    the letters A, B, C as input in order, and so the weights $W_k$
     are aware of this ordering by definition.*
 </p>
 
@@ -729,11 +746,11 @@ representations?</i></p>
     space represents how often words appear together, and in which
     order before a target word. E.g. if we feed the neural network the
     two phrases "the cat is cute" and "all dogs are cute" over and
-    over, the words "the" and "cat" will be close to each other, as
-    well as the words "cat" and "dogs". The first case because "the"
-    and "cat" appear together often before the target word "cute", and
-    the second case because "cat" and "dogs" appear in the same
-    position before the target word "cute".
+    over, the words "the" and "cat" will be close to each other
+    because "the" and "cat" appear together often before the target
+    word "cute", as well as the words "cat" and "dogs" because "cat"
+    and "dogs" appear in the same position before the target word
+    "cute".
 </p>
 
 <p><b>Question.</b> <i>How does using an unweighted linear activator

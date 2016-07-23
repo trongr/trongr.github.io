@@ -18,13 +18,367 @@
 
 <hr>
 
-<!-- <div class="epigraph"> -->
-<!--     <div class="quote"></div><hr> -->
-<!--     <div class="author"></div> -->
-<!-- </div> -->
-<!-- <div class="clearboth"></div> -->
+<h1>Linear Transformations and Matrices</h1>
 
-<h1>Diagonalization</h1>
+<div class="epigraph">
+     <div class="quote">
+          Just imagine $\RR^n,$ then let $n = 42.$
+     </div><hr><div class="author">Unknown</div>
+</div><div class="clearboth"></div>
+
+<h1>Special Matrix Functions</h1>
+
+<p>
+    <b>Proposition.</b> <i>If $A$ and $B$ are square matrices, then
+    $\tr(AB) = \tr(BA)$ and $\tr A = \tr A^t.$</i>
+</p>
+
+<h1>Change of Coordinate Matrix</h1>
+
+<p>
+    <b>Proposition.</b> <i>Let $B$ be an $n \times n$ invertible
+    matrix. Then the map $\Phi_B: M_{n\times n}(F) \longrightarrow
+    M_{n\times n}(F)$ defined by $\Phi_B(A) = B^{-1} A B$ is an
+    isomorphism.</i>
+</p>
+
+<p>
+    <b>Proposition.</b> <i>For any invertible matrix $B$ there exist
+    bases $\beta, \gamma$ s.t. $B = [I]^\beta_\gamma,$ i.e. every
+    invertible matrix is a change of coordinates matrix.</i>
+</p>
+
+<figure>
+    <img src="images/377px-3d_basis_transformation.png">
+    <figcaption></figcaption>
+</figure>
+
+<h1>Eigenvectors and Eigenvalues</h1>
+
+<figure>
+    <img src="images/5415731794_083b334b01_o.jpg">
+    <figcaption></figcaption>
+</figure>
+
+<p>
+    <b>Proposition.</b> <i>Eigenvectors and therefore eigenspaces
+    corresponding to distinct eigenvalues are linearly
+    independent.</i>
+</p>
+
+<p>
+    <i>Proof.</i> Easy to show for two eigenvectors, then use
+    induction.
+</p>
+
+<p>
+    <b>Theorem: Diagonalizability.</b> <i>A linear operator $T$ on a
+    finite-dimensional vector space $V$ is diagonalizable iff there
+    exists an ordered basis $\beta$ for $V$ consisting of eigenvectors
+    of $T.$ Furthermore, if $T$ is diagonalizable, $\beta =
+    \{v_1,\ldots, v_n\}$ is an ordered basis of eigenvectors of $T,$
+    and $D = [T]_\beta,$ then $D$ is a diagonal matrix and $D_{jj}$ is
+    the eigenvalue corresponding to $v_j$ for $1 \leq j \leq n.$</i>
+</p>
+
+Proof in the book.
+
+<p>
+    <b>Corollary.</b> <i>A matrix $A$ is diagonalizable iff the
+dimensions of its eigenspaces---i.e. the geometric multiplicities over
+all its eigenvalues---add up to the size of $A.$ In this case the
+geometric multiplicity of each eigenvalue is equal to its algebraic
+multiplicity.
+</i>
+</p>
+
+<p>
+    <i>Proof.</i> By a previous proposition, the eigenspaces are
+    linearly independent. If their dimensions added up to less than
+    $n,$ we'd have too few eigenvectors to make a basis for $V,$ and
+    by the Diagonalizable Theorem, $A$ would not be diagonalizable. If
+    they added up to more than $n,$ we'd have too many linearly
+    independent vectors in $V.$ Conversely if they do add up to $n,$
+    then the union of bases for the eigenspaces forms an eigenbasis
+    for $V,$ and $A$ is diagonalizable.
+</p>
+
+<p>
+    <b>Proposition.</b> <i>Let $T$ be a linear operator on a
+    finite-dimensional vector space $V,$ and let $\beta$ be an ordered
+    basis for $V.$ Then $\lambda$ is an eigenvalue of $T$ iff it is an
+    eigenvalue of $[T]_\beta.$</i>
+</p>
+
+<p>
+    <b>Corollary.</b> <i>
+Similar matrices have the same eigenvalues, but not necessarily the same eigenvectors.
+</i>
+</p>
+
+<p>
+    <b>Proposition.</b> <i>If $v$ is an eigenvector of $A$
+    corresponding to eigenvalue $\lambda,$ and $B$ is similar to $A$
+    under change of coordinates matrix $Q,$ then $Qv$ is an
+    eigenvector of $B$ corresponding to the same eigenvalue $\lambda.$
+    Another way of saying this is that change of coordinates preserves
+    eigenvalues and eigenvectors.</i>
+</p>
+
+<p>
+    <i>Proof.</i> Let $A = Q^{-1}BQ.$ Then \begin{align*} Av &=
+    Q^{-1}BQv \\ QAv &= BQv \\ \lambda Qv &= BQv, \end{align*} so $Qv$
+    is an eigenvector of $B$ corresponding to $\lambda.$</p>
+
+<p>
+    <b>Definition.</b> <i>Let $T$ be a linear operator on a
+    finite-dimensional vector space $V.$ Define the determinant of $T$
+    to be $\det T = \det([T]_\beta)$ for any ordered basis $\beta$ for
+    $V.$</i>
+</p>
+
+<p>
+    <b>Note.</b> Since the determinant is multiplicative, for any two bases $\beta$ and $\alpha$ we have
+\begin{align*}
+\det([T]_\beta) &= \det(Q^{-1} [T]_\alpha Q) \\
+&= \det Q^{-1} \det([T]_\alpha) \det Q \\
+&= \det([T]_\alpha),
+\end{align*}
+where $Q = [I]^\alpha_\beta$ is the change of basis matrix from $\beta$ to $\alpha,$ and therefore $\det T$ is well defined, i.e. it's independent of the choice of basis.
+</p>
+
+<p>
+    <b>Proposition.</b> <i>Representation of a matrix with respect to
+    a basis is a linear operation, i.e. $$[T + \lambda U]_\beta =
+    [T]_\beta + \lambda[U]_\beta.$$ In fact it's an isomorphism. For a
+    fixed basis $\beta$ this transformation is usually written
+    $\Phi_\beta: \mathcal{L}(V) \longrightarrow M_{n\times n}(F).$</i>
+</p>
+
+<p>
+    <i>Proof.</i> Let $v$ be a vector, $\beta = \{v_1,\ldots, v_n\},$ and $T(v) = \sum a_i v_i, U(v) = \sum b_i v_i.$ We want to show that
+
+    \begin{align*}
+    [T + \lambda U]_\beta [v]_\beta &= ([T]_\beta + \lambda[U]_\beta)[v]_\beta \\
+    [T(v) + \lambda U(v)]_\beta &= [T(v)]_\beta + \lambda[U(v)]_\beta.
+    \end{align*}
+
+    The RHS is $[a_i] + \lambda [b_i],$ which is the same as the LHS: $[a_i + \lambda b_i].$
+</p>
+
+<p>
+    <b>Note.</b> Analogously, the standard representation of a vector space $V$ with respect to a basis $\beta$ is $\phi_\beta: V \longrightarrow F^n.$ And it's also an isomorphism.
+</p>
+
+<p>
+    <b>Proposition.</b> <i>For any scalar $\lambda$ and any ordered
+    basis $\beta$ for $V,$ $\det(T - \lambda I_V) = \det([T]_\beta -
+    \lambda I).$</i>
+</p>
+
+<p>
+    <b>Proposition: Eigenvalues and invertibility.</b> <i>A linear
+    operator $T$ on a finite-dimensional vector space is invertible
+    iff its eigenvalues are nonzero.</i>
+</p>
+
+<p>
+    <i>Proof.</i> If zero is an eigenvalue of $T,$ then $\det(T - 0
+    \cdot I) = 0,$ and $T$ is not invertible. Conversely, if $T$ is
+    not invertible, then there exists a nonzero vector $v$ s.t. $T(v)
+    = 0 = 0 \cdot v,$ and so 0 is an eigenvalue and $v$ is an
+    eigenvector of $T.$
+</p>
+
+<p>
+    <b>Proposition.</b> <i>Let $T$ be an invertible linear
+    operator. Then a scalar $\lambda$ is an eigenvalue of $T$ iff
+    $\lambda^{-1}$ is an eigenvalue of $T^{-1}.$ Note that by the
+    previous proposition $\lambda$ is nonzero, so $\lambda^{-1}$
+    exists.</i>
+</p>
+
+<p>
+    <i>Proof.</i> Apply $T^{-1}$ to both sides of $T(v) = \lambda v.$
+</p>
+
+<p>
+    <b>Proposition.</b> <i>The eigenvalues of an upper triangular
+    matrix $M$ are the diagonal entries of $M.$</i>
+</p>
+
+<p>
+    <i>Proof.</i> Follows from the fact that the determinant of an
+    upper triangular matrix is the product of its diagonal entries.
+</p>
+
+<p>
+    <b>Proposition.</b> <i>Similar matrices have the same
+    characteristic polynomial.</i>
+</p>
+
+<p>
+    <i>Proof.</i> Let $A = Q^{-1} B Q.$ Then
+
+    \begin{align*}
+    \det(A - tI) &= \det(Q^{-1} B Q - Q^{-1} tI Q) \\
+    &= \det(Q^{-1}(B - tI)Q) \\
+    &= \det(Q^{-1})\det(B - tI)\det(Q) \\
+    &= \det(B - tI).
+    \end{align*}
+</p>
+
+<p>
+    <b>Corollary.</b> <i>
+The definition of the characteristic polynomial of a linear operator on a finite-dimensional vector space $V$ is independent of the choice of basis for $V.$
+</i>
+</p>
+
+<p>
+    <i>Proof.</i> Follows immediately from the fact that similar
+    matrices are the same linear operator expressed under different
+    bases.
+</p>
+
+<p>
+    <b>Proposition.</b> <i>Let $T$ be a linear operator on a finite
+    dimensional vector space $V$ over a field $F.$ Let $\beta$ be an
+    ordered basis for $V,$ and let $A = [T]_\beta.$ Then a vector $v
+    \in V$ is an eigenvector of $T$ corresponding to $\lambda$ iff
+    $\phi_\beta(v)$ is an eigenvector of $A$ corresponding to
+    $\lambda.$</i>
+</p>
+
+<figure>
+    <img src="images/basisrepresentationeigenvector.png">
+    <figcaption></figcaption>
+</figure>
+
+<p>
+    <i>Proof.</i> TODO.
+</p>
+
+<h1>Eigenvectors and Some Special Functions and Matrices</h1>
+
+<p>
+    <b>Lemma.</b> <i>A square matrix has the same determinant as its transpose.</i>
+</p>
+
+<p>
+    <b>Proposition.</b> <i>A square matrix has the same characteristic
+    polynomial as its transpose.</i>
+</p>
+
+<p>
+    <b>Proposition.</b> <i>If $x$ is an eigenvector of $T$
+    corresponding to $\lambda,$ then for any positive integer $m,$ $x$
+    is an eigenvector of $T^m$ corresponding to $\lambda^m.$</i>
+</p>
+
+<p>
+    <i>Proof.</i> Linearity of $T$ and induction.
+</p>
+
+<p>
+    <b>Note.</b> The same holds for matrices. It's always the same!
+</p>
+
+<p>
+    <b>Proposition.</b> <i>Similar matrices have the same trace.</i>
+</p>
+
+<p>
+    <b>Corollary.</b> <i>
+Define the trace of a linear operator $T$ on a finite dimensional vector space as $\tr [T]_\beta$ for any basis $\beta.$ This is well defined by the previous Proposition.
+</i>
+</p>
+
+<p>
+    <b>Proposition.</b> <i>Let $T$ be the linear operator on
+    $M_{n\times n}(\mathbf R)$ defined by $T(A) = A^t.$ Then $\pm 1$ are the
+    only eigenvalues of $T.$ The eigenvectors of $T$ corresponding to
+    $\pm 1$ are symmetric and antisymmetric matrices,
+    respectively.</i>
+</p>
+
+<p>
+    <b>Example.</b> In two dimensions, an ordered basis for $M_{2 \times 2}(\mathbf R)$ consisting of eigenvectors of $T$ so that $[T]_\beta$ is a diagonal matrix is
+$$\beta = \left\{
+\begin{bmatrix}
+1 & 0 \\
+0 & 0
+\end{bmatrix},
+\begin{bmatrix}
+0 & 0 \\
+0 & 1
+\end{bmatrix},
+\begin{bmatrix}
+0 & 1 \\
+1 & 0
+\end{bmatrix},
+\begin{bmatrix}
+0 & 1 \\
+-1 & 0
+\end{bmatrix}
+\right\}.$$
+The first three matrices are symmetric and correspond to the eigenvalue $+1,$ while the last is skew-symmetric and corresponds to $-1.$
+</p>
+
+<p>
+    <b>Example.</b> More generally, in $n$ dimensions an eigenbasis
+    consists of symmetric matrices of the form $A$ that has zeroes
+    everywhere except a single $1$ along the diagonal, and symmetric
+    matrices of the form $B$ with zeroes everywhere except a $1$ in
+    two opposite entries $B_{ij}$ and $B_{ji},$ and finally
+    anti-symmetric matrices of the form $C$ with zeroes everywhere
+    except a $-1$ and a $+1$ in two opposite entries $C_{ij}$ and
+    $C_{ji},$ where the $-1$ is in the lower left half and the $+1$ in
+    the upper right half of $C.$ There are $n$ matrices of type $A,$
+    $(n^2 - n) / 2$ each of type $B$ and $C,$ for a total of $n^2,$ as
+    expected.
+</p>
+
+<h1>Scalar Matrices</h1>
+
+<p>
+    <b>Definition.</b> <i>A scalar matrix is a square matrix of the
+    form $\lambda I$ for some scalar $\lambda.$</i>
+</p>
+
+<figure>
+    <img src="images/scalarmatrix.png">
+    <figcaption></figcaption>
+</figure>
+
+<p>
+    <b>Proposition.</b> <i>If a square matrix $A$ is similar to a
+    scalar matrix $\lambda I,$ then $A = \lambda I.$</i>
+</p>
+
+<p>
+    <i>Proof.</i> If $A$ is similar to $\lambda I,$ that means there
+    is an invertible matrix $Q$ s.t. $A = Q^{-1} \lambda I Q = \lambda
+    I.$
+</p>
+
+<p>
+    <b>Proposition.</b> <i>A diagonalizable matrix $A$ having only one
+    eigenvalue is a scalar matrix.</i>
+</p>
+
+<p>
+    <i>Proof.</i> If $A$ is diagonalizable, this means $A$ is similar
+    to a diagonal matrix, whose diagonal entries are its
+    eigenvalues. Since $A$ only has one eigenvalue $\lambda,$ the
+    diagonal entries are all equal to $\lambda.$
+</p>
+
+<p>
+    <b>Example.</b> $\begin{bmatrix}
+1 & 1 \\
+0 & 1 \\
+\end{bmatrix}$ is not diagonalizable.
+</p>
 
 <p><b>Example of a linear transformation with no eigenvalue and
 eigenvector.</b> Rotation in the plane by $\theta \in (0, 2\pi).$</p>
@@ -35,7 +389,7 @@ eigenvector.</b> Rotation in the plane by $\theta \in (0, 2\pi).$</p>
 </figure>
 
 <p><b>Proposition.</b> <i>The characteristic polynomial of an $n
-\times n$ matrix is monic---has leading coefficient $1$---and order $n$.</i></p>
+\times n$ matrix is monic---has leading coefficient $1$---and order $n.$</i></p>
 
 <p>TODO. Proof.</p>
 
@@ -44,18 +398,18 @@ invertible, then there is a scalar $c \in \mathbf C$ s.t. $A + cB$ is
 not invertible.</i></p>
 
 <p><i>Proof.</i> We want to show that $$\det(A + cB) = 0$$ for some
-$c$, which is equivalent to $$0 = \det(A + cB) \det(B^{-1}) =
+$c,$ which is equivalent to $$0 = \det(A + cB) \det(B^{-1}) =
 \det(AB^{-1} + cI),$$ since $B$ is invertible and $\det(B^{-1}) \neq
 0.$ But $$0 = \det(AB^{-1} + cI)$$ is the characteristic equation of
-$AB^{-1}$, and we know that the characteristic polynomial of a matrix
-$M$ always has leading coefficient 1 and degree $n$ the size of $M$,
-and since this is over the complex field $\mathbf C$, this equation
+$AB^{-1},$ and we know that the characteristic polynomial of a matrix
+$M$ always has leading coefficient 1 and degree $n$ the size of $M,$
+and since this is over the complex field $\mathbf C,$ this equation
 has a solution.</p>
 
 <p><b>Note.</b> The fact that the characteristic polynomial is monic
 and has degree $n$ is important because if $B$ weren't invertible,
 then $\det(A + cB)$ is also a polynomial over $\mathbf C$ that might
-not have degree $n$, e.g. it might be a constant polynomial $$\det(A +
+not have degree $n,$ e.g. it might be a constant polynomial $$\det(A +
 cB) = K \neq 0,$$ which has no solution.</p>
 
 <p><b>Example.</b> Let $$A = \begin{bmatrix}
@@ -66,7 +420,7 @@ B = \begin{bmatrix}
 -1 & 1 \\
 -1 & 1
 \end{bmatrix}.$$ Then $$\det(A + cB) = 1 \neq 0,$$ and $A$ and $A + cB$ are
-both invertible for all $c$, but $B$ isn't. The way you come up with this example is to let $$A = \begin{bmatrix}
+both invertible for all $c,$ but $B$ isn't. The way you come up with this example is to let $$A = \begin{bmatrix}
 a & b \\
 c & d
 \end{bmatrix},\quad
@@ -76,12 +430,89 @@ B = \begin{bmatrix}
 \end{bmatrix}$$ and calculate
 $$\det(A + xB) = (\alpha \delta - \beta \gamma) x^2 +
 (a\delta + \alpha d - c\beta - \gamma b) x + (ad - cb).$$ We want this
-to be equal to a constant $K$, say 1, so we need
+to be equal to a constant $K,$ say 1, so we need
 $$\begin{align*}
 \alpha \delta - \beta \gamma &= 0 \\
 a\delta + \alpha d - c\beta - \gamma b &= 0 \\
 ad - cb &= 1,
 \end{align*}$$ which are easy to find.</p>
+
+<p>
+    <b>Proposition.</b> <i>Let A and B be similar $n \times n$
+    matrices. Then there exist an $n$-dimensional vector space V, a
+    linear operator T on V, and ordered bases $\beta$ and $\gamma$
+    for V such that $A = [T]_\beta$ and $B = [T]_\gamma.$</i>
+</p>
+
+<p>
+    <b>Proposition.</b> <i>Let A be an $n \times n$ matrix with
+    characteristic polynomial
+
+    $$f(t) = \det(A - tI) = (-1)^n t^n + a_{n-1} t^{n-1} + \cdots + a_0.$$
+
+    Then $f(0) = a_0 = \det(A),$ and therefore A is invertible
+    iff $a_0 \neq 0.$</i>
+</p>
+
+<p>
+    <i>Proof.</i> By def.
+</p>
+
+<p>
+    <b>Proposition.</b> <i>Let A and $f$ be as in the previous
+    proposition. Then
+
+    $$f(t) = (A_{11} - t)(A_{22} - t)\cdots (A_{nn} - t) + q(t)$$
+
+    where $q(t)$ is a polynomial of degree at most $n - 2.$
+    Furthermore, $$\tr(A) = (-1)^{n-1}a_{n-1}.$$</i>
+</p>
+
+<p>
+    <i>Proof.</i> Easy induction on $n$ for the first part. To show
+    the second part, let's multiply out:
+
+    \begin{align*}
+    f(t) &= (A_{11} - t)(A_{22} - t)\cdots (A_{nn} - t) + q(t) \\
+         &= (-1)^n t^n \\
+         &+ (-1)^{n-1} t^{n-1} (A_{11} + \cdots + A_{nn}) \\
+         &+ A_{11}(\text{product involving at least another $A_{ii}$}) \\
+         &+ A_{22}(\text{product involving at least another $A_{ii}$}) \\
+         &+ \cdots \\
+         &+ A_{nn}(\text{product involving at least another $A_{ii}$}) \\
+         &+ q(t).
+    \end{align*}
+
+    The terms
+
+    $$A_{nn}(\text{product involving at least another $A_{ii}$})$$
+
+    have degrees at most $n - 2,$ as does $q(t),$ and so comparing
+    coefficients with
+
+    $$f(t) = (-1)^n t^n + a_{n-1} t^{n-1} + \cdots + a_0$$
+
+    we get
+
+    $$\tr(A) = A_{11} + \cdots + A_{nn} = (-1)^{n-1}a_{n-1}.$$
+</p>
+
+<p>
+    Now we know 3 coefficients of a characteristic polynomial. Let's
+    summarize:
+</p>
+
+<p>
+    <b>Corollary.</b> <i>The characteristic polynomial of a matrix A is
+
+    $$\det(A - tI) = (-1)^n t^n + (-1)^{n-1} \tr(A) t^{n-1} + a_{n-2} t^{n-2} + \cdots + \det(A).$$</i>
+</p>
+
+<div class="epigraph">
+    <img src="images/pokemon.jpg">
+     <div class="quote">
+     </div><hr><div class="author"></div>
+</div><div class="clearboth"></div>
 
 <h1>Reference</h1>
 

@@ -11,8 +11,16 @@ window.MathJax = {
     },
     TeX: {
         Macros: {
+            CC: "\\mathbf C",
+            RR: "\\mathbf R",
+            QQ: "\\mathbf Q",
+            NN: "\\mathbf N",
+
+            tr: "\\mathop{\\rm tr}",
+
             count: "\\mathop{\\rm count}\\limits",
-            sumtext: "\\mathop{\\rm sum}\\limits"
+            sumtext: "\\mathop{\\rm sum}\\limits",
+
         }
     }
 }
