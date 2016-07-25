@@ -12,9 +12,13 @@ window.MathJax = {
     TeX: {
         Macros: {
             CC: "\\mathbf C",
-            RR: "\\mathbf R",
-            QQ: "\\mathbf Q",
+            EE: "\\mathbf E",
+            FF: "\\mathbf F",
             NN: "\\mathbf N",
+            QQ: "\\mathbf Q",
+            RR: "\\mathbf R",
+            aa: "\\mathbf a",
+            rr: "\\mathbf r",
 
             tr: "\\mathop{\\rm tr}",
 

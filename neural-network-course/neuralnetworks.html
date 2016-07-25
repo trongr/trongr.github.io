@@ -32,6 +32,12 @@
 </div>
 <div class="clearboth"></div>
 
+<h1>Biological inspiration / biomimicry</h1>
+
+<img src="images/neuron.png">
+
+<img src="images/neuron_model.jpeg">
+
 <h1>Perceptron Learning Algorithm</h1>
 
 <h1>Binary Threshold Neurons / McCulloch-Pitts</h1>
@@ -93,9 +99,9 @@ vice versa.</p>
 
 <h1>Error Surface of a Linear Neuron</h1>
 
-<p><b>Question.</b> <i>IIRC feature normalization should help with
-slow learning due to unscaled data? What about pathological cases like
-this?</i></p>
+<p><b>Question.</b> <i>If I recall correctly feature normalization
+should help with slow learning due to unscaled data? What about
+pathological cases like this?</i></p>
 
 <figure>
     <img src="images/slowlearrning.jpeg">
@@ -512,19 +518,22 @@ the next layer.</p>
 
 <h2>Embedding Layer</h2>
 
+<div class="aside">
+    <b>* Why?</b>
+</div>
+
 <p>Similar to the previous layer, let $y_e$ be a neuron in the
 embedding layer, $z_e$ be its logit, $w_{he}$ be its weight to neuron
-$y_h$ in the hidden layer. There is one difference: for reasons still
-unclear to me in this layer the starter code uses a linear activation
-function: $$y_e = z_e = \sum_i w_i y_i,$$ where $i$
-ranges over the neurons per context word in the input layer. In
-particular this means $\frac{\partial y_e}{\partial z_e} = 1,$ and so
-$$\frac{\partial C}{\partial z_e} = \frac{\partial C}{\partial y_e}
-\frac{\partial y_e}{\partial z_e} = \sum_h \frac{\partial C}{\partial
-z_h} \frac{\partial z_h}{\partial y_e} = \sum_h w_{he} \frac{\partial
-C}{\partial z_h}.$$ In matrix form this is $$\frac{\partial
-C}{\partial Z_e} = \frac{\partial C}{\partial Z_h} W_e \sim m \times
-3D.$$</p>
+$y_h$ in the hidden layer. There is one difference: in this layer the
+starter code uses a linear activation function:<b>*</b> $$y_e = z_e = \sum_i
+w_i y_i,$$ where $i$ ranges over the neurons per context word in the
+input layer. In particular this means $\frac{\partial y_e}{\partial
+z_e} = 1,$ and so $$\frac{\partial C}{\partial z_e} = \frac{\partial
+C}{\partial y_e} \frac{\partial y_e}{\partial z_e} = \sum_h
+\frac{\partial C}{\partial z_h} \frac{\partial z_h}{\partial y_e} =
+\sum_h w_{he} \frac{\partial C}{\partial z_h}.$$ In matrix form this
+is $$\frac{\partial C}{\partial Z_e} = \frac{\partial C}{\partial Z_h}
+W_e \sim m \times 3D.$$</p>
 
 <p><b>Question.</b> <i>Why is a linear activator better than other
 activation functions for word embedding?</i></p>
@@ -574,11 +583,9 @@ output layer associates each trigram with the fourth target word.</p>
 </figure>
 
 <div class="aside">
-    * which coincidentally makes all the other $y_i$'s in the output
-    layer close to 0, because we defined $y_i =
-    \frac{e^{z_i}}{\sum\limits_{j\in G} e^{z_j}}.$ OK, maybe not
-    coincidentally: we defined it that way so it would have this
-    property of unit probability measure.
+    * which makes all the other $y_i$'s in the output layer close to
+    0, because we defined $y_i = \frac{e^{z_i}}{\sum\limits_{j\in G}
+    e^{z_j}}$ so they would have unit probability measure.
 </div>
 
 <p>
@@ -672,15 +679,6 @@ output layer associates each trigram with the fourth target word.</p>
     <figcaption></figcaption>
 </figure>
 
-<div class="aside">
-    * It's still not clear to me how using an unweighted linear
-    activator would differ from a logistic activator. The only
-    difference I can see is that logistic gives you a bounded
-    activation range $(0, 1),$ while linear gives you an unbounded
-    range $(-\infty, \infty),$ but that shouldn't matter as far as
-    backpropagation is concerned. Probably wrong.
-</div>
-
 <p>
     This layer is a little different because the activation is
     unweighted linear:
@@ -690,7 +688,7 @@ output layer associates each trigram with the fourth target word.</p>
     and in addition each module takes a separate word as input. But
     other than that, the idea is the same: $y_e$ is high if $w_e$ is
     similar to $Y_k,$ and so in order to properly represent a word
-    $Y_k,$ certain weights $w_e$ must move towards the vector $Y_k.$*
+    $Y_k,$ certain weights $w_e$ must move towards the vector $Y_k.$
 </p>
 
 <p>
@@ -741,25 +739,91 @@ representations?</i></p>
     are aware of this ordering by definition.*
 </p>
 
+<div class="aside">
+    <img src="images/Original_Doge_meme.jpg">
+    t-SNE plot of Doge's vocabulary. Just kidding.
+</div>
+
 <p>
     Therefore the answer to the question is: proximity in embedding
     space represents how often words appear together, and in which
     order before a target word. E.g. if we feed the neural network the
-    two phrases "the cat is cute" and "all dogs are cute" over and
-    over, the words "the" and "cat" will be close to each other
-    because "the" and "cat" appear together often before the target
-    word "cute", as well as the words "cat" and "dogs" because "cat"
-    and "dogs" appear in the same position before the target word
-    "cute".
+    two phrases <i>wow Doge much cute</i> and <i>all cats are cute</i>
+    over and over, the words <i>wow</i> and <i>Doge</i> will be close
+    to each other because <i>wow</i> and <i>Doge</i> appear together
+    often before the target word <i>cute</i>, as well as the
+    words <i>Doge</i> and <i>cats</i> because <i>Doge</i>
+    and <i>cats</i> appear often in the same position before
+    <i>cute</i>.
+</p>
+
+<div class="center">
+    <img src="images/tsneplot.png">
+    t-SNE plot of word embeddings
+</div>
+
+<p>
+    <b>Note.</b> In natural language, positional proximity will have
+    more of an effect than how often two words appear
+    together. E.g. in the t-SNE plot above, the words <i>very</i>
+    and <i>too</i> are very close together, because they appear in the
+    same position (3rd) before the target word <i>much,</i> as
+    in <i>something something very much</i> and <i>something something
+    too much.</i> Aside from the target word <i>much,</i> they also
+    appear in the same position (3rd) before other words,
+    like <i>long, well, good,</i> etc., which is why <i>very</i>
+    and <i>too</i> are closer to each other than <i>very</i>
+    and <i>much,</i> relatively speaking.
+</p>
+
+<p>
+    It's usually the 3rd word in a trigram that has its position
+    learned and associated, because it's the word closest to the
+    target word. It's rarer for the first and second words to be
+    learned, because you rarely have 3 or 4-word long phrases that
+    occur again and again.
 </p>
 
 <p><b>Question.</b> <i>How does using an unweighted linear activator
 in the embedding layer differ from using say a logistic activator? Can
 we replace one by the other and still achieve similar results?</i></p>
 
-I have a feeling they shouldn't differ in theory, but I'm not sure. TODO!
+<p>
+    They differ at least in how fast a neuron learns / changes its output
+    when it's very high or very low, also called saturated: e.g. the
+    logistic neuron
+
+    $$y = \frac{1}{1 + e^{-z}}$$
+
+    has derivative
+
+    $$\frac{\partial y}{\partial z} = y(1 - y),$$
+
+    which is close to zero when $y$ is either maxed out at 1 or min'd
+    out at 0, meaning that it won't change much when $z$ changes,
+    i.e. it learns slowly when saturated.
+</p>
 
 <hr>
+
+<h1>How to Train your Neural Network using Gradient Descent</h1>
+
+<img src="images/M6O8AbL.gif">
+
+<div class="aside">
+    * Hey, eigenvalues!
+</div>
+<p>
+    Symmetry breaking by randomly initializing weights. Mean normalize
+    data. Use PCA to decorrelate input components / remove redundant
+    data.*
+</p>
+
+<p>
+    Momentum method: use gradients to change velocity of weight
+    particle instead of its position. Adaptive learning rate per
+    weight. rmsprop: need details.
+</p>
 
 <h1>Object Recognition: Convolutional Neural Networks for Digit
 Recognition</h1>
@@ -776,7 +840,8 @@ Recognition</h1>
 <li>Geoffrey E. Hinton's Neural Networks video lectures.</li>
 <li>http://www.cs.toronto.edu/~rgrosse/csc321/</li>
 <li>http://www.cs.toronto.edu/~tijmen/csc321/</li>
-<li>Images from the Internet.</li>
+<li>http://cs231n.stanford.edu/</li>
+<li>Everything else from the web.</li>
 </ol>
 
 </div>

@@ -72,6 +72,11 @@
 </p>
 
 <p>
+    <b>Corollary.</b> <i>If T has $n$ distinct eigenvalues, then it is
+    diagonalizable.</i>
+</p>
+
+<p>
     <b>Theorem: Diagonalizability.</b> <i>A linear operator $T$ on a
     finite-dimensional vector space $V$ is diagonalizable iff there
     exists an ordered basis $\beta$ for $V$ consisting of eigenvectors
@@ -96,11 +101,11 @@ multiplicity.
     <i>Proof.</i> By a previous proposition, the eigenspaces are
     linearly independent. If their dimensions added up to less than
     $n,$ we'd have too few eigenvectors to make a basis for $V,$ and
-    by the Diagonalizable Theorem, $A$ would not be diagonalizable. If
-    they added up to more than $n,$ we'd have too many linearly
-    independent vectors in $V.$ Conversely if they do add up to $n,$
-    then the union of bases for the eigenspaces forms an eigenbasis
-    for $V,$ and $A$ is diagonalizable.
+    by the Diagonalizability Theorem, $A$ would not be
+    diagonalizable. If they added up to more than $n,$ we'd have too
+    many linearly independent vectors in $V.$ Conversely if they do
+    add up to $n,$ then the union of bases for the eigenspaces forms
+    an eigenbasis for $V,$ and $A$ is diagonalizable.
 </p>
 
 <p>
@@ -388,10 +393,28 @@ eigenvector.</b> Rotation in the plane by $\theta \in (0, 2\pi).$</p>
     <figcaption></figcaption>
 </figure>
 
-<p><b>Proposition.</b> <i>The characteristic polynomial of an $n
-\times n$ matrix is monic---has leading coefficient $1$---and order $n.$</i></p>
+<p><b>Proposition.</b> <i>The characteristic polynomial $f$ of an $n
+\times n$ matrix $A$ has leading coefficient $(-1)^n$ and order
+$n$:
 
-<p>TODO. Proof.</p>
+$$f(t) = \det(A - tI) = (-1)^n t^n + a_{n-1} t^{n-1} + \cdots + a_0.$$
+
+As a consequence, $A$ has at most $n$ eigenvalues.</i></p>
+
+<p>
+    <i>Proof.</i> Pretty easy
+    induction. <a href="#oijadfa8923">Slightly more explicit formula
+    here.</a>
+</p>
+
+<p>
+    <b>Example.</b> There are 4 possible distinct characteristic
+    polynomials of matrices in $M_{2\times 2}(Z_2)$:
+
+    $$f(t) = t^2 + at + b,$$
+
+    with 2 choices for $a$ and 2 for $b.$
+</p>
 
 <p><b>Proposition.</b> <i>Let $A, B \in \mathbf C.$ If $B$ is
 invertible, then there is a scalar $c \in \mathbf C$ s.t. $A + cB$ is
@@ -406,11 +429,11 @@ $M$ always has leading coefficient 1 and degree $n$ the size of $M,$
 and since this is over the complex field $\mathbf C,$ this equation
 has a solution.</p>
 
-<p><b>Note.</b> The fact that the characteristic polynomial is monic
-and has degree $n$ is important because if $B$ weren't invertible,
-then $\det(A + cB)$ is also a polynomial over $\mathbf C$ that might
-not have degree $n,$ e.g. it might be a constant polynomial $$\det(A +
-cB) = K \neq 0,$$ which has no solution.</p>
+<p><b>Note.</b> The fact that the characteristic polynomial has degree
+$n$ is important because if $B$ weren't invertible, then $\det(A +
+cB)$ is also a polynomial over $\mathbf C$ that might not have degree
+$n,$ in particular it might be a constant polynomial $$\det(A + cB) =
+K \neq 0,$$ which has no solution.</p>
 
 <p><b>Example.</b> Let $$A = \begin{bmatrix}
 1 & 0 \\
@@ -455,10 +478,10 @@ ad - cb &= 1,
 </p>
 
 <p>
-    <i>Proof.</i> By def.
+    <i>Proof.</i> By definition.
 </p>
 
-<p>
+<p id="oijadfa8923">
     <b>Proposition.</b> <i>Let A and $f$ be as in the previous
     proposition. Then
 
@@ -514,11 +537,77 @@ ad - cb &= 1,
      </div><hr><div class="author"></div>
 </div><div class="clearboth"></div>
 
+<p>
+    <b>Proposition.</b> <i>Let $g$ be a polynomial. If $x$ is an
+    eigenvector of $T$ with eigenvalue $\lambda,$ then
+
+    $$g(T)(x) = g(\lambda) x,$$
+
+    i.e. $x$ is an eigenvector of $g(T)$ with eigenvalue $g(\lambda).$</i>
+</p>
+
+<p>
+    <i>Proof.</i> Simple linearity argument.
+</p>
+
+<div class="aside">
+    <b>*</b> The book says it's not necessary for $T$ to be
+    diagonalizable. Will prove later.
+</div>
+
+<p>
+    <b>Corollary.</b> <i>If $f$ is the characteristic polynomial of
+    $T$ and $T$ is diagonalizable,<b>*</b> then $f(T) = T_0,$ the zero
+    operator.</i>
+</p>
+
+<p>
+    <i>Proof.</i> Since $T$ is diagonalizable, let $\beta = \{v_i\}$
+    be a basis for $V$ consisting of eigenvectors of $T.$ By the
+    previous Proposition,
+
+    $$f(T)(v_i) = f(\lambda_i) v_i = 0 \cdot v_i = 0,$$
+
+    because eigenvalues are roots of the characteristic
+    polynomial. Since $f(T)$ is zero on a basis, it must be zero on
+    all of $V.$
+</p>
+
+<hr>
+
+<h1>Diagonalizability</h1>
+
+<p>
+    <b>Definition.</b> <i>A polynomial $f$ splits over $F$ if there
+    are scalars $c,a_i$ s.t.
+
+    $$f(t) = c(t - a_1) \cdots (t - a_n).$$</i>
+</p>
+
+<p>
+    <b>Example.</b> By the Fundamental Theorem of Algebra, every
+    nonconstant polynomial splits over $\CC.$
+</p>
+
+<p>
+    <b>Theorem.</b> <i>If an operator is diagonalizable, then its
+    characteristic polynomial splits.</i>
+</p>
+
+<p>
+    <i><b>Converse isn't true: the characteristic polynomial splitting
+    doesn't mean the operator is diagonalizable.</b></i>
+</p>
+
+<p>
+    TODO. Example and intuition.
+</p>
+
 <h1>Reference</h1>
 
 <ol>
-<li>Images from the Web.</li>
 <li>Linear Algebra by Friedberg, Insel, and Spence.</li>
+<li>Everything else from the web.</li>
 </ol>
 
 </div>

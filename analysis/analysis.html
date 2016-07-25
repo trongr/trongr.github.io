@@ -28,8 +28,7 @@
 
 <figure>
     <img src="images/MH8onJG.png">
-    <figcaption>Mathematical Approximation. Everything is an
-    approximation!</figcaption>
+    <figcaption>Mathematical Approximation</figcaption>
 </figure>
 
 <p>
@@ -255,12 +254,14 @@ If $f$ has only removable discontinuities, then $f$ is continuous except at coun
 <p><b>Definition.</b> <i>The sequence $a_n$ is summable if the
 sequence $$s_n = a_1 + \cdots + a_n$$ converges. In this case
 $\lim\limits_{n\to \infty} s_n$ is denoted by
-$\sum\limits_{n=1}^\infty a_n.$</i></p>
+$\sum\limits_{n=1}^\infty a_n,$ and we say $\sum\limits_{n=1}^\infty
+a_n$ converges.</i></p>
 
 <h1>Cauchy Criterion</h1>
 
-<p><b>Proposition.</b> <i>The sequence $a_n$ is summable iff
-$$\lim_{m,n\to \infty} a_n + \cdots + a_m = 0.$$</i></p>
+<p><b>Proposition.</b> <i>The series $\sum\limits_{n=1}^\infty a_n$
+converges iff its tail vanishes: $$\lim_{m,n\to \infty} a_n + \cdots +
+a_m = 0.$$</i></p>
 
 <figure>
     <img src="images/2000px-Cauchy_sequence_illustration.png">
@@ -335,8 +336,8 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
 <div class="epigraph">
      <div class="quote">
         <img src="images/divergent-trilogy-covers.png">
-     </div><hr><div class="author">Sadly, insurgent is not a technical
-     term. Yet.</div>
+     </div><hr><div class="author">Sadly, insurgent is not the technical
+     term for inconclusive convergence test. Yet.</div>
 </div><div class="clearboth"></div>
 
 <p>
@@ -394,28 +395,27 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
     convergent if $\sum |a_n|$ converges.</i>
 </p>
 
-<p>
-    <b>Absolute Convegence Theorem.</b> <i>Every absolutely convergent
+<p id="aksfjn12124">
+    <b>Absolute Convergence Theorem.</b> <i>Every absolutely convergent
     series is convergent. Moreover, a series is absolutely convergent
     iff the series formed from its positive and negative terms both
     converge.</i>
 </p>
 
-<p>
+<p id="nxm3m4">
     <b>Note.</b> Let $\sum p_n$ and $\sum q_n$ be the series made of
     positive and negative terms of $\sum a_n.$ If $\sum a_n$ is
     conditionally convergent, i.e. it converges but not absolutely,
     then by the Absolute Convergence Theorem, one of $\sum p_n$ and
     $\sum q_n$ must diverge. In fact, they must both diverge, because
-    otherwise one converges and one diverges, i.e. one has bounded and
-    the other has unbounded partial sums, so $\sum a_n$ has unbounded
-    partial sums and $\sum a_n$ diverges, contradicting that it
-    converges.
+    otherwise one converges and one diverges, and so one has bounded
+    and the other has unbounded partial sums, so $\sum a_n$ has
+    unbounded partial sums and $\sum a_n$ diverges, contradicting that
+    it converges.
 </p>
 
 <div class="aside">
     <img src="images/alternatingseries.png">
-    Alternating series converging to zero.
 </div>
 
 <p>
@@ -435,6 +435,58 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
 </p>
 
 <p>
+    <i>Proof.</i> <a href="#ijfasdf09234">See note following the proof of this proposition:</a>
+</p>
+
+<p>
+    <b>Proposition: alternating series remainder estimate.</b> <i>Let
+
+    $$\sum_n (-1)^{n+1} a_n$$
+
+    be an alternating series as in Leibniz's Theorem above. Then
+
+    $$\left|\sum_n (-1)^{n+1} a_n - (a_1 - a_2 + \cdots \pm a_N)\right| \leq a_N$$
+
+    for any $N,$ i.e. the remainder of the series is no larger than
+    the term $a_N$ preceding it.</i>
+</p>
+
+<p>
+    <i>Proof sketch.</i> As a fun remark note that it's enough to show
+    this for $a_1,$ then it'll be true for any $N$ because we can just
+    cut the series there and the remainder will be its own alternating
+    series. So we need to show
+
+    $$|a_2 - a_3 + \cdots| \leq a_1.$$
+</p>
+
+<p>
+    Clearly, the LHS is greatest when its even terms $a_2, a_4, a_6,
+    \ldots$ are at least as big as the odd terms preceding them. But
+    the odd terms have to go to zero eventually, so we have the
+    following picture:
+</p>
+
+<img src="images/leibnizalternatingseries.png">
+
+<p>
+    where the red bars represent $a_i,$ and the green bars represent
+
+    $$|a_2 - \cdots \pm a_i|.$$
+
+    Looking at the picture, we see that even when the even terms are
+    as big as possible, the entire series can never get past its
+    original value of $a_1.$
+</p>
+
+<p id="ijfasdf09234">
+    <b>Note.</b> Using this estimate we can give a quick proof of
+    Leibniz's theorem above: since the remainder is bounded by $a_N
+    \longrightarrow 0,$ it too approaches zero, and so the series
+    converges by the Cauchy Criterion.
+</p>
+
+<p>
     <b>Rearrangement Theorem for Conditionally Convergent
     Series.</b> <i>If $\sum a_n$ converges but not absolutely, then
     for any number $\alpha$ there is a rearrangement $b_n$ of
@@ -442,18 +494,18 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
 </p>
 
 <p>
-    <i>Proof.</i> By the previous note, $\sum a_n$ contains infinitely
-    many positive and negative terms. In addition, the positive and
-    negative sums are divergent, so they can reach any positive or
-    negative number $\alpha.$ Once you're close to $\alpha$ you can
-    rearrange the terms to make it go a little over, and then a little
-    under, and so on, converging to $\alpha,$ a bit like the picture
-    above.
+    <i>Proof.</i> <a href="#nxm3m4">By a previous note,</a> $\sum a_n$
+    contains infinitely many positive and negative terms, and
+    furthermore the positive and negative sums are divergent, so they
+    can reach any positive or negative number $\alpha.$ Once you're
+    close to $\alpha$ you can rearrange the terms to make it go a
+    little over, and then a little under, and so on, converging to
+    $\alpha,$ a bit like the picture above.
 </p>
 
 <p>
-    Note that you need both positive and negative series to be
-    divergent, because otherwise, say $\sum p_n = N$ is convergent,
+    Note that you need both the positive and negative series to be
+    divergent, because otherwise say $\sum p_n = N$ is convergent,
     then you could pick $\alpha > N$ and any rearranged partial sums
     of $\sum a_n$ could never reach $\alpha.$
 </p>
@@ -479,9 +531,9 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
     series into its positive and negative terms:
 
     \begin{align*}
-    S \equiv \sum a_n^+ &= \frac{1}{2} + \frac{1}{2^3} + \frac{1}{2^5} \cdots \\
-    T \equiv \sum a_n^- &= -\frac{1}{2^2} - \frac{1}{2^4} + \frac{1}{2^6} \cdots \\
-                        &= -\frac{1}{2}\left(\frac{1}{2} + \frac{1}{2^3} + \frac{1}{2^5} \cdots\right) \\
+    S \equiv \sum a_n^+ &= \frac{1}{2} + \frac{1}{2^3} + \frac{1}{2^5} + \cdots \\
+    T \equiv \sum a_n^- &= -\frac{1}{2^2} - \frac{1}{2^4} - \frac{1}{2^6} - \cdots \\
+                        &= -\frac{1}{2}\left(\frac{1}{2} + \frac{1}{2^3} + \frac{1}{2^5} + \cdots\right) \\
                         &= -\frac{S}{2}.
     \end{align*}
 
@@ -513,15 +565,35 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
 </p>
 
 <div class="aside">
-    * <b>Question.</b> Do we need convergence of $\sum a_n$ here? Or does it follow
-    from convergence of the two positive and negative series?
+    * Just realized this result follows immediately from
+    the <a href="#aksfjn12124">Absolute Convergence Theorem.</a> In
+    fact $\sum a_n$ is absolutely convergent.
 </div>
 
 <p>
-    <b>Conjecture.</b> <i>Let $\sum a_n$ be a convergent* series
-    s.t. $\sum a_n^+$ and $\sum a_n^-$ are both convergent. Then
+    <b>Proposition.*</b> <i>Let $\sum a_n$ be a series s.t. $\sum
+    a_n^+$ and $\sum a_n^-$ are both convergent. Then $\sum a_n$ is
+    convergent and
 
     $$\sum a_n = \sum a_n^+ + \sum a_n^-.$$</i>
+</p>
+
+<p>
+    <i>Proof.</i> Let $s_n$ denote a partial sum and $s$ its limit. Since
+
+    $$s_n = s_n^+ + s_n^-$$
+
+    we have
+
+    \begin{align*}
+    |s_n - (s^+ + s^-)| &= |s_n^+ + s_n^- - (s^+ + s^-)| \\
+    &= |s_n^+ - s^+ + s_n^- - s^-| \\
+    &\leq |s_n^+ - s^+| + |s_n^- - s^-| \\
+    &< 2 \epsilon
+    \end{align*}
+
+    with appropriately defined $\epsilon.$ Therefore $s_n
+    \longrightarrow s^+ + s^-.$
 </p>
 
 <p>
@@ -535,8 +607,8 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
 <h1>Reference</h1>
 
 <ol>
-<li>Images from the Web.</li>
 <li>Spivak's Calculus.</li>
+<li>Everything else from the web.</li>
 </ol>
 
 </div>
