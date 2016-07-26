@@ -19,6 +19,8 @@ window.MathJax = {
             RR: "\\mathbf R",
             aa: "\\mathbf a",
             rr: "\\mathbf r",
+            vv: "\\mathbf v",
+            ww: "\\mathbf w",
 
             tr: "\\mathop{\\rm tr}",
 

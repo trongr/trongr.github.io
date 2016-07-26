@@ -825,6 +825,88 @@ we replace one by the other and still achieve similar results?</i></p>
     weight. rmsprop: need details.
 </p>
 
+<h1>Momentum Method</h1>
+
+<p>
+    <b>Intuition: rolling ball.</b> Modify the Delta Rule
+
+    $$\Delta \ww(t) = - \epsilon \frac{\partial E}{\partial \ww}(t)$$
+
+    to include a "momentum" term:
+
+    $$\Delta \ww(t) = \alpha \Delta \ww(t - 1) - \epsilon \frac{\partial E}{\partial \ww}(t),$$
+
+    where $\alpha$ is a factor slightly less than 1. All it's saying
+    is that $\Delta \ww(t)$ remembers a little bit of its previous
+    direction via $\alpha \Delta \ww(t - 1)$, and is pushed along the
+    gradient as usual by $-\epsilon \frac{\partial E}{\partial
+    \ww}(t).$
+</p>
+
+<p>
+    <b>Question.</b> <i>What's a good value for $\epsilon$?</i>
+</p>
+
+<p>
+    <b>Example.</b> As a simple example, suppose you have a planar
+    error surface:
+</p>
+
+<img src="images/planerollingball.png">
+
+<p>
+    Then the weights will reach a terminal velocity
+
+    $$\Delta \ww_\infty = -\frac{1}{1 - \alpha} \epsilon \frac{\partial E}{\partial \ww},$$
+
+    which can be shown as follows: since this is a flat plane,
+    $\frac{\partial E}{\partial \ww}(t)$ is constant, so recursively
+    expand
+
+    $$\Delta \ww(t) = \alpha \Delta \ww(t - 1) - \epsilon \frac{\partial E}{\partial \ww}(t)$$
+
+    to get
+
+    $$\Delta \ww(t) = \alpha^t \Delta \ww(0) - (\alpha^{t-1} + \cdots + 1)\epsilon \frac{\partial E}{\partial \ww}(t).$$
+
+    The first term $\alpha^t \Delta \ww(0)$ goes to zero because $0 <
+    \alpha < 1,$ and the second term contains the geometric series, so
+    as $t\longrightarrow 0,$
+
+    $$\Delta \ww(t) \longrightarrow \Delta \ww_\infty = -\frac{1}{1 - \alpha} \epsilon \frac{\partial E}{\partial \ww}.$$
+</p>
+
+<p>
+    <b>Corollary.</b> <i>If $\frac{\partial E}{\partial \ww}$ is
+    bounded, then so is $\Delta \ww,$ i.e. $\Delta \ww$ doesn't
+    accumulate and go all crazy.</i>
+</p>
+
+<h2>Nesterov Method</h2>
+
+<p>
+    <b>Old momentum method:</b> <i>calculate gradient, i.e. correct
+    your previous mistake, at current point, then jump.</i>
+</p>
+
+<p>
+    <b>New and improved momentum method:</b> <i>jump first, then
+    correct your mistake at the destination.</i> This method is
+    captured by the formula for $\Delta \ww$ above:
+
+    $$\Delta \ww(t) = \alpha \Delta \ww(t - 1) - \epsilon \frac{\partial E}{\partial \ww}(t).$$
+
+    The corresponding formula for the old momentum method would be
+
+    $$\Delta \ww(t) = \alpha \Delta \ww(t - 1) - \epsilon \frac{\partial E}{\partial \ww}(t - 1).$$
+</p>
+
+<img src="images/nesterov.png">
+
+<div class="center">
+    Hinton: It's better to correct a mistake after you've made it.
+</div>
+
 <h1>Object Recognition: Convolutional Neural Networks for Digit
 Recognition</h1>
 
