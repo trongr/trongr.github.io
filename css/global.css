@@ -1,5 +1,5 @@
 body {
-    font-family: times, "Times New Roman";
+    font-family: times, "Times New Roman", serif;
     font-size: 1.2em;
     background-color: #171621;
     color: white;
@@ -80,4 +80,9 @@ figcaption {
 
 .center {
     text-align: center;
+}
+
+.box {
+    border: 1px solid;
+    padding: 20px;
 }

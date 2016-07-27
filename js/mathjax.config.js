@@ -22,6 +22,8 @@ window.MathJax = {
             vv: "\\mathbf v",
             ww: "\\mathbf w",
 
+            epsilon: "\\varepsilon",
+
             tr: "\\mathop{\\rm tr}",
 
             count: "\\mathop{\\rm count}\\limits",

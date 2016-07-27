@@ -10,6 +10,10 @@
 <script src="../js/MathJax/MathJax.js"></script>
 <!-- <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js"></script> -->
 
+<script src="../js/jquery-3.1.0.min.js"></script>
+<script src="../js/smartquotes.min.js"></script>
+<script src="../js/global.js"></script>
+
 </head>
 <body>
 <div id="content">
@@ -27,7 +31,7 @@
     <div class="quote">Pipey. Looks like you want to compress a movie
     file, can I help? You know with Pied Piper's revolutionary neural
     network optimized sharded data distribution system, it's just six
-    clicks away, follow meeee!</div><hr>
+    clicks away. Follow meeee!</div><hr>
     <div class="author">Silicon Valley</div>
 </div>
 <div class="clearboth"></div>
@@ -62,9 +66,13 @@ The function $y(z)$ is also called the Heaviside / unit step function.
 
 <p><b>Proposition.</b> <i>A single binary threshold neuron cannot
 learn the XOR function, because geometrically its truth table
-represented on a plane is not linearly separable. In particular,
-perceptrons can't learn patterns if they're subject to transformations
-that form a group, e.g. translations with wrap-around.</i></p>
+represented on a plane is not linearly separable.</i></p>
+
+<p>
+    <b>Proposition.</b> <i>Perceptrons can't learn patterns if they're
+    subject to transformations that form a group, e.g. translations
+    with wrap-around.</i>
+</p>
 
 <p>TODO. Details?</p>
 
@@ -906,6 +914,88 @@ we replace one by the other and still achieve similar results?</i></p>
 <div class="center">
     Hinton: It's better to correct a mistake after you've made it.
 </div>
+
+<h1>Per Connection Adaptive Learning Rate</h1>
+
+<p class="box">
+    <b>Definition.</b> <i>Make a gain parameter $g_{ij}$ for each connection:
+
+    $$\Delta w_{ij} = -\epsilon g_{ij} \frac{\partial E}{\partial w_{ij}},$$
+
+    and increase $g_{ij}$ if the gradient does not change signs, otherwise
+    decrease it:
+
+    $$g_{ij}(t) = \begin{cases}
+    g_{ij}(t-1) + 0.05 &\text{ if } \frac{\partial E}{\partial w_{ij}}(t) \frac{\partial E}{\partial w_{ij}}(t-1) > 0 \\
+    g_{ij}(t-1) \times 0.95 &\text{ otw.}
+    \end{cases}$$</i>
+</p>
+
+<p>
+    <b>Question.</b> <i>Why keep the $\epsilon$? Some kind of global gain / learning rate?</i>
+</p>
+
+<p>
+    The effect of these gain parameters is to add damping when
+    oscillation occurs, i.e. if the gradient changes sign often,
+    $\Delta w_{ij}$ will become small, so it'll sway less. On the
+    other hand, if the gradient doesn't change sign, the weight will
+    keep going down hill and gain more and more speed. Unless we bound
+    the gains. According to lecture reasonable limits are
+
+    $$g_{ij} \in [0.1, 10] \quad \text{ or } \quad g_{ij} \in [0.01, 100].$$
+</p>
+
+<p>
+    <b>Example.</b> Let $\alpha = 0.05, \beta = 0.95.$ Say
+    $\frac{\partial E}{\partial w}$ changes sign each time. So
+    e.g. (using subscripts to denote time):
+
+    \begin{align*}
+    g_1 &= g_0 + \alpha \\
+    g_2 &= g_1 \times \beta = g_0 \beta + \alpha \beta \\
+    g_3 &= g_2 + \alpha = g_0 \beta + \alpha \beta + \alpha \\
+    &\cdots \\
+    g_{2n} &= g_0 \beta^n + \alpha \beta^n + \cdots + \alpha \beta \\
+    g_{2n+1} &= g_0 \beta^n + \alpha \beta^n + \cdots + \alpha.
+    \end{align*}
+
+    Therefore as $n\longrightarrow \infty,$ we have $g_0 \beta^n
+    \longrightarrow 0$ and
+
+    $$g_{2n} \longrightarrow \alpha \frac{1}{1 - \beta} = 1,$$
+
+    i.e. if the gradient changes sign each time, the gain will settle
+    around 1.
+</p>
+
+<p>
+    Geometric series again! Keeps showing up cause we always use
+    simple examples. Would be nice if we can see what happens when the
+    gradient changes not each time, but approximately randomly. In
+    that case,
+
+    \begin{align*}
+     g_{n_{2k+1}} &= n_1 \alpha \beta^{n_2 + n_4 + \cdots + n_{2k}}
+              + n_3 \alpha \beta^{n_2 + n_4 + \cdots + n_{2k-2}}
+              + \cdots
+              + n_{2k+1} \alpha \\
+             &\approx \alpha n \left((\beta^n)^{N/2} + \cdots + \beta^n + 1\right) \\
+             &\approx \alpha n \frac{1}{1 - \beta^n},
+    \end{align*}
+
+    where $n_i$ is the number of times the gradient increases or
+    decreases on the $i$-th change of signs, $n$ is the expected value
+    of the $n_i$'s, and $N$ is the total number of times the gradient
+    changes signs. Since the gradient changes signs randomly, $n$
+    should be 1, and so this reduces to the value we had earlier:
+
+    $$g_\infty = 1.$$
+
+    <i><b>TODO. More rigor!</b></i>
+</p>
+
+<img src="images/keep-calm-and-make-all-kinds-of-gains-12.png">
 
 <h1>Object Recognition: Convolutional Neural Networks for Digit
 Recognition</h1>
