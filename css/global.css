@@ -7,7 +7,7 @@ body {
 
 #content {
     margin:0 auto;
-    max-width: 600px;
+    max-width: 700px;
 }
 
 a {
@@ -48,7 +48,7 @@ figcaption {
 }
 
 .epigraph {
-    max-width: 300px;
+    max-width: 50%;
     float: right;
     margin: 0 0 20px 0;
 }

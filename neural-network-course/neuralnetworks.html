@@ -926,9 +926,12 @@ we replace one by the other and still achieve similar results?</i></p>
     decrease it:
 
     $$g_{ij}(t) = \begin{cases}
-    g_{ij}(t-1) + 0.05 &\text{ if } \frac{\partial E}{\partial w_{ij}}(t) \frac{\partial E}{\partial w_{ij}}(t-1) > 0 \\
-    g_{ij}(t-1) \times 0.95 &\text{ otw.}
-    \end{cases}$$</i>
+    g_{ij}(t-1) + \alpha &\text{ if } \frac{\partial E}{\partial w_{ij}}(t) \frac{\partial E}{\partial w_{ij}}(t-1) > 0 \\
+    g_{ij}(t-1) \times \beta &\text{ otw,}
+    \end{cases}$$
+
+    where $\alpha$ is close to $0$ and $\beta$ is close to $1,$
+    usually $0.05$ and $0.95$ resp.</i>
 </p>
 
 <p>
@@ -940,16 +943,15 @@ we replace one by the other and still achieve similar results?</i></p>
     oscillation occurs, i.e. if the gradient changes sign often,
     $\Delta w_{ij}$ will become small, so it'll sway less. On the
     other hand, if the gradient doesn't change sign, the weight will
-    keep going down hill and gain more and more speed. Unless we bound
-    the gains. According to lecture reasonable limits are
+    keep going down hill and gain more and more speed, unless we bound
+    the gains. According to lecture reasonable gain limits are
 
     $$g_{ij} \in [0.1, 10] \quad \text{ or } \quad g_{ij} \in [0.01, 100].$$
 </p>
 
 <p>
-    <b>Example.</b> Let $\alpha = 0.05, \beta = 0.95.$ Say
-    $\frac{\partial E}{\partial w}$ changes sign each time. So
-    e.g. (using subscripts to denote time):
+    <b>Example.</b> Say $\frac{\partial E}{\partial w}$ changes sign
+    each time. So e.g. (using subscripts to denote time):
 
     \begin{align*}
     g_1 &= g_0 + \alpha \\
@@ -972,8 +974,7 @@ we replace one by the other and still achieve similar results?</i></p>
 <p>
     Geometric series again! Keeps showing up cause we always use
     simple examples. Would be nice if we can see what happens when the
-    gradient changes not each time, but approximately randomly. In
-    that case,
+    gradient changes not each time, but randomly. In that case,
 
     \begin{align*}
      g_{n_{2k+1}} &= n_1 \alpha \beta^{n_2 + n_4 + \cdots + n_{2k}}

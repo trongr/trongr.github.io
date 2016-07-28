@@ -24,6 +24,7 @@ window.MathJax = {
 
             epsilon: "\\varepsilon",
 
+            span: "\\mathop{\\rm span}",
             tr: "\\mathop{\\rm tr}",
 
             count: "\\mathop{\\rm count}\\limits",
