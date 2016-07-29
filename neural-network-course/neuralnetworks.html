@@ -931,7 +931,7 @@ we replace one by the other and still achieve similar results?</i></p>
     \end{cases}$$
 
     where $\alpha$ is close to $0$ and $\beta$ is close to $1,$
-    usually $0.05$ and $0.95$ resp.</i>
+    e.g. $0.05$ and $0.95$ resp.</i>
 </p>
 
 <p>
@@ -944,7 +944,7 @@ we replace one by the other and still achieve similar results?</i></p>
     $\Delta w_{ij}$ will become small, so it'll sway less. On the
     other hand, if the gradient doesn't change sign, the weight will
     keep going down hill and gain more and more speed, unless we bound
-    the gains. According to lecture reasonable gain limits are
+    gains. According to lecture reasonable gain limits are
 
     $$g_{ij} \in [0.1, 10] \quad \text{ or } \quad g_{ij} \in [0.01, 100].$$
 </p>
@@ -985,18 +985,86 @@ we replace one by the other and still achieve similar results?</i></p>
              &\approx \alpha n \frac{1}{1 - \beta^n},
     \end{align*}
 
-    where $n_i$ is the number of times the gradient increases or
-    decreases on the $i$-th change of signs, $n$ is the expected value
-    of the $n_i$'s, and $N$ is the total number of times the gradient
-    changes signs. Since the gradient changes signs randomly, $n$
-    should be 1, and so this reduces to the value we had earlier:
+    where $n_i$ is the number of times the gradient keeps its sign on
+    the $i$-th change of signs, $n$ is the expected value of the
+    $n_i$'s, and $N$ is the total number of times the gradient changes
+    signs. Since the gradient changes signs randomly, $n$ should on
+    average be 1, and so this reduces to the value we had earlier:
 
     $$g_\infty = 1.$$
-
-    <i><b>TODO. More rigor!</b></i>
 </p>
 
 <img src="images/keep-calm-and-make-all-kinds-of-gains-12.png">
+
+<h2>RPROP: resilient backpropagation</h2>
+
+<p>
+    <b>Definition.</b> <i>Instead of relying on the gradient and a
+    learning rate as in the Delta Rule, RPROP keeps track of a single
+    step size $\Delta_{ij}$ per weight:
+
+    $$\Delta_{ij}(t) = \begin{cases}
+    \eta^+ \Delta_{ij}(t-1) \quad &\text{ if } \frac{\partial E}{\partial w_{ij}}(t) \frac{\partial E}{\partial w_{ij}}(t-1) > 0 \\
+    \eta^- \Delta_{ij}(t-1) \quad &\text{ if } \frac{\partial E}{\partial w_{ij}}(t) \frac{\partial E}{\partial w_{ij}}(t-1) < 0
+    \end{cases}$$
+
+    where $0 < \eta^- < 1 < \eta^+,$ usually $0.5$ and $1.2.$ Next, the weight update is
+
+    $$\Delta w_{ij}(t) = \begin{cases}
+    -\Delta_{ij}(t) &\quad \text{ if } \frac{\partial E}{\partial w_{ij}}(t) > 0 \\
+    +\Delta_{ij}(t) &\quad \text{ if } \frac{\partial E}{\partial w_{ij}}(t) < 0 \\
+    0 &\quad \text{ else. }
+    \end{cases}$$
+
+    In other words, if the gradient changes sign, then our last step
+    size $\Delta_{ij}(t-1)$ was too big, so we need to scale it back
+    by $\eta^-.$ On the other hand, if the gradient keeps its sign,
+    then we're going in the right direction, and we scale up the step
+    size by $\eta^+$ to go faster. Otherwise the gradient is zero and
+    we've reached the bottom, so there's no need to change the weight.
+    </i>
+</p>
+
+<p>
+    <b>Disadvantage.</b> Only works in full batch, can't use in
+    mini-batch because e.g. if a weight gets a gradient of $+0.1$ on
+    nine mini-batches and $-0.9$ on the tenth, this weight should stay
+    roughly where it is. But RPROP will increase it nine times and
+    decrease it only once, so the step size will grow by a factor of
+
+    $$1.2^9 \cdot 0.5 \approx 2.5,$$
+
+    i.e. the frequency and magnitude of the mini batch gradients
+    matter but the magnitude isn't reflected in RPROP.
+</p>
+
+<h2>RMSPROP: root mean square backpropagation / mini-batch RPROP</h2>
+
+<p>
+    <b>Definition.</b> <i>Note that RPROP is equivalent to regular
+    per-weight adaptive learning rate with the gradient magnitude
+    normalized out by dividing by itself. So in order to make the
+    magnitude relevant again, we divide successive gradients not by
+    themselves individually but by their root mean square: first
+    define the running mean square
+
+    $$\m_{ij}(t) = \g \m_{ij}(t-1) + (1-\g) \left(\frac{\partial E}{\partial w_{ij}}\right)^2,$$
+
+    where $\g$ is the forgetting factor: bigger $\g \in (0, 1)$ makes
+    $\m_{ij}$ remember more of its previous values. Then the weight update is
+
+    <div class="aside">
+        Look at all these parameters! Next we're gonna want to adjust
+        $\g$ per connection!
+    </div>
+    $$\D w_{ij} = - \frac{\a}{\sqrt{\m_{ij}}} \frac{\partial E}{\partial w_{ij}}.$$
+
+    </i>
+</p>
+
+<p>
+    <b>Random TODO.</b> Look up meta neural network.
+</p>
 
 <h1>Object Recognition: Convolutional Neural Networks for Digit
 Recognition</h1>

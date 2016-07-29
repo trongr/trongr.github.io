@@ -11,6 +11,15 @@ window.MathJax = {
     },
     TeX: {
         Macros: {
+            a: "\\alpha",
+            b: "\\beta",
+            d: "\\delta",
+            e: "\\epsilon",
+            g: "\\gamma",
+            l: "\\lambda",
+            m: "\\mu",
+            D: "\\Delta",
+
             CC: "\\mathbf C",
             EE: "\\mathbf E",
             FF: "\\mathbf F",
