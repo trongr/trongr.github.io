@@ -11,7 +11,7 @@
 <!-- <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js"></script> -->
 
 <script src="../js/jquery-3.1.0.min.js"></script>
-<script src="../js/smartquotes.min.js"></script>
+<script src="../js/smartquotes.js"></script>
 <script src="../js/global.js"></script>
 
 </head>
@@ -513,10 +513,10 @@ b_h} = 1.$ Similar to the weight derivatives, we also want to sum
 these over the $m$ training cases, so $$\frac{\partial C}{\partial
 b_h} = \sum_m \frac{\partial C}{\partial z_j},$$ which in matrix form
 is $$\frac{\partial C}{\partial B_h} =
-\left(\sumtext_\text{rows}\frac{\partial C}{\partial Z_j}\right)^T
-\sim K \times 1,$$ where $\sumtext_\text{rows} A$ sums a matrix $A$
-over its rows, so in particular $\sumtext_\text{rows} A$ is a row
-vector. Similarly $\sumtext_\text{cols} A$ is a column vector. In
+\left(\textsum_\text{rows}\frac{\partial C}{\partial Z_j}\right)^T
+\sim K \times 1,$$ where $\textsum_\text{rows} A$ sums a matrix $A$
+over its rows, so in particular $\textsum_\text{rows} A$ is a row
+vector. Similarly $\textsum_\text{cols} A$ is a column vector. In
 NumPy this is <code>sum(A, 0)</code> and <code>sum(A, 1)</code>,
 respectively.</p>
 
@@ -558,7 +558,7 @@ Y_e \sim H \times 3D,$$ which is the same size as $W_e.$</p>
 layer. Then as usual $$\frac{\partial C}{\partial b_e} =
 \frac{\partial C}{\partial z_h} \frac{\partial z_h}{\partial b_e} =
 \frac{\partial C}{\partial z_h},$$ which has matrix form
-$$\frac{\partial C}{\partial B_e} = \left(\sumtext_{\text{rows}}
+$$\frac{\partial C}{\partial B_e} = \left(\textsum_{\text{rows}}
 \frac{\partial C}{\partial Z_h}\right)^T \sim H \times 1.$$</p>
 
 <h1>Some Unanswered Questions</h1>
@@ -838,21 +838,21 @@ we replace one by the other and still achieve similar results?</i></p>
 <p>
     <b>Intuition: rolling ball.</b> Modify the Delta Rule
 
-    $$\Delta \ww(t) = - \epsilon \frac{\partial E}{\partial \ww}(t)$$
+    $$\Delta w(t) = - \e \frac{\partial E}{\partial w}(t)$$
 
     to include a "momentum" term:
 
-    $$\Delta \ww(t) = \alpha \Delta \ww(t - 1) - \epsilon \frac{\partial E}{\partial \ww}(t),$$
+    $$\Delta w(t) = \alpha \Delta w(t - 1) - \e \frac{\partial E}{\partial w}(t),$$
 
     where $\alpha$ is a factor slightly less than 1. All it's saying
-    is that $\Delta \ww(t)$ remembers a little bit of its previous
-    direction via $\alpha \Delta \ww(t - 1)$, and is pushed along the
-    gradient as usual by $-\epsilon \frac{\partial E}{\partial
-    \ww}(t).$
+    is that $\Delta w(t)$ remembers a little bit of its previous
+    direction via $\alpha \Delta w(t - 1)$, and is pushed along the
+    gradient as usual by $-\e \frac{\partial E}{\partial
+    w}(t).$
 </p>
 
 <p>
-    <b>Question.</b> <i>What's a good value for $\epsilon$?</i>
+    <b>Question.</b> <i>What's a good value for $\e$?</i>
 </p>
 
 <p>
@@ -865,28 +865,28 @@ we replace one by the other and still achieve similar results?</i></p>
 <p>
     Then the weights will reach a terminal velocity
 
-    $$\Delta \ww_\infty = -\frac{1}{1 - \alpha} \epsilon \frac{\partial E}{\partial \ww},$$
+    $$\Delta w_\infty = -\frac{1}{1 - \alpha} \e \frac{\partial E}{\partial w},$$
 
     which can be shown as follows: since this is a flat plane,
-    $\frac{\partial E}{\partial \ww}(t)$ is constant, so recursively
+    $\frac{\partial E}{\partial w}(t)$ is constant, so recursively
     expand
 
-    $$\Delta \ww(t) = \alpha \Delta \ww(t - 1) - \epsilon \frac{\partial E}{\partial \ww}(t)$$
+    $$\Delta w(t) = \alpha \Delta w(t - 1) - \e \frac{\partial E}{\partial w}(t)$$
 
     to get
 
-    $$\Delta \ww(t) = \alpha^t \Delta \ww(0) - (\alpha^{t-1} + \cdots + 1)\epsilon \frac{\partial E}{\partial \ww}(t).$$
+    $$\Delta w(t) = \alpha^t \Delta w(0) - (\alpha^{t-1} + \cdots + 1)\e \frac{\partial E}{\partial w}(t).$$
 
-    The first term $\alpha^t \Delta \ww(0)$ goes to zero because $0 <
+    The first term $\alpha^t \Delta w(0)$ goes to zero because $0 <
     \alpha < 1,$ and the second term contains the geometric series, so
     as $t\longrightarrow 0,$
 
-    $$\Delta \ww(t) \longrightarrow \Delta \ww_\infty = -\frac{1}{1 - \alpha} \epsilon \frac{\partial E}{\partial \ww}.$$
+    $$\Delta w(t) \longrightarrow \Delta w_\infty = -\frac{1}{1 - \alpha} \e \frac{\partial E}{\partial w}.$$
 </p>
 
 <p>
-    <b>Corollary.</b> <i>If $\frac{\partial E}{\partial \ww}$ is
-    bounded, then so is $\Delta \ww,$ i.e. $\Delta \ww$ doesn't
+    <b>Corollary.</b> <i>If $\frac{\partial E}{\partial w}$ is
+    bounded, then so is $\Delta w,$ i.e. $\Delta w$ doesn't
     accumulate and go all crazy.</i>
 </p>
 
@@ -900,13 +900,13 @@ we replace one by the other and still achieve similar results?</i></p>
 <p>
     <b>New and improved momentum method:</b> <i>jump first, then
     correct your mistake at the destination.</i> This method is
-    captured by the formula for $\Delta \ww$ above:
+    captured by the formula for $\Delta w$ above:
 
-    $$\Delta \ww(t) = \alpha \Delta \ww(t - 1) - \epsilon \frac{\partial E}{\partial \ww}(t).$$
+    $$\Delta w(t) = \alpha \Delta w(t - 1) - \e \frac{\partial E}{\partial w}(t).$$
 
     The corresponding formula for the old momentum method would be
 
-    $$\Delta \ww(t) = \alpha \Delta \ww(t - 1) - \epsilon \frac{\partial E}{\partial \ww}(t - 1).$$
+    $$\Delta w(t) = \alpha \Delta w(t - 1) - \e \frac{\partial E}{\partial w}(t - 1).$$
 </p>
 
 <img src="images/nesterov.png">
@@ -920,7 +920,7 @@ we replace one by the other and still achieve similar results?</i></p>
 <p class="box">
     <b>Definition.</b> <i>Make a gain parameter $g_{ij}$ for each connection:
 
-    $$\Delta w_{ij} = -\epsilon g_{ij} \frac{\partial E}{\partial w_{ij}},$$
+    $$\Delta w_{ij} = -\e g_{ij} \frac{\partial E}{\partial w_{ij}},$$
 
     and increase $g_{ij}$ if the gradient does not change signs, otherwise
     decrease it:
@@ -935,7 +935,7 @@ we replace one by the other and still achieve similar results?</i></p>
 </p>
 
 <p>
-    <b>Question.</b> <i>Why keep the $\epsilon$? Some kind of global gain / learning rate?</i>
+    <b>Question.</b> <i>Why keep the $\e$? Some kind of global gain / learning rate?</i>
 </p>
 
 <p>
@@ -1005,7 +1005,8 @@ we replace one by the other and still achieve similar results?</i></p>
 
     $$\Delta_{ij}(t) = \begin{cases}
     \eta^+ \Delta_{ij}(t-1) \quad &\text{ if } \frac{\partial E}{\partial w_{ij}}(t) \frac{\partial E}{\partial w_{ij}}(t-1) > 0 \\
-    \eta^- \Delta_{ij}(t-1) \quad &\text{ if } \frac{\partial E}{\partial w_{ij}}(t) \frac{\partial E}{\partial w_{ij}}(t-1) < 0
+    \eta^- \Delta_{ij}(t-1) \quad &\text{ if } \frac{\partial E}{\partial w_{ij}}(t) \frac{\partial E}{\partial w_{ij}}(t-1) < 0 \\
+    \Delta_{ij}(t-1) \quad &\text{ else,}
     \end{cases}$$
 
     where $0 < \eta^- < 1 < \eta^+,$ usually $0.5$ and $1.2.$ Next, the weight update is
@@ -1021,8 +1022,15 @@ we replace one by the other and still achieve similar results?</i></p>
     by $\eta^-.$ On the other hand, if the gradient keeps its sign,
     then we're going in the right direction, and we scale up the step
     size by $\eta^+$ to go faster. Otherwise the gradient is zero and
-    we've reached the bottom, so there's no need to change the weight.
+    there's no need to change the weight.
     </i>
+</p>
+
+<p>
+    <b>Note.</b> Even when $\frac{\partial E}{\partial w_{ij}}(t) =
+    0,$ that doesn't mean we've reached a minimal $w_{ij},$ because at
+    time $t+1$ the weights might move somewhere else and
+    $\frac{\partial E}{\partial w_{ij}}(t+1)$ might be nonzero.
 </p>
 
 <p>
@@ -1053,10 +1061,6 @@ we replace one by the other and still achieve similar results?</i></p>
     where $\g$ is the forgetting factor: bigger $\g \in (0, 1)$ makes
     $\m_{ij}$ remember more of its previous values. Then the weight update is
 
-    <div class="aside">
-        Look at all these parameters! Next we're gonna want to adjust
-        $\g$ per connection!
-    </div>
     $$\D w_{ij} = - \frac{\a}{\sqrt{\m_{ij}}} \frac{\partial E}{\partial w_{ij}}.$$
 
     </i>
@@ -1065,6 +1069,14 @@ we replace one by the other and still achieve similar results?</i></p>
 <p>
     <b>Random TODO.</b> Look up meta neural network.
 </p>
+
+<h2>Visualizations of different optimization algorithms</h2>
+
+<p>
+    There's a glitch in the matrix:
+</p>
+
+<img src="images/contours_evaluation_optimizers.gif">
 
 <h1>Object Recognition: Convolutional Neural Networks for Digit
 Recognition</h1>

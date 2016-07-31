@@ -29,7 +29,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.70710678"
-     inkscape:cx="353.16381"
+     inkscape:cx="27.187583"
      inkscape:cy="624.65464"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -47,7 +47,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -182,7 +182,7 @@
            height="37.375645"
            x="68.185295"
            y="247.7757" /></flowRegion><flowPara
-         id="flowPara4280"></flowPara></flowRoot>    <flowRoot
+         id="flowPara4280" /></flowRoot>    <flowRoot
        xml:space="preserve"
        id="flowRoot4286"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:20px;line-height:125%;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman,  Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -196,7 +196,7 @@
            x="57.578693"
            y="242.21986"
            style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman,  Bold'" /></flowRegion><flowPara
-         id="flowPara4292"></flowPara></flowRoot>    <flowRoot
+         id="flowPara4292" /></flowRoot>    <flowRoot
        xml:space="preserve"
        id="flowRoot4326"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:125%;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -414,8 +414,8 @@
        inkscape:export-xdpi="61.564762"
        inkscape:export-ydpi="61.564762" />
     <path
-       style="fill:#00ff00;fill-rule:evenodd;stroke:#0cff00;stroke-width:10.39496803;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 646.75341,568.26546 645.69268,383.78807"
+       style="fill:#00ff00;fill-rule:evenodd;stroke:#0cff00;stroke-width:13.08184719;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 646.74328,681.52453 645.70281,383.66608"
        id="path4452-3-5-1"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc"

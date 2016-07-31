@@ -14,30 +14,28 @@ window.MathJax = {
             a: "\\alpha",
             b: "\\beta",
             d: "\\delta",
-            e: "\\epsilon",
+            e: "\\varepsilon",
             g: "\\gamma",
+            h: "\\eta",
             l: "\\lambda",
             m: "\\mu",
+            r: "\\rho",
+
             D: "\\Delta",
 
             CC: "\\mathbf C",
-            EE: "\\mathbf E",
-            FF: "\\mathbf F",
             NN: "\\mathbf N",
             QQ: "\\mathbf Q",
             RR: "\\mathbf R",
-            aa: "\\mathbf a",
-            rr: "\\mathbf r",
-            vv: "\\mathbf v",
-            ww: "\\mathbf w",
-
-            epsilon: "\\varepsilon",
 
             span: "\\mathop{\\rm span}",
             tr: "\\mathop{\\rm tr}",
 
+            Sum: "\\sum\\limits",
+            Prod: "\\prod\\limits",
+            Lim: "\\lim\\limits",
             count: "\\mathop{\\rm count}\\limits",
-            sumtext: "\\mathop{\\rm sum}\\limits",
+            textsum: "\\mathop{\\rm sum}\\limits",
 
         }
     }

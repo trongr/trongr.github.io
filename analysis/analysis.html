@@ -11,7 +11,7 @@
 <!-- <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js"></script> -->
 
 <script src="../js/jquery-3.1.0.min.js"></script>
-<script src="../js/smartquotes.min.js"></script>
+<script src="../js/smartquotes.js"></script>
 <script src="../js/global.js"></script>
 
 </head>
@@ -200,9 +200,9 @@ Proof uses the Nested Interval Theorem:
 
 <p>
     <b>Proposition.</b> <i>Let $f$ be a limitful function on $[0,
-    1].$ Then for any $\epsilon > 0$ there are only finitely many
+    1].$ Then for any $\e > 0$ there are only finitely many
     points $a \in [0, 1]$ with $$|\lim\limits_{y\to a} f(y) - f(a)| >
-    \epsilon.$$</i>
+    \e.$$</i>
 </p>
 
 <p>
@@ -213,7 +213,7 @@ Proof uses the Nested Interval Theorem:
 </p>
 
 <p>
-    The condition $$|\lim\limits_{y\to a} f(y) - f(a)| > \epsilon$$
+    The condition $$|\lim\limits_{y\to a} f(y) - f(a)| > \e$$
     means that for $y$ close to $a,$ $f(y)$ is far from $f(a).$
     Similarly $\lim\limits_{a \to x} f(a) = L$ means that for $a$
     close to $x,$ $f(a)$ is close to $L.$ Together this means that for
@@ -238,10 +238,10 @@ contradiction.
 </p>
 
 <p>
-    <i>Proof.</i> By the previous Proposition, for each $\epsilon_q >
+    <i>Proof.</i> By the previous Proposition, for each $\e_q >
     0$ there are at most finitely many points $a$
-    s.t. $$|\lim\limits_{y\to a} f(y) - f(a)| > \epsilon_q.$$ Taking a
-    sequence $\epsilon_q \in \mathbf Q$ converging to zero, we have countably
+    s.t. $$|\lim\limits_{y\to a} f(y) - f(a)| > \e_q.$$ Taking a
+    sequence $\e_q \in \mathbf Q$ converging to zero, we have countably
     many such points $a.$
 </p>
 
@@ -456,10 +456,10 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
 </p>
 
 <p>
-    <i>Proof sketch.</i> As a fun remark note that it's enough to show
-    this for $a_1,$ then it'll be true for any $N$ because we can just
-    cut the series there and the remainder will be its own alternating
-    series. So we need to show
+    <i>Proof sketch.</i> Note that it's enough to show this for $a_1,$
+    then it'll be true for any $N$ because we can just cut the series
+    there and the remainder will be its own alternating series. So we
+    need to show
 
     $$|a_2 - a_3 + \cdots| \leq a_1.$$
 </p>
@@ -480,7 +480,7 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
 
     Looking at the picture, we see that even when the even terms are
     as big as possible, the entire series can never get past its
-    original value of $a_1.$
+    original value $a_1.$
 </p>
 
 <p id="ijfasdf09234">
@@ -489,6 +489,8 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
     \longrightarrow 0,$ it too approaches zero, and so the series
     converges by the Cauchy Criterion.
 </p>
+
+<h2>Rearrangement Theorems</h2>
 
 <p>
     <b>Rearrangement Theorem for Conditionally Convergent
@@ -593,10 +595,10 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
     |s_n - (s^+ + s^-)| &= |s_n^+ + s_n^- - (s^+ + s^-)| \\
     &= |s_n^+ - s^+ + s_n^- - s^-| \\
     &\leq |s_n^+ - s^+| + |s_n^- - s^-| \\
-    &< 2 \epsilon
+    &< 2 \e
     \end{align*}
 
-    with appropriately defined $\epsilon.$ Therefore $s_n
+    with appropriately defined $\e.$ Therefore $s_n
     \longrightarrow s^+ + s^-.$
 </p>
 
@@ -606,6 +608,187 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
     any sequence containing the products $a_i b_j$ for all $i, j,$ then
 
     $$\sum c_n = \sum a_n \cdot \sum b_n.$$</i>
+</p>
+
+<h2>Root Test</h2>
+
+<p>
+    <b>Proposition: root test.</b> <i>Let $a_n > 0$ for all $n,$ and
+    suppose that $$\lim_{n\to\infty} \sqrt[n]{a_n} = r.$$ Then the
+    series
+
+    $$\sum\limits_{n} a_n \text{ is } \begin{cases}
+    \text{convergent if } r < 1 \\
+    \text{divergent if } r > 1.
+    \end{cases}$$
+
+    The test is inconclusive if $r = 1.$</i>
+</p>
+
+<p>
+    <i>Proof.</i> If $r > 1,$ then $a_n > 1$ for sufficiently large
+    $n,$ and so the terms aren't approaching zero and the series
+    diverges. Let $r < 1.$ Then
+
+    $$\lim_{n\to\infty} \sqrt[n]{a_n} = r < 1$$
+
+    means that for any $s \in (r, 1)$ there exists an $N$ s.t. for all $n > N,$
+
+    $$\sqrt[n]{a_n} \leq s, \quad \text{ or } \quad a_n \leq s^n.$$
+
+    Therefore the remainder of the series after $a_N$ is
+
+    $$\sum_{n> N} a_n \leq \sum_{n>N} s^n,$$
+
+    which converges because it's a geometric series.
+</p>
+
+<p>
+    <b>Remark.</b> The ratio test above can be proved similarly.
+</p>
+
+<p>
+    <b>Note.</b> If the ratio test works, then the root test also
+    works, by the following:
+</p>
+
+<p>
+    <b>Lemma: limit of ratios is limit of roots.</b> <i>If $a_n >
+    0$ and
+
+    $$\lim_{n\to\infty} \frac{a_{n+1}}{a_n} = L,$$
+
+    then
+
+    $$\lim_{n\to\infty} \sqrt[n]{a_n} = L.$$</i>
+</p>
+
+<p>
+    <i>Proof.</i> The limit
+
+    $$\lim_{n\to\infty} \frac{a_{n+1}}{a_n} = L$$
+
+    means that for any $\e,$ there is an $N$ s.t. for all $n \geq N,$ we
+    have
+
+    $$L - \e \leq \frac{a_{n+1}}{a_n} \leq L + \e.$$
+
+    Therefore,
+
+    $$(L - \e)^n \leq \frac{a_{N+1}}{a_N} \cdots \frac{a_{N+n}}{a_{N+n-1}}
+    = \frac{a_{N+n}}{a_N} \leq (L + \e)^n \\
+
+    L - \e \leq \sqrt[n]{ \frac{a_{N+n}}{a_N} } \leq L + \e.$$
+
+    In other words,
+
+    $$\lim_{n\to\infty} \sqrt[n]{ \frac{a_{N+n}}{a_N} } = L.$$
+
+    Since $a_N > 0$ is fixed,
+
+    $$\lim_{n\to\infty} \sqrt[n]{a_N} = 1,$$
+
+    and so
+
+    $$\lim_{n\to\infty} \sqrt[n]{ \frac{a_{N+n}}{a_N} }
+    = \lim_{n\to\infty} \sqrt[n]{a_{N+n}}
+    = \lim_{m\to\infty} \sqrt[m]{a_{m}} = L.$$
+</p>
+
+<p>
+    <b>Proposition.</b> <i>If $\Sum a_n$ converges absolutely, then
+    for any subsequence $b_n$ of $a_n,$ $\Sum b_n$ also converges
+    absolutely.</i>
+</p>
+
+<p>
+    <i>Proof.</i> We want to show that for any $\e > 0,$ there is an
+    $N$ s.t. for all $M > N,$
+
+    $$|b_N| + \cdots + |b_M| < \e,$$
+
+    so that $\Sum |b_n|$ converges by the Cauchy Criterion.
+
+    But $\Sum a_n$ converges absolutely, so for any such $b_n$ tail we
+    have an $a_n$ tail containing it, s.t.
+
+    $$|b_N| + \cdots + |b_M| \leq |a_N| + \cdots + |a_M| < \e,$$
+
+    and so $\Sum b_n$ converges absolutely.
+</p>
+
+<p>
+    <b>Example.</b> This is false if $\sum a_n$ does not converge
+    absolutely, because then we know that its positive and negative
+    sums diverge, and so we can choose $\sum b_n$ to be either
+    subseries. E.g. the alternating harmonic series
+
+    $$\sum \frac{(-1)^{n+1}}{n}$$
+
+    converges conditionally, but the subseries
+
+    $$\sum_{\text{odd}} \frac{1}{n} = 1 + \frac{1}{3} + \frac{1}{5} + \cdots
+    \quad \text{and} \quad \sum_{\text{even}} \frac{1}{n} = -\frac{1}{2} - \frac{1}{4} - \cdots$$
+
+    both diverge.
+</p>
+
+<img src="images/htvol3-pic4.jpg">
+
+<p>
+    <b>Corollary.</b> <i>If $\sum a_n$ converges absolutely, then
+
+    $$\sum a_n = \sum_{\text{odd}} a_n + \sum_{\text{even}} a_n
+               = (a_1 + a_3 + \cdots) + (a_2 + a_4 + \cdots).$$</i>
+</p>
+
+<p>
+    <i>Proof.</i> By the previous proposition, we know that the even
+    and odd sums both converge absolutely. Let $A, O, E$ be the sums,
+    and let $A_n, O_n, E_n$ be the $n$-th partial sums for the whole,
+    even, and odd series:
+
+    \begin{align*}
+    A_n &= a_1 + a_2 + \cdots + a_n \\
+    O_n &= a_1 + a_3 + \cdots + a_{(n)} \\
+    E_n &= a_2 + a_4 + \cdots + a_{[n]}, \\
+    \end{align*}
+
+    where $(n)$ and $[n]$ denote the largest integer less than or
+    equal to $n$ which is odd and even, so that in particular
+
+    $$A_n = O_n + E_n.$$
+
+    Then
+
+    \begin{align*}
+    |A_n - (O + E)| &= |A_n - (O + E) + (O_n - O_n) + (E_n - E_n)| \\
+                    &\leq |A_n - O_n - E_n| + |O - O_n| + |E - E_n| \\
+                    &< 0 + \e + \e,
+    \end{align*}
+
+    for appropriately chosen $\e.$ Therefore $A_n \longrightarrow O + E.$
+</p>
+
+<p>
+    <b>Corollary.</b> <i>In fact we can do a little bit better: if
+    $\sum a_n$ converges absolutely, then for any partition $b_n, c_n$
+    of $a_n,$
+
+    $$\sum a_n = \sum b_n + \sum c_n.$$</i>
+</p>
+
+<div class="aside">
+    It's stronger in the forward but weaker in the backward direction.
+</div>
+
+<p>
+    <b>Corollary: Absolute Convergence Theorem II.</b> <i>Combining
+    this with the Absolute Convergence Theorem, we get: $\sum a_n$
+    converges absolutely iff $\sum b_n$ and $\sum c_n$ converge for
+    any partition $b_n, c_n$ of $a_n.$ In that case,
+
+    $$\sum a_n = \sum b_n + \sum c_n.$$</i>
 </p>
 
 <h1>Reference</h1>

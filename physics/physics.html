@@ -11,7 +11,7 @@
 <!-- <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js"></script> -->
 
 <script src="../js/jquery-3.1.0.min.js"></script>
-<script src="../js/smartquotes.min.js"></script>
+<script src="../js/smartquotes.js"></script>
 <script src="../js/global.js"></script>
 
 </head>
@@ -62,14 +62,18 @@
     <b>Coulomb's Inverse Square Law.</b> <i>Two charges Q and q a
     distance r apart exert a force on each other with magnitude
 
-    $$F = \frac{K|Qq|}{r^2} = \frac{1}{4\pi\epsilon_0} \frac{|Qq|}{r^2}$$
+    $$F = \frac{K|Qq|}{r^2} = \frac{1}{4\pi\e_0} \frac{|Qq|}{r^2}$$
 
-    where K is Coulomb's constant and $\epsilon_0$ is the permittivity
+    where K is Coulomb's constant and $\e_0$ is the permittivity
     constant.</i>
 </p>
 
 <p>
-    <b>Problem TODO.</b> <i>Find the force of an infinite electrical wire
+    <b>Question.</b> <i>Why inverse square?</i>
+</p>
+
+<p>
+    <b>Problem.</b> <i>Find the force of an infinite electrical wire
     on a point charge.</i>
 </p>
 
@@ -78,19 +82,19 @@
 <h1>Electric Field</h1>
 
 <p>
-    <b>Definition.</b> <i>The electric field at a point $\rr$ is
+    <b>Definition.</b> <i>The electric field at a point $r$ is
 
-    $$\EE(\rr) = \frac{\FF_q(\rr)}{q} \sim N/C$$
+    $$E(r) = \frac{F_q(r)}{q} \sim N/C$$
 
-    where $\FF_q(\rr)$ is the electric force on any test charge q at
-    $\rr$.</i>
+    where $F_q(r)$ is the electric force on any test charge q at
+    $r$.</i>
 </p>
 
 <p>
-    We can also think of $\EE$ as the force experienced by each unit
+    We can also think of $E$ as the force experienced by each unit
     charge contained in the test charge:
 
-    $$\EE(\rr) = \frac{\FF_1(\rr)}{1},$$
+    $$E(r) = \frac{F_1(r)}{1},$$
 
     kinda like how acceleration is the force per unit
     mass. E.g. compare the electric field
@@ -104,13 +108,34 @@
 
 <img src="images/Placing-powerful-squire-magnet-in-center-of-iron-dust-looks-like-Kabbah.jpg">
 <div class="center">
-    Curvature of magnetic space / field.
+    Curvature of magnetic "space" / field.
 </div>
 
 <figure>
     <img src="images/201518-14415791-1040-instructionallab_manualsphysics6bexperiment_56b-exp4_fig2.png">
     <figcaption></figcaption>
 </figure>
+
+<h1>Principle of Superposition</h1>
+
+<p>
+    <b>Superposition.</b> <i>The whole is equal to the sum of the parts.</i>
+</p>
+
+<p>
+    <b>Example.</b> Superposition of waves.
+</p>
+
+<img src="images/Standing_wave_2.gif">
+
+<div class="aside">
+    <img src="images/ParallelogramLaw_1000.gif">
+</div>
+
+<p>
+    <b>Example.</b> Parallelogram law. Why do they---e.g. forces---do
+    that in real life?
+</p>
 
 <h1>Dipoles</h1>
 
@@ -123,7 +148,7 @@
 </p>
 
 <div class="aside">
-    TODO. What happens when they aren't?
+    <b>Question.</b> What happens when they aren't?
 </div>
 
 <p>
@@ -137,22 +162,96 @@
 </figure>
 
 <p>
-    Then the force acting on $X$ is $$F = \frac{KXx}{(R -
-    \frac{\delta}{2})^2} - \frac{KXx}{(R + \frac{\delta}{2})^2} =
-    \frac{KXx}{R^2(1 - \frac{\delta}{2R})^2} - \frac{KXx}{R^2(1 +
-    \frac{\delta}{2R})^2}.$$ To simplify this expression we'll use the
+    Then the force acting on $X$ is
+
+    $$F = \frac{KXx}{(R - \frac{\delta}{2})^2} - \frac{KXx}{(R + \frac{\delta}{2})^2}
+    = \frac{KXx}{R^2(1 - \frac{\delta}{2R})^2} - \frac{KXx}{R^2(1 + \frac{\delta}{2R})^2}.$$
+
+    To simplify this expression we'll use the
     Binomial Approximation, which says that if $x$ is a small number
-    close to 0 and $\alpha$ is a real number, then $$(1 + x)^\alpha
-    \approx 1 + \alpha x.$$ Applying this to the denominator, we get
-    $$\left(1 \pm \frac{\delta}{2R}\right)^{-2} \approx 1 \mp
-    \frac{\delta}{R}.$$
+    close to 0 and $\alpha$ is a real number, then
+
+    $$(1 + x)^\alpha \approx 1 + \alpha x.$$
+
+    Applying this to the denominator, we get
+
+    $$\left(1 \pm \frac{\delta}{2R}\right)^{-2} \approx 1 \mp \frac{\delta}{R}.$$
 </p>
 
 <p>
-    Now $F$ simplifies to $$F \approx \frac{KXx}{R^2}\left(1 +
-    \frac{\delta}{R}\right) - \frac{KXx}{R^2}\left(1 -
-    \frac{\delta}{R}\right) = \frac{2\delta KXx}{R^3}.$$
+    Now $F$ simplifies to
+
+    $$F \approx \frac{KXx}{R^2}\left(1 + \frac{\delta}{R}\right)
+    - \frac{KXx}{R^2}\left(1 - \frac{\delta}{R}\right)
+    = \frac{2\delta KXx}{R^3}.$$
 </p>
+
+<p>
+    <b>Remark.</b> Actually, instead of using the Binomial
+    Approximation there's a sligthly easier way to get the same result
+    that also gives you a better feeling for the estimate---by simple
+    algebraic manipulation:
+
+    $$F = KXx \left[\frac{1}{(R - \frac{\delta}{2})^2} - \frac{1}{(R + \frac{\delta}{2})^2}\right]
+    = KXx \frac{2R\d}{(R - \frac{\d}{2})^2 (R + \frac{\d}{2})^2}.$$
+
+    Since $R \gg \d,$ the denominator is approximately $R^4,$ so this becomes
+
+    $$F \approx \frac{2\delta KXx}{R^3}.$$
+</p>
+
+<p>
+    Now we'll do the same for the case when the test charge is in the
+    plane bisecting the dipole:
+</p>
+
+<p>
+    <img src="images/inversecubedipoleknight.png">
+    <div class="center">
+        <b>Notation.</b> We'll switch notations to refer to this drawing.
+    </div>
+</p>
+
+<div class="box">
+    <b>Aside.</b> Once we calculated that the field of a dipole varied
+    inversely as the distance cubed when the test charge was along the
+    dipole, it's fairly obvious that it should also vary inversely as
+    the distance cubed no matter where the test charge is---provided
+    it's sufficiently far away---because if you're far away the
+    dipoles will look like a single point charge. But, we'll calculate
+    it for this case anyway, for practice.
+</div>
+
+<p>
+    First note that along $R,$ the field is zero because the $+q$
+    charge pushes $Q$ away, while $-q$ pulls it towards the
+    dipole. Therefore the field at $Q$ is only along the $y$-axis,
+    specifically towards the negative $y$-axis:
+
+    \begin{align*}
+    F &= \frac{KQq}{R^2 + \left( \d/2 \right)^2}
+         \frac{\d/2}{\sqrt{R^2 + \left( \d/2 \right)^2}}
+       + \frac{KQq}{R^2 + \left( \d/2 \right)^2}
+         \frac{\d/2}{\sqrt{R^2 + \left( \d/2 \right)^2}} \\
+      &= \frac{KQq\d}{\left( R^2 + \left( \d/2 \right)^2 \right)^{3/2}}.
+    \end{align*}
+
+    Since $R \gg \d,$ again the denominator is approximately $R^3,$ so
+
+    $$F \approx \frac{KQq\d}{R^3}$$
+
+    in the negative $y$ direction. Note also that this is half the
+    force when the test charge was along the dipole axis.
+</p>
+
+<p>
+    One final observation is that when $R \gg \d,$ the field line is
+    roughly parallel to the line away from the dipole, which tells us
+    a little bit about the general case when the test charge is not
+    along the axes:
+</p>
+
+<img src="images/dipolediagram.png">
 
 <p>
     <b>Corollary.</b> <i>Since magnets are always dipoles, magnetic
@@ -176,6 +275,64 @@
     <figcaption></figcaption>
 </figure>
 
+<p>
+    <b>Example: Magneto.</b>
+</p>
+
+<img src="images/tumblr_mqhs61qhD81qhe88io1_r1_500.gif">
+
+<h1>Electric Field of a Continuous Charge Distribution</h1>
+
+<h2>Linear, Surface, and Volumetric Charge Density</h2>
+
+<p>
+    <b>Definition.</b> <i>Let $L$ be the length of a one dimensional
+    object $M$ of uniform charge $Q.$ Then the linear charge density
+    of $M$ is defined to be
+
+    $$\l \equiv \frac{Q}{L}.$$
+
+    Surface and volume charge densities $\h$ and $\r$ are defined
+    ananlogously.</i>
+</p>
+
+<p>
+    <b>Example: electric field of a uniformly charged rod.</b> Assume
+    that the test charge is a distance $r$ away, and exactly half way
+    between the rod end points. A tiny slice of the rod has length
+    $dy$ and charge $\l dy,$ so its field on the test charge is
+
+    $$dE = \frac{K\l dy}{r^2 + y^2} \frac{r}{\sqrt{r^2 + y^2}},$$
+
+    and the total field is
+
+    \begin{align*}
+      E = \int_{-L/2}^{L/2} \frac{K\l r dy}{\left( r^2 + y^2 \right)^{3/2}}
+        = \left.\frac{K\l r y}{r^2\sqrt{r^2 + y^2}}\right|_{-L/2}^{L/2}
+        = \frac{K\l L}{r\sqrt{r^2 + (L/2)^2}},
+    \end{align*}
+
+    which simplifies to
+
+    $$E = \frac{KQ}{r\sqrt{r^2 + (L/2)^2}}.$$
+</p>
+
+<p>
+    <b>Remark.</b> To calculate the field for an infinite uniformly
+    charged rod of charge density $\l,$ in the second last step we can
+    take $L \longrightarrow \infty:$
+
+    $$E = \frac{K\l L}{r\sqrt{r^2 + (L/2)^2}} = \frac{K\l L}{r\sqrt{(r/L)^2 + (1/2)^2}L}
+        \longrightarrow \frac{2K\l}{r}.$$
+</p>
+
+<p>
+    <b>Note.</b> The field for an infinitely long wire varies as
+    $1/r,$ whereas that of a finite wire varies as $1/r^2.$
+</p>
+
+<img src="images/thinroduniformcharge.png">
+
 <h1>Electric Flux</h1>
 
 
@@ -189,7 +346,7 @@
 <p>
     <b>Proposition.</b> <i>The electric field of an infinite uniformly
     charged plate is constant and equal to $$E = 2 \pi K \sigma =
-    \frac{\sigma}{2 \epsilon},$$ where $\sigma$ is the charge density
+    \frac{\sigma}{2 \e},$$ where $\sigma$ is the charge density
     of the plate: the field is the same no matter where you are above
     the plate. Neat!</i>
 </p>
@@ -219,7 +376,7 @@
     <b>Corollary.</b> <i>If you had two parallel plates---instead of
     one---of opposite and equal charge densities, the electric field
     between the two plates would be twice as big: $$E = \pi K \sigma =
-    \frac{\sigma}{\epsilon}.$$ Beyond those plates the field is zero
+    \frac{\sigma}{\e}.$$ Beyond those plates the field is zero
     because the plates cancel each other out.</i>
 </p>
 
