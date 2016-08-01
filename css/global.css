@@ -21,11 +21,17 @@ a {
 h1 {
     color: #FFD557;
     text-align: left;
+    border-bottom: 1px solid;
+    padding-bottom: 5px;
 }
 
 h2 {
-    color: #FF9D5C;
+    color: #FFD557;
     font-style: italic;
+}
+
+h3 {
+
 }
 
 p {

@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>math notes and stuff</title>
+<title>Linear Algebra</title>
 <link rel="stylesheet" href="../css/global.css">
 
 <!-- this config must be before MathJax.js: -->
@@ -20,15 +20,13 @@
 
 <h1>Linear Algebra</h1>
 
-<hr>
-
-<h1>Linear Transformations and Matrices</h1>
-
 <div class="epigraph">
      <div class="quote">
           Just imagine $\RR^n,$ then let $n = 42.$
      </div><hr><div class="author">Unknown</div>
 </div><div class="clearboth"></div>
+
+<h1>Linear Transformations and Matrices</h1>
 
 <h1>Special Matrix Functions</h1>
 
@@ -149,7 +147,7 @@ where $Q = [I]^\alpha_\beta$ is the change of basis matrix from $\beta$ to $\alp
     \lambda I).$</i>
 </p>
 
-<p>
+<p id="skdnsut164">
     <b>Proposition: Eigenvalues and invertibility.</b> <i>A linear
     operator $T$ on a finite-dimensional vector space is invertible
     iff its eigenvalues are nonzero.</i>
@@ -498,7 +496,7 @@ ad - cb &= 1,
 <div class="epigraph">
     <img src="images/pokemon.jpg">
      <div class="quote">
-     </div><hr><div class="author"></div>
+     </div><hr><div class="author">Pokemon</div>
 </div><div class="clearboth"></div>
 
 <p>
@@ -695,30 +693,113 @@ ad - cb &= 1,
 </p>
 
 <p>
-    <b>Question.</b> <i>What is the relationship between
-    diagonalizability and invertibility?</i>
+    A partial answer in that direction:
 </p>
+
+<div class="aside">
+    I don't think the converse is true, but something close.
+</div>
 
 <p>
     <b>Conjecture: diagonalizable blocks.</b> <i>Let $T$ be a linear
     operator whose characteristic polynomial splits, and let $\beta$
     be any basis for $V$ s.t.
 
-    $$[T]_\beta = \begin{bmatrix}
+    $$A \equiv [T]_\beta = \begin{bmatrix}
      A_1 &        &     \\
          & \ddots &     \\
          &        & A_k \\
     \end{bmatrix},$$
 
-    where the $A_i$'s are square blocks and the remaining entries are
-    all zeroes. Then $T$ is diagonalizable iff all the $A_i$'s
-    are.</i>
+    where $A_i$ are square blocks and the remaining entries are all
+    zeroes. If all $A_i$ are diagonalizable, then so is $A.$</i>
+</p>
+
+<p>
+    <i>Proof.</i> Let $A_i$ be diagonalizable for all $i.$ Then
+    there are invertible matrices $Q_i$ s.t.
+
+    $$Q_i^{-1} A_i Q_i = D_i,$$
+
+    a diagonal matrix. Let
+
+    $$Q = \begin{bmatrix}
+     Q_1 &        &     \\
+         & \ddots &     \\
+         &        & Q_k \\
+    \end{bmatrix}.$$
+
+    Then
+
+    \begin{align*}
+    Q^{-1}AQ &= \begin{bmatrix}
+     Q_1^{-1} &        &     \\
+              & \ddots &     \\
+              &        & Q_k^{-1} \\
+    \end{bmatrix} \begin{bmatrix}
+     A_1 &        &     \\
+         & \ddots &     \\
+         &        & A_k \\
+    \end{bmatrix} \begin{bmatrix}
+     Q_1 &        &     \\
+         & \ddots &     \\
+         &        & Q_k \\
+    \end{bmatrix} \\
+    &= \begin{bmatrix}
+     Q_1^{-1} A_1 Q_1 &        &     \\
+                      & \ddots &     \\
+                      &        & Q_k^{-1} A_k Q_k \\
+    \end{bmatrix} \\
+    &= \begin{bmatrix}
+      D_1 &        &     \\
+          & \ddots &     \\
+          &        & D_k \\
+    \end{bmatrix}.
+    \end{align*}
+</p>
+
+<p class="box">
+    <b>Question.</b> <i>What is the relationship between
+    diagonalizability and invertibility, <a href="#skdnsut164">aside
+    from this</a>?</i>
+</p>
+
+<div class="aside">
+    Almost everything is easier with diagonal matrices.
+</div>
+
+<p>
+    So far it's not clear why we care about diagonalizability, but I
+    think one reason is that diagonal matrices are very easy to
+    multiply: you just multiply their diagonal entries
+    element-wise---which makes it easy to calculate any polynomial
+    function of the original matrix:
+</p>
+
+<p class="box">
+    <b>Proposition.</b> <i>Let $A$ be diagonalizable with
+
+    $$Q^{-1}AQ = D,$$
+
+    where $D$ is diagonal, and let $f$ be a polynomial. Then
+
+    $$f(A) = Q f(D) Q^{-1}.$$</i>
+</p>
+
+<p>
+    <i>Proof.</i> Exercise. \qed
+</p>
+
+<p class="box">
+    <b>Question.</b> <i>What is the probability that a random matrix
+    is diagonalizable? Invertible?</i>
 </p>
 
 <h1>Reference</h1>
 
 <ol>
 <li>Linear Algebra by Friedberg, Insel, and Spence.</li>
+<li>Linear Algebra video lectures by Gilbert Strang.</li>
 <li>Everything else from the web.</li>
 </ol>
 

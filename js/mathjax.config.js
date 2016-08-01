@@ -22,6 +22,7 @@ window.MathJax = {
             r: "\\rho",
 
             D: "\\Delta",
+            L: "\\Lambda",
 
             CC: "\\mathbf C",
             NN: "\\mathbf N",

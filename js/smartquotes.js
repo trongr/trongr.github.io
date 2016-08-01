@@ -45,6 +45,7 @@
       .replace(/'/g, '\u2032')
       .replace(/---/g, '\u2014')
       .replace(/--/g, '\u2013')
+      .replace(/\\qed/g, '\u220E')
   };
 
   smartquotes.element = function smartquotesElement(root) {
