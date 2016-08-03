@@ -1,6 +1,6 @@
 window.MathJax = {
     extensions: ["tex2jax.js", "TeX/AMSsymbols.js", "TeX/AMSmath.js"],
-    jax: ["input/TeX", "output/SVG", "output/NativeMML", "output/CommonHTML"],
+    jax: ["input/TeX", "output/SVG"],
     tex2jax: {
         inlineMath: [[ '$','$']],
         displayMath:  [['$$','$$']],
@@ -19,7 +19,10 @@ window.MathJax = {
             h: "\\eta",
             l: "\\lambda",
             m: "\\mu",
+            p: "\\pi",
             r: "\\rho",
+            t: "\\tau",
+            th: "\\theta",
 
             D: "\\Delta",
             L: "\\Lambda",

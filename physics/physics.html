@@ -30,7 +30,6 @@
     but no simpla.</div><hr>
     <div class="author">Albert Einstein</div>
 </div>
-<div class="clearboth"></div>
 
 <h1>Electricity and Magnetism</h1>
 
@@ -44,13 +43,12 @@
 <p>
     The third prong of the plug in electrical sockets connect to a
     wire that runs deep into the ground somewhere outside the
-    building, thus grounding the appliance. Didn't know that!
+    building, to ground appliances. Didn't know that!
 </p>
 
-<figure>
+<div class="bside">
     <img src="images/sg3p.jpg">
-    <figcaption></figcaption>
-</figure>
+</div>
 
 <h1>Coulomb's Law</h1>
 
@@ -68,11 +66,6 @@
     <b>Question.</b> <i>Why inverse square?</i>
 </p>
 
-<p>
-    <b>Problem.</b> <i>Find the force of an infinite electrical wire
-    on a point charge.</i>
-</p>
-
 <hr>
 
 <h1>Electric Field</h1>
@@ -85,6 +78,11 @@
     where $F_q(r)$ is the electric force on any test charge q at
     $r$.</i>
 </p>
+
+<div class="bside">
+    <img src="images/Placing-powerful-squire-magnet-in-center-of-iron-dust-looks-like-Kabbah.jpg">
+    Curvature of magnetic "space" / field.
+</div>
 
 <p>
     We can also think of $E$ as the force experienced by each unit
@@ -101,11 +99,6 @@
 
     $$a = \frac{GM}{r^2}.$$
 </p>
-
-<img src="images/Placing-powerful-squire-magnet-in-center-of-iron-dust-looks-like-Kabbah.jpg">
-<div class="center">
-    Curvature of magnetic "space" / field.
-</div>
 
 <figure>
     <img src="images/201518-14415791-1040-instructionallab_manualsphysics6bexperiment_56b-exp4_fig2.png">
@@ -124,7 +117,7 @@
 
 <img src="images/Standing_wave_2.gif">
 
-<div class="aside">
+<div class="bside">
     <img src="images/ParallelogramLaw_1000.gif">
 </div>
 
@@ -143,7 +136,7 @@
     \propto \frac{Xx}{R^3}.$$</i>
 </p>
 
-<div class="aside">
+<div class="bside">
     <b>Question.</b> What happens when they aren't?
 </div>
 
@@ -152,10 +145,7 @@
     are aligned horizontally,* so let the charge configuration be as follows:
 </p>
 
-<figure>
-    <img src="images/inversecubedipole.png">
-    <figcaption></figcaption>
-</figure>
+<img src="images/inversecubedipole.png">
 
 <p>
     Then the force acting on $X$ is
@@ -196,27 +186,24 @@
     $$F \approx \frac{2\delta KXx}{R^3}.$$
 </p>
 
-<p>
-    Now we'll do the same for the case when the test charge is in the
-    plane bisecting the dipole:
-</p>
-
-<p>
-    <img src="images/inversecubedipoleknight.png">
-    <div class="center">
-        <b>Notation.</b> We'll switch notations to refer to this drawing.
-    </div>
-</p>
-
 <div class="box">
     <b>Aside.</b> Once we calculated that the field of a dipole varied
     inversely as the distance cubed when the test charge was along the
     dipole, it's fairly obvious that it should also vary inversely as
     the distance cubed no matter where the test charge is---provided
     it's sufficiently far away---because if you're far away the
-    dipoles will look like a single point charge. But, we'll calculate
-    it for this case anyway, for practice.
+    dipoles will look like a single point charge.
 </div>
+
+<div class="aside">
+    <img src="images/inversecubedipoleknight.png">
+    <b>Notation.</b> We'll switch notations to refer to this drawing.
+</div>
+
+<p>
+    Now we'll do the same for the case when the test charge is in the
+    plane bisecting the dipole.
+</p>
 
 <p>
     First note that along $R,$ the field is zero because the $+q$
@@ -225,23 +212,23 @@
     specifically towards the negative $y$-axis:
 
     \begin{align*}
-    F &= \frac{KQq}{R^2 + \left( \d/2 \right)^2}
-         \frac{\d/2}{\sqrt{R^2 + \left( \d/2 \right)^2}}
-       + \frac{KQq}{R^2 + \left( \d/2 \right)^2}
-         \frac{\d/2}{\sqrt{R^2 + \left( \d/2 \right)^2}} \\
-      &= \frac{KQq\d}{\left( R^2 + \left( \d/2 \right)^2 \right)^{3/2}}.
+    F &= \frac{KQq}{R^2 + \left( s/2 \right)^2}
+         \frac{s/2}{\sqrt{R^2 + \left( s/2 \right)^2}}
+       + \frac{KQq}{R^2 + \left( s/2 \right)^2}
+         \frac{s/2}{\sqrt{R^2 + \left( s/2 \right)^2}} \\
+      &= \frac{KQqs}{\left( R^2 + \left( s/2 \right)^2 \right)^{3/2}}.
     \end{align*}
 
-    Since $R \gg \d,$ again the denominator is approximately $R^3,$ so
+    Since $R \gg s,$ again the denominator is approximately $R^3,$ so
 
-    $$F \approx \frac{KQq\d}{R^3}$$
+    $$F \approx \frac{KQqs}{R^3}$$
 
     in the negative $y$ direction. Note also that this is half the
     force when the test charge was along the dipole axis.
 </p>
 
 <p>
-    One final observation is that when $R \gg \d,$ the field line is
+    One final observation is that when $R \gg s,$ the field line is
     roughly parallel to the line away from the dipole, which tells us
     a little bit about the general case when the test charge is not
     along the axes:
@@ -249,33 +236,40 @@
 
 <img src="images/dipolediagram.png">
 
+<p class="box">
+    <b>Question.</b> <i>Formula for the general case? Must depend on
+    the angle and be somewhere between
+
+    $$\frac{2KQqs}{R^3} \quad \text{and} \quad \frac{KQqs}{R^3}.$$</i>
+</p>
+
+<div class="aside">
+    <img src="images/Magnet0873.png">
+</div>
+
+<div class="aside">
+    <img src="images/chapter-10-chemical-bonding-ii-molecular-geometry-and-hybridization-of-atomic-orbitals-31-638.jpg">
+</div>
+
+<div class="aside">
+    <img src="images/tumblr_mqhs61qhD81qhe88io1_r1_500.gif">
+</div>
+
 <p>
     <b>Corollary.</b> <i>Since magnets are always dipoles, magnetic
     fields also vary inversely as the distance cubed.</i>
 </p>
 
-<figure>
-    <img src="images/Magnet0873.png">
-    <figcaption></figcaption>
-</figure>
-
 <p>
     <b>Example: atomic dipole.</b> An atom in an electric field
     becomes a dipole since electrons will want to spend more time "up
-    stream" than "down stream". (By convention an electric stream
-    goes from positive to negative.)
+    stream" than "down stream". (By convention upstream refers to the
+    positive source charge.)
 </p>
-
-<figure>
-    <img src="images/chapter-10-chemical-bonding-ii-molecular-geometry-and-hybridization-of-atomic-orbitals-31-638.jpg">
-    <figcaption></figcaption>
-</figure>
 
 <p>
     <b>Example: Magneto.</b>
 </p>
-
-<img src="images/tumblr_mqhs61qhD81qhe88io1_r1_500.gif">
 
 <h1>Electric Field of a Continuous Charge Distribution</h1>
 
@@ -292,11 +286,16 @@
     ananlogously.</i>
 </p>
 
+<h2>Example. Electric Field of a Uniformly Charged Rod</h2>
+
+<div class="aside">
+    <img src="images/thinroduniformcharge.png">
+</div>
+
 <p>
-    <b>Example: electric field of a uniformly charged rod.</b> Assume
-    that the test charge is a distance $r$ away, and exactly half way
-    between the rod end points. A tiny slice of the rod has length
-    $dy$ and charge $\l dy,$ so its field on the test charge is
+    Assume that the test charge is a distance $r$ away, and exactly
+    half way between the rod end points. A tiny slice of the rod has
+    length $dy$ and charge $\l dy,$ so its field on the test charge is
 
     $$dE = \frac{K\l dy}{r^2 + y^2} \frac{r}{\sqrt{r^2 + y^2}},$$
 
@@ -327,7 +326,57 @@
     $1/r,$ whereas that of a finite wire varies as $1/r^2.$
 </p>
 
-<img src="images/thinroduniformcharge.png">
+<h2>Example. Uniform Ring of Charge</h2>
+
+<div class="aside">
+    <img src="images/ringcharge.png">
+</div>
+
+<p>
+    Remember the ring has no width: it's just the perimeter of a
+    circle. Let
+
+    $$\l = Q / 2\p R$$
+
+    be the linear charge density along
+    the ring. Then similar to the previous example an infinitesimal
+    arc has length $R d\th$ and charge $\l R d\th,$ so its field is
+
+    $$dE = \frac{K\l R z d\th}{(R^2 + z^2)^{3/2}}.$$
+
+    Therefore the total field of the ring is
+
+    $$E = \int_0^{2\p} \frac{K\l R z d\th}{(R^2 + z^2)^{3/2}}
+        = \frac{K\l R z 2\p}{(R^2 + z^2)^{3/2}}
+        = \frac{KQz}{(R^2 + z^2)^{3/2}}.$$
+
+<div class="aside">
+    <b>Relate.</b> This graph reminds me of activation functions in
+    Machine Learning. Gotta remember this if you need to use some
+    similar looking function, and if you wanna implement it
+    physically, now you know what to use: a uniformly charged ring!
+
+    <img src="images/ringchargeactivation2.png">
+
+    <img src="images/ringchargeactivation.png">
+</div>
+
+    Note that for $z \gg R,$
+
+    $$E \longrightarrow \frac{KQ}{z^2},$$
+
+    so the ring acts like a point charge at long distances, at least
+    along the main axis.
+</p>
+
+<p>
+    Finally plotting $E$ as a function of $z$ shows that it's zero at
+    the center of the ring, as we expect, and since we already know
+    that the field gets weaker with distance, it must peak somewhere
+    in between, which I hadn't expected!
+</p>
+
+<h2>Example. </h2>
 
 <h1>Electric Flux</h1>
 
@@ -352,10 +401,9 @@
     Gauss's Law or direct integration. TODO.
 </p>
 
-<figure>
+<div class="bside">
     <img src="images/infiniteplate.png">
-    <figcaption></figcaption>
-</figure>
+</div>
 
 <p>
     <b>Corollary.</b> <i>The electric field of an infinite uniformly

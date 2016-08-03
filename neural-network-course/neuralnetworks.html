@@ -20,25 +20,22 @@
 
 <h1>Neural Networks</h1>
 
-<figure>
-    <img src="images/tumblr_o93093O4Uo1qzbd7vo1_500.jpg">
-    <figcaption></figcaption>
-</figure>
-
 <div class="epigraph">
-    <div class="quote">Pipey. Looks like you want to compress a movie
-    file, can I help? You know with Pied Piper's revolutionary neural
-    network optimized sharded data distribution system, it's just six
-    clicks away. Follow meeee!</div><hr>
+    <img src="images/tumblr_o93093O4Uo1qzbd7vo1_500.jpg">
+    <div class="quote"><span class="normal">Pipey.</span>  Looks like
+    you want to compress a movie file, can I help? You know with Pied
+    Piper's revolutionary neural network optimized sharded data
+    distribution system, it's just six clicks away. Follow
+    meeee!</div><hr>
     <div class="author">Silicon Valley</div>
 </div>
-<div class="clearboth"></div>
 
 <h1>Biological inspiration / biomimicry</h1>
 
-<img src="images/neuron.png">
-
-<img src="images/neuron_model.jpeg">
+<div class="bside">
+    <img src="images/neuron.png">
+    <img src="images/neuron_model.jpeg">
+</div>
 
 <h1>Perceptron Learning Algorithm</h1>
 
@@ -46,6 +43,9 @@
 
 <p><b>Question.</b> <i>Used in Perceptrons. Also called Linear Threshold Neurons?</i></p>
 
+<div class="bside">
+    <img src="images/mccullochpitts.jpg">
+</div>
 <p><b>Definition.</b> <i>First compute $z = w^T x,$ then output $$y = \begin{cases}
 1 \quad\text{ if } z \geq 0 \\
 0 \quad\text{ otherwise,}
@@ -53,14 +53,13 @@
 The function $y(z)$ is also called the Heaviside / unit step function.
 </i></p>
 
-<figure>
-    <img src="images/mccullochpitts.jpg">
-    <figcaption></figcaption>
-</figure>
-
 <h1>Limitations of the Binary Threshold Neuron</h1>
 
 <h1>Group Invariance Theorem</h1>
+
+<div class="bside">
+    <img src="images/linSepXor.png">
+</div>
 
 <p><b>Proposition.</b> <i>A single binary threshold neuron cannot
 learn the XOR function, because geometrically its truth table
@@ -73,11 +72,6 @@ represented on a plane is not linearly separable.</i></p>
 </p>
 
 <p>TODO. Details?</p>
-
-<figure>
-    <img src="images/linSepXor.png">
-    <figcaption></figcaption>
-</figure>
 
 <h1>Linear Neuron Learning Algorithm</h1>
 
@@ -105,28 +99,26 @@ vice versa.</p>
 
 <h1>Error Surface of a Linear Neuron</h1>
 
+<div class="bside">
+    <img src="images/slowlearrning.jpeg">
+</div>
+
 <p><b>Question.</b> <i>If I recall correctly feature normalization
 should help with slow learning due to unscaled data? What about
 pathological cases like this?</i></p>
-
-<figure>
-    <img src="images/slowlearrning.jpeg">
-    <figcaption></figcaption>
-</figure>
 
 <h1>Logistic Neurons</h1>
 
 <h1>Learning Rule</h1>
 
+<div class="bside">
+    <img src="images/Logistic-curve.png">
+    A logistic curve
+</div>
 <p><b>Definition.</b> <i>The estimator for a logistic neuron is given by
 $$y = \frac{1}{1 + e^{-z}}$$ where $z = w^T x.$ The function $y(z)$ is also known as a logistic / sigmoid function, and $z$ is sometimes called the logit. As before, the error is the squared difference
 $$E = \frac{1}{2} \sum_n (t_n - y_n)^2.$$
 </i></p>
-
-<figure>
-    <img src="images/Logistic-curve.png">
-    <figcaption>A logistic curve</figcaption>
-</figure>
 
 <p><b>Proposition.</b> <i>The estimator derivatives are
 $$\frac{\partial y}{\partial w_i} = \frac{dy}{dz} \frac{\partial z}{\partial w_i}
@@ -138,6 +130,9 @@ $$\frac{\partial E}{\partial w_i} = \sum_n \frac{dE_n}{dy_n} \frac{\partial y_n}
 
 <h1>Simplifying Notations</h1>
 
+<div class="bside">
+    <img src="images/backprop.png">
+</div>
 <p>In a neural networking using logistic neurons with hidden layers,
 the neurons $y_n$ are arranged in layers, with neurons in each layer
 receiving input from every neuron in the layer below, and outputting
@@ -154,11 +149,6 @@ logit for neuron $y_j$ is $$z_j = w_{-} y_{-} + \cdots + w_{ij} y_{i}
 + \cdots + w_{-} y_{-},$$ where each unnamed $w_{-} y_{-}$ is a weight
 and neuron in row $i,$ and we're only interested in the weight and
 neuron $w_{ij} y_{i},$ so we give them names $ij$ and $i.$</p>
-
-<figure>
-    <img src="images/backprop.png">
-    <figcaption></figcaption>
-</figure>
 
 <h1>Backpropagation Algorithm</h1>
 
@@ -272,13 +262,11 @@ moment.</i></p>
 
 <h1>Digression: Softmax Output Function and Cross-Entropy Cost Function</h1>
 
+<div class="bside">
+    <img src="images/softmaxgroup.png">
+</div>
 <p><b>Definition.</b> <i>A softmax group $G$ is a group of output neurons whose outputs use the softmax activation function defined by $$y_i = \frac{e^{z_i}}{\sum\limits_{j\in G} e^{z_j}},$$ so that the outputs sum to $1.$ The cost function is given by $$C = - \sum_j t_j \log y_j.$$
 </i></p>
-
-<figure>
-    <img src="images/softmaxgroup.png">
-    <figcaption></figcaption>
-</figure>
 
 <hr>
 
@@ -328,10 +316,9 @@ $- \log y_i$ is very large, i.e. it's a big cost. And vice versa, if
 the answer is $1$ and we guess close to 1, then the cost is very
 nearly zero.</p>
 
-<figure>
+<div class="aside">
     <img src="images/figure_logarithmic_function.png">
-    <figcaption></figcaption>
-</figure>
+</div>
 
 <p><b>Question.</b> <i>What happens when $t_i = 0,$ and we guess
 right with $y_i$ close to zero, or we guess wrong with $y_i$ close to
@@ -347,7 +334,6 @@ produce true negatives?</i></p>
     when we wreck a nice beach.</div><hr>
     <div class="author">Geoffrey Hinton</div>
 </div>
-<div class="clearboth"></div>
 
 <p><b>Problem.</b> <i>Speech recognizers have to know which words are likely to come next
 and which are not.</i></p>
@@ -375,7 +361,6 @@ lectures. Not a lot of details there.</p>
     </div><hr>
     <div class="author">Pokemon</div>
 </div>
-<div class="clearboth"></div>
 
 <p>
     Turns out it's part of the assignment:
@@ -396,6 +381,10 @@ well.</i></p>
 
 <h1>Network Architecture / Language Model</h1>
 
+<div class="bside">
+    <img src="images/neuralnetlanguagemodel.png">
+</div>
+
 <p>Let $K = 250$ be the number of words in our dictionary, $D = 16$ be
 the number (also called the Embedding Dimension) of neurons for each
 word in the Embedding Layer, and let $H = 180$ be the number of
@@ -403,11 +392,6 @@ neurons in the Hidden Layer. Note that the final output layer has $K$
 neurons, with each output $y_k$ corresponding to the probability that
 the $k$-th word is the answer we're looking for, i.e. the $k$-th word
 is the word following the three input words.</p>
-
-<figure>
-    <img src="images/neuralnetlanguagemodel.png">
-    <figcaption></figcaption>
-</figure>
 
 <h2>An example of trade off between space and time</h2>
 
@@ -524,7 +508,7 @@ the next layer.</p>
 
 <h2>Embedding Layer</h2>
 
-<div class="aside">
+<div class="bside">
     <b>* Why?</b>
 </div>
 
@@ -561,6 +545,10 @@ $$\frac{\partial C}{\partial B_e} = \left(\textsum_{\text{rows}}
 
 <h1>Some Unanswered Questions</h1>
 
+<div class="aside">
+    <img src="images/deeper.jpg">
+</div>
+
 <p><b>Question.</b> <i>What exactly is each layer doing?</i></p>
 
 <p>From the bottom up: each word embedding encodes a word in a new
@@ -570,28 +558,17 @@ output layer associates each trigram with the fourth target word.</p>
 
 <p><b>Question.</b> <i>OK, but how exactly are they doing it?</i></p>
 
-<figure>
-    <img src="images/deeper.jpg">
-    <figcaption></figcaption>
-</figure>
-
 <p>
     Let's take a closer look at what each layer is doing. From the top down:
 </p>
 
 <h2>Output layer</h2>
 
-<figure>
-    <img src="images/words_hidden_to_output.png">
-    <figcaption>Note that $w_j$ is used to denote a single weight
-    vector going into $y_j,$ while $W_h$ denotes all weight vectors
-    going into the output layer as a matrix.</figcaption>
-</figure>
-
 <div class="aside">
-    * which makes all the other $y_i$'s in the output layer close to
-    0, because we defined $y_i = \frac{e^{z_i}}{\sum\limits_{j\in G}
-    e^{z_j}}$ so they would have unit probability measure.
+    <img src="images/words_hidden_to_output.png">
+    Note that $w_j$ is used to denote a single weight vector going
+    into $y_j,$ while $W_h$ denotes all weight vectors going into the
+    output layer as a matrix.
 </div>
 
 <p>
@@ -601,15 +578,29 @@ output layer associates each trigram with the fourth target word.</p>
 
     $$C = - \sum_j t_j \log y_j$$
 
-    is optimized, i.e. close to zero, if $\log y_j$ is close to zero, and therefore
-    if $y_j$ is close to 1.*
+    is optimized, i.e. close to zero, if $\log y_j$ is close to zero,
+    and therefore if $y_j$ is close to 1---which makes all the other
+    $y_i$'s in the output layer close to 0, because we defined $y_i =
+    \frac{e^{z_i}}{\sum\limits_{j\in G} e^{z_j}}$ so they would have
+    unit probability measure.
 </p>
 
-<div class="aside">
-    * This is a property of the inner / dot product of two vectors:
-    vectors that are similar, i.e. close together, have roughly bigger dot
-    products, and vectors that are farther apart have roughly smaller dot
-    products. E.g.
+<p>
+    This means that $e^{z_j}$ and therefore
+
+    $$z_j = \sum_h w_{jh} y_h = w_j^T Y_h$$
+
+    must be large, where $y_h$ are the neurons in the hidden layer and
+    $w_{jh}$ are their weights going into the output
+    layer. Geometrically, this means that the weight vector $w_j =
+    (w_{jh})$ must be close to the hidden layer activation $Y_h.$
+</p>
+
+<div class="box">
+    <b>Aside.</b> This is a property of the inner / dot product of two
+    vectors: vectors that are similar, i.e. close together, have
+    roughly bigger dot products, and vectors that are farther apart
+    have roughly smaller dot products. E.g.
 
     $$(10, 0) \cdot (11, 0) = 110$$
 
@@ -627,17 +618,6 @@ output layer associates each trigram with the fourth target word.</p>
 </div>
 
 <p>
-    This means that $e^{z_j}$ and therefore
-
-    $$z_j = \sum_h w_{jh} y_h = w_j^T Y_h$$
-
-    must be large, where $y_h$ are the neurons in the hidden layer and
-    $w_{jh}$ are their weights going into the output
-    layer. Geometrically, this means that the weight vector $w_j =
-    (w_{jh})$ must be close to the hidden layer activation $Y_h.$*
-</p>
-
-<p>
     To summarize, to optimize $C,$ some weights in the hidden to
     output layer must move towards the activation $Y_h.$ In
     particular, if we feed the network many similar trigrams and
@@ -648,10 +628,9 @@ output layer associates each trigram with the fourth target word.</p>
 
 <h2>Hidden Layer / Trigram Embedding</h2>
 
-<figure>
+<div class="bside">
     <img src="images/words_embed_to_hidden.png">
-    <figcaption></figcaption>
-</figure>
+</div>
 
 <p>
     In the previous layer, we assumed that the hidden layer faithfully
@@ -680,10 +659,9 @@ output layer associates each trigram with the fourth target word.</p>
 
 <h2>Embedding layer</h2>
 
-<figure>
+<div class="bside">
     <img src="images/words_input_to_embed.png">
-    <figcaption></figcaption>
-</figure>
+</div>
 
 <p>
     This layer is a little different because the activation is
@@ -730,7 +708,7 @@ representations?</i></p>
 
 <h2>Position-aware Trigram!</h2>
 
-<div class="aside">
+<div class="bside">
     * Hinton mentioned earlier the inability to recognize relative
     position as one of the drawbacks of the trigram method without
     using a neural network, and this is the fix.
@@ -745,7 +723,7 @@ representations?</i></p>
     are aware of this ordering by definition.*
 </p>
 
-<div class="aside">
+<div class="bside">
     <img src="images/Original_Doge_meme.jpg">
     t-SNE plot of Doge's vocabulary. Just kidding.
 </div>
@@ -763,7 +741,7 @@ representations?</i></p>
     <i>cute</i>.
 </p>
 
-<div class="center">
+<div class="bside">
     <img src="images/tsneplot.png">
     t-SNE plot of word embeddings
 </div>
@@ -816,7 +794,7 @@ we replace one by the other and still achieve similar results?</i></p>
 
 <img src="images/M6O8AbL.gif" style="width:100%">
 
-<div class="aside">
+<div class="bside">
     * Hey, eigenvalues!
 </div>
 <p>
@@ -853,12 +831,14 @@ we replace one by the other and still achieve similar results?</i></p>
     <b>Question.</b> <i>What's a good value for $\e$?</i>
 </p>
 
+<div class="bside">
+    <img src="images/planerollingball.png">
+</div>
+
 <p>
     <b>Example.</b> As a simple example, suppose you have a planar
-    error surface:
+    error surface.
 </p>
-
-<img src="images/planerollingball.png">
 
 <p>
     Then the weights will reach a terminal velocity
@@ -895,6 +875,12 @@ we replace one by the other and still achieve similar results?</i></p>
     your previous mistake, at current point, then jump.</i>
 </p>
 
+<div class="bside">
+    <img src="images/nesterov.png">
+    Hinton. <i>It's better to correct a mistake after you've made
+    it.</i>
+</div>
+
 <p>
     <b>New and improved momentum method:</b> <i>jump first, then
     correct your mistake at the destination.</i> This method is
@@ -907,16 +893,11 @@ we replace one by the other and still achieve similar results?</i></p>
     $$\Delta w(t) = \alpha \Delta w(t - 1) - \e \frac{\partial E}{\partial w}(t - 1).$$
 </p>
 
-<img src="images/nesterov.png">
-
-<div class="center">
-    Hinton: It's better to correct a mistake after you've made it.
-</div>
-
 <h1>Per Connection Adaptive Learning Rate</h1>
 
 <p class="box">
-    <b>Definition.</b> <i>Make a gain parameter $g_{ij}$ for each connection:
+    <b>Definition.</b> <i>Define a gain parameter $g_{ij}$ for each
+    connection:
 
     $$\Delta w_{ij} = -\e g_{ij} \frac{\partial E}{\partial w_{ij}},$$
 
@@ -931,6 +912,10 @@ we replace one by the other and still achieve similar results?</i></p>
     where $\alpha$ is close to $0$ and $\beta$ is close to $1,$
     e.g. $0.05$ and $0.95$ resp.</i>
 </p>
+
+<div class="aside">
+    <img src="images/keep-calm-and-make-all-kinds-of-gains-12.png">
+</div>
 
 <p>
     <b>Question.</b> <i>Why keep the $\e$? Some kind of global gain / learning rate?</i>
@@ -992,8 +977,6 @@ we replace one by the other and still achieve similar results?</i></p>
     $$g_\infty = 1.$$
 </p>
 
-<img src="images/keep-calm-and-make-all-kinds-of-gains-12.png">
-
 <h2>RPROP: resilient backpropagation</h2>
 
 <p>
@@ -1046,6 +1029,11 @@ we replace one by the other and still achieve similar results?</i></p>
 
 <h2>RMSPROP: root mean square backpropagation / mini-batch RPROP</h2>
 
+<div class="aside">
+    <img src="images/contours_evaluation_optimizers.gif">
+    Visualization of different optimization algorithms
+</div>
+
 <p>
     <b>Definition.</b> <i>Note that RPROP is equivalent to regular
     per-weight adaptive learning rate with the gradient magnitude
@@ -1068,14 +1056,6 @@ we replace one by the other and still achieve similar results?</i></p>
     <b>Random TODO.</b> Look up meta neural network.
 </p>
 
-<h2>Visualizations of different optimization algorithms</h2>
-
-<p>
-    There's a glitch in the matrix:
-</p>
-
-<img src="images/contours_evaluation_optimizers.gif">
-
 <hr>
 
 <div class="epigraph">
@@ -1084,7 +1064,7 @@ we replace one by the other and still achieve similar results?</i></p>
           In your travels you may encounter some very powerful
           foes. Return to them once you've gained more experience.
      </div><hr><div class="author">The Witcher 3</div>
-</div><div class="clearboth"></div>
+</div>
 
 <h1>TODO!</h1>
 
@@ -1098,6 +1078,30 @@ Recognition</h1>
 <h1>Assignment 2: Convolutional Neural Networks for Digit Recognition</h1>
 
 <h1>Overview: Modeling Sequences</h1>
+
+<h1>Nearest Neighbour Classifier</h1>
+
+<h2>Manhattan Distance</h2>
+
+<div class="aside">
+    Circles in Manhattan space: points equidistance from a
+    center. There's also $L^2,$ which is just normal Euclidean
+    distance, as well as $L^p.$
+    <img src="images/214px-TaxicabGeometryCircle.svg.png">
+</div>
+
+<p>
+    <b>Definition: Manhattan Metric.</b> <i>The Manhattan, also known
+    as $L^1$ distance between two vectors $v = (v_i)$ and $w = (w_i)$
+    is
+
+    $$d(v, w) = ||v - w||_1 = \sum_i |v_i - w_i|.$$</i>
+</p>
+
+<p>
+    <b>Definition: accuracy.</b> <i>Fraction of accurate
+    predictions.</i>
+</p>
 
 <h1>Reference</h1>
 

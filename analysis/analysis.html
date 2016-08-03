@@ -24,13 +24,12 @@
     <div class="quote">Be wary of gorgeous view.</div><hr>
     <div class="author">Dark Souls</div>
 </div>
-<div class="clearboth"></div>
 
 <h1>Polynomial Approximation</h1>
 
 <figure>
     <img src="images/MH8onJG.png">
-    <figcaption>Mathematical Approximation</figcaption>
+    <figcaption>Mathematical approximation</figcaption>
 </figure>
 
 <p>
@@ -49,10 +48,10 @@ for some $c$ between $a$ and $b.$
 
 <h1>Sequences</h1>
 
-<figure>
+<div class="bside">
     <img src="images/numbers.jpg">
-    <figcaption>LOST</figcaption>
-</figure>
+    LOST
+</div>
 
 <p>
     <b>Monotone Convergence Theorem.</b> <i>A sequence which is
@@ -78,6 +77,10 @@ for some $c$ between $a$ and $b.$
     differentiable, and is $\lim f_n' = f'$?</i>
 </p>
 
+<div class="aside">
+    <img src="images/uniformconvergence1.jpg">
+</div>
+
 <p>
     <b>Example.</b> No to the second question: the functions $f_n(x) =
     \frac{1}{n} \sin(nx)$ converge uniformly to the zero function,
@@ -85,21 +88,19 @@ for some $c$ between $a$ and $b.$
     derivatives don't exist. What about just differentiability?
 </p>
 
-<figure>
-    <img src="images/uniformconvergence1.jpg">
-    <figcaption></figcaption>
-</figure>
+<div class="aside">
+    <img src="images/uniformconvergence2.png">
+</div>
 
 <p>
-    <b>Example.</b> Still No, e.g. the functions $f_n(x) = \sqrt{x^2 +
-    1/n}$ converge uniformly to $f = |x|,$ which is not differentiable
+    <b>Example.</b> Still No, e.g. the functions $$f_n(x) = \sqrt{x^2 +
+    1/n}$$ converge uniformly to $f = |x|,$ which is not differentiable
     at zero.
 </p>
 
-<figure>
-    <img src="images/uniformconvergence2.png">
-    <figcaption></figcaption>
-</figure>
+<div class="aside">
+    <img src="images/nodiff1.jpg">
+</div>
 
 <p>
     <b>Example.</b> The Weierstrass function $$f(x) =
@@ -108,22 +109,15 @@ for some $c$ between $a$ and $b.$
     \cos(b^k \pi x),$$ but is nowhere differentiable.
 </p>
 
-<figure>
-    <img src="images/nodiff1.jpg">
-    <figcaption></figcaption>
-</figure>
-
+<div class="aside">
+    <img src="images/biomimicry-koch-snowflake.jpg">
+</div>
 <p>
     <b>Question.</b> <i>Is the Koch snowflake nowhere
     differentiable?</i>
 </p>
 
 Yes. Proof?
-
-<figure>
-    <img src="images/biomimicry-koch-snowflake.jpg">
-    <figcaption></figcaption>
-</figure>
 
 <p>
     <b>Definition.</b> <i>Let $\{a_n\}$ be a sequence, and $0 \leq a <
@@ -166,29 +160,25 @@ $\frac{s(a_1) + \cdots + s(a_n)}{n},$ which is close to $\frac{f(a_1)
 
 <h1>Bolzano-Weierstrass Theorem</h1>
 
+<div class="aside">
+    <img src="images/Bolzano–Weierstrass_theorem_-_step_7.png">
+</div>
 <p>
-    <b>Theorem: Bolzano-Weierstrass Theorem.</b> <i>An infinite
-    sequence contained in a closed interval $I$ has a limit point in
-    $I.$</i>
+    <b>Bolzano-Weierstrass Theorem.</b> <i>An infinite sequence
+    contained in a closed interval $I$ has a limit point in $I.$</i>
 </p>
 
-<figure>
-    <img src="images/Bolzano–Weierstrass_theorem_-_step_7.png">
-    <figcaption></figcaption>
-</figure>
-
 Proof uses the Nested Interval Theorem:
+
+<div class="aside">
+    <img src="images/511px-Illustration_nested_intervals.png">
+</div>
 
 <p>
     <b>Theorem: Nested Interval Theorem.</b> <i>The intersection of closed nested intervals is nonempty. If the
     interval lengths tend to zero, then the intersection is a
     point. Otherwise it's a closed interval.</i>
 </p>
-
-<figure>
-    <img src="images/511px-Illustration_nested_intervals.png">
-    <figcaption></figcaption>
-</figure>
 
 <p>
     <b>Definition.</b> <i>A function $f$ defined on an interval $I$ is
@@ -261,14 +251,14 @@ a_n$ converges.</i></p>
 
 <h1>Cauchy Criterion</h1>
 
+<div class="aside">
+    <img src="images/2000px-Cauchy_sequence_illustration.png">
+    A Cauchy sequence
+</div>
+
 <p><b>Proposition.</b> <i>The series $\sum\limits_{n=1}^\infty a_n$
 converges iff its tail vanishes: $$\lim_{m,n\to \infty} a_n + \cdots +
 a_m = 0.$$</i></p>
-
-<figure>
-    <img src="images/2000px-Cauchy_sequence_illustration.png">
-    <figcaption>A Cauchy sequence.</figcaption>
-</figure>
 
 <h1>Vanishing Condition</h1>
 
@@ -278,29 +268,28 @@ $$\lim_{n\to\infty} a_n = 0.$$</i></p>
 <p><b>Example.</b> The sequence $1, -1, 1, -1, \ldots$ is not
 summable.</p>
 
+<div class="aside">
+    <img src="images/Integral_Test.png">
+    Harmonic Series nonconvergent because log is unbounded.
+</div>
+
 <p><b>Noncounterexample.</b> The vanishing condition is necessary, but
 not sufficient for summability, e.g. the harmonic series $$\sum_{n}
 \frac{1}{n}$$ is not convergent even though the terms go to zero.</p>
-
-<figure>
-    <img src="images/Integral_Test.png">
-    <figcaption>Harmonic Series nonconvergent because log is unbounded.</figcaption>
-</figure>
 
 <p><b>Example of convergent series.</b> The geometric series is
 convergent for $|r| < 1$: $$\sum_{n=0}^\infty r^n = \frac{1}{1 - r}.$$
 For $|r| \geq 1,$ the series isn't convergent because the terms aren't
 vanishing.</p>
 
-<figure>
-    <img src="images/proof-without-words-halves.gif">
-    <figcaption>You can also visualize this on a line like in Zeno's Paradox.</figcaption>
-</figure>
-
-<figure>
+<div class="aside">
     <img src="images/zeno-paradox-arrow.png">
-    <figcaption></figcaption>
-</figure>
+    Zeno's Paradox
+</div>
+
+<div class="aside">
+    <img src="images/proof-without-words-halves.gif">
+</div>
 
 <h1>Boundedness Criterion</h1>
 
@@ -340,7 +329,7 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
         <img src="images/divergent-trilogy-covers.png">
      </div><hr><div class="author">Sadly, insurgent is not the technical
      term for inconclusive convergence test. Yet.</div>
-</div><div class="clearboth"></div>
+</div>
 
 <p>
     <b>Example.</b> The harmonic series has ratio
@@ -364,7 +353,7 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
     exists.</i>
 </p>
 
-<div class="aside">
+<div class="bside">
     * <b>Question.</b> What is the sum of this series? The integral
     has such a nice form when it exists: $\int_1^\infty \frac{1}{x^p}
     dx = \frac{1}{p-1}.$ Not to be confused with the geometric series
@@ -416,12 +405,12 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
     it converges.
 </p>
 
-<div id="dsf87hh34" class="aside">
+<div id="dsf87hh34" class="bside">
     <img src="images/alternatingseries.png">
 </div>
 
 <p>
-    <b>Theorem: Leibniz's Alternating Series Theorem.</b> <i>Suppose that
+    <b>Leibniz's Alternating Series Theorem.</b> <i>Suppose that
 
     $$a_1 \geq a_2 \geq \cdots \geq 0$$
 
@@ -462,23 +451,21 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
     $$|a_2 - a_3 + \cdots| \leq a_1.$$
 </p>
 
+<div class="bside">
+    <img src="images/leibnizalternatingseries.png">
+</div>
+
 <p>
     Clearly, the LHS is greatest when its even terms $a_2, a_4, a_6,
     \ldots$ are at least as big as the odd terms preceding them. But
     the odd terms have to go to zero eventually, so we have the
-    following picture:
-</p>
-
-<img src="images/leibnizalternatingseries.png">
-
-<p>
-    where the red bars represent $a_i,$ and the green bars represent
+    following picture, where the red bars represent $a_i,$ and the
+    green bars represent
 
     $$|a_2 - \cdots \pm a_i|.$$
 
-    Looking at the picture, we see that even when the even terms are
-    as big as possible, the entire series can never get past its
-    original value $a_1.$
+    Here we see that even when the even terms are as big as possible,
+    the entire series can never get past its original value $a_1.$
 </p>
 
 <p id="ijfasdf09234">
@@ -568,7 +555,7 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
     probably be proved:
 </p>
 
-<div class="aside">
+<div class="bside">
     * Just realized this result follows immediately from
     the <a href="#aksfjn12124">Absolute Convergence Theorem.</a> In
     fact $\sum a_n$ is absolutely convergent.
@@ -715,6 +702,10 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
     and so $\Sum b_n$ converges absolutely.
 </p>
 
+<div class="bside">
+    <img src="images/htvol3-pic4.jpg">
+</div>
+
 <p>
     <b>Example.</b> This is false if $\sum a_n$ does not converge
     absolutely, because then we know that its positive and negative
@@ -725,13 +716,14 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
 
     converges conditionally, but the subseries
 
-    $$\sum_{\text{odd}} \frac{1}{n} = 1 + \frac{1}{3} + \frac{1}{5} + \cdots
-    \quad \text{and} \quad \sum_{\text{even}} \frac{1}{n} = -\frac{1}{2} - \frac{1}{4} - \cdots$$
+    $$\sum_{\text{odd}} \frac{1}{n} = 1 + \frac{1}{3} + \frac{1}{5} + \cdots$$
+
+    and
+
+    $$\sum_{\text{even}} \frac{1}{n} = -\frac{1}{2} - \frac{1}{4} - \cdots$$
 
     both diverge.
 </p>
-
-<img src="images/htvol3-pic4.jpg">
 
 <p>
     <b>Corollary.</b> <i>If $\sum a_n$ converges absolutely, then
@@ -784,7 +776,7 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
     Combining this with the Absolute Convergence Theorem we get:
 </p>
 
-<div class="aside">
+<div class="bside">
     It's stronger in the forward but weaker in the backward direction.
 </div>
 

@@ -24,7 +24,7 @@
      <div class="quote">
           Just imagine $\RR^n,$ then let $n = 42.$
      </div><hr><div class="author">Unknown</div>
-</div><div class="clearboth"></div>
+</div>
 
 <h1>Linear Transformations and Matrices</h1>
 
@@ -36,6 +36,10 @@
 </p>
 
 <h1>Change of Coordinate Matrix</h1>
+
+<div class="bside">
+    <img src="images/377px-3d_basis_transformation.png">
+</div>
 
 <p>
     <b>Proposition.</b> <i>Let $B$ be an $n \times n$ invertible
@@ -49,11 +53,6 @@
     bases $\beta, \gamma$ s.t. $B = [I]^\beta_\gamma,$ i.e. every
     invertible matrix is a change of coordinates matrix.</i>
 </p>
-
-<figure>
-    <img src="images/377px-3d_basis_transformation.png">
-    <figcaption></figcaption>
-</figure>
 
 <h1>Eigenvectors and Eigenvalues</h1>
 
@@ -211,6 +210,10 @@ The definition of the characteristic polynomial of a linear operator on a finite
     bases.
 </p>
 
+<div class="bside">
+    <img src="images/basisrepresentationeigenvector.png">
+</div>
+
 <p>
     <b>Proposition.</b> <i>Let $T$ be a linear operator on a finite
     dimensional vector space $V$ over a field $F.$ Let $\beta$ be an
@@ -219,11 +222,6 @@ The definition of the characteristic polynomial of a linear operator on a finite
     $\phi_\beta(v)$ is an eigenvector of $A$ corresponding to
     $\lambda.$</i>
 </p>
-
-<figure>
-    <img src="images/basisrepresentationeigenvector.png">
-    <figcaption></figcaption>
-</figure>
 
 <h1>Eigenvectors and Some Special Functions and Matrices</h1>
 
@@ -307,15 +305,14 @@ The first three matrices are symmetric and correspond to the eigenvalue $+1,$ wh
 
 <h1>Scalar Matrices</h1>
 
+<div class="bside">
+    <img src="images/scalarmatrix.png">
+</div>
+
 <p>
     <b>Definition.</b> <i>A scalar matrix is a square matrix of the
     form $\lambda I$ for some scalar $\lambda.$</i>
 </p>
-
-<figure>
-    <img src="images/scalarmatrix.png">
-    <figcaption></figcaption>
-</figure>
 
 <p>
     <b>Proposition.</b> <i>If a square matrix $A$ is similar to a
@@ -340,6 +337,10 @@ The first three matrices are symmetric and correspond to the eigenvalue $+1,$ wh
     diagonal entries are all equal to $\lambda.$
 </p>
 
+<div class="aside">
+    <img src="images/rotation.jpg">
+</div>
+
 <p>
     <b>Example.</b> $\begin{bmatrix}
 1 & 1 \\
@@ -349,11 +350,6 @@ The first three matrices are symmetric and correspond to the eigenvalue $+1,$ wh
 
 <p><b>Example of a linear transformation with no eigenvalue and
 eigenvector.</b> Rotation in the plane by $\theta \in (0, 2\pi).$</p>
-
-<figure>
-    <img src="images/rotation.jpg">
-    <figcaption></figcaption>
-</figure>
 
 <p><b>Proposition.</b> <i>The characteristic polynomial $f$ of an $n
 \times n$ matrix $A$ has leading coefficient $(-1)^n$ and order
@@ -472,6 +468,12 @@ ad - cb &= 1,
 
     $$A_{nn}(\text{product involving at least another $A_{ii}$})$$
 
+<div class="epigraph">
+    <img src="images/pokemon.jpg">
+     <div class="quote">
+     </div><hr><div class="author">Pokemon</div>
+</div>
+
     have degrees at most $n - 2,$ as does $q(t),$ and so comparing
     coefficients with
 
@@ -493,12 +495,6 @@ ad - cb &= 1,
     $$\det(A - tI) = (-1)^n t^n + (-1)^{n-1} \tr(A) t^{n-1} + a_{n-2} t^{n-2} + \cdots + \det(A).$$</i>
 </p>
 
-<div class="epigraph">
-    <img src="images/pokemon.jpg">
-     <div class="quote">
-     </div><hr><div class="author">Pokemon</div>
-</div><div class="clearboth"></div>
-
 <p>
     <b>Proposition.</b> <i>Let $g$ be a polynomial. If $x$ is an
     eigenvector of $T$ with eigenvalue $\lambda,$ then
@@ -512,14 +508,9 @@ ad - cb &= 1,
     <i>Proof.</i> Simple linearity argument.
 </p>
 
-<div class="aside">
-    <b>*</b> The book says it's not necessary for $T$ to be
-    diagonalizable. Will prove later.
-</div>
-
 <p>
     <b>Corollary.</b> <i>If $f$ is the characteristic polynomial of
-    $T$ and $T$ is diagonalizable,<b>*</b> then $f(T) = T_0,$ the zero
+    $T$ and $T$ is diagonalizable, then $f(T) = T_0,$ the zero
     operator.</i>
 </p>
 
@@ -529,6 +520,11 @@ ad - cb &= 1,
     previous Proposition,
 
     $$f(T)(v_i) = f(\lambda_i) v_i = 0 \cdot v_i = 0,$$
+
+<div class="bside">
+    The book says it's not necessary for $T$ to be
+    diagonalizable. Will prove later.
+</div>
 
     because eigenvalues are roots of the characteristic
     polynomial. Since $f(T)$ is zero on a basis, it must be zero on
@@ -696,7 +692,7 @@ ad - cb &= 1,
     A partial answer in that direction:
 </p>
 
-<div class="aside">
+<div class="bside">
     I don't think the converse is true, but something close.
 </div>
 
@@ -760,11 +756,11 @@ ad - cb &= 1,
 
 <p class="box">
     <b>Question.</b> <i>What is the relationship between
-    diagonalizability and invertibility, <a href="#skdnsut164">aside
+    diagonalizability and invertibility, <a href="#skdnsut164">bside
     from this</a>?</i>
 </p>
 
-<div class="aside">
+<div class="bside">
     Almost everything is easier with diagonal matrices.
 </div>
 

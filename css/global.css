@@ -48,7 +48,7 @@ i {
 }
 
 img {
-    max-width: 100%;
+    width: 100%;
     background-color: white;
     display: block;
     margin-left: auto;
@@ -62,10 +62,19 @@ figcaption {
     text-align: center;
 }
 
+ol {
+    overflow: hidden; /* cause list items don't get pushed aside by floating elements, only
+                         by their contents */
+}
+
 .epigraph {
     max-width: 50%;
     float: right;
     margin: 0 0 20px 0;
+    background-color: #171621;
+    margin: 5px 0 5px 10px;
+    padding: 10px;
+    border: 1px dotted;
 }
 
 .epigraph .quote {
@@ -78,15 +87,30 @@ figcaption {
     text-align: right;
 }
 
-.aside {
+.bside {
+    clear: both;
     max-width: 50%;
     float: right;
-    margin: 0 0 0 10px;
+    margin: 5px 0 5px 10px;
     padding: 10px;
     border: 1px dotted;
     font-size: 0.8em;
     text-align: justify;
     text-justify: inter-word;
+    background-color: #171621;
+}
+
+.aside {
+    clear: both;
+    max-width: 40%;
+    float: left;
+    margin: 5px 10px 5px 0;
+    padding: 10px;
+    border: 1px dotted;
+    font-size: 0.8em;
+    text-align: justify;
+    text-justify: inter-word;
+    background-color: #171621;
 }
 
 .clearboth {
@@ -102,4 +126,8 @@ figcaption {
     padding: 20px;
     text-align: justify;
     text-justify: inter-word;
+}
+
+.normal {
+    font-style: normal;
 }
