@@ -26,6 +26,24 @@
      </div><hr><div class="author">Dante's <i>Inferno</i></div>
 </div>
 
+<h1>Useful Curl Commands</h1>
+
+GET
+
+<pre><code>curl -X GET "http://example.com/asdf?id=abc"
+</code></pre>
+
+POST
+
+<pre><code>curl -X POST --data "" "http://example.com/asdf"
+curl -X POST --data "id=abc&token=123" "http://example.com/asdf"
+curl -X POST --data-urlencode "id=abc" --data-urlencode "callback=http://asdf.com/callback" "http://example.com/asdf"
+</code></pre>
+
+DELETE
+
+<pre><code>curl -X DELETE --data "id=abc&token=123" "http://example.com/asdf"</code></pre>
+
 </div>
 </body>
 </html>

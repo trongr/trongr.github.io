@@ -21,6 +21,7 @@ window.MathJax = {
             m: "\\mu",
             p: "\\pi",
             r: "\\rho",
+            s: "\\sigma",
             t: "\\tau",
             th: "\\theta",
 

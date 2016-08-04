@@ -326,11 +326,11 @@
     $1/r,$ whereas that of a finite wire varies as $1/r^2.$
 </p>
 
-<h2>Example. Uniform Ring of Charge</h2>
-
 <div class="aside">
     <img src="images/ringcharge.png">
 </div>
+
+<h2>Example. Uniformly Charged Ring</h2>
 
 <p>
     Remember the ring has no width: it's just the perimeter of a
@@ -357,7 +357,6 @@
     physically, now you know what to use: a uniformly charged ring!
 
     <img src="images/ringchargeactivation2.png">
-
     <img src="images/ringchargeactivation.png">
 </div>
 
@@ -376,53 +375,120 @@
     in between, which I hadn't expected!
 </p>
 
-<h2>Example. </h2>
+<h2>Example. Uniformly Charged Disk</h2>
+
+<div class="aside">
+    <img src="images/uniformlychargeddisk.png">
+</div>
+
+<p>
+    First we'll calculate the field for a ring on the disk, then
+    integrate that over $r.$ Let $\h$ be the charge density of the
+    disk, $dr$ be the infinitesimal width of the ring and $r$ be its
+    radius. Then the ring has area $2\p r dr$ and charge
+
+    $$\h 2\p r dr.$$
+
+    By the previous uniform ring example, its field on a test charge
+    at distance $z$ is
+
+    $$dE = \frac{K2\p\h r dr z}{(r^2 + z^2)^{3/2}}.$$
+
+    Summing this over all the rings yields the field for the entire
+    disk:
+
+    \begin{align*}
+    E &= \int_0^R \frac{K2\p\h r z dr}{(r^2 + z^2)^{3/2}} \\
+      &= - \left.\frac{2\p\h K z}{\sqrt{r^2 + z^2}}\right|_0^R \\
+      &= - \frac{2\p \h K z}{\sqrt{R^2 + z^2}} + \frac{2\p \h K z}{\sqrt{z^2}} \\
+      &= 2\p \h K \left[1 - \frac{z}{\sqrt{R^2 + z^2}}\right].
+    \end{align*}
+
+    In the last step we assumed $z > 0$ to simplify the expression. If
+    $z < 0,$ $E$ would have the same magnitude but reverse
+    direction.
+</p>
+
+<div class="aside">
+    A proper sigmoid function!
+
+    $$\s(z) = \frac{z}{\sqrt{R^2 + z^2}}.$$
+
+    <img src="images/algebraicsigmoid.png">
+</div>
+
+<div class="aside">
+    Infinite uniformly charged plate.
+    <img src="images/infiniteplate.png">
+</div>
+
+<p>
+    The situation when $z \longrightarrow 0$ is a little
+    unexpected: since
+
+    $$\frac{z}{\sqrt{R^2 + z^2}} = \frac{1}{\sqrt{(R/z)^2 + 1}}
+        \longrightarrow 0,$$
+
+    we have
+
+    $$E \longrightarrow 2\p\h K,$$
+
+    a constant independent of $z,$ as long as $z > 0!$ An alternative
+    formulation is: instead of taking $z\longrightarrow 0,$ we take
+    $R\longrightarrow \infty,$ i.e. an infinite plane, then the field
+    is constant and equal to
+
+    $$E = 2\p\h K = \frac{\h}{2\e_0},$$
+
+    regardless of where you are above it.
+</p>
+
+<p>
+    Another surprise is that at $z = 0,$ the field suddenly drops to
+    0, but that's due to intuition rather than any math we've
+    done. <b>Where did we go wrong?</b>
+</p>
+
+<p>
+    At the other end, as $z\longrightarrow\infty,$
+
+    $$E = 2\p \h K \left[1 - \frac{z}{\sqrt{R^2 + z^2}}\right]
+        \longrightarrow 0,$$
+
+    as we expect. But, we'd like to know a little more about how fast
+    $E$ changes with respect to $z.$ Recall the binomial approximation:
+
+    $$(1 + x)^\a \approx 1 + \a x$$
+
+    for $x$ close to 0, and apply it to
+
+    $$\frac{z}{\sqrt{R^2 + z^2}} = \left(1 + (R/z)^2\right)^{-1/2} \approx 1 - \frac{R^2}{2z^2}.$$
+
+    And so
+
+    $$E \approx 2\p \h K \left[1 - \left( 1 - \frac{R^2}{2z^2} \right)\right]
+        = \frac{\pi\h K R^2}{z^2} = \frac{KQ}{z^2}.$$
+
+    Therefore $E$ varies as $1/z^2$ for $z \gg R,$ i.e. the uniformly
+    charged disk acts like a point charge far away.
+</p>
+
+<p>
+    <b>Corollary.</b> <i>If you had two parallel infinite
+    plates---instead of one---of opposite and equal charge densities,
+    the electric field between the two plates would be twice as big:
+
+    $$E = 4\pi \h K = \frac{\h}{\e_0}.$$
+
+    Beyond those plates the field is zero because the plates cancel
+    each other out.</i>
+</p>
 
 <h1>Electric Flux</h1>
 
 
 
 <h1>Gauss's Law</h1>
-
-
-
-<h1>Infinite Uniformly Charged Plates</h1>
-
-<p>
-    <b>Proposition.</b> <i>The electric field of an infinite uniformly
-    charged plate is constant and equal to $$E = 2 \pi K \sigma =
-    \frac{\sigma}{2 \e},$$ where $\sigma$ is the charge density
-    of the plate: the field is the same no matter where you are above
-    the plate. Neat!</i>
-</p>
-
-<p>
-    <i>Proof.</i> There are two ways to show this, using either
-    Gauss's Law or direct integration. TODO.
-</p>
-
-<div class="bside">
-    <img src="images/infiniteplate.png">
-</div>
-
-<p>
-    <b>Corollary.</b> <i>The electric field of an infinite uniformly
-    charged plate with a hole at the origin is constant along the line
-    above the origin.</i>
-</p>
-
-<p>
-    <b>Question.</b> <i>What does the rest of the field look like? Do
-    the field lines converge towards the z-axis?</i>
-</p>
-
-<p>
-    <b>Corollary.</b> <i>If you had two parallel plates---instead of
-    one---of opposite and equal charge densities, the electric field
-    between the two plates would be twice as big: $$E = \pi K \sigma =
-    \frac{\sigma}{\e}.$$ Beyond those plates the field is zero
-    because the plates cancel each other out.</i>
-</p>
 
 <h1>Reference</h1>
 
