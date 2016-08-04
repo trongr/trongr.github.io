@@ -316,7 +316,7 @@ $- \log y_i$ is very large, i.e. it's a big cost. And vice versa, if
 the answer is $1$ and we guess close to 1, then the cost is very
 nearly zero.</p>
 
-<div class="aside">
+<div class="bside">
     <img src="images/figure_logarithmic_function.png">
 </div>
 
@@ -493,14 +493,27 @@ $y_j$ in the output layer. Then $$\frac{\partial C}{\partial b_h} =
 \frac{\partial C}{\partial z_j},$$ since $\frac{\partial z_j}{\partial
 b_h} = 1.$ Similar to the weight derivatives, we also want to sum
 these over the $m$ training cases, so $$\frac{\partial C}{\partial
-b_h} = \sum_m \frac{\partial C}{\partial z_j},$$ which in matrix form
-is $$\frac{\partial C}{\partial B_h} =
+b_h} = \sum_m \frac{\partial C}{\partial z_j},$$
+
+<div class="bside">
+    <b>Notation.</b> Denote by $\textsum_\text{rows} A$ the sum of a
+    matrix $A$ over its rows, so in particular it's a row
+    vector. Similarly $\textsum_\text{cols} A$ is a column vector. In
+    NumPy this is
+
+    <pre><code>sum(A, 0)</code></pre>
+
+    and
+
+    <pre><code>sum(A, 1)</code></pre>
+
+    respectively.
+</div>
+which in matrix form is
+
+$$\frac{\partial C}{\partial B_h} =
 \left(\textsum_\text{rows}\frac{\partial C}{\partial Z_j}\right)^T
-\sim K \times 1,$$ where $\textsum_\text{rows} A$ sums a matrix $A$
-over its rows, so in particular $\textsum_\text{rows} A$ is a row
-vector. Similarly $\textsum_\text{cols} A$ is a column vector. In
-NumPy this is <code>sum(A, 0)</code> and <code>sum(A, 1)</code>,
-respectively.</p>
+\sim K \times 1.$$</p>
 
 <p><b>Note.</b> An alternative to treating bias units separately from normal
 neurons is to add a constant feature 1 in each input layer going in to
@@ -1061,8 +1074,8 @@ we replace one by the other and still achieve similar results?</i></p>
 <div class="epigraph">
      <img src="images/ff512d50be094b0d3e06e813553e9842-650-80.jpg">
      <div class="quote">
-          In your travels you may encounter some very powerful
-          foes. Return to them once you've gained more experience.
+          On your travels you may encounter some very powerful
+          foes: return to them once you've gained more experience.
      </div><hr><div class="author">The Witcher 3</div>
 </div>
 
@@ -1081,8 +1094,6 @@ Recognition</h1>
 
 <h1>Nearest Neighbour Classifier</h1>
 
-<h2>Manhattan Distance</h2>
-
 <div class="aside">
     Circles in Manhattan space: points equidistance from a
     center. There's also $L^2,$ which is just normal Euclidean
@@ -1094,6 +1105,8 @@ Recognition</h1>
     </p>
     <img src="images/214px-TaxicabGeometryCircle.svg.png">
 </div>
+
+<h2>Manhattan Distance</h2>
 
 <p>
     <b>Definition: Manhattan Metric.</b> <i>The Manhattan, also known

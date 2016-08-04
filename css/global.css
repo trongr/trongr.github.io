@@ -10,6 +10,16 @@ body {
     max-width: 700px;
 }
 
+pre {
+    overflow-x: scroll;
+    margin: 20px 0 20px 20px;
+}
+
+code {
+    font-family: consolas, monospace, "courier new", courier;
+    color: #87F7FF;
+}
+
 audio {
     width: 100%;
 }
