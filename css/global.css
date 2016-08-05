@@ -7,17 +7,13 @@ body {
 
 #content {
     margin:0 auto;
+    padding-bottom: 100px;
     max-width: 700px;
-}
-
-pre {
-    overflow-x: scroll;
-    margin: 20px 0 20px 20px;
 }
 
 code {
     font-family: consolas, monospace, "courier new", courier;
-    color: #87F7FF;
+    color: #7DFF88;
 }
 
 audio {
@@ -54,7 +50,11 @@ b {
 }
 
 i {
-    color: #9CFFB9;
+    color: #69FF9D;
+}
+
+video {
+    width: 100%;
 }
 
 img {
@@ -75,6 +75,10 @@ figcaption {
 ol {
     overflow: hidden; /* cause list items don't get pushed aside by floating elements, only
                          by their contents */
+}
+
+#biglist li { /* in index.html */
+    margin-left: 40px;
 }
 
 .epigraph {

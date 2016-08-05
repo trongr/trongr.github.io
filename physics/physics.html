@@ -38,6 +38,10 @@
     become positively charged when rubbed with wool and silk?</i>
 </p>
 
+<div class="aside">
+    <img src="images/sg3p.jpg">
+</div>
+
 <h2>Insulators and Conductors</h2>
 
 <p>
@@ -46,8 +50,10 @@
     building, to ground appliances. Didn't know that!
 </p>
 
-<div class="bside">
-    <img src="images/sg3p.jpg">
+<div class="aside">
+    <img src="images/PPNFRux.jpg">
+    Coulomb's constant in Fallout 4. Who said video games were a waste
+    of time!
 </div>
 
 <h1>Coulomb's Law</h1>
@@ -56,9 +62,9 @@
     <b>Coulomb's Inverse Square Law.</b> <i>Two charges Q and q a
     distance r apart exert a force on each other with magnitude
 
-    $$F = \frac{K|Qq|}{r^2} = \frac{1}{4\pi\e_0} \frac{|Qq|}{r^2}$$
+    $$F = \frac{K|Qq|}{r^2} = \frac{1}{4\pi\e} \frac{|Qq|}{r^2}$$
 
-    where K is Coulomb's constant and $\e_0$ is the permittivity
+    where K is Coulomb's constant and $\e$ is the permittivity
     constant.</i>
 </p>
 
@@ -438,15 +444,19 @@
     $R\longrightarrow \infty,$ i.e. an infinite plane, then the field
     is constant and equal to
 
-    $$E = 2\p\h K = \frac{\h}{2\e_0},$$
+    $$E = 2\p\h K = \frac{\h}{2\e},$$
 
     regardless of where you are above it.
 </p>
 
 <p>
     Another surprise is that at $z = 0,$ the field suddenly drops to
-    0, but that's due to intuition rather than any math we've
-    done. <b>Where did we go wrong?</b>
+    0! This is because in the second step where we calculated the
+    field of a ring,
+
+    $$dE = \frac{K2\p\h r dr z}{(r^2 + z^2)^{3/2}} = 0.$$
+
+    Plus it's also obvious by symmetry.
 </p>
 
 <p>
@@ -473,12 +483,36 @@
     charged disk acts like a point charge far away.
 </p>
 
+<img src="images/Alpha-Centauri-cropped.jpg">
+
+<div class="bside">
+<p>
+    Now that we've seen how a field can vary with distance as
+
+    $$r^{-1}, r^{-2}, r^{-3},\ldots$$
+
+    I'm starting to see why the gravitational and electrical forces
+    vary as $r^{-2}.$ It's the result of some local
+    geometry---analogous to the geometries of the wire, ring, disk,
+    infinite plate, dipole, etc.---at a very small scale, extending to
+    huge distances as $r\longrightarrow \infty.$ If we wanna
+    know <i>why</i> gravity varies as $r^{-2},$ we need to go down to
+    the very bottom and see what it's doing down there.
+</p>
+<p>
+    <b>Corollary.</b> <i>Gravity won't suddenly change its variability
+    as you go farther out, e.g. the Sun's gravity won't start
+    decreasing as $r^{-4}$ when you fly all the way out to Alpha
+    Centauri, and beyond.</i>
+</p>
+</div>
+
 <p>
     <b>Corollary.</b> <i>If you had two parallel infinite
     plates---instead of one---of opposite and equal charge densities,
     the electric field between the two plates would be twice as big:
 
-    $$E = 4\pi \h K = \frac{\h}{\e_0}.$$
+    $$E = 4\pi \h K = \frac{\h}{\e}.$$
 
     Beyond those plates the field is zero because the plates cancel
     each other out.</i>
