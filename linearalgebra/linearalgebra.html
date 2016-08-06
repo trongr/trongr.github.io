@@ -88,7 +88,7 @@
     <figcaption></figcaption>
 </figure>
 
-<p>
+<p id="nuhefgsd74862">
     <b>Theorem: Diagonalizability.</b> <i>A linear operator $T$ on a
     finite-dimensional vector space $V$ is diagonalizable iff there
     exists an ordered basis $\beta$ for $V$ consisting of eigenvectors
@@ -611,7 +611,8 @@ ad - cb &= 1,
 </p>
 
 <p id="vnwegji124">
-    <b>Proposition.</b> <i>Eigenvectors and therefore eigenspaces
+    <b>Proposition: linear independence of
+    eigenspaces.</b> <i>Eigenvectors and therefore eigenspaces
     corresponding to distinct eigenvalues are linearly
     independent.</i>
 </p>
@@ -635,7 +636,7 @@ ad - cb &= 1,
 </p>
 
 <p>
-    <i>Proof.</i> By <a href="#vnwegji124">this proposition,</a> the
+    <i>Proof.</i> By <a href="#vnwegji124">this theorem,</a> the
     eigenspaces are linearly independent. If their dimensions added up
     to less than $n,$ we'd have too few eigenvectors to make a basis
     for $V,$ and by the Diagonalizability Theorem, $A$ would not be
@@ -821,8 +822,8 @@ ad - cb &= 1,
 <h1>Direct Sums</h1>
 
 <p>
-    <b>Definition: direct sum.</b> <i>Let $W_1,\ldots,W_k$ be
-    subspaces of $V.$ Define the sum of these subspaces to be
+    <b>Definition: linear sum.</b> <i>Let $W_1,\ldots,W_k$ be subspaces of $V.$
+    Define the sum of these subspaces to be
 
     $$W_1 + \cdots + W_k = \sum W_i = \left\{ v_1 + \cdots + v_k : v_i \in W_i \right\}.$$</i>
 </p>
@@ -833,6 +834,75 @@ ad - cb &= 1,
 
 <p>
     <i>Proof.</i> Exercise. \qed
+</p>
+
+<div class="aside">
+    This is looking more and more like witchcraft. Human transmutation
+    circle from Fullmetal Alchemist:
+    <img src="images/7bff8caea74841eae91954057f115e53.jpg">
+</div>
+
+<div class="aside">
+    <b>Definition: linearly independent subspaces.</b> A collection of
+    subspaces are said to be linearly independent if any collection of
+    vectors, one from each subspace, is linearly independent.
+</div>
+
+<p>
+    <b>Definition: direct sums.</b> <i>Let $W, W_1,\ldots,W_k$ be
+    subspaces of $V.$ We call $W$ the direct sum of
+    $W_1,\ldots,W_k$ and write
+
+    $$W = \bigoplus_{i=1}^k W_i = W_1 \oplus \cdots \oplus W_k$$
+
+    if
+
+    $$W = \sum_{i=1}^k W_i \quad \text{and} \quad W_j \cap \sum_{i\neq j} W_i = \left\{ 0 \right\}$$
+
+    for all $j.$ In other words, $W$ is the direct sum of the $W_i$'s
+    if they are linearly independent and span $W.$</i>
+</p>
+
+<p>
+    <b>Example.</b> The $x, y,$ and $z$ axes direct sum to $\RR^3.$
+</p>
+
+<p>
+    <b>Theorem: equivalent formulations of direct sum.</b> <i>Let
+    $W_i$ be subspaces of a finite dimensional vector space $V.$ Then
+    the following are equivalent:
+
+    <ol>
+    <li>$V = \bigoplus W_i.$</li>
+    <li>$V = \sum W_i$ and for any $v_i \in W_i,$ $\sum v_i = 0$
+    implies $v_i = 0$ for all $i.$</li>
+    <li>Each $v\in V$ can be written uniquely as $v = \sum v_i$ where $v_i\in W_i.$</li>
+    <li>If $\g_i$ is a basis for $W_i,$ then $\cup \g_i$ is a basis for $V.$</li>
+    </ol>
+    </i>
+</p>
+
+<p>
+    <i>Proof.</i> Pretty straight forward. \qed
+</p>
+
+<p>
+    <b>Theorem.</b> <i>A linear operator $T$ on a finite dimensional
+    vector space $V$ is diagonalizable iff $V$ is the direct sum of
+    the eigenspaces of $T.$</i>
+</p>
+
+<p>
+    <i>Proof.</i> By the <a href="#nuhefgsd74862">diagonalizability
+    theorem,</a> $T$ is diagonalizable iff there is a basis for $V$
+    consisting of eigenvectors of $V,$ i.e. iff the eigenspaces of $T$
+    span $V.$ By <a href="#vnwegji124">this theorem,</a> eigenspaces
+    are linearly independent, and so they direct sum to $V.$ \qed
+</p>
+
+<p>
+    <b>Remark.</b> The book has an alternative proof that uses the
+    previous theorem.
 </p>
 
 <h1>Reference</h1>

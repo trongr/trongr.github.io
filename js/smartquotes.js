@@ -50,6 +50,8 @@
             .replace(/---/g, '\u2014') // Highjacking smartquotes.js for other stuff!
             .replace(/--/g, '\u2013')
             .replace(/\\qed/g, '\u220E')
+            .replace(/fi/g, '\uFB01') // ligatures
+            .replace(/fl/g, '\uFB02')
     };
 
     // Check not just whether el is whitelisted, but also whether an

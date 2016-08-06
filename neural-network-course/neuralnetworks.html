@@ -5,6 +5,10 @@
 <title>Neural Networks</title>
 <link rel="stylesheet" href="../css/global.css">
 
+<link rel="stylesheet" href="../css/obsidian.min.css">
+<script src="../js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
 <!-- this config must be before MathJax.js: -->
 <script src="../js/mathjax.config.js"></script>
 <script src="../js/MathJax/MathJax.js"></script>
@@ -1114,6 +1118,84 @@ Recognition</h1>
     predictions.</i>
 </p>
 
+<h2>Implementation</h2>
+
+<p>
+    In the following implementation, we don't do anything to train a
+    nearest neighbour classifier. Most of the work is in the test
+    phase, where for each test case we simply calculate its distances
+    from all the training cases and select the minimum matching
+    training case.
+</p>
+
+<div class="clearboth"></div>
+
+<p>
+    Refer
+    to <a href="https://github.com/trongr/trongr.github.io/tree/master/neural-network-course/cs231/knn"
+    target="_blank">source code</a> for other import files.
+
+    <pre><code># Original source code from cs231n.github.io/classification
+
+import sys
+import numpy as np
+import cifar
+
+class NearestNeighbor(object):
+    def __init__(self):
+        pass
+
+    def train(self, X, y):
+        """ X is N x D where each row is an example. Y is 1-dimension of size N """
+        # the nearest neighbor classifier simply remembers all the training data
+        self.Xtr = X
+        self.ytr = y
+
+    def predict(self, X):
+        """ X is N x D where each row is an example we wish to predict label for """
+        num_test = X.shape[0]
+        # lets make sure that the output type matches the input type
+        Ypred = np.zeros(num_test, dtype = self.ytr.dtype)
+
+        # loop over all test rows
+        for i in xrange(num_test):
+            print "Predicting test case:", i
+            # find the nearest training image to the i'th test image
+            # using the L1 distance (sum of absolute value differences)
+            distances = np.sum(np.abs(self.Xtr - X[i,:]), axis = 1)
+            min_index = np.argmin(distances) # get the index with smallest distance
+            Ypred[i] = self.ytr[min_index] # predict the label of the nearest example
+
+        return Ypred
+
+def testKNN(trainFile, testFile):
+    trainData = cifar.unpickle(trainFile)
+    testData = cifar.unpickle(testFile)
+
+    # This cifar data is already formatted in rows and columns instead
+    # of a multidimensional array as the lecture assumes, so no need
+    # to reshape
+    Xtr_rows = trainData["data"]
+    Ytr = np.array(trainData["labels"])
+    Xte_rows = testData["data"]
+    Yte = np.array(testData["labels"])
+
+    nn = NearestNeighbor() # create a Nearest Neighbor classifier class
+    nn.train(Xtr_rows, Ytr) # train the classifier on the training images and labels
+    Yte_predict = nn.predict(Xte_rows) # predict labels on the test images
+    # and now print the classification accuracy, which is the average number
+    # of examples that are correctly predicted (i.e. label matches)
+    print 'accuracy: %f' % ( np.mean(Yte_predict == Yte) )
+
+if __name__ == "__main__":
+    # Call this script as: python knn.py path/to/data_batch_1
+    # path/to/test_batch
+    trainFile = sys.argv[1]
+    testFile = sys.argv[2]
+    testKNN(trainFile, testFile)
+</code></pre>
+</p>
+
 <h1>k-Nearest Neighbour Classifier</h1>
 
 <h1>Reference</h1>
@@ -1122,6 +1204,7 @@ Recognition</h1>
 <li>Geoffrey E. Hinton's Neural Networks video lectures.</li>
 <li>http://www.cs.toronto.edu/~rgrosse/csc321/</li>
 <li>http://www.cs.toronto.edu/~tijmen/csc321/</li>
+<li>http://cs231n.github.io/</li>
 <li>http://cs231n.stanford.edu/</li>
 <li>Everything else from the web.</li>
 </ol>
