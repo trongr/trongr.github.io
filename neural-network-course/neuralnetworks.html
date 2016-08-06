@@ -496,16 +496,16 @@ these over the $m$ training cases, so $$\frac{\partial C}{\partial
 b_h} = \sum_m \frac{\partial C}{\partial z_j},$$
 
 <div class="bside">
-    <b>Notation.</b> Denote by $\tsum_\text{rows} A$ the sum of a
+    <b>Notation.</b> Denote by $\textsum_\text{rows} A$ the sum of a
     matrix $A$ over its rows, so in particular it's a row
-    vector. Similarly $\tsum_\text{cols} A$ is a column vector. In
+    vector. Similarly $\textsum_\text{cols} A$ is a column vector. In
     NumPy this is <code>sum(A, 0)</code> and <code>sum(A, 1)</code>
     respectively.
 </div>
 which in matrix form is
 
 $$\frac{\partial C}{\partial B_h} =
-\left(\tsum_\text{rows}\frac{\partial C}{\partial Z_j}\right)^T
+\left(\textsum_\text{rows}\frac{\partial C}{\partial Z_j}\right)^T
 \sim K \times 1.$$</p>
 
 <p><b>Note.</b> An alternative to treating bias units separately from normal
@@ -546,7 +546,7 @@ Y_e \sim H \times 3D,$$ which is the same size as $W_e.$</p>
 layer. Then as usual $$\frac{\partial C}{\partial b_e} =
 \frac{\partial C}{\partial z_h} \frac{\partial z_h}{\partial b_e} =
 \frac{\partial C}{\partial z_h},$$ which has matrix form
-$$\frac{\partial C}{\partial B_e} = \left(\tsum_{\text{rows}}
+$$\frac{\partial C}{\partial B_e} = \left(\textsum_{\text{rows}}
 \frac{\partial C}{\partial Z_h}\right)^T \sim H \times 1.$$</p>
 
 <h1>Some Unanswered Questions</h1>
@@ -1113,6 +1113,8 @@ Recognition</h1>
     <b>Definition: accuracy.</b> <i>Fraction of accurate
     predictions.</i>
 </p>
+
+<h1>k-Nearest Neighbour Classifier</h1>
 
 <h1>Reference</h1>
 

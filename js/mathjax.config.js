@@ -40,7 +40,7 @@ window.MathJax = {
             Prod: "\\prod\\limits",
             Lim: "\\lim\\limits",
             count: "\\mathop{\\rm count}\\limits",
-            tsum: "\\mathop{\\rm sum}\\limits",
+            textsum: "\\mathop{\\rm sum}\\limits",
 
         }
     }
