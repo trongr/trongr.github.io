@@ -17,11 +17,6 @@ def testUnpickle():
         print "%s" % key
     # print d["label_names"]
 
-def loadCifar():
-    file = sys.argv[1]
-    d = unpickle(file)
-    print d["data"].shape[0]
-
 def testReshape():
     # reshaping a 2 x 2 x 2 x 3 = 24 array to a 2 x (2 * 2 * 3) array:
     a = np.array([
@@ -58,5 +53,4 @@ def testReshape():
     # print a.reshape(3, 3, 2, 2)
 
 if __name__ == "__main__":
-    # loadCifar()
     testReshape()
