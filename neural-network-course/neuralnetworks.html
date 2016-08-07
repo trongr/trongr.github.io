@@ -61,7 +61,7 @@ The function $y(z)$ is also called the Heaviside / unit step function.
 
 <h1>Group Invariance Theorem</h1>
 
-<div class="bside">
+<div id="qnsdbbs23626" class="bside">
     <img src="images/linSepXor.png">
 </div>
 
@@ -69,7 +69,7 @@ The function $y(z)$ is also called the Heaviside / unit step function.
 learn the XOR function, because geometrically its truth table
 represented on a plane is not linearly separable.</i></p>
 
-<p>
+<p id="nfhbeyet8466">
     <b>Proposition.</b> <i>Perceptrons can't learn patterns if they're
     subject to transformations that form a group, e.g. translations
     with wrap-around.</i>
@@ -606,7 +606,7 @@ output layer associates each trigram with the fourth target word.</p>
     (w_{jh})$ must be close to the hidden layer activation $Y_h.$
 </p>
 
-<div class="box">
+<div id="wetbxdggh482155" class="box">
     <b>Aside.</b> This is a property of the inner / dot product of two
     vectors: vectors that are similar, i.e. close together, have
     roughly bigger dot products, and vectors that are farther apart
@@ -1089,6 +1089,8 @@ Recognition</h1>
 
 <h1>Overview: Modeling Sequences</h1>
 
+<hr>
+
 <h1>Nearest Neighbour Classifier</h1>
 
 <div class="aside">
@@ -1178,12 +1180,12 @@ Recognition</h1>
     predictions.</i>
 </p>
 
-<h1>k-Nearest Neighbour Classifier</h1>
-
 <div class="aside">
     Choice of $k$ is another hyperparameter.
     <img src="images/279px-KnnClassification.svg.png">
 </div>
+
+<h1>k-Nearest Neighbour Classifier</h1>
 
 <p>
     Instead of choosing the nearest neighbour, we choose $k$ nearest
@@ -1191,7 +1193,111 @@ Recognition</h1>
     among the neighbours.
 </p>
 
+<p>
+    We're gonna skip this.
+</p>
 
+<div class="clearboth"></div>
+
+<h1>Validation and Test Sets</h1>
+
+<img src="images/5foldpath.png">
+
+<div class="center">
+    <img src="images/neuralnetworkpractitioner.png">
+    Build modular neural networks
+</div>
+
+<h1>Linear Classification</h1>
+
+<p>
+    There's gonna be some overlap with materials from CSC321, cause
+    cs231n is going from the bottom up towards convolutional neural
+    networks. Good for review.
+</p>
+
+<h2>Parametric vs non-parametric approach</h2>
+<p>
+    Non-parametric is when you're looking for a function $f$ that
+    takes input $x$ directly to output:
+
+    $$x \longmapsto f(x),$$
+
+    e.g. as in the k-Nearest Neighbour Classifier, and parametric is
+    when the output also depends on a set of parameters $W$ which is
+    up to you to choose:
+
+    $$x \longmapsto f(x, W).$$
+
+    <img src="images/linearclassifier.png">
+</p>
+
+<h2>Example</h2>
+
+<p>
+    <img src="images/catdogship.png">
+</p>
+
+<h2>Interpreting a Linear Classifier</h2>
+
+<p>
+    Dot product measures similarity. <a href="#wetbxdggh482155">See note here.</a>
+</p>
+
+<div class="center">
+    <img src="images/interpretinglinearclassifier.png">
+    "Double-headed horse"
+</div>
+
+<p>
+    An alternative interpretation: linearly separating the input space:
+</p>
+
+<div class="center">
+    <img src="images/linearlyseparatinginputspace.png">
+    <a href="#qnsdbbs23626">We've seen this before too</a>
+</div>
+
+<h2>Weakness of Linear Separability</h2>
+
+<div class="aside">
+    I think this is the intuition behind
+    the <a href="#nfhbeyet8466">group invariance theorem,</a> or why
+    linear classifier doesn't work on images that translate and wrap
+    around, because it pollutes the input space.
+</div>
+<p>
+    Can't separate non-linear regions, e.g. if the images for each
+    class are all of different colors---different colored dogs in
+    different weather, different colored cars in different lighting,
+    etc.---and the objects are placed at random positions in the
+    images, so that each class is evenly distributed in input space,
+    then the linear classifier can't separate them. Much like
+    this <a href="#qnsdbbs23626">simple XOR example.</a>
+</p>
+
+<img src="images/lineardrawback.png">
+
+<h2>Big things have small beginnings</h2>
+
+<p>
+    Or more fancy-like in Latin: <i>Sic Parvis Magna.</i> It's now
+    generally accepted that all complex things arise from simpler
+    things, from evolution to the birth of the universe. What about
+    this?
+</p>
+
+<div class="box">
+    <b>Conjecture.</b> <i>All the nonlinearity we see in nature are
+    the combination of linear things.</i>
+</div>
+
+<div class="center">
+    <img src="images/54943_452936141414171_1678979800_o.jpg">
+    Big things have small beginnings
+</div>
+
+<div class="clearboth"></div>
 <h1>Reference</h1>
 
 <ol>
