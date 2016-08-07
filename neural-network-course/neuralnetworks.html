@@ -1093,13 +1093,7 @@ Recognition</h1>
 
 <div class="aside">
     Circles in Manhattan space: points equidistance from a
-    center. There's also $L^2,$ which is just normal Euclidean
-    distance, as well as $L^p.$
-    <p>
-        <b>Fun note.</b> By the triangle inequality:
-
-        $$||x||_1 \geq ||x||_2.$$
-    </p>
+    center.
     <img src="images/214px-TaxicabGeometryCircle.svg.png">
 </div>
 
@@ -1113,90 +1107,90 @@ Recognition</h1>
     $$d_1(v, w) = ||v - w||_1 = \sum_i |v_i - w_i|.$$</i>
 </p>
 
+<h2>Euclidean Distance</h2>
+
+<p>
+    There's also $L^2,$ which is just normal Euclidean
+    distance:
+
+    $$||v - w||_2 = \sqrt{\sum |v_i - w_i|^2},$$
+
+    as well as $L^p:$
+
+    $$||v - w||_p = \left( \sum |v_i - w_i|^p \right)^{1/p}.$$
+
+    Finally there's $L^\infty:$
+
+    \begin{align*}
+    ||v - w||_\infty &= \max(|v_1 - w_1|,\ldots,|v_n - w_n|) \\
+                     &= \lim_{p\to\infty} ||v - w||_p.
+    \end{align*}
+</p>
+
+<p>
+    <b>Fun note.</b> By the triangle inequality:
+
+    $$||x||_1 \geq ||x||_2.$$
+
+    Wikipedia says that in fact
+
+    $$||x||_p \geq ||x||_q$$
+
+    if $0 < p \leq q,$ but I can't prove it yet.
+</p>
+
+<div class="aside">
+    Ah, the choice of a metric <i>is</i> a hyperparameter.
+</div>
+<p>
+    <b>Question.</b> <i>Which metric to use? Maybe treat all these
+    different metrics as another feature. I think they're all roughly
+    the same anyway. <a href="#brgg2346">See experiment results
+    below.</a></i>
+</p>
+
+<h2>Implementation with $L^1$ and $L^2$ Distances</h2>
+
+<p>
+    In
+    <a href="https://github.com/trongr/trongr.github.io/tree/master/neural-network-course/cs231/knn"
+    target="_blank">nn.py,</a> we don't do anything to train a nearest
+    neighbour classifier. Most of the work is in the test phase, where
+    for each test case we simply calculate its distances from all the
+    training cases and select the minimum training case.
+</p>
+
+<p>
+    Prediction time grows linearly with training set size.
+</p>
+
+<p id="brgg2346">
+    <b>Results.</b> Running this on CIFAR-10 batch 1 and test batch
+    gives about 20% accuracy for both L1 and L2 distances, twice as
+    good as random guessing, which would give 10% accuracy since there
+    are 10 classes. The course notes said they got a 38.6% accuracy,
+    but that might be on a different batch, or maybe they trained it
+    on all batches together. TODO. Do that!
+</p>
+
 <p>
     <b>Definition: accuracy.</b> <i>Fraction of accurate
     predictions.</i>
 </p>
 
-<h2>Implementation</h2>
-
-<p>
-    In the following implementation, we don't do anything to train a
-    nearest neighbour classifier. Most of the work is in the test
-    phase, where for each test case we simply calculate its distances
-    from all the training cases and select the minimum matching
-    training case.
-</p>
-
-<div class="clearboth"></div>
-
-<p>
-    Refer
-    to <a href="https://github.com/trongr/trongr.github.io/tree/master/neural-network-course/cs231/knn"
-    target="_blank">source code</a> for other import files.
-
-    <pre><code># Original source code from cs231n.github.io/classification
-
-import sys
-import numpy as np
-import cifar
-
-class NearestNeighbor(object):
-    def __init__(self):
-        pass
-
-    def train(self, X, y):
-        """ X is N x D where each row is an example. Y is 1-dimension of size N """
-        # the nearest neighbor classifier simply remembers all the training data
-        self.Xtr = X
-        self.ytr = y
-
-    def predict(self, X):
-        """ X is N x D where each row is an example we wish to predict label for """
-        num_test = X.shape[0]
-        # lets make sure that the output type matches the input type
-        Ypred = np.zeros(num_test, dtype = self.ytr.dtype)
-
-        # loop over all test rows
-        for i in xrange(num_test):
-            print "Predicting test case:", i
-            # find the nearest training image to the i'th test image
-            # using the L1 distance (sum of absolute value differences)
-            distances = np.sum(np.abs(self.Xtr - X[i,:]), axis = 1)
-            min_index = np.argmin(distances) # get the index with smallest distance
-            Ypred[i] = self.ytr[min_index] # predict the label of the nearest example
-
-        return Ypred
-
-def testKNN(trainFile, testFile):
-    trainData = cifar.unpickle(trainFile)
-    testData = cifar.unpickle(testFile)
-
-    # This cifar data is already formatted in rows and columns instead
-    # of a multidimensional array as the lecture assumes, so no need
-    # to reshape
-    Xtr_rows = trainData["data"]
-    Ytr = np.array(trainData["labels"])
-    Xte_rows = testData["data"]
-    Yte = np.array(testData["labels"])
-
-    nn = NearestNeighbor() # create a Nearest Neighbor classifier class
-    nn.train(Xtr_rows, Ytr) # train the classifier on the training images and labels
-    Yte_predict = nn.predict(Xte_rows) # predict labels on the test images
-    # and now print the classification accuracy, which is the average number
-    # of examples that are correctly predicted (i.e. label matches)
-    print 'accuracy: %f' % ( np.mean(Yte_predict == Yte) )
-
-if __name__ == "__main__":
-    # Call this script as: python knn.py path/to/data_batch_1
-    # path/to/test_batch
-    trainFile = sys.argv[1]
-    testFile = sys.argv[2]
-    testKNN(trainFile, testFile)
-</code></pre>
-</p>
-
 <h1>k-Nearest Neighbour Classifier</h1>
+
+<div class="aside">
+    Choice of $k$ is another hyperparameter.
+    <img src="images/279px-KnnClassification.svg.png">
+</div>
+
+<p>
+    Instead of choosing the nearest neighbour, we choose $k$ nearest
+    neighbours to a test case and assign it to the most common class
+    among the neighbours.
+</p>
+
 
 <h1>Reference</h1>
 

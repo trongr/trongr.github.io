@@ -31,7 +31,7 @@ class NearestNeighbor(object):
 
         return Ypred
 
-def testKNN(trainFile, testFile):
+def testNN(trainFile, testFile):
     trainData = cifar.unpickle(trainFile)
     testData = cifar.unpickle(testFile)
 
@@ -55,4 +55,4 @@ if __name__ == "__main__":
     # path/to/test_batch
     trainFile = sys.argv[1]
     testFile = sys.argv[2]
-    testKNN(trainFile, testFile)
+    testNN(trainFile, testFile)
