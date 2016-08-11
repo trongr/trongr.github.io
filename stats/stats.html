@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Probability and Statistics</title>
+<link rel="stylesheet" href="../css/global.css">
+
+<!-- this config must be before MathJax.js: -->
+<script src="../js/mathjax.config.js"></script>
+<script src="../js/MathJax/MathJax.js"></script>
+<!-- <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js"></script> -->
+
+<script src="../js/jquery-3.1.0.min.js"></script>
+<script src="../js/smartquotes.js"></script>
+<script src="../js/global.js"></script>
+
+</head>
+<body>
+<div id="content">
+
+<h1>Probability and Statistics</h1>
+
+<div class="epigraph">
+     <img src="images/Monkey-typing.jpg">
+     <div class="quote">
+        Given an infinite length of time, a chimpanzee punching at random on a
+        typewriter would almost surely type out all of Shakespeare's plays.
+     </div><hr><div class="author">Infinite Monkey Theorem</div>
+</div>
+<div class="clearboth"></div>
+
+<h2>Union Laws</h2>
+
+<img src="images/unionlaws.png">
+
+<div class="bside">
+    <pre><code>!(a && b && c) == !a || !b || !c
+!(a || b || c) == !a && !b && !c</code></pre>
+    <img src="images/600px-Demorganlaws.svg.png">
+</div>
+
+<p>
+    More generally, De Morgan's Laws also hold for any indexing set,
+    whether it's countable or not:
+</p>
+
+<p>
+    <b>Theorem.</b> <i>Let $I$ be any indexing set. Then
+
+    \begin{align*}
+    \bar{\Cup_{i \in I} A_i} &= \Cap_{i \in I} \bar{A_i} \\
+    \bar{\Cap_{i \in I} A_i} &= \Cup_{i \in I} \bar{A_i}.
+    \end{align*}
+    </i>
+</p>
+
+<p>
+    <i>Proof.</i> We'll just prove the first equality. If an element
+    $x$ belongs to the set on the LHS, then it must not be in any
+    $A_i,$ i.e. it belongs to all $\bar{A_i},$ and so it must belong to
+    their intersection on the RHS. \qed
+</p>
+
+<h2>Sigma Algebra</h2>
+
+<p>
+    <b>Definition.</b> <i>A collection $\BB$ of subsets of $S$ is
+    called a sigma algebra if it satisfies:
+
+    <ul>
+        <li>$\BB$ contains the empty set: $\0 \in \BB.$</li>
+        <li>$\BB$ is closed under complementation: if $A \in \BB$ then $A^c \in \BB.$</li>
+        <li>$\BB$ is closed under countable union: if $A_i \in \BB,$ then $\Cup_{i=1}^\infty A_i \in \BB.$</li>
+    </ul></i>
+</p>
+
+<p>
+    <b>Corollary.</b> <i>If $\BB$ is a sigma algebra, then it contains
+    $S$ and also closed under countable intersection:
+
+    <ul>
+        <li>$S \in \BB.$</li>
+        <li>$A_i \in \BB$ implies $\Cap_{i=1}^\infty A_i \in \BB.$</li>
+    </ul></i>
+</p>
+
+<h2>Axioms of Probability</h2>
+
+<div class="bside">
+    The third axiom is also called the Axiom of Countable Additivity.
+</div>
+<p>
+    <b>Definition.</b> <i>Let $S$ be a sample space with sigma algebra
+    $\BB.$ A probability function on $\BB$ is a function
+    $P:\BB\longmapsto [0, 1]$ s.t.
+
+    <ol>
+        <li>$P(A) \geq 0$ for all $A \in \BB.$</li>
+        <li>$P(S) = 1.$</li>
+        <li>If $A_1, A_2,\ldots \in \BB$ are pair wise disjoint, then $$P(\cup A_i) = \sum P(A_i).$$</li>
+    </ol>
+    </i>
+</p>
+
+<p>
+    <b>Corollary.</b> <i>
+
+    <ul>
+        <li>$P(\0) = 0.$</li>
+        <li>$P(\bar{A}) = 1 - P(A).$</li>
+        <li>If $A\subset B$ then $P(A) \leq P(B).$</li>
+        <li>$P(A \cup B) = P(A) + P(B) - P(A \cap B).$</li>
+    </ul>
+    </i>
+</p>
+
+<img src="images/bonferroniineq3.png">
+
+<div class="aside">
+    Contour and 3D plot of Bonferroni.
+    <img src="images/bonferroniineq2.png">
+    <img src="images/bonferroniineq.png">
+</div>
+
+<div class="clearboth"></div>
+
+<h2>Inclusion Exclusion Principle</h2>
+
+<p>
+    <b>Proposition TODO.</b> <i>If $A_1,\ldots, A_n\in \BB$ then
+
+    $$P(\cup_i A_i) = \sum_{\L_1} P(\L_1) - \sum_{\L_2} P(\L_2) + \cdots \pm \sum_{\L_n} P(\L_n),$$
+
+    where $\L_k$ denotes any $k$-intersection, e.g. $A_1 \cap \cdots
+    \cap A_k,$ and the sum $\sum_{\L_k} $is over all such possible
+    $k$-intersections.</i>
+</p>
+
+<div class="clearboth"></div>
+<h1>Reference</h1>
+
+<ol>
+<li>Statistical Inference by Casella and Berger.</li>
+<li>Everything else from the web.</li>
+</ol>
+
+</div>
+</body>
+</html>
