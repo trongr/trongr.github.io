@@ -2,6 +2,13 @@ import sys
 import numpy as np
 import cPickle
 
+# This cifar data is already formatted in rows and columns instead
+# of a multidimensional array as the lecture assumes, so no need
+# to reshape
+def load(file):
+    data = unpickle(file)
+    return data["data"], np.array(data["labels"])
+
 # see https://www.cs.toronto.edu/~kriz/cifar.html for dataset and
 # format
 def unpickle(file):
