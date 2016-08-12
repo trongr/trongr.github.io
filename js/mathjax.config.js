@@ -31,30 +31,34 @@ window.MathJax = {
             count: "\\mathop{\\rm count}\\limits",
             textsum: "\\mathop{\\rm sum}\\limits",
 
-            0: "\\varnothing",
+            normal: "\\trianglelefteq",
 
+            0: "\\varnothing",
             a: "\\alpha",
             b: "\\beta",
+            BB: "\\mathbf B",
+            CC: "\\mathbf C",
             d: "\\delta",
+            D: "\\Delta",
             e: "\\varepsilon",
             g: "\\gamma",
+            // gg is >>, do not redefine.
+            f: "\\phi",
+            ff: "\\varphi",
             h: "\\eta",
             l: "\\lambda",
+            L: "\\Lambda",
             m: "\\mu",
+            NN: "\\mathbf N",
             p: "\\pi",
+            PP: "\\mathbf P",
+            QQ: "\\mathbf Q",
             r: "\\rho",
+            RR: "\\mathbf R",
             s: "\\sigma",
             t: "\\tau",
             th: "\\theta",
 
-            D: "\\Delta",
-            L: "\\Lambda",
-
-            BB: "\\mathbf B",
-            CC: "\\mathbf C",
-            NN: "\\mathbf N",
-            QQ: "\\mathbf Q",
-            RR: "\\mathbf R",
         }
     }
 }
