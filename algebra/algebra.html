@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Abstract Algebra</title>
+<link rel="stylesheet" href="../css/global.css">
+
+<!-- this config must be before MathJax.js: -->
+<script src="../js/mathjax.config.js"></script>
+<script src="../js/MathJax/MathJax.js"></script>
+<!-- <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js"></script> -->
+
+<script src="../js/jquery-3.1.0.min.js"></script>
+<script src="../js/smartquotes.js"></script>
+<script src="../js/global.js"></script>
+
+</head>
+<body>
+<div id="content">
+
+<h1>Abstract Algebra</h1>
+
+<div class="epigraph">
+     <div class="quote">
+          Any sufficiently advanced Mathematics is indistinguishable
+          from gibberish.
+     </div><hr><div class="author">
+        Arthur C. Clarke
+     </div>
+</div>
+
+<h1>Group Actions</h1>
+
+<p>
+    <b>Definition.</b> <i>A group action of a group $G$ on a set $A$
+    is a map from $G\times A$ to $A,$ written as $g \cdot a$ for all
+    $g\in G, a\in A$ satisfying:
+
+    <ul>
+    <li>$g_1 \cdot (g_2 \cdot a) = (g_1g_2) \cdot a$ for all $g_1,g_2\in G, a\in A.$</li>
+    <li>$1 \cdot a = a$ for all $a \in A.$</li>
+    </ul></i>
+</p>
+
+<div class="box">
+    <b>Theorem.</b> <i>Let $G$ act on $A,$ and let $g$ be a fixed
+    element of $G.$ Define the map $\s_g: A \longrightarrow A$ by
+
+    $$\s_g(a) = g \cdot a.$$
+
+    Then:
+
+    <ul>
+    <li>$\s_g$ is a permutation of $A$: $\s_g \in S_A.$</li>
+    <li>The map $\ff:G\longrightarrow S_A$ defined by $\ff(g) = \s_g$ is
+    a homomorphism.</li>
+    </ul></i>
+</div>
+
+<p>
+    The map $\ff$ completely characterizes an action of $G$ on $S,$ so
+    we can define the kernel of the action to be the kernel of $\ff:$
+</p>
+
+<p>
+    <b>Definition.</b> <i>The kernel of an action of $G$ on $A$ is
+
+    $$\ker \ff = \ker(G, A) = \left\{ g \in G : \ff(g) = \s_g = 1 \in S_A \right\},$$
+
+    i.e. it's the set
+
+    $$\left\{ g \in G : \s_g(a) = g \cdot a = a \text{ for all } a\in A \right\},$$
+
+    in other words elements that fix all $a \in A.$</i>
+</p>
+
+<h1>Quotient Groups</h1>
+
+<h2>Centralizers, Centers, Normalizers, and Stabilizers</h2>
+
+<p>
+    <b>Definition.</b> <i>Let $A$ be any nonempty subset of a group
+    $G.$ The centralizer of $A$ in $G$ is the set
+
+    $$C_G(A) = \left\{ g \in G : gag^{-1} = a \text{ for all } a \in A \right\},$$
+
+    i.e. it's the set of all elements in $G$ that commute with all
+    elements in $A.$ As a special case, the center of $G$ is
+
+    $$Z(G) = C_G(G) = \left\{ g \in G : gxg^{-1} = x \text{ for all } x \in G \right\},$$
+
+    i.e. elements that commute with everyone in $G.$ The normalizer of $A$
+    is the set
+
+    $$N_G(A) = \left\{ g \in G : gAg^{-1} = A \right\}.$$</i>
+</p>
+
+<p>
+    <b>Definition.</b> <i>Let $G$ be a group acting on a set $S$ and
+    let $s$ be some fixed element of $S.$ The stabilizer of $s$ in $G$
+    is the set
+
+    $$G_s = \left\{ g \in G : g \cdot s = s \right\}.$$</i>
+</p>
+
+<p>
+    Now we'll show that normalizers are a special case of stabilizers:
+    let $G$ act by conjugation on the power set $\PP(G)$ consisting of
+    all subsets of $G,$ so that for each $g\in G$ and $A \in \PP(G),$
+
+    $$g \cdot A = gAg^{-1}.$$
+
+    Then the stabilizer of $A$ under this action is
+
+    $$G_A = \left\{ g \in G : g\cdot A = gAg^{-1} = A \right\} = N_G(A).$$
+</p>
+
+<p>
+    Let's see what the kernel of this action looks like:
+
+    $$\ker(G, \PP(G)) = \left\{ g \in G : g \cdot A = gAg^{-1} = A \text{ for all } A\in\PP(G) \right\},$$
+
+    or elements in $G$ that normalize all subsets of $G.$ Since
+    elements of $Z(G) = C_G(G)$ commute with all elements of $G,$
+
+    $$Z(G) \leq \ker(G, \PP(G)).$$
+
+    In fact, taking singleton subsets $A = \left\{ a \right\},$ we have
+
+    $$\ker(G, \PP(G)) \leq Z(G),$$
+
+    so the two are identical:
+
+    $$\ker(G, \PP(G)) = Z(G).$$
+</p>
+
+<p>
+    Next we'll show that centralizers are kernels of actions: let
+    $N_G(A)$ act on $A$ by conjugation. Then the stabilizer of $A$
+    under this action is
+
+    $$N_G(A)_A = \left\{ g \in N_G(A) : g\cdot A = gAg^{-1} = A \right\} = N_G(A),$$
+
+    itself. The kernel is
+
+    $$\ker(N_G(A), A) = \left\{ g \in N_G(A) : g \cdot a = gag^{-1} = a \text{ for all } a \in A \right\},$$
+
+    i.e. elements in $N_G(A)$ that commute with all elements in $A,$ so
+
+    $$\ker(N_G(A), A) = C_{N_G(A)}(A).$$
+
+    It's easy to see that
+
+    $$C_{N_G(A)}(A) = C_G(A),$$
+
+    and so
+
+    $$\ker(N_G(A), A) = C_G(A).$$
+</p>
+
+<p>
+    <b>Corollary.</b> <i>For any subset $A$ of a group $G,$
+
+    $$C_G(A) = C_{N_G(A)}(A) \leq N_G(A).$$</i>
+</p>
+
+<p class="box">
+    <b>Summary.</b> <i>Normalizers are stabilizers and centralizers
+    are kernels of conjugate actions, and
+
+    \begin{align*}
+    \ker(G, \PP(G)) = Z(G) &\leq C_G(A) = \ker(N_G(A), A) \\
+    &\leq N_G(A) = G_A.
+    \end{align*}</i>
+</p>
+
+<h2>Equivalent Formulations of a Normal Subgroup</h2>
+
+<p>
+    <b>Theorem.</b> <i>Let $N \leq G.$ The following are equivalent:
+
+    <ul>
+    <li>$N \normal G.$</li>
+    <li>$N_G(N) = G.$</li>
+    <li>$gN = Ng$ for all $g\in G.$</li>
+    <li>Multiplication of left cosets of $N$ makes $G/N$ a group.</li>
+    <li>$gNg^{-1} \subset N$ for all $g\in G.$</li>
+    </ul></i>
+</p>
+
+
+
+<h1>Reference</h1>
+
+<ol>
+<li>Abstract Algebra by Dummit and Foote.</li>
+<li>Everything else from the web.</li>
+</ol>
+
+</div>
+</body>
+</html>

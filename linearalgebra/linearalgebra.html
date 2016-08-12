@@ -495,12 +495,6 @@ ad - cb &= 1,
 
     $$A_{nn}(\text{product involving at least another $A_{ii}$})$$
 
-<div class="epigraph">
-    <img src="images/pokemon.jpg">
-     <div class="quote">
-     </div><hr><div class="author">Pokemon</div>
-</div>
-
     have degrees at most $n - 2,$ as does $q(t),$ and so comparing
     coefficients with
 
@@ -516,10 +510,21 @@ ad - cb &= 1,
     summarize:
 </p>
 
-<p>
+<p id="stdfh1267">
     <b>Corollary.</b> <i>The characteristic polynomial of a matrix A is
 
     $$\det(A - tI) = (-1)^n t^n + (-1)^{n-1} \tr(A) t^{n-1} + a_{n-2} t^{n-2} + \cdots + \det(A).$$</i>
+</p>
+
+<div class="epigraph">
+    <img src="images/pokemon.jpg">
+     <div class="quote">
+     </div><hr><div class="author">Pokemon</div>
+</div>
+
+<p>
+    For the remaining coefficients,
+    see <a href="#gasfdbnnd35616">Vieta's formulas below.</a>
 </p>
 
 <p>
@@ -599,7 +604,8 @@ ad - cb &= 1,
     algebraic multiplicity of $T$ corresponding to $\lambda$ is the
     multiplicity of $\lambda$ as a root of the characteristic
     polynomial of $T.$ The geometric multiplicity of $T$ corresponding
-    to $\lambda$ is $\dim E_\lambda.$</i>
+    to $\lambda$ is $\dim E_\lambda.$ They are denoted
+    $\mathrm{alg}(\lambda)$ and $\mathrm{geo}(\lambda)$ resp.</i>
 </p>
 
 <p>
@@ -784,7 +790,7 @@ ad - cb &= 1,
 
 <p class="box">
     <b>Question.</b> <i>What is the relationship between
-    diagonalizability and invertibility, <a href="#skdnsut164">bside
+    diagonalizability and invertibility, <a href="#skdnsut164">aside
     from this</a>?</i>
 </p>
 
@@ -817,6 +823,141 @@ ad - cb &= 1,
 <p class="box">
     <b>Question.</b> <i>What is the probability that a random matrix
     is diagonalizable? Invertible?</i>
+</p>
+
+<p>
+    <b>Exercise.</b> <i>Let $T$ be a linear operator on a finite
+    dimensional vector space $V,$ and suppose there is a basis $\b$
+    for $V$ s.t. $[T]_\b$ is upper triangular. Then the characteristic
+    polynomial of $T$ splits. Similar result for matrix.</i>
+</p>
+
+<p>
+    <i>Proof.</i> We know that the characteristic polynomial for $T$
+    is the characteristic polynomial for $[T]_\b \equiv A$ for any
+    basis $\b,$ which is
+
+    $$\char A = \det(A - tI).$$
+
+    Since $A$ is upper triangular, this is just
+
+    $$\det(A - tI) = (A_{11} - t) \cdots (A_{nn} - t),$$
+
+    which splits. \qed
+</p>
+
+<p>
+    <b>Exercise.</b> <i>Let $T$ be a linear operator on a
+    finite-dimensional vector space $V$ with distinct eigenvalues
+    $\l_1,\ldots,\l_k$ with multiplicities $m_1,\ldots,m_k.$ Let $\b$
+    be a basis for $V$ s.t. $[T]_\b$ is upper triangular. Then the
+    diagonal entries of $[T]_\b$ are $\l_1,\ldots,\l_k,$ with each
+    $\l_i$ appearing $m_i$ times.</i>
+</p>
+
+<p>
+    I.e. the diagonal of an upper triangular matrix is as good as it
+    gets: diagonalizing, if it were possible, won't change the
+    diagonal entries, except perhaps their positions.
+</p>
+
+<p>
+    <i>Proof.</i> There's not much to prove here. By the previous
+    exercise, the eigenvalues $\l_i$ are precisely the diagonal
+    entries $A_{ii},$ and since they have multiplicities $m_i,$ they
+    appear in the diagonal $m_i$ times. \qed
+</p>
+
+<p class="box">
+    <b>Proposition.</b> <i>Let $A$ be an $n\times n$ matrix that is
+    similar to an upper triangular matrix, with distinct eigenvalues
+    $\l_1,\ldots,\l_k$ with multiplicities $m_1,\ldots,m_k.$ Then:
+
+    \begin{align*}
+    \tr A &= \sum_{i=1}^k m_i \l_i = m_1 \l_1 + \cdots + m_k \l_k \\
+    \det A &= \prod_{i=1}^k \l_i^{m_i} = \l_1^{m_1} \cdots \l_k^{m_k}.
+    \end{align*}</i>
+</p>
+
+<p>
+    <i>Proof.</i> Note that if $A$ itself is upper triangular, or
+    diagonal, then these are true by definition of trace and det. Now
+    we'll show that tr and det are invariant under similarity:
+</p>
+
+<div>
+    Since determinant is multiplicative,
+
+    \begin{align*}
+    \det(Q^{-1} A Q) &= \det Q^{-1} \det A \det Q = \det A.
+    \end{align*}
+
+    As for trace, recall that
+
+    $$\tr(AB) = \tr(BA),$$
+
+    and so
+
+    $$\tr(Q^{-1} A Q) = \tr(AQQ^{-1}) = \tr A. \qed$$
+</div>
+
+<p id="gasfdbnnd35616">
+    <i>Alternative proof.</i> Another fun way to show this---at least
+    over an algebraically closed field like $\CC$---is to use Vieta's
+    formulas, which say that:
+</p>
+
+<hr>
+<div class="bside">
+    Looking at these formulas, it seems tr and det are just special
+    cases of a more general concept.
+</div>
+<h2>Vieta's Formulas</h2>
+<p>
+    <i>Let
+
+    $$P(x) = a_n x^n + \cdots + a_0$$
+
+    be a polynomial of degree $n$ with complex roots $x_1,\ldots,
+    x_n.$ Then
+
+    \begin{align*}
+    -\frac{a_{n-1}}{a_n} &= x_1 + x_2 + \cdots + x_n \\
+    \frac{a_{n-2}}{a_n} &= (x_1 x_2 + x_1 x_3 + \cdots + x_1 x_n) + (x_2 x_3 + x_2 x_4 + \cdots + x_2 x_n) + \cdots + x_{n-1} x_n \\
+    &\cdots \\
+    (-1)^n \frac{a_0}{a_n} &= x_1 x_2 \cdots x_n.
+    \end{align*}</i>
+</p>
+<hr>
+
+<p>
+    It just so happens that <a href="#stdfh1267">earlier</a> we found
+    an expression for the characteristic polynomial of $A$:
+
+    $$\det(A - tI) = (-1)^n t^n + (-1)^{n-1} \tr(A) t^{n-1} + a_{n-2} t^{n-2} + \cdots + \det(A).$$</i>
+
+    The result now easily follows by comparing trace and det with the
+    first and last formulas in Vieta. \qed
+</p>
+
+<p class="box">
+    <b>Corollary.</b> <i>Vieta's formulas also give us the other
+    coefficients in the characteristic polynomial for a matrix $A.$
+    Since similar matrices have the same eigenvalues and
+    characteristic polynomial, these quantities are also invariant
+    under similarity.</i>
+</p>
+
+<p>
+    So, once again we see that being able to diagonalize, or at least
+    upper-triangulate a matrix makes calculations much easier.
+</p>
+
+<p class="box">
+    <b>Summary.</b> Ranking for matrix goodness according to
+    diagonalizability:
+
+    $$\text{neither} < \text{upper / lower triangular} < \text{diagonalizable}.$$
 </p>
 
 <h1>Direct Sums</h1>

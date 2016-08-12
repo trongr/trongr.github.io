@@ -61,7 +61,7 @@ The function $y(z)$ is also called the Heaviside / unit step function.
 
 <h1>Group Invariance Theorem</h1>
 
-<div class="bside">
+<div id="qnsdbbs23626" class="bside">
     <img src="images/linSepXor.png">
 </div>
 
@@ -69,7 +69,7 @@ The function $y(z)$ is also called the Heaviside / unit step function.
 learn the XOR function, because geometrically its truth table
 represented on a plane is not linearly separable.</i></p>
 
-<p>
+<p id="nfhbeyet8466">
     <b>Proposition.</b> <i>Perceptrons can't learn patterns if they're
     subject to transformations that form a group, e.g. translations
     with wrap-around.</i>
@@ -164,8 +164,8 @@ can then apply Gradient Descent or some other optimization algorithm
 to <i>compute</i> the minimum weights $W.$
 </p>
 
-<p><b>Question.</b> <i>Is there any other optimization algorithm?
-Numerical ones?</i></p>
+<p class="bside"><b>Question.</b> <i>Is there any other optimization algorithm?
+Numerical ones?</i> Yes.</p>
 
 <p>Keep in mind that there is a weight matrix $w$ for each pair of
 layers $i$ and $j,$ where each entry $w_{ij}$ corresponds to the
@@ -175,12 +175,16 @@ three-dimensional matrix $W.$</p>
 
 <h1>Analytic Solution vs Random Perturbation</h1>
 
+<div class="bside">
+    <b>*</b> I.e. numerically computing the gradient. Also used to
+    check your analytic gradient to make sure it works.
+</div>
 <p>An alternative to using Backpropagation is to randomly perturb the
 weights and see how each change affects the error (a kind of
 reinforcement learning), but that's a lot slower than solving for the
 optimal solution analytically, since you have to test a single weight
 change on <i>all</i> training cases to see if that change made an
-improvement on the error.</p>
+improvement on the error.<b>*</b></p>
 
 <h1>Deriving the Error Derivatives</h1>
 
@@ -264,12 +268,17 @@ multiple concepts.</i></p>
 cause then you'd have no relations? Kinda woolly at the
 moment.</i></p>
 
-<h1>Digression: Softmax Output Function and Cross-Entropy Cost Function</h1>
+<h1 id="babdtgggjo52">Digression: Softmax Output Function and Cross-Entropy Cost Function</h1>
 
 <div class="bside">
     <img src="images/softmaxgroup.png">
 </div>
-<p><b>Definition.</b> <i>A softmax group $G$ is a group of output neurons whose outputs use the softmax activation function defined by $$y_i = \frac{e^{z_i}}{\sum\limits_{j\in G} e^{z_j}},$$ so that the outputs sum to $1.$ The cost function is given by $$C = - \sum_j t_j \log y_j.$$
+
+<p><b>Definition.</b> <i>A softmax group $G$ is a group of output
+neurons whose outputs use the softmax activation function defined by
+$$y_i = \frac{e^{z_i}}{\sum\limits_{j\in G} e^{z_j}},$$ so that the
+outputs sum to $1.$ The cost function is given by $$C = - \sum_j t_j
+\log y_j.$$
 </i></p>
 
 <hr>
@@ -324,7 +333,7 @@ nearly zero.</p>
     <img src="images/figure_logarithmic_function.png">
 </div>
 
-<p><b>Question.</b> <i>What happens when $t_i = 0,$ and we guess
+<p id="ndwobct164"><b>Question.</b> <i>What happens when $t_i = 0,$ and we guess
 right with $y_i$ close to zero, or we guess wrong with $y_i$ close to
 one? The cost function $C$ seems to ignore those guesses. Shouldn't we
 punish those neurons that produce false positives and award ones that
@@ -606,7 +615,7 @@ output layer associates each trigram with the fourth target word.</p>
     (w_{jh})$ must be close to the hidden layer activation $Y_h.$
 </p>
 
-<div class="box">
+<div id="wetbxdggh482155" class="box">
     <b>Aside.</b> This is a property of the inner / dot product of two
     vectors: vectors that are similar, i.e. close together, have
     roughly bigger dot products, and vectors that are farther apart
@@ -1089,17 +1098,13 @@ Recognition</h1>
 
 <h1>Overview: Modeling Sequences</h1>
 
+<hr>
+
 <h1>Nearest Neighbour Classifier</h1>
 
 <div class="aside">
     Circles in Manhattan space: points equidistance from a
-    center. There's also $L^2,$ which is just normal Euclidean
-    distance, as well as $L^p.$
-    <p>
-        <b>Fun note.</b> By the triangle inequality:
-
-        $$||x||_1 \geq ||x||_2.$$
-    </p>
+    center.
     <img src="images/214px-TaxicabGeometryCircle.svg.png">
 </div>
 
@@ -1113,99 +1118,423 @@ Recognition</h1>
     $$d_1(v, w) = ||v - w||_1 = \sum_i |v_i - w_i|.$$</i>
 </p>
 
+<h2>Euclidean Distance</h2>
+
+<p>
+    There's also $L^2,$ which is just normal Euclidean
+    distance:
+
+    $$||v - w||_2 = \sqrt{\sum |v_i - w_i|^2},$$
+
+    as well as $L^p:$
+
+    $$||v - w||_p = \left( \sum |v_i - w_i|^p \right)^{1/p}.$$
+
+    Finally there's $L^\infty:$
+
+    \begin{align*}
+    ||v - w||_\infty &= \max(|v_1 - w_1|,\ldots,|v_n - w_n|) \\
+                     &= \lim_{p\to\infty} ||v - w||_p.
+    \end{align*}
+</p>
+
+<p>
+    <b>Fun note.</b> By the triangle inequality:
+
+    $$||x||_1 \geq ||x||_2.$$
+
+    Wikipedia says that in fact
+
+    $$||x||_p \geq ||x||_q$$
+
+    if $0 < p \leq q,$ but I can't prove it yet.
+</p>
+
+<div class="aside">
+    Ah, the choice of a metric <i>is</i> a hyperparameter.
+</div>
+<p>
+    <b>Question.</b> <i>Which metric to use? Maybe treat all these
+    different metrics as another feature. I think they're all roughly
+    the same anyway. <a href="#brgg2346">See experiment results
+    below.</a></i>
+</p>
+
+<h2>Implementation with $L^1$ and $L^2$ Distances</h2>
+
+<p>
+    In
+    <a href="https://github.com/trongr/trongr.github.io/tree/master/neural-network-course/cs231/knn"
+    target="_blank">nn.py,</a> we don't do anything to train a nearest
+    neighbour classifier. Most of the work is in the test phase, where
+    for each test case we simply calculate its distances from all the
+    training cases and select the minimum training case.
+</p>
+
+<p>
+    Prediction time grows linearly with training set size.
+</p>
+
+<p id="brgg2346">
+    <b>Results.</b> Running this on CIFAR-10 batch 1 and test batch
+    gives about 20% accuracy for both L1 and L2 distances, twice as
+    good as random guessing, which would give 10% accuracy since there
+    are 10 classes. The course notes said they got a 38.6% accuracy,
+    but that might be on a different batch, or maybe they trained it
+    on all batches together. TODO. Do that!
+</p>
+
 <p>
     <b>Definition: accuracy.</b> <i>Fraction of accurate
     predictions.</i>
 </p>
 
-<h2>Implementation</h2>
+<div class="aside">
+    Choice of $k$ is another hyperparameter.
+    <img src="images/279px-KnnClassification.svg.png">
+</div>
+
+<h1>k-Nearest Neighbour Classifier</h1>
 
 <p>
-    In the following implementation, we don't do anything to train a
-    nearest neighbour classifier. Most of the work is in the test
-    phase, where for each test case we simply calculate its distances
-    from all the training cases and select the minimum matching
-    training case.
+    Instead of choosing the nearest neighbour, we choose $k$ nearest
+    neighbours to a test case and assign it to the most common class
+    among the neighbours.
+</p>
+
+<p>
+    We're gonna skip this.
 </p>
 
 <div class="clearboth"></div>
 
+<h1>Validation and Test Sets</h1>
+
 <p>
-    Refer
-    to <a href="https://github.com/trongr/trongr.github.io/tree/master/neural-network-course/cs231/knn"
-    target="_blank">source code</a> for other import files.
-
-    <pre><code># Original source code from cs231n.github.io/classification
-
-import sys
-import numpy as np
-import cifar
-
-class NearestNeighbor(object):
-    def __init__(self):
-        pass
-
-    def train(self, X, y):
-        """ X is N x D where each row is an example. Y is 1-dimension of size N """
-        # the nearest neighbor classifier simply remembers all the training data
-        self.Xtr = X
-        self.ytr = y
-
-    def predict(self, X):
-        """ X is N x D where each row is an example we wish to predict label for """
-        num_test = X.shape[0]
-        # lets make sure that the output type matches the input type
-        Ypred = np.zeros(num_test, dtype = self.ytr.dtype)
-
-        # loop over all test rows
-        for i in xrange(num_test):
-            print "Predicting test case:", i
-            # find the nearest training image to the i'th test image
-            # using the L1 distance (sum of absolute value differences)
-            distances = np.sum(np.abs(self.Xtr - X[i,:]), axis = 1)
-            min_index = np.argmin(distances) # get the index with smallest distance
-            Ypred[i] = self.ytr[min_index] # predict the label of the nearest example
-
-        return Ypred
-
-def testKNN(trainFile, testFile):
-    trainData = cifar.unpickle(trainFile)
-    testData = cifar.unpickle(testFile)
-
-    # This cifar data is already formatted in rows and columns instead
-    # of a multidimensional array as the lecture assumes, so no need
-    # to reshape
-    Xtr_rows = trainData["data"]
-    Ytr = np.array(trainData["labels"])
-    Xte_rows = testData["data"]
-    Yte = np.array(testData["labels"])
-
-    nn = NearestNeighbor() # create a Nearest Neighbor classifier class
-    nn.train(Xtr_rows, Ytr) # train the classifier on the training images and labels
-    Yte_predict = nn.predict(Xte_rows) # predict labels on the test images
-    # and now print the classification accuracy, which is the average number
-    # of examples that are correctly predicted (i.e. label matches)
-    print 'accuracy: %f' % ( np.mean(Yte_predict == Yte) )
-
-if __name__ == "__main__":
-    # Call this script as: python knn.py path/to/data_batch_1
-    # path/to/test_batch
-    trainFile = sys.argv[1]
-    testFile = sys.argv[2]
-    testKNN(trainFile, testFile)
-</code></pre>
+    The Five Fold Path:
 </p>
 
-<h1>k-Nearest Neighbour Classifier</h1>
+<img src="images/5foldpath.png">
 
+<div class="center">
+    <img src="images/neuralnetworkpractitioner.png">
+    Build modular neural networks
+</div>
+
+<h1>Linear Classification</h1>
+
+<p>
+    There's gonna be some overlap with materials from CSC321, cause
+    cs231n is going from the bottom up towards convolutional neural
+    networks. Good for review.
+</p>
+
+<h2>Parametric vs non-parametric approach</h2>
+<p>
+    Non-parametric is when you're looking for a function $f$ that
+    takes input $x$ directly to output:
+
+    $$x \longmapsto f(x),$$
+
+    e.g. as in the k-Nearest Neighbour Classifier, and parametric is
+    when the output also depends on a set of parameters $W$ which is
+    up to you to choose:
+
+    $$x \longmapsto f(x, W).$$
+
+    <img src="images/linearclassifier.png">
+</p>
+
+<h2>Example</h2>
+
+<p>
+    <img src="images/catdogship.png">
+</p>
+
+<h2>Interpreting a Linear Classifier</h2>
+
+<p>
+    Dot product measures similarity. <a href="#wetbxdggh482155">See note here.</a>
+</p>
+
+<div class="center">
+    <img src="images/interpretinglinearclassifier.png">
+    "Double-headed horse"
+</div>
+
+<p>
+    An alternative interpretation: linearly separating the input space:
+</p>
+
+<div class="center">
+    <img src="images/linearlyseparatinginputspace.png">
+    <a href="#qnsdbbs23626">We've seen this before too</a>
+</div>
+
+<h2>Weakness of Linear Separability</h2>
+
+<div class="aside">
+    I think this is the intuition behind
+    the <a href="#nfhbeyet8466">group invariance theorem,</a> or why
+    linear classifier doesn't work on images that translate and wrap
+    around, because it pollutes the input space.
+</div>
+<p>
+    Can't separate non-linear regions.
+</p>
+
+<p>
+    E.g. if the images for each class are all of different
+    colors---different colored dogs in different weather, different
+    colored cars in different lighting, etc.---and the objects are
+    placed at random positions in the images, so that each class is
+    evenly distributed in input space, then the linear classifier
+    can't separate them. Much like this <a href="#qnsdbbs23626">simple
+    XOR example.</a>
+</p>
+
+<img src="images/lineardrawback.png">
+
+<h2>Big things have small beginnings</h2>
+
+<p>
+    Or more fancy-like in Latin: <i>Sic Parvis Magna.</i> It's now
+    generally accepted that all complex things arise from simpler
+    things, from evolution to the birth of the universe. What about
+    this?
+</p>
+
+<div class="box">
+    <b>Conjecture.</b> <i>All the nonlinearity we see in nature are
+    the combination of linear things.</i>
+</div>
+
+<div class="center">
+    <img src="images/54943_452936141414171_1678979800_o.jpg">
+    Big things have small beginnings
+</div>
+
+<h2>Multiclass SVM Loss Function</h2>
+
+<div class="bside">
+    <b>*</b> Can also keep $j = y_i$ for simplicity without changing
+    optimal $W.$
+</div>
+
+<p>
+    <b>Definition.</b> <i>Let $x_i$ be an input vector, $y_i$ be its
+    integer label, and let
+
+    $$s = f(x, W)$$
+
+    be the output vector. Define the SVM loss for $x_i$ to be<b>*</b>
+
+    $$L_i = \sum_{j\neq y_i} \max(0, s_j - s_{y_j} + 1).$$
+
+    The loss corresponding to $W$ is the mean loss over all inputs:
+
+    $$L = \frac{1}{N} \sum_{i=1}^N L_i.$$</i>
+</p>
+
+<img src="images/svmloss.png">
+
+<p>
+    <b>Intuition.</b> The output
+
+    $$s = f(x, W)$$
+
+    is a vector representing the scores for
+    $x_i$ belonging to the different classes, i.e. $s_j$ is a
+    prediction score, and so
+
+    $$s_j - s_{y_j}$$
+
+    represents scores recentered around the correct score $s_{y_j}$:
+    if the wrong score $s_j$ is higher than the correct score
+    $s_{y_j},$ then we get a positive loss (bad), and conversely if
+    $s_j$ is lower, we get a negative loss (good). Adding one---
+
+    $$s_j - s_{y_i} + 1$$
+
+    gives us a margin of error: it says that we should consider it a
+    positive loss as soon as $s_j > s_{y_i} - 1.$ Next we max with
+    zero:
+</p>
+
+<div class="bside">
+    <p>
+        <b>*</b> Ah! Turns out that is a bug (or maybe a feature) in
+        SVM loss.
+    </p>
+
+    <p>
+        <b>**</b> We can alternatively just add up the losses $L_i$ without
+        taking the average. It doesn't change how $W$ optimizes.
+    </p>
+</div>
+
+<p>
+    $$\max(0, s_j - s_{y_i} + 1)$$
+
+    because for reasons to be revealed (to me)<b>*</b> all negative
+    losses are considered equally good: we're happy as long as a wrong
+    prediction score is below $s_{y_i} - 1.$
+</p>
+
+<p>
+    The rest is straight forward: we just add up all the losses $L_i$
+    over the predictions, and average<b>**</b> $L_i$ over all inputs
+    $x_i.$
+</p>
+
+<img src="images/linumpy.png">
+
+<h2>Regularization</h2>
+
+<div class="bside">
+    <b>*</b> E.g. $W$ might focus all its effort on a single feature
+    instead of spreading out and use the other features, i.e. it's
+    ignoring data that might be useful. That's bad. Plus small numbers
+    are always a good thing.
+
+    <img src="images/regularizationforceswtousemoredimensions.png">
+</div>
+<p>
+    The loss function
+
+    $$L = \frac{1}{N} \sum_{i=1}^N L_i$$
+
+    as it is leaves $W$ free to do whatever it wants, which is
+    sometimes undesirable,<b>*</b> so we'd like to limit its behavior
+    by adding a regularization term:
+
+    $$L = \frac{1}{N} \sum_{i=1}^N L_i + \l \sum_{ij} W_{ij}^2,$$
+
+    assuming $W$ is a two dimensional matrix. Putting a Euclidean norm
+    on $W$ forces its entries to spread out, because a vector with one
+    large entry has bigger magnitude than one with many small ones,
+    e.g. in $\RR^{100},$
+
+    $$100 = |(100, 0, \ldots, 0)|_2 > |(1, \ldots, 1)|_2 = 10.$$
+</p>
+
+<div class="center">
+    <img src="images/euclideannormcomparison.png">
+    Diagonal of a hypercube vs a line
+</div>
+
+<h2>Softmax / Cross Entropy Classifier</h2>
+
+<div class="epigraph">
+     <img src="images/156dacf.png">
+     <div class="quote">
+          It's hard to fill a cup that's already full.
+     </div><hr><div class="author">Avatar</div>
+</div>
+
+<p>
+    <a href="#babdtgggjo52">We did this before.</a> But let's forget
+    and do it again!
+</p>
+
+<p>
+    One way to interpret the output of a linear classifier
+
+    $$s = f(x, W) = Wx$$
+
+    is as simple scores: high means good and low means bad. An
+    alternative is to interpret them as unnormalized log probabilities
+    of the classes, i.e. we'll use these initial scores to obtain the
+    (log) probabilities that the input belongs to each class.
+</p>
+
+<p>
+    Concretely, let $x$ be an input vector, $W$ a weight matrix. Then
+
+    $$s = Wx = \begin{bmatrix}
+    s_1 \\
+    \vdots \\
+    s_n
+    \end{bmatrix}$$
+
+    is a column vector whose $i$-th entry $s_i$ is the score for $x$
+    belonging to class $i,$ assuming there are $n$ classes.
+</p>
+
+<p>
+    <b>Definition.</b> <i>Suppose $x$ belongs to class $i.$ Let
+
+    $$y_i = P(x \text{ belongs to class } i) = \frac{e^{s_i}}{\sum_{j=1}^n e^{s_j}}.$$
+
+    Now define the softmax loss due to $x$ to be
+
+    $$L_x = - \log y_i.$$
+
+    And finally the total loss over all the inputs
+
+    $$L = \frac{1}{N} \sum_x L_x + R(W),$$
+
+    where $N$ is the total number of inputs and $R$ is some
+    regularization function.</i>
+</p>
+
+<p>
+    When we did this earlier, we defined the loss function as
+
+    $$L_x = - \sum_{j=1}^n t_j \log y_j.$$
+
+    This is exactly the same, since only $t_i$ will be
+    $1,$ while the rest is zero.
+</p>
+
+<p>
+    These slides use slightly different notations: here $i$ indexes
+    over the inputs $x_i,$ whereas ours is over the $n$ classes. It's
+    OK.
+</p>
+
+<img src="images/softmaxeg.png">
+
+<img src="images/svmvssoftmax.png">
+
+<img src="images/svmvssoftmax2.png">
+
+<img src="images/lossrecap.png">
+
+<p>
+    <a href="#ndwobct164">A question I had earlier. . . .</a> And the
+    answer is TODO.
+</p>
+
+<h2>Old Pipeline</h2>
+
+<p>
+    Hand-engineered features.
+</p>
+
+<img src="images/featuretypes.png">
+
+<img src="images/featuretypehistogram.png">
+
+<img src="images/hogsift.png">
+
+<img src="images/bagofwords.png">
+
+<h2>Historical vs new and improved pipeline</h2>
+
+<img src="images/featureextractionvsnewandimprovedpipeline.png">
+
+<div class="clearboth"></div>
 <h1>Reference</h1>
 
 <ol>
+<li>Andrew Ng's Coursera Machine Learning lectures.</li>
 <li>Geoffrey E. Hinton's Neural Networks video lectures.</li>
 <li>http://www.cs.toronto.edu/~rgrosse/csc321/</li>
 <li>http://www.cs.toronto.edu/~tijmen/csc321/</li>
 <li>http://cs231n.github.io/</li>
 <li>http://cs231n.stanford.edu/</li>
+<li>Andrej Karpathy's video lectures.</li>
 <li>Everything else from the web.</li>
 </ol>
 

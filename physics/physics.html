@@ -315,7 +315,9 @@
 
     which simplifies to
 
+<div class="box">
     $$E = \frac{KQ}{r\sqrt{r^2 + (L/2)^2}}.$$
+</div>
 </p>
 
 <p>
@@ -323,8 +325,10 @@
     charged rod of charge density $\l,$ in the second last step we can
     take $L \longrightarrow \infty:$
 
+<div class="box">
     $$E = \frac{K\l L}{r\sqrt{r^2 + (L/2)^2}} = \frac{K\l L}{r\sqrt{(r/L)^2 + (1/2)^2}L}
         \longrightarrow \frac{2K\l}{r}.$$
+</div>
 </p>
 
 <p>
@@ -352,9 +356,12 @@
 
     Therefore the total field of the ring is
 
+<div class="box">
     $$E = \int_0^{2\p} \frac{K\l R z d\th}{(R^2 + z^2)^{3/2}}
         = \frac{K\l R z 2\p}{(R^2 + z^2)^{3/2}}
         = \frac{KQz}{(R^2 + z^2)^{3/2}}.$$
+</div>
+</p>
 
 <div class="aside">
     This graph reminds me of activation functions in Machine
@@ -366,12 +373,14 @@
     <img src="images/ringchargeactivation.png">
 </div>
 
+<p>
     Note that for $z \gg R,$
 
     $$E \longrightarrow \frac{KQ}{z^2},$$
 
     so the ring acts like a point charge at long distances, at least
     along the main axis.
+
 </p>
 
 <p>
@@ -381,7 +390,7 @@
     in between, which I hadn't expected!
 </p>
 
-<h2>Example. Uniformly Charged Disk</h2>
+<h2>Example. Uniformly Charged Disk and Infinite Uniformly Charged Plane</h2>
 
 <div class="aside">
     <img src="images/uniformlychargeddisk.png">
@@ -416,16 +425,8 @@
 </p>
 
 <div class="aside">
-    A proper sigmoid function!
-
-    $$\s(z) = \frac{z}{\sqrt{R^2 + z^2}}.$$
-
-    <img src="images/algebraicsigmoid.png">
-</div>
-
-<div class="aside">
-    Infinite uniformly charged plate.
-    <img src="images/infiniteplate.png">
+    <a href="images/algebraicsigmoid.png" target="_blank">A sigmoid
+    function!</a>
 </div>
 
 <p>
@@ -439,15 +440,27 @@
 
     $$E \longrightarrow 2\p\h K,$$
 
-    a constant independent of $z,$ as long as $z > 0!$ An alternative
-    formulation is: instead of taking $z\longrightarrow 0,$ we take
-    $R\longrightarrow \infty,$ i.e. an infinite plane, then the field
-    is constant and equal to
+    a constant independent of $z,$ as long as $z > 0!$
+</p>
 
+<p>
+    An alternative formulation gives us the field for an infinite
+    plane: if instead of taking $z\longrightarrow 0$ we take
+    $R\longrightarrow \infty,$ then the field is constant and equal to
+
+<div class="box">
     $$E = 2\p\h K = \frac{\h}{2\e},$$
+</div>
+</p>
 
+<p>
     regardless of where you are above it.
 </p>
+
+<div class="aside">
+    Infinite uniformly charged plate.
+    <img src="images/infiniteplate.png">
+</div>
 
 <p>
     Another surprise is that at $z = 0,$ the field suddenly drops to
@@ -475,17 +488,20 @@
     $$\frac{z}{\sqrt{R^2 + z^2}} = \left(1 + (R/z)^2\right)^{-1/2} \approx 1 - \frac{R^2}{2z^2}.$$
 
     And so
-
+<div class="box">
     $$E \approx 2\p \h K \left[1 - \left( 1 - \frac{R^2}{2z^2} \right)\right]
         = \frac{\pi\h K R^2}{z^2} = \frac{KQ}{z^2}.$$
+</div>
+</p>
 
+<p>
     Therefore $E$ varies as $1/z^2$ for $z \gg R,$ i.e. the uniformly
     charged disk acts like a point charge far away.
 </p>
 
 <img src="images/Alpha-Centauri-cropped.jpg">
 
-<div class="bside">
+<div class="aside">
 <p>
     Now that we've seen how a field can vary with distance as
 
@@ -514,6 +530,8 @@
 </p>
 </div>
 
+<h2>Parallel Plate Capacitor</h2>
+
 <p>
     <b>Corollary.</b> <i>If you had two parallel infinite
     plates---instead of one---of opposite and equal charge densities,
@@ -523,6 +541,38 @@
 
     Beyond those plates the field is zero because the plates cancel
     each other out.</i>
+</p>
+
+<div class="aside">
+    <img src="images/parallelplatecapacitor.png">
+</div>
+
+<h2>Uniformly Charged Sphere</h2>
+
+<p>
+    <b>TODO.</b> This one's tough to integrate.
+</p>
+
+<h2>Uniformly Charged Ball</h2>
+
+<p>
+    <b>TODO.</b>
+</p>
+
+<p>
+    We never do any ununiformly charged object. Hard to describe them
+    at this point.
+</p>
+
+<h2>Charge to Mass Ratio</h2>
+
+<p>
+    <i>Particles with different masses and charges but the same charge
+    to mass ratio $\frac{q}{m}$ will experience the same acceleration
+
+    $$a = \frac{qE}{m}$$
+
+    and follow the same trajectory.</i>
 </p>
 
 <h1>Electric Flux</h1>

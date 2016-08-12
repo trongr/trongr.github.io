@@ -379,6 +379,50 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
     diverges and $\sum_n \frac{1}{n^2}$ converges.
 </p>
 
+<h2>Reverse Integral Test</h2>
+
+<p>
+    <b>Example.</b> <i>$$\int_0^\infty \left| \frac{\sin x}{x} \right| dx \quad \text{diverges.}$$</i>
+</p>
+
+<p>
+    <i>Proof.</i> First note that
+
+    $$\int_0^\pi \left| \frac{\sin x}{x} \right| dx
+        \geq \frac{1}{\pi} \int_0^\pi |\sin x| dx
+        = \frac{1}{\pi},$$
+
+    and similarly for the remaining intervals $\pi, 2\pi, 3\p,\ldots.$
+    Therefore we can compare this integral with the harmonic series:
+
+    \begin{align*}
+    \int_0^\infty \left| \frac{\sin x}{x} \right| dx
+        &= \int_0^\pi \left| \frac{\sin x}{x} \right| dx
+        + \int_\p^{2\p} \left| \frac{\sin x}{x} \right| dx
+        + \int_{2\p}^{3\p} \left| \frac{\sin x}{x} \right| dx
+        + \cdots \\
+        &\geq \frac{1}{\pi} + \frac{1}{2\pi} + \frac{1}{3\pi} + \cdots \\
+        &= \frac{1}{\p}\left( 1 + \frac{1}{2} + \frac{1}{3} + \cdots \right),
+    \end{align*}
+
+    which diverges. \qed
+</p>
+
+<div class="aside">
+    <b>Question.</b> <i>Is there a nice function that magically
+    pinches intervals?</i>
+</div>
+
+<p>
+    <b>Example: geometric sawtooth.</b> A continuous function $f \geq 0$
+    s.t. $\int_0^\infty f$ exists, but $\Lim_{x\to\infty} f(x)$ does
+    not:
+</p>
+
+<p>
+    <img src="images/improperintegralexistsnolimit.png">
+</p>
+
 <h2>Absolute and Conditional Convergence</h2>
 
 <p>
@@ -436,7 +480,7 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
 
     be an alternating series as in Leibniz's Theorem above. Then
 
-    $$\left|\sum_n (-1)^{n+1} a_n - (a_1 - a_2 + \cdots \pm a_N)\right| \leq a_N$$
+    $$\left|\ \sum_n (-1)^{n+1} a_n - (a_1 - a_2 + \cdots \pm a_N)\ \right| \leq a_N$$
 
     for any $N,$ i.e. the remainder of the series is no larger than
     the term $a_N$ preceding it.</i>
@@ -776,16 +820,39 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
     Combining this with the Absolute Convergence Theorem we get:
 </p>
 
-<div class="bside">
-    It's stronger in the forward but weaker in the backward direction.
-</div>
-
 <p>
     <b>Corollary: Absolute Convergence Theorem II.</b> <i> $\sum a_n$
     converges absolutely iff $\sum b_n$ and $\sum c_n$ converge for
     any partition $b_n, c_n$ of $a_n.$ In that case,
 
     $$\sum a_n = \sum b_n + \sum c_n.$$</i>
+</p>
+
+<p>
+    It's stronger in the forward but weaker in the backward direction.
+</p>
+
+<div class="aside">
+    <img src="images/illuminati-symbols-all-seeing-eye.gif">
+</div>
+<p>
+    <b>Proposition: infinite triangle inequality.</b> <i>If $\sum a_n$
+    is absolutely convergent, then
+
+    $$\left|\ \sum_{n=1}^\infty a_n\ \right| \leq \sum_{i=1}^\infty |a_n|.$$</i>
+</p>
+
+<p>
+    <i>Proof.</i> By the triangle inequality, for each $n,$
+
+    \begin{align*}
+    s_n &\equiv |a_1 + \cdots + a_n| \\
+        &\leq |a_1| + \cdots + |a_n| \\
+        &\leq \sum_{i=1}^\infty |a_n| \equiv S.
+    \end{align*}
+
+    Since the sequence $s_n$ is bounded above by $S,$ its limit must
+    also be bounded by $S.$ Illuminati Confirmed \qed
 </p>
 
 <h1>Reference</h1>
