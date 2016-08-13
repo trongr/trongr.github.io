@@ -100,7 +100,7 @@
     let $s$ be some fixed element of $S.$ The stabilizer of $s$ in $G$
     is the set
 
-    $$G_s = \left\{ g \in G : g \cdot s = s \right\}.$$</i>
+    $$\stab_G(s) = \left\{ g \in G : g \cdot s = s \right\}.$$</i>
 </p>
 
 <p>
@@ -112,7 +112,7 @@
 
     Then the stabilizer of $A$ under this action is
 
-    $$G_A = \left\{ g \in G : g\cdot A = gAg^{-1} = A \right\} = N_G(A).$$
+    $$\stab_G(A) = \left\{ g \in G : g\cdot A = gAg^{-1} = A \right\} = N_G(A).$$
 </p>
 
 <p>
@@ -136,18 +136,12 @@
 
 <p>
     Next we'll show that centralizers are kernels of actions: let
-    $N_G(A)$ act on $A$ by conjugation. Then the stabilizer of $A$
-    under this action is
+    $N_G(A)$ act on $A$ by conjugation. The kernel is
 
-    $$N_G(A)_A = \left\{ g \in N_G(A) : g\cdot A = gAg^{-1} = A \right\} = N_G(A),$$
+    $$\ker(N_G(A), A) = \left\{ g \in N_G(A) : g \cdot a = gag^{-1} = a \text{ for all } a \in A \right\}
+        = C_{N_G(A)}(A),$$
 
-    itself. The kernel is
-
-    $$\ker(N_G(A), A) = \left\{ g \in N_G(A) : g \cdot a = gag^{-1} = a \text{ for all } a \in A \right\},$$
-
-    i.e. elements in $N_G(A)$ that commute with all elements in $A,$ so
-
-    $$\ker(N_G(A), A) = C_{N_G(A)}(A).$$
+    i.e. elements in $N_G(A)$ that commute with all elements in $A.$
 
     It's easy to see that
 
@@ -156,6 +150,22 @@
     and so
 
     $$\ker(N_G(A), A) = C_G(A).$$
+
+    While we're at it let's also calculate the stabilizer of an
+    element $a \in A:$
+
+    $$\stab_{N_G(A)}(a) = \left\{ g \in N_G(A) : g\cdot a = gag^{-1} = a \right\} = C_{N_G(A)}(a),$$
+
+    i.e. elements in $N_G(A)$ that commute with $a.$
+</p>
+
+<p>
+    Finally for completeness let $C_G(A)$ act on $A$ by conjugation. Then
+
+    \begin{align*}
+    \ker(C_G(A), A) &= \left\{ g \in C_G(A) : g\cdot a = gag^{-1} = a \text{ for all } a\in A\right\} = C_G(A) \\
+    \stab_{C_G(A)}(a) &= \left\{ g \in C_G(A) : g\cdot a = gag^{-1} = a \right\}.
+    \end{align*}
 </p>
 
 <p>
@@ -169,9 +179,19 @@
     are kernels of conjugate actions, and
 
     \begin{align*}
-    \ker(G, \PP(G)) = Z(G) &\leq C_G(A) = \ker(N_G(A), A) \\
-    &\leq N_G(A) = G_A.
-    \end{align*}</i>
+    \ker(G, \PP(G)) = Z(G) &\leq C_G(A) \\
+    &= \ker(N_G(A), A) = \ker(C_G(A), A) \\
+    &\leq N_G(A) = \stab_G(A).
+    \end{align*}
+
+    It's nice how you can line them up like that.</i>
+</p>
+
+<p>
+    <b>Corollary.</b> <i>Let $\ff$ be an action of $G$ on $A.$
+    Then
+
+    $$\ker(\ff, G, A) = \Cap_{a\in A} \stab_G(a).$$</i>
 </p>
 
 <h2>Equivalent Formulations of a Normal Subgroup</h2>

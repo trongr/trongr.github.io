@@ -379,7 +379,7 @@ lectures. Not a lot of details there.</p>
     Turns out it's part of the assignment:
 </p>
 
-<h1>Assignment 1: Learning Distributed Word Representations</h1>
+<h1>CSC321 Assignment 1: Learning Distributed Word Representations</h1>
 
 <p>Gonna use the Winter 2015 version of CSC321 cause they use Python instead of MATLAB.</p>
 
@@ -1094,7 +1094,7 @@ Recognition</h1>
 
 <h1>Backpropagation with Weight Constraints</h1>
 
-<h1>Assignment 2: Convolutional Neural Networks for Digit Recognition</h1>
+<h1>CSC321 Assignment 2: Convolutional Neural Networks for Digit Recognition</h1>
 
 <h1>Overview: Modeling Sequences</h1>
 
@@ -1175,6 +1175,10 @@ Recognition</h1>
     Prediction time grows linearly with training set size.
 </p>
 
+<div class="bside">
+    I don't think the magic is in the metric.
+</div>
+
 <p id="brgg2346">
     <b>Results.</b> Running this on CIFAR-10 batch 1 and test batch
     gives about 20% accuracy for both L1 and L2 distances, twice as
@@ -1202,8 +1206,31 @@ Recognition</h1>
     among the neighbours.
 </p>
 
+<h1>cs231n Assignment 1</h1>
+
 <p>
-    We're gonna skip this.
+    <a href="https://github.com/trongr/trongr.github.io/tree/master/neural-network-course/cs231/assignment1"
+    target="_blank">Refer to source.</a>
+</p>
+
+<p>
+    <img src="images/knncrossdistances.png">
+</p>
+
+<p>
+    The cause for each bright row is that the corresponding test case
+    is very far from most training cases, and each bright column is
+    'cause the corresponding training case is very far from most test
+    cases. Unless I'm missing something and there's a deeper reason.
+</p>
+
+<p>
+    Also, since this metric is calculated by summing over all the
+    pixel differences, the only way that you can get a very large
+    distance between a test and a training image is if most of the
+    pixels in the two images are far apart, i.e. it's the difference
+    in brightness of the images, e.g. one is average lit and the other
+    is very bright or very dark.
 </p>
 
 <div class="clearboth"></div>
@@ -1502,8 +1529,24 @@ Recognition</h1>
 <img src="images/lossrecap.png">
 
 <p>
-    <a href="#ndwobct164">A question I had earlier. . . .</a> And the
-    answer is TODO.
+    <a href="#ndwobct164">A question I had earlier....</a> And the
+    answer is that it's already built into the normalized
+    probabilities
+
+    $$y_k = \frac{e^{s_k}}{\sum_{j=1}^n e^{s_j}}.$$
+
+    More concretely, suppose that $x$ belongs to class $i.$ Now we
+    want to know whether the scores $y_j$ for $j\neq i$ affect the
+    loss function: it looks like it doesn't since the loss only
+    includes the one nonzero term for $i:$
+
+    $$L_x = - \log y_i.$$
+
+    But, remember that the $y_j$'s add up to $1,$ so $y_i$'s goodness
+    is affected by the other $y_j$'s: if $y_i$ is high, the other
+    $y_j$'s must all be low, and conversely if some $y_j$ is high,
+    $y_i$ must be low. Therefore it's enough to have just the one
+    nonzero term in our expression for $L_x.$
 </p>
 
 <h2>Old Pipeline</h2>

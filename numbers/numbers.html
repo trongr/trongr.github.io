@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Number Theory</title>
+<link rel="stylesheet" href="../css/global.css">
+
+<!-- this config must be before MathJax.js: -->
+<script src="../js/mathjax.config.js"></script>
+<script src="../js/MathJax/MathJax.js"></script>
+<!-- <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js"></script> -->
+
+<script src="../js/jquery-3.1.0.min.js"></script>
+<script src="../js/smartquotes.js"></script>
+<script src="../js/global.js"></script>
+
+</head>
+<body>
+<div id="content">
+
+<h1>Number Theory</h1>
+
+<div class="epigraph">
+     <img src="images/ficcal1.png">
+     <div class="quote">
+     </div><hr><div class="author">
+        Calvin and Hobbes
+     </div>
+</div>
+
+<h1>Congruences</h1>
+
+<p>
+    <b>Definition.</b> <i>If a nonzero integer $m$ divides $a-b,$ then
+    we say that $a$ is congruent to $b$ modulo $m$ and write
+
+    $$a \equiv b \mod m.$$</i>
+</p>
+
+<p>
+    <b>Theorem.</b> <i>
+    <ul>
+    <li>Congruence respects addition and multiplication: if $a \eq b
+    \mod m$ and $c \eq d \mod m,$ then
+
+    \begin{align*}
+    a + c &\eq b + d && \mod m \\
+    ac &\eq bd && \mod m.
+    \end{align*}</li>
+    <li>If $a \eq b \mod m$ and $d \mid m,$ then $a \eq b \mod d.$</li>
+    <li>If $a \eq b \mod m$ and $c \neq 0,$ then $ac \eq bc \mod mc.$</li>
+    </ul>
+    </i>
+</p>
+
+<p>
+    Note. We're allowing the divisor $d$ and $mc$ to be negative.
+</p>
+
+<p>
+    <b>Corollary.</b> <i>Let $f$ be a polynomial with integer
+    coefficients. If
+
+    $$a \eq b \mod m$$
+
+    then
+
+    $$f(a) \eq f(b) \mod m.$$</i>
+</p>
+
+<p>
+    <b>Theorem.</b> <i>
+
+    <ul>
+    <li>$ax \eq ay \mod m$ iff $x \eq y \mod \frac{m}{(a, m)}.$</li>
+    <li>Let $(a, m) = 1.$ Then $ax \eq ay \mod m$ iff $x \eq y \mod m.$</li>
+    <li>$x \eq y \mod m_i$ for $i=1:r$ iff $x \eq y \mod [m_1,\ldots,m_r].$</li>
+    <li>If $x \eq y \mod m_i$ for some $i=1:r,$ then $x \eq y \mod (m_1,\ldots,m_r).$</li>
+    </ul></i>
+</p>
+
+<p>
+    The last statement is a bit trivial, included for completeness.
+</p>
+
+<h2>Complete residue system</h2>
+
+<p>
+    <b>Definition.</b> <i>If $x \eq y \mod m,$ then $y$ is called a
+    residue of $x$ modulo $m.$ A set $x_1,\dots,x_m$ is called a
+    complete residue system mod $m$ if for every integer $y$ there is
+    an $x_j$ s.t. $y \eq x_j \mod m.$</i>
+</p>
+
+<p>
+    Note. A set of $m$ integers forms a complete residue system mod
+    $m$ iff all integers in the set are distinct mod $m.$
+</p>
+
+<h1>Reference</h1>
+
+<ol>
+<li>Intro to Number Theory by Niven, Zuckerman and Montgomery.</li>
+<li>Everything else from the web.</li>
+</ol>
+
+</div>
+</body>
+</html>

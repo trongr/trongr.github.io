@@ -16,23 +16,30 @@ window.MathJax = {
         equationNumbers: { autoNumber: "AMS" },
         Macros: {
 
+            // comparison operators
             def: "\\stackrel{\\text{df}}{=}",
+            eq: "\\equiv",
+            normal: "\\trianglelefteq",
+
+            // environments
             bar: ["\\overline{#1}", 1],
 
-            span: "\\mathop{\\rm span}",
-            tr: "\\mathop{\\rm tr}",
-            char: "\\mathop{\\rm char}",
-
+            // functions and operators
             Sum: "\\sum\\limits",
             Prod: "\\prod\\limits",
             Lim: "\\lim\\limits",
             Cup: "\\bigcup\\limits",
             Cap: "\\bigcap\\limits",
+            stab: "\\mathop{\\rm stab}",
             count: "\\mathop{\\rm count}\\limits",
             textsum: "\\mathop{\\rm sum}\\limits",
+            span: "\\mathop{\\rm span}",
+            tr: "\\mathop{\\rm tr}",
+            char: "\\mathop{\\rm char}",
+            mod: "\\bmod",
+            Mod: "\\mod",
 
-            normal: "\\trianglelefteq",
-
+            // symbols
             0: "\\varnothing",
             a: "\\alpha",
             b: "\\beta",
