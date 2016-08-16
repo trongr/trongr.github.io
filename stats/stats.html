@@ -127,7 +127,7 @@
 <h2>Inclusion Exclusion Principle</h2>
 
 <p>
-    <b>Proposition TODO.</b> <i>If $A_1,\ldots, A_n\in \BB$ then
+    <b>Theorem.</b> <i>If $A_1,\ldots, A_n\in \BB$ then
 
     $$P(\cup_i A_i) = \sum_{\L_1} P(\L_1) - \sum_{\L_2} P(\L_2) + \cdots \pm \sum_{\L_n} P(\L_n),$$
 
@@ -136,7 +136,71 @@
     $k$-intersections.</i>
 </p>
 
-<div class="clearboth"></div>
+<p>
+    <b>Theorem.</b> <i>If $P$ is a probability function, then
+
+    <ul>
+    <li>$P(A) = \Sum_{i=1}^\8 P(A \cap C_i)$ for any partition $C_i$ of $\O.$</li>
+    <li>Boole's Inequality: $P(\Cup_{i=1}^\8 A_i) \leq \Sum_{i=1}^\infty A_i$ for any sets $A_i.$</li>
+    </ul></i>
+</p>
+
+<p>
+    <b>Remark.</b> Can get a more general version of Bonferroni from
+    Boole:
+
+    $$P(\cap_{i=1}^n A_i) \geq \sum_{i=1}^n P(A_i) - (n-1).$$
+</p>
+
+<h2>Counting</h2>
+
+<p>
+    The number of ways of choosing $k$ balls from a collection of $n$
+    balls, provided the order matters or not and you can replace
+    selected balls or not:
+</p>
+
+<table>
+  <tr>
+    <td></td>
+    <td>With replacement</td>
+    <td>Without replacement</td>
+  </tr>
+  <tr>
+    <td>Ordered</td>
+    <td>$$n^k$$</td>
+    <td>$$\frac{n!}{(n-k)!} = {n \choose k} k!$$</td>
+  </tr>
+  <tr>
+    <td>Unordered</td>
+    <td class="red">$${n - 1 + k \choose k}$$</td>
+    <td>$${n \choose k}$$</td>
+  </tr>
+</table>
+
+<p>
+    <img src="images/unorderedwithreplacement.PNG">
+</p>
+
+<h3>The end doesn't uniquely identify the means</h3>
+
+<p class="bside">
+    That's a very objective / absolutist approach to probability. I
+    agree, but I still have to wonder whether there's a (correct)
+    subjective / relativistic approach as well. What would that even
+    mean?  Probability is in the eye of the beholder?
+</p>
+
+<p>
+    <i>In order to correctly calculate the probability of an outcome,
+    you have to take into account the whole sequence of events leading
+    up to the outcome and not just the end result:</i>
+</p>
+
+<p>
+    <img src="images/samplingwithreplacement.png">
+</p>
+
 <h1>Reference</h1>
 
 <ol>

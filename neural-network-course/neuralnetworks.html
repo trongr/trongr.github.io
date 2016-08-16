@@ -1072,10 +1072,8 @@ we replace one by the other and still achieve similar results?</i></p>
 </p>
 
 <p>
-    <b>Random TODO.</b> Look up meta neural network.
+    <b>Random.</b> Look up meta neural network.
 </p>
-
-<hr>
 
 <div class="epigraph">
      <img src="images/ff512d50be094b0d3e06e813553e9842-650-80.jpg">
@@ -1098,8 +1096,6 @@ Recognition</h1>
 
 <h1>Overview: Modeling Sequences</h1>
 
-<hr>
-
 <h1>Nearest Neighbour Classifier</h1>
 
 <div class="aside">
@@ -1108,7 +1104,7 @@ Recognition</h1>
     <img src="images/214px-TaxicabGeometryCircle.svg.png">
 </div>
 
-<h2>Manhattan Distance</h2>
+<h3>Manhattan Distance</h3>
 
 <p>
     <b>Definition: Manhattan Metric.</b> <i>The Manhattan, also known
@@ -1118,7 +1114,7 @@ Recognition</h1>
     $$d_1(v, w) = ||v - w||_1 = \sum_i |v_i - w_i|.$$</i>
 </p>
 
-<h2>Euclidean Distance</h2>
+<h3>Euclidean Distance</h3>
 
 <p>
     There's also $L^2,$ which is just normal Euclidean
@@ -1193,12 +1189,12 @@ Recognition</h1>
     predictions.</i>
 </p>
 
+<h1>k-Nearest Neighbour Classifier</h1>
+
 <div class="aside">
     Choice of $k$ is another hyperparameter.
     <img src="images/279px-KnnClassification.svg.png">
 </div>
-
-<h1>k-Nearest Neighbour Classifier</h1>
 
 <p>
     Instead of choosing the nearest neighbour, we choose $k$ nearest
@@ -1232,6 +1228,35 @@ Recognition</h1>
     in brightness of the images, e.g. one is average lit and the other
     is very bright or very dark.
 </p>
+
+<h3>Pair-wise row differences</h3>
+
+<p>
+    Given training data as a matrix $D$ and test data as matrix $T,$
+    where the rows are the cases and columns are the features, in this
+    case pixel RGB values, we want to calculate the distance between
+    each test case and each training case. In other words we want to
+    calculate
+
+    $$|x - y| = \sqrt{(x_1 - y_1)^2 + \cdots + (x_n - y_n)^2}$$
+
+    for all rows $x$ in $D$ and rows $y$ in $T.$ In order to compute
+    this efficiently for all pairs $x, y,$ we need to convert this
+    into a simpler form:
+
+    \begin{align*}
+    |x - y| &= \sqrt{(x_1^2 - 2 x_1 y_1 + y_1^2) + \cdots + (x_n^2 - 2 x_n y_n + y_n^2)} \\
+            &= \sqrt{(x_1^2 + \cdots + x_n^2) - 2(x_1 y_1 + \cdots + x_n y_n) + (y_1^2 + \cdots + y_n^2)},
+    \end{align*}
+
+    so that the full matrix implementation is:
+</p>
+
+<img src="images/knndistances.png">
+
+<h3>Predict Labels</h3>
+
+<img src="images/knnpredictlabels.png">
 
 <div class="clearboth"></div>
 

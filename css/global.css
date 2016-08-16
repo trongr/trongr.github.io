@@ -11,6 +11,16 @@ body {
     max-width: 700px;
 }
 
+table, th, td {
+    margin:0 auto;
+    border: 1px solid white;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+}
+
 pre code {
     font-size: 0.8em;
 }
@@ -29,19 +39,23 @@ a {
 }
 
 h1 {
+    clear: both;
     color: #FFD557;
-    text-align: left;
     border-bottom: 1px solid;
     padding-bottom: 5px;
 }
 
 h2 {
-    color: #FFD557;
+    clear: both;
     font-style: italic;
+    border-bottom: 1px solid;
+    padding-bottom: 5px;
+    color: #FFD557;
 }
 
 h3 {
-
+    color: #FFD557;
+    font-style: italic;
 }
 
 p {
@@ -83,6 +97,18 @@ ol {
 
 #biglist li { /* in index.html */
     margin-left: 40px;
+}
+
+.red {
+    color: #FF5757;
+}
+
+.yellow {
+    color: #FFFF57;
+}
+
+.green {
+    color: #57FF6A;
 }
 
 .epigraph {

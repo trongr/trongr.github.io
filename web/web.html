@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Web Development</title>
+<title>Web & Mobile Development</title>
 <link rel="stylesheet" href="../css/global.css">
 
 <link rel="stylesheet" href="../css/obsidian.min.css">
@@ -23,7 +23,7 @@
 
 <div id="content">
 
-<h1>Web Development</h1>
+<h1>Web & Mobile Development</h1>
 
 <div class="epigraph">
      <div class="quote">
@@ -59,6 +59,22 @@ DELETE
 <h2>Grep</h2>
 
 <h2>FFmpeg</h2>
+
+<h1>Node.js</h1>
+
+<h2>Request</h2>
+
+<pre><code>request.post({
+    url: "http://IP:PORT/asdf",
+    body: {
+        asdf: 123
+    },
+    json: true,
+    timeout: 60 * 1000 // ms
+}, function(er, res, body){
+    if (er) console.log("ERROR", er, body)
+})
+</code></pre>
 
 <h1>MongoDB / Mongoose</h1>
 

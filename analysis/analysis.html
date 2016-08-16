@@ -20,10 +20,59 @@
 
 <h1>Analysis</h1>
 
+<img src="images/23c4bdff2b3ebcb89382735a643aba37bdd5f79d.jpg">
+
 <div class="epigraph">
-    <div class="quote">Be wary of gorgeous view.</div><hr>
-    <div class="author">Dark Souls</div>
+    <div class="quote">Math is a lot like Dark Souls.</div>
+    <div class="author"></div>
 </div>
+
+<h1>Integrals</h1>
+
+<h3 id="agdggi426">Abel's Lemma</h3>
+
+<p>
+    <b>Lemma.</b> <i>Suppose $b_n \geq 0$ is non-increasing, and
+    that
+
+    $$m \leq a_1 + \cdots + a_n \leq M$$
+
+    for all $n.$ Then
+
+    $$b_1 m \leq a_1 b_1 + \cdots + a_n b_n \leq b_1 M.$$</i>
+</p>
+
+<p>
+    <i>Proof.</i> We'll prove the right inequality first cause it's
+    easier:
+
+    $$a_1 b_1 + \cdots + a_n b_n \leq a_1 b_1 + \cdots + a_n b_1 \leq b_1 M.$$
+
+    To prove the left inequality we'll use induction, and to keep
+    things simple we'll first show it for $n=1$ and $2.$ First:
+
+    \begin{align}
+    b_1 m \leq a_1 b_1
+    \label{hsdfb342}
+    \end{align}
+
+    Now we want to show that
+
+    $$b_1 m \leq a_1 b_1 + a_2 b_2.$$
+
+    There are two cases: either $a_2 \geq 0$ or $a_2 < 0.$ If $a_2
+    \geq 0,$ then $a_2 b_2 \geq 0,$ and adding a non-negative number
+    to the RHS of $\ref{hsdfb342}$ doesn't make it less:
+
+    $$b_1 m \leq a_1 b_1 + a_2 b_2.$$
+
+    On the other hand, suppose $a_2 < 0.$ Since $b_1 \geq b_2,$ we
+    have $a_2 b_1 \leq a_2 b_2.$ Therefore
+
+    $$b_1 m \leq a_1 b_1 + a_2 b_1 \leq a_1 b_1 + a_2 b_2.$$
+
+    Keep going like that for $n = 3,4,5,\dots.$ \qed
+</p>
 
 <h1>Polynomial Approximation</h1>
 
@@ -34,16 +83,29 @@
 
 <p>
     <b>Theorem: Taylor's Theorem.</b> <i>If $f', \ldots, f^{(n+1)}$
-are defined on $[a, x],$ then $$f(x) = f(a) + f'(a)(x - a) + \cdots +
-\frac{f^{(n)}(a)}{n!}(x - a)^n + R_n(x)$$ where $R_n(x) =
-\frac{f^{(n+1)}(t)}{(n+1)!}(x - a)^{n+1}$ for some $t$ in $(a,
-x).$</i>
+    are defined on $[a, x],$ then $$f(x) = f(a) + f'(a)(x - a) +
+    \cdots + \frac{f^{(n)}(a)}{n!}(x - a)^n + R_n(x)$$ where
+
+    \begin{align*}
+    R_n(x) &= \frac{f^{(n+1)}(t)}{n!}(x - t)^n (x - a) &&\text{ for some } t \in (a, x) \\
+    R_n(x) &= \frac{f^{(n+1)}(t)}{(n+1)!}(x - a)^{n+1} &&\text{ for some } t \in (a, x).
+    \end{align*}
+
+    If $f^{(n+1)}$ is integrable on $[a, x],$ then
+
+    $$R_n(x) = \int_a^x \frac{f^{(n+1)}(t)}{n!} (x - t)^n dt.$$
+
+    The remainder forms are called Cauchy, Lagrange, and Integral,
+    respectively.</i>
 </p>
 
+<div class="aside">
+    <img src="images/Tayloranimation.gif">
+</div>
+
 <p>
-    <b>Note.</b> The Mean Value Theorem is a special case of Taylor's Theorem:
-$$f(b) = f(a) + f'(c)(b - a)$$
-for some $c$ between $a$ and $b.$
+    The Mean Value Theorem is a special case of Taylor's Theorem:
+    $$f(b) = f(a) + f'(c)(b - a)$$ for some $c$ between $a$ and $b.$
 </p>
 
 <h1>Sequences</h1>
@@ -296,7 +358,7 @@ vanishing.</p>
 <p><b>Proposition.</b> <i>A nonnegative sequence $a_n$ is summable iff
 the partial sums $s_n$ is bounded.</i></p>
 
-<h1>Comparison Tests</h1>
+<h1>Convergence Tests</h1>
 
 <p><b>Theorem.</b> <i>Suppose that $0 \leq a_n \leq b_n$ for all $n.$ If
 $\sum\limits_n b_n$ converges, then so does $\sum\limits_n a_n.$</i></p>
@@ -421,6 +483,159 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
 
 <p>
     <img src="images/improperintegralexistsnolimit.png">
+</p>
+
+<h2>Root Test</h2>
+
+<p>
+    <b>Proposition: root test.</b> <i>Let $a_n > 0$ for all $n,$ and
+    suppose that $$\lim_{n\to\infty} \sqrt[n]{a_n} = r.$$ Then the
+    series
+
+    $$\sum\limits_{n} a_n \text{ is } \begin{cases}
+    \text{convergent if } r < 1 \\
+    \text{divergent if } r > 1.
+    \end{cases}$$
+
+    The test is inconclusive if $r = 1.$</i>
+</p>
+
+<p>
+    <i>Proof.</i> If $r > 1,$ then $a_n > 1$ for sufficiently large
+    $n,$ and so the terms aren't approaching zero and the series
+    diverges. Let $r < 1.$ Then
+
+    $$\lim_{n\to\infty} \sqrt[n]{a_n} = r < 1$$
+
+    means that for any $s \in (r, 1)$ there exists an $N$ s.t. for all $n > N,$
+
+    $$\sqrt[n]{a_n} \leq s, \quad \text{ or } \quad a_n \leq s^n.$$
+
+    Therefore the remainder of the series after $a_N$ is
+
+    $$\sum_{n> N} a_n \leq \sum_{n>N} s^n,$$
+
+    which converges because it's a geometric series.
+</p>
+
+<p>
+    <b>Remark.</b> The ratio test above can be proved similarly.
+</p>
+
+<p>
+    <b>Note.</b> If the ratio test works, then the root test also
+    works, by the following:
+</p>
+
+<p>
+    <b>Lemma: limit of ratios is limit of roots.</b> <i>If $a_n >
+    0$ and
+
+    $$\lim_{n\to\infty} \frac{a_{n+1}}{a_n} = L,$$
+
+    then
+
+    $$\lim_{n\to\infty} \sqrt[n]{a_n} = L.$$</i>
+</p>
+
+<p>
+    <i>Proof.</i> The limit
+
+    $$\lim_{n\to\infty} \frac{a_{n+1}}{a_n} = L$$
+
+    means that for any $\e,$ there is an $N$ s.t. for all $n \geq N,$ we
+    have
+
+    $$L - \e \leq \frac{a_{n+1}}{a_n} \leq L + \e.$$
+
+    Therefore,
+
+    $$(L - \e)^n \leq \frac{a_{N+1}}{a_N} \cdots \frac{a_{N+n}}{a_{N+n-1}}
+    = \frac{a_{N+n}}{a_N} \leq (L + \e)^n \\
+
+    L - \e \leq \sqrt[n]{ \frac{a_{N+n}}{a_N} } \leq L + \e.$$
+
+    In other words,
+
+    $$\lim_{n\to\infty} \sqrt[n]{ \frac{a_{N+n}}{a_N} } = L.$$
+
+    Since $a_N > 0$ is fixed,
+
+    $$\lim_{n\to\infty} \sqrt[n]{a_N} = 1,$$
+
+    and so
+
+    $$\lim_{n\to\infty} \sqrt[n]{ \frac{a_{N+n}}{a_N} }
+    = \lim_{n\to\infty} \sqrt[n]{a_{N+n}}
+    = \lim_{m\to\infty} \sqrt[m]{a_{m}} = L.$$
+</p>
+
+<h3>Partial sums tail bound</h3>
+
+<p>
+    <b>Lemma.</b> <i>If the partial sums are bounded, then so is the
+    tail. Concretely, if
+
+    $$|a_1 + \cdots + a_n| \leq M$$
+
+    for all $n,$ then
+
+    $$|a_k + \cdots + a_n| \leq 2M$$
+
+    for all $k$ and $n.$</i>
+</p>
+
+<p>
+    <i>Proof.</i> Suppose for contradiction that
+
+    $$|a_k + \cdots + a_n| > 2M.$$
+
+    Then, by the reverse triangle inequality,
+
+    \begin{align*}
+    M &\geq |a_1 + \cdots + a_n| \\
+      &\geq |a_k + \cdots + a_n| - |a_1 + \cdots + a_{k-1}| \\
+      &> 2M - M = M,
+    \end{align*}
+
+    contradiction. \qed
+</p>
+
+<p>
+    Combining this bound on the tail with <a href="#agdggi426">Abel's
+    Lemma,</a> we get:
+</p>
+
+<h3>Abel's Lemma Reloaded</h3>
+
+<p>
+    <b>Corollary.</b> <i>Suppose $b_n \geq 0$ is non-increasing, and
+    that
+
+    $$|a_1 + \cdots + a_n| \leq M$$
+
+    for all $n.$ Then
+
+    $$|a_k b_k + \cdots + a_n b_n| \leq 2 b_k M.$$</i>
+</p>
+
+<h3>Dirichlet Test</h3>
+
+<p>
+    <b>Proposition.</b> <i>Suppose that the partial
+    sums of $a_n$ are bounded and that $b_n$ is a sequence with $b_n
+    \geq b_{n+1}$ and $\Lim_{n\to\8} b_n = 0.$ Then $\Sum_{n=1}^\8 a_n
+    b_n$ converges.</i>
+</p>
+
+<p>
+    <i>Proof.</i> By the previous corollary, the tail is bounded:
+
+    $$|a_k b_k + \cdots + a_n b_n| \leq 2 b_k M.$$
+
+    Since $\Lim_{n\to\8} b_n = 0,$ it also vanishes as
+    $k\longrightarrow \8,$ therefore by the cauchy criterion the
+    series converges. \qed
 </p>
 
 <h2>Absolute and Conditional Convergence</h2>
@@ -639,91 +854,6 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
     $$\sum c_n = \sum a_n \cdot \sum b_n.$$</i>
 </p>
 
-<h2>Root Test</h2>
-
-<p>
-    <b>Proposition: root test.</b> <i>Let $a_n > 0$ for all $n,$ and
-    suppose that $$\lim_{n\to\infty} \sqrt[n]{a_n} = r.$$ Then the
-    series
-
-    $$\sum\limits_{n} a_n \text{ is } \begin{cases}
-    \text{convergent if } r < 1 \\
-    \text{divergent if } r > 1.
-    \end{cases}$$
-
-    The test is inconclusive if $r = 1.$</i>
-</p>
-
-<p>
-    <i>Proof.</i> If $r > 1,$ then $a_n > 1$ for sufficiently large
-    $n,$ and so the terms aren't approaching zero and the series
-    diverges. Let $r < 1.$ Then
-
-    $$\lim_{n\to\infty} \sqrt[n]{a_n} = r < 1$$
-
-    means that for any $s \in (r, 1)$ there exists an $N$ s.t. for all $n > N,$
-
-    $$\sqrt[n]{a_n} \leq s, \quad \text{ or } \quad a_n \leq s^n.$$
-
-    Therefore the remainder of the series after $a_N$ is
-
-    $$\sum_{n> N} a_n \leq \sum_{n>N} s^n,$$
-
-    which converges because it's a geometric series.
-</p>
-
-<p>
-    <b>Remark.</b> The ratio test above can be proved similarly.
-</p>
-
-<p>
-    <b>Note.</b> If the ratio test works, then the root test also
-    works, by the following:
-</p>
-
-<p>
-    <b>Lemma: limit of ratios is limit of roots.</b> <i>If $a_n >
-    0$ and
-
-    $$\lim_{n\to\infty} \frac{a_{n+1}}{a_n} = L,$$
-
-    then
-
-    $$\lim_{n\to\infty} \sqrt[n]{a_n} = L.$$</i>
-</p>
-
-<p>
-    <i>Proof.</i> The limit
-
-    $$\lim_{n\to\infty} \frac{a_{n+1}}{a_n} = L$$
-
-    means that for any $\e,$ there is an $N$ s.t. for all $n \geq N,$ we
-    have
-
-    $$L - \e \leq \frac{a_{n+1}}{a_n} \leq L + \e.$$
-
-    Therefore,
-
-    $$(L - \e)^n \leq \frac{a_{N+1}}{a_N} \cdots \frac{a_{N+n}}{a_{N+n-1}}
-    = \frac{a_{N+n}}{a_N} \leq (L + \e)^n \\
-
-    L - \e \leq \sqrt[n]{ \frac{a_{N+n}}{a_N} } \leq L + \e.$$
-
-    In other words,
-
-    $$\lim_{n\to\infty} \sqrt[n]{ \frac{a_{N+n}}{a_N} } = L.$$
-
-    Since $a_N > 0$ is fixed,
-
-    $$\lim_{n\to\infty} \sqrt[n]{a_N} = 1,$$
-
-    and so
-
-    $$\lim_{n\to\infty} \sqrt[n]{ \frac{a_{N+n}}{a_N} }
-    = \lim_{n\to\infty} \sqrt[n]{a_{N+n}}
-    = \lim_{m\to\infty} \sqrt[m]{a_{m}} = L.$$
-</p>
-
 <p>
     <b>Proposition.</b> <i>If $\Sum a_n$ converges absolutely, then
     for any subsequence $b_n$ of $a_n,$ $\Sum b_n$ also converges
@@ -853,6 +983,130 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
 
     Since the sequence $s_n$ is bounded above by $S,$ its limit must
     also be bounded by $S.$ Illuminati Confirmed \qed
+</p>
+
+<h2>Binomial Series</h2>
+
+<p>
+    <b>Definition.</b> <i>For any $\a$ and non-negative integer $n,$ define
+    the binomial coefficient
+
+    $${\a \choose n} = \begin{cases}
+    \frac{\a(\a - 1) \cdots (\a - n + 1)}{n!} & \text{ if } n\neq 0\\
+    1 & \text{ if } n = 0.
+    \end{cases}$$
+    </i>
+</p>
+
+<p>
+    If $\a$ is an integer, then this is the old binomial coefficient
+    for $n \leq \a$ and zero for $n > \a.$ Otherwise it is never zero
+    and alternates in sign for $n > \a.$
+</p>
+
+<p>
+    <b>Proposition.</b> <i>The Taylor polynomial of degree $n$ around
+    $0$ for
+
+    $$f(x) = (1 + x)^\a$$
+
+    is
+
+    $$P_n(x) = \sum_{k=0}^n {\a \choose k} x^k,$$
+
+    with Cauchy and Lagrange remainders
+
+    \begin{align*}
+    R_n(x) &= \a {\a-1 \choose n} \left( \frac{x-t}{1+t} \right)^n x (1+t)^{\a-1} && \text{ for some } t \in (0,x) \text{ or } (x,0) \\
+    R_n(x) &= {\a \choose n+1} x^{n+1} (1+t)^{\a-n-1} && \text{ for some } t \in (0,x) \text{ or } (x,0). \\
+    \end{align*} </i>
+</p>
+
+<h3>Newton's Generalised Binomial Theorem</h3>
+
+<div class="aside">
+    Very cool GIF of Isaac Newton. Gotta learn how to make stuff like
+    this!
+    <img src="images/1d92f6_139c131507b186fa32e4fcc31294a3a0.gif">
+</div>
+<p>
+    <b>Theorem.</b> <i>For any $\a$ and $|x| < 1,$
+
+    $$(1 + x)^\a = \sum_{k=1}^\8 {\a \choose k} x^k.$$</i>
+</p>
+
+<p>
+    <i>Proof.</i> By the previous proposition,
+
+    $$(1 + x)^\a = \sum_{k=0}^n {\a \choose k} x^k + R_n(x),$$
+
+    where $R_n$ is the remainder in Cauchy or Lagrange form. We'll
+    prove the theorem by showing that $R_n(x) \longrightarrow 0$ for
+    $|x| < 1.$
+</p>
+
+<div class="aside">
+    That's a neat trick: sometimes you can show that a sequence $a_n$
+    goes to zero by showing that it's the terms of a convergent series
+    and using a convergence test like the ratio test.
+</div>
+
+<p>
+    By the ratio test, the series
+
+    $$\sum_{k=0}^\8 {\a \choose k} x^k$$
+
+    converges for $|x| < 1.$ In particular, for $|x| < 1,$
+
+    \begin{align}
+    \lim_{n\to\8} {\a \choose n} x^n = 0.
+    \label{iosjdofd34}
+    \end{align}
+</p>
+
+<p>
+    Suppose first that $0 \leq x < 1.$ Then the $t$ in Lagrange's form
+    of the remainder satisfies $0 \leq t < x < 1,$ so
+
+    $$0 < (1 + t)^{\a-n-1} \leq 1$$
+
+    for $n+1 > \a.$ Therefore, by $\ref{iosjdofd34}$,
+
+    $$R_n(x) = {\a \choose n+1} x^{n+1} (1+t)^{\a-n-1} \longrightarrow 0$$
+
+    as $n\longrightarrow \8.$
+</p>
+
+<p>
+    Now suppose that $-1 < x < 0.$ The $t$ in Cauchy's form of the
+    remainder satisfies $-1 < x < t \leq 0.$ It's easy to check that
+
+    $$\left| \frac{x-t}{1+t} \right| = |x|\frac{1-t/x}{1+t} \leq |x| < 1$$
+
+    and
+
+    $$|x(1 + t)^{\a-1}| \leq |x|M = \text{constant},$$
+
+    where $M = \max(1, (1+x)^{\a-1}).$ By $\ref{iosjdofd34}$ again,
+
+    $$\lim_{n\to\8} \a {\a-1 \choose n} \left( \frac{x-t}{1+t} \right)^n = 0,$$
+
+    and therefore
+
+    $$R_n(x) = \a {\a-1 \choose n} \left( \frac{x-t}{1+t} \right)^n x (1+t)^{\a-1} \longrightarrow 0.\qed$$
+</p>
+
+<p>
+    <b>Question.</b> <i>Is there an interpretation for the generalized
+    binomial theorem?</i>
+</p>
+
+<h3>Binomial Approximation</h3>
+
+<p>
+    <b>Corollary.</b> <i>If $x$ is a number close to $0$ and $\a$ is any real number, then
+
+    $$(1 + x)^\a \approx 1 + \a x.$$</i>
 </p>
 
 <h1>Reference</h1>

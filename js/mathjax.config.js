@@ -4,13 +4,19 @@ window.MathJax = {
     tex2jax: {
         inlineMath: [[ '$','$']],
         displayMath:  [['$$','$$']],
-        processEscapes: true
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
     },
     "HTML-CSS": {
         availableFonts: ["TeX"],
     },
     SVG: {
         // font: "STIX-Web"
+        styles: {
+            ".mjx-svg-href": {
+                fill: "red", stroke: "red",
+            },
+        }
     },
     TeX: {
         equationNumbers: { autoNumber: "AMS" },
@@ -20,6 +26,9 @@ window.MathJax = {
             def: "\\stackrel{\\text{df}}{=}",
             eq: "\\equiv",
             normal: "\\trianglelefteq",
+
+            // binary ops
+            ".": "\\cdot",
 
             // environments
             bar: ["\\overline{#1}", 1],
@@ -41,6 +50,7 @@ window.MathJax = {
 
             // symbols
             0: "\\varnothing",
+            8: "\\infty",
             a: "\\alpha",
             b: "\\beta",
             BB: "\\mathbf B",
@@ -54,9 +64,12 @@ window.MathJax = {
             ff: "\\varphi",
             h: "\\eta",
             l: "\\lambda",
+            // ll is <<, do not redefine.
             L: "\\Lambda",
             m: "\\mu",
             NN: "\\mathbf N",
+            o: "\\omega",
+            O: "\\Omega",
             p: "\\pi",
             PP: "\\mathbf P",
             QQ: "\\mathbf Q",
@@ -66,6 +79,7 @@ window.MathJax = {
             t: "\\tau",
             th: "\\theta",
 
+            qed: "\\ \\blacksquare",
         }
     }
 }

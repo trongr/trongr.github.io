@@ -29,7 +29,58 @@
     <div class="quote">Everything should be made as simpa as possiba,
     but no simpla.</div><hr>
     <div class="author">Albert Einstein</div>
+</div><div class="clearboth"></div>
+
+<h1>Uniform Circular Motion</h1>
+
+<p>
+    TODO
+</p>
+
+<h1>Rotation of a Rigid Body</h1>
+
+<div class="aside">
+    <img src="images/Torque_animation.gif">
+<p>
+    <b>*</b> We'll sometimes confuse the symbol for a vector with its
+    magnitude. It's often clear from context.
+</p>
 </div>
+
+<h2>Torque</h2>
+
+<p>
+    <b>Definition.</b> <i>Let $F$ be the force on a rotational rigid
+    body applied at a point a distance $r$ from the pivot. The torque
+    on the body is defined to be
+
+    $$\t = r \times F$$
+
+    with magnitude<b>*</b>
+
+    $$\t = rF\sin \th,$$
+
+    where $\th$ is the angle between $r$ and $F.$</i>
+</p>
+
+<div class="aside">
+<p>
+    Moment arm:
+</p>
+    <img src="images/512px-Moment_arm.svg.png">
+</div>
+<p>
+    We can also define the moment arm $d$ as the line from the pivot
+    to the force perpendicular to it. Then
+
+    $$\t = F r \sin \th = Fd.$$
+</p>
+
+<h2>Angular Acceleration</h2>
+
+<p>
+    TODO
+</p>
 
 <h1>Electricity and Magnetism</h1>
 
@@ -143,12 +194,16 @@
 </p>
 
 <div class="bside">
-    <b>Question.</b> What happens when they aren't?
+    <b>Question.</b> What happens when they aren't?---Ah, if they
+    aren't at first they will be. That doesn't exactly answer the
+    question but at least you know what ultimately
+    happens. <a href="#fneorbqh347255">See the water bottle.</a>
 </div>
 
 <p>
     <i>Proof.</i> For simplicity assume the dipole and the test charge
-    are aligned horizontally,* so let the charge configuration be as follows:
+    are aligned horizontally,<b>*</b> so let the charge configuration
+    be as follows:
 </p>
 
 <img src="images/inversecubedipole.png">
@@ -390,11 +445,35 @@
     in between, which I hadn't expected!
 </p>
 
-<h2>Example. Uniformly Charged Disk and Infinite Uniformly Charged Plane</h2>
+<div class="clearboth"></div>
+
+<div class="bside">
+    <img src="images/ringofchargeoscillator.png">
+</div>
+
+<p>
+    <b>Exercise.</b> The ring of charge has field
+
+    $$E = \frac{KQz}{(R^2 + z^2)^{3/2}},$$
+
+    so for $z \ll R,$ the force is
+
+    $$F \approx \frac{KQqz}{R^3}.$$
+
+    This is exactly Hooke's law for a spring with spring constant $k =
+    \frac{KQq}{R^3},$ which we already know undergoes harmonic
+    oscillation with frequency
+
+    $$f = \frac{1}{2\pi} \sqrt{\frac{k}{m}} = \frac{1}{2\pi} \sqrt{\frac{KQq}{m R^3}}.$$
+</p>
+
+<div class="clearboth"></div>
 
 <div class="aside">
     <img src="images/uniformlychargeddisk.png">
 </div>
+
+<h2>Example. Uniformly Charged Disk and Infinite Uniformly Charged Plane</h2>
 
 <p>
     First we'll calculate the field for a ring on the disk, then
@@ -413,8 +492,8 @@
     disk:
 
     \begin{align*}
-    E &= \int_0^R \frac{K2\p\h r z dr}{(r^2 + z^2)^{3/2}} \\
-      &= - \left.\frac{2\p\h K z}{\sqrt{r^2 + z^2}}\right|_0^R \\
+    E &= \int_0^R \frac{K2\p\h r z dr}{(r^2 + z^2)^{3/2}}
+       = - \left.\frac{2\p\h K z}{\sqrt{r^2 + z^2}}\right|_0^R \\
       &= - \frac{2\p \h K z}{\sqrt{R^2 + z^2}} + \frac{2\p \h K z}{\sqrt{z^2}} \\
       &= 2\p \h K \left[1 - \frac{z}{\sqrt{R^2 + z^2}}\right].
     \end{align*}
@@ -425,8 +504,8 @@
 </p>
 
 <div class="aside">
-    <a href="images/algebraicsigmoid.png" target="_blank">A sigmoid
-    function!</a>
+    A sigmoid function!
+    <img src="images/algebraicsigmoid.png">
 </div>
 
 <p>
@@ -469,7 +548,10 @@
 
     $$dE = \frac{K2\p\h r dr z}{(r^2 + z^2)^{3/2}} = 0.$$
 
-    Plus it's also obvious by symmetry.
+    Plus it's also obvious by symmetry. Just kinda odd that nature
+    allows such sharp jumps. But of course this isn't nature: in real
+    life a test charge would never get to $z=0$---there'd be something
+    in the way. Postulative speculations!
 </p>
 
 <p>
@@ -498,8 +580,6 @@
     Therefore $E$ varies as $1/z^2$ for $z \gg R,$ i.e. the uniformly
     charged disk acts like a point charge far away.
 </p>
-
-<img src="images/Alpha-Centauri-cropped.jpg">
 
 <div class="aside">
 <p>
@@ -530,6 +610,28 @@
 </p>
 </div>
 
+<img src="images/Alpha-Centauri-cropped.jpg">
+
+<div class="aside">
+    <img src="images/parallelplatecapacitor.png">
+
+    <p>
+        Capacitors are used to bend electrons, e.g. to make CRT
+        TV's. Ferdinand Braun's cold-cathode CRT, 1897. Eighteen
+        ninety-seven! Looks like it only has the vertical capacitor.
+    </p>
+
+    <img src="images/Braun_cathode_ray_tube.jpg">
+
+    <p>
+        Also used to make electrostatic ink-jet printers: a capacitor
+        steers charged ink drops up and down while the print line
+        scans horizontally. Genius, these muggles.
+    </p>
+</div>
+
+<img src="images/tumblr_mvpiqzflwa1sit1clo1_500.gif">
+
 <h2>Parallel Plate Capacitor</h2>
 
 <p>
@@ -543,17 +645,7 @@
     each other out.</i>
 </p>
 
-<div class="aside">
-    <img src="images/parallelplatecapacitor.png">
-
-    <p>
-        Capacitors are used to bend electrons, e.g. to make CRT
-        TV's. Ferdinand Braun's cold-cathode CRT, 1897. Eighteen
-        ninety-seven! Looks like it only has the vertical capacitor.
-    </p>
-
-    <img src="images/Braun_cathode_ray_tube.jpg">
-</div>
+<div class="clearboth"></div>
 
 <h2>Uniformly Charged Sphere</h2>
 
@@ -564,12 +656,12 @@
 <h2>Uniformly Charged Ball</h2>
 
 <p>
-    <b>TODO.</b>
+    <b>TODO.</b> This one too!
 </p>
 
 <p>
     We never do any ununiformly charged object. Hard to describe them
-    at this point.
+    at this point. <b>Question.</b> <i>Do they even exist?</i>
 </p>
 
 <h2>Charge to Mass Ratio</h2>
@@ -583,15 +675,75 @@
     and follow the same trajectory.</i>
 </p>
 
+<div class="aside">
 <p>
+    The iron filings are magnetic dipoles, therefore there's no net
+    force on them, which is why they stay in one place.
+</p>
+    <img src="images/Placing-powerful-squire-magnet-in-center-of-iron-dust-looks-like-Kabbah.jpg">
+<p id="fneorbqh347255">
+    <b>Question.</b> <i>Why is an iron filing's dipole axis always
+    aligned along the length? Kinda odd.</i>
+</p>
+<p>
+    Maybe it's kinda like how a half filled bottle always floats with
+    the length vertical. When there's no gravity, the positive water
+    and the negative air in the bottle can be in any arrangement. But
+    once you introduce a force field, the water will be pushed down
+    stream, and the water in turn pushes one end of the bottle to
+    align it vertically:
+</p>
+    <img src="images/waterbottledipole.png">
+</div>
 
+<h2>Dipoles in a uniform field</h2>
+
+<p>
+    There is no net force on a dipole in a (globally---what about
+    locally?) uniform electric field, because the positive end is
+    pushed down stream, while the negative end is pulled up stream.
 </p>
 
-<h1>Electric Flux</h1>
+<p>
+    The torque on the dipole is due to the two forces $F = qE$ on the
+    two ends of the dipole. Therefore
 
+    \begin{align*}
+    \t = 2dF &= 2 (\tfrac{1}{2} s \sin \th) qE \\
+             &= qs E \sin \th \\
+             &= p E \sin \th \\
+             &= p \times E,
+    \end{align*}
 
+    where $p \def qs$ is called the dipole moment. (The torque as
+    drawn in the diagram points into the page.)
+</p>
+
+<div class="aside">
+    Dipole moment
+    <img src="images/torquedipolemoment.png">
+</div>
+
+<div class="clearboth"></div>
+
+<h2>Dipole in Nonuniform Electric Field</h2>
+
+<p>
+    Dipoles are attracted to the source of the stronger field. WOW
+    dipoles are universal attractors. That's a very useful skill.
+</p>
+
+<div class="box">
+    <b>Question.</b> <i>I wonder if gravity's like that.</i>
+</div>
+
+<div>
+    <img src="images/dipolenonuniformfield.png">
+</div>
 
 <h1>Gauss's Law</h1>
+
+asdf
 
 <h1>Reference</h1>
 

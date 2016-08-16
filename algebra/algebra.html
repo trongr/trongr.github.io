@@ -33,12 +33,12 @@
 
 <p>
     <b>Definition.</b> <i>A group action of a group $G$ on a set $A$
-    is a map from $G\times A$ to $A,$ written as $g \cdot a$ for all
+    is a map from $G\times A$ to $A,$ written as $g \. a$ for all
     $g\in G, a\in A$ satisfying:
 
     <ul>
-    <li>$g_1 \cdot (g_2 \cdot a) = (g_1g_2) \cdot a$ for all $g_1,g_2\in G, a\in A.$</li>
-    <li>$1 \cdot a = a$ for all $a \in A.$</li>
+    <li>$g_1 \. (g_2 \. a) = (g_1g_2) \. a$ for all $g_1,g_2\in G, a\in A.$</li>
+    <li>$1 \. a = a$ for all $a \in A.$</li>
     </ul></i>
 </p>
 
@@ -46,7 +46,7 @@
     <b>Theorem.</b> <i>Let $G$ act on $A,$ and let $g$ be a fixed
     element of $G.$ Define the map $\s_g: A \longrightarrow A$ by
 
-    $$\s_g(a) = g \cdot a.$$
+    $$\s_g(a) = g \. a.$$
 
     Then:
 
@@ -69,7 +69,7 @@
 
     i.e. it's the set
 
-    $$\left\{ g \in G : \s_g(a) = g \cdot a = a \text{ for all } a\in A \right\},$$
+    $$\left\{ g \in G : \s_g(a) = g \. a = a \text{ for all } a\in A \right\},$$
 
     in other words elements that fix all $a \in A.$</i>
 </p>
@@ -100,7 +100,7 @@
     let $s$ be some fixed element of $S.$ The stabilizer of $s$ in $G$
     is the set
 
-    $$\stab_G(s) = \left\{ g \in G : g \cdot s = s \right\}.$$</i>
+    $$\stab_G(s) = \left\{ g \in G : g \. s = s \right\}.$$</i>
 </p>
 
 <p>
@@ -108,17 +108,17 @@
     let $G$ act by conjugation on the power set $\PP(G)$ consisting of
     all subsets of $G,$ so that for each $g\in G$ and $A \in \PP(G),$
 
-    $$g \cdot A = gAg^{-1}.$$
+    $$g \. A = gAg^{-1}.$$
 
     Then the stabilizer of $A$ under this action is
 
-    $$\stab_G(A) = \left\{ g \in G : g\cdot A = gAg^{-1} = A \right\} = N_G(A).$$
+    $$\stab_G(A) = \left\{ g \in G : g\. A = gAg^{-1} = A \right\} = N_G(A).$$
 </p>
 
 <p>
     Let's see what the kernel of this action looks like:
 
-    $$\ker(G, \PP(G)) = \left\{ g \in G : g \cdot A = gAg^{-1} = A \text{ for all } A\in\PP(G) \right\},$$
+    $$\ker(G, \PP(G)) = \left\{ g \in G : g \. A = gAg^{-1} = A \text{ for all } A\in\PP(G) \right\},$$
 
     or elements in $G$ that normalize all subsets of $G.$ Since
     elements of $Z(G) = C_G(G)$ commute with all elements of $G,$
@@ -138,7 +138,7 @@
     Next we'll show that centralizers are kernels of actions: let
     $N_G(A)$ act on $A$ by conjugation. The kernel is
 
-    $$\ker(N_G(A), A) = \left\{ g \in N_G(A) : g \cdot a = gag^{-1} = a \text{ for all } a \in A \right\}
+    $$\ker(N_G(A), A) = \left\{ g \in N_G(A) : g \. a = gag^{-1} = a \text{ for all } a \in A \right\}
         = C_{N_G(A)}(A),$$
 
     i.e. elements in $N_G(A)$ that commute with all elements in $A.$
@@ -154,7 +154,7 @@
     While we're at it let's also calculate the stabilizer of an
     element $a \in A:$
 
-    $$\stab_{N_G(A)}(a) = \left\{ g \in N_G(A) : g\cdot a = gag^{-1} = a \right\} = C_{N_G(A)}(a),$$
+    $$\stab_{N_G(A)}(a) = \left\{ g \in N_G(A) : g\. a = gag^{-1} = a \right\} = C_{N_G(A)}(a),$$
 
     i.e. elements in $N_G(A)$ that commute with $a.$
 </p>
@@ -163,8 +163,8 @@
     Finally for completeness let $C_G(A)$ act on $A$ by conjugation. Then
 
     \begin{align*}
-    \ker(C_G(A), A) &= \left\{ g \in C_G(A) : g\cdot a = gag^{-1} = a \text{ for all } a\in A\right\} = C_G(A) \\
-    \stab_{C_G(A)}(a) &= \left\{ g \in C_G(A) : g\cdot a = gag^{-1} = a \right\}.
+    \ker(C_G(A), A) &= \left\{ g \in C_G(A) : g\. a = gag^{-1} = a \text{ for all } a\in A\right\} = C_G(A) \\
+    \stab_{C_G(A)}(a) &= \left\{ g \in C_G(A) : g\. a = gag^{-1} = a \right\}.
     \end{align*}
 </p>
 
