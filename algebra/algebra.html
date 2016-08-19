@@ -194,6 +194,114 @@
     $$\ker(\ff, G, A) = \Cap_{a\in A} \stab_G(a).$$</i>
 </p>
 
+<h3>Cosets of a kernel</h3>
+
+<p>
+    <b>Proposition.</b> <i>Let $\ff : G \longrightarrow H$ be a
+    homomorphism with kernel $K.$ Let $X \in G/K$ be the fiber above
+    $a,$ i.e. $X = \ff^{-1}(a).$ Then for any $u \in X,$
+
+    $$X = u K = K u,$$
+
+    i.e. every fiber is represented by any of its element modulo the
+    kernel of the homomorphism.
+    </i>
+</p>
+
+<div class="epigraph">
+     <img src="images/923.jpg">
+     <div class="quote">
+        Young man, in mathematics you don't understand things. You
+        just remember lots of examples.
+     </div><hr><div class="author">John von Neumann</div>
+</div>
+<div class="clearboth"></div>
+
+<h3>Modular Arithmetic</h3>
+
+<p>
+    <b>Example.</b> Let $G = \ZZ, H = \ZZ/10\ZZ = \left\{ 0:9
+    \right\},$ and $\ff : G \longrightarrow H$ such that
+
+    $$\ff(m) = \bar{m} = m \mod 10.$$
+
+    Then
+
+    \begin{align*}
+    \ker \ff = K &= \text{ integers congruent 0 mod 10} \\
+                 &= \left\{ \dots, -10, 0, 10, 20, 30, \dots \right\}
+    \end{align*}
+
+    and the fiber $X$ above $\bar{1} \in H$ is the set of integers
+    congruent $1\mod 10,$ and
+
+    \begin{align*}
+    X &= 1 + K \\
+      &= 11 + K \\
+      &= 21 + K \\
+      &= \text{etc.}
+    \end{align*}
+</p>
+
+<h3>$G/K$ is a group for kernel $K$</h3>
+
+<p>
+    <b>Proposition.</b> <i>Let $G$ be a group and $K$ be the kernel of
+    some homomorphism from $G$ to another group. Then the set $G/K$ of
+    left cosets of $K$ with operation defined by
+
+    $$uK \cdot vK = (uv)K$$
+
+    is a group. Same for the set $G/K$ of right cosets of $K.$</i>
+</p>
+
+<p>
+    <b>Proposition.</b> <i>Let $N \leq G.$ The set of left cosets of
+    $N$ form a partition of $G.$ Furthermore, for any $u, v\in G,$
+
+    $$uN = vN \quad\text{ iff }\quad v^{-1}u \in N,$$
+
+    and in particular iff $u$ and $v$ are representatives of the same
+    coset.</i>
+</p>
+
+<p>
+    <b>Example.</b> Let $N = \ZZ/4\ZZ.$ The left cosets of $N$ are
+
+    \begin{align*}
+    0 + N &= \left\{ \dots, -4, 0, 4, 8,\dots \right\} \\
+    1 + N &= \left\{ \dots, -3, 1, 5, 9,\dots \right\} \\
+    2 + N &= \left\{ \dots, -2, 2, 6, 10,\dots \right\} \\
+    3 + N &= \left\{ \dots, -1, 3, 7, 11,\dots \right\}
+    \end{align*}
+
+    and e.g.
+
+    $$5 + N = 1 + N,$$
+
+    integers congruent to 1 mod 4, because
+
+    $$-1 + 5 \equiv 0 \mod 4,$$
+
+    or in other words
+
+    $$-1 + 5 \in N.$$
+</p>
+
+<p>
+    <b>Proposition.</b> <i>Let $N \leq G.$
+
+    <ul>
+    <li>The operation on $G/N$ given by
+
+    $$uN \cdot vN = (uv)N$$
+
+    is well defined iff $gng^{-1} \in N$ for all $g \in G$ and $n \in
+    N,$ i.e. iff $N \normal G.$</li>
+    <li>If this operation is well defined, then $G/N$ is a group.</li>
+    </ul></i>
+</p>
+
 <h2>Equivalent Formulations of a Normal Subgroup</h2>
 
 <p>
@@ -208,7 +316,45 @@
     </ul></i>
 </p>
 
+<p>
+    <b>Proposition.</b> <i>A subgroup $N \leq G$ is normal iff it is
+    the kernel of some homomorphism.</i>
+</p>
 
+<p>
+    Given a homomorphism $\ff: G \longrightarrow H,$ we can find its
+    kernel $K,$ which is normal in $G$ and so $G/K$ is a group and is
+    isomorphic to the image of $G$ under $\ff:$
+
+    $$G/K \cong \ff(G).$$
+
+    This means that if we want to study images of $G$ under any
+    homomorphism $\ff,$ we can just study $G/K.$ It also means that
+    all the homomorphisms we can define on $G$ are determined by the
+    structures of $G/K$ for $K \normal G,$ i.e. of $G$ and its normal
+    subgroups.
+</p>
+
+<p>
+    <b>Question.</b> <i>Are there groups so different that you can't
+    define any nontrivial homomorphism between them?</i>
+</p>
+
+<p>
+    <b>Example.</b> Ah yes: there is no nontrivial homomorphism of
+    $Z_2$ into $\ZZ$ or vice versa because $Z_2$ has an element of
+    order $2$ and $\ZZ$ doesn't.
+</p>
+
+<h3>Examples of normal subgroups and quotients</h3>
+
+<p>
+    <b>Example.</b> $1, G \normal G, G \cong G/1, 1 \cong G/G.$
+</p>
+
+<p>
+    <b>Example.</b>
+</p>
 
 <h1>Reference</h1>
 

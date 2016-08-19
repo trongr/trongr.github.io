@@ -27,6 +27,47 @@
     <div class="author"></div>
 </div>
 
+<h1>Trigonometric Functions</h1>
+
+<h3 id="hsdgb3662">Lagrange's Trigonometric Identities</h3>
+
+<div class="aside">
+    The functions
+
+    $$1 + 2 \sum_{k=1}^n \cos kx = \frac{\sin(n + \frac{1}{2})x}{\sin \frac{x}{2}}$$
+
+    are also called the Dirichlet kernel, used in Fourier analysis.
+
+    <img src="images/Dirichlet_kernel_anime.gif">
+</div>
+<p>
+    <b>Proposition.</b> <i>
+
+    \begin{align*}
+    \frac{1}{2} + \sum_{k=1}^n \cos kx &= \frac{\sin(n + \frac{1}{2})x}{2\sin \frac{x}{2}} \\
+    \sum_{k=1}^n \sin kx &= \frac{\sin \frac{n+1}{2}x \sin \frac{n}{2}x}{\sin \frac{x}{2}}.
+    \end{align*}
+    </i>
+</p>
+
+<p>
+    <i>Proof.</i> We'll just prove the first one, the second is
+    similar. A well known trigonometric identity says that
+
+    $$2 \cos \th \sin \ff = \sin(\th + \ff) - \sin(\th - \ff),$$
+
+    so that
+
+    $$2 \cos kx \sin \frac{x}{2} = \sin(k + \tfrac{1}{2})x - \sin(k - \tfrac{1}{2})x.$$
+
+    Summing up both sides for $k = 1:n$ gives
+
+    \begin{align*}
+    \sum_{k=1}^n 2 \cos kx \sin \frac{x}{2} &= \sin(n+\tfrac{1}{2})x - \sin\frac{x}{2} \quad \text{ (RHS telescopes)} \\
+    \frac{1}{2} + \sum_{k=1}^n \cos kx &= \frac{\sin(n + \frac{1}{2})x}{2\sin \frac{x}{2}}. \qed
+    \end{align*}
+</p>
+
 <h1>Integrals</h1>
 
 <h3 id="agdggi426">Abel's Lemma</h3>
@@ -573,8 +614,8 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
 <h3>Partial sums tail bound</h3>
 
 <p>
-    <b>Lemma.</b> <i>If the partial sums are bounded, then so is the
-    tail. Concretely, if
+    <b>Lemma.</b> <i>If the partial sums are bounded, then so are the
+    tails. Concretely, if
 
     $$|a_1 + \cdots + a_n| \leq M$$
 
@@ -616,7 +657,10 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
 
     for all $n.$ Then
 
-    $$|a_k b_k + \cdots + a_n b_n| \leq 2 b_k M.$$</i>
+    $$|a_k b_k + \cdots + a_n b_n| \leq 2 b_k M,$$
+
+    i.e. if the partial sums of a series are bounded, then the
+    squeezed tails are also bounded.</i>
 </p>
 
 <h3>Dirichlet Test</h3>
@@ -636,6 +680,46 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
     Since $\Lim_{n\to\8} b_n = 0,$ it also vanishes as
     $k\longrightarrow \8,$ therefore by the cauchy criterion the
     series converges. \qed
+</p>
+
+<h3>Corollary. Leibniz's Alternating Series Theorem</h3>
+
+<p>
+    We can use Dirichlet's test to give another proof
+    of <a href="#bsdjskb31">Leibniz's theorem below.</a>
+</p>
+
+<p>
+    <i>Proof.</i> Take
+
+    $$a_n = (-1)^{n+1}, \quad b_n \geq b_{n+1} \quad
+        \text{ and } \quad \Lim_{n\to\8} b_n = 0.$$
+
+     Then the alternating series
+
+    $$\sum_{n=1}^\8 (-1)^{n+1} b_n$$
+
+    converges. \qed
+</p>
+
+<p>
+    <b>Exercise.</b> <i>The series
+
+    $$\sum_{n=1}^\8 \frac{\cos nx}{n}$$
+
+    converges iff $x$ is not of the form $2k\pi.$</i>
+</p>
+
+<p>
+    <i>Proof.</i> By <a href="#hsdgb3662">Lagrange's trigonometric
+    identity,</a> the partial sums
+
+    $$\sum_{n=1}^N \cos nx = \frac{\sin(N + \frac{1}{2})x}{2\sin \frac{x}{2}} - \frac{1}{2}$$
+
+    are bounded, and $\frac{1}{n} \longrightarrow 0,$ so by
+    Dirichlet's test the series converges if $x \neq 2k\pi.$ If $x =
+    2k\pi,$ then $\cos nx = 1$ and this becomes the harmonic series,
+    which we know diverges. \qed
 </p>
 
 <h2>Absolute and Conditional Convergence</h2>
@@ -668,7 +752,7 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
     <img src="images/alternatingseries.png">
 </div>
 
-<p>
+<p id="bsdjskb31">
     <b>Leibniz's Alternating Series Theorem.</b> <i>Suppose that
 
     $$a_1 \geq a_2 \geq \cdots \geq 0$$
@@ -724,14 +808,14 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
     $$|a_2 - \cdots \pm a_i|.$$
 
     Here we see that even when the even terms are as big as possible,
-    the entire series can never get past its original value $a_1.$
+    the entire series can never get past its original value $a_1.$ \qed
 </p>
 
 <p id="ijfasdf09234">
-    <b>Note.</b> Using this estimate we can give a quick proof of
-    Leibniz's theorem above: since the remainder is bounded by $a_N
-    \longrightarrow 0,$ it too approaches zero, and so the series
-    converges by the Cauchy Criterion.
+    <i>Proof of Leibniz.</i> Using this estimate we can give a quick
+    proof of Leibniz's theorem above: since the remainder is bounded
+    by $a_N \longrightarrow 0,$ it too approaches zero, and so the
+    series converges by the Cauchy Criterion. \qed
 </p>
 
 <h2>Rearrangement Theorems</h2>

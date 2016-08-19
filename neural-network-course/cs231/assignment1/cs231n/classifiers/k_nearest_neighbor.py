@@ -178,3 +178,12 @@ class KNearestNeighbor(object):
       counts = np.bincount(closest_y)
       y_pred[i] = np.argmax(counts)
     return y_pred
+
+def trainAndValidate(X_train, y_train, X_val, y_val, k):
+    classifier = KNearestNeighbor()
+    classifier.train(X_train, y_train)
+    dists = classifier.compute_distances_no_loops(X_val)
+    y_val_pred = classifier.predict_labels(dists, k)
+    num_correct = np.sum(y_val_pred == y_val)
+    num_val = len(y_val)
+    return float(num_correct) / num_val

@@ -39,6 +39,8 @@
 
 <h1>Rotation of a Rigid Body</h1>
 
+<h2>Torque</h2>
+
 <div class="aside">
     <img src="images/Torque_animation.gif">
 <p>
@@ -46,8 +48,6 @@
     magnitude. It's often clear from context.
 </p>
 </div>
-
-<h2>Torque</h2>
 
 <p>
     <b>Definition.</b> <i>Let $F$ be the force on a rotational rigid
@@ -89,11 +89,11 @@
     become positively charged when rubbed with wool and silk?</i>
 </p>
 
+<h2>Insulators and Conductors</h2>
+
 <div class="aside">
     <img src="images/sg3p.jpg">
 </div>
-
-<h2>Insulators and Conductors</h2>
 
 <p>
     The third prong of the plug in electrical sockets connect to a
@@ -101,13 +101,13 @@
     building, to ground appliances. Didn't know that!
 </p>
 
+<h1>Coulomb's Law</h1>
+
 <div class="aside">
     <img src="images/PPNFRux.jpg">
     Coulomb's constant in Fallout 4. Who said video games were a waste
     of time!
 </div>
-
-<h1>Coulomb's Law</h1>
 
 <p>
     <b>Coulomb's Inverse Square Law.</b> <i>Two charges Q and q a
@@ -391,11 +391,11 @@
     $1/r,$ whereas that of a finite wire varies as $1/r^2.$
 </p>
 
+<h2>Example. Uniformly Charged Ring</h2>
+
 <div class="aside">
     <img src="images/ringcharge.png">
 </div>
-
-<h2>Example. Uniformly Charged Ring</h2>
 
 <p>
     Remember the ring has no width: it's just the perimeter of a
@@ -467,13 +467,11 @@
     $$f = \frac{1}{2\pi} \sqrt{\frac{k}{m}} = \frac{1}{2\pi} \sqrt{\frac{KQq}{m R^3}}.$$
 </p>
 
-<div class="clearboth"></div>
+<h2>Example. Uniformly Charged Disk and Infinite Uniformly Charged Plane</h2>
 
 <div class="aside">
     <img src="images/uniformlychargeddisk.png">
 </div>
-
-<h2>Example. Uniformly Charged Disk and Infinite Uniformly Charged Plane</h2>
 
 <p>
     First we'll calculate the field for a ring on the disk, then
@@ -597,10 +595,8 @@
 </p>
 
 <p>
-    That's kinda obvious now that I said it out loud.
+    That's kinda obvious huh.
 </p>
-
-<img src="images/no_shit.png">
 
 <p>
     <b>Corollary.</b> <i>Gravity won't suddenly change its variability
@@ -661,7 +657,8 @@
 
 <p>
     We never do any ununiformly charged object. Hard to describe them
-    at this point. <b>Question.</b> <i>Do they even exist?</i>
+    at this point. <b>Question.</b> <i>Do they even exist?</i> Cause
+    you'd imagine that it'd spread out.
 </p>
 
 <h2>Charge to Mass Ratio</h2>
@@ -674,6 +671,8 @@
 
     and follow the same trajectory.</i>
 </p>
+
+<h2>Dipoles in a uniform field</h2>
 
 <div class="aside">
 <p>
@@ -695,8 +694,6 @@
 </p>
     <img src="images/waterbottledipole.png">
 </div>
-
-<h2>Dipoles in a uniform field</h2>
 
 <p>
     There is no net force on a dipole in a (globally---what about
@@ -743,7 +740,52 @@
 
 <h1>Gauss's Law</h1>
 
-asdf
+<p class="aside">
+    Whoa, group theory!
+</p>
+
+<img src="images/symmetries.png">
+
+<h2>Flux</h2>
+
+<div class="bside">
+    <img src="images/eflux.png">
+</div>
+
+<p>
+    <b>Definition.</b> <i>The electric flux of a constant electric
+    field $E$ through a planar area $A$ is defined to be
+
+    $$\F = E \cdot A = E A \cos \th$$
+
+    where $\th$ is the angle between $E$ and $A.$</i>
+</p>
+
+<p>
+    <b>Definition.</b> <i>The flux of an arbitrary electric field $E$
+    through any surface $A$ is
+
+    $$\F = \int_A E \cdot dA.$$</i>
+</p>
+
+<p>
+    <b>Example.</b> If the field is constant on the surface, so that
+    the magnitude $E$ and $\th$ are both constant, then we can move $E
+    \cos \th$ out of the integral:
+
+    $$\F = \int_A E \cos \th\ dA = E \cos \th \int_A dA = E A \cos \th,$$
+
+    which is the same as for the flat surface. In particular, if the
+    field is tangent to the surface, i.e. it's perpendicular to the
+    normal of $A,$ so that $\cos \th = 0,$ then
+
+    $$\F = 0.$$
+
+    On the other hand, if the field is perpendicular to $A,$
+    i.e. parallel to the normal, then $\cos \th = 1$ and
+
+    $$\F = EA.$$
+</p>
 
 <h1>Reference</h1>
 

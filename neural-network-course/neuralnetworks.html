@@ -7,7 +7,6 @@
 
 <link rel="stylesheet" href="../css/obsidian.min.css">
 <script src="../js/highlight.min.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
 
 <!-- this config must be before MathJax.js: -->
 <script src="../js/mathjax.config.js"></script>
@@ -1209,6 +1208,8 @@ Recognition</h1>
     target="_blank">Refer to source.</a>
 </p>
 
+<h2>k-Nearest Neighbours</h2>
+
 <p>
     <img src="images/knncrossdistances.png">
 </p>
@@ -1257,6 +1258,65 @@ Recognition</h1>
 <h3>Predict Labels</h3>
 
 <img src="images/knnpredictlabels.png">
+
+<h3>Cross Validation</h3>
+
+<p>
+    Simple implementation using only one fold to train and the last fold to validate:
+</p>
+
+<p>
+    <img src="images/knncrossvalidation.png">
+</p>
+
+<p>
+    Slightly improved implementation: use $i$-th fold as validation
+    and remaining four folds as training data. Yields $0.282$ accuracy
+    on test set with best $k = 10.$
+</p>
+
+<p>
+    <pre><code class="lang-python">num_folds = 5
+k_choices = [1, 3, 5, 8, 10, 12, 15, 20, 50, 100]
+
+X_train_folds = []
+y_train_folds = []
+
+X_train_folds = np.array_split(X_train, num_folds)
+y_train_folds = np.array_split(y_train, num_folds)
+
+k_to_accuracies = {}
+
+def trainAndValidate(X_train, y_train, X_val, y_val, k):
+    classifier = KNearestNeighbor()
+    classifier.train(X_train, y_train)
+    dists = classifier.compute_distances_no_loops(X_val)
+    y_val_pred = classifier.predict_labels(dists, k)
+    num_correct = np.sum(y_val_pred == y_val)
+    num_val = len(y_val)
+    return float(num_correct) / num_val
+
+for k in k_choices:
+    k_to_accuracies[k] = []
+    for i in xrange(num_folds):
+        Xtr = np.concatenate(X_train_folds[:i] + X_train_folds[i+1:], axis=0)
+        ytr = np.concatenate(y_train_folds[:i] + y_train_folds[i+1:], axis=0)
+        Xval = X_train_folds[i]
+        yval = y_train_folds[i]
+        k_to_accuracies[k].append(trainAndValidate(Xtr, ytr, Xval, yval, k))
+
+for k in sorted(k_to_accuracies):
+    for accuracy in k_to_accuracies[k]:
+        print 'k = %d, accuracy = %f' % (k, accuracy)
+</code></pre>
+</p>
+
+<p class="center">
+    <img src="images/knncrossdistancesplot.png">
+    Best $k = 10.$
+</p>
+
+asdf
 
 <div class="clearboth"></div>
 
@@ -1390,10 +1450,17 @@ Recognition</h1>
 
 <img src="images/svmloss.png">
 
+<div class="bside">
+    Here we're using a linear SVM loss function.
+</div>
 <p>
     <b>Intuition.</b> The output
 
-    $$s = f(x, W)$$
+    $$s = f(x, W) = Wx = \begin{bmatrix}
+    s_1 \\
+    \vdots \\
+    s_n
+    \end{bmatrix}$$
 
     is a vector representing the scores for
     $x_i$ belonging to the different classes, i.e. $s_j$ is a
@@ -1437,6 +1504,18 @@ Recognition</h1>
     The rest is straight forward: we just add up all the losses $L_i$
     over the predictions, and average<b>**</b> $L_i$ over all inputs
     $x_i.$
+</p>
+
+<p>
+    For easy remembering, here's the key matrix, assuming the correct
+    class is $n:$
+
+    $$\begin{bmatrix}
+    s_1 - s_n + 1 \\
+    s_2 - s_n + 1 \\
+    \vdots \\
+    s_n - s_n + 1
+    \end{bmatrix}$$
 </p>
 
 <img src="images/linumpy.png">
@@ -1592,7 +1671,6 @@ Recognition</h1>
 
 <img src="images/featureextractionvsnewandimprovedpipeline.png">
 
-<div class="clearboth"></div>
 <h1>Reference</h1>
 
 <ol>
@@ -1602,7 +1680,7 @@ Recognition</h1>
 <li>http://www.cs.toronto.edu/~tijmen/csc321/</li>
 <li>http://cs231n.github.io/</li>
 <li>http://cs231n.stanford.edu/</li>
-<li>Andrej Karpathy's video lectures.</li>
+<li>Andrej Karpathy's cs231n video lectures.</li>
 <li>Everything else from the web.</li>
 </ol>
 

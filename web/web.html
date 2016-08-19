@@ -7,7 +7,6 @@
 
 <link rel="stylesheet" href="../css/obsidian.min.css">
 <script src="../js/highlight.min.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
 
 <!-- this config must be before MathJax.js: -->
 <script src="../js/mathjax.config.js"></script>
@@ -32,6 +31,36 @@
 </div>
 
 <h1>Command Line Reference</h1>
+
+<h2>Utilities</h2>
+
+<h3>Disk management</h3>
+
+Get system storage sizes:
+
+<pre><code>df -h</code></pre>
+
+Find big folders:
+
+<pre><code>du / | sort -n</code></pre>
+
+<p>
+    Find and remove files and folders in current dir older than time:
+</p>
+
+<pre><code>find ./ -maxdepth 1 -mmin +10 | xargs rm -rf # 10 minutes
+find ./ -maxdepth 1 -mtime +10 | xargs rm -rf # 10 days
+find ./ -maxdepth 1 -mtime +10 -type f | xargs rm -rf # Files only
+</code></pre>
+
+<h2>Git</h2>
+
+<p>
+    Deleting a branch:
+</p>
+
+<pre><code>git branch -d branchName # local
+git push origin --delete branchName # remote</code></pre>
 
 <h2>Curl</h2>
 
@@ -60,12 +89,38 @@ DELETE
 
 <h2>FFmpeg</h2>
 
+<h2>Livestreamer</h2>
+
+<p>
+    Get source of stream:
+</p>
+
+<pre><code>livestreamer URL best --stream-url</code></pre>
+
+<h1>NGINX</h1>
+
+<p>
+    List modules:
+</p>
+
+<pre><code>nginx -V</code></pre>
+
 <h1>Node.js</h1>
+
+<h2>Forever</h2>
+
+<p>
+    Starting a node server with logs appended
+    to <code>~/.forever/live.log</code>. Might also want to use
+    logrotate to rotate the log file.
+</p>
+
+<pre><code>NODE_ENV=production PORT=8080 forever start -a --uid live server.js</code></pre>
 
 <h2>Request</h2>
 
 <pre><code>request.post({
-    url: "http://IP:PORT/asdf",
+    url: "http://IP:PORT/asdf?q=asdf",
     body: {
         asdf: 123
     },
@@ -76,11 +131,58 @@ DELETE
 })
 </code></pre>
 
-<h1>MongoDB / Mongoose</h1>
+<h1>MongoDB</h1>
 
-<h1>Amazon SQS</h1>
+<h2>Mongo Console</h2>
 
-<h1>Amazon Lambda</h1>
+<h3>Administrative tasks</h3>
+
+<pre><code>show databases
+show collections</code></pre>
+
+<h3>Indices</h3>
+
+<pre><code>db.books.getIndexes()</code></pre>
+
+<h3>Queries</h3>
+
+<p>
+    Find all items and sort reverse chronologically, latest first.
+</p>
+
+<pre><code>db.books.find({}).sort({_id:-1}).pretty()</code></pre>
+
+<h1>Mongoose</h1>
+
+<h3>JSON query</h3>
+
+<p>
+    By default you can't modify a Mongoose query result if it violates
+    the schema. In that case use <code>lean()</code> to convert it
+    into a JSON object. This is useful if you want to remove sensitive
+    data from the result or tack on some additional data of your own:
+</p>
+
+<pre><code>Book.find({
+    title: "Manual for Bicycle Repair"
+})
+.lean() // hide everything but author.name
+.populate("author", "author.name")
+.exec(function(er, books){
+    if (er) console.log("ERROR", er)
+})</code></pre>
+
+<h1>Twitch API</h1>
+
+<p>
+    <pre><code>curl https://api.twitch.tv/kraken/streams/CHANNEL_NAME</code></pre>
+</p>
+
+<h1>Amazon Web Services</h1>
+
+<h2>AWS SQS</h2>
+
+<h2>AWS Lambda</h2>
 
 </div>
 </body>

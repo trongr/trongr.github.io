@@ -62,6 +62,7 @@ window.MathJax = {
             // gg is >>, do not redefine.
             f: "\\phi",
             ff: "\\varphi",
+            F: "\\Phi",
             h: "\\eta",
             l: "\\lambda",
             // ll is <<, do not redefine.
@@ -78,6 +79,7 @@ window.MathJax = {
             s: "\\sigma",
             t: "\\tau",
             th: "\\theta",
+            ZZ: "\\mathbf Z",
 
             qed: "\\ \\blacksquare",
         }
