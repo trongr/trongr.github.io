@@ -1520,7 +1520,131 @@ asdf
 
 <img src="images/linumpy.png">
 
-<h2>Regularization</h2>
+<h3 id="sdbbysdt1653">SVM Loss Derivative</h3>
+
+<p>
+    <b>Notation.</b> In order to reduce the amount of indexing and to
+    make our matrix implementation easier, we'll use slightly
+    different notations. Let $X_n$ be the $n$-th training example, and
+    let $x_d$ denote its entries:
+
+    $$X_n = \begin{bmatrix}
+    x_1 & \cdots & x_D
+    \end{bmatrix} \sim 1 \times D,$$
+
+    where $D$ is the number of features. Then the minibatch of $N$
+    training cases is
+
+    $$X = \begin{bmatrix}
+    X_1 \\
+    \vdots \\
+    X_N
+    \end{bmatrix} \sim N \times D.$$
+
+    Let
+
+    $$W = \begin{bmatrix}
+    w_{11} & \cdots & w_{1C} \\
+    \vdots &        & \vdots \\
+    w_{D1} & \cdots & w_{DC} \\
+    \end{bmatrix} \sim D \times C,$$
+
+    where $C$ is the number of classes. Let
+
+    \begin{align*}
+    S_n &= f(X_n, W) = X_n W \\
+        &= \begin{bmatrix}
+           x_1 w_{11} + \cdots + x_D w_{D1} \\
+           \vdots \\
+           x_1 w_{1C} + \cdots + x_D w_{DC}
+           \end{bmatrix}^T \\
+        &= \begin{bmatrix}
+           s_1 & \cdots & s_C
+           \end{bmatrix}.
+    \end{align*}
+
+    (Used tranpose just to make the typesetting look pretty.)
+</p>
+
+<p>
+    Now we want to calculate $\frac{\dd L_n}{\dd w_{dc}}$ and
+    ultimately $\frac{\dd L}{\dd w_{dc}}.$ By the chain rule,
+
+    $$\frac{\dd L_n}{\dd w_{dc}} = \frac{\dd L_n}{\dd s_c} \frac{\dd s_c}{\dd w_{dc}}.$$
+
+    The second factor is easy:
+
+    $$\frac{\dd s_c}{\dd w_{dc}} = x_d.$$
+
+    The first factor is a little bit trickier. Recall that
+
+    $$L_n = \sum_{c\neq y_n} \max(0, s_c - s_{y_n} + 1).$$
+</p>
+
+<div class="bside">
+    Hinge loss:
+    <img src="images/plot_sgd_loss_functions_0011.png">
+</div>
+<p>
+    This function has sharp corners at
+
+    $$s_c - s_{y_n} + 1 = 0,$$
+
+    so it's not differentiable there. At the moment I don't know how
+    to deal with that, other than using a smoother version of hinge
+    loss (see Wikipedia) or maybe ignore it altogether in the
+    implementation. We'll ignore it. Chances are $W$ will never be at
+    those exact points where the derivatives don't exist. Hopefully.
+</p>
+
+<p>
+    <b>Question.</b> <i>What are the consequences?</i>
+</p>
+
+<p>
+    In any case, even at points where it exists, $\frac{\dd L_n}{\dd
+    s_c}$ has very different forms depending on whether $c$ is equal
+    to $y_n$ or not. Suppose first that $c \neq y_n.$ Then $s_c$
+    appears once in the expression for $L_n,$ and
+
+    $$\frac{\dd L_n}{\dd s_c} = \begin{cases}
+    1 \quad\text{ if } s_c - s_{y_n} + 1 > 0 \\
+    0 \quad\text{ if } s_c - s_{y_n} + 1 < 0,
+    \end{cases}$$
+
+    which we can write more compactly as
+
+    $$\frac{\dd L_n}{\dd s_c} = \ch(s_c - s_{y_n} + 1 > 0)$$
+
+    using the indicator function
+
+    $$\ch(z) = \begin{cases}
+    1 \quad\text{ if $z$ is true} \\
+    0 \quad\text{ if $z$ is false.}
+    \end{cases}$$
+
+    On the other hand, if $c = y_n,$ then $s_{y_n}$ appears in every
+    term in $L_n,$ a total of $C - 1$ times, and
+
+    $$\frac{\dd L_n}{\dd s_c} = -\left(\sum_{c\neq y_n} \ch(s_c - s_{y_n} + 1 > 0) \right),$$
+
+    where the sum simply counts the number of times those margins are
+    satisfied.
+</p>
+
+<p>
+    Putting it all together:
+
+    \begin{align*}
+    \frac{\dd L_n}{\dd w_{dc}}
+        = \begin{cases}
+        \ch(s_c - s_{y_n} + 1 > 0) x_d &&\text{ if } c \neq y_n \\
+        -\left(\sum_{c\neq y_n} \ch(s_c - s_{y_n} + 1 > 0) \right) x_d &&\text{ if } c = y_n.
+        \end{cases}
+    \end{align*}
+</p>
+
+<h3>Regularization</h3>
 
 <div class="bside">
     <b>*</b> E.g. $W$ might focus all its effort on a single feature

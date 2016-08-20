@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Web & Mobile Development</title>
+<title>Web Development</title>
 <link rel="stylesheet" href="../css/global.css">
 
 <link rel="stylesheet" href="../css/obsidian.min.css">
@@ -22,7 +22,7 @@
 
 <div id="content">
 
-<h1>Web & Mobile Development</h1>
+<h1>Web Development</h1>
 
 <div class="epigraph">
      <div class="quote">
@@ -89,6 +89,12 @@ DELETE
 
 <h2>FFmpeg</h2>
 
+<p>
+    Live streaming:
+</p>
+
+<pre><code data-code="ffmpeg -re -i src.mp4 -c copy -f flv 'rtmp://asdf.com/asdf'"></code></pre>
+
 <h2>Livestreamer</h2>
 
 <p>
@@ -130,6 +136,41 @@ DELETE
     if (er) console.log("ERROR", er, body)
 })
 </code></pre>
+
+<h2>Kue</h2>
+
+<p>
+    Removing completed jobs of type <code data-code='email'></code>:
+</p>
+
+<pre><code data-code='var kue = require("kue")
+var q = kue.createQueue({
+    redis: {
+        host: 123,
+        port: 123,
+        auth: 123,
+    }
+})
+var jobtype = "email"
+// -1 for no limits on number of keys returned
+kue.Job.rangeByState("complete", 0, -1, "asc", function(er, jobs){
+    jobs.forEach(function(job){
+        if (job.type == jobtype){
+            job.remove(function(){
+                console.log("Removing job type:", jobtype, "id:", job.id)
+            })
+        }
+    });
+});
+'></code></pre>
+
+<p>
+    Alternatively:
+</p>
+
+<pre><code data-code='kue.Job.rangeByType(jobtype, "complete", 0, -1, "asc", function(er, jobs){
+
+}'></code></pre>
 
 <h1>MongoDB</h1>
 

@@ -32,6 +32,8 @@ window.MathJax = {
 
             // environments
             bar: ["\\overline{#1}", 1],
+            "<": "\\langle",
+            ">": "\\rangle",
 
             // functions and operators
             Sum: "\\sum\\limits",
@@ -55,7 +57,9 @@ window.MathJax = {
             b: "\\beta",
             BB: "\\mathbf B",
             CC: "\\mathbf C",
+            ch: "\\chi",
             d: "\\delta",
+            dd: "\\partial",
             D: "\\Delta",
             e: "\\varepsilon",
             g: "\\gamma",
@@ -64,6 +68,7 @@ window.MathJax = {
             ff: "\\varphi",
             F: "\\Phi",
             h: "\\eta",
+            k: "\\kappa",
             l: "\\lambda",
             // ll is <<, do not redefine.
             L: "\\Lambda",

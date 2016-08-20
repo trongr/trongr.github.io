@@ -142,6 +142,42 @@ main(){
 
 <pre><code>cc hello.c</code></pre>
 
+<h3>Control flow: Fibonacci with while loop</h3>
+
+<p>
+    Be not seduced by the elegance of recursive programs. Unlike your
+    imagination, computer memory has limits!
+</p>
+
+<pre><code data-code='#include <stdio.h>
+
+#define MAX_N 32
+
+main(){
+    int n = 0;
+    int f0 = 0;
+    int f1 = 1;
+    int tmp;
+    while (n < MAX_N){
+        printf("%3d %10d\n", n, f0);
+        tmp = f1;
+        f1 = f0 + f1;
+        f0 = tmp;
+        n++;
+    }
+}
+'></code></pre>
+
+<h3>Get and put char</h3>
+
+<pre><code data-code='main(){
+    int c;
+    while ((c = getchar()) != EOF){
+        putchar(c);
+    }
+}
+'></code></pre>
+
 <h1>Reference</h1>
 
 <ol>

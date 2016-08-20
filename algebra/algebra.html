@@ -266,26 +266,26 @@
 </p>
 
 <p>
-    <b>Example.</b> Let $N = \ZZ/4\ZZ.$ The left cosets of $N$ are
+    <b>Example.</b> Let $N = 4\ZZ \leq \ZZ.$ The left cosets of $N$ are
 
     \begin{align*}
-    0 + N &= \left\{ \dots, -4, 0, 4, 8,\dots \right\} \\
-    1 + N &= \left\{ \dots, -3, 1, 5, 9,\dots \right\} \\
-    2 + N &= \left\{ \dots, -2, 2, 6, 10,\dots \right\} \\
-    3 + N &= \left\{ \dots, -1, 3, 7, 11,\dots \right\}
+    0 + 4\ZZ &= \left\{ \dots, -4, 0, 4, 8,\dots \right\} \\
+    1 + 4\ZZ &= \left\{ \dots, -3, 1, 5, 9,\dots \right\} \\
+    2 + 4\ZZ &= \left\{ \dots, -2, 2, 6, 10,\dots \right\} \\
+    3 + 4\ZZ &= \left\{ \dots, -1, 3, 7, 11,\dots \right\}
     \end{align*}
 
     and e.g.
 
-    $$5 + N = 1 + N,$$
+    $$5 + 4\ZZ = 1 + 4\ZZ,$$
 
-    integers congruent to 1 mod 4, because
+    because
 
     $$-1 + 5 \equiv 0 \mod 4,$$
 
     or in other words
 
-    $$-1 + 5 \in N.$$
+    $$-1 + 5 \in 4\ZZ.$$
 </p>
 
 <p>
@@ -353,7 +353,21 @@
 </p>
 
 <p>
-    <b>Example.</b>
+    <b>Example.</b> If $G$ is abelian, then any subgroup of $G$ is
+    normal.
+</p>
+
+<p>
+    <b>Example.</b> Let $G = \ZZ.$ Then every subgroup $N \leq G$
+    is cyclic and looks like
+
+    $$N = \< n \> = \< -n \> = n\ZZ$$
+
+    for some $n,$ and
+
+    $$G/N = \ZZ/n\ZZ = \< \bar{1} \> = \< \bar{0}, \bar{1}, \ldots, \bar{n-1} \>$$
+
+    is the system of complete residues mod $n,$ where $\bar{k} = k + n\ZZ.$
 </p>
 
 <h1>Reference</h1>
