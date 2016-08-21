@@ -508,16 +508,16 @@ these over the $m$ training cases, so $$\frac{\partial C}{\partial
 b_h} = \sum_m \frac{\partial C}{\partial z_j},$$
 
 <div class="bside">
-    <b>Notation.</b> Denote by $\textsum_\text{rows} A$ the sum of a
+    <b>Notation.</b> Denote by $\sum_\text{rows} A$ the sum of a
     matrix $A$ over its rows, so in particular it's a row
-    vector. Similarly $\textsum_\text{cols} A$ is a column vector. In
+    vector. Similarly $\sum_\text{cols} A$ is a column vector. In
     NumPy this is <code>sum(A, 0)</code> and <code>sum(A, 1)</code>
     respectively.
 </div>
 which in matrix form is
 
 $$\frac{\partial C}{\partial B_h} =
-\left(\textsum_\text{rows}\frac{\partial C}{\partial Z_j}\right)^T
+\left(\sum_\text{rows}\frac{\partial C}{\partial Z_j}\right)^T
 \sim K \times 1.$$</p>
 
 <p><b>Note.</b> An alternative to treating bias units separately from normal
@@ -558,7 +558,7 @@ Y_e \sim H \times 3D,$$ which is the same size as $W_e.$</p>
 layer. Then as usual $$\frac{\partial C}{\partial b_e} =
 \frac{\partial C}{\partial z_h} \frac{\partial z_h}{\partial b_e} =
 \frac{\partial C}{\partial z_h},$$ which has matrix form
-$$\frac{\partial C}{\partial B_e} = \left(\textsum_{\text{rows}}
+$$\frac{\partial C}{\partial B_e} = \left(\sum_{\text{rows}}
 \frac{\partial C}{\partial Z_h}\right)^T \sim H \times 1.$$</p>
 
 <h1>Some Unanswered Questions</h1>
@@ -1316,8 +1316,6 @@ for k in sorted(k_to_accuracies):
     Best $k = 10.$
 </p>
 
-asdf
-
 <div class="clearboth"></div>
 
 <h1>Validation and Test Sets</h1>
@@ -1520,13 +1518,46 @@ asdf
 
 <img src="images/linumpy.png">
 
-<h3 id="sdbbysdt1653">SVM Loss Derivative</h3>
+<h3>Regularization</h3>
+
+<div class="bside">
+    <b>*</b> E.g. $W$ might focus all its effort on a single feature
+    instead of spreading out and use the other features, i.e. it's
+    ignoring data that might be useful. That's bad. Plus small numbers
+    are always a good thing.
+
+    <img src="images/regularizationforceswtousemoredimensions.png">
+</div>
+<p>
+    The loss function
+
+    $$L = \frac{1}{N} \sum_{i=1}^N L_i$$
+
+    as it is leaves $W$ free to do whatever it wants, which is
+    sometimes undesirable,<b>*</b> so we'd like to limit its behavior
+    by adding a regularization term:
+
+    $$L = \frac{1}{N} \sum_{i=1}^N L_i + \frac{\l}{2} \sum_{ij} W_{ij}^2,$$
+
+    assuming $W$ is a two dimensional matrix. Putting a Euclidean norm
+    on $W$ forces its entries to spread out, because a vector with one
+    large entry has bigger magnitude than one with many small ones,
+    e.g. in $\RR^{100},$
+
+    $$100 = |(100, 0, \ldots, 0)|_2 > |(1, \ldots, 1)|_2 = 10.$$
+</p>
+
+<div class="center">
+    <img src="images/euclideannormcomparison.png">
+    Diagonal of a hypercube vs a line
+</div>
+
+<h3>SVM Loss Derivative</h3>
 
 <p>
-    <b>Notation.</b> In order to reduce the amount of indexing and to
-    make our matrix implementation easier, we'll use slightly
-    different notations. Let $X_n$ be the $n$-th training example, and
-    let $x_d$ denote its entries:
+    <b>Notation.</b> We'll use slightly different notations to
+    simplify indices and make our matrices look simpler. Let $X_n$ be
+    the $n$-th training example, and let $x_d$ denote its entries:
 
     $$X_n = \begin{bmatrix}
     x_1 & \cdots & x_D
@@ -1554,16 +1585,16 @@ asdf
     \begin{align*}
     S_n &= f(X_n, W) = X_n W \\
         &= \begin{bmatrix}
+           s_1 & \cdots & s_C
+           \end{bmatrix} \\
+        &= \begin{bmatrix}
            x_1 w_{11} + \cdots + x_D w_{D1} \\
            \vdots \\
            x_1 w_{1C} + \cdots + x_D w_{DC}
-           \end{bmatrix}^T \\
-        &= \begin{bmatrix}
-           s_1 & \cdots & s_C
-           \end{bmatrix}.
+           \end{bmatrix}^T.
     \end{align*}
 
-    (Used tranpose just to make the typesetting look pretty.)
+    (Used tranpose just to make it look pretty.)
 </p>
 
 <p>
@@ -1578,23 +1609,23 @@ asdf
 
     The first factor is a little bit trickier. Recall that
 
-    $$L_n = \sum_{c\neq y_n} \max(0, s_c - s_{y_n} + 1).$$
+    $$L_n = \sum_{k\neq y_n} \max(0, s_k - s_{y_n} + 1).$$
 </p>
 
 <div class="bside">
-    Hinge loss:
+    Hinge loss
     <img src="images/plot_sgd_loss_functions_0011.png">
 </div>
 <p>
     This function has sharp corners at
 
-    $$s_c - s_{y_n} + 1 = 0,$$
+    $$s_k - s_{y_n} + 1 = 0,$$
 
     so it's not differentiable there. At the moment I don't know how
     to deal with that, other than using a smoother version of hinge
-    loss (see Wikipedia) or maybe ignore it altogether in the
-    implementation. We'll ignore it. Chances are $W$ will never be at
-    those exact points where the derivatives don't exist. Hopefully.
+    loss or maybe ignore it altogether in the implementation. We'll
+    ignore it. Chances are $W$ will never be at those exact points
+    where the derivatives don't exist. Hopefully.
 </p>
 
 <p>
@@ -1614,19 +1645,30 @@ asdf
 
     which we can write more compactly as
 
-    $$\frac{\dd L_n}{\dd s_c} = \ch(s_c - s_{y_n} + 1 > 0)$$
+    $$\frac{\dd L_n}{\dd s_c} = \c(s_c - s_{y_n} + 1 > 0)$$
 
     using the indicator function
 
-    $$\ch(z) = \begin{cases}
+    $$\c(z) = \begin{cases}
     1 \quad\text{ if $z$ is true} \\
     0 \quad\text{ if $z$ is false.}
     \end{cases}$$
 
-    On the other hand, if $c = y_n,$ then $s_{y_n}$ appears in every
-    term in $L_n,$ a total of $C - 1$ times, and
+    Since we'll use it a lot let's simplify notations by defining the
+    symbol
 
-    $$\frac{\dd L_n}{\dd s_c} = -\left(\sum_{c\neq y_n} \ch(s_c - s_{y_n} + 1 > 0) \right),$$
+    $$\c_k = \c(s_k - s_{y_n} + 1 > 0).$$
+
+    Then, for example,
+
+    $$\frac{\dd L_n}{\dd s_c} = \c_c.$$
+</p>
+
+<p>
+    On the other hand, if $c = y_n,$ then $s_{y_n}$ appears in every
+    term in $L_n,$ for a total of $C - 1$ times, and
+
+    $$\frac{\dd L_n}{\dd s_c} = -\sum_{k\neq y_n} \c_k,$$
 
     where the sum simply counts the number of times those margins are
     satisfied.
@@ -1634,49 +1676,317 @@ asdf
 
 <p>
     Putting it all together:
-
+</p>
+<p class="box">
     \begin{align*}
     \frac{\dd L_n}{\dd w_{dc}}
         = \begin{cases}
-        \ch(s_c - s_{y_n} + 1 > 0) x_d &&\text{ if } c \neq y_n \\
-        -\left(\sum_{c\neq y_n} \ch(s_c - s_{y_n} + 1 > 0) \right) x_d &&\text{ if } c = y_n.
+        \c_c x_d &&\text{ if } c \neq y_n \\
+        - \sum_{k\neq y_n} \c_k x_d &&\text{ if } c = y_n.
         \end{cases}
     \end{align*}
 </p>
 
-<h3>Regularization</h3>
+<p class="aside">
+    We can actually compress this into one line using Kronecker's delta:
 
-<div class="bside">
-    <b>*</b> E.g. $W$ might focus all its effort on a single feature
-    instead of spreading out and use the other features, i.e. it's
-    ignoring data that might be useful. That's bad. Plus small numbers
-    are always a good thing.
+    $$\frac{\dd L_n}{\dd w_{dc}} = - \sum_{k\neq y_n} (\d_{cy_n} - \d_{ck}) \c_k x_d,$$
 
-    <img src="images/regularizationforceswtousemoredimensions.png">
-</div>
-<p>
-    The loss function
-
-    $$L = \frac{1}{N} \sum_{i=1}^N L_i$$
-
-    as it is leaves $W$ free to do whatever it wants, which is
-    sometimes undesirable,<b>*</b> so we'd like to limit its behavior
-    by adding a regularization term:
-
-    $$L = \frac{1}{N} \sum_{i=1}^N L_i + \l \sum_{ij} W_{ij}^2,$$
-
-    assuming $W$ is a two dimensional matrix. Putting a Euclidean norm
-    on $W$ forces its entries to spread out, because a vector with one
-    large entry has bigger magnitude than one with many small ones,
-    e.g. in $\RR^{100},$
-
-    $$100 = |(100, 0, \ldots, 0)|_2 > |(1, \ldots, 1)|_2 = 10.$$
+    However writing it in this form isn't terribly useful
+    computationally, so we won't use it again. Just for fun.
 </p>
 
-<div class="center">
-    <img src="images/euclideannormcomparison.png">
-    Diagonal of a hypercube vs a line
+<p>
+    Summing over all training cases:
+
+    $$\frac{\dd L}{\dd w_{dc}} = \frac{1}{N} \sum_{n=1}^N \frac{\dd L_n}{\dd w_{dc}}.$$
+
+    Recall that the loss function with regularization is
+
+    $$L = \frac{1}{N} \sum_{n=1}^N L_n + \frac{\l}{2} \sum_{dc} w_{dc}^2,$$
+
+    therefore the full partial derivative is
+</p>
+<p class="box">
+    $$\frac{\dd L}{\dd w_{dc}} = \frac{1}{N} \sum_{n=1}^N \frac{\dd L_n}{\dd w_{dc}} + \l w_{dc}.$$
+</p>
+
+<h3 id="sdbxkd2435">Vectorized implementation for a single training case</h3>
+
+<p>
+    Using the formula for $\frac{\dd L_n}{\dd w_{dc}}$ we can find a
+    simple vectorized version for one training case $X_n:$
+
+    $$\newcommand{\dWn}{{\rm dWn}}
+    \begin{align*}
+    \dWn &= \frac{\dd L_n}{\dd W}
+         = \left[\frac{\dd L_n}{\dd w_{dc}}\right] \\
+        &\gets X_n^T \c(S_n - S_n[y_n] + 1 > 0) \\
+        &= \begin{bmatrix}
+        x_1 \\
+        \vdots \\
+        x_D
+        \end{bmatrix} \begin{bmatrix}
+        \c_1 & \cdots & \c_C
+        \end{bmatrix} \\
+        &\sim D \times C,
+    \end{align*}$$
+
+    which takes care of every column except one where $c = y_n,$ which
+    we need to replace:
+
+    $$\begin{align*}
+    \dWn [:, y_n] &\gets - \sum_{k\neq y_n} \c_k X_n^T \\
+        &= - \sum_{k\neq y_n} \c_k
+        \begin{bmatrix}
+        x_1 \\
+        \vdots \\
+        x_D
+        \end{bmatrix} \\
+        &\sim D \times 1.
+    \end{align*}$$
+</p>
+<div class="bside">
+    <b>Notations.</b> We'll use $\gets$ to indicate that the variable
+    will get updated later, and $=$ for immutable varible assignment.
 </div>
+<p>
+    where $\gets$ is the assignment operator, and the other operations
+    follow similar rules as in NumPy, e.g. element-wise arithmetic,
+    and array broadcasting and index slicing.
+</p>
+
+<h3>Naive Python implementation---with loops</h3>
+
+<p>
+    From here we just need to add up $\dWn$ over all training cases,
+    which we can do using a for loop, for now:
+</p>
+
+<pre><code data-content='def svm_loss_naive(W, X, y, reg):
+    dW = np.zeros(W.shape)
+    num_classes = W.shape[1]
+    num_train = X.shape[0]
+    loss = 0.0
+
+    for i in xrange(num_train):
+        scores = X[i].dot(W)
+        correct_class_score = scores[y[i]]
+
+        # calculate partial derivatives:
+        margins = scores - correct_class_score + 1
+        margins_indicator = np.where(margins > 0, 1, 0)
+        dWi = np.dot(X[i][np.newaxis].T, margins_indicator[np.newaxis])
+        dWi[:, y[i]] = 0
+        dW += dWi
+
+        # replace one column:
+        margins_indicator_count = max(0, np.sum(margins_indicator) - 1)
+        dW[:, y[i]] += - margins_indicator_count * X[i]
+
+        for j in xrange(num_classes):
+            if j == y[i]:
+                continue
+            margin = scores[j] - correct_class_score + 1 # delta = 1
+            if margin > 0:
+                loss += margin
+
+    loss /= num_train
+    dW /= num_train
+
+    loss += 0.5 * reg * np.sum(W * W)
+    dW += reg * W
+
+    return loss, dW
+'></code></pre>
+
+<h3>Full vectorized implementation</h3>
+
+<p>
+    We'll vectorize the loss function first, then its derivatives. For reference, the
+    loss function is
+
+    \begin{align*}
+    L_n &= \sum_{k\neq y_n} \max(0, s_k - s_{y_n} + 1) \\
+    L &= \frac{1}{N} \sum_{n=1}^N L_n + \frac{\l}{2} \sum_{dc} w_{dc}^2.
+    \end{align*}
+
+    Let $S_n$ be as before, and
+
+    $$y = \begin{bmatrix}
+    y_1 \\
+    \vdots \\
+    y_N
+    \end{bmatrix} \sim N \times 1$$
+
+    be the vector of labels. When we write the code $y$ will be a row
+    vector, but that doesn't matter very much. Since the score vector
+    for one training case is
+
+    $$S_n = X_n W,$$
+
+    the score matrix for every training case must be
+
+    $$S = \begin{bmatrix}
+    S_1 \\
+    \vdots \\
+    S_N
+    \end{bmatrix} = \begin{bmatrix}
+    X_1 \\
+    \vdots \\
+    X_N
+    \end{bmatrix} \begin{bmatrix}
+    w_{11} & \cdots & w_{1C} \\
+    \vdots &        & \vdots \\
+    w_{D1} & \cdots & w_{DC} \\
+    \end{bmatrix} = XW \sim N \times C.$$
+</p>
+<div class="bside">
+    In NumPy it is
+
+    <pre><code data-content='S[np.arange(N), y]'></code></pre>
+
+    Note that this is not the same as
+
+    <pre><code data-content='S[:, y]'></code></pre>
+
+    which produces, for each row in <code data-content='S'></code>, a
+    row whose elements are chosen from that row indexed
+    by <code data-content='y'></code>. LOL it's not important what it
+    is, just that it's not what we want.
+</div>
+<p>
+    For notational convenience, let
+
+    $$S[y] = \begin{bmatrix}
+    S_1[y_1] \\
+    \vdots \\
+    S_N[y_N]
+    \end{bmatrix} \sim N \times 1$$
+
+    be the vector whose entries are chosen from the rows of $S$ based
+    on the column index vector $y.$
+</p>
+
+<p>
+    Now we can calculate the margin matrix
+
+    $$M \gets \max(0, S - S[y] + 1) \sim N \times C$$
+
+    corresonding to the formula
+
+    $$\sum_{k\neq y_n} \max(0, s_k - s_{y_n} + 1),$$
+
+    remembering to exclude the $y$ column entries:
+
+    $$M[y] \gets 0.$$
+
+    And finally the loss with regularization:
+
+    $$L = \frac{1}{N}\sum_{\rm entries} M + \frac{\l}{2} \sum_{\rm entries} W * W,$$
+
+    where $*$ is component-wise multiplication. Altogether:
+</p>
+
+<p class="box">
+    $$L = \frac{1}{N} \sum_{\rm entries} \left(\begin{align*}
+    M &\gets \max(0, S - S[y] + 1) \\
+    M[y] &\gets 0
+    \end{align*}\right) + \frac{\l}{2} \sum_{\rm entries} W * W.$$
+</p>
+
+<pre><code data-content='def svm_loss_vectorized(W, X, y, reg):
+    num_train = X.shape[0]
+    allrows = np.arange(num_train)
+    S = np.dot(X, W)
+
+    margins = np.maximum(0, S - S[allrows, y][None].T + 1)
+    margins[allrows, y] = 0
+
+    loss = 1.0 / num_train * np.sum(margins) + 0.5 * reg * np.sum(W * W)
+
+    return loss
+'></code></pre>
+
+<p>
+    <b>Note.</b> Remember to always use floats in Python,
+    e.g. <code data-content='1.0'></code>, or it might think you're
+    using integer division and give you the wrong answer.
+</p>
+
+<h3 id="asdf">Vectorized derivative</h3>
+
+<p>
+    Just realized that instead of <a href="#sdbxkd2435">replacing the
+    whole column</a> $\dWn[:, y_n]$ of $\dWn,$ we can do it a bit
+    earlier, and replace a single entry in
+
+    $$\c(S_n - S_n[y_n] + 1 > 0) = \begin{bmatrix}
+    \c_1 & \cdots & \c_C
+    \end{bmatrix},$$
+
+    namely at $c = y_n$ with $- \sum_{k\neq y_n} \c_k.$
+
+    Doing it this way will actually make it easier to vectorize the
+    derivative. The margin indicator matrix over all training cases is
+
+    $$\c \gets \c(S - S[y] + 1 > 0) \sim N \times C,$$
+
+    but we still need to replace those $y$ column entries with
+
+    \begin{align*}
+    \c[y] &\gets 0 \\
+    \c[y] &\gets - \sum_{\rm cols} \c \sim N \times 1.
+    \end{align*}
+
+    Now that we have the indicator matrix, we can calculate
+
+    \begin{align*}
+    \frac{\dd L_n}{\dd w_{dc}}
+        = \begin{cases}
+        \c_c x_d &&\text{ if } c \neq y_n \\
+        - \sum_{k\neq y_n} \c_k x_d &&\text{ if } c = y_n
+        \end{cases}
+    \end{align*}
+
+    over all training cases with regularization:
+
+    $$\frac{\dd L}{\dd W} = \frac{1}{N} X^T \c + \l W.$$
+
+    Putting everything together:
+</p>
+
+<p class="box">
+    $$\frac{\dd L}{\dd W} = \frac{X^T}{N} \left( \begin{align*}
+    \c &\gets \c(S - S[y] + 1 > 0) \\
+    \c[y] &\gets 0 \\
+    \c[y] &\gets - \sum_{\rm cols} \c
+    \end{align*} \right) + \l W \sim D \times C,$$
+</p>
+
+<p>
+    Finally, the code:
+</p>
+
+<pre><code data-content='def svm_loss_vectorized(W, X, y, reg):
+    num_train = X.shape[0]
+    allrows = np.arange(num_train)
+    S = np.dot(X, W)
+    Z = S - S[allrows, y][None].T + 1
+
+    margins = np.maximum(0, Z)
+    margins[allrows, y] = 0
+
+    loss = 1.0 / num_train * np.sum(margins) + 0.5 * reg * np.sum(W * W)
+
+    margin_indicators = np.where(Z > 0, 1, 0)
+    margin_indicators[allrows, y] = 0
+    margin_indicators[allrows, y] = -np.sum(margin_indicators, axis=1)
+
+    dW = 1.0 / num_train * np.dot(X.T, margin_indicators) + reg * W
+
+    return loss, dW
+'></code></pre>
 
 <h2>Softmax / Cross Entropy Classifier</h2>
 
@@ -1791,7 +2101,7 @@ asdf
 
 <img src="images/bagofwords.png">
 
-<h2>Historical vs new and improved pipeline</h2>
+<h2>Old vs new and improved pipeline</h2>
 
 <img src="images/featureextractionvsnewandimprovedpipeline.png">
 

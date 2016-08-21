@@ -34,6 +34,14 @@
 
 <h2>Utilities</h2>
 
+<h3>Text manipulation</h3>
+
+<p>
+    Splitting long file into smaller 10MB ones:
+</p>
+
+<pre><code data-content='split -C 10m server.log'></code></pre>
+
 <h3>Disk management</h3>
 
 Get system storage sizes:
@@ -87,13 +95,28 @@ DELETE
 
 <h2>Grep</h2>
 
+<h3>Regex</h3>
+
+<p>
+    Find numbers of a certain length, e.g. find queries in a mongo db
+    that takes longer than 1 second:
+</p>
+
+<pre><code data-content="grep -e ' DB_NAME.*[0-9]\{4,10\}ms' mongo.log"></code></pre>
+
+<p>
+    Another example: find mongo query durations:
+</p>
+
+<pre><code data-content="grep -oe '[0-9]\{4,10\}ms' mongo.log | tr ms ' ' | sort -g"></code></pre>
+
 <h2>FFmpeg</h2>
 
 <p>
     Live streaming:
 </p>
 
-<pre><code data-code="ffmpeg -re -i src.mp4 -c copy -f flv 'rtmp://asdf.com/asdf'"></code></pre>
+<pre><code data-content="ffmpeg -re -i src.mp4 -c copy -f flv 'rtmp://asdf.com/asdf'"></code></pre>
 
 <h2>Livestreamer</h2>
 
@@ -140,10 +163,10 @@ DELETE
 <h2>Kue</h2>
 
 <p>
-    Removing completed jobs of type <code data-code='email'></code>:
+    Removing completed jobs of type <code data-content='email'></code>:
 </p>
 
-<pre><code data-code='var kue = require("kue")
+<pre><code data-content='var kue = require("kue")
 var q = kue.createQueue({
     redis: {
         host: 123,
@@ -168,7 +191,7 @@ kue.Job.rangeByState("complete", 0, -1, "asc", function(er, jobs){
     Alternatively:
 </p>
 
-<pre><code data-code='kue.Job.rangeByType(jobtype, "complete", 0, -1, "asc", function(er, jobs){
+<pre><code data-content='kue.Job.rangeByType(jobtype, "complete", 0, -1, "asc", function(er, jobs){
 
 }'></code></pre>
 
