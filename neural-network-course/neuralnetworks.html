@@ -1578,9 +1578,9 @@ for k in sorted(k_to_accuracies):
     w_{11} & \cdots & w_{1C} \\
     \vdots &        & \vdots \\
     w_{D1} & \cdots & w_{DC} \\
-    \end{bmatrix} \sim D \times C,$$
+    \end{bmatrix} \sim D \times C$$
 
-    where $C$ is the number of classes. Let
+    be the weight matrix, where $C$ is the number of classes. Let
 
     \begin{align*}
     S_n &= f(X_n, W) = X_n W \\
@@ -1591,10 +1591,11 @@ for k in sorted(k_to_accuracies):
            x_1 w_{11} + \cdots + x_D w_{D1} \\
            \vdots \\
            x_1 w_{1C} + \cdots + x_D w_{DC}
-           \end{bmatrix}^T.
+           \end{bmatrix}^T
     \end{align*}
 
-    (Used tranpose just to make it look pretty.)
+    be the score vector for training case $n.$ (Used tranpose just to
+    make it look pretty.)
 </p>
 
 <p>
@@ -1939,7 +1940,8 @@ for k in sorted(k_to_accuracies):
     \c[y] &\gets - \sum_{\rm cols} \c \sim N \times 1.
     \end{align*}
 
-    Now that we have the indicator matrix, we can calculate
+    Now that we have the indicator matrix, we can calculate the
+    derivative
 
     \begin{align*}
     \frac{\dd L_n}{\dd w_{dc}}

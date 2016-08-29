@@ -381,7 +381,7 @@ not sufficient for summability, e.g. the harmonic series $$\sum_{n}
 \frac{1}{n}$$ is not convergent even though the terms go to zero.</p>
 
 <p><b>Example of convergent series.</b> The geometric series is
-convergent for $|r| < 1$: $$\sum_{n=0}^\infty r^n = \frac{1}{1 - r}.$$
+convergent for $|r| < 1:$ $$\sum_{n=0}^\infty r^n = \frac{1}{1 - r}.$$
 For $|r| \geq 1,$ the series isn't convergent because the terms aren't
 vanishing.</p>
 
@@ -518,7 +518,7 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
 
 <p>
     <b>Example: geometric sawtooth.</b> A continuous function $f \geq 0$
-    s.t. $\int_0^\infty f$ exists, but $\Lim_{x\to\infty} f(x)$ does
+    s.t. $\int_0^\infty f$ exists, but $\lim\limits_{x\to\infty} f(x)$ does
     not:
 </p>
 
@@ -668,7 +668,7 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
 <p>
     <b>Proposition.</b> <i>Suppose that the partial
     sums of $a_n$ are bounded and that $b_n$ is a sequence with $b_n
-    \geq b_{n+1}$ and $\Lim_{n\to\8} b_n = 0.$ Then $\Sum_{n=1}^\8 a_n
+    \geq b_{n+1}$ and $\lim\limits_{n\to\infty} b_n = 0.$ Then $\sum\limits_{n=1}^\infty a_n
     b_n$ converges.</i>
 </p>
 
@@ -677,8 +677,8 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
 
     $$|a_k b_k + \cdots + a_n b_n| \leq 2 b_k M.$$
 
-    Since $\Lim_{n\to\8} b_n = 0,$ it also vanishes as
-    $k\longrightarrow \8,$ therefore by the cauchy criterion the
+    Since $\lim\limits_{n\to\infty} b_n = 0,$ it also vanishes as
+    $k\longrightarrow \infty,$ therefore by the cauchy criterion the
     series converges. \qed
 </p>
 
@@ -693,11 +693,11 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
     <i>Proof.</i> Take
 
     $$a_n = (-1)^{n+1}, \quad b_n \geq b_{n+1} \quad
-        \text{ and } \quad \Lim_{n\to\8} b_n = 0.$$
+        \text{ and } \quad \lim\limits_{n\to\infty} b_n = 0.$$
 
      Then the alternating series
 
-    $$\sum_{n=1}^\8 (-1)^{n+1} b_n$$
+    $$\sum_{n=1}^\infty (-1)^{n+1} b_n$$
 
     converges. \qed
 </p>
@@ -705,7 +705,7 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
 <p>
     <b>Exercise.</b> <i>The series
 
-    $$\sum_{n=1}^\8 \frac{\cos nx}{n}$$
+    $$\sum_{n=1}^\infty \frac{\cos nx}{n}$$
 
     converges iff $x$ is not of the form $2k\pi.$</i>
 </p>
@@ -720,6 +720,26 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
     Dirichlet's test the series converges if $x \neq 2k\pi.$ If $x =
     2k\pi,$ then $\cos nx = 1$ and this becomes the harmonic series,
     which we know diverges. \qed
+</p>
+
+<h3>Abel's test</h3>
+
+<p>
+    <b>Proposition.</b> <i>If $\sum a_n$ converges and $b_n$ is a
+    bounded sequence which is either nonincreasing or nondecreasing,
+    then $\sum_{n=1}^\infty a_n b_n$ converges.</i>
+</p>
+
+<p>
+    <i>Proof.</i> We'll prove the case where $b_n$ is nonincreasing,
+    the other one is similar. By the monotone convergence theorem,
+    $b_n$ converges, so let $b = \lim\limits_{n\to\infty} b_n.$ Let $c_n =
+    b_n - b.$ Then by Dirichlet's test, $\sum a_n c_n$ converges, and
+
+    $$\sum_{n=1}^\infty a_n c_n = \sum_{n=1}^\infty a_n (b_n - b)
+    = \sum_{n=1}^\infty a_n b_n - b \sum_{n=1}^\infty a_n,$$
+
+    so $\sum a_n b_n$ converges too. \qed
 </p>
 
 <h2>Absolute and Conditional Convergence</h2>
@@ -939,8 +959,8 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
 </p>
 
 <p>
-    <b>Proposition.</b> <i>If $\Sum a_n$ converges absolutely, then
-    for any subsequence $b_n$ of $a_n,$ $\Sum b_n$ also converges
+    <b>Proposition.</b> <i>If $\sum\limits a_n$ converges absolutely, then
+    for any subsequence $b_n$ of $a_n,$ $\sum\limits b_n$ also converges
     absolutely.</i>
 </p>
 
@@ -950,14 +970,14 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
 
     $$|b_N| + \cdots + |b_M| < \e,$$
 
-    so that $\Sum |b_n|$ converges by the Cauchy Criterion.
+    so that $\sum\limits |b_n|$ converges by the Cauchy Criterion.
 
-    But $\Sum a_n$ converges absolutely, so for any such $b_n$ tail we
+    But $\sum\limits a_n$ converges absolutely, so for any such $b_n$ tail we
     have an $a_n$ tail containing it, s.t.
 
     $$|b_N| + \cdots + |b_M| \leq |a_N| + \cdots + |a_M| < \e,$$
 
-    and so $\Sum b_n$ converges absolutely.
+    and so $\sum\limits b_n$ converges absolutely.
 </p>
 
 <div class="bside">
@@ -1116,7 +1136,7 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
 <p>
     <b>Theorem.</b> <i>For any $\a$ and $|x| < 1,$
 
-    $$(1 + x)^\a = \sum_{k=1}^\8 {\a \choose k} x^k.$$</i>
+    $$(1 + x)^\a = \sum_{k=1}^\infty {\a \choose k} x^k.$$</i>
 </p>
 
 <p>
@@ -1138,12 +1158,12 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
 <p>
     By the ratio test, the series
 
-    $$\sum_{k=0}^\8 {\a \choose k} x^k$$
+    $$\sum_{k=0}^\infty {\a \choose k} x^k$$
 
     converges for $|x| < 1.$ In particular, for $|x| < 1,$
 
     \begin{align}
-    \lim_{n\to\8} {\a \choose n} x^n = 0.
+    \lim_{n\to\infty} {\a \choose n} x^n = 0.
     \label{iosjdofd34}
     \end{align}
 </p>
@@ -1158,7 +1178,7 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
 
     $$R_n(x) = {\a \choose n+1} x^{n+1} (1+t)^{\a-n-1} \longrightarrow 0$$
 
-    as $n\longrightarrow \8.$
+    as $n\longrightarrow \infty.$
 </p>
 
 <p>
@@ -1173,7 +1193,7 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
 
     where $M = \max(1, (1+x)^{\a-1}).$ By $\ref{iosjdofd34}$ again,
 
-    $$\lim_{n\to\8} \a {\a-1 \choose n} \left( \frac{x-t}{1+t} \right)^n = 0,$$
+    $$\lim_{n\to\infty} \a {\a-1 \choose n} \left( \frac{x-t}{1+t} \right)^n = 0,$$
 
     and therefore
 
@@ -1191,6 +1211,239 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
     <b>Corollary.</b> <i>If $x$ is a number close to $0$ and $\a$ is any real number, then
 
     $$(1 + x)^\a \approx 1 + \a x.$$</i>
+</p>
+
+<h3>Cauchy Condensation Theorem</h3>
+
+<p>
+    <b>Theorem.</b> <i>Suppose $a_n$ is decreasing and $a_n
+    \longrightarrow 0.$ If $\sum\limits_{n=1}^\infty a_n$ converges,
+    then $\sum\limits_{n=1}^\infty 2^n a_{2^n}$ also converges.</i>
+</p>
+
+<p>
+    <i>Proof.</i> We'll show that
+
+    $$\sum\limits_{n=1}^\infty 2^n a_{2^n} \leq 2 \sum\limits_{n=1}^\infty a_n.$$
+
+    The first series is:
+
+    \begin{align*}
+    \sum\limits_{n=1}^\infty 2^n a_{2^n} &= (a_2 + \color{red}{a_2}) + (a_4 + a_4 + a_4 + \color{red}{a_4}) \\
+        &+ (a_8 + a_8 + a_8 + a_8 + a_8 + a_8 + a_8 + \color{red}{a_8}) + \cdots
+    \end{align*}
+
+    and the second:
+
+    \begin{align*}
+    2 \sum\limits_{n=1}^\infty a_n &= (a_1 + \color{red}{a_1}) + (a_2 + a_3 + a_2 + \color{red}{a_3}) \\
+        &+ (a_4 + a_5 + a_6 + a_7 + a_4 + a_5 + a_6 + \color{red}{a_7}) + \cdots
+    \end{align*}
+
+    Comparing the respective parenthetical groups in both series, we
+    see that the second series's groups are at least as big as the
+    first series's, since the smallest terms in the second groups are
+    at least as big as the terms in the first groups, e.g.
+
+    $$a_1 \geq a_2, \quad a_3 \geq a_4, \quad a_7 \geq a_8, \ldots. \qed$$
+</p>
+
+<h3>Bounded partial sums and vanishing terms do not imply convergence</h3>
+
+<p>
+    <b>Example.</b> If $\sum\limits_{n=1}^\infty a_n$ converges, then
+    the partial sums are bounded, and $\lim\limits_{n\to\infty} a_n =
+    0.$ The converse is not true, however, e.g. the partial sums of
+    the series
+
+    \begin{align*}
+    1 - \left(\frac{1}{2} + \frac{1}{2}\right) + \left(\frac{1}{3} + \frac{1}{3} + \frac{1}{3}\right)
+        - \left(\frac{1}{4} + \frac{1}{4} + \frac{1}{4} + \frac{1}{4}\right) + \cdots
+    \end{align*}
+
+    oscillate between 0 and 1, and the terms go to zero, but the
+    series isn't convergent because the sums oscillate.
+</p>
+
+<h2>Infinite Products</h2>
+
+<p>
+    <b>Definition.</b> <i>Let $b_n \neq 0.$ We say that the infinite
+    product $\prod_{n=1}^\infty b_n$ converges if the sequence
+    of partial products $p_n = \prod_{n=1}^N b_n$ converges
+    and $\lim_{n\to\infty} p_n \neq 0.$</i>
+</p>
+
+<h3>Infinite products are just infinite series</h3>
+
+<p>
+    <b>Corollary.</b> <i>$$\prod_{n=1}^\infty b_n
+    \text{ converges iff } \sum_{n=1}^\infty \log b_n \text{ converges.}$$</i>
+</p>
+
+<p>
+    <i>Proof.</i> Log turns products into sums. \qed
+</p>
+
+<p>
+    Remark. The condition $\lim_{n\to\infty} p_n \neq 0$
+    corresponds to $\sum_{n=1}^\infty \log b_n \neq -\infty.$
+</p>
+
+<p>
+    <b>Example.</b> If $\prod_{n=1}^\infty (1 + a_n)$
+    converges, then $\sum_{n=1}^\infty \log(1 + a_n)$
+    converges, so $\log(1 + a_n) \longrightarrow 0,$ and therefore
+    $a_n \longrightarrow 0.$
+</p>
+
+<h3>Upper and lower bounds for log</h3>
+
+<p class="box">
+    <b>Lemma.</b> <i>For $x > -1,$
+
+    $$\frac{x}{1+x} \leq \log(1+x) \leq x.$$</i>
+</p>
+
+<div class="bside">
+    <img src="images/logupperlowerbounds.png">
+</div>
+<p>
+    <i>Proof.</i> We'll prove the upper bound first: since log is
+    concave, its derivative decreases for increasing $x,$ so by the
+    mean value theorem, for $x > 1,$
+
+    \begin{align*}
+    \frac{\log x - \log 1}{x - 1} &\leq D \log 1 = 1 \\
+        \log x &\leq x - 1,
+    \end{align*}
+
+    Similarly for $x \in (0, 1),$ and equality clearly holds for $x =
+    1.$ Therefore inequality holds for all $x > 0,$ or alternatively,
+    for $x > -1,$
+
+    $$\log(1+x) \leq x.$$
+
+    For the lower bound, apply the upper bound to $1/x:$
+
+    \begin{align*}
+    \log \frac{1}{x} &\leq \frac{1}{x} - 1 \\
+        1 - \frac{1}{x} &\leq \log x
+    \end{align*}
+
+    for $x > 0.$ Substituting $x + 1$ into $x$ yields the lower bound
+    for $x > -1:$
+
+    $$\frac{x}{1+x} \leq \log(1+x). \qed$$
+</p>
+
+<div class="bside">
+    <img src="images/2log1x.png">
+</div>
+<p>
+    <b>Lemma.</b> <i>For $x \in [0, 1),$
+
+    $$x \leq 2 \log(1 + x).$$</i>
+</p>
+
+<p>
+    <i>Proof.</i> Both sides are equal at $x = 0$ and the RHS has
+    bigger derivative on $[0, 1).$ \qed
+</p>
+
+<p>
+    <b>Proposition.</b> <i>If $a_n \geq 0,$ then
+
+    $$\prod_{n=1}^\infty (1 + a_n) \text{ converges iff } \sum_{n=1}^\infty a_n \text{ converges.}$$</i>
+</p>
+
+<p>
+    <i>Proof.</i> By a previous result, $\prod_{n=1}^\infty (1 + a_n)$
+    converges iff $\sum_{n=1}^\infty \log(1 + a_n)$ converges. By the
+    previous two lemmas, for $a_n \geq 0,$
+
+    $$\log(1 + a_n) \leq a_n,$$
+
+    and for $a_n \in [0, 1),$
+
+    $$a_n \leq 2 \log(1 + a_n).$$
+
+    If $\sum_{n=1}^\infty a_n$ converges, then the first inequality
+    forces $\sum_{n=1}^\infty \log(1 + a_n)$ to converge. On the other
+    hand, if $\sum_{n=1}^\infty \log(1 + a_n)$ converges, then $\log(1
+    + a_n) \longrightarrow 0,$ so $a_n \longrightarrow 0,$ and so for
+    sufficiently large $n,$ $a_n$ must be in $[0, 1),$ and the second
+    inequality forces $\sum_{n=1}^\infty a_n$ to converge. \qed
+</p>
+
+<p>
+    In a previous lemma we have the inequality
+
+    $$\frac{x}{1+x} \leq x.$$
+
+    By a constant factor we can also reverse the inequality for $x$ close to 0:
+</p>
+
+<p>
+    <b>Lemma.</b> <i>By simple rearrangement, for $x \in [0, 1],$
+
+    $$x \leq \frac{2x}{1 + x}.$$</i>
+</p>
+
+<p>
+    Using both inequalities we have:
+</p>
+
+<p>
+    <b>Corollary.</b> <i>If $a_n \geq 0,$ then
+
+    $$\sum_{n=1}^\infty a_n \text{ converges iff } \sum_{n=1}^\infty \frac{a_n}{1+a_n} \text{ converges.}$$</i>
+</p>
+
+<p>
+    This result can also be used to show the previous proposition,
+    although we won't do it.
+</p>
+
+<h3>Some infinite products</h3>
+
+<p>
+    <b>Example.</b> <i>
+
+    $$\prod_{n=2}^\infty \left( 1 - \frac{1}{n^2} \right) = \frac{1}{2}.$$
+    </i>
+</p>
+
+<p>
+    <i>Proof.</i> Writing it all out:
+
+    \begin{align*}
+    \prod_{n=2}^\infty \left( 1 - \frac{1}{n^2} \right) &= \prod_{n=2}^\infty \frac{n^2 - 1}{n^2} = \prod_{n=2}^\infty \frac{(n-1)(n+1)}{n^2} \\
+        &= \frac{1 \cdot 3}{2 \cdot 2} \cdot \frac{2 \cdot 4}{3 \cdot 3} \cdot \frac{3 \cdot 5}{4 \cdot 4} \cdot \frac{4 \cdot 6}{5 \cdot 5} \cdot \frac{5 \cdot 7}{6 \cdot 6} \cdot \frac{6 \cdot 8}{7 \cdot 7} \cdots \\
+        &= \frac{1}{2}. \qed
+    \end{align*}
+</p>
+
+<p>
+    <b>Example.</b> <i>For $|x| < 1,$
+
+    $$\prod_{n=1}^\infty (1 + x^{2^n}) = \frac{1}{1-x^2}.$$
+    </i>
+</p>
+
+<p>
+    <i>Proof.</i> Multiply out all the factors:
+
+    \begin{align*}
+    \prod_{n=1}^\infty (1 + x^{2^n}) &= (1 + x^2)(1 + x^4)(1 + x^8)(1 + x^{16})\cdots \\
+        &= 1 + x^2 + x^4 + x^6 + x^8 + x^{10} + x^{12} + x^{14} + \cdots,
+    \end{align*}
+
+    which is the geometric series with $r = x^2:$
+
+    $$\prod_{n=1}^\infty (1 + x^{2^n}) = \frac{1}{1 - x^2}. \qed$$
+
+    Nice relationship between powers of 2 and even numbers.
 </p>
 
 <h1>Reference</h1>

@@ -36,14 +36,12 @@ window.MathJax = {
             ">": "\\rangle",
 
             // functions and operators
-            Sum: "\\sum\\limits",
-            Prod: "\\prod\\limits",
-            Lim: "\\lim\\limits",
             Cup: "\\bigcup\\limits",
             Cap: "\\bigcap\\limits",
             stab: "\\mathop{\\rm stab}",
             count: "\\mathop{\\rm count}\\limits",
             span: "\\mathop{\\rm span}",
+            rank: "\\mathop{\\rm rank}",
             tr: "\\mathop{\\rm tr}",
             char: "\\mathop{\\rm char}",
             mod: "\\bmod",
@@ -51,7 +49,6 @@ window.MathJax = {
 
             // symbols
             0: "\\varnothing",
-            8: "\\infty",
             a: "\\alpha",
             b: "\\beta",
             BB: "\\mathbf B",

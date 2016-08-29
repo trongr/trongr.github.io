@@ -113,6 +113,12 @@ DELETE
 <h2>FFmpeg</h2>
 
 <p>
+    Screenshot:
+</p>
+
+<pre><code data-content='ffmpeg -analyzeduration 2147483647 -probesize 2147483647 -ss 1 -i asdf.mp4 -an -vframes 1 -vf scale=720:-2 asdf.jpg'></code></pre>
+
+<p>
     Live streaming:
 </p>
 
@@ -126,6 +132,14 @@ DELETE
 
 <pre><code>livestreamer URL best --stream-url</code></pre>
 
+<h2>MediaInfo</h2>
+
+<p>
+    Get video length:
+</p>
+
+<pre><code data-content='mediainfo --Inform="General;%Duration%" asdf.mp4'></code></pre>
+
 <h1>NGINX</h1>
 
 <p>
@@ -134,7 +148,35 @@ DELETE
 
 <pre><code>nginx -V</code></pre>
 
-<h1>Node.js</h1>
+<h1>Javascript & Node.js</h1>
+
+<h3>try catch finally</h3>
+
+<p>
+    Print error. Only in node, though: omit .stack in browsers:
+</p>
+
+<pre><code data-content='try {
+
+} catch(er){
+    console.log(er.stack)
+} finally {
+
+}'></code></pre>
+
+<h3>Regex</h3>
+
+<p>
+    Replacing a URL:
+</p>
+
+<pre><code data-content='"http://old.com/asdf.mp4".replace(/https?:\/\/old.com/, "http://new.com")'></code></pre>
+
+<h3>Killing child process when server restarts</h3>
+
+<p>
+    TODO
+</p>
 
 <h2>Forever</h2>
 
@@ -197,6 +239,35 @@ kue.Job.rangeByState("complete", 0, -1, "asc", function(er, jobs){
 
 <h1>MongoDB</h1>
 
+<h3>ObjectID</h3>
+
+<p>
+    Two ways to generate mongo ObjectID's. Methods also take a string
+    ObjectID argument.
+</p>
+
+<pre><code data-content='var mongo = require("mongodb")
+var id = new mongo.ObjectID()
+
+var mongoose = require("mongoose")
+var id = mongoose.Types.ObjectId()
+'></code></pre>
+
+<h3>Queries</h3>
+
+<p>
+    Using <code data-content='$in'></code> to find
+    field <code data-content='status'></code> matching one of several
+    values:
+</p>
+
+<pre><code data-content='var query = {
+    status: {
+        $in: ["active", "inactive"]
+    }
+}
+'></code></pre>
+
 <h2>Mongo Console</h2>
 
 <h3>Administrative tasks</h3>
@@ -224,7 +295,9 @@ show collections</code></pre>
     By default you can't modify a Mongoose query result if it violates
     the schema. In that case use <code>lean()</code> to convert it
     into a JSON object. This is useful if you want to remove sensitive
-    data from the result or tack on some additional data of your own:
+    data from the result or tack on some additional data of your
+    own. Note however that things like virtuals won't show up when
+    using lean.
 </p>
 
 <pre><code>Book.find({

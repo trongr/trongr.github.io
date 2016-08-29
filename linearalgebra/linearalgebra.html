@@ -42,11 +42,22 @@
 
 <h1>Linear Transformations and Matrices</h1>
 
+<h3>Dimension / rank nullity theorem</h3>
+
 <div class="epigraph">
      <div class="quote">
           Just imagine $\RR^n,$ then let $n = 42.$
      </div><hr><div class="author">Unknown</div>
+     <img src="images/760px-Rank-nullity.svg.png">
 </div>
+
+<p>
+    <b>Theorem.</b> <i>Let V and W be vector spaces, and let
+    $T:V\longrightarrow W$ be linear. If V is finite-dimensional,
+    then
+
+    $$\dim \ker T + \rank T = \dim V.$$</i>
+</p>
 
 <h1>Special Matrix Functions</h1>
 
@@ -881,7 +892,7 @@ ad - cb &= 1,
 <p>
     <i>Proof.</i> Note that if $A$ itself is upper triangular, or
     diagonal, then these are true by definition of trace and det. Now
-    we'll show that tr and det are invariant under similarity:
+    we'll show that trace and det are invariant under similarity:
 </p>
 
 <div>
@@ -1046,6 +1057,130 @@ ad - cb &= 1,
 <p>
     <b>Remark.</b> The book has an alternative proof that uses the
     previous theorem.
+</p>
+
+<p>
+    <b>Proposition.</b> <i>Let $T$ be an invertible linear operator on
+    a finite dimensional vector space $V,$ and $\l$ be an eigenvalue
+    of $T.$ Then the eigenspace of $T$ corresponding to $\l$ is also
+    the eigenspace of $T^{-1}$ corresponding to $\l^{-1}.$ In
+    addition, if $T$ is diagonalizable, then so is $T^{-1}.$</i>
+</p>
+
+<div class="bside">
+    <b>*</b> Ah we have. Earlier we showed that similar matrices have
+    the same eigenvalues, but not necessarily the same
+    eigenvectors. So invertible matrices, which are similar, take that
+    a step further, having both the same eigenvectors and eigenvalues.
+</div>
+
+<p>
+    <i>Proof.</i> Let $x$ be an eigenvector of $T$ corresponding to
+    $\l.$ We'll show that $x$ is also an eigenvector of $T^{-1}.$
+    Omitting parantheses for simplicity:
+
+    \begin{align*}
+    Tx &= \l x \\
+    \l^{-1} Tx &= x \\
+    T^{-1} \l^{-1} Tx &= T^{-1} x \\
+    \l^{-1} T^{-1} Tx &= T^{-1} x \\
+    \l^{-1} x &= T^{-1} x.
+    \end{align*}
+
+    This also shows that if $\l$ is an eigenvalue of $T,$ then
+    $\l^{-1}$ is an eigenvalue of $T^{-1},$ which I think we've showed
+    before.<b>*</b>
+</p>
+
+<p>
+    Now let $T$ be diagonalizable, so that there is an invertible
+    matrix $Q$ s.t.:
+
+    \begin{align*}
+    Q T Q^{-1} = D,
+    \end{align*}
+
+    a diagonal matrix. Then
+
+    \begin{align*}
+    (Q T Q^{-1})^{-1} = Q T^{-1} Q^{-1} = D^{-1},
+    \end{align*}
+
+    which is also diagonal (the inverse of a diagonal matrix is
+    diagonal). Therefore $T^{-1}$ is diagonalizable. \qed
+</p>
+
+<p>
+    <b>Proposition.</b> <i>Let $A \in M_{n\times n}(F).$ Recall that
+    $A$ and $A^t$ have the same characteristic polynomial and hence
+    the same eigenvalues with the same multiplicities. For any
+    eigenvalue $\l$ of $A$ and $A^t,$ let $E_\l$ and $E_\l^t$ denote
+    the corresponding eigenspaces for $A$ and $A^t.$ Then:
+
+    <ol>
+    <li>$E_\l$ and $E_\l^t$ need not be the same.</li>
+    <li>For any eigenvalue $\l,$ their dimensions are the same: $\dim E_\l = \dim E_\l^t.$</li>
+    <li>If $A$ is diagonalizable, then $A^t$ is also diagonalizable.</li>
+    </ol></i>
+</p>
+
+<p>
+    <i>1 Proof.</i> Let
+
+    \begin{align*}
+    A = \begin{bmatrix}
+    1 & 1 \\
+    0 & 1
+    \end{bmatrix} \quad \text{and} \quad
+    A^t = \begin{bmatrix}
+    1 & 0 \\
+    1 & 1
+    \end{bmatrix},
+    \end{align*}
+
+    which have only one eigenvalue $\l = 1.$ It's easy to check that
+    $A$ has eigenvector
+
+    $$v = \begin{bmatrix}
+    1 \\
+    0
+    \end{bmatrix},$$ which is not an eigenvector of $A^t.$ \qed
+</p>
+
+<p>
+    <i>2 Proof.</i> By the Rank Nullity Theorem,
+
+    \begin{align*}
+    \dim V &= \dim \ker(A - \l I) + \rank(A - \l I) \\
+           &= \dim \ker(A^t - \l I) + \rank(A^t - \l I).
+    \end{align*}
+
+    By properties of transpose,
+
+    $$A^t - \l I = (A - \l I)^t,$$
+
+    and since transpose matrices have the same rank, we have
+
+    $$\rank(A - \l I) = \rank(A^t - \l I),$$
+
+    therefore
+
+    $$\dim E_\l = \dim \ker(A - \l I) = \dim \ker(A^t - \l I) = \dim E_\l^t. \qed$$
+</p>
+
+<p>
+    <i>3 Proof.</i> Let $A$ be diagonalizable, so that there is an
+    invertible matrix $Q$ s.t.
+
+    $$QAQ^{-1} = D$$
+
+    is diagonal. Then
+
+    \begin{align*}
+    (QAQ^{-1})^t = (Q^{-1})^t A^t Q^t = (Q^t)^{-1} A^t Q^t = D^t,
+    \end{align*}
+
+    which is diagonal, so $A^t$ is also diagonalizable. \qed
 </p>
 
 <h1>Reference</h1>

@@ -207,17 +207,20 @@ array([[  6.,   7.,   8.,   9.],
     hello.c:
     <pre><code data-content='#include <stdio.h>
 
-main(){
+int main(){
     printf("Hello World\n");
+    return 0;
 }'></code></pre>
 
 </p>
+
+<h3>Compilation</h3>
 
 <p>
     Compile with:
 </p>
 
-<pre><code>cc hello.c</code></pre>
+<pre><code>cc -std=c99 hello.c</code></pre>
 
 <h3>Control flow: Fibonacci with while loop</h3>
 
@@ -256,6 +259,51 @@ main(){
     }
 }
 '></code></pre>
+
+<h3>Example. Counting lines, words, and chars</h3>
+
+<pre><code>#include &lt;stdio.h&gt;
+
+#define IN  1                   /* inside a word */
+#define OUT 0                   /* outside a word */
+
+main(){
+    int c, nl, nw, nc, state;   /* num chars, words, and lines */
+    nc = nw = nl = 0;
+    state = OUT;
+    printf("Type something or press ^D to quit\n");
+    printf("NOTE. ^C is different from ^D\n");
+    while ((c = getchar()) != EOF){
+        if (c == '\n'){
+            nl++;
+        }
+        if (c == ' ' || c == '\n' || c == '\t'){
+            state = OUT;
+        } else if (state == OUT){
+            state = IN;
+            nw++;
+        }
+        nc++;
+    }
+    printf("%d %d %d\n", nc, nl, nw);
+}</code></pre>
+
+<p>
+    NOTE. ^C is kill code, ^D is EOF.
+</p>
+
+<h3>Declaring and Defining Functions</h3>
+
+<pre><code>int pow(int base, int exp);
+
+/* exp must be int >= 0 */
+int pow(int base, int exp){
+    int n = 1;
+    for (int i = 0; i < exp; i++){
+        n = n * base;
+    }
+    return n;
+}</code></pre>
 
 <h1>Reference</h1>
 
