@@ -32,6 +32,28 @@
 
 <h1>Command Line Reference</h1>
 
+<h2>SSH</h2>
+
+<h3>Screen</h3>
+
+<p>
+    Listing screens:
+</p>
+
+<pre><code>screen -ls</code></pre>
+
+<p>
+    Create new screen with 100000-line history:
+</p>
+
+<pre><code>screen -h 100000</code></pre>
+
+<p>
+    Opening existing default screen:
+</p>
+
+<pre><code>screen -x</code></pre>
+
 <h2>Utilities</h2>
 
 <h3>Text manipulation</h3>
@@ -41,6 +63,12 @@
 </p>
 
 <pre><code data-content='split -C 10m server.log'></code></pre>
+
+<p>
+    Replacing spaces in file and dirnames with _, including subdirs:
+</p>
+
+<pre><code>find ./ | rename 's/ /_/g'</code></pre>
 
 <h3>Disk management</h3>
 
@@ -60,6 +88,14 @@ Find big folders:
 find ./ -maxdepth 1 -mtime +10 | xargs rm -rf # 10 days
 find ./ -maxdepth 1 -mtime +10 -type f | xargs rm -rf # Files only
 </code></pre>
+
+<h3>Compression</h3>
+
+<p>
+    Zipping all files in current dir:
+</p>
+
+<pre><code>zip myzipfile ./*</code></pre>
 
 <h2>Git</h2>
 
@@ -124,6 +160,23 @@ DELETE
 
 <pre><code data-content="ffmpeg -re -i src.mp4 -c copy -f flv 'rtmp://asdf.com/asdf'"></code></pre>
 
+<h3>Overlays</h3>
+
+<p>
+    Overlay a short animation <code>overlay.mov</code> with
+    transparency at the beginning of a longer <code>src.mp4</code> and
+    mix their audios. Also rescale overlay to 720 width (auto height):
+</p>
+
+<pre><code>ffmpeg -y -i src.mp4 -i overlay.mov -filter_complex \
+    "[1:v] scale=720:-2 [olay];[0:v][olay] overlay=0:0 [outv];[0:a][1:a] amix [outa]" \
+    -map "[outv]" -map "[outa]" -preset ultrafast dst.mp4
+</code></pre>
+
+<p>
+    NOTE. MOV's have transparency whereas mp4's usually don't.
+</p>
+
 <h2>Livestreamer</h2>
 
 <p>
@@ -135,10 +188,10 @@ DELETE
 <h2>MediaInfo</h2>
 
 <p>
-    Get video length:
+    Get video info: <code>src</code> can be a static video or a live stream, e.g. an m3u8 playlist.
 </p>
 
-<pre><code data-content='mediainfo --Inform="General;%Duration%" asdf.mp4'></code></pre>
+<pre><code>mediainfo --Inform="Video;%Duration%,%Width%,%Height%,%BitRate%,%FrameRate%," src</code></pre>
 
 <h1>NGINX</h1>
 
@@ -172,7 +225,21 @@ DELETE
 
 <pre><code data-content='"http://old.com/asdf.mp4".replace(/https?:\/\/old.com/, "http://new.com")'></code></pre>
 
-<h3>Killing child process when server restarts</h3>
+<h3>if name main</h3>
+
+<p>
+    Node equivalent of python's <code>if __name__ == "__main__":</code>
+</p>
+
+<pre><code>if (require.main === module){
+    var title = process.argv[2]
+    findBook(title)
+} else { // required in some other module
+
+}
+</code></pre>
+
+<h3>Stopping child process when server restarts</h3>
 
 <p>
     TODO
@@ -273,7 +340,8 @@ var id = mongoose.Types.ObjectId()
 <h3>Administrative tasks</h3>
 
 <pre><code>show databases
-show collections</code></pre>
+show collections
+db.books.drop()</code></pre>
 
 <h3>Indices</h3>
 
@@ -316,6 +384,20 @@ show collections</code></pre>
 </p>
 
 <h1>Amazon Web Services</h1>
+
+<h2>s3cmd</h2>
+
+<p>
+    Getting all items starting with prefix:
+</p>
+
+<pre><code>s3cmd get --recursive s3://mybucket/myprefix</code></pre>
+
+<p>
+    Putting with public permissions:
+</p>
+
+<pre><code>s3cmd put --acl-public asdf.mp4 s3://mybucket/</code></pre>
 
 <h2>AWS SQS</h2>
 

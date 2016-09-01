@@ -765,7 +765,10 @@
     <b>Definition.</b> <i>The flux of an arbitrary electric field $E$
     through any surface $A$ is
 
-    $$\F = \int_A E \cdot dA.$$</i>
+    $$\F = \int_A E \cdot dA.$$ If $A$ is a closed surface we use a
+    different symbol that means the same thing:
+
+    $$\F = \oint_A E \cdot dA.$$</i>
 </p>
 
 <p>
@@ -785,6 +788,112 @@
     i.e. parallel to the normal, then $\cos \th = 1$ and
 
     $$\F = EA.$$
+</p>
+
+<h3>Cylindrical flux</h3>
+
+<div class="bside">
+    <img src="images/gaussiancylinder.png">
+</div>
+<p>
+    <b>Example.</b> The flux of a field with cylindrical symmetry
+    through a cylinder with the same symmetry is
+
+    $$\F = E_R A = 2\pi RL E_R,$$
+
+    where $R$ and $L$ are the radius and length of the cylinder.
+</p>
+
+<h3>Spherical flux</h3>
+
+<div class="bside">
+    <b>*</b> The amount of water flowing through any circle is the
+    same regardless of the radius.
+    <img src="images/f65bd922a787ccd4a1fc35bb1879070e.jpg">
+</div>
+<p>
+    <b>Example.</b> The flux of a field with spherical symmetry
+    through a sphere with the same symmetry is
+
+    $$\F = E_R A = 4\pi R^2 E_R,$$
+
+    where $R$ is the radius of the sphere and $E_R$ is the field
+    there. E.g. if the field is that of a point charge $q,$ then
+
+    $$\F = 4\pi R^2 \frac{q}{4\pi \e R^2} = \frac{q}{\e}.$$
+
+    In other words, the flux through a sphere around a point charge is
+    independent of the radius.<b>*</b> Makes sense for a static field, one
+    that doesn't change with time. I wonder if there's a time-variant
+    version, e.g. if the charge pulses in time.
+</p>
+
+<div class="bside">
+    <img src="images/gaussianpointcharge.png">
+</div>
+<p>
+    In fact, we can generalize this a bit further: the flux of a point
+    charge through any spherical sector is independent of the
+    radius.
+</p>
+
+<h3>Flux through a gaussian surface containing a single charge</h3>
+
+<p>
+    Furthermore, since any closed surface can be approximated by many
+    spherical sectors, we have:
+</p>
+
+<p>
+    <b>Corollary.</b> <i>The flux through any gaussian surface
+    containing a single charge is
+
+    $$\F = \frac{q}{\e}.$$</i>
+</p>
+
+<h3>Flux through a gaussian surface containing no charge</h3>
+
+<p>
+    <b>Lemma.</b> <i>On the other hand, if a gaussian surface contains
+    no charge then the net flux through the surface is zero, because
+    everything flowing in has to flow out.</i>
+</p>
+
+<h3>Gauss's Law</h3>
+
+<p>
+    Combining the previous two results and using the principle of
+    superposition, we have:
+</p>
+
+<p>
+    <b>Theorem.</b> <i>Let $q_1,\ldots,q_n$ be charges with fields
+    $E_1,\ldots,E_n,$ and let $A$ be a gaussian surface. Then the flux
+    through $A$ due to those charges is
+
+    <!-- use \vphantom to help vertically align underbrace texts -->
+    \begin{align*}
+    \F = \oint_A E \cdot dA &= \oint_A (E_1 + \cdots + E_n) \cdot dA \\
+        &= \oint_A E_1 \cdot dA + \cdots + \oint_A E_n \cdot dA \\
+        &= \underbrace{\frac{q_i}{\e} + \cdots + \frac{q_j}{\e}}_\text{charges inside $A$}
+            + \underbrace{0 + \cdots + 0 \vphantom{\frac{}{}}}_\text{charges outside $A$}
+    \end{align*}</i>
+</p>
+
+<p>
+    If we define $Q = q_i + \cdots + q_j$ to be the total charges inside $A,$ we can write:
+</p>
+
+<p class="box yellow">
+    $$\F = \frac{Q}{\e}.$$
+</p>
+
+<p>
+    <b>Question.</b> This works for finitely many discrete
+    charges. What about continuous charges? By the water analogy, it
+    should still be true, e.g. instead of a water faucet (a point
+    charge) imagine a sprinkler-like device or a long pipe with cracks
+    all along its length (line of charge).
 </p>
 
 <h1>Reference</h1>
