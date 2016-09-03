@@ -1453,6 +1453,49 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
     of 3 and powers of 3?</i>
 </p>
 
+<p>
+    <b>Theorem. </b> <i>Any positive rational number $x$ can be
+    written as a finite sum of distinct numbers of the form $1/n.$</i>
+</p>
+
+<p>
+    <i>Proof by example.</i> Say we want to write $x = \frac{27}{31}$
+    as such a sum. Since
+
+    \begin{align*}
+    \frac{27}{31} - \frac{1}{2} &= \frac{23}{62} \\
+    \frac{23}{62} - \frac{1}{3} &= \frac{7}{186} \\
+    \frac{7}{186} &< \frac{1}{4}, \ldots, \frac{1}{26} \\
+    \frac{7}{186} - \frac{1}{27} &= \frac{1}{1674}
+    \end{align*}
+
+    we have
+
+    $$\frac{27}{31} = \frac{1}{2} + \frac{1}{3} + \frac{1}{27} + \frac{1}{1674}. \qed$$
+</p>
+
+<h1>Uniform Convergence and Power Series</h1>
+
+<p>
+    Counterexamples motivating notion of uniform convergence.
+</p>
+
+<div class="aside">
+    <img src="images/p128.jpg">
+</div>
+<p>
+    <b>Definition.</b> <i>Let $f_n$ be a sequence of functions defined
+    on $A.$ Then a function $f$ on $A$ is called the uniform limit of
+    $f_n$ if for every $\e > 0$ there is some $N$ such that for all $x$ in $A,$
+
+    $$n > N \quad\text{implies}\quad |f(x) - f_n(x)| < \e.$$</i>
+</p>
+
+<p>
+    In other words, for every $\e$-tube around $f,$ for all
+    sufficiently large $n,$ $f_n$ lies inside this tube.
+</p>
+
 <h1>Reference</h1>
 
 <ol>

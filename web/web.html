@@ -152,10 +152,13 @@ DELETE
     Screenshot:
 </p>
 
-<pre><code data-content='ffmpeg -analyzeduration 2147483647 -probesize 2147483647 -ss 1 -i asdf.mp4 -an -vframes 1 -vf scale=720:-2 asdf.jpg'></code></pre>
+<pre><code>ffmpeg -analyzeduration 2147483647 -probesize 2147483647 \
+    -ss 1 -i asdf.mp4 -an -vframes 1 -vf scale=720:-2 asdf.jpg</code></pre>
+
+<h3>Live streaming</h3>
 
 <p>
-    Live streaming:
+    Simple:
 </p>
 
 <pre><code data-content="ffmpeg -re -i src.mp4 -c copy -f flv 'rtmp://asdf.com/asdf'"></code></pre>
@@ -169,12 +172,28 @@ DELETE
 </p>
 
 <pre><code>ffmpeg -y -i src.mp4 -i overlay.mov -filter_complex \
-    "[1:v] scale=720:-2 [olay];[0:v][olay] overlay=0:0 [outv];[0:a][1:a] amix [outa]" \
-    -map "[outv]" -map "[outa]" -preset ultrafast dst.mp4
+    "[1:v] scale=720:-2 [olay];[0:v][olay] overlay=0:0 [outv];\
+    [0:a][1:a] amix [outa]" -map [outv] -map [outa] \
+    -preset ultrafast dst.mp4
 </code></pre>
 
 <p>
     NOTE. MOV's have transparency whereas mp4's usually don't.
+</p>
+
+<p>
+    Overlay with 30-second offset:
+</p>
+
+<pre><code>ffmpeg -y -i src.mp4 -itsoffset 30 -i overlay.mov -filter_complex \
+    "aevalsrc=0:d=30 [s1];[s1][1:a] concat=n=2:v=0:a=1 [olaya];\
+    [1:v] scale=720:-2 [olayv];[0:v][olayv] overlay=eof_action=pass [outv];\
+    [0:a][olaya] amix [outa]" -map [outv] -map [outa] \
+    -c:v libx264 -c:a libfdk_aac -preset ultrafast out.mp4</code></pre>
+
+<p>
+    Included video and audio codecs for reference, but don't really
+    need to.
 </p>
 
 <h2>Livestreamer</h2>
@@ -191,7 +210,7 @@ DELETE
     Get video info: <code>src</code> can be a static video or a live stream, e.g. an m3u8 playlist.
 </p>
 
-<pre><code>mediainfo --Inform="Video;%Duration%,%Width%,%Height%,%BitRate%,%FrameRate%," src</code></pre>
+<pre><code>mediainfo --Inform="Video;%Duration%,%Width%,%Height%," src</code></pre>
 
 <h1>NGINX</h1>
 
@@ -244,6 +263,33 @@ DELETE
 <p>
     TODO
 </p>
+
+<h3>Object manipulations</h3>
+
+<p>
+    Shifting an array left:
+</p>
+
+<pre><code>&gt; var fruits = ["Banana", "Orange", "Apple", "Mango"];
+&gt; var fruit = fruits.shift()
+&gt; fruit
+'Banana'
+&gt; fruits
+[ 'Orange', 'Apple', 'Mango' ]
+</code></pre>
+
+<h3>Lodash</h3>
+
+<p>
+    Merging object <code>a</code> with another object in place:
+</p>
+
+<pre><code>&gt; var _ = require("lodash")
+&gt; var a = {asdf:123}
+&gt; _.merge(a, {oij:32})
+&gt; a
+{ asdf: 123, oij: 32 }
+</code></pre>
 
 <h2>Forever</h2>
 
@@ -310,7 +356,7 @@ kue.Job.rangeByState("complete", 0, -1, "asc", function(er, jobs){
 
 <p>
     Two ways to generate mongo ObjectID's. Methods also take a string
-    ObjectID argument.
+    ObjectID argument, <code>null</code>, or <code>undefined</code>.
 </p>
 
 <pre><code data-content='var mongo = require("mongodb")
@@ -319,6 +365,14 @@ var id = new mongo.ObjectID()
 var mongoose = require("mongoose")
 var id = mongoose.Types.ObjectId()
 '></code></pre>
+
+<h3>Comparing ID's</h3>
+
+<p>
+    Comparing ID's. <code>anotherID</code> can be <code>null</code>:
+</p>
+
+<pre><code>id && id.equals(anotherID)</code></pre>
 
 <h3>Queries</h3>
 
@@ -402,6 +456,14 @@ db.books.drop()</code></pre>
 <h2>AWS SQS</h2>
 
 <h2>AWS Lambda</h2>
+
+
+<h1>Reference</h1>
+
+<ol>
+<li>stackoverflow</li>
+<li>Everything else from the web.</li>
+</ol>
 
 </div>
 </body>
