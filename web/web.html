@@ -24,6 +24,7 @@
 
 <h1>Web Development</h1>
 
+<img src="images/Gustave_Dor_5.jpg">
 <div class="epigraph">
      <div class="quote">
         All hope abandon, ye who enter here.
@@ -278,6 +279,21 @@ DELETE
 [ 'Orange', 'Apple', 'Mango' ]
 </code></pre>
 
+<h3>jQuery</h3>
+
+<p>
+    Ajax POST:
+</p>
+
+<pre><code>$.post("/book", {
+    title: "Testing is the future"
+}, function(res){
+    console.log(res.book)
+}).fail(function(er){ // server responds with {info:"Error msg"}
+    console.log(er.responseJSON.info)
+})
+</code></pre>
+
 <h3>Lodash</h3>
 
 <p>
@@ -411,6 +427,28 @@ db.books.drop()</code></pre>
 
 <h1>Mongoose</h1>
 
+<h3>Populate</h3>
+
+<p>
+    You can populate a field or an array of items referencing another
+    collection:
+</p>
+
+<pre><code>var BookSchema = mongoose.Schema({
+    author: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Author"
+    },
+    bibliography: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Book"
+    }]
+})</code></pre>
+
+<pre><code>.populate("author")</code></pre>
+
+<pre><code>.populate("bibliography")</code></pre>
+
 <h3>JSON query</h3>
 
 <p>
@@ -439,6 +477,45 @@ db.books.drop()</code></pre>
 
 <h1>Amazon Web Services</h1>
 
+<h2>EBS</h2>
+
+<h3>Mounting an EBS volume</h3>
+
+<p>
+    Create an attach an EBS volume, then list device blocks to see
+    which one you just added:
+</p>
+
+<pre><code>lsblk</code></pre>
+
+<p>
+    If the volume is newly created from scratch, then create a file
+    system on the device:
+</p>
+
+<pre><code>sudo mkfs -t ext4 /dev/xvdf</code></pre>
+
+<p>
+    Otherwise skip that step and simply mount:
+</p>
+
+<pre><code>sudo mkdir ~/mount_point
+sudo mount /dev/xvdf ~/mount_point</code></pre>
+
+<p>
+    Finally mod the new file system permissions and check:
+</p>
+
+<pre><code>sudo chown nobody:ubuntu ~/mount_point
+sudo chmod 777 ~/mount_point
+ls -alrt ~/mount_point
+df -h</code></pre>
+
+<p>
+    NOTE. Be careful with those ^^^. You can also set it to attach
+    every time the machine starts.
+</p>
+
 <h2>s3cmd</h2>
 
 <p>
@@ -453,9 +530,9 @@ db.books.drop()</code></pre>
 
 <pre><code>s3cmd put --acl-public asdf.mp4 s3://mybucket/</code></pre>
 
-<h2>AWS SQS</h2>
+<h2>SQS</h2>
 
-<h2>AWS Lambda</h2>
+<h2>Lambda</h2>
 
 
 <h1>Reference</h1>

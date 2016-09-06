@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Differential Equations</title>
+<link rel="stylesheet" href="../css/global.css">
+
+<!-- this config must be before MathJax.js: -->
+<script src="../js/mathjax.config.js"></script>
+<script src="../js/MathJax/MathJax.js"></script>
+<!-- <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js"></script> -->
+
+<script src="../js/jquery-3.1.0.min.js"></script>
+<script src="../js/smartquotes.js"></script>
+<script src="../js/global.js"></script>
+
+</head>
+<body>
+<div id="content">
+
+<h1>Differential Equations</h1>
+
+<img src="images/tumblr_o6goow949B1rtjm0mo1_500.gif">
+<p class="quote">The results of mathematics are seldom directly
+applied; it is the definitions that are really useful. Once you learn
+the concept of a differential equation, you see differential equations
+all over, no matter what you do. This you cannot see unless you take a
+course in abstract differential equations. What applies is the
+cultural background you get from a course in differential equations,
+not the specific theorems. If you want to learn French, you have to
+live the life of France, not just memorize thousands of words. If you
+want to apply mathematics, you have to live the life of differential
+equations. When you live this life, you can then go back to molecular
+biology with a new set of eyes that will see things you could not
+otherwise see.</p><hr>
+<p class="author">Gian-Carlo Rota</p>
+<div class="clearboth"></div>
+
+<p>
+    That's because first-order objects (things) are simpler and
+    therefore easier to use than second-order objects (relations
+    between things). E.g. it's easier to use a hammer than to apply
+    Maslow's Law of the Instrument.
+</p>
+
+<p class="box">
+    <b>Maslow's Hammer Law.</b> <i>If all you have is a hammer,
+    everything looks like a nail.</i>
+</p>
+
+<h3>Phase Space</h3>
+
+<p>
+    Note. These are either very neighbourly roads or very large
+    wagons:
+</p>
+<img src="images/carswagons.png">
+
+<p>
+    No. Reminds me of another puzzle where you walk up a mountain at
+    dawn one day, and the next day also at dawn you walk
+    down. Question is whether at some point on the second day you'll
+    be at the same place at the same time as on the first day. Answer
+    is Yes.
+</p>
+
+<h3>Model of a falling object</h3>
+
+<div class="bside">
+    Direction / slope field. Equilibrium solution corresponds to
+    terminal velocity.
+    <img src="images/fallingobject.png">
+</div>
+<p>
+    <b>Example.</b> By Newton's second law,
+
+    $$F = ma = m \frac{dv}{dt} = mg - \g v,$$
+
+    where $\g v$ is an approximation of the force due to air drag.
+</p>
+<div class="clearboth"></div>
+
+<h3>Simple model of population growth</h3>
+
+<div class="bside">
+    $r = 0.5, d = 450.$
+    <img src="images/fieldmice.png">
+</div>
+<p>
+    <b>Example.</b> Let $p$ be a mice population, $r$ be the constant
+    growth rate, and $d$ be the constant number of deaths due to owls
+    per unit time (e.g. month):
+
+    $$\dot p = rp - d.$$
+</p>
+
+<h1>Reference</h1>
+
+<ol>
+<li>Elementary Differential Equations and Boundary Value Problems by Boyce and DiPrima.</li>
+<li>Ordinary Differential Equations by Arnol'd.</li>
+<li>Everything else from the web.</li>
+</ol>
+
+</div>
+</body>
+</html>
