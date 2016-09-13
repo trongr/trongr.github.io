@@ -917,8 +917,6 @@ ad - cb &= 1,
     Vieta's formulas, which say that:
 </p>
 
-<hr>
-
 <h2>Vieta's Formulas</h2>
 
 <div class="bside">
@@ -928,7 +926,7 @@ ad - cb &= 1,
 </div>
 
 <p>
-    <i>Let
+    <b>Theorem.</b> <i>Let
 
     $$P(x) = a_n x^n + \cdots + a_0$$
 
@@ -942,7 +940,6 @@ ad - cb &= 1,
     (-1)^n \frac{a_0}{a_n} &= x_1 x_2 \cdots x_n.
     \end{align*}</i>
 </p>
-<hr>
 
 <p>
     It just so happens that <a href="#stdfh1267">earlier</a> we found
@@ -1058,6 +1055,14 @@ ad - cb &= 1,
 <p>
     <b>Remark.</b> The book has an alternative proof that uses the
     previous theorem.
+</p>
+
+<h3>Direct sum and diagonalizability</h3>
+
+<p>
+    Using this new terminology, we can say that <i>a linear operator
+    $T: V\longrightarrow V$ is diagonalizable iff its eigenspaces
+    direct sum to $V.$</i>
 </p>
 
 <p>
@@ -1182,6 +1187,238 @@ ad - cb &= 1,
     \end{align*}
 
     which is diagonal, so $A^t$ is also diagonalizable. \qed
+</p>
+
+<h3>Columns of diagonalization matrix</h3>
+
+<p>
+    <b>Lemma.</b> <i>Let $A$ be diagonalizable and $Q$ be its
+    diagonalization matrix, i.e.:
+
+    $$Q^{-1} A Q = D = \begin{bmatrix}
+    \l_1 &        & \\
+         & \ddots & \\
+         &        & \l_n
+    \end{bmatrix},$$
+
+    where the $\l_i$'s are eigenvalues of $A,$ not all distinct. Then
+    the $i$-th column of $Q$ is an eigenvector of $A$
+    corresponding to $\l_i.$ Furthermore, since $Q$ is
+    invertible, its columns corresponding to each distinct eigenvalue
+    $\l_i$ are linearly independent and form a basis for $E_{\l_i},$
+    and all the columns together form an eigenbasis for $V.$</i>
+</p>
+
+<p>
+    <i>Proof.</i> Let $e_i$ be the $i$-th standard basis vector, and
+    let $Q_i$ denote the $i$-th column of $Q.$ Then
+
+    \begin{align*}
+    Q^{-1} A Q e_i &= D e_i \\
+    A Q e_i &= Q D e_i \\
+    A Q_i &= \l_i Q_i,
+    \end{align*}
+
+    i.e. $Q_i$ is an eigenvector of $A$ corresponding to $\l_i.$ \qed
+</p>
+
+<h3>System of differential equations</h3>
+
+<p>
+    <b>Proposition.</b> <i>Let $A = (a_{ij})$ be the coefficient
+    matrix of the system of differential equations
+
+    \begin{align*}
+    x_1' &= a_{11} x_1 + \cdots + a_{1n} x_n \\
+    \vdots \\
+    x_n' &= a_{n1} x_n + \cdots + a_{nn} x_n.
+    \end{align*}
+
+    Suppose $A$ is diagonalizable with distinct eigenvalues $\l_1,
+    \ldots, \l_k.$ Then a differentiable function $x: \RR
+    \longrightarrow \RR^n$ is a solution iff $x$ is of the form
+
+    $$x(t) = e^{\l_1 t} z_1 + \cdots + e^{\l_k t} z_k,$$
+
+    where $z_i \in E_{\l_i},$ and therefore the set of solutions to
+    the system is an $n$-dimensional vector space.</i>
+</p>
+
+<p>
+    <i>Proof.</i> Suppose $x$ is of said form. Then it's easy to check
+    that $x$ satisfies the system:
+
+    \begin{align*}
+    x' &= \frac{d}{dt}( e^{\l_1 t} z_1 + \cdots + e^{\l_k t} z_k ) \\
+       &= \l_1 e^{\l_1 t} z_1 + \cdots + \l_k e^{\l_k t} z_k \\
+       &= A( e^{\l_1 t} z_1 + \cdots + e^{\l_k t} z_k ) \\
+       &= Ax.
+    \end{align*}
+
+    Conversely, suppose that
+
+    \begin{align*}
+    x' = Ax.
+    \end{align*}
+
+    We want to convert this into a simpler system that we know how to
+    solve. Since $A$ is diagonalizable, there is an invertible matrix
+    $Q$ s.t.
+
+    $$Q A Q^{-1} = D = \begin{bmatrix}
+    \l_1 &        & \\
+         & \ddots & \\
+         &        & \l_k
+    \end{bmatrix}.$$
+
+    Since
+
+    \begin{align*}
+    x' = Ax &= Q^{-1} D Q x \\
+        Qx' &= D Q x,
+    \end{align*}
+
+    $x$ satisfies $x' = Ax$ iff $y = Qx$ satisfies
+
+    \begin{align*}
+    y' = D y = \begin{bmatrix}
+    y_1' \\
+    \vdots \\
+    y_n'
+    \end{bmatrix} = \begin{bmatrix}
+    \l_1 &        & \\
+         & \ddots & \\
+         &        & \l_k
+    \end{bmatrix} \begin{bmatrix}
+    y_1 \\
+    \vdots \\
+    y_n
+    \end{bmatrix} = \begin{bmatrix}
+    \l_1 y_1 \\
+    \vdots \\
+    \l_k y_n
+    \end{bmatrix},
+    \end{align*}
+
+    which has solution
+
+    $$y = \begin{bmatrix}
+    c_1 e^{\l_1 t} \\
+    \vdots \\
+    c_n e^{\l_k t}
+    \end{bmatrix},$$
+
+    for real constants $c_1, \ldots, c_n.$
+</p>
+
+<p>
+    To convert this back into $x,$ let
+
+    $$Q^{-1} = \begin{bmatrix}
+    q_{11} & \cdots & q_{1n} \\
+    \vdots &        & \vdots \\
+    q_{n1} & \cdots & q_{nn} \\
+    \end{bmatrix}.$$
+
+    Then
+
+    \begin{align*}
+    x = Q^{-1} y &= \begin{bmatrix}
+    q_{11} & \cdots & q_{1n} \\
+    \vdots &        & \vdots \\
+    q_{n1} & \cdots & q_{nn} \\
+    \end{bmatrix} \begin{bmatrix}
+    c_1 e^{\l_1 t} \\
+    \vdots \\
+    c_n e^{\l_k t}
+    \end{bmatrix} \\
+
+    &= \begin{bmatrix}
+    q_{11} c_1 e^{\l_1 t} + \cdots + q_{1n} c_n e^{\l_k t} \\
+    \vdots \\
+    q_{n1} c_1 e^{\l_1 t} + \cdots + q_{nn} c_n e^{\l_k t}
+    \end{bmatrix} \\
+
+    &= c_1 e^{\l_1 t} \begin{bmatrix}
+    q_{11} \\
+    \vdots \\
+    q_{n1}
+    \end{bmatrix} + \cdots + c_n e^{\l_k t} \begin{bmatrix}
+    q_{1n} \\
+    \vdots \\
+    q_{nn}
+    \end{bmatrix} \\
+
+    &= c_1 e^{\l_1 t} w_1 + \cdots + c_n e^{\l_k t} w_n,
+    \end{align*}
+
+    where $w_i$ are the columns of $Q^{-1}.$ By the previous lemma,
+    the $w_i$'s are precisely the eigenvectors forming bases for the
+    eigenspaces $E_{\l_i}$'s. Therefore
+
+    \begin{align*}
+    x = e^{\l_1 t} z_1 + \cdots + e^{\l_k t} z_k,
+    \end{align*}
+
+    where $z_i \in E_{\l_i}$ is a linear combination of columns of
+    $Q^{-1}$ corresponding to $\l_i,$ and $x$ is of the desired form.
+</p>
+
+<p>
+    Finally, note that the set
+
+    $$\b = \left\{ e^{\l_1 t} w_1, \ldots, e^{\l_k t} w_n \right\}$$
+
+    generates all solutions $x.$ To show that they are linearly
+    independent, suppose there are constants $c_i$ s.t.
+
+    $$0 = c_1 e^{\l_1 t} w_1 + \cdots + c_n e^{\l_k t} w_n$$
+
+    for all $t,$ in particular for $t = 0:$
+
+    $$0 = c_1 w_1 + \cdots + c_n w_n.$$
+
+    Since $w_i$ are linearly independent, $c_i$ must be $0$ for all
+    $i,$ and so $\b$ is linearly independent. Therefore the set of all
+    solutions forms a real vector space of dimension $n.$ \qed
+</p>
+
+<p>
+    <b>Example.</b> Say we want to find the general solution to the
+    system
+
+    \begin{align*}
+    x_1' &= x_1 + x_2 \\
+    x_2' &= 3x_1 - x_2.
+    \end{align*}
+
+    It's easy to check that
+
+    $$A = \begin{bmatrix}
+    1 & 1 \\
+    3 & -1
+    \end{bmatrix}$$
+
+    has eigenvectors
+
+    $$\begin{bmatrix}
+    1 \\
+    1
+    \end{bmatrix} \quad\text{ and }\quad \begin{bmatrix}
+    1 \\
+    -3
+    \end{bmatrix}$$
+
+    corresponding to eigenvalues $\pm 2.$ Therefore the general
+    solution is
+
+    $$x(t) = c_1 e^{2t} \begin{bmatrix}
+    1 \\
+    1
+    \end{bmatrix} + c_2 e^{-2t} \begin{bmatrix}
+    1 \\
+    -3
+    \end{bmatrix}.$$
 </p>
 
 <h1>Reference</h1>

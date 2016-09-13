@@ -28,7 +28,94 @@
     <div class="author">Tristan Needham</div>
 </div>
 
+<h1>Some basic stuff</h1>
 
+<h3>De Moivre's formula</h3>
+<p>
+    <b>Theorem.</b> <i>For any integer $n$ and any real number $\th,$
+
+    $$e^{i n \th} = (\cos \th + i \sin \th)^n = \cos n\th + i \sin n\th.$$
+    </i>
+</p>
+<div class="bside">
+    Multiply complex numbers by multiplying their magnitudes and
+    adding their arguments
+    <img src="images/multiplication.gif">
+</div>
+<p>
+    Algebraically we're raising $e^{i\th}$ to the $n$-th power and
+    geometrically it's rotating $e^{i\th}$ by theta $n$ times.
+</p>
+
+<h3>Cauchy Schwarz inequality</h3>
+
+<p>
+    <b>Theorem.</b> <i>For any complex numbers $a_i, b_i,$
+
+    $$\left|\ \sum_{i=1}^n a_i \bar{b_i}\ \right|^2 \leq \sum_{i=1}^n |a_i|^2 \sum_{i=1}^n |b_i|^2.$$</i>
+</p>
+<div class="bside">
+    Cauchy Schwarz follows from the fact that
+    $$a \cdot b = |a||b| \cos \th.$$
+    <img src="images/sF2wC.png">
+</div>
+<p>
+    Letting $a = (a_i), b = (b_i),$ we can write (taking square root of both sides)
+
+    $$|\< a, b \>| \leq |a||b|.$$
+</p>
+
+<h3>Triangle inequality</h3>
+
+<p>
+    <b>Theorem.</b> <i>For any complex vector $a = (a_i), b = (b_i) \in \CC^n,$
+
+    $$|a + b| = \left( \sum_{i=1}^n |a_i + b_i|^2 \right)^{1/2}
+        \leq \left( \sum_{i=1}^n |a_i|^2 \right)^{1/2} + \left( \sum_{i=1}^n |b_i|^2 \right)^{1/2}
+        = |a| + |b|.$$</i>
+</p>
+<div class="bside">
+    &nbsp;&nbsp;\triangle<br>
+    \triangle\triangle<br>
+    <img src="images/illuminati-symbols-all-seeing-eye.gif">
+</div>
+
+<h3>Roots of complex numbers</h3>
+
+<p>
+    <b>Theorem.</b> <i>Let $w = |w|(\cos \psi + i \sin \psi).$ Then
+    the $n$-th roots of $w$ are
+
+    $$z_k = |w|^{1/n}(\cos \th_k + i \sin \th_k),$$
+
+    where
+
+    $$\th_k = \frac{\psi}{n} + \frac{2\pi k}{n}, \quad\text{for}\quad k = 0,\ldots,n-1.$$</i>
+</p>
+
+<p>
+    <img src="images/960px-Complex_fifth_roots.svg.png">
+</p>
+
+<h3>Two ways to represent a circle using complex numbers</h3>
+
+<p>
+    One way to represent a circle is as the set of points $z$ s.t.
+
+    $$|z - z_0| = r.$$
+
+    Another way is:
+</p>
+
+<p>
+    <b>Proposition.</b> <i>Let $p$ and $q$ be distinct complex
+    numbers, and $\r$ be any positive real number not equal to 1. Then
+    the set of points $z$ s.t.
+
+    $$|z - p| = \r |z - q|$$
+
+    is a circle.</i>
+</p>
 
 <h1>Reference</h1>
 

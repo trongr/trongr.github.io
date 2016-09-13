@@ -47,10 +47,11 @@
             .replace(/(\u2018)([0-9]{2}[^\u2019]*)(\u2018([^0-9]|$)|$|\u2019[a-z])/ig, '\u2019$2$3')     // abbrev. years like '93
             .replace(/(\B|^)\u2018(?=([^\u2019]*\u2019\b)*([^\u2019\u2018]*\W[\u2019\u2018]\b|[^\u2019\u2018]*$))/ig, '$1\u2019') // backwards apostrophe
             .replace(/'s/, '\u2019s')
-            .replace(/'/g, '\u2032')
+            // .replace(/'/g, '\u2032')
             .replace(/---/g, '\u2014') // Highjacking smartquotes.js for other stuff!
             .replace(/--/g, '\u2013')
             .replace(/\\qed/g, '\u220E')
+            .replace(/\\triangle/g, '\u25B2')
             .replace(/fi/g, '\uFB01') // ligatures
             .replace(/fl/g, '\uFB02')
     };

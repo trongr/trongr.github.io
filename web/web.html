@@ -71,6 +71,14 @@
 
 <pre><code>find ./ | rename 's/ /_/g'</code></pre>
 
+<h3>sed</h3>
+
+<p>
+    Replacing text in file:
+</p>
+
+<pre><code>sed -i 's/old/new/g' file</code></pre>
+
 <h3>Disk management</h3>
 
 Get system storage sizes:
@@ -106,6 +114,12 @@ find ./ -maxdepth 1 -mtime +10 -type f | xargs rm -rf # Files only
 
 <pre><code>git branch -d branchName # local
 git push origin --delete branchName # remote</code></pre>
+
+<p>
+    Set remote URL:
+</p>
+
+<pre><code>git remote set-url origin URL</code></pre>
 
 <h2>Curl</h2>
 
@@ -197,6 +211,14 @@ DELETE
     need to.
 </p>
 
+<h2>ImageMagick</h2>
+
+<p>
+    Resize all images in dir in place by 50%:
+</p>
+
+<pre><code>mogrify *.png -resize 50% *</code></pre>
+
 <h2>Livestreamer</h2>
 
 <p>
@@ -222,6 +244,14 @@ DELETE
 <pre><code>nginx -V</code></pre>
 
 <h1>Javascript & Node.js</h1>
+
+<h3>Extending an array</h3>
+
+<p>
+    Extending an array <code>a</code> in place by array <code>b</code>:
+</p>
+
+<pre><code>Array.prototype.push.apply(a, b)</code></pre>
 
 <h3>try catch finally</h3>
 
@@ -519,10 +549,21 @@ df -h</code></pre>
 <h2>s3cmd</h2>
 
 <p>
+    Note. Be careful about trailing slashes when getting and
+    pushing.
+</p>
+
+<p>
     Getting all items starting with prefix:
 </p>
 
 <pre><code>s3cmd get --recursive s3://mybucket/myprefix</code></pre>
+
+<p>
+    Putting all files and dirs in directory:
+</p>
+
+<pre><code>s3cmd put --recursive mydir s3://mybucket/</code></pre>
 
 <p>
     Putting with public permissions:

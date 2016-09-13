@@ -1915,7 +1915,7 @@ for k in sorted(k_to_accuracies):
     using integer division and give you the wrong answer.
 </p>
 
-<h3 id="asdf">Vectorized derivative</h3>
+<h3>Vectorized derivative</h3>
 
 <p>
     Just realized that instead of <a href="#sdbxkd2435">replacing the
@@ -1990,7 +1990,189 @@ for k in sorted(k_to_accuracies):
     return loss, dW
 '></code></pre>
 
-<h2>Softmax / Cross Entropy Classifier</h2>
+<h3>SGD: Stochastic / Minibatch Gradient Descent</h3>
+
+<p>
+    Now that we have the loss and weight derivative, we can iteratively
+    calculate the weight matrix using gradient descent (the delta
+    rule):
+
+    $$W \gets W - \a dW,$$
+
+    where $\a$ is the learning rate.
+</p>
+
+<pre><code>  def train(self, X, y, learning_rate=1e-3, reg=1e-5, num_iters=100,
+            batch_size=200, verbose=False):
+    """
+    Train this linear classifier using stochastic gradient descent.
+
+    Inputs:
+    - X: A numpy array of shape (N, D) containing training data; there are N
+      training samples each of dimension D.
+    - y: A numpy array of shape (N,) containing training labels; y[i] = c
+      means that X[i] has label 0 <= c < C for C classes.
+    - learning_rate: (float) learning rate for optimization.
+    - reg: (float) regularization strength.
+    - num_iters: (integer) number of steps to take when optimizing
+    - batch_size: (integer) number of training examples to use at each step.
+    - verbose: (boolean) If true, print progress during optimization.
+
+    Outputs:
+    A list containing the value of the loss function at each training iteration.
+    """
+    num_train, dim = X.shape
+    num_classes = np.max(y) + 1 # assume y takes values 0...K-1 where K is number of classes
+    if self.W is None:
+      self.W = 0.001 * np.random.randn(dim, num_classes)
+
+    loss_history = []
+    for it in xrange(num_iters):
+      batch_idx = np.random.choice(num_train, batch_size, replace=False) # todo try replace=True
+      X_batch = X[batch_idx]
+      y_batch = y[batch_idx]
+
+      loss, grad = self.loss(X_batch, y_batch, reg)
+      loss_history.append(loss)
+
+      self.W = self.W - learning_rate * grad # gradient descent / delta rule
+
+      if verbose and it % 100 == 0:
+        print 'iteration %d / %d: loss %f' % (it, num_iters, loss)
+
+    return loss_history
+</code></pre>
+
+<p>
+    Plot of the loss history over iterations. Good sign that SGD
+    worked cause the loss converges to a minimum. Surprisingly smooth
+    curve:
+</p>
+
+<pre><code>plt.plot(loss_hist)
+plt.xlabel('Iteration number')
+plt.ylabel('Loss value')
+plt.show()</code></pre>
+
+<p>
+    <img src="images/sgdlosshistory.png">
+</p>
+
+<h3>Predict</h3>
+
+<p>
+    Use $W \sim D \times C$ to calculate the class scores over all examples in data
+    matrix $X \sim N \times D:$
+
+    $$S = X W \sim N \times C.$$
+
+    Then find the maximum score per row (sample) and consider its
+    index the most likely class that row belongs to:
+
+    $$\text{y_pred} = \mathop{\rm argmax} S.$$
+</p>
+
+<pre><code class="lang-python">  def predict(self, X):
+    """
+    Use the trained weights of this linear classifier to predict labels for
+    data points.
+
+    Inputs:
+    - X: D x N array of training data. Each column is a D-dimensional point.
+
+    Returns:
+    - y_pred: Predicted labels for the data in X. y_pred is a 1-dimensional
+      array of length N, and each element is an integer giving the predicted
+      class.
+    """
+    return np.argmax(np.dot(X, self.W), axis=1)</code></pre>
+
+<p>
+    Almost $40\%!$ Bretty gud.
+</p>
+
+<p>
+    <img src="images/linearsvmpredictaccuracy.png">
+</p>
+
+<h3>Validating Hyperparameters</h3>
+
+<p>
+    Train and validate to find the best learning rate and
+    regularization hyperparameters:
+</p>
+
+<pre><code>learning_rates = [3.5e-7, 2e-7, 1.7e-7, 1.5e-7]
+regularization_strengths = [5e3, 8e3, 1e4, 2e4]
+
+results = {}
+best_val = -1   # The highest validation accuracy that we have seen so far.
+best_svm = None # The LinearSVM object that achieved the highest validation rate.
+
+def validateHyperparams(X_train, y_train, X_val, y_val, alpha, reg):
+    svm = LinearSVM()
+    svm.train(X_train, y_train, learning_rate=alpha, reg=reg, num_iters=1500) # todo change num_iters to 1500
+    y_train_pred = svm.predict(X_train)
+    y_val_pred = svm.predict(X_val)
+    train_acc = np.mean(y_train == y_train_pred)
+    val_acc = np.mean(y_val == y_val_pred)
+    return train_acc, val_acc, svm
+
+for alpha in learning_rates:
+    for reg in regularization_strengths:
+        train_acc, val_acc, svm = validateHyperparams(X_train, y_train, X_val, y_val, alpha, reg)
+        results[(alpha, reg)] = (train_acc, val_acc)
+        if (val_acc > best_val):
+            best_val = val_acc
+            best_svm = svm</code></pre>
+
+<p>
+    Best learning rate and regularization strength are $3.5 \times
+    10^{-7}$ and $8 \times 10^3,$ giving $41\%$ validation
+    accuracy. On test set it does a little worse, at $36.6\%.$
+</p>
+
+<p>
+    <img src="images/svmhyperparamsvalidationlist.png">
+</p>
+
+<p>
+    <img src="images/svmhyperparamsvalidation.png">
+</p>
+
+<h3>Visualizing learned weights</h3>
+
+<p>
+    If you try you can sorta see a blue sky (for the plane), a car, a
+    two-headed deer, a yellowish-green frog, a two-headed horse, a
+    ship on blue water, and a truck (from the front) similar to the
+    car. The bird and cat and dog are hard to see.
+</p>
+
+<p>
+    <img src="images/svmlearnedfeatures.png">
+</p>
+
+<p>
+    Fine-tuning / optimization is nice but that's not where the magic
+    is, I think. What we need are methods that are just plain more
+    powerful.
+</p>
+
+<p>
+    <img src="images/matrix-neo-bullets.jpg">
+</p>
+
+<div class="epigraph">
+     <div class="quote">
+          <span class="normal">Neo.</span> What are you trying to tell
+          me? That I can dodge bullets? <br><br>
+          <span class="normal">Morpheus.</span> No, Neo. I'm trying to
+          tell you that when you're ready, you won't have to.
+     </div><hr><div class="author">The Matrix</div>
+</div>
+
+<h2 id="asdf">Softmax / Cross Entropy Classifier</h2>
 
 <div class="epigraph">
      <img src="images/156dacf.png">

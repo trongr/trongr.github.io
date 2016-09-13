@@ -27,6 +27,192 @@
     <div class="author">Yotsuba&! よつばと！</div>
 </div>
 
+<h1>Set theory basics</h1>
+
+<h3>Section of the positive integers</h3>
+
+<p>
+    <b>Definition.</b> <i>Define a section $S_n$ of the positive
+    integers to be the set of positive integers less than $n:$
+
+    $$S_n = \left\{ 1, \ldots, n - 1 \right\}.$$
+
+    E.g. $S_1 = \0.$</i>
+</p>
+
+<h1>Principle of Recursive Definition</h1>
+
+<p>
+    <b>Theorem.</b> <i>Let $A$ be a set, $a_0$ an element of $A.$
+    Suppose $\r$ is a function that assigns, to each function $f$
+    mapping a nonempty section of the positive integers into $A,$ an
+    element of $A.$ Then there exists a unique function
+
+    $$h: \ZZ_+ \longrightarrow A$$
+
+    such that
+
+    \begin{align*}
+    h(1) &= a_0 \\
+    h(i) &= \r(h|S_i) \quad\text{ for }\quad i > 1.
+    \end{align*}</i>
+</p>
+
+<p>
+    In plain English, $h$ is defined recursively by the rule $\r$ and
+    $h$'s previous values.
+</p>
+
+<h1>Axiom of Choice</h1>
+
+<p>
+    <img src="images/70d8fd30038b617ce8a7bb56477386b6.jpg">
+</p>
+
+<div class="bside">
+    Choice. The problem is Choice. Ergo! Vis-à-vis! Concordantly!
+</div>
+<div class="clearboth"></div>
+
+<p class="box">
+    <b>Axiom of Choice.</b> <i>Given a collection $\AA$ of disjoint
+    nonempty sets, there is a set $C$ consisting of exactly one
+    element from each element $A \in \AA,$ i.e. a set $C$ s.t.
+
+    $$C \subset \Cup_{A \in \AA} A,$$
+
+    and for each $A \in \AA,$
+
+    $$ C \cap A = \text{a singleton set.}$$</i>
+</p>
+
+<p>
+    Lets you make infinitely many choices.
+</p>
+
+<h1>Well ordered sets</h1>
+
+<p>
+    <b>Definition.</b> <i>A set $A$ with a relation $<$ is said to be
+    well ordered if every nonempty subset of $A$ has a smallest
+    element.</i>
+</p>
+
+<p>
+    E.g. $\NN$ and $\NN_0$ are well ordered but $\ZZ, \RR, \RR_+,$ and $\RR_0$ are not, under the natural
+    ordering.
+</p>
+
+<p>
+    E.g. $\NN^\o = \Times_{i=1}^\infty \NN = \NN \times \NN \times \cdots$ is not well
+    ordered under dictionary order.
+</p>
+
+<p>
+    <b>Theorem.</b> <i>If $A$ and $B$ are well ordered, then $A \times
+    B$ is well ordered in the dictionary order.</i>
+</p>
+
+<h3>Well ordering theorem</h3>
+
+<p class="box">
+    <b>Well ordering theorem.</b> <i>Every set has a well ordering
+    relation.</i>
+</p>
+
+<p>
+    <b>Corollary.</b> <i>There exists an uncountable well ordered
+    set.</i>
+</p>
+
+<p>
+    <b>Corollary.</b> <i>Every set has a total ordering.</i>
+</p>
+
+<p>
+    Wait, this means every set can be put on a line. What about all
+    those sets bigger than $\RR?$ What is going on here? Well, I don't
+    know enough about all this so let's leave it alone for the time
+    being. Bread and butter!
+</p>
+
+<h3>Section of a set</h3>
+
+<p>
+    <b>Definition.</b> <i>Let $X$ be a well ordered set and $\a \in
+    X.$ The set
+
+    $$S_\a = \left\{ x \in X : x < \a \right\}$$
+
+    is called an $\a$-section of $X.$</i>
+</p>
+
+<p>
+    Similar to an $n$-section $S_n$ of the positive integers.
+</p>
+
+<h3>Least upper bound property</h3>
+
+<div class="bside">
+    <img src="images/282px-Illustration_of_supremum.svg.png">
+</div>
+<p>
+    <b>Definition.</b> <i>An ordered set $A$ is said to have the least
+    upper bound property if every nonempty subset of $A$ that is
+    bounded above has a least upper bound. Similarly for greatest
+    lower bound.</i>
+</p>
+
+<p>
+    <b>Proposition.</b> <i>$A$ has the lub property iff it has the glb
+    property.</i>
+</p>
+
+<h3>Well order and least upper bound</h3>
+
+<p>
+    <b>Proposition.</b> <i>Every well ordered set has the least upper
+    bound property.</i>
+</p>
+
+<p>
+    <i>Proof.</i> Let $A$ be a well ordered set, and let nonempty $B
+    \subset A$ have an upper bound in $A.$ Then the set $C$ of upper
+    bounds of $B$ is nonempty and has a least element, by well
+    ordering of $A.$ \qed
+</p>
+
+<p>
+    <b>Proposition.</b> <i>In a well ordered set, every element except
+    the largest---if one exists---has an immediate successor.</i>
+</p>
+
+<p>
+    <i>Proof.</i> Let $A$ be well ordered and $x \in A$ be not the
+    largest element. Then the set of elements greater than $x$ is
+    nonempty and by well ordering has a least element, which is the
+    immediate successor to $x.$ \qed
+</p>
+
+<p>
+    Nonexample. The converse isn't true, e.g. every integer in $\ZZ$
+    has an immediate successor but $\ZZ$ is not well ordered.
+</p>
+
+<p>
+    <b>Question.</b> <i>Can an element in a well ordered set have more
+    than one immediate successor?</i>
+</p>
+
+<p>
+    No, cause a well ordering has to first be a total (linear)
+    order. So that means when we say every subset of a well ordered
+    set has a least element, what we really mean is that
+    it's <i>the</i> least element (in that subset).
+</p>
+
+<h1>Topological spaces and continuous functions</h1>
+
 
 
 <h1>Reference</h1>
