@@ -771,10 +771,24 @@
     $$\F = \oint_A E \cdot dA.$$</i>
 </p>
 
+<div class="bside">
+    <b>*</b> Actually this is not quite rigorous, cause we're
+    confusing a vector $E$ with its magnitude. A better way is to
+    consider $E$ and $dA$ as actual vectors, and $E \cdot dA = E_1
+    dA_1 + E_2 dA_2 + E_3 dA_3$ as a real-valued function on $A:$
+
+    \begin{align*}
+    \F &= \oint_A E \cdot dA \quad\text{(integral of a real function)}\\
+        &= E \cdot dA \int_A 1 \\
+        &= |E||dA| \cos \th \ A \\
+        &= |E| \cos \th \ A.
+    \end{align*}
+</div>
+
 <p>
     <b>Example.</b> If the field is constant on the surface, so that
     the magnitude $E$ and $\th$ are both constant, then we can move $E
-    \cos \th$ out of the integral:
+    \cos \th$ out of the integral:<b>*</b>
 
     $$\F = \int_A E \cos \th\ dA = E \cos \th \int_A dA = E A \cos \th,$$
 

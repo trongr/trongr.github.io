@@ -59,7 +59,7 @@ h3 {
     font-style: italic;
 }
 
-p {
+p, li {
     text-align: justify;
     text-justify: inter-word;
 }

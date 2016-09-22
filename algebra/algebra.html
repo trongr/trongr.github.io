@@ -31,6 +31,37 @@
      </div>
 </div>
 
+<h1>Cyclic groups and cyclic subgroups</h1>
+
+<p>
+    <b>Theorem.</b> <i>Let $H = \< x \>$ be a cyclic group.
+
+    <ul>
+    <li>Every subgroup of $H$ is cyclic. More precisely, if $K \leq
+    H,$ then either $K = \{ 1 \}$ or $K = \< x^d
+    \>$ where $d$ is the smallest integer s.t. $x^d \in K.$</li>
+    <li>If $|H| = \infty,$ then for any distinct nonnegative integers
+    $a$ and $b,$ $\< x^a \> \neq \< x^b \>.$
+    Furthermore, for every integer $m,$ $\< x^m \> =
+    \< x^{|m|} \>,$ where $|m|$ denotes the absolute value
+    of $m,$ so that the nontrivial subgroups of $H$ correspond
+    bijectively with the integers $1,2,3,\ldots.$</li>
+    <li>If $|H| = n < \infty,$ then for each positive integer $a$
+    dividing $n$ there is a unique subgroup of $H$ of order $a.$ This
+    subgroup is the cyclic group $\< x^d \>$ where $d =
+    n/a.$ Furthermore, for every integer $m,$ $\< x^m \> =
+    \< x^{(m,n)} \>,$ so that the subgroups of $H$
+    correspond bijectively with the positive divisors of $n.$</li>
+    </ul></i>
+</p>
+
+<h3>Classification of groups of order $4$</h3>
+
+<p>
+    <b>Proposition.</b> <i>Every group of order $4$ is isomorphic to
+    either $Z_4$ or $V_4 \cong Z_2 \times Z_2.$</i>
+</p>
+
 <h1>Group Actions</h1>
 
 <p>
@@ -67,11 +98,11 @@
 <p>
     <b>Definition.</b> <i>The kernel of an action of $G$ on $A$ is
 
-    $$\ker \ff = \ker(G, A) = \left\{ g \in G : \ff(g) = \s_g = 1 \in S_A \right\},$$
+    $$\ker \ff = \ker(G, A) = \{ g \in G : \ff(g) = \s_g = 1 \in S_A \},$$
 
     i.e. it's the set
 
-    $$\left\{ g \in G : \s_g(a) = g \. a = a \text{ for all } a\in A \right\},$$
+    $$\{ g \in G : \s_g(a) = g \. a = a \text{ for all } a\in A \},$$
 
     in other words elements that fix all $a \in A.$</i>
 </p>
@@ -84,17 +115,17 @@
     <b>Definition.</b> <i>Let $A$ be any nonempty subset of a group
     $G.$ The centralizer of $A$ in $G$ is the set
 
-    $$C_G(A) = \left\{ g \in G : gag^{-1} = a \text{ for all } a \in A \right\},$$
+    $$C_G(A) = \{ g \in G : gag^{-1} = a \text{ for all } a \in A \},$$
 
     i.e. it's the set of all elements in $G$ that commute with all
     elements in $A.$ As a special case, the center of $G$ is
 
-    $$Z(G) = C_G(G) = \left\{ g \in G : gxg^{-1} = x \text{ for all } x \in G \right\},$$
+    $$Z(G) = C_G(G) = \{ g \in G : gxg^{-1} = x \text{ for all } x \in G \},$$
 
     i.e. elements that commute with everyone in $G.$ The normalizer of $A$
     is the set
 
-    $$N_G(A) = \left\{ g \in G : gAg^{-1} = A \right\}.$$</i>
+    $$N_G(A) = \{ g \in G : gAg^{-1} = A \}.$$</i>
 </p>
 
 <p>
@@ -102,7 +133,7 @@
     let $s$ be some fixed element of $S.$ The stabilizer of $s$ in $G$
     is the set
 
-    $$\stab_G(s) = \left\{ g \in G : g \. s = s \right\}.$$</i>
+    $$\stab_G(s) = \{ g \in G : g \. s = s \}.$$</i>
 </p>
 
 <p>
@@ -114,20 +145,20 @@
 
     Then the stabilizer of $A$ under this action is
 
-    $$\stab_G(A) = \left\{ g \in G : g\. A = gAg^{-1} = A \right\} = N_G(A).$$
+    $$\stab_G(A) = \{ g \in G : g\. A = gAg^{-1} = A \} = N_G(A).$$
 </p>
 
 <p>
     Let's see what the kernel of this action looks like:
 
-    $$\ker(G, \PP(G)) = \left\{ g \in G : g \. A = gAg^{-1} = A \text{ for all } A\in\PP(G) \right\},$$
+    $$\ker(G, \PP(G)) = \{ g \in G : g \. A = gAg^{-1} = A \text{ for all } A\in\PP(G) \},$$
 
     or elements in $G$ that normalize all subsets of $G.$ Since
     elements of $Z(G) = C_G(G)$ commute with all elements of $G,$
 
     $$Z(G) \leq \ker(G, \PP(G)).$$
 
-    In fact, taking singleton subsets $A = \left\{ a \right\},$ we have
+    In fact, taking singleton subsets $A = \{ a \},$ we have
 
     $$\ker(G, \PP(G)) \leq Z(G),$$
 
@@ -140,7 +171,7 @@
     Next we'll show that centralizers are kernels of actions: let
     $N_G(A)$ act on $A$ by conjugation. The kernel is
 
-    $$\ker(N_G(A), A) = \left\{ g \in N_G(A) : g \. a = gag^{-1} = a \text{ for all } a \in A \right\}
+    $$\ker(N_G(A), A) = \{ g \in N_G(A) : g \. a = gag^{-1} = a \text{ for all } a \in A \}
         = C_{N_G(A)}(A),$$
 
     i.e. elements in $N_G(A)$ that commute with all elements in $A.$
@@ -156,7 +187,7 @@
     While we're at it let's also calculate the stabilizer of an
     element $a \in A:$
 
-    $$\stab_{N_G(A)}(a) = \left\{ g \in N_G(A) : g\. a = gag^{-1} = a \right\} = C_{N_G(A)}(a),$$
+    $$\stab_{N_G(A)}(a) = \{ g \in N_G(A) : g\. a = gag^{-1} = a \} = C_{N_G(A)}(a),$$
 
     i.e. elements in $N_G(A)$ that commute with $a.$
 </p>
@@ -165,8 +196,8 @@
     Finally for completeness let $C_G(A)$ act on $A$ by conjugation. Then
 
     \begin{align*}
-    \ker(C_G(A), A) &= \left\{ g \in C_G(A) : g\. a = gag^{-1} = a \text{ for all } a\in A\right\} = C_G(A) \\
-    \stab_{C_G(A)}(a) &= \left\{ g \in C_G(A) : g\. a = gag^{-1} = a \right\}.
+    \ker(C_G(A), A) &= \{ g \in C_G(A) : g\. a = gag^{-1} = a \text{ for all } a\in A\} = C_G(A) \\
+    \stab_{C_G(A)}(a) &= \{ g \in C_G(A) : g\. a = gag^{-1} = a \}.
     \end{align*}
 </p>
 
@@ -222,8 +253,8 @@
 <h3>Modular Arithmetic</h3>
 
 <p>
-    <b>Example.</b> Let $G = \ZZ, H = \ZZ/10\ZZ = \left\{ 0:9
-    \right\},$ and $\ff : G \longrightarrow H$ such that
+    <b>Example.</b> Let $G = \ZZ, H = \ZZ/10\ZZ = \{ 0:9
+    \},$ and $\ff : G \longrightarrow H$ such that
 
     $$\ff(m) = \bar{m} = m \mod 10.$$
 
@@ -231,7 +262,7 @@
 
     \begin{align*}
     \ker \ff = K &= \text{ integers congruent 0 mod 10} \\
-                 &= \left\{ \dots, -10, 0, 10, 20, 30, \dots \right\}
+                 &= \{ \dots, -10, 0, 10, 20, 30, \dots \}
     \end{align*}
 
     and the fiber $X$ above $\bar{1} \in H$ is the set of integers
@@ -271,10 +302,10 @@
     <b>Example.</b> Let $N = 4\ZZ \leq \ZZ.$ The left cosets of $N$ are
 
     \begin{align*}
-    0 + 4\ZZ &= \left\{ \dots, -4, 0, 4, 8,\dots \right\} \\
-    1 + 4\ZZ &= \left\{ \dots, -3, 1, 5, 9,\dots \right\} \\
-    2 + 4\ZZ &= \left\{ \dots, -2, 2, 6, 10,\dots \right\} \\
-    3 + 4\ZZ &= \left\{ \dots, -1, 3, 7, 11,\dots \right\}
+    0 + 4\ZZ &= \{ \dots, -4, 0, 4, 8,\dots \} \\
+    1 + 4\ZZ &= \{ \dots, -3, 1, 5, 9,\dots \} \\
+    2 + 4\ZZ &= \{ \dots, -2, 2, 6, 10,\dots \} \\
+    3 + 4\ZZ &= \{ \dots, -1, 3, 7, 11,\dots \}
     \end{align*}
 
     and e.g.
@@ -319,8 +350,8 @@
 </p>
 
 <p>
-    <b>Proposition.</b> <i>A subgroup $N \leq G$ is normal iff it is
-    the kernel of some homomorphism.</i>
+    <b>Theorem.</b> <i>A subgroup $N \leq G$ is normal iff it is the
+    kernel of some homomorphism.</i>
 </p>
 
 <p>
@@ -370,6 +401,117 @@
     $$G/N = \ZZ/n\ZZ = \< \bar{1} \> = \< \bar{0}, \bar{1}, \ldots, \bar{n-1} \>$$
 
     is the system of complete residues mod $n,$ where $\bar{k} = k + n\ZZ.$
+</p>
+
+<p>
+    <b>Example.</b> $Z(D_8) = \< r^2 \>$ and $Z(Q_8) = \< -1 \>,$ and
+
+    $$D_8 / Z(D_8) \cong Q_8 / Z(Q_8) \cong V_4 \cong Z_2 \times Z_2.$$
+</p>
+
+<h3>Quotient groups of a cyclic group</h3>
+
+<p>
+    <b>Theorem.</b> <i>Quotient groups of a cyclic group are cyclic,
+    and the image of a generator $g$ for $G$ is $\bar{g} = gN,$ a
+    generator of the quotient $G/N.$ If in addition $G$ is a finite
+    cyclic group, then
+
+    $$|G/N| = \frac{|G|}{|N|}.$$</i>
+</p>
+
+<h1>Exercises</h1>
+
+<h3>Homomorphic preimage of a subgroup</h3>
+
+<p>
+    <b>Proposition.</b> <i>Let $\ff: G\longrightarrow H$ be a
+    homomorphism and let $E \leq H.$ Then $\ff^{-1}(E) \leq G,$
+    i.e. the homomorphic preimage of a subgroup is a subgroup. If $E$
+    is also normal in $H,$ then its preimage is also normal in
+    $G.$ Finally as a corollary $\ker \ff = \ff^{-1}(1) \normal G.$</i>
+</p>
+
+<h3>Cosets of the kernel are fibers of the homomorphism</h3>
+
+<p>
+    <b>Proposition.</b> <i>Let $\ff:G\longrightarrow H$ be a
+    homomorphism with kernel $K.$ Then the elements of $G/K$ are of
+    the form $gK$ for some $g\in G,$ and for a fixed $gK \in G/K,$
+    $\ff$ maps all elements $x \in gK$ (and only those) to the same
+    element $h\in H,$ i.e. each coset of $K$ is the fiber above $h$
+    for some $h\in H.$</i>
+</p>
+
+<p>
+    <i>Proof.</i> Let $gK \in G/K,$ and $gk_1, gk_2 \in gK.$ Then
+
+    $$\ff(gk_1) = \ff(g) \ff(k_1) = \ff(g) = \ff(g) \ff(k_2) = \ff(gk_2),$$
+
+    so $gk_1$ and $gk_2$ map to the same element, say $h\in H.$ To
+    show the converse, that these are the only elements mapped to $h,$
+    let $\ff(x) = h.$ We want to show that $x \in gK.$ Consider $g^{-1}x:$
+
+    $$\ff(g^{-1} x) = \ff(g)^{-1} \ff(x) = h^{-1} h = 1 \in H,$$
+
+    so $g^{-1}x = k$ for some $k\in K,$ and so $x = gk.$ \qed
+</p>
+
+<h3>Representative of inverse elements in $G/K$</h3>
+
+<p>
+    <b>Proposition.</b> <i>Let $\ff:G\longrightarrow H$ be a
+    homomorphism with kernel $K,$ let $X, Y \in G/K$ and $Z = XY.$ If
+    $x \in X, z\in Z,$ then there is a $y\in Y$ s.t. $xy = z,$ namely
+    $y = x^{-1} z.$</i>
+</p>
+
+<h3>Quotient of an abelian group</h3>
+
+<p>
+    <b>Proposition.</b> <i>Let $A$ be an abelian group. Then any
+    subgroup $B$ is normal in $A,$ and $A/B$ is abelian.</i>
+</p>
+
+<h3>Nonabelian group $A$ s.t. quotient $A/B$ is abelian</h3>
+
+<p>
+    <b>Nonexample.</b> $A = Q_8, B = \< -1 \>.$ Then $A/B \cong V_4
+    \cong Z_2 \times Z_2$ is abelian.
+</p>
+
+<h3>Order of elements of a quotient group</h3>
+
+<p>
+    <b>Proposition.</b> <i>Let $G/N$ be a quotient. Then $|gN| = n,$
+    where $n$ is the smallest positive integer s.t. $g^n \in N.$ If no
+    such $n$ exists, then $gN$ has infinite order.</i>
+</p>
+
+<p>
+    <b>Nonexample.</b> We already know that $|gN| \leq |g|.$ An
+    example of $gN$ having order strictly smaller than $g$ is in
+    $Q_8/\< -1 \> \cong Z_2 \times Z_2,$ whose nonidentity elements
+    all have order 2, while $Q_8$ has elements of order $4,$ namely
+    $\pm i,\pm j,\pm k.$
+</p>
+
+<h3>More examples of homomorphisms, kernels, images, and fibers</h3>
+
+<p>
+    <b>Example.</b> Define $\ff:\CC^\times \longrightarrow \RR^\times$ by
+
+    $$\ff(a+ib) = a^2 + b^2.$$
+
+    Then $\ff$ is a homomorphism, and
+
+    \begin{align*}
+    \ff(\CC^\times) &= \RR^+ \\
+    \ker \ff &= \{ z = a+ib \in \CC^\times: \ff(z) = a^2 + b^2 = 1 \in \RR^\times \} \\
+             &= \text{unit circle in } \CC,
+    \end{align*}
+
+    and the fibers of $\ff$ are circles of radius $r \in \RR^\times.$
 </p>
 
 <h1>Reference</h1>

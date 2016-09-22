@@ -977,7 +977,7 @@ ad - cb &= 1,
     <b>Definition: linear sum.</b> <i>Let $W_1,\ldots,W_k$ be subspaces of $V.$
     Define the sum of these subspaces to be
 
-    $$W_1 + \cdots + W_k = \sum W_i = \left\{ v_1 + \cdots + v_k : v_i \in W_i \right\}.$$</i>
+    $$W_1 + \cdots + W_k = \sum W_i = \{ v_1 + \cdots + v_k : v_i \in W_i \}.$$</i>
 </p>
 
 <p>
@@ -1009,7 +1009,7 @@ ad - cb &= 1,
 
     if
 
-    $$W = \sum_{i=1}^k W_i \quad \text{and} \quad W_j \cap \sum_{i\neq j} W_i = \left\{ 0 \right\}$$
+    $$W = \sum_{i=1}^k W_i \quad \text{and} \quad W_j \cap \sum_{i\neq j} W_i = \{ 0 \}$$
 
     for all $j.$ In other words, $W$ is the direct sum of the $W_i$'s
     if they are linearly independent and span $W.$</i>
@@ -1367,7 +1367,7 @@ ad - cb &= 1,
 <p>
     Finally, note that the set
 
-    $$\b = \left\{ e^{\l_1 t} w_1, \ldots, e^{\l_k t} w_n \right\}$$
+    $$\b = \{ e^{\l_1 t} w_1, \ldots, e^{\l_k t} w_n \}$$
 
     generates all solutions $x.$ To show that they are linearly
     independent, suppose there are constants $c_i$ s.t.
@@ -1420,6 +1420,89 @@ ad - cb &= 1,
     -3
     \end{bmatrix}.$$
 </p>
+
+<h3>Simultaneous Diagonalizability</h3>
+
+<p>
+    <b>Proposition.</b> <i>If $T$ and $U$ are simultaneously
+    diagonalizable, then they commute: $TU = UT.$</i>
+</p>
+
+<p>
+    <i>Proof.</i> By definition, $T$ and $U$ simultaneously
+    diagonalizable if there is a basis $\b$ s.t. $[T]_\b$ and $[U]_\b$
+    are diagonal, therefore
+
+    \begin{align*}
+    [TU]_\b = [T]_\b [U]_\b &= [U]_\b [T]_\b \quad\text{ (diagonal matrices commute)} \\
+        &= [UT]_\b. \qed
+    \end{align*}
+</p>
+
+<p>
+    <b>Proposition.</b> <i>Let $T$ be a diagonalizable linear operator
+    on a finite-dimensional vector space, and $m\in \NN.$ Then $T$ and
+    $T^m$ are simultaneously diagonalizable.</i>
+</p>
+
+<p>
+    <i>Proof.</i> Let $\b$ be a basis s.t. $[T]_\b$ is diagonal. Then
+
+    $$[T^m]_\b = [T]_\b^m$$
+
+    is a product of diagonal matrices, and is therefore diagonal. \qed
+</p>
+
+<h3>Direct sums</h3>
+
+<p>
+    <b>Proposition.</b> <i>Let $W_i$ be subspaces of a finite
+    dimensional vector space $V$ s.t.
+
+    $$\sum_{i=1}^k W_i = V.$$ Then $V$ is the direct sum of $W_i$
+    iff
+
+    $$\dim V = \sum_{i=1}^k \dim W_i.$$</i>
+</p>
+
+<p>
+    <i>Proof.</i> Let $\b_i$ be an ordered basis for $W_i.$ By a
+    previous theorem, $V$ is a direct sum of $W_i$ iff $\Cup \b_i$ is
+    an ordered basis for $V,$ iff
+
+    $$\dim V = \sum \b_i = \sum \dim W_i. \qed$$
+</p>
+
+<h1>Matrix limits and Markov chains</h1>
+
+<h3>Eigenvalues and matrix limits</h3>
+
+<p>
+    <b>Definition.</b> <i>Let
+
+    $$S = \{ \l \in \CC: |\l| < 1 \quad\text{or}\quad \l = 1 \},$$
+
+    i.e. $S$ is the open unit disk in $\CC$ plus the number $1.$</i>
+</p>
+
+<p>
+    <b>Theorem.</b> <i>Let $A \in M_{n\times n}(\CC).$ Then
+    $\lim_{m\to\infty} A^m$ exists iff both of the following
+    conditions hold:
+
+    <ol>
+    <li>Every eigenvalue of $A$ is in $S.$</li>
+    <li>If $1$ is an eigenvalue of $A,$ then $\dim E_1 = \mathrm{alg}(1).$</li>
+    </ol></i>
+</p>
+
+<p>
+    <b>Corollary.</b> <i>Let $A\in M_{n\times n}(\CC)$ be
+    diagonalizable s.t. every eigenvalue of $A$ is contained in $S.$
+    Then $\lim\limits_{m\to\infty} A^m$ exists.
+    </i>
+</p>
+
 
 <h1>Reference</h1>
 

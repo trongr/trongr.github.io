@@ -75,12 +75,7 @@
     <li>$ax \eq ay \mod m$ iff $x \eq y \mod \frac{m}{(a, m)}.$</li>
     <li>Let $(a, m) = 1.$ Then $ax \eq ay \mod m$ iff $x \eq y \mod m.$</li>
     <li>$x \eq y \mod m_i$ for $i=1:r$ iff $x \eq y \mod [m_1,\ldots,m_r].$</li>
-    <li>If $x \eq y \mod m_i$ for some $i=1:r,$ then $x \eq y \mod (m_1,\ldots,m_r).$</li>
     </ul></i>
-</p>
-
-<p>
-    The last statement is a bit trivial, included for completeness.
 </p>
 
 <h3>Complete residue system</h3>
@@ -95,6 +90,44 @@
 <p>
     A set of $m$ integers forms a complete residue system mod $m$ iff
     all integers in the set are distinct mod $m.$
+</p>
+
+<p>
+    <b>Theorem.</b> <i>If $b \equiv c \mod m,$ then $(b, m) = (c, m).$</i>
+</p>
+
+<h3>Fermat's Theorem</h3>
+
+<p>
+    <b>Theorem.</b> <i>Let $p$ be a prime. If $p \nmid a,$ then
+
+    $$a^{p-1} \equiv 1 \mod p.$$
+
+    For every integer $a,$
+
+    $$a^p \equiv a \mod p.$$</i>
+</p>
+
+<h3>Euler's generalization of Fermat's theorem</h3>
+
+<p>
+    <b>Theorem.</b> <i>If $(a, m) = 1,$ then
+
+    $$a^{\f(m)} \equiv 1 \mod m.$$</i>
+</p>
+
+<p>
+    <b>Lemma.</b> <i>Let $p$ be prime. Then
+
+    $$x^2 \equiv 1 \mod p \quad\text{ iff }\quad x \equiv \pm 1 \mod p.$$</i>
+</p>
+
+<h3>Wilson's Theorem</h3>
+
+<p>
+    <b>Theorem.</b> <i>If $p$ is a prime, then
+
+    $$(p - 1)! \equiv -1 \mod p.$$</i>
 </p>
 
 <h1>Reference</h1>

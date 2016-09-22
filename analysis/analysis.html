@@ -27,6 +27,43 @@
     <div class="author"></div>
 </div>
 
+<h1>Fundamental Theorem of Calculus</h1>
+
+<h3>First fundamental theorem of calculus</h3>
+
+<p>
+    <b>Theorem.</b> <i>Let $f$ be integrable on $[a, b]$ and define
+    $F$ on $[a, b]$ by
+
+    $$F(x) = \int_a^x f.$$
+
+    If $f$ is continuous at $c \in [a, b],$ then $F$ is differentiable
+    at $c,$ and
+
+    $$F'(c) = f(c).$$</i>
+</p>
+
+<p>
+    I.e. an antiderivative $F$ of an integrable function $f$ is
+    differentiable with derivative $F'$ equal to $f.$
+</p>
+
+<p>
+    <b>Corollary.</b> <i>If $f$ is continuous on $[a, b]$ and $f = g'$
+    for some function $g,$ then
+
+    $$\int_a^b f = g(b) - g(a).$$</i>
+</p>
+
+<h3>Second fundamental theorem of calculus</h3>
+
+<p>
+    <b>Theorem.</b> <i>If $f$ is integrable on $[a, b]$ and $f = g'$
+    for some $g,$ then
+
+    $$\int_a^b f = g(b) - g(a).$$</i>
+</p>
+
 <h1>Trigonometric Functions</h1>
 
 <h3 id="hsdgb3662">Lagrange's Trigonometric Identities</h3>
@@ -221,6 +258,17 @@
 </p>
 
 Yes. Proof?
+
+<h3>Another example similar to the Weierstrass function</h3>
+
+<p>
+    <b>Example.</b> Let $\{ x \}$ denote the distance from
+    $x$ to the nearest integer. Then the function
+
+    $$f(x) = \sum_{n=1}^\infty \frac{\{ 10^n x \}}{10^n}$$
+
+    is continuous everywhere but differentiable nowhere.
+</p>
 
 <p>
     <b>Definition.</b> <i>Let $\{a_n\}$ be a sequence, and $0 \leq a <
@@ -1494,6 +1542,76 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
 <p>
     In other words, for every $\e$-tube around $f,$ for all
     sufficiently large $n,$ $f_n$ lies inside this tube.
+</p>
+
+<h3>Uniform convergence respects integrals</h3>
+
+<p>
+    <b>Theorem.</b> <i>Let $f_n$ be a sequence of functions integrable
+    on $[a, b]$ that converges uniformly to $f,$ which is also
+    integrable on $[a, b].$ Then
+
+    $$\int_a^b f = \lim_{n\to\infty} \int_a^b f_n.$$</i>
+</p>
+
+<h3>Uniform convergence preserves continuity</h3>
+
+<p>
+    <b>Theorem.</b> <i>Suppose $f_n$ is a sequence of continuous
+    functions on $[a, b]$ which converges uniformly to $f.$ Then $f$
+    is also continuous on $[a, b].$</i>
+</p>
+
+<h3>Uniform convergence of derivatives</h3>
+
+<p>
+    <b>Theorem.</b> <i>Suppose that $f_n$ is a sequence of functions
+    which are differentiable on $[a, b]$ with integrable derivatives
+    $f_n',$ and that $f_n$ converges point-wise to $f.$ Suppose also
+    that $f_n'$ converges uniformly on $[a, b]$ to some continuous
+    function $g.$ Then $f$ is differentiable and
+
+    $$f'(x) = g(x) = \lim_{n\to\infty} f_n'(x).$$</i>
+</p>
+
+<p>
+    Question. Does this mean $f_n$ converges uniformly to $f?$
+</p>
+
+<h3>Infinite Sum of Functions</h3>
+
+<p>
+    <b>Corollary.</b> <i>Let $\sum_{n=1}^\infty f_n$ converge
+    uniformly to $f$ on $[a, b].$
+
+    <ul>
+    <li>If each $f_n$ is continuous on $[a, b],$ then so is $f.$</li>
+    <li>If $f_n$ and $f$ are integrable on $[a, b],$ then
+
+    $$\int_a^b f = \sum_{n=1}^\infty \int_a^b f_n.$$</li>
+    <li>If $\sum_{n=1}^\infty f_n$ converges pointwise to $f$ and each
+    $f_n$ has integrable derivative $f_n'$ and $\sum_{n=1}^\infty
+    f_n'$ converges uniformly on $[a, b]$ to some continuous function $g,$
+    then
+
+    $$f'(x) = g(x) = \sum_{n=1}^\infty f_n'(x).$$</li>
+    </ul></i>
+</p>
+
+<h3>Weierstrass M-test</h3>
+
+<p>
+    <b>Theorem.</b> <i>Let $f_n$ be a sequence of functions defined on
+    $A,$ and suppose that $M_n$ is a sequence of numbers such that
+
+    $$|f_n(x)| \leq M_n \quad\text{ for all }\quad x \in A.$$
+
+    Suppose also that $\sum_{n=1}^\infty M_n$ converges. Then for each
+    $x \in A$ the series $\sum_{n=1}^\infty f_n(x)$ converges
+    absolutely, and $\sum_{n=1}^\infty f_n$ converges uniformly on
+    $A$ to the function
+
+    $$f(x) = \sum_{n=1}^\infty f_n(x).$$</i>
 </p>
 
 <h1>Reference</h1>
