@@ -293,8 +293,8 @@ $$\frac{\partial y_i}{\partial z_j} = y_i(\delta_{ij} - y_j).$$
 
 <hr>
 
-<p><b>Proposition.</b> <i>The derivatives of the cost function are:
-$$\frac{\partial C}{\partial z_i} = y_i - t_i.$$
+<p id="oisdfb245"><b>Proposition.</b> <i>The derivatives of the cost
+function are: $$\frac{\partial C}{\partial z_i} = y_i - t_i.$$
 </i></p>
 
 <hr>
@@ -2002,16 +2002,16 @@ for k in sorted(k_to_accuracies):
     where $\a$ is the learning rate.
 </p>
 
-<pre><code>  def train(self, X, y, learning_rate=1e-3, reg=1e-5, num_iters=100,
+<pre><code>def train(self, X, y, learning_rate=1e-3, reg=1e-5, num_iters=100,
             batch_size=200, verbose=False):
     """
     Train this linear classifier using stochastic gradient descent.
 
     Inputs:
     - X: A numpy array of shape (N, D) containing training data; there are N
-      training samples each of dimension D.
+        training samples each of dimension D.
     - y: A numpy array of shape (N,) containing training labels; y[i] = c
-      means that X[i] has label 0 <= c < C for C classes.
+        means that X[i] has label 0 <= c < C for C classes.
     - learning_rate: (float) learning rate for optimization.
     - reg: (float) regularization strength.
     - num_iters: (integer) number of steps to take when optimizing
@@ -2024,21 +2024,21 @@ for k in sorted(k_to_accuracies):
     num_train, dim = X.shape
     num_classes = np.max(y) + 1 # assume y takes values 0...K-1 where K is number of classes
     if self.W is None:
-      self.W = 0.001 * np.random.randn(dim, num_classes)
+        self.W = 0.001 * np.random.randn(dim, num_classes)
 
     loss_history = []
     for it in xrange(num_iters):
-      batch_idx = np.random.choice(num_train, batch_size, replace=False) # todo try replace=True
-      X_batch = X[batch_idx]
-      y_batch = y[batch_idx]
+        batch_idx = np.random.choice(num_train, batch_size, replace=False) # todo try replace=True
+        X_batch = X[batch_idx]
+        y_batch = y[batch_idx]
 
-      loss, grad = self.loss(X_batch, y_batch, reg)
-      loss_history.append(loss)
+        loss, grad = self.loss(X_batch, y_batch, reg)
+        loss_history.append(loss)
 
-      self.W = self.W - learning_rate * grad # gradient descent / delta rule
+        self.W = self.W - learning_rate * grad # gradient descent / delta rule
 
-      if verbose and it % 100 == 0:
-        print 'iteration %d / %d: loss %f' % (it, num_iters, loss)
+        if verbose and it % 100 == 0:
+            print 'iteration %d / %d: loss %f' % (it, num_iters, loss)
 
     return loss_history
 </code></pre>
@@ -2072,7 +2072,7 @@ plt.show()</code></pre>
     $$\text{y_pred} = \mathop{\rm argmax} S.$$
 </p>
 
-<pre><code class="lang-python">  def predict(self, X):
+<pre><code class="lang-python">def predict(self, X):
     """
     Use the trained weights of this linear classifier to predict labels for
     data points.
@@ -2288,6 +2288,237 @@ for alpha in learning_rates:
 <h2>Old vs new and improved pipeline</h2>
 
 <img src="images/featureextractionvsnewandimprovedpipeline.png">
+
+<h2>Derivatives of softmax loss function</h2>
+
+<p>
+    <a href="#oisdfb245">Previously we calculated</a> the derivatives
+    of the loss function with respect to $s_i$ (there the logits are
+    denoted $z_i$ instead of $s_i$). Now we'll calculate the
+    derivatives with respect to the weights. But let's restate the
+    main result using new notations:
+</p>
+
+<p>
+    <b>Notation.</b> <i>Let $D$ be the number of features, $C$ be the
+    number of classes. Let
+
+    $$W = \begin{bmatrix}
+    w_{11} & \cdots & w_{1C} \\
+    \vdots &        & \vdots \\
+    w_{D1} & \cdots & w_{DC} \\
+    \end{bmatrix} \sim D \times C.$$
+
+    be the weight matrix,
+
+    $$x = \begin{bmatrix}
+    x_1 & \cdots & x_D
+    \end{bmatrix} \sim 1 \times D$$
+
+    be a training example, and let
+
+    $$s = \begin{bmatrix}
+    s_1 & \cdots & s_C
+    \end{bmatrix} = xW \sim 1 \times C$$
+
+    be its logit vector. Let
+
+    $$y = \begin{bmatrix}
+    y_1 & \cdots & y_C
+    \end{bmatrix} = \begin{bmatrix}
+    \frac{e^{s_1}}{\sum_i e^{s_i}} & \cdots & \frac{e^{s_C}}{\sum_i e^{s_i}}
+    \end{bmatrix} \sim 1 \times C$$ be the probability vector, and let
+
+    $$t_i = \begin{cases}
+    1 & \quad\text{if $x$ belongs to class $i$} \\
+    0 & \quad\text{else}
+    \end{cases}$$
+
+    be the label for $x.$ Finally let
+
+    $$L_x = - \sum_i t_i \log y_i$$
+
+    be the softmax cost due to $x.$</i>
+</p>
+
+<p>
+    <b>Proposition.</b> <i>The derivatives of the cost function with
+    respect to the logits are:
+
+    $$\frac{\partial L_x}{\partial s_i} = y_i - t_i.$$
+    </i>
+</p>
+
+<h3>Derivatives of softmax with respect to weights</h3>
+
+<p>
+    <b>Proposition.</b> <i>The derivatives of the cost function with
+    respect to the weights are
+
+    $$\frac{\dd L_x}{\dd w_{ij}} = (y_j - t_j) x_i.$$</i>
+</p>
+
+<p>
+    <i>Proof.</i> By the chain rule,
+
+    $$\frac{\dd L_x}{\dd w_{ij}} = \sum_k \frac{\dd L_x}{\dd s_{k}} \frac{\dd s_k}{\dd w_{ij}}.$$
+
+    Since
+
+    $$s_k = x_1 w_{1k} + \cdots + x_D w_{Dk},$$
+
+    we have
+
+    $$\frac{\dd s_k}{\dd w_{ij}} = \begin{cases}
+    x_i & \quad\text{if $k = j$} \\
+    0   & \quad\text{else,}
+    \end{cases}$$
+
+    which makes all the terms in $\frac{\dd L_x}{\dd w_{ij}}$ zero
+    except for $k = j,$ so
+
+    $$\frac{\dd L_x}{\dd w_{ij}} = \frac{\dd L_x}{\dd s_{j}} x_i = (y_j - t_j) x_i,$$
+
+    by the previous proposition. \qed
+</p>
+
+<h3>Vectorized softmax loss derivatives</h3>
+
+
+<p>
+    Recall that the softmax loss due to all samples is
+
+    $$L = \frac{1}{N} \sum_x L_x + R(W),$$
+
+    where $N$ is the number of training cases. As usual we'll use the
+    regularization
+
+    $$R(W) = \frac{\l}{2} \sum_{ij} W_{ij}^2 = \frac{\l}{2} \sum_{\rm entries} W * W.$$
+
+    (The second form is more useful to think about since we'll be
+    implementing it.)
+</p>
+
+<p>
+    <b>Notation.</b> <i>Let
+
+    $$X = \begin{bmatrix}
+    \text{training case 1} \\
+    \vdots \\
+    \text{training case $n$} \\
+    \end{bmatrix} \sim N \times D$$
+
+    be the matrix of all training cases, and let
+
+    $$S = XW \sim N \times C$$
+
+    be the matrix of class scores, i.e. $X$ and $S$ contain the
+    individual training cases $x$ and $s$ we defined earlier. Let
+
+    \begin{align*}
+    Y &\gets \exp S  \\
+    Y &\gets Y \bigg/ \sum_{\rm columns} Y \sim N \times C
+    \end{align*}
+
+    be the matrix of class probabilities, and let $T \sim N \times C$
+    be the label encoding matrix containing the vectors $t$ from
+    before.</i>
+</p>
+
+<p>
+    Trivia: $T$ is also known as a one-hot encoding matrix.
+</p>
+
+<p class="box">
+    <b>Proposition.</b> <i>The softmax cost over all training cases is
+
+    $$L = -\frac{1}{N} \sum_{\rm entries} T * \log Y + \frac{\l}{2} \sum_{\rm entries} W * W,$$
+
+    and the derivative with respect to the weights is
+
+    $$\frac{\dd L}{\dd W} = \frac{1}{N} X^T (Y - T) + \l W \sim D \times C.$$</i>
+</p>
+
+<p>
+    <i>Proof.</i> Pretty easy, you just write it out. Use
+
+    $$\frac{\dd L_x}{\dd w_{ij}} = (y_j - t_j) x_i$$
+
+    for the derivative. \qed
+</p>
+
+<h3>Implementation</h3>
+
+<pre><code>def softmax_loss_vectorized(W, X, y, reg):
+    """
+    Inputs have dimension D, there are C classes, and we operate on minibatches
+    of N examples.
+
+    Inputs:
+    - W: A numpy array of shape (D, C) containing weights.
+    - X: A numpy array of shape (N, D) containing a minibatch of data.
+    - y: A numpy array of shape (N,) containing training labels; y[i] = c means
+        that X[i] has label c, where 0 &lt;= c &lt; C.
+    - reg: (float) regularization strength
+
+    Returns a tuple of:
+    - loss as single float
+    - gradient with respect to weights W; an array of same shape as W
+    """
+    num_classes = W.shape[1]
+    num_train = X.shape[0]
+
+    S = np.dot(X, W)
+    Y = np.exp(S)
+    Y = Y / np.sum(Y, axis=1)[None].T # NOTE. Y, and therefore S, X, and W must be made of floats, otw division will round to int
+    T = np.eye(num_classes)[y] # one-hot encodings of the class labels
+
+    loss = - 1.0 / num_train * np.sum(T * np.log(Y)) + 0.5 * reg * np.sum(W * W)
+    dW = 1.0 / num_train * np.dot(X.T, Y - T) + reg * W
+
+    return loss, dW
+</code></pre>
+
+<pre><code># Generate a random softmax weight matrix and use it to compute the loss.
+W = np.random.randn(3073, 10) * 0.0001
+loss, grad = softmax_loss_vectorized(W, X_dev, y_dev, 0.0)
+
+# As a rough sanity check, our loss should be something close to -log(0.1).
+print 'loss: %f' % loss
+print 'sanity check: %f' % (-np.log(0.1))</code></pre>
+
+<p>
+    In this test run using small randomly initialized $W$ the loss
+
+    $$L = -\frac{1}{N} \sum_{\rm entries} T * \log Y + \frac{\l}{2} \sum_{\rm entries} W * W,$$
+
+    should be close to $-\log 0.1$ because $W$ is close to zero, so $S
+    = XW \approx 0,$ and the entries of
+
+    \begin{align*}
+    Y &\gets \exp S  \\
+    Y &\gets Y \bigg/ \sum_{\rm columns} Y \sim N \times C
+    \end{align*}
+
+    are close to $\frac{e^0}{\sum_C e^0} = 1/C = 1/10 = 0.1.$ When we
+    multiply $\log Y$ element-wise with $T,$ each row of $T * \log Y$
+    is all zero except for a single entry close to $\log 0.1.$ Adding
+    all of these up over the $N$ training cases and dividing again by
+    $N$ doesn't change the result. Finally take the negative sign to
+    give $-\log 0.1.$ Also there's no regularization because $\l = 0.$
+</p>
+
+<h3>Visualizing learned softmax features</h3>
+
+<p>
+    Similar results on validation and test sets as those by SVM, about
+    $40\%$ and $37\%$ accuracy. Oddly enough the learned features are
+    even less recognizable.
+</p>
+
+<p>
+    <img src="images/softmaxlearnedfeatures.png">
+</p>
 
 <h1>Reference</h1>
 

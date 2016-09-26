@@ -292,7 +292,43 @@ DELETE
 <h3>Stopping child process when server restarts</h3>
 
 <p>
-    TODO
+    TODO. Try this:
+</p>
+
+<pre><code>process.on('SIGTERM', function() {
+    // stop here
+}).on('SIGINT', function() {
+    // here
+}).on('uncaughtException', function(er) {
+    // and here
+    console.log(er)
+})
+</code></pre>
+
+<h3>Node.js custom <code>console.log</code></h3>
+
+<p>
+    Redefine <code>console.log</code> to prepend a date at the
+    beginning of each line, so you don't have to type <code>new
+    Date()</code> all the time. Can also
+    use <a href="https://github.com/marak/colors.js/">colors.js</a> to
+    color the output.
+</p>
+
+<pre><code>var oldMethod = console.log.bind(console);
+console.log = function() {
+    var args = Array.prototype.slice.call(arguments);
+    args.unshift(new Date().toISOString());
+    oldMethod.apply(console, args)
+}
+</code></pre>
+
+<p>
+    <b>NOTE.</b> Need to put this code in a separate file so you can
+    require it in possibly multiple modules. If instead you copy it
+    into those modules it will run multiple times and crash with
+    a <code>RangeError: Maximum call stack size exceeded</code>. Not
+    quite sure why, but probably infinite recursion somewhere.
 </p>
 
 <h3>Object manipulations</h3>
@@ -309,7 +345,7 @@ DELETE
 [ 'Orange', 'Apple', 'Mango' ]
 </code></pre>
 
-<h3>jQuery</h3>
+<h2>jQuery</h2>
 
 <p>
     Ajax POST:
@@ -324,7 +360,19 @@ DELETE
 })
 </code></pre>
 
-<h3>Lodash</h3>
+<h3>Getting URL params client-side</h3>
+
+<p>
+    Use <code>purl.js</code>: <a href="https://github.com/allmarkedup/purl/">source</a>
+    <a href="https://github.com/trongr/purl">mirror.</a>
+</p>
+
+<pre><code>&lt;script src="js/purl.js"&gt;&lt;/script&gt;</code></pre>
+
+<pre><code>var url = window.location.href // "http://example.com?id=123"
+var id = purl(url).param("id")</code></pre>
+
+<h2>Lodash</h2>
 
 <p>
     Merging object <code>a</code> with another object in place:

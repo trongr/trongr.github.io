@@ -171,6 +171,22 @@ array([[ 0,  1,  2,  3],
        [16,  0, 18, 19],
        [20, 21,  0, 23]])'></code></pre>
 
+<h3>One-hot encoding</h3>
+
+<p>
+    A one-hot encoding is a representation of a number $k \in [0, n)$
+    as a row vector whose entries are all zero except for the $k$-th
+    place. To convert a list <code>[1, 2, 2, 0, 1]</code> of numbers
+    $k \in [0, 3)$ into their one-hot encodings:
+</p>
+
+<pre><code>>>> np.eye(3)[[1, 2, 2, 0, 1]]
+array([[ 0.,  1.,  0.],
+       [ 0.,  0.,  1.],
+       [ 0.,  0.,  1.],
+       [ 1.,  0.,  0.],
+       [ 0.,  1.,  0.]])</code></pre>
+
 <h3>Getting indices of maximum entries in rows of a 2D array</h3>
 
 <pre><code>>>> a
@@ -316,6 +332,65 @@ int pow(int base, int exp){
     }
     return n;
 }</code></pre>
+
+<h3>Character Arrays</h3>
+
+<pre><code>#include &lt;stdio.h&gt;
+
+#define MAXLINELENGTH 100
+
+int getline(char line[], int maxlinelength);
+void copy(char from[], char to[]);
+void printLongestLine();
+
+int main(){
+    printLongestLine();
+    return 0;
+}
+
+/* Reads user input line by line and prints the longest line */
+void printLongestLine(){
+    int len;
+    int max = 0;
+    char line[MAXLINELENGTH];
+    char longest[MAXLINELENGTH];
+    printf("Type some lines. Press c-d to quit\n");
+    while ((len = getline(line, MAXLINELENGTH)) &gt; 0){
+        if (len &gt; max){
+            max = len;
+            copy(line, longest);
+        }
+    }
+    if (max &gt; 0){
+        printf("The longest line was: %d %s\n", max, longest);
+    }
+}
+
+/* Reads a line into line, returns length */
+int getline(char line[], int maxlinelength){
+    int c, i;
+    // Book says this is -1, but I think it should be -2, cause we're
+    // appending \n and null terminator \0 to the end. Otherwise we'll
+    // assign '\0' outside the array, that's not good.
+    for (i = 0; i &lt; maxlinelength - 2
+            && (c = getchar()) != EOF && c != '\n'; i++){
+        line[i] = c;
+    }
+    if (c == '\n'){
+        line[i] = c;
+        i++;
+    }
+    line[i] = '\0';
+    return i;
+}
+
+void copy(char from[], char to[]){
+    int i = 0;
+    while ((to[i] = from[i]) != '\0'){
+        i++;
+    }
+}
+</code></pre>
 
 <h1>Reference</h1>
 
