@@ -130,7 +130,7 @@
     things simple we'll first show it for $n=1$ and $2.$ First:
 
     \begin{align}
-    b_1 m \leq a_1 b_1
+    b_1 m \leq a_1 b_1.
     \label{hsdfb342}
     \end{align}
 
@@ -492,6 +492,10 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
     $$\sum_n \frac{1}{n^2}$$
 
     also has ratio 1 but is convergent, by the integral test.
+</p>
+
+<p>
+    <b>Example.</b> The series $\sum\limits_{n=1}^\infty n r^n$ converges for $r\in [0, 1).$
 </p>
 
 <p>
@@ -1612,6 +1616,34 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
     $A$ to the function
 
     $$f(x) = \sum_{n=1}^\infty f_n(x).$$</i>
+</p>
+
+<h3>Radius of convergence of power series and its derivative</h3>
+
+<p>
+    <b>Proposition.</b> <i>Suppose that the series
+
+    $$f(x_0) = \sum_{n=0}^\infty a_n x_0^n$$
+
+    converges, and let $a \in (0, |x_0|).$ Then the series
+
+    $$f(x) = \sum_{n=0}^\infty a_n x^n$$
+
+    converges uniformly and absolutely on $[-a, a],$ as does the series
+
+    $$g(x) = \sum_{n=0}^\infty n a_n x^{n-1}.$$ Moreover, $f$ is
+    differentiable and
+
+    $$f'(x) = g(x)$$
+
+    for all $x \in [0, |x_0|).$</i>
+</p>
+
+<p>
+    <b>Corollary.</b> <i>A function defined by a convergent power
+    series in an interval $(-R, R)$ is infinitely differentiable in
+    that interval. A convergent power series centered at zero is the
+    Taylor series at zero of the function it defines.</i>
 </p>
 
 <h1>Reference</h1>

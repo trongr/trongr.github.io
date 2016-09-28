@@ -2490,7 +2490,7 @@ print 'sanity check: %f' % (-np.log(0.1))</code></pre>
 <p>
     In this test run using small randomly initialized $W$ the loss
 
-    $$L = -\frac{1}{N} \sum_{\rm entries} T * \log Y + \frac{\l}{2} \sum_{\rm entries} W * W,$$
+    $$L = -\frac{1}{N} \sum_{\rm entries} T * \log Y + \frac{\l}{2} \sum_{\rm entries} W * W$$
 
     should be close to $-\log 0.1$ because $W$ is close to zero, so $S
     = XW \approx 0,$ and the entries of
@@ -2500,7 +2500,7 @@ print 'sanity check: %f' % (-np.log(0.1))</code></pre>
     Y &\gets Y \bigg/ \sum_{\rm columns} Y \sim N \times C
     \end{align*}
 
-    are close to $\frac{e^0}{\sum_C e^0} = 1/C = 1/10 = 0.1.$ When we
+    are close to $e^0 / \sum_C e^0 = 1/C = 1/10 = 0.1.$ When we
     multiply $\log Y$ element-wise with $T,$ each row of $T * \log Y$
     is all zero except for a single entry close to $\log 0.1.$ Adding
     all of these up over the $N$ training cases and dividing again by

@@ -1487,7 +1487,7 @@ ad - cb &= 1,
 
 <p>
     <b>Theorem.</b> <i>Let $A \in M_{n\times n}(\CC).$ Then
-    $\lim_{m\to\infty} A^m$ exists iff both of the following
+    $\Lim_{m\to\infty} A^m$ exists iff both of the following
     conditions hold:
 
     <ol>
@@ -1503,6 +1503,120 @@ ad - cb &= 1,
     </i>
 </p>
 
+<h3>Transition / stochastic matrix and probability vector</h3>
+
+<p>
+    <b>Definition.</b> <i>An $n\times n$ matrix M is called a
+    transition matrix if $M_{ij}$ represents the probability of moving
+    from state $j$ to state $i$ in one step. A vector $P$ is called a
+    probability vector if its entries are nonnenative and sum to
+    $1.$</i>
+</p>
+
+<p>
+    In particular, the entries of $M$ are nonnenative and each column
+    sums to 1.
+</p>
+
+<p>
+    <b>Corollary.</b> <i>The columns of a transition matrix are
+    probability vectors.</i>
+</p>
+
+<p>
+    <b>Proposition.</b> <i>Let $M$ be a transition matrix. Then
+    $(M^m)_{ij}$ is the probability of moving from state $j$ to state
+    $i$ in $m$ steps.</i>
+</p>
+
+<p>
+    <i>Proof.</i> We'll prove this by induction. As a simple first case,
+
+    $$(M^2)_{ij} = \sum_{k=1}^n M_{ik} M_{kj} = M_{i1} M_{1j} + \cdots + M_{in} M_{nj},$$
+
+    or in words: the probability of moving from state $j$ to state $i$
+    in two steps is the sum over $k$ of moving from state $j$ to some
+    intermediate state $k$ and then from $k$ to $i,$ which is clearly
+    true. The inductive step:
+
+    $$(M^m)_{ij} = \sum_{k=1}^n M_{ik} (M^{m-1})_{kj},$$
+
+    i.e. in order to move from $j$ to $i$ in $m$ steps, you have to
+    move from $j$ to $k$ in $m-1$ steps, and then from $k$ to $i,$
+    summed over all such $k.$ \qed
+</p>
+
+<div class="bside">
+    This formula
+
+    $$(M^2)_{ij} = \sum_{k=1}^n M_{ik} M_{kj}$$
+
+    for multiplying two matrices feels a lot like the total derivative
+    of a function $f(x, y, z)$ by $t,$ where $x, y,$ and $z$ are
+    functions of $t:$
+
+    $$\frac{df}{dt} = \frac{\dd f}{\dd x} \frac{dx}{dt} + \frac{\dd f}{\dd y} \frac{dy}{dt} + \frac{\dd f}{\dd z} \frac{dz}{dt}.$$
+
+    Well, I guess breaking things into components is a very natural
+    thing to do.
+</div>
+
+<h3>Product of transition matrices and probability vectors</h3>
+
+<p>
+    <b>Theorem.</b> <i>Let $M$ be an $n\times n$ real nonnegative
+    matrix, $v\in \RR^n$ be real nonnegative, and $u \in \RR^n$ have
+    all its entries equal $1.$ Then:
+
+    <ol>
+    <li>$M$ is a transition matrix iff $M^T u = u.$</li>
+    <li>$v$ is a probability vector iff $u^T v = 1.$</li>
+    </ol></i>
+</p>
+
+<p>
+    <i>Proof.</i> Just a fancy restatement of the definitions: (1)
+    says that the columns of $M$ each sums to 1, and (2) says that the
+    entries of $v$ sum to 1. \qed
+</p>
+
+<p>
+    <b>Corollary.</b> <i>The product of a transition matrix with a
+    probability vector is a probability vector. The product of two
+    $n\times n$ transition matrices is a transition matrix. In
+    particular any power of a transition matrix is a transition
+    matrix.</i>
+</p>
+
+<p>
+    <i>Proof.</i> Let $M$ be a transition matrix and $P$ be a
+    probability vector. Multiplying everything out and rearranging we
+    have
+
+    \begin{align*}
+    \sum_{\rm entries} MP &= P_1 \sum_{\rm entries} M_1 + \cdots + P_n \sum_{\rm entries} M_n \\
+                          &= P_1 \cdot 1 + \cdots + P_n \cdot 1 \\
+                          &= P_1 + \cdots + P_n \\
+                          &= 1,
+    \end{align*}
+
+    where $\Sum_{\rm entries} M_k$ denotes the sum of entries of the
+    $k$-th column of $M.$ Therefore $MP$ is a probability vector.
+</p>
+
+<p>
+    Next suppose $N$ is a transition matrix. By properties of matrix
+    multiplication, the $k$-th column of $MN$ is $M N_k,$ where $N_k$
+    is the $k$-th column of $N.$ In fact,
+
+    $$MN = \begin{bmatrix}
+    M N_1 & \cdots & M N_n
+    \end{bmatrix}.$$
+
+    But $N$ is transition matrix, so its column $N_k$ is a probability
+    vector, and we've just showed that $MN_k$ is also a probability
+    vector, therefore $MN$ is a transition matrix. \qed
+</p>
 
 <h1>Reference</h1>
 

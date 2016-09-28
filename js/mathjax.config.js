@@ -14,7 +14,7 @@ window.MathJax = {
         // font: "STIX-Web"
         styles: {
             ".mjx-svg-href": {
-                fill: "red", stroke: "red",
+                fill: "#FF4A4A", stroke: "#FF4A4A",
             },
         }
     },
@@ -38,6 +38,9 @@ window.MathJax = {
             lf: "\\lfloor",
 
             // functions and operators
+            Lim: "\\lim\\limits",
+            Sum: "\\sum\\limits",
+            Prod: "\\prod\\limits",
             Cup: "\\bigcup\\limits",
             Cap: "\\bigcap\\limits",
             Times: "\\mathop{\\Large\\times}\\limits",

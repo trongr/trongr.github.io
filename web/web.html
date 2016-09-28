@@ -331,6 +331,19 @@ console.log = function() {
     quite sure why, but probably infinite recursion somewhere.
 </p>
 
+<p>
+    One down side is that you can't use <code>console.log</code>'s
+    string formatting, because the arguments are shifted, e.g.
+</p>
+
+<pre><code>console.log("id: %s name: %s", id, name)</code></pre>
+
+<p>
+    Can do this instead though:
+</p>
+
+<pre><code>console.log("id:", id, "name:", name)</code></pre>
+
 <h3>Object manipulations</h3>
 
 <p>
