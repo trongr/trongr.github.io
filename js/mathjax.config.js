@@ -89,6 +89,15 @@ window.MathJax = {
             th: "\\theta",
             ZZ: "\\mathbf Z",
 
+            bE: "\\mathbf E",
+            bF: "\\mathbf F",
+            br: "\\mathbf r",
+            bN: "\\mathbf N",
+            bR: "\\mathbf R",
+            btau: "\\boldsymbol \\tau",
+            bZ: "\\mathbf Z",
+            bC: "\\mathbf C",
+
             qed: "\\ \\blacksquare",
         }
     }

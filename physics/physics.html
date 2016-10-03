@@ -43,24 +43,20 @@
 
 <div class="aside">
     <img src="images/Torque_animation.gif">
-<p>
-    <b>*</b> We'll sometimes confuse the symbol for a vector with its
-    magnitude. It's often clear from context.
-</p>
 </div>
 
 <p>
-    <b>Definition.</b> <i>Let $F$ be the force on a rotational rigid
+    <b>Definition.</b> <i>Let $\bF$ be the force on a rotational rigid
     body applied at a point a distance $r$ from the pivot. The torque
     on the body is defined to be
 
-    $$\t = r \times F$$
+    $$\btau = \br \times \bF$$
 
-    with magnitude<b>*</b>
+    with magnitude
 
-    $$\t = rF\sin \th,$$
+    $$\t = r F\sin \th,$$
 
-    where $\th$ is the angle between $r$ and $F.$</i>
+    where $\th$ is the angle between $\br$ and $\bF.$</i>
 </p>
 
 <div class="aside">
@@ -73,7 +69,7 @@
     We can also define the moment arm $d$ as the line from the pivot
     to the force perpendicular to it. Then
 
-    $$\t = F r \sin \th = Fd.$$
+    $$\t = Fr \sin \th = Fd.$$
 </p>
 
 <h2>Angular Acceleration</h2>
@@ -646,26 +642,78 @@
 <h2>Uniformly Charged Sphere</h2>
 
 <p>
-    <b>TODO.</b> This one's tough to integrate.
+    <b>Proposition.</b> <i>The electric field at radius $r$ inside a
+    uniformly charged sphere of radius $R$ and charge $Q$ is zero. If
+    $r > R,$ the field is
+
+    $$E = \frac{Q}{4\pi\e r^2}.$$</i>
+</p>
+
+<p>
+    <i>Proof.</i> Similar to next example.
 </p>
 
 <h2>Uniformly Charged Ball</h2>
 
+<div class="bside">
+    <img src="images/fieldofballofcharge.png">
+</div>
 <p>
-    <b>TODO.</b> This one too!
+    <b>Proposition.</b> <i>The electric field at radius $r$ inside a uniformly
+    charged ball of radius $R$ and charge $Q$ is
+
+    $$E = \frac{Qr}{4\pi \e R^3},$$
+
+    and the field outside at radius $r$ is
+
+    $$E = \frac{Q}{4\pi\e r^2}.$$</i>
+</p>
+
+<p>
+    <i>Proof.</i> Let $A_r$ be the spherical Gaussian surface of radius
+    $r < R.$ Then by Gauss's Law the flux through $A_r$ is
+
+    $$\F = \oint_{A_r} E_r \cdot dA_r = \frac{Q_r}{\e},$$
+
+    where $E_r$ is the field at $r$ and $Q_r$ is the charge of the
+    ball $V_r$ enclosed by $A_r.$ By symmetry, $E_r$ is constant on
+    $A_r,$ so
+
+    \begin{align*}
+    E_r A_r &= \frac{Q_r}{\e} \\
+      E_r &= \frac{Q_r}{\e A_r}.
+    \end{align*}
+
+    Let
+
+    $$\r = \frac{Q}{V} = \frac{Q}{\frac{4}{3}\pi R^3}$$
+
+    be the charge density of the ball. Then the charge of the ball
+    $V_r$ is
+
+    $$Q_r = V_r \r = \tfrac{4}{3}\pi r^3 \frac{Q}{\frac{4}{3}\pi R^3} = \frac{Qr^3}{R^3}.$$
+
+    Therefore the field at $r$ is
+
+    $$E_r = \frac{Q_r}{\e A_r} = \frac{Qr^3 / R^3}{4\pi r^2 \e} = \frac{Qr}{4\pi\e R^3}.$$
+
+    The case when $r > R$ is similar. \qed
 </p>
 
 <p>
     We never do any ununiformly charged object. Hard to describe them
     at this point. <b>Question.</b> <i>Do they even exist?</i> Cause
-    you'd imagine that it'd spread out.
+    you'd imagine that it'd spread out. . . . Ah, obviously they do
+    exist: e.g. when you have a field that moves those charges and
+    keeps them there (in electrostatic equilibrium).
 </p>
 
 <h2>Charge to Mass Ratio</h2>
 
 <p>
-    <i>Particles with different masses and charges but the same charge
-    to mass ratio $\frac{q}{m}$ will experience the same acceleration
+    <b>Theorem.</b> <i>Particles with different masses and charges but
+    the same charge to mass ratio $\frac{q}{m}$ will, in the same
+    electric field, experience the same acceleration
 
     $$a = \frac{F}{m} = \frac{qE}{m}$$
 
@@ -899,7 +947,7 @@
 </p>
 
 <p class="box yellow">
-    $$\F = \frac{Q}{\e}.$$
+    $$\F = \oint_A E \cdot dA = \frac{Q}{\e}.$$
 </p>
 
 <p>
@@ -908,6 +956,59 @@
     should still be true, e.g. instead of a water faucet (a point
     charge) imagine a sprinkler-like device or a long pipe with cracks
     all along its length (line of charge).
+</p>
+
+<h2>Conductor in electrostatic equilibrium</h2>
+
+<div class="bside">
+    <img src="images/conductorelectrostaticequilibrium.png">
+</div>
+
+<p>
+    <b>Theorem.</b> <i>The electric field is zero at all points within
+    a conductor at electrostatic equilibrium. On the surface, the
+    field is perpendicular to the surface and has magnitude
+
+    $$E = \frac{\h}{\e},$$
+
+    where $\h$ is the surface charge density.</i>
+</p>
+
+<div class="clearboth"></div>
+<p>
+    All the excess charges are pushed to the surface of the
+    conductor. Whoa, this is wild.
+</p>
+
+<p class="bside">
+    <img src="images/f65bd922a787ccd4a1fc35bb1879070e.jpg">
+</p>
+
+<p>
+    <b>Analogy.</b> Consider this fountain again. The water is the
+    field, and the grains of sand floating in the water are the
+    charges. If there are any excess charges floating at the top two
+    rings, they'll be pushed to the bottom ring, where they have
+    nowhere else to go. The water, like the field, is able to pass
+    through the bottom ring into a drain, but the grains are stuck at
+    the boundary of the conductor, because the drain is sand proof,
+    say.
+</p>
+
+<h3>Faraday cage</h3>
+
+<p>
+    <b>Proposition.</b> <i>The field is zero on and intestinal within
+    any interior surface of a conductor at electrostatic
+    equilibrium.</i>
+</p>
+
+<p>
+    Application. Faraday cage:
+</p>
+
+<p>
+    <img src="images/faradaycage.png">
 </p>
 
 <h1>Reference</h1>
