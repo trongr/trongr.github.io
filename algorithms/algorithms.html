@@ -31,9 +31,37 @@
      </div><hr><div class="author">A Wizard of Earthsea</div>
 </div>
 
-<h3>Insertion sort</h3>
+<h1>Insertion sort</h1>
 
+<pre><code>void insertion(int a[], size_t n){
+    for (size_t i = 1; i < n; i++){
+        int key = a[i];
+        size_t j = i;
+        while (0 < j && key < a[j - 1]){
+            a[j] = a[j - 1];
+            j--;
+        }
+        a[j] = key;
+    }
+}</code></pre>
 
+<p>
+    Test method, requires C99: <code>cc -std=c99 sort.c</code>
+</p>
+
+<pre><code>#include &lt;stdbool.h&gt;
+
+bool is_sorted(int a[], size_t n){
+    for (size_t i = 0; i < n - 1; i++){
+        if (a[i] > a[i + 1]){
+            return false;
+        }
+    }
+    return true;
+}
+</code></pre>
+
+<pre><code>assert(is_sorted(a, n));</code></pre>
 
 <h1>Reference</h1>
 

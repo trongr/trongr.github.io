@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 class TwoLayerNet(object):
   """
   A two-layer fully-connected neural network. The net has an input dimension of
-  N, a hidden layer dimension of H, and performs classification over C classes.
+  D, a hidden layer dimension of H, and performs classification over C classes.
   We train the network with a softmax loss function and L2 regularization on the
   weight matrices. The network uses a ReLU nonlinearity after the first fully
   connected layer.
@@ -66,48 +66,41 @@ class TwoLayerNet(object):
     W1, b1 = self.params['W1'], self.params['b1']
     W2, b2 = self.params['W2'], self.params['b2']
     N, D = X.shape
+    num_classes = W2.shape[1]
 
     # Compute the forward pass
-    scores = None
-    #############################################################################
-    # TODO: Perform the forward pass, computing the class scores for the input. #
-    # Store the result in the scores variable, which should be an array of      #
-    # shape (N, C).                                                             #
-    #############################################################################
-    pass
-    #############################################################################
-    #                              END OF YOUR CODE                             #
-    #############################################################################
-    
-    # If the targets are not given then jump out, we're done
-    if y is None:
-      return scores
+    A = np.dot(X, W1) + b1 # fully connected first layer
+    B = np.maximum(0, A) # ReLU activation
+    C = np.dot(B, W2) + b2 # fully connected second layer (the scores)
 
-    # Compute the loss
-    loss = None
-    #############################################################################
-    # TODO: Finish the forward pass, and compute the loss. This should include  #
-    # both the data loss and L2 regularization for W1 and W2. Store the result  #
-    # in the variable loss, which should be a scalar. Use the Softmax           #
-    # classifier loss. So that your results match ours, multiply the            #
-    # regularization loss by 0.5                                                #
-    #############################################################################
-    pass
-    #############################################################################
-    #                              END OF YOUR CODE                             #
-    #############################################################################
+    # If the targets are not given then jump out, we're done. (For dev
+    # purposes)
+    if y is None:
+      return C
+
+    # Compute the loss. Reusing code from softmax assignment
+    Y = np.exp(C)
+    Y = Y / np.sum(Y, axis=1)[None].T
+    T = np.eye(num_classes)[y] # one-hot encodings of the class labels
+    # regularize both the ordinary weights and the bias weights
+    loss = - 1.0 / N * np.sum(T * np.log(Y)) + 0.5 * reg * np.sum(W1 * W1) \
+                                             + 0.5 * reg * np.sum(W2 * W2) \
+                                             + 0.5 * reg * np.sum(b1 * b1) \
+                                             + 0.5 * reg * np.sum(b2 * b2) \
 
     # Backward pass: compute gradients
     grads = {}
-    #############################################################################
-    # TODO: Compute the backward pass, computing the derivatives of the weights #
-    # and biases. Store the results in the grads dictionary. For example,       #
-    # grads['W1'] should store the gradient on W1, and be a matrix of same size #
-    #############################################################################
-    pass
-    #############################################################################
-    #                              END OF YOUR CODE                             #
-    #############################################################################
+
+    dC = Y - T
+    grads["W2"] = 1.0 / N * np.dot(B.T, dC) + reg * W2
+    grads["b2"] = 1.0 / N * np.sum(dC, axis=0) + reg * b2 # NOTE. This is the same as np.dot(np.ones(N), dC)
+
+    dB = np.dot(dC, W2.T)
+    iA = np.where(A >= 0, 1, 0) # indicator function on A >= 0
+    dA = dB * iA
+
+    grads["W1"] = 1.0 / N * np.dot(X.T, dA) + reg * W1
+    grads["b1"] = 1.0 / N * np.sum(dA, axis=0) + reg * b1 # NOTE. This is the same as np.dot(np.ones(N), dA)
 
     return loss, grads
 
@@ -214,5 +207,3 @@ class TwoLayerNet(object):
     ###########################################################################
 
     return y_pred
-
-

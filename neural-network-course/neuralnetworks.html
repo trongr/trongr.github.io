@@ -1180,7 +1180,7 @@ Recognition</h1>
     good as random guessing, which would give 10% accuracy since there
     are 10 classes. The course notes said they got a 38.6% accuracy,
     but that might be on a different batch, or maybe they trained it
-    on all batches together. TODO. Do that!
+    on all batches together.
 </p>
 
 <p>
@@ -2136,6 +2136,11 @@ for alpha in learning_rates:
     <img src="images/svmhyperparamsvalidationlist.png">
 </p>
 
+<div class="bside">
+    EDIT. Should do random search instead of grid search for the
+    hyperparameters like this:
+</div>
+
 <p>
     <img src="images/svmhyperparamsvalidation.png">
 </p>
@@ -2289,7 +2294,7 @@ for alpha in learning_rates:
 
 <img src="images/featureextractionvsnewandimprovedpipeline.png">
 
-<h2>Derivatives of softmax loss function</h2>
+<h2 id="bcvsdgg52396">Derivatives of softmax loss function</h2>
 
 <p>
     <a href="#oisdfb245">Previously we calculated</a> the derivatives
@@ -2492,7 +2497,7 @@ print 'sanity check: %f' % (-np.log(0.1))</code></pre>
 
     $$L = -\frac{1}{N} \sum_{\rm entries} T * \log Y + \frac{\l}{2} \sum_{\rm entries} W * W$$
 
-    should be close to $-\log 0.1$ because $W$ is close to zero, so $S
+    should be close to $-\log 0.1 \approx 2.3$ because $W$ is close to zero, so $S
     = XW \approx 0,$ and the entries of
 
     \begin{align*}
@@ -2505,7 +2510,7 @@ print 'sanity check: %f' % (-np.log(0.1))</code></pre>
     is all zero except for a single entry close to $\log 0.1.$ Adding
     all of these up over the $N$ training cases and dividing again by
     $N$ doesn't change the result. Finally take the negative sign to
-    give $-\log 0.1.$ Also there's no regularization because $\l = 0.$
+    give $-\log 0.1 \approx 2.3.$ Also there's no regularization because $\l = 0.$
 </p>
 
 <h3>Visualizing learned softmax features</h3>
@@ -2519,6 +2524,357 @@ print 'sanity check: %f' % (-np.log(0.1))</code></pre>
 <p>
     <img src="images/softmaxlearnedfeatures.png">
 </p>
+
+<h1>Feature Extraction</h1>
+
+<p>
+    Extract higher level features than raw pixels, e.g. using
+    histograms of oriented gradients (HOG) and color histograms.
+</p>
+<img src="images/68747470733a2f2f67696c736376626c6f672e66696c65732e776f726470726573732e636f6d2f323031332f30382f666967757265352e6a7067.jpg">
+
+<h1>Neural Network</h1>
+
+<h3>Neural network as a circuit</h3>
+
+<p>
+    Modular components that know how to calculate their own
+    derivatives instead of one monolithic expression for the entire
+    network.
+</p>
+
+<img src="images/neuralnetworkcircuit.png">
+<img src="images/neuronlegoblocks.png">
+
+<h3>Implementation</h3>
+
+<img src="images/neuralnetworkimplementation.png">
+
+<h3>Rectified Linear Unit---ReLU</h3>
+
+<div class="bside">
+    <img src="images/495px-Rectifier_and_softplus_functions.svg.png">
+</div>
+<p>
+    <b>Definition.</b> <i>A ReLU is a neuron using the activation
+    function
+
+    $$f(x) = \max(0, x).$$</i>
+</p>
+
+<h1>Assignment: two layer neural network</h1>
+
+<h3>Network architecture</h3>
+
+<p>
+    Let the network architecture and notations be as in the following
+    diagram, where $x \in \bR^D$ is a single training case. We'll
+    calculate the derivatives of the loss function $f_x$ with respect
+    to $c = (c_j), b = (b_j), a = (a_j),$ and $W_2 = (W^2_{ij}), W_1 =
+    (W^1_{ij}),$ and the bias vectors
+
+    \begin{align*}
+    b^2 &= \begin{bmatrix}
+    b^2_1 & \cdots & b^2_C
+    \end{bmatrix} \\
+    b^1 &= \begin{bmatrix}
+    b^1_1 & \cdots & b^1_H
+    \end{bmatrix},
+    \end{align*}
+
+    first in scalar for the one training case $x,$ then in matrix form
+    for the minibatch.
+</p>
+
+<h3>Free regularization terms</h3>
+
+<p>
+    Note that the regularization terms are free, in the sense that we
+    don't need to include them in the backpropagation, because they
+    don't depend on any of the intermediate terms $c, b, a,$ only on
+    $W_2$ and $W_1:$ so we just need to add their derivatives when we
+    actually need them, namely at $\frac{\dd f}{\dd W_2}$ and
+    $\frac{\dd f}{\dd W_1}.$
+</p>
+
+<img src="images/IMG_0312.JPG">
+
+<h2>Backpropagating scalar derivatives</h2>
+
+<h3>Softmax layer</h3>
+
+<p>
+    We've already done this before a couple times (using different
+    notations), so let's reuse it:
+</p>
+<p class="box">
+    \begin{align*}
+    \frac{\dd f_x}{\dd c_j} &= y_j - t_j \\
+    \frac{\dd f_x}{\dd W^2_{ij}} &= (y_j - t_j) b_i = \frac{\dd f_x}{\dd c_j} b_i \\
+    \frac{\dd f_x}{\dd b^2_{j}} &= y_j - t_j = \frac{\dd f_x}{\dd c_j},
+    \end{align*}
+</p>
+<p>
+    where $y$ and $t$ are defined <a href="#bcvsdgg52396">as
+    before.</a> Note: we used the second formula to get the third one,
+    since for bias units the input $b_i$ is 1.
+</p>
+
+<h3>ReLU layer</h3>
+
+<p>
+    By the chain rule,
+
+    $$\frac{\dd f_x}{\dd b_i} = \sum_j \frac{\dd f_x}{\dd c_j} \frac{\dd c_j}{\dd b_i}.$$
+
+    Since
+
+    $$c_j = \sum_k b_k W^2_{kj},$$
+
+    we have
+
+    $$\frac{\dd c_j}{\dd b_i} = W^2_{ij}.$$
+
+    Therefore
+</p>
+<p class="box">
+    $$\frac{\dd f_x}{\dd b_i} = \sum_j \frac{\dd f_x}{\dd c_j} W^2_{ij}.$$
+</p>
+
+<p>
+    Next we have $b_i = \max(0, a_i),$ so
+</p>
+<p class="box">
+    $$\frac{\dd f_x}{\dd a_i} = \frac{\dd f_x}{\dd b_i} \frac{\dd b_i}{\dd a_i}
+        = \frac{\dd f_x}{\dd b_i} \c(a_i \geq 0),$$
+</p>
+<p>
+    where $\c$ is the indicator function:
+
+    $$\c(X) = \begin{cases}
+    1 & \text{if $X$ is true} \\
+    0 & \text{contrariwise.}
+    \end{cases}$$
+</p>
+
+<h3>Input layer</h3>
+
+<p>
+    Skipping the details, the last set of derivatives are:
+</p>
+<p class="box">
+    \begin{align*}
+    \frac{\dd f_x}{\dd W^1_{ij}} &= \frac{\dd f_x}{\dd a_j} \frac{\dd a_j}{\dd W^1_{ij}}
+        = \frac{\dd f_x}{\dd a_j} x_i \\
+    \frac{\dd f_x}{\dd b^1_j} &= \frac{\dd f_x}{\dd a_j},
+    \end{align*}
+</p>
+<p>
+    where again we used the nonbias formula to get the bias.
+</p>
+
+<h2>Backpropagating matrix derivatives</h2>
+
+<h3>Softmax layer</h3>
+
+<p>
+    Let $C \sim N \times C$ (slight abuse of notation here---it'll be
+    clear from context which $C$ we mean) be the matrix of activations
+    for all training cases, so that the rows of $C$ are the vectors
+    $c$ from before, and let
+
+    $$\frac{\dd f_x}{\dd C} = \left(\frac{\dd f_x}{\dd c_i}\right) \sim N \times C$$
+
+    be the corresponding matrix of derivatives of $f_x$ with respect
+    to $c_i$ for each $i$ and each training case $x.$ By our previous
+    calculation this is
+</p>
+<p class="box">
+    $$\frac{\dd f_x}{\dd C} = Y - T \sim N \times C.$$
+</p>
+<p>
+    Note that we're using the symbol $\frac{\dd f_x}{\dd C}$ to
+    distinguish it from the derivative $\frac{\dd f}{\dd C}$ of the
+    total loss function
+
+    $$f = \frac{1}{N} \sum_x f_x + R,$$
+
+    which would be
+
+    $$\frac{\dd f}{\dd C} = \frac{1}{N}(Y - T),$$
+
+    but that's not what we want. We don't want to add the $1/N$ factor
+    here quite yet.
+</p>
+
+<p>
+    Let $B \sim N \times H$ be the matrix of activations in layer $B$
+    for all training cases. Omitting regularization for the moment,
+    since
+
+    $$f = \frac{1}{N} \sum_x f_x,$$
+
+    we have
+
+    $$\frac{\dd f}{\dd W^2_{ij}} = \frac{1}{N} \sum_x \frac{\dd f_x}{\dd W^2_{ij}} = \frac{1}{N} \sum_x \frac{\dd f_x}{\dd c_j} b_i,$$
+
+    using the scalar derivative we obtained earlier.
+
+    Converting this into matrix form, we get
+
+    $$\frac{\dd f}{\dd W_2} = \left( \frac{\dd f}{\dd W^2_{ij}} \right)
+        = \frac{1}{N} B^T \frac{\dd f_x}{\dd C} \sim H \times C.$$
+
+    (It's hard to explain but easy to see if you write both matrices
+    $B^T$ and $\frac{\dd f_x}{\dd C}$ out.)
+</p>
+
+<p>
+    Next we add regularization. We'll be regularizing both the weights
+    and bias units using L2 norm:
+
+    $$f = \frac{1}{N} \sum_x f_x + R(W_1) + R(b^1) + R(W_2) + R(b^2),$$
+
+    where
+
+    $$R(X) = \frac{\l}{2} ||X||^2 = \frac{\l}{2} \sum_{ij} X_{ij}^2
+           = \frac{\l}{2} \sum_{\rm entries} X * X.$$
+
+    We've also calculated this derivative before:
+
+    $$\frac{\dd R(X)}{\dd X} = \l X.$$
+
+    Therefore the matrix form of the derivative of loss with respect
+    to $W_2$ with regularization is
+</p>
+<p class="box">
+    $$\frac{\dd f}{\dd W_2} = \frac{1}{N} B^T \frac{\dd f_x}{\dd C} + \l W_2 \sim H \times C,$$
+</p>
+<p>
+    where only the $W_2$ regularization term remains since
+
+    $$\frac{\dd R(b_2)}{\dd W_2} = \frac{\dd R(W_1)}{\dd W_2} = \frac{\dd R(b_1)}{\dd W_2} = 0.$$
+
+    Similarly, we can compute the bias derivative
+</p>
+
+<p class="box">
+    $$\frac{\dd f}{\dd b^2} = \frac{1}{N} \sum_{\rm rows} \frac{\dd f_x}{\dd C} + \l b^2 \sim 1 \times C.$$
+</p>
+
+<p>
+    Note that
+
+    $$\sum_{\rm rows} \frac{\dd f_x}{\dd C}$$
+
+    is the same as
+
+    $$\begin{bmatrix}
+    1 & \cdots & 1
+    \end{bmatrix} \frac{\dd f_x}{\dd C},$$
+
+    which makes sense because another way to derive $\frac{\dd f}{\dd
+    b^2}$ is to use the expression for the nonbias weight derivative
+    $\frac{\dd f}{\dd W^2_{ij}}$ we just found, where $B$ becomes the
+    bias input vector consisting of only ones.
+</p>
+
+<h3>ReLU layer</h3>
+
+<p>
+    The rest of the derivations are similar, so we'll skip the
+    details. Let $B \sim N \times H$ be the matrix of activations $b$
+    over all training cases (see diagram above). Then
+</p>
+<p class="box">
+    $$\frac{\dd f_x}{\dd B} = \frac{\dd f_x}{\dd C} W_2^T \sim N \times H.$$
+</p>
+<p>
+    Let $A \sim N \times H$ be the matrix of activations $a.$ Then
+</p>
+<p class="box">
+    $$\frac{\dd f_x}{\dd A} = \frac{\dd f_x}{\dd B} * \c(A \geq 0) \sim N \times H.$$
+</p>
+
+<h3>Input layer</h3>
+
+<p>
+    Finally,
+</p>
+<p class="box">
+    \begin{align*}
+    \frac{\dd f}{\dd W_1} &= \frac{1}{N} X^T \frac{\dd f_x}{\dd A} + \l W_1 \sim D \times H \\
+    \frac{\dd f}{\dd b^1} &= \frac{1}{N} \sum_{\rm rows} \frac{\dd f_x}{\dd A} + \l b^1 \sim 1 \times H.
+    \end{align*}
+</p>
+
+<h3>Implementation</h3>
+
+<pre><code>  def loss(self, X, y=None, reg=0.0):
+    """
+    Compute the loss and gradients for a two layer fully connected neural
+    network.
+
+    Inputs:
+    - X: Input data of shape (N, D). Each X[i] is a training sample.
+    - y: Vector of training labels. y[i] is the label for X[i], and each y[i] is
+      an integer in the range 0 <= y[i] < C. This parameter is optional; if it
+      is not passed then we only return scores, and if it is passed then we
+      instead return the loss and gradients.
+    - reg: Regularization strength.
+
+    Returns:
+    If y is None, return a matrix scores of shape (N, C) where scores[i, c] is
+    the score for class c on input X[i].
+
+    If y is not None, instead return a tuple of:
+    - loss: Loss (data loss and regularization loss) for this batch of training
+      samples.
+    - grads: Dictionary mapping parameter names to gradients of those parameters
+      with respect to the loss function; has the same keys as self.params.
+    """
+    # Unpack variables from the params dictionary
+    W1, b1 = self.params['W1'], self.params['b1']
+    W2, b2 = self.params['W2'], self.params['b2']
+    N, D = X.shape
+    num_classes = W2.shape[1]
+
+    # Compute the forward pass
+    A = np.dot(X, W1) + b1 # fully connected first layer
+    B = np.maximum(0, A) # ReLU activation
+    C = np.dot(B, W2) + b2 # fully connected second layer (the scores)
+
+    # If the targets are not given then jump out, we're done. (For dev
+    # purposes)
+    if y is None:
+      return C
+
+    # Compute the loss. Reusing code from softmax assignment
+    Y = np.exp(C)
+    Y = Y / np.sum(Y, axis=1)[None].T
+    T = np.eye(num_classes)[y] # one-hot encodings of the class labels
+    # regularize both the ordinary weights and the bias weights
+    loss = - 1.0 / N * np.sum(T * np.log(Y)) + 0.5 * reg * np.sum(W1 * W1) \
+                                             + 0.5 * reg * np.sum(W2 * W2) \
+                                             + 0.5 * reg * np.sum(b1 * b1) \
+                                             + 0.5 * reg * np.sum(b2 * b2) \
+
+    # Backward pass: compute gradients
+    grads = {}
+
+    dC = Y - T
+    grads["W2"] = 1.0 / N * np.dot(B.T, dC) + reg * W2
+    grads["b2"] = 1.0 / N * np.sum(dC, axis=0) + reg * b2 # NOTE. This is the same as np.dot(np.ones(N), dC)
+
+    dB = np.dot(dC, W2.T)
+    iA = np.where(A >= 0, 1, 0) # indicator function on A >= 0
+    dA = dB * iA
+
+    grads["W1"] = 1.0 / N * np.dot(X.T, dA) + reg * W1
+    grads["b1"] = 1.0 / N * np.sum(dA, axis=0) + reg * b1 # NOTE. This is the same as np.dot(np.ones(N), dA)
+
+    return loss, grads
+</code></pre>
 
 <h1>Reference</h1>
 
