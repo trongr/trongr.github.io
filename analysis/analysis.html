@@ -1160,6 +1160,19 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
     and alternates in sign for $n > \a.$
 </p>
 
+<h3 id="bfvtr3491">Multiplicative and additive recursion</h3>
+
+<p>
+    <b>Corollary.</b> <i>For any real $\a$ and integer $k > 0,$
+
+    \begin{align*}
+    k \binom{\a}{k} &= \a {\a - 1 \choose k - 1} \\
+    {\a \choose k} &= {\a - 1 \choose k - 1} + {\a - 1 \choose k}.
+    \end{align*}</i>
+</p>
+
+<h3>Binomial Taylor polynomial</h3>
+
 <p>
     <b>Proposition.</b> <i>The Taylor polynomial of degree $n$ around
     $0$ for
@@ -1621,7 +1634,7 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
 <h3>Radius of convergence of power series and its derivative</h3>
 
 <p>
-    <b>Proposition.</b> <i>Suppose that the series
+    <b>Theorem.</b> <i>Suppose that the series
 
     $$f(x_0) = \sum_{n=0}^\infty a_n x_0^n$$
 
@@ -1645,6 +1658,172 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
     that interval. A convergent power series centered at zero is the
     Taylor series at zero of the function it defines.</i>
 </p>
+
+<p>
+    <b>Corollary.</b> <i>A convergent power series in an interval
+    $(-R, R)$ is continuous and uniformly and absolutely convergent in
+    any interval $[-a, a]$ for $a < R.$</i>
+</p>
+
+<h3>Power series for $\sin x / x$</h3>
+
+<p>
+    <b>Exercise.</b> <i>If
+
+    $$f(x) = \begin{cases}
+    \frac{\sin x}{x} & \text{if $x \neq 0$}\\
+    1 & \text{otherwise,}
+    \end{cases}$$
+
+    find $f^{(k)}(0).$ Hint: find the power series for $f.$</i>
+</p>
+
+<p>
+    <b>Solution.</b> The power series for $\sin x$ is
+
+    $$\sin x = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \cdots,$$
+
+    convergent for all $x,$ so
+
+    $$\frac{\sin x}{x} = 1 - \frac{x^2}{3!} + \frac{x^4}{5!} - \cdots,$$
+
+    convergent for all $x \neq 0.$ By the previous corollary this is
+    the Taylor series of $f$ centered at zero, so
+
+    \begin{align*}
+    \frac{f^{(k)}(0)}{k!} &= a_k = \frac{(-1)^{k/2}}{(k+1)!} \\
+    f^{(k)}(0) &= \frac{(-1)^{k/2}}{k+1}
+    \end{align*}
+
+    for even $k,$ and $f^{(k)}(0) = 0$ for odd $k.$ \qed
+</p>
+
+<h3>Alternative proof Newton's binomial theorem</h3>
+
+<p>
+    <b>Theorem.</b> <i>For any $\a$ and $|x| < 1,$
+
+    $$(1 + x)^\a = \sum_{k=1}^\infty {\a \choose k} x^k.$$</i>
+</p>
+
+<p>
+    <i>Proof.</i> Let
+
+    $$f(x) = \sum_{k=1}^\infty {\a \choose k} x^k.$$
+
+    First show that $f$ satisfies the first order linear differential
+    equation
+
+    $$(1 + x) f'(x) = \a f(x)$$
+
+    by differentiating $f$ and use <a href="#bfvtr3491">these two
+    binomial identities.</a>
+
+    Then solve the equation using integrating factor and show that $f$
+    must be of the form
+
+    $$f(x) = c(1 + x)^\a$$
+
+    for some $c,$ which must clearly be $1.$ \qed
+</p>
+
+<h3>Weierstrass M test example</h3>
+
+<p>
+    <b>Exercise.</b> <i>Prove that the series
+
+    $$\sum_{n=1}^\infty \frac{x}{n(1 + nx^2)}$$
+
+    converges uniformly on $\bR.$</i>
+</p>
+
+<p>
+    <i>Solution.</i> Show that the functions
+
+    $$f_n(x) = \frac{x}{n(1 + nx^2)}$$
+
+    have max absolute values $1/2n^{3/2}$ at $x = 1/\sqrt{n}$ by
+    solving
+
+    $$f_n'(x) = 0,$$
+
+    then use the Weierstrass M test and the fact that $\sum 1/n^s$
+    converges iff $s > 1.$ \qed
+</p>
+
+<h3>Some functions power series cannot represent</h3>
+
+<p>
+    <b>Proposition.</b> <i>Suppose that $f(x) = \sum a_n x^n$ for all
+    $x$ in some interval $I = (-R, R)$ and that $f(x) = 0$ for all $x
+    \in I.$ Then $a_n = 0.$</i>
+</p>
+
+<p>
+    <i>Proof.</i> Since $f = 0$ in $I,$ its derivatives are also all
+    zero there, so
+
+    $$a_n = \frac{f^{(n)}(0)}{n!} = 0. \qed$$
+</p>
+
+<p>
+    <b>Proposition.</b> <i>Suppose that $f(x) = \sum a_n x^n$ for all
+    $x$ in some interval $I = (-R, R)$ and that $f(x_m) = 0$ for some
+    sequence $x_m \longrightarrow 0.$ Then $a_n = 0.$</i>
+</p>
+
+<p>
+    <i>Proof.</i> By a previous corollary, $f$ is continuous in any
+    interval $[-a, a]$ for $a < R,$ so
+
+    $$a_0 = f(0) = \lim_{x_m \to 0} f(x_m) = 0.$$
+
+    Since $f$ is zero at $x_m,$ by the mean value theorem there is a
+    sequence $y_m \longrightarrow 0$ s.t.
+
+    $$f'(y_m) = 0.$$
+
+    Applying the first step again, we have
+
+    $$a_1 = 0,$$
+
+    and so on for $a_2, a_3, \ldots.$ \qed
+</p>
+
+<div class="bside">
+    <img src="images/sin1overx.png">
+</div>
+<p>
+    <b>Example.</b> The function
+
+    $$f = \sin 1/x$$
+
+    cannot be represented as a power series, because it crosses 0
+    infinitely many times near the origin.
+</p>
+
+<p>
+    <b>Example.</b> A power series also can't represent a function
+    which is 0 for $x \leq 0$ and nonzero for $x > 0,$ e.g. it cannot
+    describe the motion of a particle that remains at rest until time
+    0 and then starts moving.
+</p>
+
+<h3>Uniqueness of power series representation</h3>
+
+<p>
+    <b>Corollary.</b> <i>Suppose that $f(x) = \sum a_n x^n$ and
+    $g(x) = \sum b_n x^n$ converge for all $x$ in some interval
+    containing zero, and that $f(x_m) = g(x_m)$ for some sequence $x_m
+    \longrightarrow 0.$ Then $a_n = b_n$ for all $n.$</i>
+</p>
+
+<p>
+    <b>Corollary.</b> <i>A function can only have one power series
+    representation centered at $0.$</i>
+</p>
+
+
 
 <h1>Reference</h1>
 

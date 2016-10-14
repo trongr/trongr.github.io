@@ -76,6 +76,7 @@ window.MathJax = {
             // ll is <<, do not redefine.
             L: "\\Lambda",
             m: "\\mu",
+            n: "\\nu",
             NN: "\\mathbf N",
             o: "\\omega",
             O: "\\Omega",

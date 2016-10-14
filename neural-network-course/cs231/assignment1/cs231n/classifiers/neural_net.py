@@ -134,32 +134,19 @@ class TwoLayerNet(object):
     val_acc_history = []
 
     for it in xrange(num_iters):
-      X_batch = None
-      y_batch = None
-
-      #########################################################################
-      # TODO: Create a random minibatch of training data and labels, storing  #
-      # them in X_batch and y_batch respectively.                             #
-      #########################################################################
-      pass
-      #########################################################################
-      #                             END OF YOUR CODE                          #
-      #########################################################################
+      batch_idx = np.random.choice(num_train, batch_size, replace=True) # todo try replace=True
+      X_batch = X[batch_idx]
+      y_batch = y[batch_idx]
 
       # Compute loss and gradients using the current minibatch
       loss, grads = self.loss(X_batch, y=y_batch, reg=reg)
       loss_history.append(loss)
 
-      #########################################################################
-      # TODO: Use the gradients in the grads dictionary to update the         #
-      # parameters of the network (stored in the dictionary self.params)      #
-      # using stochastic gradient descent. You'll need to use the gradients   #
-      # stored in the grads dictionary defined above.                         #
-      #########################################################################
-      pass
-      #########################################################################
-      #                             END OF YOUR CODE                          #
-      #########################################################################
+      # gradient descent / delta rule
+      self.params["W1"] = self.params["W1"] - learning_rate * grads["W1"]
+      self.params["W2"] = self.params["W2"] - learning_rate * grads["W2"]
+      self.params["b1"] = self.params["b1"] - learning_rate * grads["b1"]
+      self.params["b2"] = self.params["b2"] - learning_rate * grads["b2"]
 
       if verbose and it % 100 == 0:
         print 'iteration %d / %d: loss %f' % (it, num_iters, loss)
@@ -196,14 +183,8 @@ class TwoLayerNet(object):
       the elements of X. For all i, y_pred[i] = c means that X[i] is predicted
       to have class c, where 0 <= c < C.
     """
-    y_pred = None
-
-    ###########################################################################
-    # TODO: Implement this function; it should be VERY simple!                #
-    ###########################################################################
-    pass
-    ###########################################################################
-    #                              END OF YOUR CODE                           #
-    ###########################################################################
-
-    return y_pred
+    # run X through the network and compute class scores
+    A = np.dot(X, self.params["W1"]) + self.params["b1"] # fully connected first layer
+    B = np.maximum(0, A) # ReLU activation
+    C = np.dot(B, self.params["W2"]) + self.params["b2"] # fully connected second layer (the scores)
+    return np.argmax(C, axis=1)

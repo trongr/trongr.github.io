@@ -2740,7 +2740,7 @@ print 'sanity check: %f' % (-np.log(0.1))</code></pre>
     $$R(X) = \frac{\l}{2} ||X||^2 = \frac{\l}{2} \sum_{ij} X_{ij}^2
            = \frac{\l}{2} \sum_{\rm entries} X * X.$$
 
-    We've also calculated this derivative before:
+    We've also computed this derivative before:
 
     $$\frac{\dd R(X)}{\dd X} = \l X.$$
 
@@ -2753,7 +2753,7 @@ print 'sanity check: %f' % (-np.log(0.1))</code></pre>
 <p>
     where only the $W_2$ regularization term remains since
 
-    $$\frac{\dd R(b_2)}{\dd W_2} = \frac{\dd R(W_1)}{\dd W_2} = \frac{\dd R(b_1)}{\dd W_2} = 0.$$
+    $$\frac{\dd R(b^2)}{\dd W_2} = \frac{\dd R(W_1)}{\dd W_2} = \frac{\dd R(b^1)}{\dd W_2} = 0.$$
 
     Similarly, we can compute the bias derivative
 </p>
@@ -2874,6 +2874,23 @@ print 'sanity check: %f' % (-np.log(0.1))</code></pre>
     grads["b1"] = 1.0 / N * np.sum(dA, axis=0) + reg * b1 # NOTE. This is the same as np.dot(np.ones(N), dA)
 
     return loss, grads
+</code></pre>
+
+<h2>Training the network using stochastic gradient descent</h2>
+
+<pre><code>    for it in xrange(num_iters):
+      batch_idx = np.random.choice(num_train, batch_size, replace=True) # todo try replace=True
+      X_batch = X[batch_idx]
+      y_batch = y[batch_idx]
+
+      # Compute loss and gradients using the current minibatch
+      loss, grads = self.loss(X_batch, y=y_batch, reg=reg)
+
+      # gradient descent / delta rule
+      self.params["W1"] = self.params["W1"] - learning_rate * grads["W1"]
+      self.params["W2"] = self.params["W2"] - learning_rate * grads["W2"]
+      self.params["b1"] = self.params["b1"] - learning_rate * grads["b1"]
+      self.params["b2"] = self.params["b2"] - learning_rate * grads["b2"]
 </code></pre>
 
 <h1>Reference</h1>

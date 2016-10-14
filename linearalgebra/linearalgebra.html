@@ -1619,6 +1619,90 @@ ad - cb &= 1,
     matrix. \qed
 </p>
 
+<h3>Regular transition matrix</h3>
+
+<p>
+    <b>Definition.</b> <i>A transition matrix is called regular if
+    some power of the matrix contains only positive entries.</i>
+</p>
+
+<h3>Row sum and column sum</h3>
+
+<p>
+    <b>Definition.</b> <i>Let $A \in M_{n\times n}(\bC).$ Define the
+    $i$-th row sum $\r_i(A)$ to be the sum of the absolute values of
+    the entries in row $i$ of $A,$ and define the $j$-th column sum
+    $\n_j(A)$ to be the sum of the absolute values of the entries in
+    column $j$ of $A.$ In other words,
+
+    \begin{align*}
+    \r_i(A) &= \sum_j |A_{ij}| \\
+    \n_j(A) &= \sum_i |A_{ij}|.
+    \end{align*}
+
+    Finally define the row sum and column sum of $A$ as
+
+    \begin{align*}
+    \r(A) &= \max_i \r_i(A) \\
+    \n(A) &= \max_j \n_j(A).
+    \end{align*}</i>
+</p>
+
+<h3>Gerschgorin disk theorem</h3>
+
+<p>
+    <b>Definition.</b> <i>Let $A \in M_{n\times n}(\bC).$ Define the
+    $i$-th Gerschgorin disk $C_i$ to be the disk in the complex plane
+    with center $A_{ii}$ and radius $r_i = \r_i(A) - |A_{ii}|,$ i.e.
+
+    $$C_i = \{ z \in \bC : |z - A_{ii}| \leq \r_i(A) - |A_{ii}| \}.$$</i>
+</p>
+
+<p>
+    <b>Theorem.</b> <i>Let $A \in M_{n\times n}(\bC).$ Then every
+    eigenvalue of $A$ is contained in a Gerschgorin disk.</i>
+</p>
+
+<h3>Bound on the absolute value of an eigenvalue</h3>
+
+<p>
+    <b>Corollary.</b> <i>Let $\l$ be an eigenvalue of $A \in
+    M_{n\times n}(\bC).$ Then
+
+    $$|\l| \leq \r(A).$$</i>
+</p>
+
+<p>
+    <i>Proof.</i> The book has a short proof using the triangle
+    inequality. An alternative geometric proof: since $\l$ lies in some
+    Gerschgorin disk $C_k,$ we have
+
+    $$|\l| \leq |P|,$$
+
+    where $P$ is the point on $C_k$ furthest from the origin. (To show
+    this we'd need to use the triangle inequality, but it's pretty
+    obvious.)  More specifically,
+
+    $$P = A_{kk} + \frac{A_{kk}}{|A_{kk}|} r_k
+        = A_{kk} + \frac{A_{kk}}{|A_{kk}|}(\r_k(A) - |A_{kk}|)$$
+
+    with absolute value
+
+    $$|P| = \r_k(A).$$
+
+    Therefore
+
+    $$|\l| \leq |P| = \r_k(A) \leq \r(A). \qed$$
+</p>
+<img src="images/gerschgorin.jpg">
+
+<p>
+    <b>Corollary.</b> <i>Let $\l$ be an eigenvalue of $A \in
+    M_{n\times n}(\bC).$ Then
+
+    $$|\l| \leq \min(\r(A), \n(A)).$$</i>
+</p>
+
 <h1>Reference</h1>
 
 <ol>
