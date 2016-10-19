@@ -1573,7 +1573,7 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
 
 <h3>Uniform convergence preserves continuity</h3>
 
-<p>
+<p class="box">
     <b>Theorem.</b> <i>Suppose $f_n$ is a sequence of continuous
     functions on $[a, b]$ which converges uniformly to $f.$ Then $f$
     is also continuous on $[a, b].$</i>
@@ -1818,12 +1818,265 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
     \longrightarrow 0.$ Then $a_n = b_n$ for all $n.$</i>
 </p>
 
-<p>
+<p class="box">
     <b>Corollary.</b> <i>A function can only have one power series
     representation centered at $0.$</i>
 </p>
 
+<h3>Even and odd power series</h3>
 
+<p>
+    <b>Corollary.</b> <i>If $\sum_{n=0}^\infty a_n x^n$ is an even
+    function, then $a_n = 0$ for odd $n.$ If $\sum_{n=0}^\infty a_n
+    x^n$ is an odd function, then $a_n = 0$ for even $n.$</i>
+</p>
+
+<h3>Power series for log</h3>
+
+<p>
+    <b>Proposition.</b> <i>The power series for $f(x) = \log(1 - x)$
+    converges only for $x\in[-1,1),$ and the power series for $g(x) =
+    \log\frac{1+x}{1-x}$ converges only for $x\in(-1,1).$</i>
+</p>
+
+<p>
+    <i>Proof.</i> Recall that the power series for $\log(1 + x)$
+    around zero is
+</p>
+<p class="box">
+    $$\log(1 + x) = x - \frac{x^2}{2} + \frac{x^3}{3} - \frac{x^4}{4} + \cdots,$$
+</p>
+<p>
+    convergent for $x\in (-1,1].$ Replacing $x$ with $-x$, we have the
+    power series for $\log(1-x):$
+
+    $$\log(1 - x) = -x - \frac{x^2}{2} - \frac{x^3}{3} - \frac{x^4}{4} - \cdots,$$
+
+    which converges for $x = -1$ because it's the same series as
+    $\log(1 + x)$ for $x = 1.$ However it doesn't converge for $x = 1$
+    because that's the same series as $\log(1 + x)$ for $x = -1,$ or
+    alternatively by comparison with the harmonic series.
+</p>
+
+<p class="bside">
+    <b>*</b> Another way to see that this series converges for
+    $x\in(-1,1)$ is to compare it with the geometric series $\sum_n
+    r^n,$ which converges for $r \in (-1,1).$
+</p>
+<p>
+    Since these two series are absolutely convergent for $x\in(-1,1),$
+    we can rearrange their terms to get
+
+    \begin{align*}
+    \log\frac{1+x}{1-x} &= \log(1+x) - \log(1-x) \\
+        &= 2 \left( x + \frac{x^3}{3} + \frac{x^5}{5} + \frac{x^7}{7} + \cdots \right)
+    \end{align*}
+
+    for $x \in (-1,1).$<b>*</b> For $x = \pm 1,$ the series diverges by
+    comparison with the harmonic series:
+
+    $$2 + \frac{2}{3} + \frac{2}{5} + \frac{2}{7} + \cdots > 1 + \frac{1}{2} + \frac{1}{3} + \frac{1}{4} + \cdots,$$
+
+    because
+
+    $$\frac{2}{2k - 1} > \frac{1}{k}. \qed$$
+</p>
+
+<h3>Formula for Fibonacci sequence</h3>
+
+<p class="box">
+    <b>Proposition.</b> <i>Recall that the Fibonacci sequence $a_n$ is
+    defined as
+
+    $$a_1 = a_2 = 1, \quad a_{n+1} = a_n + a_{n-1}.$$
+
+    A closed form for $a_n$ is
+
+    $$a_n = \frac{\left( \frac{1+\sqrt{5}}{2} \right)^n -
+                  \left( \frac{1-\sqrt{5}}{2} \right)^n}{\sqrt{5}}.$$</i>
+</p>
+
+<p>
+    <i>Proof.</i> Let
+
+    $$f(x) = \sum_{n=1}^\infty a_n x^n-1 = 1 + x + 2x^2 + 3x^3 + 5x^5 + 8x^6 + \cdots$$
+
+    be the power series having the Fibonacci numbers as
+    coefficients. By the ratio test, $f$ converges for $x \in I :=
+    (-1/2, 1/2).$ Since $f$ is absolutely convergent in $I,$ we can
+    rearrange its terms to get
+
+    $$f(x) - f(x) x - f(x) x^2 = 1,$$
+
+    and so
+
+    $$f(x) = \frac{-1}{x^2 + x - 1}$$
+
+    for $x\in I.$ In this form, $f$ has the partial fractions
+    decomposition
+
+    $$f(x) = \frac{-1}{x^2 + x - 1} = \frac{1/\sqrt{5}}{x - \frac{-1-\sqrt{5}}{2}}
+                                    - \frac{1/\sqrt{5}}{x - \frac{-1+\sqrt{5}}{2}}.$$
+
+    Using the power series
+
+    $$\frac{1}{x - a} = -\frac{1}{a} - \frac{x}{a^2} - \frac{x^2}{a^3} - \cdots,$$
+
+    convergent for $x \in (-a, a)$ (by comparison with the geometric
+    series), we can rewrite $f$ as
+
+    \begin{align*}
+    f(x) &= \frac{1}{\sqrt{5}}\left( - \frac{1}{\frac{-1-\sqrt{5}}{2}} - \frac{x}{\left(\frac{-1-\sqrt{5}}{2}\right)^2} - \frac{x^2}{\left(\frac{-1-\sqrt{5}}{2}\right)^3} - \cdots \right) \\
+         &- \frac{1}{\sqrt{5}}\left( - \frac{1}{\frac{-1+\sqrt{5}}{2}} - \frac{x}{\left(\frac{-1+\sqrt{5}}{2}\right)^2} - \frac{x^2}{\left(\frac{-1+\sqrt{5}}{2}\right)^3} - \cdots \right) \\
+         &= \sum_{n=1}^\infty \left[ \frac{1}{\sqrt{5}}\frac{1}{\left(\frac{-1+\sqrt{5}}{2}\right)^n} - \frac{1}{\sqrt{5}}\frac{1}{\left(\frac{-1-\sqrt{5}}{2}\right)^n} \right] x^{n-1},
+    \end{align*}
+
+    convergent for $x \in (-a, a),$ where $a = \min\left(\left|
+    \frac{-1+\sqrt{5}}{2} \right|, \left| \frac{-1-\sqrt{5}}{2}
+    \right|\right) \approx 0.618,$ in particular it's convergent for
+    $x \in I.$
+</p>
+<p>
+    In other words, we derived two power series for $f$ around 0, so
+    by our previous uniqueness theorem they must be the same, with the
+    same coefficients:
+
+    $$a_n = \frac{1}{\sqrt{5}}\frac{1}{\left(\frac{-1+\sqrt{5}}{2}\right)^n} - \frac{1}{\sqrt{5}}\frac{1}{\left(\frac{-1-\sqrt{5}}{2}\right)^n},$$
+
+    which simplifies to
+
+    $$a_n = \frac{\left( \frac{1+\sqrt{5}}{2} \right)^n - \left( \frac{1-\sqrt{5}}{2} \right)^n}{\sqrt{5}}$$
+
+    since
+
+    $$\frac{2}{-1 \pm \sqrt{5}} = \frac{1 \pm \sqrt{5}}{2}. \qed$$
+</p>
+
+<img src="images/fibonacci-spirals-sunflower-pattern.jpg">
+
+<h3>Abel's theorem on uniformly convergent power series</h3>
+
+<p>
+    <b>Theorem.</b> <i>Suppose that $\sum a_n$ converges. We know that
+    the series $f(x) = \sum_{n=0}^\infty a_n x^n$ must converge
+    uniformly on $(-a,a)$ for $a\in(0,1),$ but it may not converge
+    uniformly on $[-1,1].$ In fact it may not even converge for $x =
+    -1,$ e.g. when $f(x) = \log(1+x),$ which converges only for
+    $x\in(-1, 1].$ However, $f$ does converge uniformly on
+    $[0,1].$</i>
+</p>
+
+<p>
+    <i>Proof.</i> Let $\e > 0.$ Since $\sum a_n$ converges, by
+    Cauchy's condition its tail must vanish, specificially there is an
+    $N$ s.t. for all $m,n > N,$
+
+    $$|a_m + \cdots + a_n| < \e.$$
+
+    By Abel's lemma,
+
+    $$|a_m x^m + \cdots + a_n x^n| \leq 2 x^m \e \leq 2 \e,$$
+
+    for all $x\in [0, 1].$ Therefore the tail of $f$ vanishes
+    uniformly on $[0,1].$ \qed
+</p>
+
+<p>
+    <b>Corollary.</b> <i>$f$ is continuous on $[0,1],$ and in particular
+
+    $$\sum_{n=0}^\infty a_n = \lim_{x\uparrow 1}\sum_{n=0}^\infty a_n x^n.$$</i>
+</p>
+
+<h3>Abel summable</h3>
+
+<p>
+    <b>Definition.</b> <i>A sequence $a_n$ is called Abel summable if
+
+    $$\lim_{x\uparrow 1}\sum_{n=0}^\infty a_n x^n$$
+
+    exists.</i>
+</p>
+
+<div class="bside">
+    <img src="images/oneoveroneplusxsquared.png">
+</div>
+<p>
+    <b>Example.</b> Using this terminology, the previous results say
+    that a summable sequence is Abel summable. However the converse is
+    not true: an abel summable sequence is not necessarily
+    summable. E.g. the series
+
+    $$f(x) = 1 - x^2 + x^4 - x^6 + x^8 - \cdots$$
+
+    is the power series for
+
+    $$\arctan'(x) = \frac{1}{1+x^2}$$
+
+    on $(-1,1).$ The sequence of coefficients is abel summable since
+
+    $$\lim_{x\uparrow 1} f(x) = \lim_{x\uparrow 1} \frac{1}{1+x^2} = \frac{1}{2},$$
+
+    but it is not summable because the terms don't vanish. \qed
+</p>
+
+<p>
+    At the risk of going insane you can write this as
+</p>
+<p class="box">
+    $$1 - 1 + 1 - 1 + \cdots = \frac{1}{2},$$
+</p>
+<p>
+    which kinda makes sense: you can't decide whether you want 0 or a
+    dollar so you expect fifty cents as a compromise.
+</p>
+
+<p>
+    <b>Exercise.</b> <i>
+
+    $$\frac{1}{1\cdot 2} - \frac{1}{2\cdot 3} + \frac{1}{3\cdot 4} - \frac{1}{4\cdot 5} + \cdots = 2\log 2 - 1.$$</i>
+</p>
+
+<p>
+    <i>Proof.</i> Observing that
+
+    $$\frac{1}{n(n+1)} = \frac{1}{n} - \frac{1}{n+1},$$
+
+    we can rewrite
+
+    \begin{align*}
+    \frac{1}{1\cdot 2} - \frac{1}{2\cdot 3} + \frac{1}{3\cdot 4} - \frac{1}{4\cdot 5} + \cdots
+        &= \sum_{n=1}^\infty (-1)^{n+1} \left( \frac{1}{n} - \frac{1}{n+1} \right) \\
+        &= 1 - \frac{1}{2} - \frac{1}{2} + \frac{1}{3} + \frac{1}{3} - \frac{1}{4} - \frac{1}{4} + \cdots \\
+        &= 2\left( \frac{1}{3} - \frac{1}{4} + \frac{1}{5} - \frac{1}{6} + \cdots \right) \\
+        &= 2\left( \log(1+1) - 1 + \frac{1}{2} \right) \\
+        &= 2 \log 2 - 1,
+    \end{align*}
+
+    since
+
+    $$\log(1 + x) = x - \frac{x^2}{2} + \frac{x^3}{3} - \frac{x^4}{4} + \cdots. \qed$$
+    </i>
+</p>
+
+<h3>Uniform convergence preserves boundedness</h3>
+
+<p>
+    <b>Proposition.</b> <i>If $f_n$ is a sequence of bounded functions
+    that converges uniformly to $f$ on $[a,b],$ then $f$ is also
+    bounded.</i>
+</p>
+
+<p>
+    <b>Nonexample.</b> If $f_n$ only converges point wise to $f$ then
+    $f$ may be unbounded, e.g. $\tan x(1-1/n)$ are bounded functions
+    that converge point wise to $\tan x,$ which is unbounded on
+    $[-\frac{\pi}{2},\frac{\pi}{2}].$
+</p>
+<p>
+    More examples: $\frac{1}{x + 1/n}$ are bounded and converge point
+    wise to $1/x,$ and $\min(n, 1/x)$ are also bounded and converge
+    point wise to $1/x,$ which is unbounded on $[0,1].$ \qed
+</p>
 
 <h1>Reference</h1>
 

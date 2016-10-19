@@ -95,6 +95,7 @@ window.MathJax = {
             br: "\\mathbf r",
             bN: "\\mathbf N",
             bR: "\\mathbf R",
+            bs: "\\mathbf s",
             btau: "\\boldsymbol \\tau",
             bZ: "\\mathbf Z",
             bC: "\\mathbf C",

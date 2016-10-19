@@ -199,6 +199,36 @@ array([[12, 18,  4,  9],
 >>> np.argmax(a, axis=1)
 array([1, 0, 1, 3, 0, 3], dtype=int64)</code></pre>
 
+<h3>Masking an array</h3>
+
+<p>
+    Masking an array by condition.
+</p>
+
+<pre><code>>>> a
+array([[ 0,  1,  2,  3],
+       [ 4,  5,  6,  7],
+       [ 8,  9, 10, 11]])
+>>> a * (a > 5)
+array([[ 0,  0,  0,  0],
+       [ 0,  0,  6,  7],
+       [ 8,  9, 10, 11]])</code></pre>
+
+<p>
+    E.g. randomly masking an array, where each entry has probability
+    $1/2$ of being masked. (E.g. used in forward pass dropout in
+    neural network.)
+</p>
+
+<pre><code>>>> a
+array([[ 0,  1,  2,  3],
+       [ 4,  5,  6,  7],
+       [ 8,  9, 10, 11]])
+>>> a * (np.random.random(a.shape) < 0.5)
+array([[ 0,  0,  0,  3],
+       [ 4,  0,  0,  0],
+       [ 8,  9, 10, 11]])</code></pre>
+
 <h3>Statistics</h3>
 
 <p>

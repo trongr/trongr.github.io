@@ -24,7 +24,7 @@
 
 <h1>Web Development</h1>
 
-<img src="images/Gustave_Dor_5.jpg">
+<img src="images/colorize.it.dore.png">
 <div class="epigraph">
      <div class="quote">
         All hope abandon, ye who enter here.
@@ -543,6 +543,18 @@ db.books.drop()</code></pre>
 
 <pre><code>db.books.find({}).sort({_id:-1}).pretty()</code></pre>
 
+<h3>Looping in Mongo console</h3>
+
+<pre><code>db.users.find().forEach(function(user){ user.name = 24601; db.users.save(user) })
+</code></pre>
+
+<p>
+    E.g. generating a hash for every user:
+</p>
+
+<pre><code>db.users.find().forEach(function(user){ user.hash = hex_md5(user.name || ""); db.users.save(user) })
+</code></pre>
+
 <h1>Mongoose</h1>
 
 <h3>Populate</h3>
@@ -590,7 +602,7 @@ db.books.drop()</code></pre>
 <h1>Twitch API</h1>
 
 <p>
-    <pre><code>curl https://api.twitch.tv/kraken/streams/CHANNEL_NAME</code></pre>
+    <pre><code>curl --header "Client-ID:1234" https://api.twitch.tv/kraken/streams/CHANNEL_NAME</code></pre>
 </p>
 
 <h1>Amazon Web Services</h1>

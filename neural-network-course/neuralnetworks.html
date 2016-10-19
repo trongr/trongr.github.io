@@ -1070,10 +1070,6 @@ we replace one by the other and still achieve similar results?</i></p>
     </i>
 </p>
 
-<p>
-    <b>Random.</b> Look up meta neural network.
-</p>
-
 <div class="epigraph">
      <img src="images/ff512d50be094b0d3e06e813553e9842-650-80.jpg">
      <div class="quote">
@@ -1081,19 +1077,6 @@ we replace one by the other and still achieve similar results?</i></p>
           foes: return to them once you've gained more experience.
      </div><hr><div class="author">The Witcher 3</div>
 </div>
-
-<h1>TODO!</h1>
-
-<h1>Object Recognition: Convolutional Neural Networks for Digit
-Recognition</h1>
-
-<h1>Replicated Features</h1>
-
-<h1>Backpropagation with Weight Constraints</h1>
-
-<h1>CSC321 Assignment 2: Convolutional Neural Networks for Digit Recognition</h1>
-
-<h1>Overview: Modeling Sequences</h1>
 
 <h1>Nearest Neighbour Classifier</h1>
 
@@ -2893,8 +2876,81 @@ print 'sanity check: %f' % (-np.log(0.1))</code></pre>
       self.params["b2"] = self.params["b2"] - learning_rate * grads["b2"]
 </code></pre>
 
-<h1>Reference</h1>
+<h1>Parameter updates</h1>
 
+<p>
+    See e.g. momentum method, adaptive learning rates, etc. earlier.
+</p>
+
+<h3>Decaying learning rate</h3>
+
+<img src="images/learningratedecay.png">
+
+<h1>Model ensembles</h1>
+
+<p>
+    Train multiple independent models and average their results at
+    test time. Slightly improves performance.
+</p>
+
+<h1>Dropout</h1>
+
+<p>
+    Randomly kill neurons. Forces network to have redundant
+    representations of features. Similar to how Netflix uses chaos
+    monkey to randomly kill their servers to help them build robust
+    systems.
+</p>
+
+<img src="images/dropoutredundantrepresentation.png">
+
+<img src="images/dropoutredundantrepresentation2.png">
+
+<p>
+    LOL It's like people say: you only use 10% of your brain.
+</p>
+
+<h3>Dropout rescale at test time</h3>
+
+<img src="images/dropouttesttime.png">
+
+<img src="images/dropouttesttimerescale.png">
+
+<h3>Inverted dropout</h3>
+
+<img src="images/inverteddropout.png">
+
+<h1>Gradient checking</h1>
+
+<p>
+    TODO
+</p>
+
+<h1>Convolutional Neural Networks</h1>
+
+<img src="images/convnet.png">
+
+<img src="images/convnet2.png">
+
+<h3>Output size example</h3>
+
+<img src="images/convnetoutputsize.png">
+
+<h3>Param size example</h3>
+
+<img src="images/convnetparamsize.png">
+
+<h3>Architecture overview</h3>
+
+<img src="images/convnetarchoverview.png">
+
+<h3>Pooling</h3>
+
+<img src="images/convpooling.png">
+
+<img src="images/maxpooling.png">
+
+<h1>Reference</h1>
 <ol>
 <li>Andrew Ng's Coursera Machine Learning lectures.</li>
 <li>Geoffrey E. Hinton's Neural Networks video lectures.</li>
@@ -2905,7 +2961,6 @@ print 'sanity check: %f' % (-np.log(0.1))</code></pre>
 <li>Andrej Karpathy's cs231n video lectures.</li>
 <li>Everything else from the web.</li>
 </ol>
-
 </div>
 </body>
 </html>
