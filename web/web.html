@@ -439,6 +439,9 @@ var id = purl(url).param("id")</code></pre>
 
 <pre><code>request.post({
     url: "http://IP:PORT/asdf?q=asdf",
+    headers: {
+        "Client-ID": "1234",
+    },
     body: {
         asdf: 123
     },
@@ -601,8 +604,35 @@ db.books.drop()</code></pre>
 
 <h1>Twitch API</h1>
 
+<pre><code>curl --header "Client-ID:1234" https://api.twitch.tv/kraken/channels/CHANNEL
+curl --header "Client-ID:1234" https://api.twitch.tv/kraken/streams/CHANNEL
+</code></pre>
+
+<h3>Get broadcasts</h3>
+
+<pre><code>curl --header "Client-ID:1234" https://api.twitch.tv/kraken/channels/CHANNEL/videos?broadcasts=true</code></pre>
+
 <p>
-    <pre><code>curl --header "Client-ID:1234" https://api.twitch.tv/kraken/streams/CHANNEL_NAME</code></pre>
+    NOTE. Can put <code>?client_id=1234</code> in the query string for
+    these calls,
+    e.g.
+</p>
+<pre><code>https://api.twitch.tv/kraken/channels/CHANNEL?client_id=1234</code></pre>
+
+<h3>Getting chat messages from VOD by timestamp</h3>
+
+<p>
+    Can also get live chat messages: the live stream is the latest
+    video in the broadcasts list.
+</p>
+
+<pre><code>curl --header "Client-ID:1234" https://rechat.twitch.tv/rechat-messages?start=EPOCH_SECONDS&video_id=vXXXXXXXX</code></pre>
+
+<h2>tmi.js</h2>
+
+<p>
+    Node library that lets you receive events from a live stream,
+    e.g. live chat messages.
 </p>
 
 <h1>Amazon Web Services</h1>
@@ -679,8 +709,7 @@ df -h</code></pre>
 <h1>Reference</h1>
 
 <ol>
-<li>stackoverflow</li>
-<li>Everything else from the web.</li>
+<li>Everything from the web.</li>
 </ol>
 
 </div>

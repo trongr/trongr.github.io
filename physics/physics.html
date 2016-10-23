@@ -1015,25 +1015,211 @@
 
 <h3>Work required to move a particle along a curve</h3>
 
+<p>
+    Recall that the work done by a force to move a charge from $s_1$
+    to $s_2$ along a curve is
+</p>
 <p class="box">
     <i>$$W = \int_{s_1}^{s_2} F_s ds = \int_{C} \bF \cdot d \bs.$$</i>
 </p>
+<p>
+    For example, suppose a charge $q_1$ is fixed at the origin. The
+    work you need to bring another charge $q_2$ from $+\infty$ is
 
-<h3>Work and potential energy</h3>
+    \begin{align*}
+    W_{\rm you} = \int_\infty^R \bF_W \cdot d\br = \int_R^\infty \bF_e \cdot d\br
+                = \int_R^\infty \frac{Kq_1 q_2}{r^2} dr
+                = \frac{Kq_1 q_2}{R} \sim J.
+    \end{align*}
+
+    If $q_1$ and $q_2$ have the same sign charge, then the work is
+    positive. Otherwise it is negative. It makes sense because it
+    takes positive work to bring two similar charges together, and
+    negative work for charges of opposite polarity.
+</p>
+
+<img src="images/electricpotentialenergy.png">
+
+<h3>Work and electric potential energy</h3>
+
+<p>
+    We can define the electric potential energy of a charge $q$ in a
+    field due to another charge $Q$ to be the work it takes to get $q$
+    there, so
+
+    $$U = W_{\rm you} = \int_\infty^R \bF_W \cdot d\br = \int_R^\infty \bF_e \cdot d\br = \frac{KQq}{R}.$$
+
+    E.g. at infinity the potential energy is zero, and at $R$ less
+    than infinity $U$ is positive for similar charges (higher
+    potential energy) and negative for opposite charges (lower
+    potential energy).
+</p>
+
+<p>
+    The difference in electric potential energy of a charge $q$
+    between two points $A$ and $B$ distances $A$ and $B$ from a charge
+    $Q$ is therefore
+
+    \begin{align*}
+    \D U = U_B - U_A &= \int_B^\infty \bF_e \cdot d\br - \int_A^\infty \bF_e \cdot d\br \\
+                     &= \int_B^A \bF_e \cdot d\br \\
+                     &= - \int_A^B \bF_e \cdot d\br \\
+                     &= - W_e,
+    \end{align*}
+
+    where $W_e$ is the work done by the electric field of $Q$ as $q$
+    moves from $A$ to $B.$
+</p>
+
+<p>
+    Note that $W_e$ is the work done by the electric field, not
+    $W_{\rm you}.$
+</p>
 
 <p class="box">
-    <i>$$\D U = U_f - U_i = -W.$$</i>
+    <i>$$\D U = U_f - U_i = -W_e.$$</i>
+</p>
+
+<h3>Electric potential energy of a pair of point charges</h3>
+
+<p>
+    For a system of two point charges $Q$ and $q$ a distance $R$
+    apart, where $Q$ is fixed, we already know that the electric
+    potential energy of $q$ is
+
+    $$U_q = \frac{KQq}{R}.$$
+
+    Note that this is also the total energy of the system. If we then
+    let go of $q,$ its potential energy is converted into kinetic
+    energy, so we can write
+
+    $$U_{\rm total} = U_q \longrightarrow K_q,$$
+
+    where the LHS represents time $t=0$ and the RHS represents time
+    $t=\infty.$
+</p>
+
+<p>
+    Now suppose $Q$ and $q$ are both free to move. Before letting go
+    of the charges, <i>we'd like this sytem to have the same total
+    energy as the previous system,</i> since everything at $t=0$ is
+    the same. In other words,
+</p>
+<p class="box">
+    $$U_{\rm total} = U_Q + U_q = \frac{KQq}{R}.$$
+</p>
+<p>
+    After letting go, this same amount of potential energy is
+    converted into kinetic energy for both particles, and we have
+
+    $$U_{\rm total} = U_Q + U_q \longrightarrow K_Q + K_q.$$
+
+    In summary:
+</p>
+
+<p class="box">
+    <i class="yellow">The potential energy of two charges $Q$ and $q$
+    a distance $r$ apart is
+
+    $$U_{Qq} = \frac{KQq}{r}.$$
+
+    It is the same whether both are moving or both fixed or one is
+    moving and the other kept fixed.</i>
+</p>
+<p class="bside">
+    Putting it in a box cause it confused me more than usual why you
+    only calculate the potential energy of one charge when you have
+    two charges. Now I know why.
+</p>
+
+<p>
+    This situation is a little unique because when the charges are
+    both moving we can't really talk about the potential energy of
+    either one: we can only say that both charges have this combined
+    potential energy $U_{Qq}.$
+</p>
+
+<h3>Electric potential energy of a system of point charges</h3>
+
+<p>
+    More generally, the potential energy of a system of charges is the
+    sum of the potential energy of each pair:
+</p>
+<p class="box">
+    <i>$$U = \sum_{i < j} \frac{Kq_i q_j}{r_{ij}}.$$</i>
 </p>
 
 <h3>Central forces are conservative, e.g. electric force</h3>
 
 <img src="images/electricconservativeforce.png">
 
-<h3>Electric potential energy of a system of point charges</h3>
+<h3>Electric potential</h3>
 
-<p class="box">
-    <i>$$U = \sum_{i < j} \frac{Kq_i q_j}{r_{ij}}.$$</i>
+<p>
+    The electric potential at a point $P$ of a charge $Q$ is the
+    amount of work per unit charge required to bring a test charge $q$
+    to $P:$
+
+    \begin{align*}
+    V_P = \frac{W_{\rm you}}{q} = \int_R^\infty \frac{\bF_e}{q} \cdot d\br
+        = \int_R^\infty \bE \cdot d\br = \frac{KQ}{R} \sim J/C = \text{Volt},
+    \end{align*}
+
+    where $R$ is the distance from $Q$ to $P.$ Similar to how the
+    electric field is the force per unit charge, or how acceleration
+    is the force per unit mass.
 </p>
+
+<img src="images/electricpotential.png">
+
+<h3>Electric potential difference</h3>
+
+<p>
+    The electric potential difference between two points $A$ and $B$
+    at distance $A$ and $B$ from a charge $Q$ is
+
+    $$V_A - V_B = \int_A^\infty \bE \cdot d\br - \int_B^\infty \bE \cdot d\br
+                = \int_A^B \bE \cdot d\br,$$
+
+    or alternatively
+</p>
+<p class="box">
+    $$\D V = V_B - V_A = - \int_A^B \bE \cdot d\br.$$
+</p>
+
+<p>
+    This is the same formula as the potential energy difference we
+    figured out earlier:
+
+    \begin{align*}
+    \D U &= U_B - U_A = - \int_A^B \bF_e \cdot d\br = - W_e,
+    \end{align*}
+
+    since $q \bE = \bF_e$ and $q V = U.$
+</p>
+
+<img src="images/electricpotentialdiff.png">
+
+<h3>Kinetic energy and potential difference</h3>
+
+<p>
+    By conservation of energy,
+</p>
+<p class="box">
+    $$W_e = -\D U = q\D V= \D K.$$
+</p>
+
+<p>
+    <b>Trivia.</b> Just realized that separating potential energy $U$
+    into potential $V$ and charge $q$ is kinda like a refactoring (in
+    programming speak). In most applications you don't know what your
+    test charges $q$'s are gonna be, so it's more convenient to factor
+    out $V,$ because then you can apply it to different $q$'s. Neat.
+</p>
+
+<h3>Field lines are always perpendicular to equipotential surfaces</h3>
+
+<img src="images/equipotentialsurfaces.png">
 
 <h1>Reference</h1>
 

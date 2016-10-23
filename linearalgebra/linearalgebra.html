@@ -1114,6 +1114,8 @@ ad - cb &= 1,
     diagonal). Therefore $T^{-1}$ is diagonalizable. \qed
 </p>
 
+<h3>Eigenvalues of transpose matrices</h3>
+
 <p>
     <b>Proposition.</b> <i>Let $A \in M_{n\times n}(F).$ Recall that
     $A$ and $A^t$ have the same characteristic polynomial and hence
@@ -1709,6 +1711,63 @@ ad - cb &= 1,
 <p>
     <b>Theorem.</b> <i>Every transition matrix has $1$ as an
     eigenvalue.</i>
+</p>
+
+<h3>Maximal eigenvalue of a positive matrix</h3>
+
+<p>
+    <b>Theorem.</b> <i>Let $A\in M_{n\times n}(\bC)$ be a matrix whose
+    entries are positive, and let $\l$ be an eigenvalue of $A$
+    s.t. $|\l| = \r(A).$ Then $\l = \r(A)$ and $\{ u \}$ is a basis
+    for $E_\l,$ where $u\in\bC^n$ is the vector in which each
+    coordinate equals $1.$</i>
+</p>
+
+<p>
+    <b>Corollary.</b> <i>Let $A\in M_{n\times n}(\bC)$ be a matrix
+    whose entries are positive, and let $\l$ be an eigenvalue of $A$
+    s.t. $|\l| = \n(A).$ Then $\l = \n(A)$ and $\dim E_\l = 1.$</i>
+</p>
+
+<p>
+    <i>Proof.</i> Since $A^T$ and $A$ have the same eigenvalues, and
+    $\r(A^T) = \n(A),$ the previous theorem says that
+
+    $$\l = \r(A^T) = \n(A).$$
+
+    To show dimensionality, recall that the eigenspaces of $A$ and
+    $A^T$ corresponding to the same eigenvalue have equal
+    dimension. \qed
+</p>
+
+<h3>Eigenvalues of positive transition matrix</h3>
+
+<p>
+    <b>Corollary.</b> <i>Let $A\in M_{n\times n}(\bC)$ be a transition
+    matrix whose entries are positive, and let $\l$ be an eigenvalue
+    of $A$ other than $1.$ Then $|\l| < 1.$ Moreover, the eigenspace
+    corresponding to the eigenvalue $1$ has dimension $1.$</i>
+</p>
+
+<p>
+    <i>Proof.</i> A previous corollary says that any eigenvalue $\l$
+    of a transition matrix satisfies $|\l| \leq 1.$ Now $|\l|$ can't
+    be $1$ because otherwise the previous corollary says that $\l =
+    \n(A) = 1,$ and we have a contradiction. Since $1$ is the maximal
+    eigenvalue of a transition matrix, the corollary also says that
+    the corresponding eigenspace must have dimension $1.$ \qed
+</p>
+
+<h3>Eigenvalues of regular transition matrix</h3>
+
+<p>
+    <b>Theorem.</b> <i>Let $A$ be a regular transition matrix, and let
+    $\l$ be an eigenvalue of $A.$ Then
+
+    <ul>
+    <li>$|\l| \leq 1.$</li>
+    <li>If $|\l| = 1,$ then $\l = 1$ and $\dim E_\l = 1.$</li>
+    </ul></i>
 </p>
 
 

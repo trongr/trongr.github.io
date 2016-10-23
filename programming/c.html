@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>C/C++</title>
+<link rel="stylesheet" href="../css/global.css">
+
+<link rel="stylesheet" href="../css/obsidian.min.css">
+<script src="../js/highlight.min.js"></script>
+
+<!-- this config must be before MathJax.js: -->
+<script src="../js/mathjax.config.js"></script>
+<script src="../js/MathJax/MathJax.js"></script>
+<!-- <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js"></script> -->
+
+<script src="../js/jquery-3.1.0.min.js"></script>
+<script src="../js/smartquotes.js"></script>
+<script src="../js/global.js"></script>
+
+</head>
+<body>
+
+<div id="content">
+
+<h1>C/C++</h1>
+
+<img src="images/tumblr_myo2hr97No1skltbdo1_500.gif">
+<div class="epigraph">
+     <div class="quote">
+     </div><div class="author">The Matrix</div>
+</div>
+
+<h1>Hello World</h1>
+
+<p>
+    hello.c:
+    <pre><code data-content='#include <stdio.h>
+
+int main(){
+    printf("Hello World\n");
+    return 0;
+}'></code></pre>
+
+</p>
+
+<h3>Compilation</h3>
+
+<p>
+    Compile with:
+</p>
+
+<pre><code>cc -std=c99 hello.c</code></pre>
+
+<h3>Control flow: Fibonacci with while loop</h3>
+
+<p>
+    Be not seduced by the elegance of recursive programs. Unlike your
+    imagination, computer memory has limits!
+</p>
+
+<pre><code data-content='#include <stdio.h>
+
+#define MAX_N 32
+
+main(){
+    int n = 0;
+    int f0 = 0;
+    int f1 = 1;
+    int tmp;
+    while (n < MAX_N){
+        printf("%3d %10d\n", n, f0);
+        tmp = f1;
+        f1 = f0 + f1;
+        f0 = tmp;
+        n++;
+    }
+}
+'></code></pre>
+
+<h3>Get and put char</h3>
+
+<pre><code data-content='#include <stdio.h>
+
+main(){
+    int c;
+    while ((c = getchar()) != EOF){
+        putchar(c);
+    }
+}
+'></code></pre>
+
+<h3>Example. Counting lines, words, and chars</h3>
+
+<pre><code>#include &lt;stdio.h&gt;
+
+#define IN  1                   /* inside a word */
+#define OUT 0                   /* outside a word */
+
+main(){
+    int c, nl, nw, nc, state;   /* num chars, words, and lines */
+    nc = nw = nl = 0;
+    state = OUT;
+    printf("Type something or press ^D to quit\n");
+    printf("NOTE. ^C is different from ^D\n");
+    while ((c = getchar()) != EOF){
+        if (c == '\n'){
+            nl++;
+        }
+        if (c == ' ' || c == '\n' || c == '\t'){
+            state = OUT;
+        } else if (state == OUT){
+            state = IN;
+            nw++;
+        }
+        nc++;
+    }
+    printf("%d %d %d\n", nc, nl, nw);
+}</code></pre>
+
+<p>
+    NOTE. ^C is kill code, ^D is EOF.
+</p>
+
+<h3>Declaring and Defining Functions</h3>
+
+<pre><code>int pow(int base, int exp);
+
+/* exp must be int >= 0 */
+int pow(int base, int exp){
+    int n = 1;
+    for (int i = 0; i < exp; i++){
+        n = n * base;
+    }
+    return n;
+}</code></pre>
+
+<h3>Character Arrays</h3>
+
+<pre><code>#include &lt;stdio.h&gt;
+
+#define MAXLINELENGTH 100
+
+int getline(char line[], int maxlinelength);
+void copy(char from[], char to[]);
+void printLongestLine();
+
+int main(){
+    printLongestLine();
+    return 0;
+}
+
+/* Reads user input line by line and prints the longest line */
+void printLongestLine(){
+    int len;
+    int max = 0;
+    char line[MAXLINELENGTH];
+    char longest[MAXLINELENGTH];
+    printf("Type some lines. Press c-d to quit\n");
+    while ((len = getline(line, MAXLINELENGTH)) &gt; 0){
+        if (len &gt; max){
+            max = len;
+            copy(line, longest);
+        }
+    }
+    if (max &gt; 0){
+        printf("The longest line was: %d %s\n", max, longest);
+    }
+}
+
+/* Reads a line into line, returns length */
+int getline(char line[], int maxlinelength){
+    int c, i;
+    // Book says this is -1, but I think it should be -2, cause we're
+    // appending \n and null terminator \0 to the end. Otherwise we'll
+    // assign '\0' outside the array, that's not good.
+    for (i = 0; i &lt; maxlinelength - 2
+            && (c = getchar()) != EOF && c != '\n'; i++){
+        line[i] = c;
+    }
+    if (c == '\n'){
+        line[i] = c;
+        i++;
+    }
+    line[i] = '\0';
+    return i;
+}
+
+void copy(char from[], char to[]){
+    int i = 0;
+    while ((to[i] = from[i]) != '\0'){
+        i++;
+    }
+}
+</code></pre>
+
+<h1>Types, operators, and expressions</h1>
+
+
+
+<h1>Reference</h1>
+
+<ol>
+<li>The C Programming Language by Kernighan and Ritchie.</li>
+<li>Everything else from the web.</li>
+</ol>
+
+</div>
+</body>
+</html>
