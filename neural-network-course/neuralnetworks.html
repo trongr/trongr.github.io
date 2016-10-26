@@ -2471,7 +2471,7 @@ for alpha in learning_rates:
 W = np.random.randn(3073, 10) * 0.0001
 loss, grad = softmax_loss_vectorized(W, X_dev, y_dev, 0.0)
 
-# As a rough sanity check, our loss should be something close to -log(0.1).
+# As a rough sanity check, our loss should be something close to -log(0.1) ~ 2.3.
 print 'loss: %f' % loss
 print 'sanity check: %f' % (-np.log(0.1))</code></pre>
 
@@ -3193,6 +3193,23 @@ print 'sanity check: %f' % (-np.log(0.1))</code></pre>
     }
     return loss, grads
 </code></pre>
+
+<h3>Training using solver class</h3>
+
+<pre><code>D, H, C = 3*32*32, 100, 10
+std, reg = 1e-2, 1
+model = TwoLayerNet(input_dim=D, hidden_dim=H, num_classes=C, weight_scale=std, reg=reg)
+solver = Solver(model, data,
+              update_rule='sgd',
+              optim_config={
+                'learning_rate': 1e-3,
+              },
+              lr_decay=0.95,
+              num_epochs=10, batch_size=100,
+              print_every=100)
+solver.train()</code></pre>
+
+<img src="images/cifartwolayernetworktraining.png">
 
 <h1>Reference</h1>
 <ol>

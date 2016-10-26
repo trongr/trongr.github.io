@@ -1770,7 +1770,54 @@ ad - cb &= 1,
     </ul></i>
 </p>
 
+<h3>Diagonalizable regular transition matrix</h3>
+<div class="aside">
+    Actually we don't need $A$ to be diagonalizable, but we can't
+    prove it right now.
+</div>
+<p>
+    <b>Corollary.</b> <i>Let $A$ be a diagonalizable regular
+    transition matrix. Then $\lim\limits_{m\to\infty} A^m$ exists.</i>
+</p>
 
+<p>
+    <i>Proof.</i> A previous result says that
+    $\lim\limits_{m\to\infty} A^m$ exists if $A$ is diagonalizable and
+    every eigenvalue of $A$ lies in the open unit disk plus 1. \qed
+</p>
+
+<h3>Properties of regular transition matrix</h3>
+
+<div class="box">
+<p>
+    <b>Theorem.</b> <i>Let $A$ be an $n\times n$ regular transition matrix. Then
+
+    <ul>
+    <li>The algebraic multiplicity of $1$ as an eigenvalue of $A$ is $1.$</li>
+    <li>$L = \lim\limits_{m\to\infty} A^m$ exists.</li>
+    <li>$AL = LA = L.$</li>
+    <li>$L = \begin{bmatrix} v & \cdots & v \end{bmatrix}$ is a
+    transition matrix, where $v$ is the unique probability vector that
+    is also an eigenvector of $A$ corresponding to the eigenvalue
+    $1.$</li>
+    <li>For any probability vector $w,$ $\lim\limits_{m\to\infty} A^m w = v.$</li>
+    </ul></i>
+</p>
+</div>
+
+<p>
+    NOTE. To clarify, $v$ is unique in the sense that there can only
+    be one probability vector which is also an eigenvector of $A$
+    corresponding to the eigenvalue $1.$ This is because the dimension
+    of $E_1$ is 1, so any eigenvector of $A$ corresonding to $\l = 1$
+    must be a multiple $kv$ of $v$ for some $v\in E_1.$ If $kv$ is
+    also a probability vector, then its entries must be between zero
+    and one and sum to 1, which forces $k$ to be unique.
+</p>
+<p>
+    (The vector $v$ is called the fixed or stationary probability
+    vector of the regular transition matrix $A.$)
+</p>
 
 <h1>Reference</h1>
 

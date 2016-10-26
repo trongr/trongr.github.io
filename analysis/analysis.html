@@ -1584,7 +1584,7 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
 <p>
     <b>Theorem.</b> <i>Suppose that $f_n$ is a sequence of functions
     which are differentiable on $[a, b]$ with integrable derivatives
-    $f_n',$ and that $f_n$ converges point-wise to $f.$ Suppose also
+    $f_n',$ and that $f_n$ converges point wise to $f.$ Suppose also
     that $f_n'$ converges uniformly on $[a, b]$ to some continuous
     function $g.$ Then $f$ is differentiable and
 
@@ -1592,7 +1592,121 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
 </p>
 
 <p>
-    Question. Does this mean $f_n$ converges uniformly to $f?$
+    <b>Question.</b> Does this mean $f_n$ converges uniformly to $f?$
+    Whoa it does! A lemma first:
+</p>
+
+<p>
+    <b>Lemma.</b> <i>Suppose that $g_n$ are differentiable functions
+    on $[a,b]$ whose derivatives $g_n'$ converge uniformly to
+    zero. Then $g_n$ converge uniformly to a constant function.</i>
+</p>
+
+<p>
+    <i>Proof.</i> Derivatives converging uniformly to zero means that
+    for any $\e > 0,$
+
+    $$|g_n'(x)| = \left| \lim_{h\to 0} \frac{g_n(x+h) - g_n(x)}{h} \right| < \e$$
+
+    for all $x\in[a,b]$ for sufficiently large $n.$ Then for all such
+    $n,$ for sufficiently small $h$ we have
+
+    $$\left| g_n(x+h) - g_n(x) \right| < \e h.$$
+
+    Now let $y$ be any number in $[a,b].$ For simplicity assume $y >
+    x$ and let $y = x+Mh$ for some positive integer $M.$ Consider the
+    telescope difference
+
+    \begin{align*}
+    & \left| g_n(y) - g_n(x) \right| \\
+        &= \left| g_n(x+Mh) - g_n(x+(M-1)h) + \cdots + g_n(x+h) - g_n(x) \right| \\
+        &\leq \left| g_n(x+Mh) - g_n(x+(M-1)h) \right| + \cdots + \left| g_n(x+h) - g_n(x) \right| \\
+        &< M \e h = \e(y - x) \leq \e(b - a).
+    \end{align*}
+
+    In other words, the difference $\left| g_n(y) - g_n(x) \right|$
+    can be made as small as we like, uniformly on $[a,b],$ by choosing
+    sufficiently large $n,$ i.e. $g_n$ converges uniformly to a
+    constant function. \qed
+</p>
+
+<p>
+    <b>Proposition.</b> <i>Suppose that $f_n$ is a sequence of
+    functions which are differentiable on $[a, b],$ that $f_n$
+    converges point wise to $f,$ and that $f_n'$ converges uniformly
+    to $f'.$ Then $f_n$ converges uniformly to $f.$</i>
+</p>
+
+<p>
+    <i>Proof.</i> Uniform convergence of $f_n'$ means that for any $\e
+    > 0,$ for sufficiently large $n$ we have
+
+    $$|f_n'(x) - f'(x)| < \e$$
+
+    for all $x\in[a,b],$ i.e.
+
+    \begin{align*}
+    & \left| \lim_{h\to 0} \frac{f_n(x+h) - f_n(x)}{h} - \lim_{h\to 0} \frac{f(x+h) - f(x)}{h} \right| \\
+        &= \left| \lim_{h\to 0} \frac{f_n(x+h) - f(x+h) - f_n(x) + f(x)}{h} \right| \\
+        &= \left| g_n'(x) \right| \\
+        &< \e,
+    \end{align*}
+
+    where $g_n(x) := f_n(x) - f(x).$ In other words, $g_n'$ converges
+    uniformly to 0. By the previous lemma, $g_n$ converges uniformly
+    to a constant function, and since $g_n$ converges point wise to
+    zero, this means $g_n$ converges uniformly to zero. \qed
+</p>
+
+<p>
+    <b>Proposition.</b> <i>Suppose that $f_n$ is a sequence of
+    functions which are differentiable on $[a, b],$ that $f_n'$
+    converges uniformly to some continuous function $g,$ and that
+    $f_n(x_0)$ converges to a number $L$ for some $x_0\in[a,b].$ Then
+    $f_n$ converges point wise to a function $f.$ By the previous
+    proposition, $f_n$ then converges uniformly to $f.$</i>
+</p>
+
+<p>
+    <i>Proof.</i> Uniform convergence of $f_n'$ means that for any $\e
+    > 0,$ for sufficiently large $n$ we have
+
+    $$|f_n'(x) - g(x)| = \left| \lim_{h\to 0} \frac{f_n(x+h) - f_n(x)}{h} - g(x) \right| < \e$$
+
+    for all $x\in[a,b].$ Therefore for such $n,$ for sufficiently
+    small $h$ we have
+
+    $$\left| f_n(x+h) - f_n(x) - h g(x) \right| < \e h.$$
+
+    Now let $x$ be any number in $[a,b].$ For simplicity assume $x =
+    x_0 + Mh$ for some positive integer $M.$ Consider the telescope
+
+    \begin{align*}
+    & \left| f_n(x) - f_n(x_0) - hg(x_0+(M-1)h) - \cdots - hg(x_0) \right| \\
+    &= | f_n(x_0+Mh) - f_n(x_0+(M-1)h) - hg(x_0+(M-1)h)
+        + \cdots + f_n(x_0+h) - f_n(x_0) - hg(x_0) | \\
+    &\leq | f_n(x_0+Mh) - f_n(x_0+(M-1)h) - hg(x_0+(M-1)h) |
+        + \cdots + | f_n(x_0+h) - f_n(x_0) - hg(x_0) | \\
+    &< M\e h = \e(x - x_0) \leq \e(b - a).
+    \end{align*}
+
+    In other words,
+
+    $$|f_n(x) - f_n(x_0) - hg(x_0+(M-1)h) - \cdots - hg(x_0)|$$
+
+    can be made as small as we like for sufficiently large $n$ and
+    small $h.$ Since
+
+    \begin{align*}
+    f_n(x_0) &\longrightarrow L \\
+    hg(x_0+(M-1)h) + \cdots + hg(x_0) &\longrightarrow \int_{x_0}^x g
+    \end{align*}
+
+    as $n\longrightarrow\infty$ and $h\longrightarrow 0,$ we have
+
+    $$f_n(x) \longrightarrow L + \int_{x_0}^x g.$$
+
+    (Note that this is the fundamental theorem of calculus.) \qed
 </p>
 
 <h3>Infinite Sum of Functions</h3>
@@ -2076,6 +2190,175 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
     More examples: $\frac{1}{x + 1/n}$ are bounded and converge point
     wise to $1/x,$ and $\min(n, 1/x)$ are also bounded and converge
     point wise to $1/x,$ which is unbounded on $[0,1].$ \qed
+</p>
+
+<h3>Point wise limit of continuous functions not necessarily continuous</h3>
+
+<p>
+    <b>Exercise.</b> <i>Suppose $f$ is differentiable. Then $f'$ is
+    the point wise limit of a sequence of continuous functions.</i>
+</p>
+
+<p>
+    <i>Proof.</i> Let
+
+    $$g_n(x) = \frac{f(x + 1/n) - f(x)}{1/n}.$$
+
+    Then $g_n$ are continuous and
+
+    $$\lim_{n\to\infty} g_n(x) = \lim_{h\to 0} \frac{f(x + h) - f(x)}{h} = f'(x). \qed$$
+</p>
+
+<div class="aside">
+    <img src="images/bc0zD.png">
+    <img src="images/U6wd6.png">
+</div>
+<p>
+    <b>Example of a function with discontinuous derivative.</b> This
+    shows that the point wise limit of continuous functions needs not
+    be continuous: let
+
+    $$f(x) = \begin{cases}
+    x^2 \sin \frac{1}{x} & \text{if } x \neq 0 \\
+    0 & \text{if } x = 0
+    \end{cases}$$
+
+    with derivative
+
+    $$f'(x) = \begin{cases}
+    2x \sin \frac{1}{x} - \cos \frac{1}{x} & \text{if } x \neq 0 \\
+    0 & \text{if } x = 0,
+    \end{cases}$$
+
+    which is discontinuous at 0. \qed
+</p>
+
+<h3>Point wise limit of integrable functions not necessarily integrable</h3>
+
+<p>
+    <b>Example.</b> <i>Find a sequence of integrable functions on $[0,
+    1]$ that converge to
+
+    $$f(x) = \begin{cases}
+    1 & \text{for rational } x \\
+    0 & \text{for irrational } x.
+    \end{cases}$$</i>
+
+    Let
+
+    $$f_n(x) = \begin{cases}
+    0 & \text{everywhere except} \\
+    1 & \text{if } x = 0, \frac{1}{n}, \frac{2}{n}, \ldots, \frac{n}{n}.
+    \end{cases}$$
+
+    Then $f_n$ have finitely many points of discontinuity and so are
+    integrable, and for any rational number $x = \frac{p}{q},$ for all
+    sufficiently large $n$ we have
+
+    $$\tfrac{p}{q} \in \{ 0, \tfrac{1}{n}, \tfrac{2}{n}, \ldots, \tfrac{n}{n} \},$$
+
+    and therefore
+
+    $$\lim_{n\to\infty} f_n(\tfrac{p}{q}) = 1.$$
+
+    On the other hand for irrational $x$ and all $n,$
+
+    $$f_n(x) = 0. \qed$$
+</p>
+
+<h3>Uniform limit of integrable functions is integrable</h3>
+
+<p>
+    <b>Proposition.</b> <i>If $f_n$ are integrable functions on
+    $[a,b]$ that converge uniformly to $f,$ then $f$ is
+    integrable and
+
+    $$\int_a^b f = \lim_{n\to\infty} \int_a^b f_n.$$</i>
+</p>
+
+<p>
+    <i>Proof.</i> Inferring appropriate notations, $f_n$ integrable
+    means that
+
+    $$\lim_{\D_i\to 0} \sum_i f_n(t_i) \D_i$$
+
+    exist. We want to show the same thing for $f,$ so let $\D_i$ be
+    any partition of $[a,b]$ and consider the difference
+
+    \begin{align*}
+    \left| \sum_i f_n(t_i) \D_i - \sum_i f(t_i) \D_i \right|
+        &\leq \sum_i \left| f_n(t_i) - f(t_i) \right| \D_i \\
+        &< \e \sum_i \D_i = \e(b-a),
+    \end{align*}
+
+    where $\e > 0$ is chosen so that $\left| f_n(t_i) - f(t_i) \right|
+    < \e$ for all $x\in[a,b]$ for sufficiently large $n.$ In other
+    words, for any partition $\D_i$ and large enough $n,$ we can make
+    this difference as small as we like, i.e.
+
+    $$\lim_{\D_i\to 0} \sum_i f(t_i) \D_i = \lim_{n\to\infty} \lim_{\D_i\to 0} \sum_i f_n(t_i) \D_i,$$
+
+    and $f$ is integrable with integral
+
+    $$\int_a^b f = \lim_{n\to\infty} \int_a^b f_n. \qed$$
+</p>
+
+<h3>Example of uniformly convergent series on $[0,\infty)$</h3>
+
+<p>
+    <b>Exercise.</b> <i>The series
+
+    $$f(x) = \sum_{n=1}^\infty \frac{(-1)^n}{x+n}$$
+
+    converges uniformly on $[0,\infty).$</i>
+</p>
+<p>
+    <i>Proof.</i> First note that $f(x)$ converges for all $x\in A :=
+    [0,\infty)$ by Leibniz's alternating series theorem. To show
+    uniform convergence we need to show that the sequence of partial
+    sums
+
+    $$f_m(x) = \sum_{n=1}^m \frac{(-1)^n}{x+n}$$
+
+    converges uniformly to $f,$ i.e. the tail of the series vanishes,
+    i.e. for any $\e > 0,$
+
+    $$|f(x) - f_{n-1}(x)| = \left|\frac{(-1)^{n}}{x+n}
+        + \frac{(-1)^{n+1}}{x+n+1} + \cdots \right| < \e$$
+
+    for all $x\in A$ for sufficiently large $n.$ Since $f(0) = \sum
+    \frac{(-1)^n}{n}$ converges, its tail does vanishes:
+
+    $$\left|\frac{(-1)^{n}}{n} + \frac{(-1)^{n+1}}{n+1} + \cdots \right| < \e,$$
+
+    so it's enough to show that
+
+    $$\left|\frac{(-1)^{n}}{x+n} + \frac{(-1)^{n+1}}{x+n+1} + \cdots \right|
+    \leq \left|\frac{(-1)^{n}}{n} + \frac{(-1)^{n+1}}{n+1} + \cdots \right|$$
+
+    for all $x\in A.$
+</p>
+<p>
+    For notational convenience and without loss of generality, assume
+    that the tail starts with a positive sign, so we can drop the
+    absolute value symbols and write
+
+    $$\frac{1}{x+n} - \frac{1}{x+n+1} + \frac{1}{x+n+2} - \frac{1}{x+n+3} + \cdots.$$
+
+    Note that the terms in this series have decreasing absolute
+    values, and so successive difference pairs are positive: the first
+    minus the second term is positive, the third minus the fourth is
+    positive, fifth minus sixth, and so on. Therefore to show that
+
+    $$\frac{1}{x+n} - \frac{1}{x+n+1} + \cdots \leq \frac{1}{n} - \frac{1}{n+1} + \cdots$$
+
+    it's enough to show that the difference pairs satisfy
+
+    $$\frac{1}{x+n+2k} - \frac{1}{x+n+2k+1} \leq \frac{1}{n+2k} - \frac{1}{n+2k+1}$$
+
+    for all $k,$ which is clearly true:
+
+    $$\frac{1}{(x+n+2k)(x+n+2k+1)} \leq \frac{1}{(n+2k)(n+2k+1)}. \qed$$
 </p>
 
 <h1>Reference</h1>
