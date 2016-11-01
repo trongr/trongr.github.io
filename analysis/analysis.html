@@ -2303,6 +2303,42 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
     $$\int_a^b f = \lim_{n\to\infty} \int_a^b f_n. \qed$$
 </p>
 
+<h3>A variation</h3>
+
+<p>
+    <b>Exercise.</b> <i>Suppose that $f_n$ are continuous functions on
+    $[0,1]$ converging uniformly to $f.$ Then
+
+    $$\lim_{n\to\infty} \int_0^{1-1/n} f_n = \int_0^1 f.$$</i>
+</p>
+
+<p>
+    <i>Proof.</i> Consider:
+
+    \begin{align*}
+    \left| \int_0^1 f - \int_0^{1-1/n} f_n \right|
+        &= \left| \int_0^1 (f - f_n) - \int_{1-1/n}^1 f_n \right| \\
+        &\leq \left| \int_0^1 (f - f_n) \right| + \left| \int_{1-1/n}^1 f_n \right|.
+    \end{align*}
+
+    The first term goes to zero by the previous proposition. Since
+    $f_n$ are continous and converge uniformly to $f,$ $f$ is also
+    continuous and thus bounded. Therefore for large $n,$ $f_n$ is
+    also bounded, so the second term also goes to zero. \qed
+</p>
+
+<p>
+    <b>Example.</b> If $f_n$ does not converge uniformly to $f,$ then
+    it's not necessarily true that
+
+    $$\lim_{n\to\infty} \int_0^{1-1/n} f_n = \int_0^1 f.$$
+
+    E.g. let $f_n$ be zero on $[0,1-1/n]$ and look a triangle of
+    height $n$ on $[1-1/n,1].$ Then
+
+    $$\lim_{n\to\infty} \int_0^{1-1/n} f_n = \frac{1}{2} \neq 0 = \int_0^1 f.$$
+</p>
+
 <h3>Example of uniformly convergent series on $[0,\infty)$</h3>
 
 <p>
@@ -2352,13 +2388,95 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
 
     $$\frac{1}{x+n} - \frac{1}{x+n+1} + \cdots \leq \frac{1}{n} - \frac{1}{n+1} + \cdots$$
 
-    it's enough to show that the difference pairs satisfy
+    it's enough to show that these difference pairs satisfy
 
     $$\frac{1}{x+n+2k} - \frac{1}{x+n+2k+1} \leq \frac{1}{n+2k} - \frac{1}{n+2k+1}$$
 
     for all $k,$ which is clearly true:
 
     $$\frac{1}{(x+n+2k)(x+n+2k+1)} \leq \frac{1}{(n+2k)(n+2k+1)}. \qed$$
+</p>
+
+<h3>Example. Uniform limit of length is not length of the limit</h3>
+
+<p>
+    <i>Find a sequence $f_n$ approaching $f$ uniformly on $[0,1]$ s.t.
+
+    $$\lim_{n\to\infty}(\text{length of $f_n$ on $[0,1]$}) \neq \text{length of $f.$}$$</i>
+</p>
+<p>
+    Let $f_1$ be the triangle of height 1, $f_2$ be the two triangles
+    of height $1/2,$ $f_3$ be the 4 triangles of height $1/4,$ and so
+    on. Then each $f_n$ has length $\sqrt{5}$ and the sequence
+    converges uniformly to $f=0,$ therefore
+
+    $$\lim_{n\to\infty}(\text{length of $f_n$ on $[0,1]$})
+        = \sqrt{5} \neq 0 = \text{length of $f.$} \qed$$
+</p>
+
+<h1>Complex Numbers</h1>
+
+<h3>Roots of complex polynomial with real coefficients</h3>
+
+<p>
+    <b>Proposition.</b> <i>Let $f(z) = z^n + a_{n-1}z^{n-1} + \cdots +
+    a_0$ be a complex polynomial with real coefficients and $z_0 = a +
+    ib$ be one of its roots. Then $\bar{z_0} = a - ib$ is also a
+    root. Thus nonreal roots of $f$ always appear in pairs, and the
+    number of such roots is even.</i>
+</p>
+
+<p>
+    <i>Proof.</i> Follows from conjugate rules for product, sum, and
+    real numbers. \qed
+</p>
+
+<p>
+    <b>Corollary.</b> <i>$f$ is divisible by $(z - z_0)(z - \bar{z_0})
+    = z^2 - 2az + a^2 + b^2,$ a quadratic polynomial with real
+    coefficients.</i>
+</p>
+
+<h3>Primitive nth roots</h3>
+
+<p>
+    A number $w$ is called a primitive $n$-th root of 1 if
+    $1,w,\ldots,w^{n-1}$ are all $n$-th roots of 1.
+</p>
+
+<p>
+    <b>Proposition.</b> <i>There are $\f(n)$ primitive $n$-th roots of
+    $1,$ where $\f$ is Euler's totient function counting the number of
+    positive integers less than $n$ which are relatively prime to
+    it.</i>
+</p>
+
+<p>
+    <b>Proposition.</b> <i>Let $w \neq 1$ be an $n$-th root of $1.$
+    Then
+
+    $$\sum_{k=0}^{n-1} w^k = 0.$$</i>
+</p>
+
+<p>
+    <i>Proof.</i> Let $w = \cos\frac{2\pi k}{n} + i \sin\frac{2\pi
+    k}{n}$ and write out $\sum_{k=0}^{n-1} w^k.$ Then use Lagrange's
+    trigonometric identities:
+
+    \begin{align*}
+    \frac{1}{2} + \sum_{k=1}^n \cos kx &= \frac{\sin(n + \frac{1}{2})x}{2\sin \frac{x}{2}} \\
+    \sum_{k=1}^n \sin kx &= \frac{\sin \frac{n+1}{2}x \sin \frac{n}{2}x}{\sin \frac{x}{2}}. \qed
+    \end{align*}
+</p>
+
+<p>
+    <b>Conjecture.</b> <i>Conversely, suppose that $|w_0| = |w_1| =
+    \ldots |w_{n-1}|$ and $\sum w_k = 0.$ Then $w_k$ are the vertices
+    of an equilateral $n$-gon.</i>
+</p>
+
+<p>
+    This is true for $n=3.$
 </p>
 
 <h1>Reference</h1>

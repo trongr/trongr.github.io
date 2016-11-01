@@ -1819,6 +1819,36 @@ ad - cb &= 1,
     vector of the regular transition matrix $A.$)
 </p>
 
+<h3>Every transition matrix has $1$ as an eigenvalue</h3>
+
+<p>
+    <b>Proposition.</b> <i>Every transition matrix has $1$ as an
+    eigenvalue.</i>
+</p>
+
+<p>
+    <i>Proof.</i> Let $A$ be a transition matrix. Then $A$ has $1$ as
+    an eigenvalue iff
+
+    $$\det(A - I) = \det \begin{bmatrix}
+    a_{11} - 1 & \cdots & a_{1n} \\
+    \vdots     & \ddots & \vdots \\
+    a_{n1}     & \cdots & a_{nn} - 1 \\
+    \end{bmatrix} = 0.$$
+
+    If we row reduce $A - I$ by adding the second, third,..., and
+    $n$-th rows to the first, we get a matrix $B$ whose first row is
+    zero, because $A$ is a transition matrix. Therefore $\det B = 0,$
+    and since $B$ is similar to $A - I,$ it also has zero
+    determinant. \qed
+</p>
+
+<p>
+    <b>Exercise.</b> <i>If $A\in M_{n\times n}(\bC)$ is diagonalizable
+    and $L = \lim\limits_{m\to\infty} A^m$ exists, then either $L =
+    I_n$ or $\rank L < n.$</i>
+</p>
+
 <h1>Reference</h1>
 
 <ol>

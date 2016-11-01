@@ -845,6 +845,39 @@ we replace one by the other and still achieve similar results?</i></p>
     w}(t).$
 </p>
 
+<h3>Momentum implementation</h3>
+
+<p>
+    Slightly different notations:
+</p>
+
+<pre><code>def sgd_momentum(w, dw, config=None):
+  """
+  Performs stochastic gradient descent with momentum.
+
+  config format:
+  - learning_rate: Scalar learning rate.
+  - momentum: Scalar between 0 and 1 giving the momentum value.
+    Setting momentum = 0 reduces to sgd.
+  - velocity: A numpy array of the same shape as w and dw used to store a moving
+    average of the gradients.
+  """
+  if config is None: config = {}
+  a = config.setdefault('learning_rate', 1e-2)
+  m = config.setdefault('momentum', 0.9)
+  v = config.setdefault('velocity', np.zeros_like(w))
+
+  v = m * v - a * dw
+  next_w = w + v
+
+  config['velocity'] = v
+  return next_w, config
+</code></pre>
+
+<h3>SGD vs SGD + Momentum</h3>
+
+<img src="images/sgdvssgdmomentum.png">
+
 <p>
     <b>Question.</b> <i>What's a good value for $\e$?</i>
 </p>
@@ -911,7 +944,7 @@ we replace one by the other and still achieve similar results?</i></p>
     $$\Delta w(t) = \alpha \Delta w(t - 1) - \e \frac{\partial E}{\partial w}(t - 1).$$
 </p>
 
-<h1>Per Connection Adaptive Learning Rate</h1>
+<h2>Per Connection Adaptive Learning Rate</h2>
 
 <p class="box">
     <b>Definition.</b> <i>Define a gain parameter $g_{ij}$ for each
@@ -995,6 +1028,36 @@ we replace one by the other and still achieve similar results?</i></p>
     $$g_\infty = 1.$$
 </p>
 
+<h2>Adagrad---Adaptive Gradient</h2>
+
+<p>
+    <b>Definition.</b> <i>Store a history of the gradient:
+
+    $$C = \frac{\dd E}{\dd w} * \frac{\dd E}{\dd w},$$
+
+    and define the update rule
+
+    \begin{align*}
+    \D w &= - \frac{\a}{\sqrt{C}} \frac{\dd E}{\dd w} \quad\text{(Operations on $\sqrt{C}$ are element wise)} \\
+    w &= w + \D w.
+    \end{align*}</i>
+</p>
+
+<p>
+    Intuitively, this makes each parameter in $w$ aware of its own
+    gradient, via the historical cache, and update itself based on its
+    own implicit learning rate, rather than a global learning rate for
+    all the weights. E.g. if $w_{ij}$ has a consistently steep
+    gradient, then $C_{ij}$ will be large and $\D w_{ij}$ will be
+    small in absolute value, i.e. it's a steep valley so we want to be
+    careful going down. Conversely, if $w_{ij}$ has a consistently
+    shallow gradient, then $C_{ij}$ will be small and $\D w_{ij}$ will
+    be large, i.e. it's a gentle slope so we can afford to take larger
+    strides.
+</p>
+
+<img src="images/adagrad.png">
+
 <h2>RPROP: resilient backpropagation</h2>
 
 <p>
@@ -1066,9 +1129,140 @@ we replace one by the other and still achieve similar results?</i></p>
     $\m_{ij}$ remember more of its previous values. Then the weight update is
 
     $$\D w_{ij} = - \frac{\a}{\sqrt{\m_{ij}}} \frac{\partial E}{\partial w_{ij}}.$$
-
     </i>
 </p>
+
+<p>
+    In vector form,
+
+    \begin{align*}
+    \m &\gets \g \m + (1 - \g) \left( \frac{\dd E}{\dd w} \right)^2 \\
+    \D w &= - \frac{\a}{\sqrt{\m}} \frac{\dd E}{\dd w} \\
+    w &\gets w + \D w,
+    \end{align*}
+
+    where all operations are done component wise with broadcasting if
+    necessary.
+</p>
+
+<img src="images/rmsprop2.png">
+
+<img src="images/rmsprop.png">
+
+<h3>RMSPROP implementation</h3>
+
+<pre><code>def rmsprop(x, dx, config=None):
+  """
+  Uses the RMSProp update rule, which uses a moving average of squared gradient
+  values to set adaptive per-parameter learning rates.
+
+  config format:
+  - learning_rate: Scalar learning rate.
+  - decay_rate: Scalar between 0 and 1 giving the decay rate for the squared
+    gradient cache.
+  - epsilon: Small scalar used for smoothing to avoid dividing by zero.
+  - cache: Moving average of second moments of gradients.
+  """
+  if config is None: config = {}
+  a = config.setdefault('learning_rate', 1e-2)
+  d = config.setdefault('decay_rate', 0.99)
+  e = config.setdefault('epsilon', 1e-8)
+  c = config.setdefault('cache', np.zeros_like(x))
+
+  c = d * c + (1 - d) * dx ** 2
+  next_x = x - a * dx / (np.sqrt(c) + e)
+
+  config["cache"] = c
+  return next_x, config
+</code></pre>
+
+<h2>Adam---Adaptive Moment Estimation</h2>
+
+<p>
+    <b>Definition.</b> <i>Incorporates forgetting from RMSPROP
+    and momentum: let
+
+    \begin{align*}
+    m &\gets \b_1 m + (1 - \b_1) \frac{\dd E}{\dd w} \\
+    v &\gets \b_2 v + (1 - \b_2) \left( \frac{\dd E}{\dd w} \right)^2,
+    \end{align*}
+
+    and define the update rule
+
+    \begin{align*}
+    \D w &= - \frac{\a m}{\sqrt{v}} \\
+    w &\gets w + \D w.
+    \end{align*}
+    </i>
+</p>
+<p>
+    Adam is similar to momentum in that it doesn't use the derivative
+    directly, but averages them out, making the update smoother
+    (although the way it does it is slightly different, using
+    forgetting instead of adding a friction term like momentum
+    does). Similar to RMSPROP, Adam also keeps a running mean square
+    of the derivatives.
+</p>
+
+<img src="images/adam.png">
+
+<h3>Adam: bias correction</h3>
+
+<img src="images/adambiascorrection.png">
+
+<p>
+    This slide is actually wrong: the running momentum and velocity
+    shouldn't retain the bias correction, according to <i>Adam: A
+    Method for Stochastic Optimization</i> by Kingma Ba. Although, if
+    you train long enough I don't think you really need bias
+    correction: everything'll even out eventually. But, the assignment
+    uses the original algorithm, so we'll do it that way. (Also if you
+    don't do bias correction it'll converge more slowly.)
+</p>
+
+<h3>Adam implementation</h3>
+
+<pre><code>def adam(x, dx, config=None):
+  """
+  Uses the Adam update rule, which incorporates moving averages of both the
+  gradient and its square and a bias correction term.
+
+  config format:
+  - learning_rate: Scalar learning rate.
+  - beta1: Decay rate for moving average of first moment of gradient.
+  - beta2: Decay rate for moving average of second moment of gradient.
+  - epsilon: Small scalar used for smoothing to avoid dividing by zero.
+  - m: Moving average of gradient.
+  - v: Moving average of squared gradient.
+  - t: Iteration number.
+  """
+  if config is None: config = {}
+  a = config.setdefault('learning_rate', 1e-3)
+  b1 = config.setdefault('beta1', 0.9)
+  b2 = config.setdefault('beta2', 0.999)
+  e = config.setdefault('epsilon', 1e-8)
+  m = config.setdefault('m', np.zeros_like(x))
+  v = config.setdefault('v', np.zeros_like(x))
+  t = config.setdefault('t', 0) + 1
+
+  m = b1 * m + (1 - b1) * dx
+  v = b2 * v + (1 - b2) * dx ** 2
+
+  mhat = m / (1 - b1 ** t) # NOTE. Bias corrections not retained by m and v,
+  vhat = v / (1 - b2 ** t) # only in temporary variables mhat and vhat.
+
+  next_x = x - a * mhat / (np.sqrt(vhat) + e)
+
+  config["m"] = m
+  config["v"] = v
+  config["t"] = t
+
+  return next_x, config
+</code></pre>
+
+<h3>Update rules comparison</h3>
+
+<img src="images/updaterulescomparison.png">
 
 <div class="epigraph">
      <img src="images/ff512d50be094b0d3e06e813553e9842-650-80.jpg">

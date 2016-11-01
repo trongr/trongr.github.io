@@ -33,7 +33,21 @@
 
 <h1>Command Line Reference</h1>
 
-<h2>SSH</h2>
+<h1>Bash</h1>
+
+<h3>Find files by filename length</h3>
+
+<p>
+    Find files with .log extension whose names are 4 letters long.
+</p>
+<pre><code>ls ????.log</code></pre>
+<p>
+    Find files whose full names are 4 letters long. <code>-d</code>
+    avoids files in subdirs with matching names.
+</p>
+<pre><code>ls -d ????</code></pre>
+
+<h1>SSH</h1>
 
 <h3>Screen</h3>
 
@@ -55,7 +69,7 @@
 
 <pre><code>screen -x</code></pre>
 
-<h2>Utilities</h2>
+<h1>Utilities</h1>
 
 <h3>Text manipulation</h3>
 
@@ -106,7 +120,7 @@ find ./ -maxdepth 1 -mtime +10 -type f | xargs rm -rf # Files only
 
 <pre><code>zip myzipfile ./*</code></pre>
 
-<h2>Git</h2>
+<h1>Git</h1>
 
 <p>
     Deleting a branch:
@@ -121,7 +135,7 @@ git push origin --delete branchName # remote</code></pre>
 
 <pre><code>git remote set-url origin URL</code></pre>
 
-<h2>Curl</h2>
+<h1>Curl</h1>
 
 GET
 
@@ -144,7 +158,7 @@ DELETE
 
 <pre><code>curl -X DELETE --data "id=abc&token=123" "http://example.com/asdf"</code></pre>
 
-<h2>Grep</h2>
+<h1>Grep</h1>
 
 <h3>Find text in files in current directory</h3>
 
@@ -165,7 +179,7 @@ DELETE
 
 <pre><code data-content="grep -oe '[0-9]\{4,10\}ms' mongo.log | tr ms ' ' | sort -g"></code></pre>
 
-<h2>FFmpeg</h2>
+<h1>FFmpeg</h1>
 
 <p>
     Screenshot:
@@ -215,7 +229,7 @@ DELETE
     need to.
 </p>
 
-<h2>ImageMagick</h2>
+<h1>ImageMagick</h1>
 
 <p>
     Resize all images in dir in place by 50%:
@@ -223,7 +237,7 @@ DELETE
 
 <pre><code>mogrify *.png -resize 50% *</code></pre>
 
-<h2>Livestreamer</h2>
+<h1>Livestreamer</h1>
 
 <p>
     Get source of stream:
@@ -231,7 +245,7 @@ DELETE
 
 <pre><code>livestreamer URL best --stream-url</code></pre>
 
-<h2>MediaInfo</h2>
+<h1>MediaInfo</h1>
 
 <p>
     Get video info: <code>src</code> can be a static video or a live stream, e.g. an m3u8 playlist.
@@ -362,7 +376,7 @@ console.log = function() {
 [ 'Orange', 'Apple', 'Mango' ]
 </code></pre>
 
-<h2>jQuery</h2>
+<h1>jQuery</h1>
 
 <p>
     Ajax POST:
@@ -389,7 +403,7 @@ console.log = function() {
 <pre><code>var url = window.location.href // "http://example.com?id=123"
 var id = purl(url).param("id")</code></pre>
 
-<h2>Lodash</h2>
+<h1>Lodash</h1>
 
 <h3>Sorting list of objects by subfield</h3>
 
@@ -425,7 +439,7 @@ var id = purl(url).param("id")</code></pre>
 { asdf: 123, oij: 32 }
 </code></pre>
 
-<h2>Forever</h2>
+<h1>Forever</h1>
 
 <p>
     Starting a node server with logs appended
@@ -435,7 +449,7 @@ var id = purl(url).param("id")</code></pre>
 
 <pre><code>NODE_ENV=production PORT=8080 forever start -a --uid live server.js</code></pre>
 
-<h2>Request</h2>
+<h1>Request</h1>
 
 <pre><code>request.post({
     url: "http://IP:PORT/asdf?q=asdf",
@@ -452,7 +466,7 @@ var id = purl(url).param("id")</code></pre>
 })
 </code></pre>
 
-<h2>Kue</h2>
+<h1>Kue</h1>
 
 <p>
     Removing completed jobs of type <code data-content='email'></code>:
@@ -488,6 +502,19 @@ kue.Job.rangeByState("complete", 0, -1, "asc", function(er, jobs){
 }'></code></pre>
 
 <h1>MongoDB</h1>
+
+<h3>mongod.conf and bind_ip</h3>
+
+<p>
+    Comment out <code>bind_ip</code> in mongod.conf to allow mongo db
+    access from a remote client. This is similar to doing
+
+<pre><code>var ip = "0.0.0.0"
+app.listen(port, ip)
+</code></pre>
+
+    in node.js for the same behaviour.
+</p>
 
 <h3>ObjectID</h3>
 
@@ -526,7 +553,7 @@ var id = mongoose.Types.ObjectId()
 }
 '></code></pre>
 
-<h2>Mongo Console</h2>
+<h1>Mongo Console</h1>
 
 <h3>Administrative tasks</h3>
 
@@ -628,7 +655,7 @@ curl --header "Client-ID:1234" https://api.twitch.tv/kraken/streams/CHANNEL
 
 <pre><code>curl --header "Client-ID:1234" https://rechat.twitch.tv/rechat-messages?start=EPOCH_SECONDS&video_id=vXXXXXXXX</code></pre>
 
-<h2>tmi.js</h2>
+<h1>tmi.js</h1>
 
 <p>
     Node library that lets you receive events from a live stream,
@@ -637,7 +664,7 @@ curl --header "Client-ID:1234" https://api.twitch.tv/kraken/streams/CHANNEL
 
 <h1>Amazon Web Services</h1>
 
-<h2>EBS</h2>
+<h1>EBS</h1>
 
 <h3>Mounting an EBS volume</h3>
 
@@ -676,7 +703,7 @@ df -h</code></pre>
     every time the machine starts.
 </p>
 
-<h2>s3cmd</h2>
+<h1>s3cmd</h1>
 
 <p>
     Note. Be careful about trailing slashes when getting and
@@ -701,9 +728,9 @@ df -h</code></pre>
 
 <pre><code>s3cmd put --acl-public asdf.mp4 s3://mybucket/</code></pre>
 
-<h2>SQS</h2>
+<h1>SQS</h1>
 
-<h2>Lambda</h2>
+<h1>Lambda</h1>
 
 
 <h1>Reference</h1>
