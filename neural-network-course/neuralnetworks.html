@@ -3405,6 +3405,232 @@ solver.train()</code></pre>
 
 <img src="images/cifartwolayernetworktraining.png">
 
+<h1>Batch normalization</h1>
+
+<img src="images/batchnorm.png">
+<img src="images/batchnorm2.png">
+<img src="images/batchnorm3.png">
+<img src="images/batchnorm4.png">
+<img src="images/batchnorm5.png">
+<img src="images/batchnorm6.png">
+
+<h3>Cumulative weighted running average</h3>
+
+<p>
+    (Recall forgetting function from RMSPROP.)
+</p>
+
+<img src="images/exponentialsmoothing.png">
+
+<h2>Batchnorm derivative</h2>
+
+<p>
+    Let $X = (X_{ij})$ be the input matrix of dimension $N \times D$,
+    and let $Y = (Y_{ij})$ be the batchnorm output matrix of the same
+    size. Let $\g = (\g_j)$ and $\b = (\b_j)$ be the scaling and shift
+    parameters of dimension $1 \times D,$ and let $\m = (\m_j)$ and
+    $\s = (\s_j)$ be the means and standard deviations of the columns
+    of $X.$ By definition,
+
+    $$Y_{ij} = \g_j \frac{X_{ij} - \m_j}{\s_j} + \b_j.$$
+
+    Consider column $j$ of $X.$ Since an element $X_{ij}$ contributes
+    to all entries in the same column in $Y$ and only those, by the
+    chain rule we have:
+
+    $$\frac{\dd E}{\dd X_{ij}} = \sum_{k=1}^N \frac{\dd E}{\dd Y_{kj}}
+        \frac{\dd Y_{kj}}{\dd X_{ij}}.$$
+
+    For simplicity, let prime denote differentiation w.r.t. $X_{ij}.$ Then
+
+    \begin{align*}
+    Y_{kj}' &= \left( \g_j \frac{X_{kj} - \m_j}{\s_j} + \b_j \right)' \\
+            &= \g_j \frac{\s_j (X_{kj}' - \m_j') - \s_j' (X_{kj} - \m_j)}{\s^2}.
+    \end{align*}
+
+    Recall that the means and standard deviations are
+
+    \begin{align*}
+    \m_j &= \frac{1}{N} \sum_{m=1}^N X_{mj} \\
+    \s_j &= \left( \frac{1}{N} \sum_{m=1}^N (X_{mj} - \m_j)^2 \right)^{1/2}.
+    \end{align*}
+
+    Therefore
+
+    $$\m_j' = \frac{1}{N}$$
+
+    and
+
+    \begin{align*}
+    \s_j' &= \frac{1}{2} \underbrace{\left( \frac{1}{N} \sum_{m=1}^N (X_{mj} - \m_j)^2 \right)^{-1/2}}_{\text{This is } 1/\s_j}
+        \left( \frac{1}{N} \sum_{m=1}^N (X_{mj} - \m_j)^2 \right)' \\
+        &= \frac{1}{2N\s_j} \sum_{m=1}^N 2(X_{mj} - \m_j)(X_{mj} - \m_j)'.
+    \end{align*}
+
+    Now
+
+    $$(X_{mj} - \m_j)' = \begin{cases}
+     -\frac{1}{N} & \text{if } m \neq i \\
+     1 - \frac{1}{N} & \text{if } m = i,
+    \end{cases}$$
+
+    so $\s_j'$ becomes
+
+    \begin{align*}
+    \s_j' &= \frac{1}{2N\s_j} \bigg(
+            \underbrace{- \tfrac{2}{N}(X_{mj} - \m_j) - \cdots - \tfrac{2}{N}(X_{mj} - \m_j)}_{N-1 \text{ terms with } m\neq i}
+            + \underbrace{2(X_{ij} - \m_j)(1 - \tfrac{1}{N})}_{m = i \text{ term}}
+        \bigg) \\
+        &= \frac{1}{2N\s_j} \bigg( \underbrace{-\frac{2}{N} \sum_{m=1}^N (X_{mj} - \m_j)}_{\substack{\text{This is zero. (Mean of}\\\text{zero-meaned data is zero.)}}} + 2(X_{ij} - \m_j) \bigg) \\
+        &= \frac{1}{N\s_j} (X_{ij} - \m_j).
+    \end{align*}
+
+    Plugging this back into $Y_{kj}',$ we get
+
+    \begin{align*}
+    Y_{kj}' &= \g_j \frac{\s_j (X_{kj}' - \m_j') - \s_j' (X_{kj} - \m_j)}{\s^2} \\
+        &= \frac{\g_j}{\s_j}(\d_{ik} - \tfrac{1}{N}) - \frac{\g_j}{N \s_j^3} (X_{kj} - \m_j)(X_{ij} - \m_j).
+    \end{align*}
+
+    Finally plugging this back into $\frac{\dd E}{\dd X_{ij}}$:
+
+    \begin{align*}
+    \frac{\dd E}{\dd X_{ij}} &= \sum_{k=1}^N \frac{\dd E}{\dd Y_{kj}} \frac{\dd Y_{kj}}{\dd X_{ij}} \\
+        &= \sum_{k=1}^N \frac{\dd E}{\dd Y_{kj}} \left( \frac{\g_j}{\s_j}(\d_{ik} - \tfrac{1}{N}) - \frac{\g_j}{N \s_j^3} (X_{kj} - \m_j)(X_{ij} - \m_j) \right) \\
+        &\text{ Multiply through:} \\
+        &= \frac{\g_j}{\s_j} \sum_{k=1}^N \frac{\dd E}{\dd Y_{kj}} \d_{ik}
+        - \frac{\g_j}{N \s_j} \sum_{k=1}^N \frac{\dd E}{\dd Y_{kj}}
+        - \frac{\g_j}{N \s_j^3} (X_{ij} - \m_j) \sum_{k=1}^N \frac{\dd E}{\dd Y_{kj}} (X_{kj} - \m_j) \\
+        &\text{ and simplify the first term:} \\
+        &= \frac{\g_j}{\s_j} \frac{\dd E}{\dd Y_{ij}}
+        - \frac{\g_j}{N \s_j} \sum_{k=1}^N \frac{\dd E}{\dd Y_{kj}}
+        - \frac{\g_j}{N \s_j^3} (X_{ij} - \m_j) \sum_{k=1}^N \frac{\dd E}{\dd Y_{kj}} (X_{kj} - \m_j).
+    \end{align*}
+
+    Converting this into matrix form:
+</p>
+<p class="box">
+    $$\frac{\dd E}{\dd X} = \frac{\g}{\s} \frac{\dd E}{\dd Y}
+        - \frac{\g}{N\s} \sum_\text{rows} \frac{\dd E}{\dd Y}
+        - \frac{\g}{N\s^3} (X - \m) \sum_\text{rows} \frac{\dd E}{\dd Y} (X - \m),$$
+</p>
+<p>
+    where operations are performed component wise with broadcasting if
+    necessary.
+</p>
+
+<h3>Batchnorm parameter derivatives</h3>
+
+<p>
+    The derivatives of $E$ w.r.t. parameters $\g$ and $\b$ are similar
+    (and easier), so we'll skip the details:
+</p>
+<p class="box">
+    \begin{align*}
+    \frac{\dd E}{\dd \g} &= \sum_\text{rows} \frac{\dd E}{\dd Y} \frac{X - \m}{\s} \\
+    \frac{\dd E}{\dd \b} &= \sum_\text{rows} \frac{\dd E}{\dd Y}.
+    \end{align*}
+</p>
+
+<h3>Batchnorm implementation</h3>
+
+<pre><code>def batchnorm_forward(x, gamma, beta, bn_param):
+  """
+  Forward pass for batch normalization.
+
+  During training the sample mean and (uncorrected) sample variance are
+  computed from minibatch statistics and used to normalize the incoming data.
+  During training we also keep an exponentially decaying running mean of the mean
+  and variance of each feature, and these averages are used to normalize data
+  at test-time.
+
+  At each timestep we update the running averages for mean and variance using
+  an exponential decay based on the momentum parameter:
+
+  running_mean = momentum * running_mean + (1 - momentum) * sample_mean
+  running_var = momentum * running_var + (1 - momentum) * sample_var
+
+  Note that the batch normalization paper suggests a different test-time
+  behavior: they compute sample mean and variance for each feature using a
+  large number of training images rather than using a running average. For
+  this implementation we have chosen to use running averages instead since
+  they do not require an additional estimation step; the torch7 implementation
+  of batch normalization also uses running averages.
+
+  Input:
+  - x: Data of shape (N, D)
+  - gamma: Scale parameter of shape (D,)
+  - beta: Shift paremeter of shape (D,)
+  - bn_param: Dictionary with the following keys:
+    - mode: 'train' or 'test'; required
+    - eps: Constant for numeric stability
+    - momentum: Constant for running mean / variance.
+    - running_mean: Array of shape (D,) giving running mean of features
+    - running_std Array of shape (D,) giving running std of features
+
+  Returns a tuple of:
+  - out: of shape (N, D)
+  - cache: A tuple of values needed in the backward pass
+  """
+  mode = bn_param['mode']
+  eps = bn_param.get('eps', 1e-7)
+  momentum = bn_param.get('momentum', 0.9)
+
+  N, D = x.shape
+  running_mean = bn_param.get('running_mean', np.zeros(D, dtype=x.dtype))
+  running_std = bn_param.get('running_std', np.zeros(D, dtype=x.dtype))
+
+  if mode == 'train':
+    m = np.mean(x, axis=0)
+    s = np.std(x, axis=0)
+    out = gamma * (x - m) / s + beta
+    running_mean = momentum * running_mean + (1 - momentum) * m
+    running_std = momentum * running_std + (1 - momentum) * s
+  elif mode == 'test':
+    m = running_mean
+    s = running_std
+    out = gamma * (x - m) / s + beta
+  else:
+    raise ValueError('Invalid forward batchnorm mode "%s"' % mode)
+
+  bn_param['running_mean'] = running_mean
+  bn_param['running_std'] = running_std
+
+  cache = (x, gamma, beta, m, s)
+  return out, cache
+
+def batchnorm_backward(dout, cache):
+  """Backward pass for batch normalization.
+
+  For this implementation, you should write out a computation graph
+  for batch normalization on paper and propagate gradients backward
+  through intermediate nodes.
+
+  Let's skip computation graph and go straight to full derivative.
+
+  Inputs:
+  - dout: Upstream derivatives, of shape (N, D)
+  - cache: Variable of intermediates from batchnorm_forward.
+
+  Returns a tuple of:
+  - dx: Gradient with respect to inputs x, of shape (N, D)
+  - dgamma: Gradient with respect to scale parameter gamma, of shape (D,)
+  - dbeta: Gradient with respect to shift parameter beta, of shape (D,)
+  """
+  N, D = dout.shape
+  x, gamma, beta, m, s = cache
+
+  xm = x - m
+  dx = gamma / s * dout \
+     - gamma / (N * s) * np.sum(dout, axis=0) \
+     - gamma / (N * s**3) * xm * np.sum(dout * xm, axis=0)
+
+  dgamma = np.sum(dout * xm / s, axis=0)
+  dbeta = np.sum(dout, axis=0)
+
+  return dx, dgamma, dbeta
+</code></pre>
+
 <h1>Reference</h1>
 <ol>
 <li>Andrew Ng's Coursera Machine Learning lectures.</li>
