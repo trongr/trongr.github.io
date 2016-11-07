@@ -29,6 +29,7 @@ window.MathJax = {
 
             // binary ops
             ".": "\\cdot",
+            by: "\\times",
 
             // environments
             bar: ["\\overline{#1}", 1],

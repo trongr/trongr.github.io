@@ -3445,7 +3445,7 @@ solver.train()</code></pre>
 
     \begin{align*}
     Y_{kj}' &= \left( \g_j \frac{X_{kj} - \m_j}{\s_j} + \b_j \right)' \\
-            &= \g_j \frac{\s_j (X_{kj}' - \m_j') - \s_j' (X_{kj} - \m_j)}{\s^2}.
+            &= \g_j \frac{\s_j (X_{kj} - \m_j)' - \s_j' (X_{kj} - \m_j)}{\s^2}.
     \end{align*}
 
     Recall that the means and standard deviations are
@@ -3488,7 +3488,7 @@ solver.train()</code></pre>
     Plugging this back into $Y_{kj}',$ we get
 
     \begin{align*}
-    Y_{kj}' &= \g_j \frac{\s_j (X_{kj}' - \m_j') - \s_j' (X_{kj} - \m_j)}{\s^2} \\
+    Y_{kj}' &= \g_j \frac{\s_j (X_{kj} - \m_j)' - \s_j' (X_{kj} - \m_j)}{\s^2} \\
         &= \frac{\g_j}{\s_j}(\d_{ik} - \tfrac{1}{N}) - \frac{\g_j}{N \s_j^3} (X_{kj} - \m_j)(X_{ij} - \m_j).
     \end{align*}
 
@@ -3630,6 +3630,15 @@ def batchnorm_backward(dout, cache):
 
   return dx, dgamma, dbeta
 </code></pre>
+
+<h3>Using batchnorm </h3>
+
+<p>
+    Using batchnorm lets us be more flexible with weight
+    initialization, i.e. batchnorm makes the network less sensitive to
+    weight scales during initialization.
+</p>
+<img src="images/batchnormaccuracyvsweightscaling.png">
 
 <h1>Reference</h1>
 <ol>

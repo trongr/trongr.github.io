@@ -373,19 +373,45 @@ The first three matrices are symmetric and correspond to the eigenvalue $+1,$ wh
     diagonal entries are all equal to $\lambda.$
 </p>
 
+<p>
+    <b>Example.</b> $\begin{bmatrix}
+    1 & 1 \\
+    0 & 1 \\
+    \end{bmatrix}$ is not diagonalizable.
+</p>
+
+<h3>Example. A and B diagonalizable doesn't mean $A + B$ is
+diagonalizable</h3>
+<p>
+    Let
+
+    $$A = \begin{bmatrix}
+    1 & 0 \\
+    0 & 0 \\
+    \end{bmatrix},\quad
+    B = \begin{bmatrix}
+    0 & 1 \\
+    0 & 1 \\
+    \end{bmatrix}.$$
+
+    Then $A$ is diagonal, and $B$ is diagonalizable because it has two
+    distinct eigenvalues 0 and 1. But
+
+    $$A + B = \begin{bmatrix}
+    1 & 1 \\
+    0 & 1 \\
+    \end{bmatrix}$$
+
+    is not diagonalizable. \qed
+</p>
+
 <div class="aside">
     <img src="images/rotation.jpg">
 </div>
-
-<p>
-    <b>Example.</b> $\begin{bmatrix}
-1 & 1 \\
-0 & 1 \\
-\end{bmatrix}$ is not diagonalizable.
-</p>
-
 <p><b>Example of a linear transformation with no eigenvalue and
 eigenvector.</b> Rotation in the plane by $\theta \in (0, 2\pi).$</p>
+
+<h3>Characteristic polynomial of a matrix</h3>
 
 <p><b>Proposition.</b> <i>The characteristic polynomial $f$ of an $n
 \times n$ matrix $A$ has leading coefficient $(-1)^n$ and order
@@ -1222,7 +1248,7 @@ ad - cb &= 1,
     i.e. $Q_i$ is an eigenvector of $A$ corresponding to $\l_i.$ \qed
 </p>
 
-<h3>System of differential equations</h3>
+<h3 id="cnwuyeett3501">System of differential equations</h3>
 
 <p>
     <b>Proposition.</b> <i>Let $A = (a_{ij})$ be the coefficient
@@ -1708,11 +1734,6 @@ ad - cb &= 1,
     matrix, then $|\l| \leq 1.$</i>
 </p>
 
-<p>
-    <b>Theorem.</b> <i>Every transition matrix has $1$ as an
-    eigenvalue.</i>
-</p>
-
 <h3>Maximal eigenvalue of a positive matrix</h3>
 
 <p>
@@ -1822,7 +1843,7 @@ ad - cb &= 1,
 <h3>Every transition matrix has $1$ as an eigenvalue</h3>
 
 <p>
-    <b>Proposition.</b> <i>Every transition matrix has $1$ as an
+    <b>Theorem.</b> <i>Every transition matrix has $1$ as an
     eigenvalue.</i>
 </p>
 
@@ -1847,6 +1868,288 @@ ad - cb &= 1,
     <b>Exercise.</b> <i>If $A\in M_{n\times n}(\bC)$ is diagonalizable
     and $L = \lim\limits_{m\to\infty} A^m$ exists, then either $L =
     I_n$ or $\rank L < n.$</i>
+</p>
+
+<p>
+    <i>Proof.</i> Use the fact that $Q (\lim A^m) Q^{-1} = \lim QA^m
+    Q^{-1}.$ \qed
+</p>
+
+<h3>Example. $\lim\limits_{m\to\infty} (AB)^{m} \neq \lim\limits_{m\to\infty} A^{m} \lim\limits_{m\to\infty} B^{m}$</h3>
+
+<p>
+    <b>Example.</b> <i>Find $2\by 2$ matrices $A$ and $B$
+    s.t. $\lim\limits_{m\to\infty} A^{m}, \lim\limits_{m\to\infty}
+    B^{m},$ and $\lim\limits_{m\to\infty} (AB)^{m}$ all exist, but
+
+    $$\lim\limits_{m\to\infty} (AB)^{m} \neq \lim\limits_{m\to\infty} A^{m} \lim\limits_{m\to\infty} B^{m}.$$</i>
+</p>
+<p>
+    Let
+
+    $$A = \begin{bmatrix}
+    1 & 0 \\
+    0 & 0 \\
+    \end{bmatrix},\quad
+    B = \begin{bmatrix}
+    0 & 1 \\
+    0 & 1 \\
+    \end{bmatrix}.$$
+
+    Then $A^m = A$ and $B^m = B,$
+
+    $$AB = \begin{bmatrix}
+    0 & 1 \\
+    0 & 0 \\
+    \end{bmatrix},$$
+
+    and $(AB)^m = \begin{bmatrix}
+    0 & 0 \\
+    0 & 0 \\
+    \end{bmatrix}$
+
+    for all $m.$ Therefore
+
+    $$\lim\limits_{m\to\infty} (AB)^{m}
+    = \begin{bmatrix}
+    0 & 0 \\
+    0 & 0 \\
+    \end{bmatrix}
+    \neq \begin{bmatrix}
+    0 & 1 \\
+    0 & 0 \\
+    \end{bmatrix}
+    = \lim\limits_{m\to\infty} A^{m} \lim\limits_{m\to\infty} B^{m}. \qed$$
+</p>
+<p>
+    Note that if $A$ and $B$ commute, then we have equality:
+
+    \begin{align*}
+    \lim\limits_{m\to\infty} A^{m} \lim\limits_{m\to\infty} B^{m}
+        &= \lim_{m\to\infty} \left( A^{m} \lim\limits_{m\to\infty} B^{m} \right) \\
+        &= \lim_{m\to\infty} \left( \lim\limits_{m\to\infty} A^{m} B^{m} \right) \\
+        &= \lim_{m\to\infty} A^{m} B^{m} \\
+        &= \lim\limits_{m\to\infty} (AB)^{m}.
+    \end{align*}
+
+    The above example worked because $A$ and $B$ didn't commute. The
+    trick was to choose $A$ and $B$ that made the limits easy to
+    compute.
+</p>
+
+<h3>$M$ regular iff $M'$ regular</h3>
+
+<p>
+    <b>Proposition.</b> <i>Let $M$ and $M'$ be $n\times n$ transition
+    matrices.
+
+    <ol>
+    <li>If $M$ is regular, $N$ is any $n\times n$ transition matrix,
+    and $c\in(0,1],$ then $cM + (1-c)N$ is a regular transition matrix.</li>
+    <li>Suppose that for all $i,j,$ we have $M'_{ij} > 0$ whenever
+    $M_{ij} > 0.$ Then there exists a transition matrix $N$ and a real
+    number $c\in(0,1]$ s.t. $M' = cM + (1-c)N.$</li>
+    <li>If the nonzero entries of $M$ and $M'$ occur in the same
+    positions, then $M$ is regular iff $M'$ is regular.</li>
+    </ol></i>
+</p>
+
+<p>
+    <i>1 Proof.</i> First note that $cM + (1-c)N$ is a transition
+    matrix, and since the product of two transition matrices is a
+    transition matrix, $(cM + (1-c)N)^n$ is also a transition matrix
+    for all positive $n.$ To show that it is regular, expand the
+    product using the binomial theorem:
+
+    \begin{align*}
+    (cM + (1-c)N)^n = \underbrace{c^n M^n}_{>0} + \underbrace{c^{n-1} M^{n-1} (1-c) N + \cdots + (c-1)^n N^n.}_{\geq 0}
+    \end{align*}
+
+    Since $M$ is regular, the first term is positive for some $n.$ The
+    remaining terms are nonnegative, so the whole thing is positive. \qed
+</p>
+<p>
+    <i>2 Proof.</i> If $M' = M,$ then we can choose $c=1,$ and we're
+    done. So for some $c\in(0,1)$ to be determined, define the matrix
+
+    $$N = \frac{M' - cM}{1-c}.$$
+
+    Note that the columns of $N$ sum to $1$ for any $c\in(0,1)$:
+
+    \begin{align*}
+    \sum_{i=1}^n N_{ij} &= \frac{1}{1-c} \sum_{i=1}^n M'_{ij} - \frac{c}{1-c} \sum_{i=1}^n M_{ij} \\
+        &= \frac{1}{1-c} - \frac{c}{1-c} \\
+        &= 1.
+    \end{align*}
+
+    In other words, the only
+    thing keeping $N$ from being a transition matrix is for its
+    entries to be between zero and one, and so we need to choose $c$
+    more carefully.
+</p>
+<p>
+    Consider
+
+    $$0 \stackrel{?}{\leq} N_{ij} = \frac{M'_{ij} - cM_{ij}}{1-c} \stackrel{?}{\leq} 1 \\
+    0 \stackrel{?}{\leq} M'_{ij} - c M_{ij} \stackrel{?}{\leq} 1 - c.$$
+
+    It's easy to see that this is true for sufficiently small $c.$ The
+    only exception is when $M'_{ij} = 0$ but $M_{ij} > 0,$ but this is
+    impossible by the assumption that $M_{ij} > 0$ implies $M'_{ij}.$
+</p>
+<p>
+    Therefore the entries of $N$ are between zero and one and its
+    columns sum to 1, and so $N$ is a transition matrix. \qed
+</p>
+<p>
+    <i>3 Proof.</i> Follows immediately from 1 and 2. \qed
+</p>
+
+<h3>Infinite matrix series</h3>
+
+<p class="bside">
+    Note that this is not the same as $e^A := (e^{A_{ij}})$ where exp
+    is evaluated component wise (e.g. as in NumPy). It's only true
+    when $A$ is a diagonal matrix.
+</p>
+<p>
+    <b>Definition.</b> <i>Define the exponential power series
+
+    $$e^A = I + A + \frac{A^2}{2!} + \cdots.$$</i>
+</p>
+<p>
+    <b>Proposition.</b> <i>If $D = (D_{ii})$ is a diagonal matrix, then
+
+    $$e^{D} = (e^{D_{ii}}) = \begin{bmatrix}
+    e^{D_{11}} &        & 0 \\
+               & \ddots &   \\
+    0          &        & e^{D_{nn}}
+    \end{bmatrix}.$$</i>
+</p>
+<p>
+    <b>Corollary.</b> <i>
+    <ul>
+    <li>$e^O = I.$</li>
+    <li>$e^I = eI = \begin{bmatrix}
+    e &        & 0 \\
+      & \ddots &   \\
+    0 &        & e
+    \end{bmatrix}.$</li>
+    </ul>
+    </i>
+</p>
+<div class="bside">
+    Later we'll show that $e^A$ exists for any $A\in M_{n\by n}(\bC).$
+</div>
+<p>
+    <b>Corollary.</b> <i>Let $P^{-1} AP = D$ be a diagonal
+    matrix. Then $e^A = P e^D P^{-1}.$ In other words, if $A$ is
+    diagonalizable, then $e^A$ exists.</i>
+</p>
+
+<h3>Example. $e^A e^B \neq e^{A+B}$</h3>
+
+<p>
+    <b>Example.</b> <i>Find matrices A and B s.t. $e^A e^B \neq
+    e^{A+B}.$</i>
+</p>
+<p>
+    Let
+
+    $$A = \begin{bmatrix}
+    1 & 0 \\
+    0 & 0 \\
+    \end{bmatrix},\quad
+    B = \begin{bmatrix}
+    0 & 1 \\
+    0 & 1 \\
+    \end{bmatrix}.$$
+
+    Then $A^m = A$ and $B^m = B,$
+
+    $$A + B = \begin{bmatrix}
+    1 & 1 \\
+    0 & 1 \\
+    \end{bmatrix},\quad
+    (A + B)^{m} = \begin{bmatrix}
+    1 & m \\
+    0 & 1 \\
+    \end{bmatrix},$$
+
+    $$e^A = \begin{bmatrix}
+    e & 0 \\
+    0 & 0 \\
+    \end{bmatrix},\quad
+    e^B = \begin{bmatrix}
+    0 & e \\
+    0 & e \\
+    \end{bmatrix},$$
+
+    $$e^{A+B} = \begin{bmatrix}
+    e & 1+\frac{2}{2!}+\frac{3}{3!}+\cdots=1+1+\frac{1}{2!}+\cdots=e \\
+    0 & e \\
+    \end{bmatrix}.$$
+
+    Therefore
+
+    $$e^A e^B = \begin{bmatrix}
+    0 & e^2 \\
+    0 & 0 \\
+    \end{bmatrix} \neq \begin{bmatrix}
+    e & e \\
+    0 & e \\
+    \end{bmatrix} = e^{A+B}. \qed$$
+</p>
+
+<h3>System of differential equations in matrix form</h3>
+
+<p>
+    Recall the solution to <a href="#cnwuyeett3501">the system of
+    first order linear differential equations:</a>
+
+    $$x(t) = c_1 e^{\l_1 t} w_1 + \cdots + c_n e^{\l_k t} w_n,$$
+
+    where $c_i$ and $w_i$ are defined in the proof there. We're using
+    this form rather than the form involving $z_k$ because it's more
+    convenient for the next proposition.
+</p>
+<p>
+    <b>Proposition.</b> <i>Using notations defined previously, a
+    differentiable function $x:\bR\longrightarrow\bR^n$ is a solution
+    to said system iff
+
+    $$x(t) = e^{tA}v$$
+
+    for some $v\in\bR^n.$</i>
+</p>
+<p>
+    <i>Proof.</i> Let $A = Q^{-1}DQ$ as in the other proof. We want to
+    show that
+
+    $$x(t) = e^{tA}v = Q^{-1} e^{tD} Qv.$$
+
+    Since the $w_i$'s are the columns of $Q^{-1},$ we want
+
+    \begin{align*}
+    x &= \begin{bmatrix}
+    w_1 & \cdots & w_n
+    \end{bmatrix} \begin{bmatrix}
+    e^{t\l_1} &        & 0          \\
+              & \ddots &            \\
+    0         &        & e^{t\l_k}  \\
+    \end{bmatrix} Qv \\
+    &= \begin{bmatrix}
+    e^{t\l_1} w_1 & \cdots & e^{t\l_k} w_n
+    \end{bmatrix} Qv,
+    \end{align*}
+
+    which will be precisely
+
+    $$c_1 e^{\l_1 t} w_1 + \cdots + c_n e^{\l_k t} w_n$$
+
+    if $Qv = c := \begin{bmatrix} c_1 & \cdots & c_n \end{bmatrix}^T.$
+    But this is easy because $Q$ is invertible, and therefore one to
+    one, so for any $c$ we can find a $v\in\bR^n$ s.t. $Qv = c.$ \qed
 </p>
 
 <h1>Reference</h1>
