@@ -2438,9 +2438,13 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
 </p>
 
 <p>
-    <b>Corollary.</b> <i>Every polynomial $x^n + a_{n-1}x^{n-1}
-    + \cdots + a_0$ is divisible by the polynomial $x^2 - 2ax +
-    a^2 + b^2.$</i>
+    <b>Corollary.</b> <i>Every real polynomial $f(x) = x^n +
+    a_{n-1}x^{n-1} + \cdots + a_0$ is divisible by the polynomial $x^2
+    - 2ax + a^2 + b^2,$ where $a+ib$ is a complex root of $f.$</i>
+</p>
+<p>
+    <b>Corollary.</b> <i>Every such $f$ can be written as a product of
+    linear and quadratic factors.</i>
 </p>
 
 <h3>Primitive nth roots</h3>
@@ -2484,6 +2488,26 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
 <p>
     This is true for $n=3.$
 </p>
+
+<h3>Intermediate value theorem for real and complex valued complex functions</h3>
+
+<p>
+    <b>Exercise.</b> <i>Suppose that $f$ is a real valued function
+    defined on a closed rectangle $R = [a,b]\times[c,d].$ If $f$ takes
+    on the values $f(z)$ and $f(w)$ for $z,w\in R,$ then $f$ also
+    takes on all values between $f(z)$ and $f(w).$</i>
+</p>
+<p>
+    <i>However, if $f$ is complex valued, then this is not true:
+    e.g. for $z = x+iy,$ define the complex exponential function
+
+    $$f(z) = e^z = e^x e^{iy} = e^x(\cos y + i\sin y),$$
+
+    continuous for all $z.$ Then $f$ takes on $f(i\pi/2) = i$ and
+    $f(-i\pi/2) = -i,$ but doesn't take on the point zero on the line
+    between $i$ and $-i.$</i>
+</p>
+<img src="images/complexexponential.png">
 
 <h1>Reference</h1>
 

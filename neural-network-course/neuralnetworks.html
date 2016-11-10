@@ -3114,6 +3114,103 @@ print 'sanity check: %f' % (-np.log(0.1))</code></pre>
 
 <img src="images/inverteddropout.png">
 
+<h3>Dropout backpropagation derivative</h3>
+
+<p>
+    Let $X = (x)$ be the input of any shape, $Y = (y)$ be the dropout
+    output, $M = (m)$ be the random mask during training, all of the
+    same size. Let $p$ be the probability of dropping out a
+    neuron. Then
+
+    $$y = \frac{xm}{1-p}.$$
+
+    Note that we're dividing by $1-p$ instead of $p$ because here (and
+    in the assignment) $p$ is the probability of dropping out a
+    neuron, which seems more natural to me (bigger $p$ means more
+    dropout), while in the slides $p$ was the probability of keeping a
+    neuron alive.
+</p>
+<p>
+    Therefore
+
+    \begin{align*}
+    \frac{dy}{dx} &= \begin{cases}
+    \frac{1}{1-p} & \text{if } m = 1 \\
+    0   & \text{if } m = 0
+    \end{cases} \\
+    &= \frac{m}{1-p}.
+    \end{align*}
+
+    By the chain rule,
+
+    $$\frac{\dd E}{\dd x} = \frac{\dd E}{\dd y} \frac{dy}{dx}
+        = \frac{\dd E}{\dd y} \frac{m}{1-p},$$
+
+    which in matrix form is
+
+    $$\frac{\dd E}{\dd X} = \frac{\dd E}{\dd Y} \frac{M}{1-p}.$$
+</p>
+
+<h3>Dropout Implementation</h3>
+
+<pre><code>
+def dropout_forward(x, dropout_param):
+  """
+  Performs the forward pass for (inverted) dropout.
+
+  Inputs:
+  - x: Input data, of any shape
+  - dropout_param: A dictionary with the following keys:
+    - p: Dropout parameter. We drop each neuron output with probability p.
+      NOTE. This is the opposite of the lecture slides! Slides said p is the
+      probability of keeping a neuron alive.
+    - mode: 'test' or 'train'. If the mode is train, then perform dropout;
+      if the mode is test, then just return the input.
+    - seed: Seed for the random number generator. Passing seed makes this
+      function deterministic, which is needed for gradient checking but not in
+      real networks.
+
+  Outputs:
+  - out: Array of the same shape as x.
+  - cache: A tuple (dropout_param, mask). In training mode, mask is the dropout
+    mask that was used to multiply the input; in test mode, mask is None.
+  """
+  p, mode = dropout_param['p'], dropout_param['mode']
+  if 'seed' in dropout_param:
+    np.random.seed(dropout_param['seed'])
+
+  if mode == 'train':
+    mask = np.random.random(x.shape) > p
+    out = x * mask / (1 - p)
+  elif mode == 'test':
+    out = x
+    mask = None
+
+  cache = (dropout_param, mask)
+  out = out.astype(x.dtype, copy=False)
+  return out, cache
+
+def dropout_backward(dout, cache):
+  """
+  Perform the backward pass for (inverted) dropout.
+  Inputs:
+  - dout: Upstream derivatives, of any shape
+  - cache: (dropout_param, mask) from dropout_forward.
+  """
+  dropout_param, mask = cache
+  p, mode = dropout_param['p'], dropout_param['mode']
+  if mode == 'train':
+    dx = dout * mask / (1 - p)
+  elif mode == 'test':
+    dx = dout
+  return dx
+</code></pre>
+
+<h3>Dropout helps avoid overfitting during training and generalizes a
+little better on new data</h3>
+
+<img src="images/dropoutregularization.png">
+
 <h1>Gradient checking</h1>
 
 <p>
@@ -3639,6 +3736,157 @@ def batchnorm_backward(dout, cache):
     weight scales during initialization.
 </p>
 <img src="images/batchnormaccuracyvsweightscaling.png">
+
+<h1>Fully connected net with batchnorm and dropout implementation</h1>
+
+<pre><code>
+class FullyConnectedNet(object):
+  """A fully-connected neural network with an arbitrary number of hidden
+  layers, ReLU nonlinearities, and a softmax loss function. This will
+  also implement dropout and batch normalization as options. For a
+  network with L layers, the architecture will be
+
+  {affine - [batch norm] - relu - [dropout]} x (L - 1) - affine - softmax
+
+  where batch normalization and dropout are optional, and the {...}
+  block is repeated L - 1 times.
+
+  Similar to the TwoLayerNet above, learnable parameters are stored in
+  the self.params dictionary and will be learned using the Solver
+  class.
+
+  """
+
+  def __init__(self, hidden_dims, input_dim=3*32*32, num_classes=10,
+               dropout=1, use_batchnorm=False, reg=0.0,
+               weight_scale=1e-2, dtype=np.float32, seed=None):
+    """
+    Initialize a new FullyConnectedNet.
+
+    Inputs:
+    - hidden_dims: A list of integers giving the size of each hidden layer.
+    - input_dim: An integer giving the size of the input.
+    - num_classes: An integer giving the number of classes to classify.
+    - dropout: Scalar between 0 and 1 giving dropout strength. If dropout=0 then
+      the network should not use dropout at all.
+    - use_batchnorm: Whether or not the network should use batch normalization.
+    - reg: Scalar giving L2 regularization strength.
+    - weight_scale: Scalar giving the standard deviation for random
+      initialization of the weights.
+    - dtype: A numpy datatype object; all computations will be performed using
+      this datatype. float32 is faster but less accurate, so you should use
+      float64 for numeric gradient checking.
+    - seed: If not None, then pass this random seed to the dropout layers. This
+      will make the dropout layers deteriminstic so we can gradient check the
+      model.
+    """
+    self.use_batchnorm = use_batchnorm
+    self.use_dropout = dropout > 0
+    self.reg = reg
+    self.num_layers = 1 + len(hidden_dims)
+    self.dtype = dtype
+    self.params = {}
+
+    predim = input_dim
+    for i, dim in enumerate(hidden_dims):
+        self.params["W" + str(i + 1)] = weight_scale * np.random.randn(predim, dim)
+        self.params["b" + str(i + 1)] = np.zeros(dim)
+        if self.use_batchnorm:
+            self.params["gamma" + str(i + 1)] = np.ones(dim)
+            self.params["beta" + str(i + 1)] = np.zeros(dim)
+        predim = dim
+    self.params["W" + str(self.num_layers)] = weight_scale * np.random.randn(predim, num_classes)
+    self.params["b" + str(self.num_layers)] = np.zeros(num_classes)
+
+    # When using dropout we need to pass a dropout_param dictionary to
+    # each dropout layer so that the layer knows the dropout
+    # probability and the mode (train / test). You can pass the same
+    # dropout_param to each dropout layer.
+    self.dropout_param = {}
+    if self.use_dropout:
+      self.dropout_param = {'mode': 'train', 'p': dropout}
+      if seed is not None:
+        self.dropout_param['seed'] = seed
+
+    # With batch normalization we need to keep track of running means
+    # and variances, so we need to pass a special bn_param object to
+    # each batch normalization layer. You should pass
+    # self.bn_params[0] to the forward pass of the first batch
+    # normalization layer, self.bn_params[1] to the forward pass of
+    # the second batch normalization layer, etc.
+    self.bn_params = []
+    if self.use_batchnorm:
+      self.bn_params = [{'mode': 'train'} for i in xrange(self.num_layers - 1)]
+
+    # Cast all parameters to the correct datatype
+    for k, v in self.params.iteritems():
+      self.params[k] = v.astype(dtype)
+
+  def loss(self, X, y=None):
+    """
+    Compute loss and gradient for the fully-connected net.
+
+    Input / output: Same as TwoLayerNet above.
+    """
+    X = X.astype(self.dtype)
+    mode = 'test' if y is None else 'train'
+
+    # Set train/test mode for batchnorm params and dropout param since
+    # they behave differently during training and testing.
+    if self.dropout_param is not None:
+      self.dropout_param['mode'] = mode
+    if self.use_batchnorm:
+      for bn_param in self.bn_params:
+        bn_param[mode] = mode
+
+    out = X
+    cache = {}
+    dropout_cache = {}
+    for i in xrange(self.num_layers - 1):
+        W = self.params["W" + str(i + 1)]
+        b = self.params["b" + str(i + 1)]
+        if self.use_batchnorm:
+            gamma = self.params["gamma" + str(i + 1)]
+            beta = self.params["beta" + str(i + 1)]
+            bn_param = self.bn_params[i]
+            out, cache[str(i + 1)] = affine_batchnorm_relu_forward(out, W, b, gamma, beta, bn_param)
+        else:
+            out, cache[str(i + 1)] = affine_relu_forward(out, W, b)
+
+        if self.use_dropout:
+            out, dropout_cache[str(i + 1)] = dropout_forward(out, self.dropout_param)
+
+    W = self.params["W" + str(self.num_layers)]
+    b = self.params["b" + str(self.num_layers)]
+    scores, cache[str(self.num_layers)] = affine_forward(out, W, b)
+
+    if mode == 'test':
+      return scores
+
+    grads = {}
+    loss, dout = softmax_loss(scores, y)
+    dout, dW, db = affine_backward(dout, cache[str(self.num_layers)])
+    grads["W" + str(self.num_layers)] = dW
+    grads["b" + str(self.num_layers)] = db
+
+    for i in reversed(xrange(self.num_layers - 1)):
+        if self.use_dropout:
+            dout = dropout_backward(dout, dropout_cache[str(i + 1)])
+
+        if self.use_batchnorm:
+            dout, dW, db, dgamma, dbeta = affine_batchnorm_relu_backward(dout, cache[str(i + 1)])
+            grads["gamma" + str(i + 1)] = dgamma
+            grads["beta" + str(i + 1)] = dbeta
+        else:
+            dout, dW, db = affine_relu_backward(dout, cache[str(i + 1)])
+
+        W = self.params["W" + str(i + 1)]
+        grads["W" + str(i + 1)] = dW + self.reg * W
+        grads["b" + str(i + 1)] = db
+        loss += 0.5 * self.reg * np.sum(W * W)
+
+    return loss, grads
+</code></pre>
 
 <h1>Reference</h1>
 <ol>

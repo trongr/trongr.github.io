@@ -116,7 +116,7 @@ class FullyConnectedNet(object):
   """
 
   def __init__(self, hidden_dims, input_dim=3*32*32, num_classes=10,
-               dropout=0, use_batchnorm=False, reg=0.0,
+               dropout=1, use_batchnorm=False, reg=0.0,
                weight_scale=1e-2, dtype=np.float32, seed=None):
     """
     Initialize a new FullyConnectedNet.
@@ -144,7 +144,7 @@ class FullyConnectedNet(object):
     self.num_layers = 1 + len(hidden_dims)
     self.dtype = dtype
     self.params = {}
-                       #
+
     predim = input_dim
     for i, dim in enumerate(hidden_dims):
         self.params["W" + str(i + 1)] = weight_scale * np.random.randn(predim, dim)
@@ -156,10 +156,10 @@ class FullyConnectedNet(object):
     self.params["W" + str(self.num_layers)] = weight_scale * np.random.randn(predim, num_classes)
     self.params["b" + str(self.num_layers)] = np.zeros(num_classes)
 
-    # TODO
-    # When using dropout we need to pass a dropout_param dictionary to each
-    # dropout layer so that the layer knows the dropout probability and the mode
-    # (train / test). You can pass the same dropout_param to each dropout layer.
+    # When using dropout we need to pass a dropout_param dictionary to
+    # each dropout layer so that the layer knows the dropout
+    # probability and the mode (train / test). You can pass the same
+    # dropout_param to each dropout layer.
     self.dropout_param = {}
     if self.use_dropout:
       self.dropout_param = {'mode': 'train', 'p': dropout}
@@ -197,10 +197,9 @@ class FullyConnectedNet(object):
       for bn_param in self.bn_params:
         bn_param[mode] = mode
 
-    # When using dropout, you'll need to pass self.dropout_param to
-    # each dropout forward pass.
     out = X
     cache = {}
+    dropout_cache = {}
     for i in xrange(self.num_layers - 1):
         W = self.params["W" + str(i + 1)]
         b = self.params["b" + str(i + 1)]
@@ -211,6 +210,9 @@ class FullyConnectedNet(object):
             out, cache[str(i + 1)] = affine_batchnorm_relu_forward(out, W, b, gamma, beta, bn_param)
         else:
             out, cache[str(i + 1)] = affine_relu_forward(out, W, b)
+
+        if self.use_dropout:
+            out, dropout_cache[str(i + 1)] = dropout_forward(out, self.dropout_param)
 
     W = self.params["W" + str(self.num_layers)]
     b = self.params["b" + str(self.num_layers)]
@@ -226,6 +228,9 @@ class FullyConnectedNet(object):
     grads["b" + str(self.num_layers)] = db
 
     for i in reversed(xrange(self.num_layers - 1)):
+        if self.use_dropout:
+            dout = dropout_backward(dout, dropout_cache[str(i + 1)])
+
         if self.use_batchnorm:
             dout, dW, db, dgamma, dbeta = affine_batchnorm_relu_backward(dout, cache[str(i + 1)])
             grads["gamma" + str(i + 1)] = dgamma

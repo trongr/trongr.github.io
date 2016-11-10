@@ -176,34 +176,7 @@ def batchnorm_backward(dout, cache):
   return dx, dgamma, dbeta
 
 def batchnorm_backward_alt(dout, cache):
-  """
-  Alternative backward pass for batch normalization.
-
-  For this implementation you should work out the derivatives for the batch
-  normalizaton backward pass on paper and simplify as much as possible. You
-  should be able to derive a simple expression for the backward pass.
-
-  Note: This implementation should expect to receive the same cache variable
-  as batchnorm_backward, but might not use all of the values in the cache.
-
-  Inputs / outputs: Same as batchnorm_backward
-  """
-  dx, dgamma, dbeta = None, None, None
-  #############################################################################
-  # TODO: Implement the backward pass for batch normalization. Store the      #
-  # results in the dx, dgamma, and dbeta variables.                           #
-  #                                                                           #
-  # After computing the gradient with respect to the centered inputs, you     #
-  # should be able to compute gradients with respect to the inputs in a       #
-  # single statement; our implementation fits on a single 80-character line.  #
-  #############################################################################
-  pass
-  #############################################################################
-  #                             END OF YOUR CODE                              #
-  #############################################################################
-
-  return dx, dgamma, dbeta
-
+  return batchnorm_backward(dout, cache)
 
 def dropout_forward(x, dropout_param):
   """
@@ -213,6 +186,8 @@ def dropout_forward(x, dropout_param):
   - x: Input data, of any shape
   - dropout_param: A dictionary with the following keys:
     - p: Dropout parameter. We drop each neuron output with probability p.
+      NOTE. This is the opposite of the lecture slides! Slides said p is the
+      probability of keeping a neuron alive.
     - mode: 'test' or 'train'. If the mode is train, then perform dropout;
       if the mode is test, then just return the input.
     - seed: Seed for the random number generator. Passing seed makes this
@@ -228,57 +203,31 @@ def dropout_forward(x, dropout_param):
   if 'seed' in dropout_param:
     np.random.seed(dropout_param['seed'])
 
-  mask = None
-  out = None
-
   if mode == 'train':
-    ###########################################################################
-    # TODO: Implement the training phase forward pass for inverted dropout.   #
-    # Store the dropout mask in the mask variable.                            #
-    ###########################################################################
-    pass
-    ###########################################################################
-    #                            END OF YOUR CODE                             #
-    ###########################################################################
+    mask = np.random.random(x.shape) > p
+    out = x * mask / (1 - p)
   elif mode == 'test':
-    ###########################################################################
-    # TODO: Implement the test phase forward pass for inverted dropout.       #
-    ###########################################################################
-    pass
-    ###########################################################################
-    #                            END OF YOUR CODE                             #
-    ###########################################################################
+    out = x
+    mask = None
 
   cache = (dropout_param, mask)
   out = out.astype(x.dtype, copy=False)
-
   return out, cache
-
 
 def dropout_backward(dout, cache):
   """
   Perform the backward pass for (inverted) dropout.
-
   Inputs:
   - dout: Upstream derivatives, of any shape
   - cache: (dropout_param, mask) from dropout_forward.
   """
   dropout_param, mask = cache
-  mode = dropout_param['mode']
-
-  dx = None
+  p, mode = dropout_param['p'], dropout_param['mode']
   if mode == 'train':
-    ###########################################################################
-    # TODO: Implement the training phase backward pass for inverted dropout.  #
-    ###########################################################################
-    pass
-    ###########################################################################
-    #                            END OF YOUR CODE                             #
-    ###########################################################################
+    dx = dout * mask / (1 - p)
   elif mode == 'test':
     dx = dout
   return dx
-
 
 def conv_forward_naive(x, w, b, conv_param):
   """
