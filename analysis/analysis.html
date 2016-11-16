@@ -2333,7 +2333,7 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
 
     $$\lim_{n\to\infty} \int_0^{1-1/n} f_n = \int_0^1 f.$$
 
-    E.g. let $f_n$ be zero on $[0,1-1/n]$ and look a triangle of
+    E.g. let $f_n$ be zero on $[0,1-1/n]$ and look like a triangle of
     height $n$ on $[1-1/n,1].$ Then
 
     $$\lim_{n\to\infty} \int_0^{1-1/n} f_n = \frac{1}{2} \neq 0 = \int_0^1 f.$$
@@ -2443,8 +2443,75 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
     - 2ax + a^2 + b^2,$ where $a+ib$ is a complex root of $f.$</i>
 </p>
 <p>
-    <b>Corollary.</b> <i>Every such $f$ can be written as a product of
-    linear and quadratic factors.</i>
+    <b>Corollary.</b> <i>Every real polynomial $f(x) = x^n +
+    a_{n-1}x^{n-1} + \cdots + a_0$ can be written as a product of
+    linear factors of the form $x-a$ and irreducible quadratic factors
+    of the form $x^2 - 2ax + a^2 + b^2.$</i>
+</p>
+
+<h3>Sum of polynomial squares</h3>
+
+<p>
+    <b>Definition.</b> <i>A real polynomial $f(x) = x^n +
+    a_{n-1}x^{n-1} + \cdots + a_0$ is called a sum of squares if it
+    can be written as $h_1^2 + \cdots + h_k^2$ for polynomials
+    $h_i.$</i>
+</p>
+<p>
+    <b>Corollary.</b> <i>If $f$ and $g$ are sums of squares, then so
+    is $fg.$</i>
+</p>
+<p>
+    <b>Proposition.</b> <i>$f$ is a sum of squares iff $f(x) \geq 0$
+    for all $x.$</i>
+</p>
+<p>
+    <i>Proof.</i> If $f$ is a sum of squares, then clearly $f(x) \geq
+    0$ for all $x.$ Now suppose that $f \geq 0.$ By a previous
+    corollary, $f$ can be written as a product of linear factors of
+    the form $x-a$ and irreducible quadratic factors of the form $x^2
+    - 2ax + a^2 + b^2$:
+
+    $$f(x) = \underbrace{\prod_{a,k} \underbrace{(x - a)^k}_{\stackrel{?}{\geq} 0}}_{\geq 0}
+        \prod_{a,b} \underbrace{(x^2 - 2ax + a^2 + b^2)}_{>0},$$
+
+    where $k$ is the multiplicity of each root $a.$ Since the
+    quadratic factors are irreducible, they have no roots, and since
+    their leading coefficients are $1,$ they must all be positive for
+    all $x.$ Since $f \geq 0,$ this implies $\prod_{a,k} (x - a)^k
+    \geq 0.$
+</p>
+<p>
+    Note that each quadratic factor is a sum of squares. We'll show
+    that each $k$ is even, so that $(x-a)^k$ is a square, and apply
+    the previous corollary to conclude that their product is also a
+    sum of squares. We'll show this starting with the largest root and
+    its multiplicity, and then down to the smallest root.
+</p>
+<p>
+    Let $a$ be the largest root and $k$ be its multiplicity. (If $a$
+    is the only root, then $(x-a)^k \geq 0$ implies that $k$ is even,
+    and we're done.) Otherwise let $b$ be the second largest root and
+    $l$ its multiplicity, let $c$ be etc. Then for $x \in (b, a),$
+
+    \begin{align*}
+    x - a &< 0 \\
+    x - b &> 0 \\
+    \vdots \\
+    x - c &> 0.
+    \end{align*}
+
+    But
+
+    $$(x - a)^k \underbrace{(x - b)^l \cdots (x - c)^m }_{>0} \geq 0$$
+
+    implies that
+
+    $$(x - a)^k \geq 0.$$
+
+    Therefore $k$ must be even. Continue this way to the smallest root
+    to find that all linear multiplicities are even, so $(x-a)^k$ are
+    all squares for all roots $a.$ \qed
 </p>
 
 <h3>Primitive nth roots</h3>
@@ -2508,6 +2575,8 @@ $$\sum\limits_{n} a_n \text{ is } \begin{cases}
     between $i$ and $-i.$</i>
 </p>
 <img src="images/complexexponential.png">
+
+<h1>Complex Power Series</h1>
 
 <h1>Reference</h1>
 

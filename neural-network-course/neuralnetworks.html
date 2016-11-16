@@ -3888,6 +3888,230 @@ class FullyConnectedNet(object):
     return loss, grads
 </code></pre>
 
+<h1>Convolution Layer</h1>
+
+<h3>Forward pass</h3>
+
+<p>
+    The forward pass is pretty straight forward. The only tricky
+    business is to vectorize the sliding window dot products, which
+    requires a bit of black magic: <code>im2col_indices</code> (also
+    called <code>im2col</code>, for "image blocks to columns"). I'm
+    not quite sure how it works (the function helpfully came with the
+    assignment starter code) but what it does is simply (very quickly)
+    converting an array (of dimension $N \times C \times H \times W$
+    representing $N$ images of size $H \times W$ in $C$ channels) into
+    a matrix of dimension $C h_f w_f \times N H' W',$ where $h_f$ and
+    $w_f$ are the height and width of the filter, and $H'W'$ is the
+    number of sliding windows per image:
+
+    \begin{align*}
+    H' &= 1 + \frac{H + 2p - h_f}{s} \\
+    W' &= 1 + \frac{W + 2p - w_f}{s},
+    \end{align*}
+
+    where $s$ and $p$ are the stride and padding.
+</p>
+<p>
+    Conceptually this is very simple, but the details are tricky, so
+    let's do an example just to get the shapes and dimensions
+    right. We'll use dimension $2$ all the way through to keep
+    dimensions small and manageable. Let the input $x$ be
+</p>
+<pre><code>                              N  C  H  W
+>>> x = np.arange(16).reshape(2, 2, 2, 2)
+>>> x      W=1 W=2
+array([[[[ 0,  1],    H=1 C=1 N=1
+         [ 2,  3]],   H=2
+
+        [[ 4,  5],    H=1 C=2
+         [ 6,  7]]],  H=2
+
+
+       [[[ 8,  9],    H=1 C=1 N=2
+         [10, 11]],   H=2
+
+        [[12, 13],    H=1 C=2
+         [14, 15]]]]) H=2
+</code></pre>
+<p>
+    Let the filters $w$ be
+</p>
+<pre><code>                              F  C  hf wf
+>>> w = np.arange(16).reshape(2, 2, 2, 2)
+>>> w   wf=1   2
+array([[[[ 0,  1],    hf=1 C=1 F=1
+         [ 2,  3]],   hf=2
+
+        [[ 4,  5],    hf=1 C=2
+         [ 6,  7]]],  hf=2
+
+
+       [[[ 8,  9],    hf=1 C=1 F=2
+         [10, 11]],   hf=2
+
+        [[12, 13],    hf=1 C=2
+         [14, 15]]]]) hf=2
+</code></pre>
+<p>
+    But we need to reshape $w$ so that each filter becomes a row:
+</p>
+<pre><code>                  F
+>>> f = w.reshape(2, -1)
+>>> f
+array([[ 0,  1,  2,  3,  4,  5,  6,  7],     F=1
+       [ 8,  9, 10, 11, 12, 13, 14, 15]])    F=2
+</code></pre>
+<p>
+    Suppose we have padding $p=1$ and stride $s=1.$
+    Then <code>x_pad</code> will look like:
+</p>
+<pre><code>>>> x_pad = np.pad(x, pad_width=((0,0),(0,0),(p,p),(p,p)), mode="constant")
+>>> x_pad
+array([[[[ 0,  0,  0,  0],
+         [ 0,  0,  1,  0],
+         [ 0,  2,  3,  0],
+         [ 0,  0,  0,  0]],
+
+        [[ 0,  0,  0,  0],
+         [ 0,  4,  5,  0],
+         [ 0,  6,  7,  0],
+         [ 0,  0,  0,  0]]],
+
+
+       [[[ 0,  0,  0,  0],
+         [ 0,  8,  9,  0],
+         [ 0, 10, 11,  0],
+         [ 0,  0,  0,  0]],
+
+        [[ 0,  0,  0,  0],
+         [ 0, 12, 13,  0],
+         [ 0, 14, 15,  0],
+         [ 0,  0,  0,  0]]]])</code></pre>
+<p>
+    Conveniently <code>im2col_indices</code> will do the padding for
+    us, so let's see what's happening here:
+</p>
+<pre><code>>>> c = ic.im2col_indices(x, hf, wf, padding=p, stride=s)
+>>> c    1   2   3   4   5   6   7   8   9  10  11  12   etc.               18 = N * H' * W'
+array([[ 0,  0,  0,  0,  0,  0,  0,  0,  0,  8,  1,  9,  0,  0,  2, 10,  3, 11],
+       [ 0,  0,  0,  0,  0,  0,  0,  8,  1,  9,  0,  0,  2, 10,  3, 11,  0,  0],
+       [ 0,  0,  0,  8,  1,  9,  0,  0,  2, 10,  3, 11,  0,  0,  0,  0,  0,  0],
+       [ 0,  8,  1,  9,  0,  0,  2, 10,  3, 11,  0,  0,  0,  0,  0,  0,  0,  0],
+       [ 0,  0,  0,  0,  0,  0,  0,  0,  4, 12,  5, 13,  0,  0,  6, 14,  7, 15],
+       [ 0,  0,  0,  0,  0,  0,  4, 12,  5, 13,  0,  0,  6, 14,  7, 15,  0,  0],
+       [ 0,  0,  4, 12,  5, 13,  0,  0,  6, 14,  7, 15,  0,  0,  0,  0,  0,  0],
+       [ 4, 12,  5, 13,  0,  0,  6, 14,  7, 15,  0,  0,  0,  0,  0,  0,  0,  0]])
+</code></pre>
+<p>
+    Each column is a filter-sized ($C\times h_f \times w_f$) block of
+    one of the images in <code>x_pad</code> reshaped to a column. For
+    example, column 1 is a reshape of the <code>2 x 2 x 2</code> block
+    drawn in squares. The order of the remaining columns are as
+    follows: first go along $N,$ then along $W,$ and finally along
+    $H.$
+</p>
+<pre><code>>>> x_pad
+          +------+               column order:
+array([[[[|0,  0,| 0,  0],       1     3     5
+         [|0,  0,| 1,  0],       |  7     9     11
+          +------+               |    etc.
+         [ 0,  2,  3,  0],       |
+         [ 0,  0,  0,  0]],      |
+          +------+               |
+        [[|0,  0,| 0,  0],       |
+         [|0,  4,| 5,  0],       |
+          +------+               |
+         [ 0,  6,  7,  0],       |
+         [ 0,  0,  0,  0]]],     |
+                                 |
+                                 |
+       [[[ 0,  0,  0,  0],       2     4     6
+         [ 0,  8,  9,  0],          8     10    12
+         [ 0, 10, 11,  0],
+         [ 0,  0,  0,  0]],
+
+        [[ 0,  0,  0,  0],
+         [ 0, 12, 13,  0],
+         [ 0, 14, 15,  0],
+         [ 0,  0,  0,  0]]]])
+</code></pre>
+<p>
+    Now that we have the filter and the blocks as columns, we can
+    simply dot product the two to get the activation map for each
+    filter:
+</p>
+<pre><code>>>> out = np.dot(f, c)
+>>> out    1     2     3   etc.                                                                                 18 = N * H' * W'
+array([[  28,  108,   62,  206,   32,   96,   68,  196,  140,  364,   68,  164,   32,   80,   62,  142,   28,   60],  F=1
+       [  60,  268,  142,  542,   80,  272,  164,  548,  364, 1100,  196,  548,   96,  272,  206,  542,  108,  268]]) F=2
+</code></pre>
+<p>
+    Again each row is the activation map for a filter, and each column
+    is a sliding window arranged in the order we just talked
+    about. (For simplicity we'll omit the bias term.) Finally as an
+    exercise, you might want to see how to reshape it into its final
+    form:
+</p>
+<pre><code>                          N            N  F  Hp Wp
+>>> out = out.reshape(-1, 2).T.reshape(2, 2, 3, 3)
+>>> out
+array([[[[  28,   62,   32],      activation map
+         [  68,  140,   68],      for filter 1 on
+         [  32,   62,   28]],     image 1
+
+        [[  60,  142,   80],      activation map
+         [ 164,  364,  196],      for filter 2 on
+         [  96,  206,  108]]],    image 1
+
+
+       [[[ 108,  206,   96],      activation map
+         [ 196,  364,  164],      for filter 1 on
+         [  80,  142,   60]],     image 2
+
+        [[ 268,  542,  272],      activation map
+         [ 548, 1100,  548],      for filter 2 on
+         [ 272,  542,  268]]]])   image 2
+</code></pre>
+
+<pre><code>def conv_forward(x, w, b, conv_param):
+  """
+  A naive implementation of the forward pass for a convolutional layer.
+
+  The input consists of N data points, each with C channels, height H and width
+  W. We convolve each input with F different filters, where each filter spans
+  all C channels and has height h and width h.
+
+  Input:
+  - x: Input data of shape (N, C, H, W)
+  - w: Filter weights of shape (F, C, hf, wf)
+  - b: Biases, of shape (F,)
+  - conv_param: A dictionary with the following keys:
+    - 'stride': The number of pixels between adjacent receptive fields in the
+      horizontal and vertical directions.
+    - 'pad': The number of pixels that will be used to zero-pad the input.
+
+  Returns a tuple of:
+  - out: Output data, of shape (N, F, H', W') where H' and W' are given by
+    H' = 1 + (H + 2 * pad - hf) / stride
+    W' = 1 + (W + 2 * pad - wf) / stride
+  - cache: (x, w, b, conv_param)
+  """
+  s = conv_param["stride"]
+  p = conv_param["pad"]
+  N, C, H, W = x.shape
+  F, C, hf, wf = w.shape
+  Hp = 1 + (H + 2 * p - hf) / s
+  Wp = 1 + (W + 2 * p - wf) / s
+
+  f = w.reshape(F, -1)
+  c = ic.im2col_indices(x, hf, wf, padding=p, stride=s)
+  out = np.dot(f, c) + b[None].T
+  out = out.reshape(-1, N).T.reshape(N, F, Hp, Wp)
+
+  cache = (x, w, b, conv_param)
+  return out, cache</code></pre>
+
 <h1>Reference</h1>
 <ol>
 <li>Andrew Ng's Coursera Machine Learning lectures.</li>

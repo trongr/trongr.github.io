@@ -1,5 +1,5 @@
 import numpy as np
-
+import im2col as ic
 
 def affine_forward(x, w, b):
   """
@@ -22,7 +22,6 @@ def affine_forward(x, w, b):
   out = np.dot(x.reshape(x.shape[0], -1), w) + b
   cache = (x, w, b)
   return out, cache
-
 
 def affine_backward(dout, cache):
   """
@@ -235,11 +234,11 @@ def conv_forward_naive(x, w, b, conv_param):
 
   The input consists of N data points, each with C channels, height H and width
   W. We convolve each input with F different filters, where each filter spans
-  all C channels and has height HH and width HH.
+  all C channels and has height h and width h.
 
   Input:
   - x: Input data of shape (N, C, H, W)
-  - w: Filter weights of shape (F, C, HH, WW)
+  - w: Filter weights of shape (F, C, hf, wf)
   - b: Biases, of shape (F,)
   - conv_param: A dictionary with the following keys:
     - 'stride': The number of pixels between adjacent receptive fields in the
@@ -248,22 +247,24 @@ def conv_forward_naive(x, w, b, conv_param):
 
   Returns a tuple of:
   - out: Output data, of shape (N, F, H', W') where H' and W' are given by
-    H' = 1 + (H + 2 * pad - HH) / stride
-    W' = 1 + (W + 2 * pad - WW) / stride
+    H' = 1 + (H + 2 * pad - hf) / stride
+    W' = 1 + (W + 2 * pad - wf) / stride
   - cache: (x, w, b, conv_param)
   """
-  out = None
-  #############################################################################
-  # TODO: Implement the convolutional forward pass.                           #
-  # Hint: you can use the function np.pad for padding.                        #
-  #############################################################################
-  pass
-  #############################################################################
-  #                             END OF YOUR CODE                              #
-  #############################################################################
+  s = conv_param["stride"]
+  p = conv_param["pad"]
+  N, C, H, W = x.shape
+  F, C, hf, wf = w.shape
+  Hp = 1 + (H + 2 * p - hf) / s
+  Wp = 1 + (W + 2 * p - wf) / s
+
+  f = w.reshape(F, -1)
+  c = ic.im2col_indices(x, hf, wf, padding=p, stride=s)
+  out = np.dot(f, c) + b[None].T
+  out = out.reshape(-1, N).T.reshape(N, F, Hp, Wp)
+
   cache = (x, w, b, conv_param)
   return out, cache
-
 
 def conv_backward_naive(dout, cache):
   """
