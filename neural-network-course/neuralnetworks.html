@@ -3893,30 +3893,35 @@ class FullyConnectedNet(object):
 <h3>Forward pass</h3>
 
 <p>
-    The forward pass is pretty straight forward. The only tricky
-    business is to vectorize the sliding window dot products, which
-    requires a bit of black magic: <code>im2col_indices</code> (also
-    called <code>im2col</code>, for "image blocks to columns"). I'm
-    not quite sure how it works (the function helpfully came with the
-    assignment starter code) but what it does is simply (very quickly)
-    converting an array (of dimension $N \times C \times H \times W$
-    representing $N$ images of size $H \times W$ in $C$ channels) into
-    a matrix of dimension $C h_f w_f \times N H' W',$ where $h_f$ and
-    $w_f$ are the height and width of the filter, and $H'W'$ is the
-    number of sliding windows per image:
+    The forward pass is pretty straight forward. The only tricky part
+    is to vectorize the sliding window dot products, which requires a
+    little bit of black magic: <code>im2col_indices</code>, also
+    called <code>im2col</code>, for "image blocks to columns". To be
+    completely honest I'm not quite sure how it works in details (the
+    function helpfully came with the assignment starter code) but what
+    it does is simply, very quickly, converting an array (of dimension
+    $N \times C \times H \times W$ representing $N$ images of size $H
+    \times W$ in $C$ channels) into a matrix of dimension $C h_f w_f
+    \times N H' W',$ where $h_f$ and $w_f$ are the height and width of
+    the filter, $W'$ is the number of sliding windows in the $W$
+    dimension, and $H'$ is the number of sliding windows along $H$:
 
     \begin{align*}
     H' &= 1 + \frac{H + 2p - h_f}{s} \\
     W' &= 1 + \frac{W + 2p - w_f}{s},
     \end{align*}
 
-    where $s$ and $p$ are the stride and padding.
+    where $s$ and $p$ are the stride and padding. In other words, each
+    column of the output of <code>im2col</code> is a filter-sized
+    block stretched out into a column, and the columns range over all
+    images and sliding windows, in an order we'll discuss below.
 </p>
 <p>
-    Conceptually this is very simple, but the details are tricky, so
-    let's do an example just to get the shapes and dimensions
-    right. We'll use dimension $2$ all the way through to keep
-    dimensions small and manageable. Let the input $x$ be
+    Conceptually convolution is very simple, but the details are
+    tricky cause we're dealing with 4 dimensional arrays, so let's do
+    an example just to get the shapes and dimensions right. We'll use
+    dimension $2$ all the way through to keep dimensions small and
+    manageable. Let the input $x$ be
 </p>
 <pre><code>                              N  C  H  W
 >>> x = np.arange(16).reshape(2, 2, 2, 2)
@@ -4074,7 +4079,7 @@ array([[[[  28,   62,   32],      activation map
          [ 272,  542,  268]]]])   image 2
 </code></pre>
 
-<pre><code>def conv_forward(x, w, b, conv_param):
+<pre><code>def conv_forward_naive(x, w, b, conv_param):
   """
   A naive implementation of the forward pass for a convolutional layer.
 
@@ -4105,12 +4110,207 @@ array([[[[  28,   62,   32],      activation map
   Wp = 1 + (W + 2 * p - wf) / s
 
   f = w.reshape(F, -1)
-  c = ic.im2col_indices(x, hf, wf, padding=p, stride=s)
+  c = ic.im2col_indices(x, hf, wf, p, s)
   out = np.dot(f, c) + b[None].T
   out = out.reshape(-1, N).T.reshape(N, F, Hp, Wp)
 
-  cache = (x, w, b, conv_param)
+  cache = (x, w, b, conv_param, c)
   return out, cache</code></pre>
+
+<h3>Convolution layer backward pass</h3>
+
+<p>
+    Previously we did a numerical example to get the shapes and
+    dimensions down. This time before doing the back propagation let's
+    do a more symbolic example to understand what's going on and how
+    to derive the derivatives. Let $x \sim N \times C \times H \times
+    W$ be the input, $w \sim F \times C \times h_f \times w_f$ be the
+    filter array.
+</p>
+<p>
+    In the forward pass we converted $x$ into the column matrix $c
+    \sim w_f h_f C \times N H' W',$ and $w$ into the filter matrix $f
+    \sim F \times w_f h_f C$:
+</p>
+<pre><code>                            c                      N H' W'
+                            [---------------------------]
+  f             wf hf C     [---------------------------]
+  [-------------------]     [---------------------------]
+  [--------f_ij-------]     [-----------c_ij------------]
+  [-------------------]     [---------------------------]
+F [-------------------]     [---------------------------]
+                            [---------------------------]
+                    wf hf C [---------------------------]
+</code></pre>
+<p>
+    Then we computed <code>y = f.c + b</code>:
+</p>
+<pre><code>  y                      N H' W'
+  [---------------------------]
+  [---------------------------]
+  [---------------------------]
+F [---------------------------]
+</code></pre>
+<p>
+    And finally reshape <code>y</code> to its proper dimension $N
+    \times F \times H' \times W',$ and call it <code>out</code>.
+</p>
+<p>
+    Now suppose we have an upstream derivative <code>dout</code>. It
+    is 4 dimensional, the same as <code>out</code>, so first we'll
+    need to convert it into $\frac{\dd E}{\dd y} \sim y.$
+</p>
+<p>
+    Since $c_{ij}$ contributes to all $y_{kj}$ in column $j$ of $y,$
+    by the chain rule:
+
+    $$\frac{\dd E}{\dd c_{ij}} = \sum_{k=1}^{F} \frac{\dd E}{\dd y_{kj}} \frac{\dd y_{kj}}{\dd c_{ij}}.$$
+
+    Since $y = f\cdot c + b,$
+
+    $$y_{kj} = \sum_{l=1}^{w_f h_f C} f_{kl} c_{lj} + b_{j},$$
+
+    and so
+
+    $$\frac{\dd y_{kj}}{\dd c_{ij}} = f_{ki},$$
+
+    therefore
+
+    $$\frac{\dd E}{\dd c_{ij}} = \sum_{k=1}^{F} \frac{\dd E}{\dd y_{kj}} f_{ki},$$
+
+    which in matrix form is
+
+    $$\frac{\dd E}{\dd c} = f^{T} \frac{\dd E}{\dd y}.$$
+</p>
+<p>
+    Now we need to convert this into the derivative with respect to
+    $x.$ Recall that we slid filter-sized blocks along images in $x$
+    and unrolled them into columns of $c,$ which means that most
+    elements of $x$ are repeated in $c.$ Therefore by the chain rule,
+
+    $$\frac{\dd E}{\dd x_{ij}} = \sum_{ab} \frac{\dd E}{\dd c_{ab}} \frac{\dd c_{ab}}{\dd x_{ij}},$$
+
+    where the sum is over those $c_{ab}$ entries which are repeats of
+    $x_{ij}.$ Since these are repeats, this means in particular that
+    $c_{ab} = x_{ij},$ so $\frac{\dd c_{ab}}{\dd x_{ij}} = 1,$ and
+
+    $$\frac{\dd E}{\dd x_{ij}} = \sum_{ab} \frac{\dd E}{\dd c_{ab}}.$$
+
+    In otherwords, we just need to add those derivatives in $\frac{\dd
+    E}{\dd c}$ wherever entries of $c$ repeat those in $x.$ The
+    problem is how to actually do it with matrices. Thankfully there's
+    another magic function that does
+    this: <code>col2im_indices</code>. See reference code below,
+    specifically the line
+</p>
+<pre><code>np.add.at(x_padded, (slice(None), k, i, j), cols_reshaped)</code></pre>
+<p>
+    Similarly, omitting details we can calculate
+
+    $$\frac{\dd E}{\dd f_{ij}} = \sum_{k=1}^{NH'W'} \frac{\dd E}{\dd y_{ik}} \frac{\dd y_{ik}}{\dd f_{ij}}
+        = \sum_{k=1}^{NH'W'} \frac{\dd E}{\dd y_{ik}} c_{jk},$$
+
+    with matrix form
+
+    $$\frac{\dd E}{\dd f} = \frac{\dd E}{\dd y} c^T.$$
+
+    Since there's no overlapping here, we can just reshape this into
+    $\frac{\dd E}{\dd w}.$ See code below for details.
+</p>
+<p>
+    Finally, the bias derivative:
+
+    $$\frac{\dd E}{\dd b_{j}} = \sum_{k=1}^{NH'W'} \frac{\dd E}{\dd y_{jk}} \frac{\dd y_{jk}}{\dd b_{j}}
+        = \sum_{k=1}^{NH'W'} \frac{\dd E}{\dd y_{jk}},$$
+
+    with matrix form
+
+    $$\frac{\dd E}{\dd b} = \sum_{\rm cols} \frac{\dd E}{\dd y_{jk}}.$$
+</p>
+
+<pre><code>def conv_backward_naive(dout, cache):
+  """
+  A naive implementation of the backward pass for a convolutional layer.
+
+  Inputs:
+  - dout: Upstream derivatives.
+  - cache: A tuple of (x, w, b, conv_param) as in conv_forward_naive
+
+  Returns a tuple of:
+  - dx: Gradient with respect to x
+  - dw: Gradient with respect to w
+  - db: Gradient with respect to b
+  """
+  (x, w, b, conv_param, c) = cache
+  s = conv_param["stride"]
+  p = conv_param["pad"]
+  N, C, H, W = x.shape
+  F, C, hf, wf = w.shape
+  Hp = 1 + (H + 2 * p - hf) / s
+  Wp = 1 + (W + 2 * p - wf) / s
+
+  dy = dout.reshape(N, -1).T.reshape(F, -1)
+  f = w.reshape(F, -1)
+  dx = np.dot(f.T, dy)
+  dx = ic.col2im_indices(dx, x.shape, hf, wf, p, s)
+  dw = np.dot(dy, c.T).reshape(w.shape)
+  db = np.sum(dy, axis=1)
+
+  return dx, dw, db
+</code></pre>
+
+<h2>Helper <code>im2col</code> and <code>col2im</code> for reference</h2>
+<p>
+    Magic functions from starter code:
+</p>
+<pre><code>import numpy as np
+
+def get_im2col_indices(x_shape, field_height, field_width, padding=1, stride=1):
+  # First figure out what the size of the output should be
+  N, C, H, W = x_shape
+  assert (H + 2 * padding - field_height) % stride == 0
+  assert (W + 2 * padding - field_height) % stride == 0
+  out_height = (H + 2 * padding - field_height) / stride + 1
+  out_width = (W + 2 * padding - field_width) / stride + 1
+
+  i0 = np.repeat(np.arange(field_height), field_width)
+  i0 = np.tile(i0, C)
+  i1 = stride * np.repeat(np.arange(out_height), out_width)
+  j0 = np.tile(np.arange(field_width), field_height * C)
+  j1 = stride * np.tile(np.arange(out_width), out_height)
+  i = i0.reshape(-1, 1) + i1.reshape(1, -1)
+  j = j0.reshape(-1, 1) + j1.reshape(1, -1)
+
+  k = np.repeat(np.arange(C), field_height * field_width).reshape(-1, 1)
+
+  return (k, i, j)
+
+def im2col_indices(x, field_height, field_width, padding=1, stride=1):
+  """ An implementation of im2col based on some fancy indexing """
+  # Zero-pad the input
+  p = padding
+  x_padded = np.pad(x, ((0, 0), (0, 0), (p, p), (p, p)), mode='constant')
+
+  k, i, j = get_im2col_indices(x.shape, field_height, field_width, padding, stride)
+
+  cols = x_padded[:, k, i, j]
+  C = x.shape[1]
+  cols = cols.transpose(1, 2, 0).reshape(field_height * field_width * C, -1)
+  return cols
+
+def col2im_indices(cols, x_shape, field_height=3, field_width=3, padding=1, stride=1):
+  """ An implementation of col2im based on fancy indexing and np.add.at """
+  N, C, H, W = x_shape
+  H_padded, W_padded = H + 2 * padding, W + 2 * padding
+  x_padded = np.zeros((N, C, H_padded, W_padded), dtype=cols.dtype)
+  k, i, j = get_im2col_indices(x_shape, field_height, field_width, padding, stride)
+  cols_reshaped = cols.reshape(C * field_height * field_width, -1, N)
+  cols_reshaped = cols_reshaped.transpose(2, 0, 1)
+  np.add.at(x_padded, (slice(None), k, i, j), cols_reshaped)
+  if padding == 0:
+    return x_padded
+  return x_padded[:, :, padding:-padding, padding:-padding]
+</code></pre>
 
 <h1>Reference</h1>
 <ol>

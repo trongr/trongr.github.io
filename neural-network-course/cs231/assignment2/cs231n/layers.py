@@ -259,11 +259,11 @@ def conv_forward_naive(x, w, b, conv_param):
   Wp = 1 + (W + 2 * p - wf) / s
 
   f = w.reshape(F, -1)
-  c = ic.im2col_indices(x, hf, wf, padding=p, stride=s)
+  c = ic.im2col_indices(x, hf, wf, p, s)
   out = np.dot(f, c) + b[None].T
   out = out.reshape(-1, N).T.reshape(N, F, Hp, Wp)
 
-  cache = (x, w, b, conv_param)
+  cache = (x, w, b, conv_param, c)
   return out, cache
 
 def conv_backward_naive(dout, cache):
@@ -279,16 +279,22 @@ def conv_backward_naive(dout, cache):
   - dw: Gradient with respect to w
   - db: Gradient with respect to b
   """
-  dx, dw, db = None, None, None
-  #############################################################################
-  # TODO: Implement the convolutional backward pass.                          #
-  #############################################################################
-  pass
-  #############################################################################
-  #                             END OF YOUR CODE                              #
-  #############################################################################
-  return dx, dw, db
+  (x, w, b, conv_param, c) = cache
+  s = conv_param["stride"]
+  p = conv_param["pad"]
+  N, C, H, W = x.shape
+  F, C, hf, wf = w.shape
+  Hp = 1 + (H + 2 * p - hf) / s
+  Wp = 1 + (W + 2 * p - wf) / s
 
+  dy = dout.reshape(N, -1).T.reshape(F, -1)
+  f = w.reshape(F, -1)
+  dx = np.dot(f.T, dy)
+  dx = ic.col2im_indices(dx, x.shape, hf, wf, p, s)
+  dw = np.dot(dy, c.T).reshape(w.shape)
+  db = np.sum(dy, axis=1)
+
+  return dx, dw, db
 
 def max_pool_forward_naive(x, pool_param):
   """
@@ -305,17 +311,20 @@ def max_pool_forward_naive(x, pool_param):
   - out: Output data
   - cache: (x, pool_param)
   """
-  out = None
-  #############################################################################
-  # TODO: Implement the max pooling forward pass                              #
-  #############################################################################
-  pass
-  #############################################################################
-  #                             END OF YOUR CODE                              #
-  #############################################################################
-  cache = (x, pool_param)
-  return out, cache
+  N, C, H, W = x.shape
+  h = pool_param["pool_height"]
+  w = pool_param["pool_width"]
+  s = pool_param["stride"]
+  Hp = 1 + (H - h) / s
+  Wp = 1 + (W - w) / s
 
+  out = ic.im2col_indices(x, h, w, padding=0, stride=s)
+  z = out.T.reshape(-1, w * h) # need to cache this
+  out = np.max(z, axis=1).reshape(-1, C)
+  out = out.T.reshape(-1, N).T.reshape(N, C, Hp, Wp)
+
+  cache = (x, pool_param, z)
+  return out, cache
 
 def max_pool_backward_naive(dout, cache):
   """
@@ -328,16 +337,23 @@ def max_pool_backward_naive(dout, cache):
   Returns:
   - dx: Gradient with respect to x
   """
-  dx = None
-  #############################################################################
-  # TODO: Implement the max pooling backward pass                             #
-  #############################################################################
-  pass
-  #############################################################################
-  #                             END OF YOUR CODE                              #
-  #############################################################################
-  return dx
+  x, pool_param, z = cache
+  N, C, H, W = x.shape
+  h = pool_param["pool_height"]
+  w = pool_param["pool_width"]
+  s = pool_param["stride"]
+  Hp = 1 + (H - h) / s
+  Wp = 1 + (W - w) / s
 
+  dx = dout.reshape(N, -1).T.reshape(C, -1).T     # db
+  dx = dx.reshape(1, -1)                          # da
+  iz = np.argmax(z, axis=1)                       # iz
+  iz = np.eye(w * h)[iz]                          # hz
+  dx = iz * dx.T                                  # dz
+  dx = dx.reshape(-1, w * h * C).T                # dy
+  dx = ic.col2im_indices(dx, x.shape, h, w, 0, s) # dx
+
+  return dx
 
 def spatial_batchnorm_forward(x, gamma, beta, bn_param):
   """

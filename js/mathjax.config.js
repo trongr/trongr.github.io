@@ -101,6 +101,9 @@ window.MathJax = {
             bZ: "\\mathbf Z",
             bC: "\\mathbf C",
 
+            rd: "{\\rm d}",
+            ry: "{\\rm y}",
+
             qed: "\\ \\blacksquare",
         }
     }
