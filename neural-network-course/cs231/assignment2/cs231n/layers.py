@@ -377,22 +377,11 @@ def spatial_batchnorm_forward(x, gamma, beta, bn_param):
   - out: Output data, of shape (N, C, H, W)
   - cache: Values needed for the backward pass
   """
-  out, cache = None, None
-
-  #############################################################################
-  # TODO: Implement the forward pass for spatial batch normalization.         #
-  #                                                                           #
-  # HINT: You can implement spatial batch normalization using the vanilla     #
-  # version of batch normalization defined above. Your implementation should  #
-  # be very short; ours is less than five lines.                              #
-  #############################################################################
-  pass
-  #############################################################################
-  #                             END OF YOUR CODE                              #
-  #############################################################################
-
+  N, C, H, W = x.shape
+  y = x.transpose(1, 0, 2, 3).reshape(C, -1).T
+  z, cache = batchnorm_forward(y, gamma, beta, bn_param)
+  out = z.T.reshape(C, N, H, W).transpose(1, 0, 2, 3)
   return out, cache
-
 
 def spatial_batchnorm_backward(dout, cache):
   """
@@ -407,22 +396,11 @@ def spatial_batchnorm_backward(dout, cache):
   - dgamma: Gradient with respect to scale parameter, of shape (C,)
   - dbeta: Gradient with respect to shift parameter, of shape (C,)
   """
-  dx, dgamma, dbeta = None, None, None
-
-  #############################################################################
-  # TODO: Implement the backward pass for spatial batch normalization.        #
-  #                                                                           #
-  # HINT: You can implement spatial batch normalization using the vanilla     #
-  # version of batch normalization defined above. Your implementation should  #
-  # be very short; ours is less than five lines.                              #
-  #############################################################################
-  pass
-  #############################################################################
-  #                             END OF YOUR CODE                              #
-  #############################################################################
-
+  N, C, H, W = dout.shape
+  dz = dout.transpose(1, 0, 2, 3).reshape(C, -1).T
+  dy, dgamma, dbeta = batchnorm_backward(dz, cache)
+  dx = dy.T.reshape(C, N, H, W).transpose(1, 0, 2, 3)
   return dx, dgamma, dbeta
-
 
 def svm_loss(x, y):
   """
