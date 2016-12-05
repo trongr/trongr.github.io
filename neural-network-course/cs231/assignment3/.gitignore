@@ -1,0 +1,6 @@
+*.swp
+*.pyc
+.env/*
+tiny-imagenet-100-A
+coco_captioning
+pretrained_model.h5
