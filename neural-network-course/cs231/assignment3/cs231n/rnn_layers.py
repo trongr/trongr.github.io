@@ -73,22 +73,21 @@ def rnn_forward(x, h0, Wx, Wh, b):
   - h: Hidden states for the entire timeseries, of shape (N, T, H).
   - cache: Values needed in the backward pass
   """
-  h, cache = None, None
-  ##############################################################################
-  # TODO: Implement forward pass for a vanilla RNN running on a sequence of    #
-  # input data. You should use the rnn_step_forward function that you defined  #
-  # above.                                                                     #
-  ##############################################################################
-  pass
-  ##############################################################################
-  #                               END OF YOUR CODE                             #
-  ##############################################################################
+  N, T, D = x.shape
+  N, H = h0.shape
+  h = np.zeros((N, T, H))
+  cache = {}
+  ht1 = h0
+  for t in xrange(T):
+    xt = x[:, t, :]
+    ht, cachet = rnn_step_forward(xt, ht1, Wx, Wh, b)
+    h[:, t, :] = ht
+    cache[t] = cachet
+    ht1 = ht
   return h, cache
 
-
 def rnn_backward(dh, cache):
-  """
-  Compute the backward pass for a vanilla RNN over an entire sequence of data.
+  """Compute the backward pass for a vanilla RNN over an entire sequence of data.
 
   Inputs:
   - dh: Upstream gradients of all hidden states, of shape (N, T, H)
@@ -100,18 +99,25 @@ def rnn_backward(dh, cache):
   - dWh: Gradient of hidden-to-hidden weights, of shape (H, H)
   - db: Gradient of biases, of shape (H,)
   """
-  dx, dh0, dWx, dWh, db = None, None, None, None, None
-  ##############################################################################
-  # TODO: Implement the backward pass for a vanilla RNN running an entire      #
-  # sequence of data. You should use the rnn_step_backward function that you   #
-  # defined above.                                                             #
-  ##############################################################################
-  pass
-  ##############################################################################
-  #                               END OF YOUR CODE                             #
-  ##############################################################################
+  x, h, Wx, Wh, b, z = cache[0] # throwaway variables to get shapes
+  N, T, H = dh.shape
+  D, H = Wx.shape
+  dx = np.zeros((N, T, D))
+  dWx = np.zeros(Wx.shape)
+  dWh = np.zeros(Wh.shape)
+  db = np.zeros(b.shape)
+  dht = 0.0
+  for t in reversed(xrange(T)):
+    dHt = dh[:, t, :] + dht # dh is error of h due to outputs
+    cachet = cache[t]
+    dxt, dht1, dWxt, dWht, dbt = rnn_step_backward(dHt, cachet)
+    dht = dht1 # error of h due to step forward
+    dx[:, t, :] = dxt
+    dWx += dWxt # accumulate weight derivatives
+    dWh += dWht
+    db += dbt
+  dh0 = dht
   return dx, dh0, dWx, dWh, db
-
 
 def word_embedding_forward(x, W):
   """
@@ -128,26 +134,16 @@ def word_embedding_forward(x, W):
   - out: Array of shape (N, T, D) giving word vectors for all input words.
   - cache: Values needed for the backward pass
   """
-  out, cache = None, None
-  ##############################################################################
-  # TODO: Implement the forward pass for word embeddings.                      #
-  #                                                                            #
-  # HINT: This should be very simple.                                          #
-  ##############################################################################
-  pass
-  ##############################################################################
-  #                               END OF YOUR CODE                             #
-  ##############################################################################
+  V, D = W.shape
+  onehot = (np.arange(V) == x[:, :, None]).astype(int)
+  out = np.dot(onehot, W)
+  cache = (x, W)
   return out, cache
 
-
 def word_embedding_backward(dout, cache):
-  """
-  Backward pass for word embeddings. We cannot back-propagate into the words
-  since they are integers, so we only return gradient for the word embedding
-  matrix.
-
-  HINT: Look up the function np.add.at
+  """Backward pass for word embeddings. We cannot back-propagate into
+  the words since they are integers, so we only return gradient for
+  the word embedding matrix. HINT: Look up the function np.add.at
 
   Inputs:
   - dout: Upstream gradients of shape (N, T, D)
@@ -156,18 +152,10 @@ def word_embedding_backward(dout, cache):
   Returns:
   - dW: Gradient of word embedding matrix, of shape (V, D).
   """
-  dW = None
-  ##############################################################################
-  # TODO: Implement the backward pass for word embeddings.                     #
-  #                                                                            #
-  # HINT: Look up the function np.add.at                                       #
-  ##############################################################################
-  pass
-  ##############################################################################
-  #                               END OF YOUR CODE                             #
-  ##############################################################################
+  x, W = cache
+  dW = np.zeros(W.shape)
+  np.add.at(dW, x, dout)
   return dW
-
 
 def sigmoid(x):
   """

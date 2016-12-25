@@ -1,8 +1,10 @@
 body {
     font-family: times, "Times New Roman", serif;
     font-size: 1.2em;
-    background-color: #171621;
-    color: white;
+    /* color: white; */
+    /* background-color: #171621; */
+    color: black;
+    background-color: #f5ebc4;
 }
 
 #content {
@@ -27,7 +29,8 @@ pre code {
 
 code {
     font-family: consolas, monospace, "courier new", courier;
-    color: #7DFF88;
+    /* color: #7DFF88; */
+    color: #007808;
 }
 
 audio {
@@ -35,12 +38,14 @@ audio {
 }
 
 a {
-    color: #689EE3;
+    /* color: #689EE3; */
+    color: #003DCC;
 }
 
 h1 {
     clear: both;
-    color: #FFD557;
+    /* color: #FFD557; */
+    color: #003DCC;
     border-bottom: 1px solid;
     padding-bottom: 5px;
 }
@@ -50,12 +55,14 @@ h2 {
     font-style: italic;
     border-bottom: 1px solid;
     padding-bottom: 5px;
-    color: #FFD557;
+    /* color: #FFD557; */
+    color: #003DCC;
 }
 
 h3 {
     clear: both;
-    color: #FFD557;
+    /* color: #FFD557; */
+    color: #003DCC;
     font-style: italic;
 }
 
@@ -65,11 +72,13 @@ p, li {
 }
 
 b {
-    color: #FF5C5C;
+    /* color: #FF5C5C; */
+    color: #940000;
 }
 
 i {
-    color: #6BFF86;
+    /* color: #6BFF86; */
+    color: #940000;
 }
 
 video {
@@ -101,11 +110,13 @@ ol {
 }
 
 .red {
-    color: #FF5C5C;
+    /* color: #FF5C5C; */
+    color: #940000;
 }
 
 .yellow {
-    color: #FFD557;
+    /* color: #FFD557; */
+    color: #E66B00;
 }
 
 .green {
@@ -116,7 +127,7 @@ ol {
     max-width: 50%;
     float: right;
     margin: 0 0 20px 0;
-    background-color: #171621;
+    /* background-color: #171621; */
     margin: 5px 0 5px 10px;
     padding: 10px;
     border: 1px dotted;
@@ -138,11 +149,11 @@ ol {
     float: right;
     margin: 5px 0 5px 10px;
     padding: 10px;
-    border: 1px dotted;
+    /* border: 1px dotted; */
     font-size: 0.8em;
     text-align: justify;
     text-justify: inter-word;
-    background-color: #171621;
+    /* background-color: #171621; */
 }
 
 .aside {
@@ -151,11 +162,11 @@ ol {
     float: left;
     margin: 5px 10px 5px 0;
     padding: 10px;
-    border: 1px dotted;
+    /* border: 1px dotted; */
     font-size: 0.8em;
     text-align: justify;
     text-justify: inter-word;
-    background-color: #171621;
+    /* background-color: #171621; */
 }
 
 .clearboth {
