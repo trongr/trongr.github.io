@@ -110,13 +110,22 @@ class CaptioningRNN(object):
 
     h0, h0_cache = affine_forward(features, W_proj, b_proj)
     x, x_cache = word_embedding_forward(captions_in, W_embed)
-    # mach check self.cell_type == rnn|lstm
-    h, h_cache = rnn_forward(x, h0, Wx, Wh, b)
+
+    if self.cell_type == "rnn":
+        h, h_cache = rnn_forward(x, h0, Wx, Wh, b)
+    else:
+        h, h_cache = lstm_forward(x, h0, Wx, Wh, b)
+
     scores, scores_cache = temporal_affine_forward(h, W_vocab, b_vocab)
     loss, dloss = temporal_softmax_loss(scores, captions_out, mask, verbose=False)
 
     dscores, dW_vocab, db_vocab = temporal_affine_backward(dloss, scores_cache)
-    dx, dh0, dWx, dWh, db = rnn_backward(dscores, h_cache)
+
+    if self.cell_type == "rnn":
+        dx, dh0, dWx, dWh, db = rnn_backward(dscores, h_cache)
+    else:
+        dx, dh0, dWx, dWh, db = lstm_backward(dscores, h_cache)
+
     dW_embed = word_embedding_backward(dx, x_cache)
     dfeatures, dW_proj, db_proj = affine_backward(dh0, h0_cache)
     grads = {
@@ -179,14 +188,23 @@ class CaptioningRNN(object):
     #     get scores for all words in the vocabulary
     # (4) Select the word with the highest score as the next word, writing it
     #     to the appropriate slot in the captions variable
-    # mach use lstm_step_forward
     cur_words = self._start * np.ones((N, 1), dtype=np.int32)
     h, _ = affine_forward(features, W_proj, b_proj)
+
+    if self.cell_type == "lstm":
+      c = np.zeros(h.shape)
+
     for t in xrange(max_length):
       cur_words = cur_words.reshape(N, 1)
       x, _ = word_embedding_forward(cur_words, W_embed)
       x = x.reshape(N, W)
-      h, _ = rnn_step_forward(x, h, Wx, Wh, b) # temporarily reshape h to satisfy temporal_affine_forward input
+
+      if self.cell_type == "rnn":
+        h, _ = rnn_step_forward(x, h, Wx, Wh, b)
+      else:
+        h, c, _ = lstm_step_forward(x, h, c, Wx, Wh, b)
+
+      # reshape h to satisfy temporal_affine_forward input
       scores, _ = temporal_affine_forward(h.reshape(N, 1, H), W_vocab, b_vocab)
       cur_words = np.argmax(scores.reshape(N, V), axis=1)
       captions[:, t] = cur_words
