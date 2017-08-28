@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 <meta charset="utf-8">
 <title>Complex Analysis</title>
@@ -15,36 +16,44 @@
 <script src="../js/global.js"></script>
 
 </head>
+
 <body>
 <div id="content">
 
 <h1>Complex Analysis</h1>
 
-<img src="images/beethoven2.jpg">
+<!--<img src="images/beethoven2.jpg">
 
 <div class="epigraph">
-    <div class="quote">Mathematics must not be visualized, and Music
-    must never be performed or listened to!</div><hr>
+    <div class="quote">Mathematics must not be visualized, and Music must never be performed or listened to!</div>
+    <hr>
     <div class="author">Tristan Needham</div>
-</div>
+</div>-->
 
 <h1>Some basic stuff</h1>
+
+<h3>Inverse of a complex number</h3>
+
+<p><span>
+    <b>Exercise.</b> <i>An explicit formula for the inverse of a complex number
+    $z = x + iy$ is 
+    
+    $$\frac{1}{z} = \frac{x}{x^2 + y^2} - \frac{iy}{x^2 + y^2}.$$</i>
+</span></p>
 
 <h3>De Moivre's formula</h3>
 <p>
     <b>Theorem.</b> <i>For any integer $n$ and any real number $\th,$
 
-    $$e^{i n \th} = (\cos \th + i \sin \th)^n = \cos n\th + i \sin n\th.$$
-    </i>
+$$e^{i n \th} = (\cos \th + i \sin \th)^n = \cos n\th + i \sin n\th.$$
+</i>
 </p>
 <div class="bside">
-    Multiply complex numbers by multiplying their magnitudes and
-    adding their arguments
+    Multiply complex numbers by multiplying their magnitudes and adding their arguments
     <img src="images/multiplication.gif">
 </div>
 <p>
-    Algebraically we're raising $e^{i\th}$ to the $n$-th power and
-    geometrically it's rotating $e^{i\th}$ by theta $n$ times.
+    Algebraically we're raising $e^{i\th}$ to the $n$-th power and geometrically it's rotating $e^{i\th}$ by theta $n$ times.
 </p>
 
 <h3>Cauchy Schwarz inequality</h3>
@@ -52,17 +61,16 @@
 <p>
     <b>Theorem.</b> <i>For any complex numbers $a_i, b_i,$
 
-    $$\left|\ \sum_{i=1}^n a_i \bar{b_i}\ \right|^2 \leq \sum_{i=1}^n |a_i|^2 \sum_{i=1}^n |b_i|^2.$$</i>
+$$\left|\ \sum_{i=1}^n a_i \bar{b_i}\ \right|^2 \leq \sum_{i=1}^n |a_i|^2 \sum_{i=1}^n |b_i|^2.$$</i>
 </p>
 <div class="bside">
-    Cauchy Schwarz follows from the fact that
-    $$a \cdot b = |a||b| \cos \th.$$
+    Cauchy Schwarz follows from the fact that $$a \cdot b = |a||b| \cos \th.$$
     <img src="images/sF2wC.png">
 </div>
 <p>
-    Letting $a = (a_i), b = (b_i),$ we can write (taking square root of both sides)
+    Letting $a = (a_i), b = (b_i),$ we can write (taking square root of both sides) $$|\
 
-    $$|\< a, b \>| \leq |a||b|.$$
+    < a, b \>| \leq |a||b|.$$
 </p>
 
 <h3>Triangle inequality</h3>
@@ -70,27 +78,27 @@
 <p>
     <b>Theorem.</b> <i>For any complex vector $a = (a_i), b = (b_i) \in \CC^n,$
 
-    $$|a + b| = \left( \sum_{i=1}^n |a_i + b_i|^2 \right)^{1/2}
-        \leq \left( \sum_{i=1}^n |a_i|^2 \right)^{1/2} + \left( \sum_{i=1}^n |b_i|^2 \right)^{1/2}
-        = |a| + |b|.$$</i>
+$$|a + b| = \left( \sum_{i=1}^n |a_i + b_i|^2 \right)^{1/2}
+\leq \left( \sum_{i=1}^n |a_i|^2 \right)^{1/2} + \left( \sum_{i=1}^n |b_i|^2 \right)^{1/2}
+= |a| + |b|.$$</i>
 </p>
-<div class="bside">
-    &nbsp;&nbsp;\triangle<br>
-    \triangle\triangle<br>
+<!--<div class="bside">
+    &nbsp;&nbsp;\triangle<br> \triangle\triangle
+    <br>
     <img src="images/illuminati-symbols-all-seeing-eye.gif">
-</div>
+</div>-->
 
 <h3>Roots of complex numbers</h3>
 
 <p>
     <b>Theorem.</b> <i>Let $w = |w|(\cos \psi + i \sin \psi).$ Then
-    the $n$-th roots of $w$ are
+the $n$-th roots of $w$ are
 
-    $$z_k = |w|^{1/n}(\cos \th_k + i \sin \th_k),$$
+$$z_k = |w|^{1/n}(\cos \th_k + i \sin \th_k),$$
 
-    where
+where
 
-    $$\th_k = \frac{\psi}{n} + \frac{2\pi k}{n}, \quad\text{for}\quad k = 0,\ldots,n-1.$$</i>
+$$\th_k = \frac{\psi}{n} + \frac{2\pi k}{n}, \quad\text{for}\quad k = 0,\ldots,n-1.$$</i>
 </p>
 
 <p>
@@ -100,32 +108,113 @@
 <h3>Two ways to represent a circle using complex numbers</h3>
 
 <p>
-    One way to represent a circle is as the set of points $z$ s.t.
-
-    $$|z - z_0| = r.$$
-
-    Another way is:
+    One way to represent a circle is as the set of points $z$ s.t. $$|z - z_0| = r.$$ Another way is:
 </p>
 
 <p>
     <b>Proposition.</b> <i>Let $p$ and $q$ be distinct complex
-    numbers, and $\r$ be any positive real number not equal to 1. Then
-    the set of points $z$ s.t.
+numbers, and $\r$ be any positive real number not equal to 1. Then
+the set of points $z$ s.t.
 
-    $$|z - p| = \r |z - q|$$
+$$|z - p| = \r |z - q|$$
 
-    is a circle.</i>
+is a circle.</i>
 </p>
 
-<h1>Reference</h1>
+<h3>Ellipses, Parabolas, and Hyperbolas</h3>
 
+<p><span>
+    <b>Exercise.</b> <i>Let $ p\in R_+ $ and let $ \G $ be the locus of
+    points z satisfying $ |z - p| = cx, z = x + iy. $ Then $ \G $ is an
+    ellipse if $ 0 < c < 1, $ a parabola if $ c = 1, $ and a hyperbola
+    if $1 < c < \infty.$</i>
+</span></p>
+
+<p><span>
+    <b>Exercise.</b> <i>Let $\a$ be a complex number with $0 < |\a| < 1.$ Then
+    the set of all $z$ with
+    
+    <ol>
+        <li>$|z - \a| < |1 - \bar\a z|$ is the disc $\{z: |z| < 1\}.$</li>
+        <li>$|z - \a| = |1 - \bar\a z|$ is the circle $\{z: |z| = 1\}.$</li>
+        <li>$|z - \a| < |1 - \bar\a z|$ is the set $\{z: |z| > 1\}.$</li>
+    </ol></i>
+</span></p>
+
+<h3>Triangle Inequality</h3>
+
+<p><span>
+    <b>Exercise.</b> <i>Let $z$ and $w$ be nonzero complex numbers. Then $|z+w|
+    = |z| + |w|$ iff $z = sw$ for some positive real number $s.$</i>
+</span></p>
+
+<h3>Odd roots of a negative real number</h3>
+
+<p><span>
+    <b>Exercise.</b> <i>Suppose that $n$ is an odd integer and $w$ is a negative
+    real number. Then one solution of the equation $z^n = w$ is a negative real
+    number. (E.g. $-2$ is a root of $z^3 = 8.$)</i>
+</span></p>
+
+<p><span>
+    <b>Exercise.</b> <i>Let $C$ be a circle and let A and B be any two points on
+    C. If P is selected on the smaller arc of C joining A and B, then the angle
+    from the line AP to the line PB is independent of the choice of P. (Recall
+    that this angle is $\pi / 2$ if A and B are on opposite ends of a diameter.)
+    The result remains true if "smaller" is replaced by "larger".</i>
+</span></p>
+
+<h3>Inversion</h3>
+
+<p><span>
+    <b>Exercise.</b> <i>Let $L$ be the line $y = a, a > 0.$ Show that the locus
+    of points $1/z, z\in L$ is the circle of radius $1/2a$ centered at $-i/2a.$</i>
+</span></p>
+
+<p><span>
+    <i>Proof.</i> Let $w = 1/z$ where $z = x + ia \in L.$ We want to show that
+    $w$ satisfies $|w + i/2a| = 1/2a.$ Write
+
+    \begin{align*}
+        \left|\frac{1}{z} + \frac{i}{2a}\right| &= \frac{1}{2a} \\
+        \left|\frac{2a + iz}{2az}\right| &= \frac{1}{2a} \\
+        |2a + iz| &= |z| \\        
+        |2a + i(x + ia)| &= |z| \\
+        |ix + a| &= |z| \\
+        |i(x - ia)| &= |z| \\
+        |i \bar z| &= |z|,
+    \end{align*}
+
+    which is true.
+</span></p>
+
+<p><span>
+    <b>Exercise.</b> <i>Let L be a line through the origin. Then the locus of
+    points $1/z, z\in L$ is a line through the origin. The two lines have equal
+    slopes except for a minus sign.</i>
+</span></p>
+
+<p><span>
+    <b>Exercise.</b> <i>Let C be the circle $|z - c| = r, 0 < r < c.$ Show that
+    the locus of points $1/z, z\in C$ is the circle centered at $\frac{c}{c^2 -
+    r^2}$ of radius $\frac{r}{c^2 - r^2}.$</i>
+</span></p>
+
+<p><span>
+    <b>Exercise.</b> <i>Let C be the circle $|z - r| = r, r > 0.$ Show that the
+    locus of points $1/z, z\in C$ is the vertical line through $1/2r.$</i>
+</span></p>
+
+<h1>Subsets of the Plane</h1>
+
+
+
+<h1>Reference</h1>
 <ol>
 <li>Complex Variables by Fisher.</li>
 <li>Complex Analysis by Stein & Shakarchi.</li>
 <li>Visual Complex Analysis by Needham.</li>
-<li>Everything else from the web.</li>
 </ol>
-
 </div>
 </body>
 </html>

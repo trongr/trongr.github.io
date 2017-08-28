@@ -1,56 +1,68 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="utf-8">
-<title>Number Theory</title>
-<link rel="stylesheet" href="../css/global.css">
+    <meta charset="utf-8">
+    <title>Number Theory</title>
+    <link rel="stylesheet" href="../css/global.css">
 
-<!-- this config must be before MathJax.js: -->
-<script src="../js/mathjax.config.js"></script>
-<script src="../js/MathJax/MathJax.js"></script>
-<!-- <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js"></script> -->
+    <!-- this config must be before MathJax.js: -->
+    <script src="../js/mathjax.config.js"></script>
+    <script src="../js/MathJax/MathJax.js"></script>
+    <!-- <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js"></script> -->
 
-<script src="../js/jquery-3.1.0.min.js"></script>
-<script src="../js/smartquotes.js"></script>
-<script src="../js/global.js"></script>
+    <script src="../js/jquery-3.1.0.min.js"></script>
+    <script src="../js/smartquotes.js"></script>
+    <script src="../js/global.js"></script>
 
 </head>
+
 <body>
 <div id="content">
 
 <h1>Number Theory</h1>
 
-<img src="images/ficcal1.png">
+<!--<img src="images/ficcal1.png">
 <div class="epigraph">
-     <div class="quote">
-     </div><div class="author">
+    <div class="quote">
+    </div>
+    <div class="author">
         Calvin and Hobbes
-     </div>
-</div>
+    </div>
+</div>-->
+
+<h3>Bezout's Identity</h3>
+
+<p><span>
+    <b>Lemma.</b> <i>Let d be the greatest common divisor of nonzero
+    integers a and b. Then there exist integers x and y s.t. 
+    
+    $$ax + by = d.$$</i>
+</span></p>
 
 <h1>Congruences</h1>
 
 <p>
     <b>Definition.</b> <i>If a nonzero integer $m$ divides $a-b,$ then
-    we say that $a$ is congruent to $b$ modulo $m$ and write
+we say that $a$ is congruent to $b$ modulo $m$ and write
 
-    $$a \equiv b \mod m.$$</i>
+$$a \equiv b \mod m.$$</i>
 </p>
 
 <p>
     <b>Theorem.</b> <i>
-    <ul>
-    <li>Congruence respects addition and multiplication: if $a \eq b
-    \mod m$ and $c \eq d \mod m,$ then
+<ul>
+<li>Congruence respects addition and multiplication: if $a \eq b
+\mod m$ and $c \eq d \mod m,$ then
 
-    \begin{align*}
-    a + c &\eq b + d && \mod m \\
-    ac &\eq bd && \mod m.
-    \end{align*}</li>
-    <li>If $a \eq b \mod m$ and $d \mid m,$ then $a \eq b \mod d.$</li>
-    <li>If $a \eq b \mod m$ and $c \neq 0,$ then $ac \eq bc \mod mc.$</li>
-    </ul>
-    </i>
+\begin{align*}
+a + c &\eq b + d && \mod m \\
+ac &\eq bd && \mod m.
+\end{align*}</li>
+<li>If $a \eq b \mod m$ and $d \mid m,$ then $a \eq b \mod d.$</li>
+<li>If $a \eq b \mod m$ and $c \neq 0,$ then $ac \eq bc \mod mc.$</li>
+</ul>
+</i>
 </p>
 
 <p>
@@ -59,37 +71,36 @@
 
 <p>
     <b>Corollary.</b> <i>Let $f$ be a polynomial with integer
-    coefficients. If
+coefficients. If
 
-    $$a \eq b \mod m$$
+$$a \eq b \mod m$$
 
-    then
+then
 
-    $$f(a) \eq f(b) \mod m.$$</i>
+$$f(a) \eq f(b) \mod m.$$</i>
 </p>
 
 <p>
     <b>Theorem.</b> <i>
 
-    <ul>
-    <li>$ax \eq ay \mod m$ iff $x \eq y \mod \frac{m}{(a, m)}.$</li>
-    <li>Let $(a, m) = 1.$ Then $ax \eq ay \mod m$ iff $x \eq y \mod m.$</li>
-    <li>$x \eq y \mod m_i$ for $i=1:r$ iff $x \eq y \mod [m_1,\ldots,m_r].$</li>
-    </ul></i>
+<ul>
+<li>$ax \eq ay \mod m$ iff $x \eq y \mod \frac{m}{(a, m)}.$</li>
+<li>Let $(a, m) = 1.$ Then $ax \eq ay \mod m$ iff $x \eq y \mod m.$</li>
+<li>$x \eq y \mod m_i$ for $i=1,\ldots,r$ iff $x \eq y \mod [m_1,\ldots,m_r].$</li>
+</ul></i>
 </p>
 
 <h3>Complete residue system</h3>
 
 <p>
     <b>Definition.</b> <i>If $x \eq y \mod m,$ then $y$ is called a
-    residue of $x$ modulo $m.$ A set $x_1,\dots,x_m$ is called a
-    complete residue system mod $m$ if for every integer $y$ there is
-    an $x_j$ s.t. $y \eq x_j \mod m.$</i>
+residue of $x$ modulo $m.$ A set $x_1,\dots,x_m$ is called a
+complete residue system mod $m$ if for every integer $y$ there is
+an $x_j$ s.t. $y \eq x_j \mod m.$</i>
 </p>
 
 <p>
-    A set of $m$ integers forms a complete residue system mod $m$ iff
-    all integers in the set are distinct mod $m.$
+    A set of $m$ integers forms a complete residue system mod $m$ iff all integers in the set are distinct mod $m.$
 </p>
 
 <p>
@@ -101,42 +112,111 @@
 <p>
     <b>Theorem.</b> <i>Let $p$ be a prime. If $p \nmid a,$ then
 
-    $$a^{p-1} \equiv 1 \mod p.$$
+$$a^{p - 1} \equiv 1 \mod p.$$
 
-    For every integer $a,$
+For every integer $a,$
 
-    $$a^p \equiv a \mod p.$$</i>
+$$a^p \equiv a \mod p.$$</i>
 </p>
+
+<h3>Euler's Totient Function</h3>
+
+<p><span>
+    <b>Definition.</b> <i>The number $\f(m)$ is the number of positive integers
+    less than or equal to m which are relatively prime to m.</i>
+</span></p>
 
 <h3>Euler's generalization of Fermat's theorem</h3>
 
 <p>
     <b>Theorem.</b> <i>If $(a, m) = 1,$ then
 
-    $$a^{\f(m)} \equiv 1 \mod m.$$</i>
+$$a^{\f(m)} \equiv 1 \mod m.$$</i>
 </p>
 
 <p>
-    <b>Lemma.</b> <i>Let $p$ be prime. Then
-
-    $$x^2 \equiv 1 \mod p \quad\text{ iff }\quad x \equiv \pm 1 \mod p.$$</i>
+    <b>Lemma.</b> <i>Let $p$ be prime. Then $$x^2 \equiv 1 \mod p
+    \quad\text{ iff }\quad x \equiv \pm 1 \mod p.$$</i>
 </p>
 
 <h3>Wilson's Theorem</h3>
 
-<p>
-    <b>Theorem.</b> <i>If $p$ is a prime, then
-
-    $$(p - 1)! \equiv -1 \mod p.$$</i>
+<p class="box">
+    <b>Theorem.</b> <i>If $p$ is a prime, then $$(p - 1)! \equiv -1 \mod
+    p.$$ Conversely, if n is not prime, then $$(n - 1)! \not\equiv -1 \mod
+    n.$$</i>
 </p>
 
+<p><span>
+    <i>Proof of converse.</i> Suppose $n$ is not prime, with prime factor $p.$
+    Then $p$ appears in the factorial $(n - 1)!,$ so $(n - 1)! \equiv 0
+    \not\equiv -1 \mod p.$ Since $(n - 1)! + 1$ is not divisible by $p,$ it
+    cannot be divisible by $n.$
+</span></p>
+
+<p><span>
+    <b>Theorem.</b> <i>Let p be a prime. Then $x^2 \equiv -1 \mod p$ has
+    a solution iff $p=2$ or $p\equiv 1 \mod 4.$</i>
+</span></p>
+
+<p><span>
+    <b>Lemma.</b> <i>If p is a prime and $p\equiv 1\mod 4,$ then there
+    exist positive integers a and b s.t. $a^2 + b^2 = p.$</i>
+</span></p>
+
+<p><span>
+    <b>Lemma.</b> <i>Let q be a prime factor of $a^2 + b^2.$ If $q
+    \equiv 3 \mod 4,$ then $q|a$ and $q|b.$</i>
+</span></p>
+
+<p><span>
+    <b>Theorem (Fermat).</b> <i>Write the canonical factorization of n
+    in the form
+    
+    $$n = 2^\a \prod_{p\equiv 1(4)} p^\b \prod_{p\equiv 3(4)} q^\g.$$
+    
+    Then n can be expressed as a sum of two squares iff the exponents
+    $\g$ are even.</i>
+</span></p>
+
+<p><span>
+    <b>Exercise.</b> <i>Let $f$ be a polynomial with integral
+    coefficients and $f(a) \equiv k \mod m.$ Then $f(a + tm) \equiv k
+    \mod m$ for every integer t.</i>
+</span></p>
+
+<p><span>
+    <b>Exercise.</b> <i>
+        <ul>
+            <li>Any number that is a square must have one of the
+            following for its units digit: $0, 1, 4, 5, 6, 9.$</li>
+            <li>Any number that is a fourth power must have one of the
+            following for its units digit: $0, 1, 5, 6.$</li>
+        </ul>
+    </i>
+</span></p>
+
+<p><span>
+    <b>Exercise.</b> <i>$19$ is not a divisor of $4n^2 + 4$ for any integer n.</i>
+</span></p>
+
+<p><span>
+    Use the fact that for a prime $p,$ $x^2 \equiv -1 \mod p$ has a solution iff
+    $p=2$ or $p\equiv 1 \mod 4.$
+</span></p>
+
+<p><span>
+    <b>Exercise.</b> <i>$7|(3^{2n+1} + 2^{n+2}).$</i>
+</span></p>
+<p><span>
+    Rewrite $3^{2n+1} + 2^{n+2} = 9^{n}3 + 2^{n}4 \equiv 2^{n}3 + 2^{n}4 \equiv 2^{n}(3 + 4) \equiv 0
+    \mod 7.$
+</span></p>
+
 <h1>Reference</h1>
-
 <ol>
-<li>An Introduction to the Theory of Numbers by Niven, Zuckerman and Montgomery.</li>
-<li>Everything else from the web.</li>
+    <li>An Introduction to the Theory of Numbers by Niven, Zuckerman and Montgomery.</li>
 </ol>
-
 </div>
 </body>
 </html>

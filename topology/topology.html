@@ -1,49 +1,51 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="utf-8">
-<title>Topology</title>
-<link rel="stylesheet" href="../css/global.css">
+    <meta charset="utf-8">
+    <title>Topology</title>
+    <link rel="stylesheet" href="../css/global.css">
 
-<!-- this config must be before MathJax.js: -->
-<script src="../js/mathjax.config.js"></script>
-<script src="../js/MathJax/MathJax.js"></script>
-<!-- <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js"></script> -->
+    <!-- this config must be before MathJax.js: -->
+    <script src="../js/mathjax.config.js"></script>
+    <script src="../js/MathJax/MathJax.js"></script>
+    <!-- <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js"></script> -->
 
-<script src="../js/jquery-3.1.0.min.js"></script>
-<script src="../js/smartquotes.js"></script>
-<script src="../js/global.js"></script>
+    <script src="../js/jquery-3.1.0.min.js"></script>
+    <script src="../js/smartquotes.js"></script>
+    <script src="../js/global.js"></script>
 
 </head>
+
 <body>
-<div id="content">
+    <div id="content">
 
-<h1>Topology</h1>
+        <h1>Topology</h1>
+        <!--
+        <img src="images/Yotsubato_v06_c40_p03.jpg">
 
-<img src="images/Yotsubato_v06_c40_p03.jpg">
+        <div class="epigraph">
+            <div class="quote"></div>
+            <div class="author">Yotsuba&! よつばと！</div>
+        </div>-->
 
-<div class="epigraph">
-    <div class="quote"></div>
-    <div class="author">Yotsuba&! よつばと！</div>
-</div>
+        <h1>Set theory basics</h1>
 
-<h1>Set theory basics</h1>
+        <h3>Section of the positive integers</h3>
 
-<h3>Section of the positive integers</h3>
-
-<p>
-    <b>Definition.</b> <i>Define a section $S_n$ of the positive
+        <p>
+            <b>Definition.</b> <i>Define a section $S_n$ of the positive
     integers to be the set of positive integers less than $n:$
 
     $$S_n = \{ 1, \ldots, n - 1 \}.$$
 
     E.g. $S_1 = \0.$</i>
-</p>
+        </p>
 
-<h1>Principle of Recursive Definition</h1>
+        <h1>Principle of Recursive Definition</h1>
 
-<p>
-    <b>Theorem.</b> <i>Let $A$ be a set, $a_0$ an element of $A.$
+        <p>
+            <b>Theorem.</b> <i>Let $A$ be a set, $a_0$ an element of $A.$
     Suppose $\r$ is a function that assigns, to each function $f$
     mapping a nonempty section of the positive integers into $A,$ an
     element of $A.$ Then there exists a unique function
@@ -56,26 +58,25 @@
     h(1) &= a_0 \\
     h(i) &= \r(h|S_i) \quad\text{ for }\quad i > 1.
     \end{align*}</i>
-</p>
+        </p>
 
-<p>
-    In plain English, $h$ is defined recursively by the rule $\r$ and
-    $h$'s previous values.
-</p>
+        <p>
+            In plain English, $h$ is defined recursively by the rule $\r$ and $h$'s previous values.
+        </p>
 
-<h1>Axiom of Choice</h1>
+        <h1>Axiom of Choice</h1>
+        <!--
+        <p>
+            <img src="images/70d8fd30038b617ce8a7bb56477386b6.jpg">
+        </p>
 
-<p>
-    <img src="images/70d8fd30038b617ce8a7bb56477386b6.jpg">
-</p>
+        <div class="bside">
+            Choice. The problem is Choice. Ergo! Vis-à-vis! Concordantly!
+        </div>
+        <div class="clearboth"></div>-->
 
-<div class="bside">
-    Choice. The problem is Choice. Ergo! Vis-à-vis! Concordantly!
-</div>
-<div class="clearboth"></div>
-
-<p class="box">
-    <b>Axiom of Choice.</b> <i>Given a collection $\AA$ of disjoint
+        <p class="box">
+            <b>Axiom of Choice.</b> <i>Given a collection $\AA$ of disjoint
     nonempty sets, there is a set $C$ consisting of exactly one
     element from each element $A \in \AA,$ i.e. a set $C$ s.t.
 
@@ -84,144 +85,133 @@
     and for each $A \in \AA,$
 
     $$ C \cap A = \text{a singleton set.}$$</i>
-</p>
+        </p>
 
-<p>
-    Lets you make infinitely many choices.
-</p>
+        <p>
+            Lets you make infinitely many choices.
+        </p>
 
-<h1>Well ordered sets</h1>
+        <h1>Well ordered sets</h1>
 
-<p>
-    <b>Definition.</b> <i>A set $A$ with a relation $<$ is said to be
+        <p>
+            <b>Definition.</b> <i>A set $A$ with a relation $<$ is said to be
     well ordered if every nonempty subset of $A$ has a smallest
     element.</i>
-</p>
+        </p>
 
-<p>
-    E.g. $\NN$ and $\NN_0$ are well ordered but $\ZZ, \RR, \RR_+,$ and $\RR_0$ are not, under the natural
-    ordering.
-</p>
+        <p>
+            E.g. $\NN$ and $\NN_0$ are well ordered but $\ZZ, \RR, \RR_+,$ and $\RR_0$ are not, under the natural ordering.
+        </p>
 
-<p>
-    E.g. $\NN^\o = \Times_{i=1}^\infty \NN = \NN \times \NN \times \cdots$ is not well
-    ordered under dictionary order.
-</p>
+        <p>
+            E.g. $\NN^\o = \Times_{i=1}^\infty \NN = \NN \times \NN \times \cdots$ is not well ordered under dictionary order.
+        </p>
 
-<p>
-    <b>Theorem.</b> <i>If $A$ and $B$ are well ordered, then $A \times
+        <p>
+            <b>Theorem.</b> <i>If $A$ and $B$ are well ordered, then $A \times
     B$ is well ordered in the dictionary order.</i>
-</p>
+        </p>
 
-<h3>Well ordering theorem</h3>
+        <h3>Well ordering theorem</h3>
 
-<p class="box">
-    <b>Well ordering theorem.</b> <i>Every set has a well ordering
+        <p class="box">
+            <b>Well ordering theorem.</b> <i>Every set has a well ordering
     relation.</i>
-</p>
+        </p>
 
-<p>
-    <b>Corollary.</b> <i>There exists an uncountable well ordered
+        <p>
+            <b>Corollary.</b> <i>There exists an uncountable well ordered
     set.</i>
-</p>
+        </p>
 
-<p>
-    <b>Corollary.</b> <i>Every set has a total ordering.</i>
-</p>
+        <p>
+            <b>Corollary.</b> <i>Every set has a total ordering.</i>
+        </p>
 
-<p>
-    Wait, this means every set can be put on a line. What about all
-    those sets bigger than $\RR?$ What is going on here? Well, I don't
-    know enough about all this so let's leave it alone for the time
-    being. Bread and butter!
-</p>
+        <p>
+            Wait, this means every set can be put on a line. What about all those sets bigger than $\RR?$ What is going on here? Well,
+            I don't know enough about all this so let's leave it alone for the time being. Bread and butter!
+        </p>
 
-<h3>Section of a set</h3>
+        <h3>Section of a set</h3>
 
-<p>
-    <b>Definition.</b> <i>Let $X$ be a well ordered set and $\a \in
+        <p>
+            <b>Definition.</b> <i>Let $X$ be a well ordered set and $\a \in
     X.$ The set
 
     $$S_\a = \{ x \in X : x < \a \}$$
 
     is called an $\a$-section of $X.$</i>
-</p>
+        </p>
 
-<p>
-    Similar to an $n$-section $S_n$ of the positive integers.
-</p>
+        <p>
+            Similar to an $n$-section $S_n$ of the positive integers.
+        </p>
 
-<h3>Least upper bound property</h3>
+        <h3>Least upper bound property</h3>
 
-<div class="bside">
-    <img src="images/282px-Illustration_of_supremum.svg.png">
-</div>
-<p>
-    <b>Definition.</b> <i>An ordered set $A$ is said to have the least
+        <div class="bside">
+            <img src="images/282px-Illustration_of_supremum.svg.png">
+        </div>
+        <p>
+            <b>Definition.</b> <i>An ordered set $A$ is said to have the least
     upper bound property if every nonempty subset of $A$ that is
     bounded above has a least upper bound. Similarly for greatest
     lower bound.</i>
-</p>
+        </p>
 
-<p>
-    <b>Proposition.</b> <i>$A$ has the lub property iff it has the glb
+        <p>
+            <b>Proposition.</b> <i>$A$ has the lub property iff it has the glb
     property.</i>
-</p>
+        </p>
 
-<h3>Well order and least upper bound</h3>
+        <h3>Well order and least upper bound</h3>
 
-<p>
-    <b>Proposition.</b> <i>Every well ordered set has the least upper
+        <p>
+            <b>Proposition.</b> <i>Every well ordered set has the least upper
     bound property.</i>
-</p>
+        </p>
 
-<p>
-    <i>Proof.</i> Let $A$ be a well ordered set, and let nonempty $B
-    \subset A$ have an upper bound in $A.$ Then the set $C$ of upper
-    bounds of $B$ is nonempty and has a least element, by well
-    ordering of $A.$ \qed
-</p>
+        <p>
+            <i>Proof.</i> Let $A$ be a well ordered set, and let nonempty $B \subset A$ have an upper bound in $A.$ Then
+            the set $C$ of upper bounds of $B$ is nonempty and has a least element, by well ordering of $A.$ \qed
+        </p>
 
-<p>
-    <b>Proposition.</b> <i>In a well ordered set, every element except
+        <p>
+            <b>Proposition.</b> <i>In a well ordered set, every element except
     the largest---if one exists---has an immediate successor.</i>
-</p>
+        </p>
 
-<p>
-    <i>Proof.</i> Let $A$ be well ordered and $x \in A$ be not the
-    largest element. Then the set of elements greater than $x$ is
-    nonempty and by well ordering has a least element, which is the
-    immediate successor to $x.$ \qed
-</p>
+        <p>
+            <i>Proof.</i> Let $A$ be well ordered and $x \in A$ be not the largest element. Then the set of elements greater
+            than $x$ is nonempty and by well ordering has a least element, which is the immediate successor to $x.$ \qed
+        </p>
 
-<p>
-    Nonexample. The converse isn't true, e.g. every integer in $\ZZ$
-    has an immediate successor but $\ZZ$ is not well ordered.
-</p>
+        <p>
+            Nonexample. The converse isn't true, e.g. every integer in $\ZZ$ has an immediate successor but $\ZZ$ is not well ordered.
+        </p>
 
-<p>
-    <b>Question.</b> <i>Can an element in a well ordered set have more
+        <p>
+            <b>Question.</b> <i>Can an element in a well ordered set have more
     than one immediate successor?</i>
-</p>
+        </p>
 
-<p>
-    No, cause a well ordering has to first be a total (linear)
-    order. So that means when we say every subset of a well ordered
-    set has a least element, what we really mean is that
-    it's <i>the</i> least element (in that subset).
-</p>
+        <p>
+            No, cause a well ordering has to first be a total (linear) order. So that means when we say every subset of a well ordered
+            set has a least element, what we really mean is that it's <i>the</i> least element (in that subset).
+        </p>
 
-<h1>Topological spaces and continuous functions</h1>
+        <h1>Topological spaces and continuous functions</h1>
 
 
 
-<h1>Reference</h1>
+        <h1>Reference</h1>
 
-<ol>
-<li>Topology by Munkres.</li>
-<li>Everything else from the web.</li>
-</ol>
+        <ol>
+            <li>Topology by Munkres.</li>
+        </ol>
 
-</div>
+    </div>
 </body>
+
 </html>

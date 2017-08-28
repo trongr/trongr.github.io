@@ -1,41 +1,77 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="utf-8">
-<title>Differential Geometry</title>
-<link rel="stylesheet" href="../css/global.css">
+    <meta charset="utf-8">
+    <title>Differential Geometry</title>
+    <link rel="stylesheet" href="../css/global.css">
 
-<!-- this config must be before MathJax.js: -->
-<script src="../js/mathjax.config.js"></script>
-<script src="../js/MathJax/MathJax.js"></script>
-<!-- <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js"></script> -->
+    <!-- this config must be before MathJax.js: -->
+    <script src="../js/mathjax.config.js"></script>
+    <script src="../js/MathJax/MathJax.js"></script>
+    <!-- <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js"></script> -->
 
-<script src="../js/jquery-3.1.0.min.js"></script>
-<script src="../js/smartquotes.js"></script>
-<script src="../js/global.js"></script>
+    <script src="../js/jquery-3.1.0.min.js"></script>
+    <script src="../js/smartquotes.js"></script>
+    <script src="../js/global.js"></script>
 
 </head>
+
 <body>
-<div id="content">
+    <div id="content">
 
-<h1>Differential Geometry</h1>
+        <h1>Differential Geometry</h1>
 
-<img src="images/initial-d-332742.jpg">
-<div class="epigraph">
-     <div class="quote">
+        <img src="images/initial-d-332742.jpg">
+        <div class="epigraph">
+            <div class="quote">
 
-     </div><div class="author">Initial D</div>
-</div>
+            </div>
+            <div class="author">Initial D</div>
+        </div>
 
-<h1></h1>
+        <h1>Tangent Vector</h1>
 
-<h1>Reference</h1>
+        <p>
+            <b>Proposition.</b> <i>If the tangent vector of a parametrised curve
+            is constant, then the image of the curve is part of a straight
+            line.</i>
+        </p>
 
-<ol>
-<li>Elementary Differential Geometry by Andrew Pressley.</li>
-<li>Everything else from the web.</li>
-</ol>
+        <p>
+            <b>Exercise.</b> <i>$\gamma(t) = (t^2, t^4)$ is not a
+            parametrisation of the parabola $y = x^2$ because $t^2$ is always
+            positive, so the negative half of the parabola isn't
+            parametrised.</i>
+        </p>
 
-</div>
+        <p>
+            <b>Exercise.</b> <i>Find a parametrisation of the level curve $y^2 -
+            x^2 = 1.$</i>
+        </p>
+
+        <p><span>
+            This is the hyperbola with parametrisation $ \gamma(t) = (\sinh t,
+            \cosh t), $ since $$ \cosh^2 t - \sinh t = 1. $$
+        </span></p>
+
+        <p><span>
+            <b>Exercise.</b> <i>Find a parametrisation of the level curve $
+            \frac{x^2}{4} + \frac{y^2}{9} = 1. $</i>
+        </span></p>
+
+        <p><span>
+            This is an ellipse with parametrisation $ \gamma(t) = (2\cos t,
+            3\sin t). $
+        </span></p>
+
+        <h1>Reference</h1>
+
+        <ol>
+            <li>Elementary Differential Geometry by Andrew Pressley.</li>
+        </ol>
+
+    </div>
 </body>
+
 </html>

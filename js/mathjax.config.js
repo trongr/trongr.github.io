@@ -2,8 +2,8 @@ window.MathJax = {
     extensions: ["tex2jax.js", "TeX/AMSsymbols.js", "TeX/AMSmath.js"],
     jax: ["input/TeX", "output/SVG"],
     tex2jax: {
-        inlineMath: [[ '$','$']],
-        displayMath:  [['$$','$$']],
+        inlineMath: [['$', '$']],
+        displayMath: [['$$', '$$']],
         processEscapes: true,
         skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
     },
@@ -67,6 +67,7 @@ window.MathJax = {
             D: "\\Delta",
             e: "\\varepsilon",
             g: "\\gamma",
+            G: "\\Gamma",
             // gg is >>, do not redefine.
             f: "\\phi",
             ff: "\\varphi",
@@ -95,6 +96,7 @@ window.MathJax = {
             bF: "\\mathbf F",
             br: "\\mathbf r",
             bN: "\\mathbf N",
+            bQ: "\\mathbf Q",
             bR: "\\mathbf R",
             bs: "\\mathbf s",
             btau: "\\boldsymbol \\tau",
