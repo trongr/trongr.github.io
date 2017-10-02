@@ -25,10 +25,56 @@
 
 <h1>Artificial Intelligence II</h1>
 
+<h1>RNN: Gated Recurrent Units (GRU)</h1>
+
+<p>
+    \begin{align*}
+        z_t &= \s(W_z x_t + U_z h_{t-1}) & \textrm{Update Gate} \\
+        r_t &= \s(W_r x_t + U_r h_{t-1}) & \textrm{Reset Gate} \\
+        \tilde h_t &= \tanh(r_t \circ U h_{t-1} + W x_t) & \textrm{New Memory} \\
+        h_t &= (1 - z_t) \circ \tilde h_t + z_t \circ h_{t-1} & \textrm{Hidden State}
+    \end{align*}
+</p>
+
+<h1>RNN: Long Short-Term Memory (LSTM)</h1>
+
+<p>
+    \begin{align*}
+        i_t &= \s(W_i x_t + U_i h_{t-1}) & \textrm{Input Gate} \\
+        f_t &= \s(W_f x_t + U_f h_{t-1}) & \textrm{Forget Gate} \\
+        o_t &= \s(W_o x_t + U_o h_{t-1}) & \textrm{Output gate} \\
+        \tilde c_t &= \tanh(W_c x_t + U_c h_{t-1}) & \textrm{New Memory} \\
+        c_t &= f_t \circ \tilde c_{t-1} + i_t \circ \tilde c_t & \textrm{Final Memory} \\
+        h_t &= o_t \circ \tanh(c_t) & \textrm{Hidden State}
+    \end{align*}
+</p>
+
+<p>
+    The interpretation is as follows: the new input $x_t$ is combined with the
+    old hidden state $h_{t-1}$ to create the new memory $\tilde c_t.$ Then the
+    new memory $\tilde c_t$ is combined with the previous "new memory" $\tilde
+    c_{t-1}$ to create the final memory $c_t.$ Question is why not use the
+    previous final memory $c_{t-1}$ instead of $\tilde c_{t-1}$? I.e.
+
+    $$c_t = f_t \circ c_{t-1} + i_t \circ \tilde c_t.$$
+</p>
+
+<p>
+    Is $h_t$ like the short-term memory and $c_t$ the long-term memory?
+</p>
+
+<h1>Recursive Neural Networks</h1>
+
+<h1>Dynamic Convolutional Neural Network</h1>
+
+
+
 <h1>Reference</h1>
 
 <ol>
 <li>ML0120EN Online Course on Big Data University</li>
+<li>https://cs224d.stanford.edu</li>
+<li>A Convolutional Neural Network for Modelling Sentences</li>
 </ol>
 </div>
 </body>
