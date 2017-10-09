@@ -67,7 +67,34 @@
 
 <h1>Dynamic Convolutional Neural Network</h1>
 
+<h3>Word Embedding and Sentence Construction</h3>
 
+Given an input sentence, let $w_i \in \bR^d$ be the $i$-th word in the sentence
+and $s = [w_1, \ldots, w_s] \in \bR^{d\times s}$ be the sentence matrix.
+
+<h3>Wide Convolution</h3>
+
+<p>
+    Let $m \in \bR^{d\times m}$ be a filter (weight) matrix. Then apply a wide
+    convolution of $s$ with $m$:
+    
+    $$\textrm{wideconv} (s, m) = c \sim d \times (s + m - 1).$$
+</p>
+
+<h3>$k$-Max Pooling</h3>
+
+<p>
+    Apply static $k$-max pooling to the last convolutional layer before the fully
+    connected layer. Every intermediate conv layer uses dynamic $k_{l}$-max pooling.
+    A simple heuristic for $k_l$ is
+
+    $$k_l = \max(k_{\rm top}, \lceil \frac{L - l}{L} s \rceil),$$
+
+    where $k_{\rm top}$ is the $k$-max value at the top pooling layer just
+    before FC, $L$ is the number of conv layer in the network that uses pooling,
+    $l$ is the current pooling layer, and $s$ is the length of the input
+    sentence.
+</p>
 
 <h1>Reference</h1>
 
