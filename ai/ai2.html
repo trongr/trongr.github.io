@@ -143,7 +143,7 @@ and $s = [w_1, \ldots, w_s] \in \bR^{d\times s}$ be the sentence matrix.
     \begin{matrix}
     m^2_{11} & m^2_{12} & m^2_{13} \\
     m^2_{21} & m^2_{22} & m^2_{23} \\
-    m^2_{31} & m^2_{32} & m^2_{33} \\
+    m^2_{31} & m^2_{32} & m^2_{33}. \\
     \end{matrix}
 
     Then the feature maps are
@@ -204,6 +204,12 @@ and $s = [w_1, \ldots, w_s] \in \bR^{d\times s}$ be the sentence matrix.
     Instead what we'd like is for $F^2_1$ to learn how $F^1_1, F^1_2,$ and
     $F^1_3$ combine. And we want $F^2_2$ to learn another way they combine, and
     $F^2_3$ yet another.
+</p>
+
+<h3>Folding</h3>
+
+<p>
+    Apply folding to introduce dependencies among rows of feature maps.
 </p>
 
 <h1>Reference</h1>
