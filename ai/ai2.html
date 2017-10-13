@@ -67,6 +67,11 @@
 
 <h1>Dynamic Convolutional Neural Network</h1>
 
+<p>
+    Ref. A Convolutional Neural Network for Modelling Sentences. Nal
+    Kalchbrenner, Edward Grefenstette, Phil Blunsom.
+</p>
+
 <h3>Word Embedding and Sentence Construction</h3>
 
 Given an input sentence, let $w_i \in \bR^d$ be the $i$-th word in the sentence
@@ -101,14 +106,14 @@ and $s = [w_1, \ldots, w_s] \in \bR^{d\times s}$ be the sentence matrix.
     
     $$k_0 = \max(k_{\rm top}, \lceil \frac{L - 0}{L} s \rceil) = s,$$
 
-    assuming $s \geq k_{\rm top}.$ Therefore an output of the $k$-max operation
+    assuming $s \geq k_{\rm top}.$ Therefore an output of a $k$-max operation
     in the first layer has dimension $d \times s.$
 </p>
 
 <h3>Nonlinear activation function</h3>
 
 <p>
-    Next apply a nonlinear activation function, e.g. sigmoid or ReLU.
+    Next apply a nonlinear activation function, e.g. sigmoid, tanh, or ReLU.
 </p>
 
 <h3>Multiple feature maps</h3>
@@ -209,7 +214,21 @@ and $s = [w_1, \ldots, w_s] \in \bR^{d\times s}$ be the sentence matrix.
 <h3>Folding</h3>
 
 <p>
-    Apply folding to introduce dependencies among rows of feature maps.
+    (Optionally) Apply folding between each wide conv and pooling layer to
+    introduce dependencies among rows of feature maps.
+</p>
+
+<h3>Fully connected layer and softmax</h3>
+
+<p>
+    Finally join the last set of feature maps along columns, e.g.
+    
+    \begin{matrix}
+    [F^z_1 & F^z_2 & F^z_3] \sim d \times ?
+    \end{matrix}
+
+    and run them through a fully connected layer, then softmax to predict the
+    next word, and minimize cross entropy loss.
 </p>
 
 <h1>Reference</h1>
@@ -217,8 +236,6 @@ and $s = [w_1, \ldots, w_s] \in \bR^{d\times s}$ be the sentence matrix.
 <ol>
 <li>ML0120EN Online Course on Big Data University</li>
 <li>https://cs224d.stanford.edu</li>
-<li>A Convolutional Neural Network for Modelling Sentences. Nal Kalchbrenner, Edward Grefenstette, Phil Blunsom.</li>
-
 </ol>
 </div>
 </body>
