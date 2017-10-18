@@ -2259,6 +2259,67 @@ ad - cb &= 1,
     of $T.$ \qed
 </p>
 
+<h1>Adjoint operator</h1>
+
+<p>
+    <i>Theorem. Let V be a finite-dimensional inner product space, and $\b$ be
+    an orthonormal basis for V. If T is a linear operator on V, then
+
+    $$[T^*]_\b = [T]_\b^*.$$</i>
+</p>
+
+<p>
+    <i>Corollary. Let A be an $n\times n$ matrix. Then 
+
+        $$L_{A^*} = (L_A)^*.$$
+    </i>
+</p>
+
+<p>
+    <i>Theorem. Let V be an inner product space, and let T and U be linear
+    operators on V. Then 
+
+    <ol>
+        <li>$ (T + U)^* = T^* + U^*. $</li>
+        <li>$ (cT)^* = \bar c T^* $ for any $ c \in F. $</li>
+        <li>$ (TU)^* = U^* T^*. $</li>
+        <li>$ T^{**} = T. $</li>
+        <li>$ I^{**} = I. $</li>
+    </ol>
+
+    The same relations hold for $ n\times n $ matrices A and B. (Seems it holds
+    even for non-square matrices.)
+    </i>
+</p>
+
+<h3>Least square approximation</h3>
+
+<p>
+    Problem: minimize
+
+    $$ E = \sum_{i=1}^{m} (y_i - c t_i - d)^2 $$
+
+    over all values of $ c $ and $ d. $ The line $ y = ct + d $ is called the
+    least square line. More generally we wish to minimize 
+
+    $$ E = \sum_{i=1}^{m} (y_i - f(t_i))^2 $$
+
+    over all the constant coefficients of the polynomial $ f $ of order $ k. $
+    This problem can be recast into matrix form: for $ A \in M_{m\times n}(F),
+    x\in F^n, y\in F^m,$ to minimize 
+
+    $$ E = || y - Ax ||^2 $$
+
+    over all values of $ x. $
+</p>
+
+<p>
+    <i>Lemma. Let $ A \in M_{m\times n}(F), x\in F^n, y\in F^m. $ Then 
+
+        $$ \< Ax, y \>_m = \< x, A^* y \>_n. $$
+    </i>
+</p>
+
 <h1>Reference</h1>
 
 <ol>
