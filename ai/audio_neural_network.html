@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<title>Audio Neural Network</title>
+<link rel="stylesheet" href="../css/global.css">
+
+<link rel="stylesheet" href="../css/obsidian.min.css">
+<script src="../js/highlight.min.js"></script>
+
+<!-- this config must be before MathJax.js: -->
+<script src="../js/mathjax.config.js"></script>
+<script src="../js/MathJax/MathJax.js"></script>
+<!-- <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js"></script> -->
+
+<script src="../js/jquery-3.1.0.min.js"></script>
+<script src="../js/smartquotes.js"></script>
+<script src="../js/global.js"></script>
+
+</head>
+
+<body>
+<div id="content">
+
+<h1>Audio Neural Network</h1>
+
+<h3>Preprocessing ABC data</h3>
+
+<p>
+    Lines we can remove from an ABC file to make it easy for the network to learn the 
+    rest of the music content: lines starting with %:, T:, R:, B:, N:, Z:, C:, O:, A:, G:, H:, R:, B:, D:, F:,
+    S:, I:, w:, W:.
+</p>
+
+<h3>Some things to try</h3>
+
+<p>
+    After a network has learned the data sufficiently, make it generate music after every
+    training batch and see how close its output is from the training input, i.e. whether 
+    it's simply regurgitating (with slight variation) what it's being fed right now,
+    or recalling long past sequences, or actually generating new patterns.
+</p>
+
+<p>
+    Another thing to try is to stop training, and let the network generate samples on its
+    own.
+</p>
+
+<h3>Other notes</h3>
+
+<p>
+    On a windows terminal you might not be able to print certain characters using python.
+    If that happens, run chcp 65001 in the terminal and rerun your script.
+</p>
+
+<h1>Reference</h1>
+
+<!-- <ol>
+<li></li>
+</ol> -->
+</div>
+</body>
+</html>
