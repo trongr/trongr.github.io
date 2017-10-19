@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Security</title>
+<link rel="stylesheet" href="../css/global.css">
+
+<link rel="stylesheet" href="../css/obsidian.min.css">
+<script src="../js/highlight.min.js"></script>
+
+<!-- this config must be before MathJax.js: -->
+<script src="../js/mathjax.config.js"></script>
+<script src="../js/MathJax/MathJax.js"></script>
+<!-- <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js"></script> -->
+
+<script src="../js/jquery-3.1.0.min.js"></script>
+<script src="../js/smartquotes.js"></script>
+<script src="../js/global.js"></script>
+
+</head>
+<body>
+
+<div id="content">
+
+<h1>Security</h1>
+
+<h3>objdump</h3>
+
+<pre><code>objdump -x86-asm-syntax intel -D a.out | grep -C20 main</code></pre>
+
+<h3>GDB</h3>
+
+<pre><code>gdb -q ./a.out</code></pre>
+
+<h3>GDB Commands</h3>
+
+<pre><code>i r rip
+i r ebp
+x/4xw $rip
+x/4i $rip
+</code></pre>
+
+<h1>Reference</h1>
+
+<ol>
+<li>Hacking: the Art of Exploitation.</li>
+</ol>
+
+</div>
+</body>
+</html>

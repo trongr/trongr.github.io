@@ -2757,38 +2757,53 @@ solver.train()</code></pre>
 
                 <h2>Batchnorm derivative</h2>
 
-                <p>
-                    Let $X = (X_{ij})$ be the input matrix of dimension $N \times D$, and let $Y = (Y_{ij})$ be the batchnorm output matrix of
-                    the same size. Let $\g = (\g_j)$ and $\b = (\b_j)$ be the scaling and shift parameters of dimension $1
-                    \times D,$ and let $\m = (\m_j)$ and $\s = (\s_j)$ be the means and standard deviations of the columns
-                    of $X.$ By definition, $$Y_{ij} = \g_j \frac{X_{ij} - \m_j}{\s_j} + \b_j.$$ Consider column $j$ of $X.$
-                    Since an element $X_{ij}$ contributes to all entries in the same column in $Y$ and only those, by the
-                    chain rule we have: $$\frac{\dd E}{\dd X_{ij}} = \sum_{k=1}^N \frac{\dd E}{\dd Y_{kj}} \frac{\dd Y_{kj}}{\dd
-                    X_{ij}}.$$ For simplicity, let prime denote differentiation w.r.t. $X_{ij}.$ Then \begin{align*} Y_{kj}'
-                    &= \left( \g_j \frac{X_{kj} - \m_j}{\s_j} + \b_j \right)' \\ &= \g_j \frac{\s_j (X_{kj} - \m_j)' - \s_j'
-                    (X_{kj} - \m_j)}{\s^2}. \end{align*} Recall that the means and standard deviations are \begin{align*}
-                    \m_j &= \frac{1}{N} \sum_{m=1}^N X_{mj} \\ \s_j &= \left( \frac{1}{N} \sum_{m=1}^N (X_{mj} - \m_j)^2
-                    \right)^{1/2}. \end{align*} Therefore $$\m_j' = \frac{1}{N}$$ and \begin{align*} \s_j' &= \frac{1}{2}
-                    \underbrace{\left( \frac{1}{N} \sum_{m=1}^N (X_{mj} - \m_j)^2 \right)^{-1/2}}_{\text{This is } 1/\s_j}
-                    \left( \frac{1}{N} \sum_{m=1}^N (X_{mj} - \m_j)^2 \right)' \\ &= \frac{1}{2N\s_j} \sum_{m=1}^N 2(X_{mj}
-                    - \m_j)(X_{mj} - \m_j)'. \end{align*} Now $$(X_{mj} - \m_j)' = \begin{cases} -\frac{1}{N} & \text{if
-                    } m \neq i \\ 1 - \frac{1}{N} & \text{if } m = i, \end{cases}$$ so $\s_j'$ becomes \begin{align*} \s_j'
-                    &= \frac{1}{2N\s_j} \bigg( \underbrace{- \tfrac{2}{N}(X_{mj} - \m_j) - \cdots - \tfrac{2}{N}(X_{mj} -
-                    \m_j)}_{N-1 \text{ terms with } m\neq i} + \underbrace{2(X_{ij} - \m_j)(1 - \tfrac{1}{N})}_{m = i \text{
-                    term}} \bigg) \\ &= \frac{1}{2N\s_j} \bigg( \underbrace{-\frac{2}{N} \sum_{m=1}^N (X_{mj} - \m_j)}_{\substack{\text{This
-                    is zero. (Mean of}\\\text{zero-meaned data is zero.)}}} + 2(X_{ij} - \m_j) \bigg) \\ &= \frac{1}{N\s_j}
-                    (X_{ij} - \m_j). \end{align*} Plugging this back into $Y_{kj}',$ we get \begin{align*} Y_{kj}' &= \g_j
-                    \frac{\s_j (X_{kj} - \m_j)' - \s_j' (X_{kj} - \m_j)}{\s^2} \\ &= \frac{\g_j}{\s_j}(\d_{ik} - \tfrac{1}{N})
-                    - \frac{\g_j}{N \s_j^3} (X_{kj} - \m_j)(X_{ij} - \m_j). \end{align*} Finally plugging this back into
-                    $\frac{\dd E}{\dd X_{ij}}$: \begin{align*} \frac{\dd E}{\dd X_{ij}} &= \sum_{k=1}^N \frac{\dd E}{\dd
-                    Y_{kj}} \frac{\dd Y_{kj}}{\dd X_{ij}} \\ &= \sum_{k=1}^N \frac{\dd E}{\dd Y_{kj}} \left( \frac{\g_j}{\s_j}(\d_{ik}
-                    - \tfrac{1}{N}) - \frac{\g_j}{N \s_j^3} (X_{kj} - \m_j)(X_{ij} - \m_j) \right) \\ &\text{ Multiply through:}
-                    \\ &= \frac{\g_j}{\s_j} \sum_{k=1}^N \frac{\dd E}{\dd Y_{kj}} \d_{ik} - \frac{\g_j}{N \s_j} \sum_{k=1}^N
-                    \frac{\dd E}{\dd Y_{kj}} - \frac{\g_j}{N \s_j^3} (X_{ij} - \m_j) \sum_{k=1}^N \frac{\dd E}{\dd Y_{kj}}
-                    (X_{kj} - \m_j) \\ &\text{ and simplify the first term:} \\ &= \frac{\g_j}{\s_j} \frac{\dd E}{\dd Y_{ij}}
-                    - \frac{\g_j}{N \s_j} \sum_{k=1}^N \frac{\dd E}{\dd Y_{kj}} - \frac{\g_j}{N \s_j^3} (X_{ij} - \m_j) \sum_{k=1}^N
-                    \frac{\dd E}{\dd Y_{kj}} (X_{kj} - \m_j). \end{align*} Converting this into matrix form:
-                </p>
+<p>
+    Let $X = (X_{ij})$ be the input matrix of dimension $N \times D$, and let $Y
+    = (Y_{ij})$ be the batchnorm output matrix of the same size. Let $\g =
+    (\g_j)$ and $\b = (\b_j)$ be the scaling and shift parameters of dimension
+    $1 \times D,$ and let $\m = (\m_j)$ and $\s = (\s_j)$ be the means and
+    standard deviations of the columns of $X.$ By definition, $$Y_{ij} = \g_j
+    \frac{X_{ij} - \m_j}{\s_j} + \b_j.$$ Consider column $j$ of $X.$ Since an
+    element $X_{ij}$ contributes to all entries in the same column in $Y$ and
+    only those, by the chain rule we have: $$\frac{\dd E}{\dd X_{ij}} =
+    \sum_{k=1}^N \frac{\dd E}{\dd Y_{kj}} \frac{\dd Y_{kj}}{\dd X_{ij}}.$$ For
+    simplicity, let prime denote differentiation w.r.t. $X_{ij}.$ Then
+    \begin{align*} Y_{kj}' &= \left( \g_j \frac{X_{kj} - \m_j}{\s_j} + \b_j
+    \right)' \\ &= \g_j \frac{\s_j (X_{kj} - \m_j)' - \s_j' (X_{kj} -
+    \m_j)}{\s^2}. \end{align*} Recall that the means and standard deviations are
+    \begin{align*} \m_j &= \frac{1}{N} \sum_{m=1}^N X_{mj} \\ \s_j &= \left(
+    \frac{1}{N} \sum_{m=1}^N (X_{mj} - \m_j)^2 \right)^{1/2}. \end{align*}
+    Therefore $$\m_j' = \frac{1}{N}$$ and \begin{align*} \s_j' &= \frac{1}{2}
+    \underbrace{\left( \frac{1}{N} \sum_{m=1}^N (X_{mj} - \m_j)^2
+    \right)^{-1/2}}_{\text{This is } 1/\s_j} \left( \frac{1}{N} \sum_{m=1}^N
+    (X_{mj} - \m_j)^2 \right)' \\ &= \frac{1}{2N\s_j} \sum_{m=1}^N 2(X_{mj} -
+    \m_j)(X_{mj} - \m_j)'. \end{align*} Now $$(X_{mj} - \m_j)' = \begin{cases}
+    -\frac{1}{N} & \text{if } m \neq i \\ 1 - \frac{1}{N} & \text{if } m = i,
+    \end{cases}$$ so $\s_j'$ becomes 
+    
+    \begin{align*} 
+    \s_j' &= \frac{1}{2N\s_j} \bigg( \underbrace{- \tfrac{2}{N}(X_{mj} - \m_j) - \cdots - \tfrac{2}{N}(X_{mj} - \m_j)}_{N-1 \text{ terms with } m\neq i} + \underbrace{2(X_{ij} - \m_j)(1 - \tfrac{1}{N})}_{m = i \text{ term}} \bigg) \\ 
+    &= \frac{1}{2N\s_j} \bigg( \underbrace{-\frac{2}{N} \sum_{m=1}^N (X_{mj} - \m_j)}_{\substack{\text{This is zero. (Mean of}\\\text{zero-meaned data is zero.)}}} + 2(X_{ij} - \m_j) \bigg) \\ 
+    &= \frac{1}{N\s_j} (X_{ij} - \m_j).
+    \end{align*} 
+    
+    Plugging this back into $Y_{kj}',$ we get \begin{align*}
+    Y_{kj}' &= \g_j \frac{\s_j (X_{kj} - \m_j)' - \s_j' (X_{kj} - \m_j)}{\s^2}
+    \\ &= \frac{\g_j}{\s_j}(\d_{ik} - \tfrac{1}{N}) - \frac{\g_j}{N \s_j^3}
+    (X_{kj} - \m_j)(X_{ij} - \m_j). \end{align*} Finally plugging this back into
+    $\frac{\dd E}{\dd X_{ij}}$: \begin{align*} \frac{\dd E}{\dd X_{ij}} &=
+    \sum_{k=1}^N \frac{\dd E}{\dd Y_{kj}} \frac{\dd Y_{kj}}{\dd X_{ij}} \\ &=
+    \sum_{k=1}^N \frac{\dd E}{\dd Y_{kj}} \left( \frac{\g_j}{\s_j}(\d_{ik} -
+    \tfrac{1}{N}) - \frac{\g_j}{N \s_j^3} (X_{kj} - \m_j)(X_{ij} - \m_j) \right)
+    \\ &\text{ Multiply through:} \\ &= \frac{\g_j}{\s_j} \sum_{k=1}^N \frac{\dd
+    E}{\dd Y_{kj}} \d_{ik} - \frac{\g_j}{N \s_j} \sum_{k=1}^N \frac{\dd E}{\dd
+    Y_{kj}} - \frac{\g_j}{N \s_j^3} (X_{ij} - \m_j) \sum_{k=1}^N \frac{\dd
+    E}{\dd Y_{kj}} (X_{kj} - \m_j) \\ &\text{ and simplify the first term:} \\
+    &= \frac{\g_j}{\s_j} \frac{\dd E}{\dd Y_{ij}} - \frac{\g_j}{N \s_j}
+    \sum_{k=1}^N \frac{\dd E}{\dd Y_{kj}} - \frac{\g_j}{N \s_j^3} (X_{ij} -
+    \m_j) \sum_{k=1}^N \frac{\dd E}{\dd Y_{kj}} (X_{kj} - \m_j). \end{align*}
+    Converting this into matrix form:
+</p>
                 <p class="box">
                     $$\frac{\dd E}{\dd X} = \frac{\g}{\s} \frac{\dd E}{\dd Y} - \frac{\g}{N\s} \sum_\text{rows} \frac{\dd E}{\dd Y} - \frac{\g}{N\s^3}
                     (X - \m) \sum_\text{rows} \frac{\dd E}{\dd Y} (X - \m),$$

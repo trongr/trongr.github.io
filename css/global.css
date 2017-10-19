@@ -68,6 +68,13 @@ h3 {
     font-style: italic;
 }
 
+h4 {
+    clear: both;
+    /* color: #FFD557; */
+    color: #0070c0;
+    font-style: italic;
+}
+
 p, li {
     text-align: justify;
     text-justify: inter-word;

@@ -20,7 +20,7 @@
 
 <h1>Differential Equations</h1>
 
-<img src="images/tumblr_o6goow949B1rtjm0mo1_500.gif">
+<!-- <img src="images/tumblr_o6goow949B1rtjm0mo1_500.gif">
 <p class="quote">The results of mathematics are seldom directly
 applied; it is the definitions that are really useful. Once you learn
 the concept of a differential equation, you see differential equations
@@ -34,7 +34,7 @@ equations. When you live this life, you can then go back to molecular
 biology with a new set of eyes that will see things you could not
 otherwise see.</p><hr>
 <p class="author">Gian-Carlo Rota</p>
-<div class="clearboth"></div>
+<div class="clearboth"></div> -->
 
 <!-- <p> -->
 <!--     That's because first-order objects (things) are simpler and -->
@@ -103,12 +103,187 @@ otherwise see.</p><hr>
     body.
 </p>
 
+<h3>Solving a first-order linear equation by integrating factors</h3>
+
+<p>
+    The differential equation
+
+    $$\frac{dx}{dt} = f(x, t)$$
+
+    is called linear if $f(x, t)$ has the form $a(t) x + b(t).$
+</p>
+<p>
+    <i>E.g. solve $$\frac{dx}{dt} + 2tx = t$$ subject to $x = 1$ when $t=0.$</i>
+</p>
+<p>
+    Multiply both sides by $e^{t^2}$:
+
+    \begin{align*}
+    e^{t^2} \frac{dx}{dt} + e^{t^2} 2tx &= e^{t^2} t \\
+    \frac{d}{dt} (e^{t^2} x) &= e^{t^2} t \\
+    e^{t^2} x &= \int e^{t^2} t dt \\
+              &= \frac{e^{t^2}}{2} + c. \\
+    \end{align*}
+
+    Apply initial condition to find 
+
+    $$c = 1/2,$$
+
+    and 
+
+    $$x = \frac{1}{2} + \frac{e^{-t^2}}{2}.$$
+</p>
+
+<h3>Solving a first order nonlinear separable equation</h3>
+
+<p>
+    <b>Ex.</b> <i>Solve $$\frac{dx}{dt} = \frac{x^2}{1 + t}$$ subject to $x = 1$ when $t = 0.$</i>
+</p>
+
+<p>
+    A first order nonlinear equation is called separable if it has the form 
+
+    $$\frac{dx}{dt} = f(x, t) = g(x) h(t).$$ Then we can write 
+
+    \begin{align*}
+    \frac{1}{g(x)} \frac{dx}{dt} &= h(t) \\
+    \int \frac{1}{g(x)} dx &= \int h(t) dt. \\
+    \end{align*}
+
+    All that's left is to calculate these integrals, which in this case we can:
+
+    \begin{align*}
+    \int \frac{1}{x^2} dx &= \int \frac{1}{1 + t} dt \\
+    x &= \frac{1}{c - \log(1 + t)}. \\
+    \end{align*}
+
+    Apply initial conditions to get
+
+    $$x = \frac{1}{1 - \log(1 + t)}.$$
+</p>
+
+<h3>Solving a second order linear homogeneous equation knowing one solution</h3>
+
+<p>
+    <i>Ex. Consider the equation
+
+        $$a \ddot x + b \dot x + cx = 0,$$
+
+        where $a, b, c$ are known functions of $t.$ Suppose that we have found
+        one solution, say $x = x_1(t),$ but have difficulty finding another.
+        Show that by writing $x = x_1(t) u(t)$ we may reduce the equation to a
+        first order problem for the variable $z = \dot u.$ Use this method to
+        solve 
+
+        $$\ddot x - 2 \dot x + x = 0$$ 
+
+        subject to $x = 1, \dot x = 0$ when $t = 0.$
+    </i>
+</p>
+<p>
+    Suppose that the second solution $x$ of this equation may be written in the
+    form $x = x_1(t) u(t)$ for some $u$ (it might not). Then we can find $\dot
+    x$ and $\ddot x$:
+
+    \begin{align*}
+        \dot x &= \dot x_1 u + x_1 \dot u \\
+        \ddot x &= \ddot x_1 u + 2 \dot x_1 \dot u + x_1 \ddot u.
+    \end{align*}
+
+    Substituting these into the differential equation, we get
+
+    \begin{align*}
+    0 &= a \ddot x + b \dot x + cx \\
+    &= a (\ddot x_1 u + 2 \dot x_1 \dot u + x_1 \ddot u) + b(\dot x_1 u + x_1 \dot u) + c x_1 u \\
+    &= (a \ddot x_1 + b \dot x_1 + c x_1) u + a (2 \dot x_1 \dot u + x_1 \ddot u) + b x_1 \dot u \\
+    &= a (2 \dot x_1 \dot u + x_1 \ddot u) + b x_1 \dot u \\
+    &= a x_1 \ddot u + (a 2 \dot x_1 + b x_1) \dot u \\
+    &= a x_1 \dot z + (a 2 \dot x_1 + b x_1) z. \\
+    \end{align*}
+
+    Depending on what $x_1$ is, this equation may easily be solved.
+</p>
+<p>
+    Applying this method to 
+
+    $$\ddot x - 2 \dot x + x = 0,$$     
+
+    we want to solve
+
+    \begin{align*}
+    0 &= a x_1 \dot z + (a 2 \dot x_1 + b x_1) z \\
+    &= e^t \dot z + (2 e^t - 2 e^t) z \\
+    &= e^t \dot z.
+    \end{align*}
+
+    Therefore $z = k$ and $u(t) = kt$ for some constant $k.$ Finally, 
+
+    $$x = x_1(t) u(t) = k e^t t$$
+
+    is the second solution.
+</p>
+<p>
+    <i>A common theme in solving higher order differential equations is to
+    reduce them to lower order equations that we know how to solve. Also a
+    common problem solving technique.</i>
+</p>
+
+<h3>Nonhomogeneous second order linear equation</h3>
+
+<p>
+    <i>Ex. Solve $$\ddot x - x = t$$ s.t. $x = 1, \dot x = 0$ when $t = 0.$</i>
+</p>
+<p>
+    We can solve a nonhomogeneous equation by finding (guessing) a particular
+    solution, and adding it to the general solution of the homogeneous eq.
+    In this case a particular solution is 
+    
+    $$x_1 = e^t - t.$$
+
+    The general solution to the homogeneous eq is known to be 
+
+    $$x = C e^t + D e^{-t}.$$
+
+    Therefore the general solution to the nonhomogeneous equation is 
+
+    $$x = C e^t + D e^{-t} + e^t - t.$$ 
+
+    Applying initial conditions we find that $C = D = 0,$ so the solution is 
+
+    $$x = e^t - t.$$
+
+    (We could've skipped all this by noting that $x_1$ satisfied the initial
+    conditions as soon as we found it.)
+</p>
+
+<h3>Simple harmonic motion</h3>
+
+<p>
+    Let 
+
+    $$m \ddot x + \a x = 0$$ 
+
+    be the equation of motion for a linear spring with $x = x_0, \dot x = 0$
+    when $t = 0.$ (this can be derived using Newton and Hooke's law). Following
+    discussion in the book we have 
+
+    $$\pm \int_{x_0}^{x} \frac{dx}{\sqrt{\frac{\a}{m}(x_0^2 - x^2)}} = t.$$
+
+    The integral can be found by substituting $\sin \theta = x$ to get
+
+    $$x = x_0 \sin(\sqrt{\tfrac{\a}{m}} t + \tfrac{\pi}{2}).$$
+
+    Using a sum of sine formula, we get
+
+    $$x = x_0 \cos \sqrt{\tfrac{\a}{m}} t.$$
+</p>
+
 <h1>Reference</h1>
 
 <ol>
 <li>Elementary Differential Equations and Boundary Value Problems by Boyce and DiPrima.</li>
 <li>Ordinary Differential Equations by Arnol'd.</li>
-<li>Everything else from the web.</li>
+<li>Intro to Dynamics by David Acheson.</li>
 </ol>
 
 </div>
