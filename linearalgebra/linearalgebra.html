@@ -69,9 +69,9 @@
 
 <h1>Change of Coordinate Matrix</h1>
 
-<div class="bside">
+<!-- <div class="bside">
     <img src="images/377px-3d_basis_transformation.png">
-</div>
+</div> -->
 
 <p>
     <b>Proposition.</b> <i>Let $B$ be an $n \times n$ invertible
@@ -94,10 +94,10 @@
 
 <h1>Eigenvectors and Eigenvalues</h1>
 
-<figure>
+<!-- <figure>
     <img src="images/5415731794_083b334b01_o.jpg">
     <figcaption></figcaption>
-</figure>
+</figure> -->
 
 <p id="nuhefgsd74862">
     <b>Theorem: Diagonalizability.</b> <i>A linear operator $T$ on a
@@ -553,12 +553,12 @@ ad - cb &= 1,
 
     $$\det(A - tI) = (-1)^n t^n + (-1)^{n-1} \tr(A) t^{n-1} + a_{n-2} t^{n-2} + \cdots + \det(A).$$</i>
 </p>
-
+<!-- 
 <div class="epigraph">
     <img src="images/pokemon.jpg">
      <div class="quote">
      </div><hr><div class="author">Pokemon</div>
-</div>
+</div> -->
 
 <p>
     For the remaining coefficients,
@@ -1015,11 +1015,11 @@ ad - cb &= 1,
     <i>Proof.</i> Exercise. \qed
 </p>
 
-<div class="aside">
+<!-- <div class="aside">
     This is looking more and more like witchcraft. Human transmutation
     circle from Fullmetal Alchemist:
     <img src="images/7bff8caea74841eae91954057f115e53.jpg">
-</div>
+</div> -->
 
 <div class="aside">
     <b>Definition: linearly independent subspaces.</b> A collection of
@@ -2292,7 +2292,7 @@ ad - cb &= 1,
     </i>
 </p>
 
-<h3>Least square approximation</h3>
+<h1>Least square approximation</h1>
 
 <p>
     Problem: minimize
@@ -2310,7 +2310,23 @@ ad - cb &= 1,
 
     $$ E = || y - Ax ||^2 $$
 
-    over all values of $ x. $
+    over all values of $ x. $ Specifically, let
+
+    $$ A = \begin{bmatrix}
+    t_1^k & \cdots & t_1 & 1 \\
+    \vdots & & \vdots & \vdots \\
+    t_m^k & \cdots & t_m & 1
+    \end{bmatrix}, 
+    x = \begin{bmatrix}
+    x_k \\
+    \vdots \\
+    x_0
+    \end{bmatrix},
+    y = \begin{bmatrix}
+    y_1 \\
+    \vdots \\
+    y_m
+    \end{bmatrix}.$$
 </p>
 
 <p>
@@ -2318,6 +2334,66 @@ ad - cb &= 1,
 
         $$ \< Ax, y \>_m = \< x, A^* y \>_n. $$
     </i>
+</p>
+
+<p>
+    <i>Lemma. Let $ A \in M_{m\times n}(F). $ Then 
+
+        $$ \rank(A^* A) = \rank(A). $$
+    </i>
+</p>
+<p>
+    <i>Corollary. If $ A \in M_{m\times n}(F) $ and $ \rank A = n, $ then $ A^*
+    A $ is invertible.
+    </i>
+</p>
+
+<p>
+    <i>Theorem. Let $ A \in M_{m\times n}(F), y \in F^m. $ Then there exists an
+    $ x_0 \in F^n $ s.t. $ (A^* A) x_0 = A^* y $ and 
+
+    $$ ||Ax_0 - y|| \leq ||Ax - y|| $$
+
+    for all $ x \in F^n. $ Furthermore, if $ \rank A = n, $ then 
+
+    $$ x_0 = (A^* A)^{-1} A^* y. $$</i>
+</p>
+
+<h1>Minimal solution to a system of linear equations</h1>
+
+<p>
+    <i>Theorem. Let $ A \in M_{m\times n}(F), b \in F^m. $ Suppose $ Ax = b $ is
+    consistent. Then
+
+    <ul>
+        <li>there is a unique minimal solution $ s $ of $ Ax = b $ and $ s \in
+        R(L_{A^*}). $</li>
+        <li>$ s $ is the only solution of $ Ax = b $ that lies in $ R(L_{A^*}),
+        $ i.e. if $ u $ satisfies $ AA^*u = b, $ then $ s = A^*u. $</li>
+    </ul></i>
+</p>
+
+<p>
+    Wow, $ A^* $ maps all solutions $ u $ of $ AA^* u = b $ to the unique
+    minimal solution $ s $ of $ Ax = b. $ That's amazing.
+</p>
+
+<p>
+    <i>Theorem. Let $ K $ be the solution set of a system of linear equations $
+    Ax = b, $ and let $ K_H $ be the solution set of the corresponding
+    homogeneous system $ Ax = 0. $ Then for any solution $ s $ of $ Ax = b, $
+
+    $$ K = \{ s \} + K_H = \{ s + k: k \in K_H \}. $$</i>
+</p>
+
+<p>
+    This is also how you solve a system of linear differential equations, by
+    finding the general solution to the homogeneous system, and adding it to a
+    specific solution of the non-homogeneous solution.
+</p>
+
+<p>
+    TODO. Page 365.
 </p>
 
 <h1>Reference</h1>
