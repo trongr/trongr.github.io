@@ -25,7 +25,15 @@
 
 <h1>Audio Neural Network</h1>
 
-<h3>Preprocessing ABC data: removing extraneous data</h3>
+<h1>Char RNN model (with tensorflow)</h1>
+
+<p>
+    TODO.
+</p>
+
+<h1>Practical concerns</h1>
+
+<h3>Preprocessing ABC data</h3>
 
 <p>
     Lines we can remove from an ABC file to make it easy for the network to
@@ -49,22 +57,27 @@
 <h3>Some things to try</h3>
 
 <p>
-    After a network has learned the data sufficiently, make it generate music after every
-    training batch and see how close its output is from the training input, i.e. whether 
-    it's simply regurgitating (with slight variation) what it's being fed right now,
-    or recalling long past sequences, or actually generating new patterns.
+    After a network has learned the data sufficiently, make it generate music
+    after every training batch and see how close its output is from the training
+    input, i.e. whether it's simply regurgitating (with slight variation) what
+    it's being fed right now, or recalling long past sequences, or actually
+    generating new patterns.
 </p>
 
 <p>
-    Another thing to try is to stop training, and let the network generate samples on its
-    own.
+    Another thing to try is to stop training, and let the network generate
+    samples on its own.
 </p>
 
-<h3>Other notes</h3>
+<h1>Other notes</h1>
 
 <p>
     On a windows terminal you might not be able to print certain characters using python.
-    If that happens, run chcp 65001 in the terminal and rerun your script.
+    If that happens, run 
+    
+    <pre><code>chcp 65001</code></pre>
+    
+    in the terminal and rerun your script.
 </p>
 
 <h1>Generated music</h1>
@@ -88,12 +101,60 @@
 <audio controls preload="none">
     <source src="audio/1710252118v1.mp3" type="audio/mpeg">
 </audio>
-<audio controls preload="none">
+<!-- <audio controls preload="none">
     <source src="audio/1710252127v1.mp3" type="audio/mpeg">
+</audio> -->
+<!-- <audio controls preload="none">
+    <source src="audio/1710252135v1.mp3" type="audio/mpeg">
+</audio> -->
+
+<p>
+    Favorites so far:
+</p>
+<audio controls preload="none">
+    <source src="audio/171030a1.mp3" type="audio/mpeg">
 </audio>
 <audio controls preload="none">
-    <source src="audio/1710252135v1.mp3" type="audio/mpeg">
+    <source src="audio/output67-171030-67.mp3" type="audio/mpeg">
 </audio>
+
+<p>
+    <a href="http://trongr.tumblr.com" target="_blank">More music on my blog.</a>
+</p>
+
+<h1>Other ideas</h1>
+
+<h2>One-to-many, many-to-one, many-to-many</h2>
+
+<p>
+    Normally RNN's are used to train a single sequence (1-dimensional) input to
+    produce a single output. One thing we can try is to have it learn one input
+    to produce many outputs, many to one, and many to many. An application of
+    this kind of network is to have it learn more than one voices at the same
+    time and producing polyphonic music.
+</p>
+<p>
+    Our current one-to-one RNN <i>can</i> learn polyphonic music, but in an
+    artificial way, in the sense that the notes in an ABC song are arranged one
+    after the other, and different voices are staggered one line after another.
+    This means that the network has to learn a short segment of one voice, then
+    a short segment of another voice, then back to the first voice, then back to
+    the second voice, and so on. What would be more natural is for the network
+    to learn each note of both voices, and producing the next notes of both
+    voices, at the same time.
+</p>
+
+<h2>Generating images</h2>
+
+<p>
+    Instead of training a sequence of characters, we can train a sequence of
+    pixels in an image, and have the network generate the next pixel. We might
+    not even need the many-to-one architecture from previously, namely by
+    training more than one sequences to produce a pixel. Instead, we can define
+    a fixed-size region (say 9-by-9 pixels rearranged linearly, e.g. left to
+    right, top to bottom) as input, and tell the network to learn / generate the
+    center pixel. (This is also kinda artificial, but it might work.)
+</p>
 
 <!-- <h1>Reference</h1> -->
 
