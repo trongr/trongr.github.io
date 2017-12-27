@@ -36,26 +36,29 @@
 <h3>Preprocessing ABC data</h3>
 
 <p>
-    Lines we can remove from an ABC file to make it easy for the network to learn the 
-    rest of the music content: lines starting with %:, T:, R:, B:, N:, Z:, C:, O:, A:, G:, H:, R:, B:, D:, F:,
-    S:, I:, w:, W:.
+    Lines we can remove from an ABC file to make it easy for the network to
+    learn the rest of the music content: lines starting with %:, T:, R:, B:, N:,
+    Z:, C:, O:, A:, G:, H:, R:, B:, D:, F:, S:, I:, w:, W:. This makes training 
+    much faster since the network doesn't have to learn things like English words
+    in titles and authors, and so on.
 </p>
 
 <h3>Some things to try</h3>
 
 <p>
-    After a network has learned the data sufficiently, make it generate music after every
-    training batch and see how close its output is from the training input, i.e. whether 
-    it's simply regurgitating (with slight variation) what it's being fed right now,
-    or recalling long past sequences, or actually generating new patterns.
+    After a network has learned the data sufficiently, make it generate music
+    after every training batch and see how close its output is from the training
+    input, i.e. whether it's simply regurgitating (with slight variation) what
+    it's being fed right now, or recalling long past sequences, or actually
+    generating new patterns.
 </p>
 
 <p>
-    Another thing to try is to stop training, and let the network generate samples on its
-    own.
+    Another thing to try is to stop training, and let the network generate
+    samples on its own.
 </p>
 
-<h2>Other notes</h2>
+<h1>Other notes</h1>
 
 <p>
     On a windows terminal you might not be able to print certain characters using python.
@@ -114,7 +117,7 @@
 
 <p>
     Normally RNN's are used to train a single sequence (1-dimensional) input to
-    output a single output. One thing we can try is to have it learn one input
+    produce a single output. One thing we can try is to have it learn one input
     to produce many outputs, many to one, and many to many. An application of
     this kind of network is to have it learn more than one voices at the same
     time and producing polyphonic music.
