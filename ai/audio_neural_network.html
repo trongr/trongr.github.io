@@ -25,12 +25,25 @@
 
 <h1>Audio Neural Network</h1>
 
-<h3>Preprocessing ABC data</h3>
+<h3>Preprocessing ABC data: removing extraneous data</h3>
 
 <p>
-    Lines we can remove from an ABC file to make it easy for the network to learn the 
-    rest of the music content: lines starting with %:, T:, R:, B:, N:, Z:, C:, O:, A:, G:, H:, R:, B:, D:, F:,
-    S:, I:, w:, W:.
+    Lines we can remove from an ABC file to make it easy for the network to
+    learn the rest of the music content: lines starting with %:, T:, R:, B:, N:,
+    Z:, C:, O:, A:, G:, H:, R:, B:, D:, F:, S:, I:, w:, W:.
+</p>
+
+<h3>Preprocessing: reshaping the training data</h3>
+
+<p>
+    Usually, when a human arranger typesets a multi-voice ABC song, they'll
+    write out the voices a few bars at a time one after another, just like in
+    sheet music, for readability. However, when some programs do it, they'll put
+    all notes in one voice first, then all notes in another voice, and so on.
+    This makes it very hard for a network to learn, since it has to remember the
+    entire previous voice while generating notes for the current voice. A simple
+    fix for this is to reshape the voices, from the way a program does it to the
+    way a human does it.
 </p>
 
 <h3>Some things to try</h3>

@@ -2,216 +2,291 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <title>Topology</title>
-    <link rel="stylesheet" href="../css/global.css">
+<meta charset="utf-8">
+<title>Topology</title>
+<link rel="stylesheet" href="../css/global.css">
 
-    <!-- this config must be before MathJax.js: -->
-    <script src="../js/mathjax.config.js"></script>
-    <script src="../js/MathJax/MathJax.js"></script>
-    <!-- <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js"></script> -->
+<!-- this config must be before MathJax.js: -->
+<script src="../js/mathjax.config.js"></script>
+<script src="../js/MathJax/MathJax.js"></script>
+<!-- <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js"></script> -->
 
-    <script src="../js/jquery-3.1.0.min.js"></script>
-    <script src="../js/smartquotes.js"></script>
-    <script src="../js/global.js"></script>
+<script src="../js/jquery-3.1.0.min.js"></script>
+<script src="../js/smartquotes.js"></script>
+<script src="../js/global.js"></script>
 
 </head>
 
 <body>
-    <div id="content">
+<div id="content">
 
-        <h1>Topology</h1>
-        <!--
-        <img src="images/Yotsubato_v06_c40_p03.jpg">
+<h1>Topology</h1>
+<!--
+<img src="images/Yotsubato_v06_c40_p03.jpg">
 
-        <div class="epigraph">
-            <div class="quote"></div>
-            <div class="author">Yotsuba&! よつばと！</div>
-        </div>-->
+<div class="epigraph">
+    <div class="quote"></div>
+    <div class="author">Yotsuba&! よつばと！</div>
+</div>-->
 
-        <h1>Set theory basics</h1>
+<h1>Set theory basics</h1>
 
-        <h3>Section of the positive integers</h3>
+<h3>Section of the positive integers</h3>
 
-        <p>
-            <b>Definition.</b> <i>Define a section $S_n$ of the positive
-    integers to be the set of positive integers less than $n:$
+<p>
+    <b>Definition.</b> <i>Define a section $S_n$ of the positive
+integers to be the set of positive integers less than $n:$
 
-    $$S_n = \{ 1, \ldots, n - 1 \}.$$
+$$S_n = \{ 1, \ldots, n - 1 \}.$$
 
-    E.g. $S_1 = \0.$</i>
-        </p>
+E.g. $S_1 = \0.$</i>
+</p>
 
-        <h1>Principle of Recursive Definition</h1>
+<h1>Principle of Recursive Definition</h1>
 
-        <p>
-            <b>Theorem.</b> <i>Let $A$ be a set, $a_0$ an element of $A.$
-    Suppose $\r$ is a function that assigns, to each function $f$
-    mapping a nonempty section of the positive integers into $A,$ an
-    element of $A.$ Then there exists a unique function
+<p>
+    <b>Theorem.</b> <i>Let $A$ be a set, $a_0$ an element of $A.$
+Suppose $\r$ is a function that assigns, to each function $f$
+mapping a nonempty section of the positive integers into $A,$ an
+element of $A.$ Then there exists a unique function
 
-    $$h: \ZZ_+ \longrightarrow A$$
+$$h: \ZZ_+ \longrightarrow A$$
 
-    such that
+such that
 
-    \begin{align*}
-    h(1) &= a_0 \\
-    h(i) &= \r(h|S_i) \quad\text{ for }\quad i > 1.
-    \end{align*}</i>
-        </p>
+\begin{align*}
+h(1) &= a_0 \\
+h(i) &= \r(h|S_i) \quad\text{ for }\quad i > 1.
+\end{align*}</i>
+</p>
 
-        <p>
-            In plain English, $h$ is defined recursively by the rule $\r$ and $h$'s previous values.
-        </p>
+<p>
+    In plain English, $h$ is defined recursively by the rule $\r$ and $h$'s previous values.
+</p>
 
-        <h1>Axiom of Choice</h1>
-        <!--
-        <p>
-            <img src="images/70d8fd30038b617ce8a7bb56477386b6.jpg">
-        </p>
+<h1>Axiom of Choice</h1>
+<!--
+<p>
+    <img src="images/70d8fd30038b617ce8a7bb56477386b6.jpg">
+</p>
 
-        <div class="bside">
-            Choice. The problem is Choice. Ergo! Vis-à-vis! Concordantly!
-        </div>
-        <div class="clearboth"></div>-->
+<div class="bside">
+    Choice. The problem is Choice. Ergo! Vis-à-vis! Concordantly!
+</div>
+<div class="clearboth"></div>-->
 
-        <p class="box">
-            <b>Axiom of Choice.</b> <i>Given a collection $\AA$ of disjoint
-    nonempty sets, there is a set $C$ consisting of exactly one
-    element from each element $A \in \AA,$ i.e. a set $C$ s.t.
+<p class="box">
+    <b>Axiom of Choice.</b> <i>Given a collection $\AA$ of disjoint
+nonempty sets, there is a set $C$ consisting of exactly one
+element from each element $A \in \AA,$ i.e. a set $C$ s.t.
 
-    $$C \subset \Cup_{A \in \AA} A,$$
+$$C \subset \Cup_{A \in \AA} A,$$
 
-    and for each $A \in \AA,$
+and for each $A \in \AA,$
 
-    $$ C \cap A = \text{a singleton set.}$$</i>
-        </p>
+$$ C \cap A = \text{a singleton set.}$$</i>
+</p>
 
-        <p>
-            Lets you make infinitely many choices.
-        </p>
+<p>
+    Lets you make infinitely many choices.
+</p>
 
-        <h1>Well ordered sets</h1>
+<h1>Well ordered sets</h1>
 
-        <p>
-            <b>Definition.</b> <i>A set $A$ with a relation $<$ is said to be
-    well ordered if every nonempty subset of $A$ has a smallest
-    element.</i>
-        </p>
+<p>
+    <b>Definition.</b> <i>A set $A$ with a relation $<$ is said to be
+well ordered if every nonempty subset of $A$ has a smallest
+element.</i>
+</p>
 
-        <p>
-            E.g. $\NN$ and $\NN_0$ are well ordered but $\ZZ, \RR, \RR_+,$ and $\RR_0$ are not, under the natural ordering.
-        </p>
+<p>
+    E.g. $\NN$ and $\NN_0$ are well ordered but $\ZZ, \RR, \RR_+,$ and $\RR_0$ are not, under the natural ordering.
+</p>
 
-        <p>
-            E.g. $\NN^\o = \Times_{i=1}^\infty \NN = \NN \times \NN \times \cdots$ is not well ordered under dictionary order.
-        </p>
+<p>
+    E.g. $\NN^\o = \Times_{i=1}^\infty \NN = \NN \times \NN \times \cdots$ is not well ordered under dictionary order.
+</p>
 
-        <p>
-            <b>Theorem.</b> <i>If $A$ and $B$ are well ordered, then $A \times
-    B$ is well ordered in the dictionary order.</i>
-        </p>
+<p>
+    <b>Theorem.</b> <i>If $A$ and $B$ are well ordered, then $A \times
+B$ is well ordered in the dictionary order.</i>
+</p>
 
-        <h3>Well ordering theorem</h3>
+<h3>Well ordering theorem</h3>
 
-        <p class="box">
-            <b>Well ordering theorem.</b> <i>Every set has a well ordering
-    relation.</i>
-        </p>
+<p class="box">
+    <b>Well ordering theorem.</b> <i>Every set has a well ordering
+relation.</i>
+</p>
 
-        <p>
-            <b>Corollary.</b> <i>There exists an uncountable well ordered
-    set.</i>
-        </p>
+<p>
+    <b>Corollary.</b> <i>There exists an uncountable well ordered
+set.</i>
+</p>
 
-        <p>
-            <b>Corollary.</b> <i>Every set has a total ordering.</i>
-        </p>
+<p>
+    <b>Corollary.</b> <i>Every set has a total ordering.</i>
+</p>
 
-        <p>
-            Wait, this means every set can be put on a line. What about all those sets bigger than $\RR?$ What is going on here? Well,
-            I don't know enough about all this so let's leave it alone for the time being. Bread and butter!
-        </p>
+<p>
+    Wait, this means every set can be put on a line. What about all those sets bigger than $\RR?$ What is going on here? Well,
+    I don't know enough about all this so let's leave it alone for the time being. Bread and butter!
+</p>
 
-        <h3>Section of a set</h3>
+<h3>Section of a set</h3>
 
-        <p>
-            <b>Definition.</b> <i>Let $X$ be a well ordered set and $\a \in
-    X.$ The set
+<p>
+    <b>Definition.</b> <i>Let $X$ be a well ordered set and $\a \in
+X.$ The set
 
-    $$S_\a = \{ x \in X : x < \a \}$$
+$$S_\a = \{ x \in X : x < \a \}$$
 
-    is called an $\a$-section of $X.$</i>
-        </p>
+is called an $\a$-section of $X.$</i>
+</p>
 
-        <p>
-            Similar to an $n$-section $S_n$ of the positive integers.
-        </p>
+<p>
+    Similar to an $n$-section $S_n$ of the positive integers.
+</p>
 
-        <h3>Least upper bound property</h3>
+<h3>Least upper bound property</h3>
 
-        <div class="bside">
-            <img src="images/282px-Illustration_of_supremum.svg.png">
-        </div>
-        <p>
-            <b>Definition.</b> <i>An ordered set $A$ is said to have the least
-    upper bound property if every nonempty subset of $A$ that is
-    bounded above has a least upper bound. Similarly for greatest
-    lower bound.</i>
-        </p>
+<!-- <div class="bside">
+    <img src="images/282px-Illustration_of_supremum.svg.png">
+</div> -->
+<p>
+    <b>Definition.</b> <i>An ordered set $A$ is said to have the least
+upper bound property if every nonempty subset of $A$ that is
+bounded above has a least upper bound. Similarly for greatest
+lower bound.</i>
+</p>
 
-        <p>
-            <b>Proposition.</b> <i>$A$ has the lub property iff it has the glb
-    property.</i>
-        </p>
+<p>
+    <b>Proposition.</b> <i>$A$ has the lub property iff it has the glb
+property.</i>
+</p>
 
-        <h3>Well order and least upper bound</h3>
+<h3>Well order and least upper bound</h3>
 
-        <p>
-            <b>Proposition.</b> <i>Every well ordered set has the least upper
-    bound property.</i>
-        </p>
+<p>
+    <b>Proposition.</b> <i>Every well ordered set has the least upper
+bound property.</i>
+</p>
 
-        <p>
-            <i>Proof.</i> Let $A$ be a well ordered set, and let nonempty $B \subset A$ have an upper bound in $A.$ Then
-            the set $C$ of upper bounds of $B$ is nonempty and has a least element, by well ordering of $A.$ \qed
-        </p>
+<p>
+    <i>Proof.</i> Let $A$ be a well ordered set, and let nonempty $B \subset A$ have an upper bound in $A.$ Then
+    the set $C$ of upper bounds of $B$ is nonempty and has a least element, by well ordering of $A.$ \qed
+</p>
 
-        <p>
-            <b>Proposition.</b> <i>In a well ordered set, every element except
-    the largest---if one exists---has an immediate successor.</i>
-        </p>
+<p>
+    <b>Proposition.</b> <i>In a well ordered set, every element except
+the largest---if one exists---has an immediate successor.</i>
+</p>
 
-        <p>
-            <i>Proof.</i> Let $A$ be well ordered and $x \in A$ be not the largest element. Then the set of elements greater
-            than $x$ is nonempty and by well ordering has a least element, which is the immediate successor to $x.$ \qed
-        </p>
+<p>
+    <i>Proof.</i> Let $A$ be well ordered and $x \in A$ be not the largest element. Then the set of elements greater
+    than $x$ is nonempty and by well ordering has a least element, which is the immediate successor to $x.$ \qed
+</p>
 
-        <p>
-            Nonexample. The converse isn't true, e.g. every integer in $\ZZ$ has an immediate successor but $\ZZ$ is not well ordered.
-        </p>
+<p>
+    Nonexample. The converse isn't true, e.g. every integer in $\ZZ$ has an immediate successor but $\ZZ$ is not well ordered.
+</p>
 
-        <p>
-            <b>Question.</b> <i>Can an element in a well ordered set have more
-    than one immediate successor?</i>
-        </p>
+<p>
+    <b>Question.</b> <i>Can an element in a well ordered set have more
+than one immediate successor?</i>
+</p>
 
-        <p>
-            No, cause a well ordering has to first be a total (linear) order. So that means when we say every subset of a well ordered
-            set has a least element, what we really mean is that it's <i>the</i> least element (in that subset).
-        </p>
+<p>
+    No, cause a well ordering has to first be a total (linear) order. So that means when we say every subset of a well ordered
+    set has a least element, what we really mean is that it's <i>the</i> least element (in that subset).
+</p>
 
-        <h1>Topological spaces and continuous functions</h1>
+<h1>Topological spaces and continuous functions</h1>
 
+<p>
+    <i>Definition. A topology on a set X is a collection T of subsets of X
+    having the properties:
 
+    <ol>
+        <li>$ \varnothing, X \in T.$</li>
+        <li>The union of any collection of elements of T is in T.</li>
+        <li>The intersection of any finite collection of elements of T is in T.</li>
+    </ol></i>
+</p>
 
-        <h1>Reference</h1>
+<p>
+    Example. The discrete topology $ T $ on $ X $ is the collection of all
+    subsets of $ X. $ A basis for $ T $ is the set of all one point subsets of
+    $ X. $
+</p>
+<p>
+    Example. The indiscrete / trivial topology is the collection $ \{
+    \varnothing, X \}. $
+</p>
 
-        <ol>
-            <li>Topology by Munkres.</li>
-        </ol>
+<p>
+    Example. The finite complement topology on $ X $ is the collection of
+    subsets $ U $ of $ X $ s.t. $ X - U $ is either finite or all of $ X. $ The
+    countable complement topology is the collection of subsets $ U $ of $ X $
+    s.t. $ X - U $ is either countable or all of $ X. $
+</p>
 
-    </div>
+<h1>Basis for a topology</h1>
+
+<p>
+    <i>Definition. If X is a set, a basis for a topology on X is a collection $
+    \BB $ of subsets of X (called basis elements) s.t. 
+
+<ol>
+    <li>For each $ x \in X $ there is at least one basis element B containing $ x. $</li>
+    <li>If $ x $ belongs to the intersection of two basis elements $ B_1 $ and $
+    B_2, $ then there is a basis element $ B $ s.t. $ x \in B \subset B_1 \cap B_2. $</li>
+</ol></i>
+</p>
+
+<p>
+    Example. The set of all open disks in the plane generates open subsets of
+    the plane. Similarly the set of all open rectangles generates the same
+    topology.
+</p>
+
+<p>
+    <i>Lemma. Let X be a set, let $ \BB $ be a basis for a topology $ \TT $ on
+    X. Then $ \TT $ equals the collection of all unions of elements of $ \BB.
+    $</i>
+</p>
+
+<p>
+    <i>Lemma. Let X be a topological space. Suppose that $ \CC $ is a collection
+    of open sets of X s.t. for each open set $ U $ of X and each $ x \in U, $
+    there is an element $ C $ of $ \CC $ s.t. $ x \in C \subset U. $ Then $ \CC
+    $ is a basis for the topology of $ X. $</i>
+</p>
+
+<p>
+    <i>Lemma. Let $ \bB, \bB' $ be bases for topologies $ T, T' $ on $ X. $ Then the
+    following are equivalent:
+
+<ol>
+    <li>$ T' $ is finer than $ T. $</li>
+    <li>For each $ x $ and each basis element $ B \in \bB $ containing $ x,
+    $ there is a basis element $ B' \in \bB' $ s.t. $ x \in B' \subset B. $</li>
+</ol></i>
+</p>
+
+<p>
+    Example. Let $ \bB = \{ (a, b) \} $ be the collection of all open intervals
+    in the real line. Then the topology generated by $ \bB $ is called the
+    standard topology.
+</p>
+
+<h1>Reference</h1>
+
+<ol>
+    <li>Topology by Munkres.</li>
+</ol>
+
+</div>
 </body>
 
 </html>
