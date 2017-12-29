@@ -231,6 +231,27 @@ and $s = [w_1, \ldots, w_s] \in \bR^{d\times s}$ be the sentence matrix.
     next word, and minimize cross entropy loss.
 </p>
 
+<h1>Autoencoders</h1>
+
+<h2>Contractive autoencoder</h2>
+
+<p>
+    The contractive autoencoder adds a regularization term to the loss function:
+
+    $$ L = || X - \hat X ||^2 + \l || J_h(X) ||^2_F, $$
+
+    where $ || J_h(X) ||^2_F = \sum_{ij} \left(\frac{\dd h_j (X)}{\dd
+    X_i}\right)^2 $ is the Frobenius inner product. Making the Jacobian small
+    means that small changes in the input map to small changes in the hidden
+    layer. How does this help?
+</p>
+
+<h1>Sequence to sequence model</h1>
+
+<p>
+    
+</p>
+
 <h1>Reference</h1>
 
 <ol>
