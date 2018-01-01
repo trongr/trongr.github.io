@@ -280,12 +280,58 @@ than one immediate successor?</i>
     standard topology.
 </p>
 
-<h1>Reference</h1>
+<h1>Continuous functions</h1>
 
+<p>
+    <i>Definition. A function $ f: M \longrightarrow N $ on topological spaces
+    M and N is continuous iff the preimage of open sets in N is open in M.</i>
+</p>
+
+<p>
+    <i>Lemma. Let $ f: M\longrightarrow N, g: N\longrightarrow P, $ and $ U
+    \subset P. $ Denote by $ g^{-1}(U) $ the preimage of $ U $ under $ g. $
+    Then
+
+    $$ (g \circ f)^{-1}(U) = f^{-1} (g^{-1}(U)). $$</i>
+</p>
+<p>
+    <i>Corollary. The composition of two continuous functions is continuous.</i>
+</p>
+<p>
+    <i>Proof.</i> Let $ f: M \longrightarrow N $ and $ g: N \longrightarrow P $
+    be continuous, and let $ U $ be an open subset of $ P. $ We want to show
+    that $ g \circ f $ is continuous, i.e. that $ (g \circ f)^{-1}(U) $ is open
+    in $ M. $ But $ (g \circ f)^{-1}(U) = f^{-1} (g^{-1}(U)). $ Since $ U $ is
+    open and $ g $ is continuous, $ g^{-1}(U) $ is open in $ N, $ and since $ f
+    $ is continuous, $ f^{-1} (g^{-1}(U)) $ is open in $ M. $
+</p>
+
+<h2>Subset / subspace / relative / induced topology</h2>
+
+<p>
+    <i>Definition. Let $ (X, T) $ be a topological space, $ S \subset X. $ The
+    subspace topology on $ S $ is defined by 
+
+    $$ T_S = \{ S \cap U:  U \in T \}. $$</i>
+</p>
+<p>
+    Need to show that $ T_S $ is a topology: just check definition.
+</p>
+
+<p>
+    <i>Proposition. Let $ X, Y $ be topological spaces, $ f: X \longrightarrow Y
+    $ be continuous, and $ S \subset X. $ Then the restriction $ f_S $ is
+    continuous, with respect to the subspace topology of $ S. $</i>
+</p>
+<p>
+    <i>Proof.</i> Let $ U \subset Y $ be open and check that $ f^{-1}_{S}(U) $
+    is open in $ S. $
+</p>
+
+<h1>Reference</h1>
 <ol>
     <li>Topology by Munkres.</li>
 </ol>
-
 </div>
 </body>
 

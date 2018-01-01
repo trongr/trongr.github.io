@@ -40,6 +40,80 @@
     $ A^* $ and columns of $ A. $
 </p>
 
+<h3>Example of linear operator without an adjoint</h3>
+
+<p>
+    <i>Example. Let $ V $ be the vector space of infinite sequences with finitely
+        many nonzero entries in $ F = \bR $ or $ F = \bC. $ Define $ T: V
+        \longrightarrow V $ by 
+    
+        $$ T(\s)_k = \sum_{i=k}^{\infty} \s_i $$
+    
+        for $ k \geq 0. $ Then
+    
+        <ol>
+            <li>$ T $ is a linear operator on $ V. $</li>
+            <li>For any $ n \geq 0, $ $ T(e_n) = \sum_{i=1}^n e_i. $</li>
+            <li>$ T $ has no adjoint.</li>
+        </ol></i>
+</p>
+<p>
+    1. $ T $ is linear. Let $ \s, \m \in V. $ Then 
+
+    $$ T(\s + \m)_k = \sum_{i=k}^{\infty} (\s + \m)_i 
+    = \sum_{i=k}^{\infty} \s_i 
+    + \sum_{i=k}^{\infty} \m_i. $$
+
+    Scalar multiple is proved similarly.
+</p>
+<p>
+    2. Explicitly,
+
+    \begin{align*}
+        e_n &= (0, 0,..., 0, 1, 0,...) \\
+        T(e_n) &= \left(\sum_{i=1}^{\infty} (e_n)_i, \sum_{i=2}^{\infty} (e_n)_i,...,
+        \sum_{i=n}^{\infty} (e_n)_i,...\right) \\
+        &= \left(1, 1,..., 1, 0, 0,...\right) \\
+        &= \sum_{i=1}^n e_i.
+    \end{align*}
+</p>
+<p>
+    3. Suppose for contradiction that $ T^* $ exists. Then for any $ n, k $ we
+    have
+
+    $$ \< T^*(e_n), e_k \> = \< e_n, T(e_k) \> = \< e_n, \sum_{i=1}^k e_i \> 
+    = \begin{cases}
+    0 \text{ if } k < n \\
+    1 \text{ if } k \geq n.
+    \end{cases}. $$
+
+    Fixing $ n $ and varying $ k $ over the positive integers, we find that $ \<
+    T^*(e_n), e_k \></n> $ has infinitely many nonzero entries. In fact 
+
+    $$ T^*(e_n) = (0, 0,...,1,1,1,1,...). $$
+
+    Therefore $ T^* $ is not a map on $ V $ and we have a contradiction.
+</p>
+
+<h1>Normal and self-adjoint operators</h1>
+
+<p>
+    <i>Lemma. Let $ T $ be a linear operator on a finite-dimensional inner
+    product space $ V. $ If $ T $ has an eigenvector, then so does $ T^*. $ If $
+    \l $ is an eigenvalue of $ T, $ then $ \bar \l $ is an eigenvalue of $ T^*.
+    $
+    </i>
+</p>
+
+<h1>Schur's Theorem</h1>
+
+<p>
+    <i>Theorem. Let $ T $ be a linear operator on a finite-dimensional inner
+    product space $ V. $ Suppose that the characteristic polynomial of $ T $
+    splits. Then there exists an orthonormal basis $ \b $ for $ V $ s.t. the
+    matrix $ [T]_\b $ is upper triangular.</i>
+</p>
+
 <h1>Reference</h1>
 
 <ol>
