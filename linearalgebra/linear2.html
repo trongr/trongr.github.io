@@ -114,6 +114,33 @@
     matrix $ [T]_\b $ is upper triangular.</i>
 </p>
 
+<h3>Normal operator</h3>
+
+<p>
+    <i>Definition. Let $ V $ be an inner product space and $ T $ be a linear
+    operator on $ V. $ Then $ T $ is called normal if $ TT^* = T^*T. $ Similarly
+    for an $ n\times n $ matrix $ A. $</i>
+</p>
+<p>
+    <i>Corollary. Let $ V $ be an inner product space and $ T $ be a linear
+    operator on $ V. $ Then $ T $ is normal iff $ [T]_{\b} $ is normal, where $
+    \b $ is an orthonormal basis for $ V. $</i>
+</p>
+<p>
+    <i>Proof.</i> $ (\Longrightarrow) $ Suppose that $ TT^* = T^*T. $ By theorem
+    6.10, 
+
+    $$ [T^*]_\b = [T]_\b^*. $$ Use this fact to expand
+
+    \begin{align*}
+        [TT^*]_{\b} &= [T^*T]_{\b} \\
+        [T]_{\b} [T^*]_{\b} &= [T^*]_{\b} [T]_{\b} \\
+        [T]_{\b} [T]^*_{\b} &= [T]^*_{\b} [T]_{\b}. \\
+    \end{align*}
+
+    Therefore $ [T]_{\b} $ is normal. The converse is similar.
+</p>
+
 <h1>Reference</h1>
 
 <ol>

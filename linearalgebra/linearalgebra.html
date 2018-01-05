@@ -869,7 +869,9 @@ ad - cb &= 1,
     for $V$ s.t. $[T]_\b$ is upper triangular. Then the characteristic
     polynomial of $T$ splits. Similar result for matrix.</i>
 </p>
-
+<p>
+    The converse is also true, and is called Schur's Theorem.
+</p>
 <p>
     <i>Proof.</i> We know that the characteristic polynomial for $T$
     is the characteristic polynomial for $[T]_\b \equiv A$ for any
@@ -2197,6 +2199,22 @@ ad - cb &= 1,
     </ul></i>
 </p>
 
+<p>
+    <i>Theorem. Let $ T $ be a linear operator on a finite dimensional vector
+    space $ V, $ and let $ W $ be a $ T $-invariant subspace of $ V. $ Then the
+    characteristic polynomial of $ T_W $ divides the characteristic polynomial
+    of $ T. $</i>
+</p>
+
+<h1>Cayley Hamilton</h1>
+
+<p>
+    <i>Theorem. Let $ T $ be a linear operator on a finite dimensional vector
+    space $ V, $ and let $ f(t) $ be the characteristic polynomial of $ T. $
+    Then $ f(T) = T_0, $ the zero transformation, i.e. $ T $ satisfies its
+    characteristic polynomial.</i>
+</p>
+
 <h3>Cayley Hamilton theorem for matrices</h3>
 
 <p>
@@ -2221,11 +2239,11 @@ ad - cb &= 1,
 
 <h3>Splitting characteristic polynomial and invariant subspaces</h3>
 <p>
-    <b>Proposition.</b> <i>Let T be a linear operator on a finite
-    dimensional vector space V whose characteristic polynomial $f$
-    splits. Then so does the characteristic polynomial $f_W$ of $T_W$
-    for any T-invariant subspace W of V. Furthermore, any nontrivial
-    T-invariant subspace of V contains an eigenvector of T.</i>
+    <b>Proposition.</b> <i>Let T be a linear operator on a finite dimensional
+    vector space V whose characteristic polynomial $f$ splits. Then so does the
+    characteristic polynomial $f_W$ of $T_W$ for any T-invariant subspace W of
+    V. Furthermore, any nontrivial T-invariant subspace of V contains an
+    eigenvector of T.</i>
 </p>
 <p>
     <i>Proof.</i> The first claim follows immediately from the fact
@@ -2258,12 +2276,17 @@ ad - cb &= 1,
     and $v$ is an eigenvector of $T_W,$ which makes it an eigenvector
     of $T.$ \qed
 </p>
+<p>
+    <i>Corollary. Let T be a linear operator on a finite dimensional vector
+    space V whose characteristic polynomial splits. Then $ T $ has an
+    eigenvector.</i>
+</p>
 
 <h1>Adjoint operator</h1>
 
 <p>
-    <i>Theorem. Let V be a finite-dimensional inner product space, and $\b$ be
-    an orthonormal basis for V. If T is a linear operator on V, then
+    <i>Theorem 6.10. Let V be a finite-dimensional inner product space, and $\b$
+    be an orthonormal basis for V. If T is a linear operator on V, then
 
     $$[T^*]_\b = [T]_\b^*.$$</i>
 </p>
