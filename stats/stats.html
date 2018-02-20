@@ -34,7 +34,7 @@
 
 <h2>Union Laws</h2>
 
-<img src="images/unionlaws.png">
+<!-- <img src="images/unionlaws.png"> -->
 
 <div class="bside">
     <pre><code>!(a && b && c) == !a || !b || !c
@@ -182,6 +182,18 @@
 </table>
 
 <p>
+    <i>Example. The number of shortest polygonal paths (with horizontal and
+    vertical segments) joining the lower left (A) and upper right (B) squares of
+    a chess board is ${ 14 \choose 7 }.$</i> In order to go from A to B, you
+    have to go right 7 steps (R) and up 7 steps (U). Therefore these paths
+    correspond one-to-one to the set of 14-letter sequences consisting of 7 R's
+    and 7 U's in some order, e.g. RRRRRRRUUUUUUU is the path where you go all
+    the way right and then all the way up. Recast in this form, it's easy to
+    count these sequences: we have to choose 7 places to put the R's; after that
+    the U's are determined: hence there are ${ 14 \choose 7 }$ such sequences.
+</p>
+
+<p>
     <img src="images/unorderedwithreplacement.png">
 </p>
 
@@ -257,11 +269,14 @@ int main() {
     return 0;
 }</code></pre>
 
+
+
 <h1>Reference</h1>
 
 <ol>
 <li>Statistical Inference by Casella and Berger.</li>
 <li>Intro to Probability by Charles M. Grinstead.</li>
+<li>An Intro to Probability Theory and its Applications by William Feller.</li>
 </ol>
 
 </div>
