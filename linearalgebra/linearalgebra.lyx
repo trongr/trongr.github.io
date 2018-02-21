@@ -86,7 +86,42 @@ Trong
 February
 \end_layout
 
+\begin_layout Section*
+M19F18
+\end_layout
+
+\begin_layout Section
+Eigenvectors of a normal operator
+\end_layout
+
 \begin_layout Standard
+
+\series bold
+Proposition.
+ 
+\series default
+\emph on
+Let T be a normal linear operator on an inner product space V with eigenvalue
+ 
+\begin_inset Formula $\text{\lambda}$
+\end_inset
+
+ and eigenvector 
+\begin_inset Formula $x,$
+\end_inset
+
+ then 
+\begin_inset Formula $x$
+\end_inset
+
+ is an eigenvector of 
+\begin_inset Formula $T^{*}$
+\end_inset
+
+ corresponding to eigenvalue 
+\begin_inset Formula $\overline{\lambda}.$
+\end_inset
+
 
 \end_layout
 
