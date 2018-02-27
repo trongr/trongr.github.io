@@ -314,5 +314,80 @@ Perhaps we can apply this principle to other fields, e.g.
  It's not quite so far fetched.
 \end_layout
 
+\begin_layout Section
+W21
+\end_layout
+
+\begin_layout Section
+GAN Generator noise dimension
+\end_layout
+
+\begin_layout Standard
+Can't tell the difference when lowering the random noise input dimension
+ into a generator from 96 to 32.
+\end_layout
+
+\begin_layout Section
+Wasserstein GANs
+\end_layout
+
+\begin_layout Standard
+Wasserstein / Kantorovich-Monge-Rubinstein / Earth mover distance.
+\end_layout
+
+\begin_layout Standard
+WGAN-GP (Gradient Penalty)
+\end_layout
+
+\begin_layout Section
+R22
+\end_layout
+
+\begin_layout Section
+Fully Connected VS Convolutional Neural Networks
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Question.
+ 
+\series default
+\emph on
+Are fully connected and convolutional networks equivalent? Specifically
+ can an FC network learn anything a conv network can, given enough training
+ time and layers?
+\end_layout
+
+\begin_layout Section
+The Neuralist
+\end_layout
+
+\begin_layout Section
+The AI problem
+\end_layout
+
+\begin_layout Standard
+The central problem in AI is how to build small, dumb AI's that become smarter
+ when combined with others of their kind.
+ Put another way, how to create AI's that individually perform simple tasks,
+ and when combined performs arbitrarily complex tasks, such that the more
+ AI agents we have the more complex the tasks they can perform.
+\end_layout
+
+\begin_layout Section
+A Super Neural Network (Neural Super Network?)
+\end_layout
+
+\begin_layout Standard
+A network made of many smaller networks and the structure of the whole network
+ is learned, e.g.
+ 
+\emph on
+which neuron talks to which neuron,
+\emph default
+ how they talk, how much data to pass back and forth, when, etc.
+\end_layout
+
 \end_body
 \end_document
