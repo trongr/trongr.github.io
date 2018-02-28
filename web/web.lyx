@@ -70,8 +70,28 @@
 
 \begin_body
 
-\begin_layout Standard
+\begin_layout Title
+Web
+\end_layout
 
+\begin_layout Author
+Trong
+\end_layout
+
+\begin_layout Date
+2018
+\end_layout
+
+\begin_layout Part
+February
+\end_layout
+
+\begin_layout Section*
+W21
+\end_layout
+
+\begin_layout Standard
+React.Component
 \end_layout
 
 \end_body
