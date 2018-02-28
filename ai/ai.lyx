@@ -87,11 +87,8 @@ February
 \end_layout
 
 \begin_layout Section*
-S180217
-\end_layout
-
-\begin_layout Section*
-Simplified Softmax Loss for GAN
+S180217.
+ Simplified Softmax Loss for GAN
 \end_layout
 
 \begin_layout Paragraph*
@@ -119,12 +116,9 @@ QUESTION
 
 \begin_layout Section*
 O180218
-\end_layout
-
-\begin_layout Section*
-
 \emph on
-The cost function in linear regression by gradient descent is convex
+.
+ The cost function in linear regression by gradient descent is convex
 \end_layout
 
 \begin_layout Standard
@@ -262,7 +256,8 @@ And finally the reason we care about convexity is that it guarantees we
 \end_layout
 
 \begin_layout Section*
-M180219
+M180219.
+ Encoding and triggering a GAN
 \end_layout
 
 \begin_layout Standard
@@ -315,11 +310,8 @@ Perhaps we can apply this principle to other fields, e.g.
 \end_layout
 
 \begin_layout Section
-W21
-\end_layout
-
-\begin_layout Section
-GAN Generator noise dimension
+W21.
+ GAN Generator noise dimension
 \end_layout
 
 \begin_layout Standard
@@ -340,11 +332,12 @@ WGAN-GP (Gradient Penalty)
 \end_layout
 
 \begin_layout Section
-R22
+R22.
+ Fully Connected VS Convolutional Neural NetworksT20 
 \end_layout
 
 \begin_layout Section
-Fully Connected VS Convolutional Neural Networks
+Generator power and modal collapse
 \end_layout
 
 \begin_layout Standard
@@ -386,7 +379,19 @@ A network made of many smaller networks and the structure of the whole network
 \emph on
 which neuron talks to which neuron,
 \emph default
- how they talk, how much data to pass back and forth, when, etc.
+ how they talk, how much data to pass back and forth, when, etc.Conjecture.
+ 
+\emph on
+The more powerful a generator is, the more chance of modal collapse.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Question.
+ 
+\emph default
+Powerful in what sense specifically?
 \end_layout
 
 \end_body
