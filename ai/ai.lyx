@@ -369,7 +369,9 @@ The central problem in AI is how to build small, dumb AI's that become smarter
 \end_layout
 
 \begin_layout Section
-A Super Neural Network (Neural Super Network?)
+
+\emph on
+A Super Neural Network / Neural Super Network? or just Super Network
 \end_layout
 
 \begin_layout Standard
@@ -408,10 +410,15 @@ Network
  Convolutional (the usual kind, not fractional stride) generator with convolutio
 nal (also usual) discriminator and simplified softmax.
  The generator has an FC layer at the end.
- Saw before that without the last FC layer the generated images tend to
- have grayscale backgrounds instead of pure black, at least in the beginning,
- and the digits are more wispy.
- I suppose that’s a feature of the convolution operation (might be useful).
+ Without the last FC layer we would have to somehow merge the color channels
+ into one, i.e.
+ 
+\begin_inset Formula $(N,28,28,C)\longrightarrow(N,28,28,1)$
+\end_inset
+
+, and the generated images would have greater grayscale variation instead
+ of more black and white, at least in the beginning, as we saw before, and
+ the digits would be more wispy.
 \end_layout
 
 \begin_layout Standard
@@ -420,8 +427,8 @@ nal (also usual) discriminator and simplified softmax.
 Conjecture.
  
 \emph default
-Whatever digits this particular network happens to generate in the beginning,
- it’ll tend to learn and generate digits most similar to those.
+Whatever digits the network happens to generate in the beginning, it’ll
+ tend to learn and generate digits most similar to those.
  E.g.
  in the beginning the generator settles on 9-looking images, and it seems
  later digits “evolved” from that, e.g.
@@ -469,8 +476,8 @@ How do you stop that from happening?
 
 \begin_layout Standard
 One solution might be to train multiple generators, each learning a few
- digits, that together generates all the digits.
- Drop out is a possibility.
+ digits, that together generate all the digits.
+ Drop out?
 \end_layout
 
 \end_body
