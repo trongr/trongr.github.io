@@ -394,5 +394,84 @@ Question.
 Powerful in what sense specifically?
 \end_layout
 
+\begin_layout Section
+W28.
+ GAN as mode evolution
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Network
+\emph default
+.
+ Convolutional (the usual kind, not fractional stride) generator with convolutio
+nal (also usual) discriminator and simplified softmax.
+ The generator has an FC layer at the end.
+ Saw before that without the last FC layer the generated images tend to
+ have grayscale backgrounds instead of pure black, at least in the beginning,
+ and the digits are more wispy.
+ I suppose that’s a feature of the convolution operation (might be useful).
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Conjecture.
+ 
+\emph default
+Whatever digits this particular network happens to generate in the beginning,
+ it’ll tend to learn and generate digits most similar to those.
+ E.g.
+ in the beginning the generator settles on 9-looking images, and it seems
+ later digits “evolved” from that, e.g.
+ 4, 7, 1, 2, 8, in order of how closely they resemble ones that went before.
+ In this case it's easy to transform the rough-looking 9 into 4 than into
+ 1.
+ It only starts learning 1's after having gone through 7.
+ Kinda makes sense.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Conjecture: existence of attractors.
+ 
+\emph default
+Once the network starts generating 1's, they'll take over, because it's
+ easier to turn other digits into 1's than to turn 1's into other digits.
+ E.g.
+ a narrow 9 looks a lot like 1, a narrow 8 looks like a 1, a badly written
+ 1 looks like a 1, a badly written 7 looks like a 1.
+ One's are like black holes.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Conjecture.
+ 
+\emph default
+Some digits never get generated.
+ There might not be any clear path from the existing digits to the missing
+ ones, e.g.
+ it's hard to go to 6 from the other digits.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Question.
+ 
+\emph default
+How do you stop that from happening?
+\end_layout
+
+\begin_layout Standard
+One solution might be to train multiple generators, each learning a few
+ digits, that together generates all the digits.
+ Drop out is a possibility.
+\end_layout
+
 \end_body
 \end_document
