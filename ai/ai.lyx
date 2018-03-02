@@ -488,5 +488,31 @@ One solution might be to train multiple generators, each learning a few
  Drop out?
 \end_layout
 
+\begin_layout Part
+March
+\end_layout
+
+\begin_layout Section
+R01.
+ Adding more randomness to the network to perturb the stagnant 
+\begin_inset Quotes eld
+\end_inset
+
+gene pool
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Question.
+ 
+\emph default
+How do you do that exactly?
+\end_layout
+
 \end_body
 \end_document
