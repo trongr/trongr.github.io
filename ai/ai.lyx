@@ -381,7 +381,15 @@ A network made of many smaller networks and the structure of the whole network
 \emph on
 which neuron talks to which neuron,
 \emph default
- how they talk, how much data to pass back and forth, when, etc.Conjecture.
+ how they talk, how much data to pass back and forth, when, etc.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Conjecture
+\emph default
+.
  
 \emph on
 The more powerful a generator is, the more chance of modal collapse.
