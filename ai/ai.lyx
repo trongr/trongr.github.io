@@ -493,8 +493,19 @@ March
 \end_layout
 
 \begin_layout Section
-R01.
- Adding more randomness to the network to perturb the stagnant 
+R1.
+ Modal collapse is natural
+\end_layout
+
+\begin_layout Standard
+It's not really that surprising that a GAN collapses into modes: that happens
+ in real life when humans learn (to generate) things too: we focus on the
+ things we're good at learning / generating, and ignore the vast majority
+ of other things.
+\end_layout
+
+\begin_layout Section
+Adding more randomness to the network to perturb the stagnant 
 \begin_inset Quotes eld
 \end_inset
 
