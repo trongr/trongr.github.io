@@ -407,18 +407,23 @@ W28.
 Network
 \emph default
 .
- Convolutional (the usual kind, not fractional stride) generator with convolutio
-nal (also usual) discriminator and simplified softmax.
- The generator has an FC layer at the end.
+ Convolutional (integer, non-fractional stride) generator with convolutional
+ (also integer) discriminator and simplified softmax.
+ 
+\end_layout
+
+\begin_layout Standard
+(The generator has an FC layer at the end.
  Without the last FC layer we would have to somehow merge the color channels
  into one, i.e.
  
 \begin_inset Formula $(N,28,28,C)\longrightarrow(N,28,28,1)$
 \end_inset
 
-, and the generated images would have greater grayscale variation instead
- of more black and white, at least in the beginning, as we saw before, and
- the digits would be more wispy.
+, e.g.
+ by averaging, and the generated images would have greater grayscale variation
+ instead of more black and white, at least in the beginning, as we saw before,
+ and the digits would be more wispy.)
 \end_layout
 
 \begin_layout Standard
@@ -432,7 +437,7 @@ Whatever digits the network happens to generate in the beginning, it’ll
  E.g.
  in the beginning the generator settles on 9-looking images, and it seems
  later digits “evolved” from that, e.g.
- 4, 7, 1, 2, 8, in order of how closely they resemble ones that went before.
+ 4, 7, 8, 1, 2, in order of how closely they resemble ones that went before.
  In this case it's easy to transform the rough-looking 9 into 4 than into
  1.
  It only starts learning 1's after having gone through 7.
@@ -448,7 +453,7 @@ Conjecture: existence of attractors.
 Once the network starts generating 1's, they'll take over, because it's
  easier to turn other digits into 1's than to turn 1's into other digits.
  E.g.
- a narrow 9 looks a lot like 1, a narrow 8 looks like a 1, a badly written
+ a narrow 9 looks a lot like a 1, a narrow 8 looks like a 1, a badly written
  1 looks like a 1, a badly written 7 looks like a 1.
  One's are like black holes.
 \end_layout
