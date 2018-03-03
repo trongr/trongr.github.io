@@ -381,7 +381,15 @@ A network made of many smaller networks and the structure of the whole network
 \emph on
 which neuron talks to which neuron,
 \emph default
- how they talk, how much data to pass back and forth, when, etc.Conjecture.
+ how they talk, how much data to pass back and forth, when, etc.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Conjecture
+\emph default
+.
  
 \emph on
 The more powerful a generator is, the more chance of modal collapse.
@@ -483,6 +491,43 @@ How do you stop that from happening?
 One solution might be to train multiple generators, each learning a few
  digits, that together generate all the digits.
  Drop out?
+\end_layout
+
+\begin_layout Part
+March
+\end_layout
+
+\begin_layout Section
+R1.
+ Modal collapse is natural
+\end_layout
+
+\begin_layout Standard
+It's not really that surprising that a GAN collapses into modes: that happens
+ in real life when humans learn (to generate) things too: we focus on the
+ things we're good at learning / generating, and ignore the vast majority
+ of other things.
+\end_layout
+
+\begin_layout Section
+Adding more randomness to the network to perturb the stagnant 
+\begin_inset Quotes eld
+\end_inset
+
+gene pool
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Question.
+ 
+\emph default
+How do you do that exactly?
 \end_layout
 
 \end_body
