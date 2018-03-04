@@ -503,7 +503,7 @@ R1.
 \end_layout
 
 \begin_layout Standard
-It's not really that surprising that a GAN collapses into modes: that happens
+It's not really surprising that a GAN collapses into modes: that happens
  in real life when humans learn (to generate) things too: we focus on the
  things we're good at learning / generating, and ignore the vast majority
  of other things.
@@ -527,7 +527,18 @@ gene pool
 Question.
  
 \emph default
-How do you do that exactly?
+How do you do that exactly? 
+\end_layout
+
+\begin_layout Section
+O4.
+ Having some trouble scaling
+\end_layout
+
+\begin_layout Standard
+the network from MNIST to CelebA, cause the images are a lot bigger and
+ the network doesn't seem to learn.
+ Keeps generating black images.
 \end_layout
 
 \end_body
