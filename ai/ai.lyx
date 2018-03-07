@@ -541,5 +541,20 @@ the network from MNIST to CelebA, cause the images are a lot bigger and
  Keeps generating black images.
 \end_layout
 
+\begin_layout Section
+M5.
+ Cooperative Networks and emergence
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Question.
+ 
+\emph default
+How do you make networks that cooperate? How do you compose networks together?
+ More generally, how do you compose simple things to make complex things?
+\end_layout
+
 \end_body
 \end_document
