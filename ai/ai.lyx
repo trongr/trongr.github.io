@@ -353,7 +353,8 @@ Are fully connected and convolutional networks equivalent? Specifically
 \end_layout
 
 \begin_layout Section
-The Neuralist
+Name.
+ The Neuralist
 \end_layout
 
 \begin_layout Section
@@ -554,6 +555,67 @@ Question.
 \emph default
 How do you make networks that cooperate? How do you compose networks together?
  More generally, how do you compose simple things to make complex things?
+\end_layout
+
+\begin_layout Section
+T6.
+ TODO.
+ GAN Generalization
+\end_layout
+
+\begin_layout Standard
+More than two networks, each contributing to none(?), one, or more loss
+ functions.
+\end_layout
+
+\begin_layout Standard
+Training a GAN to generate faces is not unlike Necromancy.
+ Some of these faces are terrifying.
+\end_layout
+
+\begin_layout Section
+W7.
+ Machine and Human Learning
+\end_layout
+
+\begin_layout Standard
+In two-player games, e.g.
+ Ping Pong, Chess, Generative Adversarial Networks, etc., you won't be able
+ to improve as well if your opponent is much better than you and plays without
+ mercy.
+ The most learning occurs for both players when they are more or less evenly
+ matched; then they can learn and improve together in tandem, like two feet
+ walking.
+\end_layout
+
+\begin_layout Section
+Teacher and Student Ensembles
+\end_layout
+
+\begin_layout Standard
+Applying human learning to machine learning, we might create a network composed
+ of many teachers / discriminators and many students / generators.
+ The teachers introduce a variety of subjects, or things to be learned,
+ and the students can come up with a variety of solutions.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Conjecture.
+
+\series default
+\emph on
+ Teacher and student ensembles perform better than a single all-knowing
+ teacher and all-talented student.
+ Architecturally it also scales better, because we can have lots of smaller
+ teacher and student networks instead of a single monolithic system, e.g.
+ teachers can take sabbaticals and a substitute can replace them, and so
+ on.
+\end_layout
+
+\begin_layout Section
+I need a bigger machine
 \end_layout
 
 \end_body
