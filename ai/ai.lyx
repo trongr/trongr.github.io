@@ -556,5 +556,54 @@ How do you make networks that cooperate? How do you compose networks together?
  More generally, how do you compose simple things to make complex things?
 \end_layout
 
+\begin_layout Section
+F10.
+ Generative models are powerful
+\end_layout
+
+\begin_layout Standard
+because if you can build a machine that can generate simple things like
+ text, images, music, etc.
+ very soon it'll be able to come up with more complicated ideas, e.g.
+ novels, math, how to navigate a city, how to grow and improve itself, i.e.
+ a machine that can think (compute at a deeper level).
+\end_layout
+
+\begin_layout Section
+How can we make machines that think at a deeper level?
+\end_layout
+
+\begin_layout Standard
+I think it's (simply!) by adding more connections and enabling more complex
+ interactions to occur more quickly among those connections.
+ If we give the machine more ability to twist and 
+\begin_inset Quotes eld
+\end_inset
+
+wrap
+\begin_inset Quotes erd
+\end_inset
+
+ its mind around ideas, it will naturally do it.
+ The problem then becomes scale (space) and speed (time), without compromising
+ either.
+\end_layout
+
+\begin_layout Section
+GAN: the more powerful a model is, the more likely modal collapse will happen
+\end_layout
+
+\begin_layout Standard
+E.g.
+ a conv GAN will converge faster and collapse faster than a GAN made of
+ only FC layers.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+In programming you don't understand things: you just use them.
+\end_layout
+
 \end_body
 \end_document
