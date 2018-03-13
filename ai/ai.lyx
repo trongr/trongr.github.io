@@ -92,7 +92,7 @@ S180217.
 \end_layout
 
 \begin_layout Paragraph*
-\begin_inset Formula 
+\begin_inset Formula
 \[
 \begin{aligned}Z & =\sum_{x\in B}e^{-\mu(x)}=\sum_{x\in B_{+}}e^{-D(x)}+\sum_{x\in B_{-}}e^{-D\circ G(x)}\\
 L_{D} & =\sum_{x\in B_{+}}\frac{1}{|B_{+}|}D(x)+\log Z\\
@@ -127,7 +127,7 @@ O180218
 Proposition
 \series default
 .
- 
+
 \emph on
 The cost function in linear regression by gradient descent is convex.
 \end_layout
@@ -138,16 +138,16 @@ The cost function in linear regression by gradient descent is convex.
 Proof
 \emph default
 .
- In linear regression by gradient descent we have the cost function 
-\begin_inset Formula 
+ In linear regression by gradient descent we have the cost function
+\begin_inset Formula
 \[
 J(\theta)=\frac{1}{2m}\sum_{k=1}^{m}(h_{\theta}(x^{(k)})-y^{(k)})^{2},
 \]
 
 \end_inset
 
-where 
-\begin_inset Formula 
+where
+\begin_inset Formula
 \[
 h_{\theta}(x)=\theta^{T}x=\theta_{0}x_{0}+\theta_{1}x_{1}+\cdots+\theta_{n}x_{n}
 \]
@@ -160,8 +160,8 @@ is the hypothesis function.
 \begin_layout Standard
 In order to show that J is convex we’re gonna use a well known fact from
  linear algebra that tells us whether a function J is convex or not by looking
- at its Hessian matrix of second order partial derivatives 
-\begin_inset Formula 
+ at its Hessian matrix of second order partial derivatives
+\begin_inset Formula
 \[
 H=\left[\frac{\partial^{2}J}{\partial\theta_{i}\partial\theta_{j}}\right].
 \]
@@ -171,7 +171,7 @@ H=\left[\frac{\partial^{2}J}{\partial\theta_{i}\partial\theta_{j}}\right].
 In particular it says that: A continuous, twice differentiable function
  of several variables is convex on a convex set if and only if its Hessian
  matrix is positive semidefinite on the interior of the convex set.
- 
+
 \end_layout
 
 \begin_layout Standard
@@ -179,12 +179,12 @@ In particular it says that: A continuous, twice differentiable function
 \end_layout
 
 \begin_layout Standard
-By definition H is positive semidefinite iff for any nonzero 
+By definition H is positive semidefinite iff for any nonzero
 \begin_inset Formula $\theta,$
 \end_inset
 
- we have 
-\begin_inset Formula 
+ we have
+\begin_inset Formula
 \[
 \theta^{T}H\theta\geq0.
 \]
@@ -200,16 +200,16 @@ By definition H is positive semidefinite iff for any nonzero
 
 \begin_layout Standard
 So let’s see what H looks like by calculating the first partial derivatives
- of J: 
-\begin_inset Formula 
+ of J:
+\begin_inset Formula
 \[
 \frac{\partial J}{\partial\theta_{j}}=\frac{1}{m}\sum_{k}(h_{\theta}(x^{(k)})-y^{(k)})x_{j}^{(k)},
 \]
 
 \end_inset
 
-and the seconds: 
-\begin_inset Formula 
+and the seconds:
+\begin_inset Formula
 \[
 H_{ij}=\frac{\partial^{2}J}{\partial\theta_{i}\partial\theta_{j}}=\frac{1}{m}\sum_{k}x_{i}^{(k)}x_{j}^{(k)}.
 \]
@@ -220,26 +220,26 @@ H_{ij}=\frac{\partial^{2}J}{\partial\theta_{i}\partial\theta_{j}}=\frac{1}{m}\su
 \end_layout
 
 \begin_layout Standard
-Looking at the formula for 
+Looking at the formula for
 \begin_inset Formula $H_{ij},$
 \end_inset
 
- we notice that H is precisely 
+ we notice that H is precisely
 \begin_inset Formula $\frac{1}{m}X^{T}X,$
 \end_inset
 
- where 
+ where
 \begin_inset Formula $X=[x_{i}^{(k)}]$
 \end_inset
 
  is the matrix of samples k by features i.
  Using H in matrix form makes it a lot easier to see that it’s positive
- semidefinite: note that 
+ semidefinite: note that
 \begin_inset Formula $\theta^{T}H\theta$
 \end_inset
 
- is just 
-\begin_inset Formula 
+ is just
+\begin_inset Formula
 \[
 \frac{1}{m}\theta^{T}X^{T}X\theta=\frac{1}{m}(X\theta)^{T}X\theta=\frac{1}{m}|X\theta|^{2}\geq0,
 \]
@@ -252,7 +252,7 @@ so H is positive semidefinite and J is convex.
 \begin_layout Standard
 And finally the reason we care about convexity is that it guarantees we
  can always find a global minimum for the cost function in linear regression.
- 
+
 \end_layout
 
 \begin_layout Section*
@@ -264,13 +264,13 @@ M180219.
 TODO.
  Would be interesting to see if different runs cause the generator to prefer
  different digits.
- That 
+ That
 \emph on
-would 
+would
 \emph default
 be interesting, but not very useful because we want consistency between
  runs, so that we can encode different digits on the random distribution
- 
+
 \begin_inset Formula $z.$
 \end_inset
 
@@ -287,7 +287,7 @@ LyX is quite enlightened in its philosophy of bridging / removing the gap
  This is a much more natural way of working than having to type and read
  LaTeX code, because the working mathematician doesn't care about LaTeX:
  what she cares about is the final math expressions.
- 
+
 \end_layout
 
 \begin_layout Standard
@@ -333,7 +333,7 @@ WGAN-GP (Gradient Penalty)
 
 \begin_layout Section
 R22.
- Fully Connected VS Convolutional Neural NetworksT20 
+ Fully Connected VS Convolutional Neural NetworksT20
 \end_layout
 
 \begin_layout Section
@@ -344,7 +344,7 @@ Generator power and modal collapse
 
 \series bold
 Question.
- 
+
 \series default
 \emph on
 Are fully connected and convolutional networks equivalent? Specifically
@@ -378,7 +378,7 @@ A Super Neural Network / Neural Super Network? or just Super Network
 \begin_layout Standard
 A network made of many smaller networks and the structure of the whole network
  is learned, e.g.
- 
+
 \emph on
 which neuron talks to which neuron,
 \emph default
@@ -391,7 +391,7 @@ which neuron talks to which neuron,
 Conjecture
 \emph default
 .
- 
+
 \emph on
 The more powerful a generator is, the more chance of modal collapse.
 \end_layout
@@ -400,7 +400,7 @@ The more powerful a generator is, the more chance of modal collapse.
 
 \emph on
 Question.
- 
+
 \emph default
 Powerful in what sense specifically?
 \end_layout
@@ -418,14 +418,14 @@ Network
 .
  Convolutional (integer, non-fractional stride) generator with convolutional
  (also integer) discriminator and simplified softmax.
- 
+
 \end_layout
 
 \begin_layout Standard
 (The generator has an FC layer at the end.
  Without the last FC layer we would have to somehow merge the color channels
  into one, i.e.
- 
+
 \begin_inset Formula $(N,28,28,C)\longrightarrow(N,28,28,1)$
 \end_inset
 
@@ -439,7 +439,7 @@ Network
 
 \emph on
 Conjecture.
- 
+
 \emph default
 Whatever digits the network happens to generate in the beginning, it’ll
  tend to learn and generate digits most similar to those.
@@ -457,7 +457,7 @@ Whatever digits the network happens to generate in the beginning, it’ll
 
 \emph on
 Conjecture: existence of attractors.
- 
+
 \emph default
 Once the network starts generating 1's, they'll take over, because it's
  easier to turn other digits into 1's than to turn 1's into other digits.
@@ -471,7 +471,7 @@ Once the network starts generating 1's, they'll take over, because it's
 
 \emph on
 Conjecture.
- 
+
 \emph default
 Some digits never get generated.
  There might not be any clear path from the existing digits to the missing
@@ -483,7 +483,7 @@ Some digits never get generated.
 
 \emph on
 Question.
- 
+
 \emph default
 How do you stop that from happening?
 \end_layout
@@ -511,7 +511,7 @@ It's not really surprising that a GAN collapses into modes: that happens
 \end_layout
 
 \begin_layout Section
-Adding more randomness to the network to perturb the stagnant 
+Adding more randomness to the network to perturb the stagnant
 \begin_inset Quotes eld
 \end_inset
 
@@ -526,9 +526,9 @@ gene pool
 
 \emph on
 Question.
- 
+
 \emph default
-How do you do that exactly? 
+How do you do that exactly?
 \end_layout
 
 \begin_layout Section
@@ -551,7 +551,7 @@ M5.
 
 \emph on
 Question.
- 
+
 \emph default
 How do you make networks that cooperate? How do you compose networks together?
  More generally, how do you compose simple things to make complex things?
@@ -637,11 +637,11 @@ Convolutional layers VS FC layers
 
 \emph on
 Conjecture.
- 
+
 \emph default
 Convolutional layers are highly sensitive to local changes in space, which
  is the reason they're used in image recognition tasks to detect local patterns.
- I suspect that 
+ I suspect that
 \emph on
 they're also sensitive to local changes in time, in the sense that they're
  easily influenced by the most recently seen training examples.
@@ -652,7 +652,7 @@ they're also sensitive to local changes in time, in the sense that they're
  in the training, generated images in each batch are almost identical to
  each other, and very different from those from even the previous batches.
  This suggests that the training images in the current batch are enough
- to force the entire convolutional network to 
+ to force the entire convolutional network to
 \begin_inset Quotes eld
 \end_inset
 
@@ -680,6 +680,52 @@ If your conv net isn't deep enough, it will learn local features but fail
 Adding FC layers after those conv layers should help prevent that.
  Do you need more FC layers the more conv layers you have in front? How
  about interleaving conv and FC layers?
+F10.
+ Generative models are powerful
+\end_layout
+
+\begin_layout Standard
+because if you can build a machine that can generate simple things like
+ text, images, music, etc.
+ very soon it'll be able to come up with more complicated ideas, e.g.
+ novels, math, how to navigate a city, how to grow and improve itself, i.e.
+ a machine that can think (compute at a deeper level).
+\end_layout
+
+\begin_layout Section
+How can we make machines that think at a deeper level?
+\end_layout
+
+\begin_layout Standard
+I think it's (simply!) by adding more connections and enabling more complex
+ interactions to occur more quickly among those connections.
+ If we give the machine more ability to twist and
+\begin_inset Quotes eld
+\end_inset
+
+wrap
+\begin_inset Quotes erd
+\end_inset
+
+ its mind around ideas, it will naturally do it.
+ The problem then becomes scale (space) and speed (time), without compromising
+ either.
+\end_layout
+
+\begin_layout Section
+GAN: the more powerful a model is, the more likely modal collapse will happen
+\end_layout
+
+\begin_layout Standard
+E.g.
+ a conv GAN will converge faster and collapse faster than a GAN made of
+ only FC layers.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+In programming you don't understand things: you just use them.
 \end_layout
 
 \end_body
