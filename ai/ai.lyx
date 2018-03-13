@@ -618,5 +618,69 @@ Conjecture.
 I need a bigger machine
 \end_layout
 
+\begin_layout Section
+Asking questions and coming up with insights
+\end_layout
+
+\begin_layout Standard
+The habit of constantly asking questions teaches you to ask better questions,
+ and the habit of coming up with insights teaches to you to come up with
+ better insights.
+ And, along the way, the little questions and insights add up.
+\end_layout
+
+\begin_layout Section
+Convolutional layers VS FC layers
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Conjecture.
+ 
+\emph default
+Convolutional layers are highly sensitive to local changes in space, which
+ is the reason they're used in image recognition tasks to detect local patterns.
+ I suspect that 
+\emph on
+they're also sensitive to local changes in time, in the sense that they're
+ easily influenced by the most recently seen training examples.
+
+\emph default
+ E.g.
+ in a GAN discriminator made of convolutional layers, at least early on
+ in the training, generated images in each batch are almost identical to
+ each other, and very different from those from even the previous batches.
+ This suggests that the training images in the current batch are enough
+ to force the entire convolutional network to 
+\begin_inset Quotes eld
+\end_inset
+
+change its mind.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Behold! Shallow Conv Nets
+\end_layout
+
+\begin_layout Standard
+If your conv net isn't deep enough, it will learn local features but fail
+ to learn how they combine together.
+ The consequence is it'll put those local patterns in the wrong places,
+ e.g.
+ when training a discriminator on faces with two conv layers, the generator
+ will put eyes all over the face.
+\end_layout
+
+\begin_layout Standard
+Adding FC layers after those conv layers should help prevent that.
+ Do you need more FC layers the more conv layers you have in front? How
+ about interleaving conv and FC layers?
+\end_layout
+
 \end_body
 \end_document
