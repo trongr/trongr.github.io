@@ -92,7 +92,7 @@ S180217.
 \end_layout
 
 \begin_layout Paragraph*
-\begin_inset Formula
+\begin_inset Formula 
 \[
 \begin{aligned}Z & =\sum_{x\in B}e^{-\mu(x)}=\sum_{x\in B_{+}}e^{-D(x)}+\sum_{x\in B_{-}}e^{-D\circ G(x)}\\
 L_{D} & =\sum_{x\in B_{+}}\frac{1}{|B_{+}|}D(x)+\log Z\\
@@ -127,7 +127,6 @@ O180218
 Proposition
 \series default
 .
-
 \emph on
 The cost function in linear regression by gradient descent is convex.
 \end_layout
@@ -139,7 +138,7 @@ Proof
 \emph default
 .
  In linear regression by gradient descent we have the cost function
-\begin_inset Formula
+\begin_inset Formula 
 \[
 J(\theta)=\frac{1}{2m}\sum_{k=1}^{m}(h_{\theta}(x^{(k)})-y^{(k)})^{2},
 \]
@@ -147,7 +146,7 @@ J(\theta)=\frac{1}{2m}\sum_{k=1}^{m}(h_{\theta}(x^{(k)})-y^{(k)})^{2},
 \end_inset
 
 where
-\begin_inset Formula
+\begin_inset Formula 
 \[
 h_{\theta}(x)=\theta^{T}x=\theta_{0}x_{0}+\theta_{1}x_{1}+\cdots+\theta_{n}x_{n}
 \]
@@ -161,7 +160,7 @@ is the hypothesis function.
 In order to show that J is convex we’re gonna use a well known fact from
  linear algebra that tells us whether a function J is convex or not by looking
  at its Hessian matrix of second order partial derivatives
-\begin_inset Formula
+\begin_inset Formula 
 \[
 H=\left[\frac{\partial^{2}J}{\partial\theta_{i}\partial\theta_{j}}\right].
 \]
@@ -171,7 +170,6 @@ H=\left[\frac{\partial^{2}J}{\partial\theta_{i}\partial\theta_{j}}\right].
 In particular it says that: A continuous, twice differentiable function
  of several variables is convex on a convex set if and only if its Hessian
  matrix is positive semidefinite on the interior of the convex set.
-
 \end_layout
 
 \begin_layout Standard
@@ -184,7 +182,7 @@ By definition H is positive semidefinite iff for any nonzero
 \end_inset
 
  we have
-\begin_inset Formula
+\begin_inset Formula 
 \[
 \theta^{T}H\theta\geq0.
 \]
@@ -201,7 +199,7 @@ By definition H is positive semidefinite iff for any nonzero
 \begin_layout Standard
 So let’s see what H looks like by calculating the first partial derivatives
  of J:
-\begin_inset Formula
+\begin_inset Formula 
 \[
 \frac{\partial J}{\partial\theta_{j}}=\frac{1}{m}\sum_{k}(h_{\theta}(x^{(k)})-y^{(k)})x_{j}^{(k)},
 \]
@@ -209,7 +207,7 @@ So let’s see what H looks like by calculating the first partial derivatives
 \end_inset
 
 and the seconds:
-\begin_inset Formula
+\begin_inset Formula 
 \[
 H_{ij}=\frac{\partial^{2}J}{\partial\theta_{i}\partial\theta_{j}}=\frac{1}{m}\sum_{k}x_{i}^{(k)}x_{j}^{(k)}.
 \]
@@ -239,7 +237,7 @@ Looking at the formula for
 \end_inset
 
  is just
-\begin_inset Formula
+\begin_inset Formula 
 \[
 \frac{1}{m}\theta^{T}X^{T}X\theta=\frac{1}{m}(X\theta)^{T}X\theta=\frac{1}{m}|X\theta|^{2}\geq0,
 \]
@@ -252,7 +250,6 @@ so H is positive semidefinite and J is convex.
 \begin_layout Standard
 And finally the reason we care about convexity is that it guarantees we
  can always find a global minimum for the cost function in linear regression.
-
 \end_layout
 
 \begin_layout Section*
@@ -270,7 +267,6 @@ would
 \emph default
 be interesting, but not very useful because we want consistency between
  runs, so that we can encode different digits on the random distribution
-
 \begin_inset Formula $z.$
 \end_inset
 
@@ -287,7 +283,6 @@ LyX is quite enlightened in its philosophy of bridging / removing the gap
  This is a much more natural way of working than having to type and read
  LaTeX code, because the working mathematician doesn't care about LaTeX:
  what she cares about is the final math expressions.
-
 \end_layout
 
 \begin_layout Standard
@@ -344,7 +339,6 @@ Generator power and modal collapse
 
 \series bold
 Question.
-
 \series default
 \emph on
 Are fully connected and convolutional networks equivalent? Specifically
@@ -378,7 +372,6 @@ A Super Neural Network / Neural Super Network? or just Super Network
 \begin_layout Standard
 A network made of many smaller networks and the structure of the whole network
  is learned, e.g.
-
 \emph on
 which neuron talks to which neuron,
 \emph default
@@ -393,7 +386,7 @@ Conjecture
 .
 
 \emph on
-The more powerful a generator is, the more chance of modal collapse.
+ The more powerful a generator is, the more chance of modal collapse.
 \end_layout
 
 \begin_layout Standard
@@ -402,7 +395,7 @@ The more powerful a generator is, the more chance of modal collapse.
 Question.
 
 \emph default
-Powerful in what sense specifically?
+ Powerful in what sense specifically?
 \end_layout
 
 \begin_layout Section
@@ -418,14 +411,12 @@ Network
 .
  Convolutional (integer, non-fractional stride) generator with convolutional
  (also integer) discriminator and simplified softmax.
-
 \end_layout
 
 \begin_layout Standard
 (The generator has an FC layer at the end.
  Without the last FC layer we would have to somehow merge the color channels
  into one, i.e.
-
 \begin_inset Formula $(N,28,28,C)\longrightarrow(N,28,28,1)$
 \end_inset
 
@@ -439,7 +430,6 @@ Network
 
 \emph on
 Conjecture.
-
 \emph default
 Whatever digits the network happens to generate in the beginning, it’ll
  tend to learn and generate digits most similar to those.
@@ -457,7 +447,6 @@ Whatever digits the network happens to generate in the beginning, it’ll
 
 \emph on
 Conjecture: existence of attractors.
-
 \emph default
 Once the network starts generating 1's, they'll take over, because it's
  easier to turn other digits into 1's than to turn 1's into other digits.
@@ -471,7 +460,6 @@ Once the network starts generating 1's, they'll take over, because it's
 
 \emph on
 Conjecture.
-
 \emph default
 Some digits never get generated.
  There might not be any clear path from the existing digits to the missing
@@ -483,7 +471,6 @@ Some digits never get generated.
 
 \emph on
 Question.
-
 \emph default
 How do you stop that from happening?
 \end_layout
@@ -526,7 +513,6 @@ gene pool
 
 \emph on
 Question.
-
 \emph default
 How do you do that exactly?
 \end_layout
@@ -551,7 +537,6 @@ M5.
 
 \emph on
 Question.
-
 \emph default
 How do you make networks that cooperate? How do you compose networks together?
  More generally, how do you compose simple things to make complex things?
@@ -639,7 +624,7 @@ Convolutional layers VS FC layers
 Conjecture.
 
 \emph default
-Convolutional layers are highly sensitive to local changes in space, which
+ Convolutional layers are highly sensitive to local changes in space, which
  is the reason they're used in image recognition tasks to detect local patterns.
  I suspect that
 \emph on
@@ -680,6 +665,9 @@ If your conv net isn't deep enough, it will learn local features but fail
 Adding FC layers after those conv layers should help prevent that.
  Do you need more FC layers the more conv layers you have in front? How
  about interleaving conv and FC layers?
+\end_layout
+
+\begin_layout Section
 F10.
  Generative models are powerful
 \end_layout
@@ -726,6 +714,72 @@ E.g.
 
 \emph on
 In programming you don't understand things: you just use them.
+\end_layout
+
+\begin_layout Section
+T13.
+ Been having trouble with GANs running out of MEM
+\end_layout
+
+\begin_layout Standard
+last few days moving from MNIST to CelebA.
+ Turns out was pretty easy to solve.
+ Moral is don't have FC layers mapping 218 * 178 * 3 = 100K units to 100K
+ other units.
+ That's 100K * 100K = 10M neurons.
+ With float32 that's 10GB of MEM! You need to reduce the input sizes before
+ feeding them into FC layers.
+ Laptop crashed several times trying to allocate memory.
+\end_layout
+
+\begin_layout Section
+R16.
+ Conv networks and entropy?
+\end_layout
+
+\begin_layout Standard
+Conv Generator, conv Discriminator, and softmax loss.
+ G and D also have ending FC layers.
+ Much cleaner images than an FC network with similar number of layers.
+ However, after about 30K iterations, the network starts losing control
+ and the colors start bleeding.
+ Don't know why yet, but I expect that a more powerful / deeper network
+ will be able to sustain its resolution longer.
+\end_layout
+
+\begin_layout Section
+Generative Model Learning from Experience
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Experiment.
+
+\series default
+\emph on
+ Something we can try is to feed the output of the generator back into part
+ of its input, so that say half the entries of 
+\begin_inset Formula $z$
+\end_inset
+
+ are drawn randomly and the other half are the generated images from the
+ last batch.
+ 
+\emph default
+I have no idea what this will do but it might give some interesting behavior
+ around seeding the generator with images you want it to create.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Experiment.
+ 
+\series default
+\emph on
+Another thing to try is to use an RNN to generate the images instead of
+ a convolutional or fully connected network.
 \end_layout
 
 \end_body
