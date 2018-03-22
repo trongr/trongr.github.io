@@ -127,7 +127,6 @@ O180218
 Proposition
 \series default
 .
- 
 \emph on
 The cost function in linear regression by gradient descent is convex.
 \end_layout
@@ -138,7 +137,7 @@ The cost function in linear regression by gradient descent is convex.
 Proof
 \emph default
 .
- In linear regression by gradient descent we have the cost function 
+ In linear regression by gradient descent we have the cost function
 \begin_inset Formula 
 \[
 J(\theta)=\frac{1}{2m}\sum_{k=1}^{m}(h_{\theta}(x^{(k)})-y^{(k)})^{2},
@@ -146,7 +145,7 @@ J(\theta)=\frac{1}{2m}\sum_{k=1}^{m}(h_{\theta}(x^{(k)})-y^{(k)})^{2},
 
 \end_inset
 
-where 
+where
 \begin_inset Formula 
 \[
 h_{\theta}(x)=\theta^{T}x=\theta_{0}x_{0}+\theta_{1}x_{1}+\cdots+\theta_{n}x_{n}
@@ -160,7 +159,7 @@ is the hypothesis function.
 \begin_layout Standard
 In order to show that J is convex we’re gonna use a well known fact from
  linear algebra that tells us whether a function J is convex or not by looking
- at its Hessian matrix of second order partial derivatives 
+ at its Hessian matrix of second order partial derivatives
 \begin_inset Formula 
 \[
 H=\left[\frac{\partial^{2}J}{\partial\theta_{i}\partial\theta_{j}}\right].
@@ -171,7 +170,6 @@ H=\left[\frac{\partial^{2}J}{\partial\theta_{i}\partial\theta_{j}}\right].
 In particular it says that: A continuous, twice differentiable function
  of several variables is convex on a convex set if and only if its Hessian
  matrix is positive semidefinite on the interior of the convex set.
- 
 \end_layout
 
 \begin_layout Standard
@@ -179,11 +177,11 @@ In particular it says that: A continuous, twice differentiable function
 \end_layout
 
 \begin_layout Standard
-By definition H is positive semidefinite iff for any nonzero 
+By definition H is positive semidefinite iff for any nonzero
 \begin_inset Formula $\theta,$
 \end_inset
 
- we have 
+ we have
 \begin_inset Formula 
 \[
 \theta^{T}H\theta\geq0.
@@ -200,7 +198,7 @@ By definition H is positive semidefinite iff for any nonzero
 
 \begin_layout Standard
 So let’s see what H looks like by calculating the first partial derivatives
- of J: 
+ of J:
 \begin_inset Formula 
 \[
 \frac{\partial J}{\partial\theta_{j}}=\frac{1}{m}\sum_{k}(h_{\theta}(x^{(k)})-y^{(k)})x_{j}^{(k)},
@@ -208,7 +206,7 @@ So let’s see what H looks like by calculating the first partial derivatives
 
 \end_inset
 
-and the seconds: 
+and the seconds:
 \begin_inset Formula 
 \[
 H_{ij}=\frac{\partial^{2}J}{\partial\theta_{i}\partial\theta_{j}}=\frac{1}{m}\sum_{k}x_{i}^{(k)}x_{j}^{(k)}.
@@ -220,25 +218,25 @@ H_{ij}=\frac{\partial^{2}J}{\partial\theta_{i}\partial\theta_{j}}=\frac{1}{m}\su
 \end_layout
 
 \begin_layout Standard
-Looking at the formula for 
+Looking at the formula for
 \begin_inset Formula $H_{ij},$
 \end_inset
 
- we notice that H is precisely 
+ we notice that H is precisely
 \begin_inset Formula $\frac{1}{m}X^{T}X,$
 \end_inset
 
- where 
+ where
 \begin_inset Formula $X=[x_{i}^{(k)}]$
 \end_inset
 
  is the matrix of samples k by features i.
  Using H in matrix form makes it a lot easier to see that it’s positive
- semidefinite: note that 
+ semidefinite: note that
 \begin_inset Formula $\theta^{T}H\theta$
 \end_inset
 
- is just 
+ is just
 \begin_inset Formula 
 \[
 \frac{1}{m}\theta^{T}X^{T}X\theta=\frac{1}{m}(X\theta)^{T}X\theta=\frac{1}{m}|X\theta|^{2}\geq0,
@@ -252,7 +250,6 @@ so H is positive semidefinite and J is convex.
 \begin_layout Standard
 And finally the reason we care about convexity is that it guarantees we
  can always find a global minimum for the cost function in linear regression.
- 
 \end_layout
 
 \begin_layout Section*
@@ -264,13 +261,12 @@ M180219.
 TODO.
  Would be interesting to see if different runs cause the generator to prefer
  different digits.
- That 
+ That
 \emph on
-would 
+would
 \emph default
 be interesting, but not very useful because we want consistency between
  runs, so that we can encode different digits on the random distribution
- 
 \begin_inset Formula $z.$
 \end_inset
 
@@ -287,7 +283,6 @@ LyX is quite enlightened in its philosophy of bridging / removing the gap
  This is a much more natural way of working than having to type and read
  LaTeX code, because the working mathematician doesn't care about LaTeX:
  what she cares about is the final math expressions.
- 
 \end_layout
 
 \begin_layout Standard
@@ -333,7 +328,7 @@ WGAN-GP (Gradient Penalty)
 
 \begin_layout Section
 R22.
- Fully Connected VS Convolutional Neural NetworksT20 
+ Fully Connected VS Convolutional Neural NetworksT20
 \end_layout
 
 \begin_layout Section
@@ -344,7 +339,6 @@ Generator power and modal collapse
 
 \series bold
 Question.
- 
 \series default
 \emph on
 Are fully connected and convolutional networks equivalent? Specifically
@@ -353,7 +347,8 @@ Are fully connected and convolutional networks equivalent? Specifically
 \end_layout
 
 \begin_layout Section
-The Neuralist
+Name.
+ The Neuralist
 \end_layout
 
 \begin_layout Section
@@ -377,7 +372,6 @@ A Super Neural Network / Neural Super Network? or just Super Network
 \begin_layout Standard
 A network made of many smaller networks and the structure of the whole network
  is learned, e.g.
- 
 \emph on
 which neuron talks to which neuron,
 \emph default
@@ -390,18 +384,18 @@ which neuron talks to which neuron,
 Conjecture
 \emph default
 .
- 
+
 \emph on
-The more powerful a generator is, the more chance of modal collapse.
+ The more powerful a generator is, the more chance of modal collapse.
 \end_layout
 
 \begin_layout Standard
 
 \emph on
 Question.
- 
+
 \emph default
-Powerful in what sense specifically?
+ Powerful in what sense specifically?
 \end_layout
 
 \begin_layout Section
@@ -417,14 +411,12 @@ Network
 .
  Convolutional (integer, non-fractional stride) generator with convolutional
  (also integer) discriminator and simplified softmax.
- 
 \end_layout
 
 \begin_layout Standard
 (The generator has an FC layer at the end.
  Without the last FC layer we would have to somehow merge the color channels
  into one, i.e.
- 
 \begin_inset Formula $(N,28,28,C)\longrightarrow(N,28,28,1)$
 \end_inset
 
@@ -438,7 +430,6 @@ Network
 
 \emph on
 Conjecture.
- 
 \emph default
 Whatever digits the network happens to generate in the beginning, it’ll
  tend to learn and generate digits most similar to those.
@@ -456,7 +447,6 @@ Whatever digits the network happens to generate in the beginning, it’ll
 
 \emph on
 Conjecture: existence of attractors.
- 
 \emph default
 Once the network starts generating 1's, they'll take over, because it's
  easier to turn other digits into 1's than to turn 1's into other digits.
@@ -470,7 +460,6 @@ Once the network starts generating 1's, they'll take over, because it's
 
 \emph on
 Conjecture.
- 
 \emph default
 Some digits never get generated.
  There might not be any clear path from the existing digits to the missing
@@ -482,7 +471,6 @@ Some digits never get generated.
 
 \emph on
 Question.
- 
 \emph default
 How do you stop that from happening?
 \end_layout
@@ -510,7 +498,7 @@ It's not really surprising that a GAN collapses into modes: that happens
 \end_layout
 
 \begin_layout Section
-Adding more randomness to the network to perturb the stagnant 
+Adding more randomness to the network to perturb the stagnant
 \begin_inset Quotes eld
 \end_inset
 
@@ -525,9 +513,8 @@ gene pool
 
 \emph on
 Question.
- 
 \emph default
-How do you do that exactly? 
+How do you do that exactly?
 \end_layout
 
 \begin_layout Section
@@ -550,10 +537,134 @@ M5.
 
 \emph on
 Question.
- 
 \emph default
 How do you make networks that cooperate? How do you compose networks together?
  More generally, how do you compose simple things to make complex things?
+\end_layout
+
+\begin_layout Section
+T6.
+ TODO.
+ GAN Generalization
+\end_layout
+
+\begin_layout Standard
+More than two networks, each contributing to none(?), one, or more loss
+ functions.
+\end_layout
+
+\begin_layout Standard
+Training a GAN to generate faces is not unlike Necromancy.
+ Some of these faces are terrifying.
+\end_layout
+
+\begin_layout Section
+W7.
+ Machine and Human Learning
+\end_layout
+
+\begin_layout Standard
+In two-player games, e.g.
+ Ping Pong, Chess, Generative Adversarial Networks, etc., you won't be able
+ to improve as well if your opponent is much better than you and plays without
+ mercy.
+ The most learning occurs for both players when they are more or less evenly
+ matched; then they can learn and improve together in tandem, like two feet
+ walking.
+\end_layout
+
+\begin_layout Section
+Teacher and Student Ensembles
+\end_layout
+
+\begin_layout Standard
+Applying human learning to machine learning, we might create a network composed
+ of many teachers / discriminators and many students / generators.
+ The teachers introduce a variety of subjects, or things to be learned,
+ and the students can come up with a variety of solutions.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Conjecture.
+
+\series default
+\emph on
+ Teacher and student ensembles perform better than a single all-knowing
+ teacher and all-talented student.
+ Architecturally it also scales better, because we can have lots of smaller
+ teacher and student networks instead of a single monolithic system, e.g.
+ teachers can take sabbaticals and a substitute can replace them, and so
+ on.
+\end_layout
+
+\begin_layout Section
+I need a bigger machine
+\end_layout
+
+\begin_layout Section
+Asking questions and coming up with insights
+\end_layout
+
+\begin_layout Standard
+The habit of constantly asking questions teaches you to ask better questions,
+ and the habit of coming up with insights teaches to you to come up with
+ better insights.
+ And, along the way, the little questions and insights add up.
+\end_layout
+
+\begin_layout Section
+Convolutional layers VS FC layers
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Conjecture.
+
+\emph default
+ Convolutional layers are highly sensitive to local changes in space, which
+ is the reason they're used in image recognition tasks to detect local patterns.
+ I suspect that
+\emph on
+they're also sensitive to local changes in time, in the sense that they're
+ easily influenced by the most recently seen training examples.
+
+\emph default
+ E.g.
+ in a GAN discriminator made of convolutional layers, at least early on
+ in the training, generated images in each batch are almost identical to
+ each other, and very different from those from even the previous batches.
+ This suggests that the training images in the current batch are enough
+ to force the entire convolutional network to
+\begin_inset Quotes eld
+\end_inset
+
+change its mind.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Behold! Shallow Conv Nets
+\end_layout
+
+\begin_layout Standard
+If your conv net isn't deep enough, it will learn local features but fail
+ to learn how they combine together.
+ The consequence is it'll put those local patterns in the wrong places,
+ e.g.
+ when training a discriminator on faces with two conv layers, the generator
+ will put eyes all over the face.
+\end_layout
+
+\begin_layout Standard
+Adding FC layers after those conv layers should help prevent that.
+ Do you need more FC layers the more conv layers you have in front? How
+ about interleaving conv and FC layers?
 \end_layout
 
 \begin_layout Section
@@ -576,7 +687,7 @@ How can we make machines that think at a deeper level?
 \begin_layout Standard
 I think it's (simply!) by adding more connections and enabling more complex
  interactions to occur more quickly among those connections.
- If we give the machine more ability to twist and 
+ If we give the machine more ability to twist and
 \begin_inset Quotes eld
 \end_inset
 
@@ -603,6 +714,142 @@ E.g.
 
 \emph on
 In programming you don't understand things: you just use them.
+\end_layout
+
+\begin_layout Section
+T13.
+ Been having trouble with GANs running out of MEM
+\end_layout
+
+\begin_layout Standard
+last few days moving from MNIST to CelebA.
+ Turns out was pretty easy to solve.
+ Moral is don't have FC layers mapping 218 * 178 * 3 = 100K units to 100K
+ other units.
+ That's 100K * 100K = 10M neurons.
+ With float32 that's 10GB of MEM! You need to reduce the input sizes before
+ feeding them into FC layers.
+ Laptop crashed several times trying to allocate memory.
+\end_layout
+
+\begin_layout Section
+R16.
+ Conv networks and entropy?
+\end_layout
+
+\begin_layout Standard
+Conv Generator, conv Discriminator, and softmax loss.
+ G and D also have ending FC layers.
+ Much cleaner images than an FC network with similar number of layers.
+ However, after about 30K iterations, the network starts losing control
+ and the colors start bleeding.
+ Don't know why yet, but I expect that a more powerful / deeper network
+ will be able to sustain its resolution longer.
+\end_layout
+
+\begin_layout Section
+Generative Model Learning from Experience
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Experiment.
+
+\series default
+\emph on
+ Something we can try is to feed the output of the generator back into part
+ of its input, so that say half the entries of 
+\begin_inset Formula $z$
+\end_inset
+
+ are drawn randomly and the other half are the generated images from the
+ last batch.
+ 
+\emph default
+I have no idea what this will do but it might give some interesting behavior
+ around seeding the generator with images you want it to create.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Experiment.
+ 
+\series default
+\emph on
+Another thing to try is to use an RNN to generate the images instead of
+ a convolutional or fully connected network.
+\end_layout
+
+\begin_layout Section
+M19.
+ Generative Adversarial Networks are .
+ .
+ .
+ well, adversarial
+\end_layout
+
+\begin_layout Standard
+I've just realized something: 
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Conjecture.
+ 
+\emph default
+The saturated images we saw previously (when you train a GAN for a long
+ time) is not due to the generator 
+\emph on
+failing
+\emph default
+ to learn: it's because the generator learned so well that it's coming up
+ with adversarial examples to fool the discriminator.
+ 
+\end_layout
+
+\begin_layout Standard
+We've seen this happening before, where you can trick a convolutional network
+ trained to classify images by tweaking the input image.
+ Here the discriminator is just a binary classifier, and we have a generator
+ trained to fool it! The problem is in the objective function and the discrimina
+tor: 
+\emph on
+the generator's job is not to come up with photorealistic faces; its job
+ is to trick the discriminator into 
+\emph default
+thinking 
+\emph on
+they're photorealistic faces, whether they are or not.
+ 
+\emph default
+That's a subtle but big difference.
+\end_layout
+
+\begin_layout Standard
+There're two problems here, but actually just one:
+\end_layout
+
+\begin_layout Enumerate
+We don't know how to create an objective function that tells the generator
+ to create realistic faces.
+ We don't know what a realistic face means.
+ The best we can do is to train a discriminator to decide for us what is
+ and isn't a realistic face.
+ That's what a realistic face is, is whatever the discriminator says.
+ Which leads us to the real problem:
+\end_layout
+
+\begin_layout Enumerate
+The discriminator is vulnerable to adversarial attacks.
+ Once we fix that the generator should be able to learn to create more reasonabl
+e pictures.
+\end_layout
+
+\begin_layout Section
+When you change the objective function, you change the game
 \end_layout
 
 \end_body
