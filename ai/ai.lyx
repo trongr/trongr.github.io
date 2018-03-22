@@ -782,5 +782,75 @@ Another thing to try is to use an RNN to generate the images instead of
  a convolutional or fully connected network.
 \end_layout
 
+\begin_layout Section
+M19.
+ Generative Adversarial Networks are .
+ .
+ .
+ well, adversarial
+\end_layout
+
+\begin_layout Standard
+I've just realized something: 
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Conjecture.
+ 
+\emph default
+The saturated images we saw previously (when you train a GAN for a long
+ time) is not due to the generator 
+\emph on
+failing
+\emph default
+ to learn: it's because the generator learned so well that it's coming up
+ with adversarial examples to fool the discriminator.
+ 
+\end_layout
+
+\begin_layout Standard
+We've seen this happening before, where you can trick a convolutional network
+ trained to classify images by tweaking the input image.
+ Here the discriminator is just a binary classifier, and we have a generator
+ trained to fool it! The problem is in the objective function and the discrimina
+tor: 
+\emph on
+the generator's job is not to come up with photorealistic faces; its job
+ is to trick the discriminator into 
+\emph default
+thinking 
+\emph on
+they're photorealistic faces, whether they are or not.
+ 
+\emph default
+That's a subtle but big difference.
+\end_layout
+
+\begin_layout Standard
+There're two problems here, but actually just one:
+\end_layout
+
+\begin_layout Enumerate
+We don't know how to create an objective function that tells the generator
+ to create realistic faces.
+ We don't know what a realistic face means.
+ The best we can do is to train a discriminator to decide for us what is
+ and isn't a realistic face.
+ That's what a realistic face is, is whatever the discriminator says.
+ Which leads us to the real problem:
+\end_layout
+
+\begin_layout Enumerate
+The discriminator is vulnerable to adversarial attacks.
+ Once we fix that the generator should be able to learn to create more reasonabl
+e pictures.
+\end_layout
+
+\begin_layout Section
+When you change the objective function, you change the game
+\end_layout
+
 \end_body
 \end_document
