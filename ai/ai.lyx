@@ -724,7 +724,7 @@ E.g.
  only FC layers.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Quote
 
 \emph on
 In programming you don't understand things: you just use them.
@@ -864,6 +864,19 @@ The discriminator is vulnerable to adversarial attacks.
 
 \begin_layout Section
 When you change the objective function, you change the game
+\end_layout
+
+\begin_layout Section
+O25.
+ Recursive GANs don't work so well
+\end_layout
+
+\begin_layout Address
+Tried feeding the generated images back to the front of the generator, worked
+ OK the first epoch, but fails after that.
+ Also tried feeding it near the end of the generator, but fails right off
+ the bat.
+ Let's put this one on the back burner for now.
 \end_layout
 
 \end_body
