@@ -619,6 +619,12 @@ Convolutional layers VS FC layers
 \end_layout
 
 \begin_layout Standard
+Earlier I made a .
+ .
+ .
+\end_layout
+
+\begin_layout Quote
 
 \emph on
 Conjecture.
@@ -628,16 +634,17 @@ Conjecture.
  is the reason they're used in image recognition tasks to detect local patterns.
  I suspect that
 \emph on
-they're also sensitive to local changes in time, in the sense that they're
+ they're also sensitive to local changes in time, in the sense that they're
  easily influenced by the most recently seen training examples.
 
 \emph default
  E.g.
  in a GAN discriminator made of convolutional layers, at least early on
- in the training, generated images in each batch are almost identical to
- each other, and very different from those from even the previous batches.
+ in the training (and much later on as well), generated images in each batch
+ are almost identical to each other, and very different from those from
+ even the previous batches.
  This suggests that the training images in the current batch are enough
- to force the entire convolutional network to
+ to force the entire convolutional network to 
 \begin_inset Quotes eld
 \end_inset
 
@@ -646,6 +653,13 @@ change its mind.
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+I think this is wrong, at least for the much later on part.
+ I think generators will tend to converge towards adversarial examples,
+ and as soon as the discriminiator learns those examples, G changes to another
+ set of adversarial examples.
 \end_layout
 
 \begin_layout Section
@@ -844,8 +858,8 @@ We don't know how to create an objective function that tells the generator
 
 \begin_layout Enumerate
 The discriminator is vulnerable to adversarial attacks.
- Once we fix that the generator should be able to learn to create more reasonabl
-e pictures.
+ Once we fix that the generator shoulcond be able to learn to create more
+ reasonable pictures.
 \end_layout
 
 \begin_layout Section
