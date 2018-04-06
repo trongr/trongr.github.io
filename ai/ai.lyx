@@ -865,5 +865,120 @@ Tried feeding the generated images back to the front of the generator, worked
  Let's put this one on the back burner for now.
 \end_layout
 
+\begin_layout Part
+April
+\end_layout
+
+\begin_layout Section
+18155 2593 600 50 2018-04-05 Thu
+\end_layout
+
+\begin_layout Section
+Jensen-Shannon divergence & Kullback–Leibler divergence
+\end_layout
+
+\begin_layout Standard
+Ah so this is similar to the earth mover metric in that it lets you measure
+ the distance between two probability distributions.
+ 
+\end_layout
+
+\begin_layout Standard
+Related: Kullback–Leibler divergence:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+D_{\text{KL}}(P\|Q)=-\sum_{i}P(i)\log\frac{Q(i)}{P(i)}=\sum_{i}P(i)\log\frac{P(i)}{Q(i)}.
+\]
+
+\end_inset
+
+For distributions P and Q of a continuous random variable,
+\begin_inset Formula 
+\[
+D_{\text{KL}}(P\|Q)=\int_{-\infty}^{\infty}p(x)\log\frac{p(x)}{q(x)}dx.
+\]
+
+\end_inset
+
+
+\emph on
+Question.
+ 
+\emph default
+What does this mean and How does it relate to the Shannon Entropy
+\begin_inset Formula 
+\[
+\text{H}=-\sum_{i}p_{i}\ln p_{i}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Shannon's Theorem and why you compressing an already compressed file makes
+ it bigger than the original
+\end_layout
+
+\begin_layout Quote
+However, the problem can still arise even in everyday use when applying
+ a compression algorithm to already compressed data: for example, making
+ a ZIP file of music, pictures or videos that are already in a compressed
+ format such as FLAC, MP3, WebM, AAC, PNG or JPEG will generally result
+ in a ZIP file that is slightly larger than the source file(s).
+\end_layout
+
+\begin_layout Section
+Information
+\end_layout
+
+\begin_layout Standard
+Properties of Information:
+\end_layout
+
+\begin_layout Enumerate
+An increase in the probability of an event decreases the information from
+ an observed event, and vice versa: 
+\begin_inset Formula $I(p)$
+\end_inset
+
+ is monotonically decreasing in 
+\begin_inset Formula $p.$
+\end_inset
+
+ (More information is contained in a message about an unlikely event.
+ This is why fake news go viral more often than real news: people like to
+ relay messages that contain more information to each other.
+ It's only natural.)
+\end_layout
+
+\begin_layout Enumerate
+Information is a non-negative quantity: 
+\begin_inset Formula $I(p)\geq0.$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Enumerate
+Events that always occur do not communicate information: 
+\begin_inset Formula $I(1)=0.$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Information due to independent events is additive: 
+\begin_inset Formula $I\left(p_{1}p_{2}\right)=I\left(p_{1}\right)+I\left(p\right).$
+\end_inset
+
+ Log has this additivity property.
+\end_layout
+
 \end_body
 \end_document

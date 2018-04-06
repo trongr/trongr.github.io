@@ -129,8 +129,210 @@ Let T be a normal linear operator on an inner product space V with eigenvalue
 March
 \end_layout
 
+\begin_layout Section
+18156 2593 600 50 2018-04-04 Wed 23:55:16
+\end_layout
+
+\begin_layout Standard
+Definition.
+ 
+\emph on
+A linear operator 
+\begin_inset Formula $T$
+\end_inset
+
+ on a finite dimensional inner product space V is called positive definite
+ if T is self-adjoint and 
+\begin_inset Formula $\left\langle T(x),x\right\rangle >0$
+\end_inset
+
+ for all 
+\begin_inset Formula $x\neq0.$
+\end_inset
+
+ It's called positive semidefinite if 
+\begin_inset Formula $\left\langle T(x),x\right\rangle \geq0$
+\end_inset
+
+ for all 
+\begin_inset Formula $x\neq0.$
+\end_inset
+
+ Similarly for a square matrix 
+\begin_inset Formula $A.$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Problem.
+ 
+\emph on
+Let T and U be self-adjoint linear operators on an n-dimensional inner product
+ space V, and let 
+\begin_inset Formula $A=\left[T\right]_{\beta},$
+\end_inset
+
+ where 
+\begin_inset Formula $\beta$
+\end_inset
+
+ is an orthonormal basis for V.
+ Prove:
+\end_layout
+
+\begin_layout Enumerate
+
+\emph on
+T is positive definite (semidefinite) iff all of its eigenvalues are positive
+ (nonnegative).
+\end_layout
+
+\begin_layout Enumerate
+
+\emph on
+T is positive definite iff 
+\begin_inset Formula 
+\[
+\sum_{i,j}A_{ij}a_{j}\overline{a}_{i}>0
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $(a_{1},\ldots,a_{n})\neq0.$
+\end_inset
+
+ [What about semidefinite?]
+\end_layout
+
+\begin_layout Enumerate
+
+\emph on
+T is positive definite semidefinite iff 
+\begin_inset Formula $A=B^{*}B$
+\end_inset
+
+ for some square matrix B.
+\end_layout
+
+\begin_layout Enumerate
+
+\emph on
+If T and U are positive semidefinite operators s.t.
+ 
+\begin_inset Formula $T^{2}=U^{2},$
+\end_inset
+
+ then 
+\begin_inset Formula $T=U.$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+
+\emph on
+If T and U are positive definite operators s.t.
+ 
+\begin_inset Formula $TU=UT,$
+\end_inset
+
+ then 
+\begin_inset Formula $TU$
+\end_inset
+
+ is positive definite.
+\end_layout
+
+\begin_layout Enumerate
+
+\emph on
+T is positive definite (semidefinite) iff A is.
+\end_layout
+
 \begin_layout Standard
 
+\emph on
+Proof 1.
+ 
+\emph default
+We'll show definite, semi is similar.
+ Let T be positive definite, and let 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ be an eigenvalue, and 
+\begin_inset Formula $x\neq0.$
+\end_inset
+
+ Then 
+\begin_inset Formula 
+\begin{align*}
+\left\langle T(x),x\right\rangle  & >0\\
+\left\langle \lambda x,x\right\rangle  & >\\
+\lambda\left\langle x,x\right\rangle  & >\\
+\lambda\text{\left|x\right|}^{2} & >0.
+\end{align*}
+
+\end_inset
+
+Since 
+\begin_inset Formula $\text{\left|x\right|}>0,$
+\end_inset
+
+ 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ must also be 
+\begin_inset Formula $>0.$
+\end_inset
+
+ Conversely, suppose that all eigenvalues of T are positive.
+ Let 
+\begin_inset Formula $v_{i}$
+\end_inset
+
+ be the eigenvectors of T with corresponding eigenvalues 
+\begin_inset Formula $\lambda_{i}$
+\end_inset
+
+.
+ Then 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+T(v_{i})=\lambda_{i}v_{i}.
+\]
+
+\end_inset
+
+Now let 
+\begin_inset Formula $x$
+\end_inset
+
+ be any vector, and 
+\begin_inset Formula $x=\sum a_{i}v_{i}.$
+\end_inset
+
+ Then 
+\begin_inset Formula 
+\[
+\left\langle T(x),x\right\rangle =\left\langle T\left(\sum a_{i}v_{i}\right),\sum a_{i}v_{i}\right\rangle =\left\langle \sum a_{i}\lambda_{i}v_{i},\sum a_{i}v_{i}\right\rangle =\sum\lambda_{i}\left|v_{i}\right|^{2}
+\]
+
+\end_inset
+
+(because the 
+\begin_inset Formula $v_{i}$
+\end_inset
+
+'s are orthonormal).
 \end_layout
 
 \end_body
