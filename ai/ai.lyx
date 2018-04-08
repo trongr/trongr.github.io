@@ -685,9 +685,13 @@ How can we make machines that think at a deeper level?
 \end_layout
 
 \begin_layout Standard
-I think it's (simply!) by adding more connections and enabling more complex
- interactions to occur more quickly among those connections.
- If we give the machine more ability to twist and
+I think it's (simply!) by 
+\emph on
+adding more connections and enabling more complex interactions to occur
+ more quickly among those connections.
+
+\emph default
+ If we give the machine more ability to twist and 
 \begin_inset Quotes eld
 \end_inset
 
@@ -768,7 +772,8 @@ Experiment.
  
 \emph default
 I have no idea what this will do but it might give some interesting behavior
- around seeding the generator with images you want it to create.
+ around seeding the generator with images you want it to create....
+ This doesn't work so good.
 \end_layout
 
 \begin_layout Standard
@@ -780,6 +785,7 @@ Experiment.
 \emph on
 Another thing to try is to use an RNN to generate the images instead of
  a convolutional or fully connected network.
+ TODO.
 \end_layout
 
 \begin_layout Section
@@ -919,12 +925,92 @@ What does this mean and How does it relate to the Shannon Entropy
 
 \end_layout
 
+\begin_layout Standard
+We have
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+D_{\text{KL}}(P\|Q) & =\sum_{i}P(i)\log\frac{P(i)}{Q(i)}\\
+ & =-\sum_{i}P(i)\log Q(i)+\sum_{i}P(i)\log P(i)\\
+ & =H(P,Q)-H(P)
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula $H(P,Q)$
+\end_inset
+
+ is the cross entropy of P and Q.
+ Whoa, it's this guy.
+ But what does it mean?
+\end_layout
+
+\begin_layout Subsection
+
+\emph on
+Conditional entropy
+\end_layout
+
+\begin_layout Standard
+TODO.
+ There is also the related quantity called the 
+\emph on
+conditional entropy
+\emph default
+ of two events X and Y:
+\begin_inset Formula 
+\[
+\text{H}(X|Y)=-\sum_{i,j}p\left(x_{i},y_{j}\right)\log\frac{p\left(x_{i},y_{j}\right)}{p\left(y_{j}\right)},
+\]
+
+\end_inset
+
+representing the amount of randomness in the random variable X given the
+ event Y.
+\end_layout
+
 \begin_layout Section
-Shannon's Theorem and why you compressing an already compressed file makes
- it bigger than the original
+Shannon Entropy
+\end_layout
+
+\begin_layout Standard
+Entropy is defined as the expected value of the amount of information contained
+ in an event.
+ It's the mean of the log probabilities of the component events, weighted
+ by the probabilities of the events:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\text{H}(X)=\mathbb{E}[\text{I}(X)]=\mathbb{E}[-\ln(P(X))]=\sum_{i=1}^{n}P\left(x_{i}\right)\text{I}\left(x_{i}\right)=-\sum_{i=1}^{n}P\left(x_{i}\right)\ln P\left(x_{i}\right).
+\]
+
+\end_inset
+
+So this is the reason AI people like to use log probabilities!
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+These are Times of High Entropy.
+
+\emph default
+ (These are uncertain times LOL)
+\end_layout
+
+\begin_layout Section
+Shannon's Theorem and why compressing an already compressed file makes it
+ bigger than the original
 \end_layout
 
 \begin_layout Quote
+
+\emph on
 However, the problem can still arise even in everyday use when applying
  a compression algorithm to already compressed data: for example, making
  a ZIP file of music, pictures or videos that are already in a compressed
@@ -977,7 +1063,19 @@ Information due to independent events is additive:
 \begin_inset Formula $I\left(p_{1}p_{2}\right)=I\left(p_{1}\right)+I\left(p\right).$
 \end_inset
 
- Log has this additivity property.
+ 
+\end_layout
+
+\begin_layout Standard
+Define 
+\begin_inset Formula 
+\[
+I(p)=\log(1/p)=-\log(p).
+\]
+
+\end_inset
+
+
 \end_layout
 
 \end_body

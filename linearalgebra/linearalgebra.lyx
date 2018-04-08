@@ -91,6 +91,81 @@ M19F18
 \end_layout
 
 \begin_layout Section
+Theorem 6.3
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Theorem.
+ Let V be an inner product space and 
+\begin_inset Formula $S=\left\{ v_{1},v_{2}\dots\ldots,v_{k}\right\} $
+\end_inset
+
+ be an orthogonal subset of V consisting of nonzero vectors.
+ If 
+\begin_inset Formula $y\in\operatorname{span}(S)$
+\end_inset
+
+ then 
+\begin_inset Formula 
+\[
+y=\sum_{i=1}^{k}\frac{\left\langle y,v_{i}\right\rangle }{\|v_{i}\|^{2}}v_{i}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Corollary.
+ 
+\emph on
+Let V be an inner product space and 
+\begin_inset Formula $S=\left\{ v_{1},v_{2}\dots\ldots,v_{k}\right\} $
+\end_inset
+
+ be an orthonormal subset of V and 
+\begin_inset Formula $y\in\operatorname{span}(S),$
+\end_inset
+
+ then 
+\begin_inset Formula 
+\[
+y=\sum_{i=1}^{k}\left\langle y,v_{i}\right\rangle v_{i}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Corollary.
+ 
+\emph on
+Let V be an inner product space, 
+\begin_inset Formula $y\in V,$
+\end_inset
+
+ and 
+\begin_inset Formula $\beta=\left\{ v_{1},v_{2}\dots\ldots,v_{k}\right\} $
+\end_inset
+
+ be an orthonormal basis for V.
+ Then 
+\begin_inset Formula 
+\[
+y=\sum_{i=1}^{k}\left\langle y,v_{i}\right\rangle v_{i}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
 Eigenvectors of a normal operator
 \end_layout
 
@@ -131,6 +206,52 @@ March
 
 \begin_layout Section
 18156 2593 600 50 2018-04-04 Wed 23:55:16
+\end_layout
+
+\begin_layout Standard
+Theorem.
+ 
+\emph on
+The inner product is unique up to an orthonormal basis.
+ Specifically, let V be a finite-dimensional inner product on C or R, and
+ 
+\begin_inset Formula $\beta$
+\end_inset
+
+ and 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ be any orthonormal bases for V, and x, y be vectors in V.
+ Then 
+\begin_inset Formula 
+\[
+\left\langle x,y\right\rangle =\overline{y}^{T}x=[y]_{\beta}\cdot[x]_{\beta}=[y]_{\gamma}\cdot[x]_{\gamma}.
+\]
+
+\end_inset
+
+In other words, the dot product of two vectors is the same in any orthonormal
+ basis.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Proof.
+ 
+\emph default
+TODO.
+ Might need the fact that 
+\begin_inset Formula 
+\[
+w_{i}=\sum_{j=1}^{n}\left\langle w_{i},v_{j}\right\rangle v_{j}
+\]
+
+\end_inset
+
+ from Theorem 6.3 and cor in the book.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -204,7 +325,7 @@ for all
 \begin_inset Formula $(a_{1},\ldots,a_{n})\neq0.$
 \end_inset
 
- [What about semidefinite?]
+ [What about semidefinite? Also true.]
 \end_layout
 
 \begin_layout Enumerate
@@ -333,6 +454,42 @@ Now let
 \end_inset
 
 's are orthonormal).
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Proof 2.
+ 
+\emph default
+First note that
+\begin_inset Formula 
+\[
+\sum_{i,j}A_{ij}a_{j}\overline{a}_{i}=\text{\ensuremath{\overline{a}^{T}Aa=\overline{\begin{bmatrix}a_{1} & \cdots & a_{n}\end{bmatrix}}\left[A_{ij}\right]\begin{bmatrix}a_{1}\\
+\vdots\\
+a_{n}
+\end{bmatrix}.}}
+\]
+
+\end_inset
+
+This is equal to 
+\begin_inset Formula 
+\[
+\left\langle T\left(x\right),x\right\rangle 
+\]
+
+\end_inset
+
+since 
+\begin_inset Formula $\beta$
+\end_inset
+
+ is an orthonormal basis (recall that 
+\emph on
+the dot product of two vectors is the same in any orthonormal basis
+\emph default
+).
 \end_layout
 
 \end_body
