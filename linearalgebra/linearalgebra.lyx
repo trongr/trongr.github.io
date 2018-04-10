@@ -70,6 +70,14 @@
 
 \begin_body
 
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\rank}{\operatorname{rank}}
+\end_inset
+
+
+\end_layout
+
 \begin_layout Title
 Linear Algebra
 \end_layout
@@ -88,6 +96,81 @@ February
 
 \begin_layout Section*
 M19F18
+\end_layout
+
+\begin_layout Section
+Exercise 5.4.25.
+ 
+\emph on
+Simultaneously diagonalizable if 
+\emph default
+
+\begin_inset Formula $UT=TU$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Proposition
+\emph on
+.
+ If T and U are diagonalizable linear operators on a finite-dimensional
+ vector space V s.t.
+ 
+\begin_inset Formula $UT=TU,$
+\end_inset
+
+ then T and U are simultaneously diagonalizable.
+\end_layout
+
+\begin_layout Section
+Theorem.
+ 
+\emph on
+If two operators agree on a basis, they are equal.
+\end_layout
+
+\begin_layout Section
+Theorem.
+ 
+\emph on
+Eigenvectors correspondiong to distinct eigenvalues of a normal operator
+ are orthogonal
+\end_layout
+
+\begin_layout Standard
+Theorem.
+ 
+\emph on
+Let T be normal on V, 
+\begin_inset Formula $\left\langle \cdot,\cdot\right\rangle .$
+\end_inset
+
+ Then eigenvectors correspondiong to distinct eigenvalues of T are orthogonal.
+\end_layout
+
+\begin_layout Section
+Theorem.
+ 
+\emph on
+Normal operators are diagonalizable
+\end_layout
+
+\begin_layout Section
+Theorem.
+ 
+\emph on
+An operator T is diagonalizable iff there exists a basis of V consisting
+ of eigenvectors of T
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Corollary.
+ If T is a self-adjoint operator, then there is a basis of V consisting
+ of eigenvectors of T.
 \end_layout
 
 \begin_layout Section
@@ -166,6 +249,35 @@ y=\sum_{i=1}^{k}\left\langle y,v_{i}\right\rangle v_{i}.
 \end_layout
 
 \begin_layout Section
+Theorem 6.16.
+ Complex case: normal operator and orthonormal basis consisting of eigenvectors
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Let T be a linear operator on a finite-dimensional complex inner product
+ space V.
+ Then T is normal iff there exists an orthonormal basis for V consisting
+ of eigenvectors of T.
+\end_layout
+
+\begin_layout Section
+Theorem 6.17.
+ Real case: self-adjoint operator and orthonormal basis consisting of eigenvecto
+rs
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Let T be a linear operator on a finite-dimensional real inner product space
+ V.
+ Then T is self-adjoint iff there exists an orthonormal basis for V consisting
+ of eigenvectors of T.
+\end_layout
+
+\begin_layout Section
 Eigenvectors of a normal operator
 \end_layout
 
@@ -236,22 +348,8 @@ In other words, the dot product of two vectors is the same in any orthonormal
 \end_layout
 
 \begin_layout Standard
-
-\emph on
 Proof.
- 
-\emph default
-TODO.
- Might need the fact that 
-\begin_inset Formula 
-\[
-w_{i}=\sum_{j=1}^{n}\left\langle w_{i},v_{j}\right\rangle v_{j}
-\]
-
-\end_inset
-
- from Theorem 6.3 and cor in the book.
- 
+ TODO.
 \end_layout
 
 \begin_layout Standard
@@ -286,9 +384,13 @@ A linear operator
 
 \end_layout
 
+\begin_layout Section
+Exercise 6.4.17.
+ Positive semi/definite operator
+\end_layout
+
 \begin_layout Standard
-Problem.
- 
+
 \emph on
 Let T and U be self-adjoint linear operators on an n-dimensional inner product
  space V, and let 
@@ -331,7 +433,7 @@ for all
 \begin_layout Enumerate
 
 \emph on
-T is positive definite semidefinite iff 
+T is positive semidefinite iff 
 \begin_inset Formula $A=B^{*}B$
 \end_inset
 
@@ -356,7 +458,7 @@ If T and U are positive semidefinite operators s.t.
 \begin_layout Enumerate
 
 \emph on
-If T and U are positive definite operators s.t.
+If T and U are positive definite (semidefinite?) operators s.t.
  
 \begin_inset Formula $TU=UT,$
 \end_inset
@@ -365,7 +467,7 @@ If T and U are positive definite operators s.t.
 \begin_inset Formula $TU$
 \end_inset
 
- is positive definite.
+ is positive definite (semidefinite?).
 \end_layout
 
 \begin_layout Enumerate
@@ -490,6 +592,80 @@ since
 the dot product of two vectors is the same in any orthonormal basis
 \emph default
 ).
+\end_layout
+
+\begin_layout Section
+18151 2593 600 50 2018-04-09 Mon 23:13:09
+\end_layout
+
+\begin_layout Section
+Ex 6.4.18
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Let 
+\begin_inset Formula $T:V\longrightarrow W$
+\end_inset
+
+ be a linear transformation, where V and W are finite-dim.
+ Then
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $T^{*}T$
+\end_inset
+
+ and 
+\begin_inset Formula $TT^{*}$
+\end_inset
+
+ are positive semidefinite.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\rank(T^{*}T)=\rank(TT^{*})=\rank(T).$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Ex 6.4.19
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Let T and U be positive definite operators on an inner product space V.
+ Then
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $T+U$
+\end_inset
+
+ is positive definite.
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $c>0,$
+\end_inset
+
+ then 
+\begin_inset Formula $cT$
+\end_inset
+
+ is p.d.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $T^{-1}$
+\end_inset
+
+ is p.d.
 \end_layout
 
 \end_body

@@ -945,7 +945,7 @@ where
 
  is the cross entropy of P and Q.
  Whoa, it's this guy.
- But what does it mean?
+ But what does it mean? TODO.
 \end_layout
 
 \begin_layout Subsection
@@ -998,9 +998,7 @@ So this is the reason AI people like to use log probabilities!
 
 \emph on
 These are Times of High Entropy.
-
-\emph default
- (These are uncertain times LOL)
+ LOL
 \end_layout
 
 \begin_layout Section
