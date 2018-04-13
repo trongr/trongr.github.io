@@ -668,5 +668,162 @@ If
  is p.d.
 \end_layout
 
+\begin_layout Section
+18149.
+ Unitary and orthogonal operators and their matrices
+\end_layout
+
+\begin_layout Standard
+Definition.
+ 
+\emph on
+Let T, n, 
+\begin_inset Formula $\left\langle \right\rangle ,V,F.$
+\end_inset
+
+ If 
+\begin_inset Formula $\left|\left|T(x)\right|\right|=\left|\left|x\right|\right|$
+\end_inset
+
+ for all 
+\begin_inset Formula $x,$
+\end_inset
+
+ we call T a unitary operator if 
+\begin_inset Formula $F=C,$
+\end_inset
+
+ and an orthogonal operator if 
+\begin_inset Formula $F=R.$
+\end_inset
+
+ T is also called an isometry, or length-preserving operator.
+\end_layout
+
+\begin_layout Standard
+E.g.
+ any rotation or reflection in 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ preserves length and hence is an orthogonal operator.
+\end_layout
+
+\begin_layout Standard
+E.g.
+ Recall the space H of continuous complex-valued functions defined on 
+\begin_inset Formula $[0,2\pi]$
+\end_inset
+
+ with the inner product
+\begin_inset Formula 
+\[
+\left\langle f,g\right\rangle =\frac{1}{2\pi}\int_{0}^{2\pi}f(t)\overline{g(t)}dt.
+\]
+
+\end_inset
+
+ Let 
+\begin_inset Formula $h\in H$
+\end_inset
+
+ satisfy 
+\begin_inset Formula $\left|h(x)\right|=1$
+\end_inset
+
+ for all 
+\begin_inset Formula $x.$
+\end_inset
+
+ Define T on H by 
+\begin_inset Formula $T(f)=hf.$
+\end_inset
+
+ Then 
+\begin_inset Formula 
+\[
+\left|\left|T(f)\right|\right|^{2}=\left|\left|hf\right|\right|^{2}=\frac{1}{2\pi}\int_{0}^{2\pi}h(t)f(t)\overline{h(t)f(t)}dt=\left|\left|f\right|\right|^{2}
+\]
+
+\end_inset
+
+since 
+\begin_inset Formula $\left|h(t)\right|^{2}=1.$
+\end_inset
+
+ So T is a unitary operator.
+ 
+\end_layout
+
+\begin_layout Section
+Theorem 6.18.
+ Characterizing unitary / orthogonal / isometric operators on a fin dim
+ inner product space
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Let T, n, 
+\begin_inset Formula $\left\langle \right\rangle ,V,F.$
+\end_inset
+
+ Then the following statements are equivalent:
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $TT^{*}=T^{*}T=I.$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\left\langle T(x),T(y)\right\rangle =\left\langle x,y\right\rangle $
+\end_inset
+
+ for all 
+\begin_inset Formula $x,y.$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $\beta$
+\end_inset
+
+ is an orthonormal basis, then 
+\begin_inset Formula $T(\beta)$
+\end_inset
+
+ is an orthonormal basis.
+\end_layout
+
+\begin_layout Enumerate
+There exists an orthonormal basis 
+\begin_inset Formula $\beta$
+\end_inset
+
+ s.t.
+ 
+\begin_inset Formula $T(\beta)$
+\end_inset
+
+ is an orthonormal basis.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\left|\left|T(x)\right|\right|=\left|\left|x\right|\right|$
+\end_inset
+
+ for all 
+\begin_inset Formula $x.$
+\end_inset
+
+
+\end_layout
+
 \end_body
 \end_document
