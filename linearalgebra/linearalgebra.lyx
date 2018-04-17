@@ -158,7 +158,7 @@ Normal operators are diagonalizable
 \end_layout
 
 \begin_layout Section
-Theorem.
+Theorem *6.3.
  
 \emph on
 An operator T is diagonalizable iff there exists a basis of V consisting
@@ -171,6 +171,15 @@ An operator T is diagonalizable iff there exists a basis of V consisting
 Corollary.
  If T is a self-adjoint operator, then there is a basis of V consisting
  of eigenvectors of T.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Proof.
+ 
+\emph default
+Follows from Theorem 6.16 or 6.17.
 \end_layout
 
 \begin_layout Section
@@ -275,6 +284,27 @@ Let T be a linear operator on a finite-dimensional real inner product space
  V.
  Then T is self-adjoint iff there exists an orthonormal basis for V consisting
  of eigenvectors of T.
+\end_layout
+
+\begin_layout Standard
+Corollary 6.17.
+ 
+\emph on
+Let T be a linear operator on a finite-dimensional complex [real] inner
+ product space V.
+ If T is normal [self-adjoint] then T is diagonalizable.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Proof.
+ 
+\emph default
+In either case, V has an orthonormal basis consisting of eigenvectors of
+ T.
+ By Theorem *6.3, this happens iff T is diagonalizable.
+ Oh, I already have this corollary as a corollary over there.
 \end_layout
 
 \begin_layout Section
@@ -669,7 +699,7 @@ If
 \end_layout
 
 \begin_layout Section
-18149.
+18149 2592 600.
  Unitary and orthogonal operators and their matrices
 \end_layout
 
@@ -756,8 +786,84 @@ since
 \end_layout
 
 \begin_layout Section
+18143 2591 600 50 2018-04-17
+\end_layout
+
+\begin_layout Section
+Lemma 6.18
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Let U be self adjoint on 
+\begin_inset Formula $n,\left\langle \right\rangle ,V.$
+\end_inset
+
+ If 
+\begin_inset Formula $\left\langle x,U(x)\right\rangle =0$
+\end_inset
+
+ for all x, then 
+\begin_inset Formula $U=T_{0},$
+\end_inset
+
+ the zero operator.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Proof.
+ 
+\emph default
+By Theorem 6.16 or 6.17, there exists an orthonormal basis 
+\begin_inset Formula $\beta$
+\end_inset
+
+ for V consisting of eigenvectors of U.
+ Let 
+\begin_inset Formula $x\in\beta.$
+\end_inset
+
+ Then 
+\begin_inset Formula $U(x)=\lambda x$
+\end_inset
+
+ for some 
+\begin_inset Formula $\lambda.$
+\end_inset
+
+ Thus
+\begin_inset Formula 
+\[
+0=\left\langle x,U(x)\right\rangle =\left\langle x,\lambda x\right\rangle =\overline{\lambda}\left\langle x,x\right\rangle =\overline{\lambda}\left|\left|x\right|\right|^{2},
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula $\overline{\lambda}=0.$
+\end_inset
+
+ Hence 
+\begin_inset Formula $U(x)=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $x\in\beta$
+\end_inset
+
+ and 
+\begin_inset Formula $U=T_{0}.$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Section
 Theorem 6.18.
- Characterizing unitary / orthogonal / isometric operators on a fin dim
+ Characterizing unitary / orthogonal / isometric operato8rs on a fin dim
  inner product space
 \end_layout
 
@@ -772,13 +878,18 @@ Let T, n,
 \end_layout
 
 \begin_layout Enumerate
+
+\emph on
 \begin_inset Formula $TT^{*}=T^{*}T=I.$
 \end_inset
 
-
+ In particular, T is normal and there exists an orthonormal basis for V
+ consisting of eigenvectors of T.
 \end_layout
 
 \begin_layout Enumerate
+
+\emph on
 \begin_inset Formula $\left\langle T(x),T(y)\right\rangle =\left\langle x,y\right\rangle $
 \end_inset
 
@@ -790,6 +901,8 @@ Let T, n,
 \end_layout
 
 \begin_layout Enumerate
+
+\emph on
 If 
 \begin_inset Formula $\beta$
 \end_inset
@@ -802,6 +915,8 @@ If
 \end_layout
 
 \begin_layout Enumerate
+
+\emph on
 There exists an orthonormal basis 
 \begin_inset Formula $\beta$
 \end_inset
@@ -815,6 +930,8 @@ There exists an orthonormal basis
 \end_layout
 
 \begin_layout Enumerate
+
+\emph on
 \begin_inset Formula $\left|\left|T(x)\right|\right|=\left|\left|x\right|\right|$
 \end_inset
 
@@ -823,6 +940,201 @@ There exists an orthonormal basis
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+In other words, an operator is unitary / orthogonal iff it is normal and
+ its 
+\begin_inset Quotes eld
+\end_inset
+
+norm
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $TT^{*}$
+\end_inset
+
+ is 1.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Proof
+\emph default
+ (1) implies (2).
+ For any 
+\begin_inset Formula $x,y,$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\left\langle x,y\right\rangle =\left\langle T^{*}T(x),y\right\rangle =\left\langle T(x),T(y)\right\rangle .
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Proof 
+\emph default
+(2) implies (3).
+ Let 
+\begin_inset Formula $\beta=\left\{ v_{1},\ldots,v_{n}\right\} $
+\end_inset
+
+ be an orthonormal basis for V.
+ Then 
+\begin_inset Formula $T(\beta)=\left\{ T(v_{1}),\ldots,T(v_{n})\right\} $
+\end_inset
+
+ and 
+\begin_inset Formula 
+\[
+\left\langle T(v_{i}),T(v_{j})\right\rangle =\left\langle v_{i},v_{j}\right\rangle =\delta_{ij},
+\]
+
+\end_inset
+
+so 
+\begin_inset Formula $T(\beta)$
+\end_inset
+
+ is an orthonormal basis for V.
+\end_layout
+
+\begin_layout Standard
+Proof (3) implies (4).
+ [This one is a little odd?] Any orthonormal basis 
+\begin_inset Formula $\beta$
+\end_inset
+
+ satisfies this property, and there must be one because V is fin dim.
+\end_layout
+
+\begin_layout Standard
+Proof (4) implies (5).
+ Let 
+\begin_inset Formula $x\in V,\beta=\left\{ v_{1},\ldots,v_{n}\right\} .$
+\end_inset
+
+ Then
+\begin_inset Formula 
+\[
+x=\sum_{i=1}^{n}a_{i}v_{i}
+\]
+
+\end_inset
+
+for some 
+\begin_inset Formula $a_{i},$
+\end_inset
+
+ and 
+\begin_inset Formula 
+\[
+\left|\left|x\right|\right|^{2}=\left\langle \sum_{i=1}^{n}a_{i}v_{i},\sum_{i=1}^{n}a_{i}v_{i}\right\rangle =\sum_{i}\sum_{j}a_{i}\overline{a_{j}}\left\langle v_{i},v_{j}\right\rangle =\sum_{i=1}^{n}\left|a_{i}\right|^{2}.
+\]
+
+\end_inset
+
+Similarly,
+\begin_inset Formula 
+\[
+\left|\left|T(x)\right|\right|^{2}=\left\langle \sum_{i=1}^{n}a_{i}T(v_{i}),\sum_{i=1}^{n}a_{i}T(v_{i})\right\rangle =\sum_{i}\sum_{j}a_{i}\overline{a_{j}}\left\langle T(v_{i}),T(v_{j})\right\rangle =\sum_{i=1}^{n}\left|a_{i}\right|^{2},
+\]
+
+\end_inset
+
+since 
+\begin_inset Formula $T(\beta)$
+\end_inset
+
+ is also orthonormal.
+\end_layout
+
+\begin_layout Standard
+Proof (5) implies (1).
+ For any 
+\begin_inset Formula $x,$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\begin{aligned}\left\langle x,x\right\rangle  & =\left\langle T(x),T(x)\right\rangle =\left\langle x,T^{*}T(x)\right\rangle \\
+\left\langle x,(I-T^{*}T)(x)\right\rangle  & =0.
+\end{aligned}
+\]
+
+\end_inset
+
+Let 
+\begin_inset Formula $U=I-T^{*}T.$
+\end_inset
+
+ Then U is self-adjoint and 
+\begin_inset Formula $\left\langle x,U(x)\right\rangle =0$
+\end_inset
+
+ for all x.
+ By the previous lemma, 
+\begin_inset Formula $I-T^{*}T=U=T_{0}$
+\end_inset
+
+ and 
+\begin_inset Formula $I=T^{*}T.$
+\end_inset
+
+ [Why does this imply that 
+\begin_inset Formula $TT^{*}=I?$
+\end_inset
+
+ The referenced Exercise 2.4.10 is about invertible matrices, not adjoint
+ operators.]
+\end_layout
+
+\begin_layout Standard
+Conjecture.
+ 
+\emph on
+Let T, n, 
+\begin_inset Formula $\left\langle \right\rangle ,V,F,$
+\end_inset
+
+ and let 
+\begin_inset Formula $\beta$
+\end_inset
+
+ be an orthonormal basis for V.
+ Then 
+\begin_inset Formula $T^{*}=T^{-1}$
+\end_inset
+
+ iff 
+\begin_inset Formula $T(\beta)$
+\end_inset
+
+ is also an orthonormal basis.
+\end_layout
+
+\begin_layout Standard
+If that were true we can apply Exercise 2.4.10 and say that 
+\begin_inset Formula $TT^{*}=TT^{-1}=I$
+\end_inset
+
+ and therefore 
+\begin_inset Formula $T^{-1}T=T^{*}T=I.$
+\end_inset
+
+ 
 \end_layout
 
 \end_body
