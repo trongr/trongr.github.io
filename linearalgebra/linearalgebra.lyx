@@ -91,6 +91,45 @@ Trong
 \end_layout
 
 \begin_layout Part
+January
+\end_layout
+
+\begin_layout Section
+Theorem 6.1.
+ Properties of inner products
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Let 
+\begin_inset Formula $V\left\langle \right\rangle .$
+\end_inset
+
+ Then
+\emph default
+ 
+\begin_inset Formula $\left\langle x,y\right\rangle =\left\langle x,z\right\rangle $
+\end_inset
+
+ 
+\emph on
+for all 
+\begin_inset Formula $x,$
+\end_inset
+
+ then 
+\begin_inset Formula $y=z.$
+\end_inset
+
+ Similarly 
+\begin_inset Formula $\left\langle y,x\right\rangle =\left\langle z,x\right\rangle .$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Part
 February
 \end_layout
 
@@ -861,9 +900,17 @@ and
  
 \end_layout
 
+\begin_layout Standard
+Nonexample of a non-self adjoint operator that has 
+\begin_inset Formula $\left\langle x,U(x)\right\rangle =0$
+\end_inset
+
+ but is not the zero op: U is the rotation by 90 degrees in the plane.
+\end_layout
+
 \begin_layout Section
 Theorem 6.18.
- Characterizing unitary / orthogonal / isometric operato8rs on a fin dim
+ Characterizing unitary / orthogonal / isometric operators on a fin dim
  inner product space
 \end_layout
 
@@ -1098,15 +1145,22 @@ Let
 \end_inset
 
  The referenced Exercise 2.4.10 is about invertible matrices, not adjoint
- operators.]
+ operators....
+ Ah, See next.] 
+\end_layout
+
+\begin_layout Section
+Proposition.
+ 
+\emph on
+The adjoint of a unitary / orthogonal operator is its inverse
 \end_layout
 
 \begin_layout Standard
-Conjecture.
- 
+
 \emph on
-Let T, n, 
-\begin_inset Formula $\left\langle \right\rangle ,V,F,$
+Let 
+\begin_inset Formula $Tn\left\langle \right\rangle VF,$
 \end_inset
 
  and let 
@@ -1122,7 +1176,7 @@ Let T, n,
 \begin_inset Formula $T(\beta)$
 \end_inset
 
- is also an orthonormal basis.
+ is also an orthonormal basis for V.
 \end_layout
 
 \begin_layout Standard
@@ -1135,6 +1189,151 @@ If that were true we can apply Exercise 2.4.10 and say that
 \end_inset
 
  
+\end_layout
+
+\begin_layout Standard
+Proof.
+ Suppose 
+\begin_inset Formula $T^{*}=T^{-1}.$
+\end_inset
+
+ Then 
+\begin_inset Formula $TT^{*}=T^{*}T=I$
+\end_inset
+
+ and (3) implies that 
+\begin_inset Formula $T(\beta)$
+\end_inset
+
+ is an orthonormal basis.
+ Conversely suppose that 
+\begin_inset Formula $T(\beta)$
+\end_inset
+
+ is an orthonormal basis, 
+\begin_inset Formula 
+\[
+\beta=\left\{ v_{1},\ldots,v_{n}\right\} ,T(\beta)=\left\{ T(v_{1}),\ldots,T(v_{n})\right\} .
+\]
+
+\end_inset
+
+ To show that 
+\begin_inset Formula $T^{*}=T^{-1},$
+\end_inset
+
+ we want to show that 
+\begin_inset Formula 
+\[
+\left\langle T^{-1}(x),y\right\rangle =\left\langle T^{*}(x),y\right\rangle =\left\langle x,T(y)\right\rangle 
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $x,y\in V.$
+\end_inset
+
+ It suffices to show that this holds for all 
+\begin_inset Formula $x\in T(\beta),y\in\beta.$
+\end_inset
+
+ [Why? This feels right, but it's not quite the result I'm thinking about.]
+ There are two cases: either (1) 
+\begin_inset Formula $x=T(y)$
+\end_inset
+
+ or (2) 
+\begin_inset Formula $x\neq T(y).$
+\end_inset
+
+ In case (1), 
+\begin_inset Formula 
+\[
+\left\langle T^{-1}(x),y\right\rangle =\left\langle y,y\right\rangle =1=\left\langle x,T(y)\right\rangle .
+\]
+
+\end_inset
+
+ In case (2), 
+\begin_inset Formula 
+\[
+\left\langle x,T(y)\right\rangle =0=\left\langle T^{-1}(x),y\right\rangle .
+\]
+
+\end_inset
+
+ Therefore 
+\begin_inset Formula $T^{*}=T^{-1}.$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Section
+Conjecture.
+ Equality of two operators in an inner product
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Let 
+\begin_inset Formula $T,n\left\langle \right\rangle VF,$
+\end_inset
+
+ and let 
+\begin_inset Formula $\beta$
+\end_inset
+
+ and 
+\begin_inset Formula $T(\beta)$
+\end_inset
+
+ be orthonormal bases for V.
+ If 
+\begin_inset Formula 
+\[
+\left\langle T^{-1}(x),y\right\rangle =\left\langle x,T(y)\right\rangle 
+\]
+
+\end_inset
+
+ for all 
+\begin_inset Formula $y\in\beta,x\in T(\beta),$
+\end_inset
+
+ then 
+\begin_inset Formula $\left\langle T^{-1}(x),y\right\rangle =\left\langle x,T(y)\right\rangle $
+\end_inset
+
+ for all 
+\begin_inset Formula $x,y\in V.$
+\end_inset
+
+ In particular 
+\begin_inset Formula $\left\langle T^{-1}(x),y\right\rangle =\left\langle T^{*}(x),y\right\rangle $
+\end_inset
+
+ for all x, y, and therefore 
+\begin_inset Formula $T^{-1}=T^{*}.$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Proof.
+ TODO.
+\end_layout
+
+\begin_layout Standard
+We should apply abstract results on concrete examples.
+\end_layout
+
+\begin_layout Section
+Exercise 2.4.10.
+ TODO
 \end_layout
 
 \end_body
