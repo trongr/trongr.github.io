@@ -70,6 +70,14 @@
 
 \begin_body
 
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\rank}{\operatorname{rank}}
+\end_inset
+
+
+\end_layout
+
 \begin_layout Title
 Linear Algebra
 \end_layout
@@ -83,11 +91,259 @@ Trong
 \end_layout
 
 \begin_layout Part
+January
+\end_layout
+
+\begin_layout Section
+Theorem 6.1.
+ Properties of inner products
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Let 
+\begin_inset Formula $V\left\langle \right\rangle .$
+\end_inset
+
+ Then
+\emph default
+ 
+\begin_inset Formula $\left\langle x,y\right\rangle =\left\langle x,z\right\rangle $
+\end_inset
+
+ 
+\emph on
+for all 
+\begin_inset Formula $x,$
+\end_inset
+
+ then 
+\begin_inset Formula $y=z.$
+\end_inset
+
+ Similarly 
+\begin_inset Formula $\left\langle y,x\right\rangle =\left\langle z,x\right\rangle .$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Part
 February
 \end_layout
 
 \begin_layout Section*
 M19F18
+\end_layout
+
+\begin_layout Section
+Exercise 5.4.25.
+ 
+\emph on
+Simultaneously diagonalizable if 
+\emph default
+
+\begin_inset Formula $UT=TU$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Proposition
+\emph on
+.
+ If T and U are diagonalizable linear operators on a finite-dimensional
+ vector space V s.t.
+ 
+\begin_inset Formula $UT=TU,$
+\end_inset
+
+ then T and U are simultaneously diagonalizable.
+\end_layout
+
+\begin_layout Section
+Theorem.
+ 
+\emph on
+If two operators agree on a basis, they are equal.
+\end_layout
+
+\begin_layout Section
+Theorem.
+ 
+\emph on
+Eigenvectors correspondiong to distinct eigenvalues of a normal operator
+ are orthogonal
+\end_layout
+
+\begin_layout Standard
+Theorem.
+ 
+\emph on
+Let T be normal on V, 
+\begin_inset Formula $\left\langle \cdot,\cdot\right\rangle .$
+\end_inset
+
+ Then eigenvectors correspondiong to distinct eigenvalues of T are orthogonal.
+\end_layout
+
+\begin_layout Section
+Theorem.
+ 
+\emph on
+Normal operators are diagonalizable
+\end_layout
+
+\begin_layout Section
+Theorem *6.3.
+ 
+\emph on
+An operator T is diagonalizable iff there exists a basis of V consisting
+ of eigenvectors of T
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Corollary.
+ If T is a self-adjoint operator, then there is a basis of V consisting
+ of eigenvectors of T.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Proof.
+ 
+\emph default
+Follows from Theorem 6.16 or 6.17.
+\end_layout
+
+\begin_layout Section
+Theorem 6.3
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Theorem.
+ Let V be an inner product space and 
+\begin_inset Formula $S=\left\{ v_{1},v_{2}\dots\ldots,v_{k}\right\} $
+\end_inset
+
+ be an orthogonal subset of V consisting of nonzero vectors.
+ If 
+\begin_inset Formula $y\in\operatorname{span}(S)$
+\end_inset
+
+ then 
+\begin_inset Formula 
+\[
+y=\sum_{i=1}^{k}\frac{\left\langle y,v_{i}\right\rangle }{\|v_{i}\|^{2}}v_{i}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Corollary.
+ 
+\emph on
+Let V be an inner product space and 
+\begin_inset Formula $S=\left\{ v_{1},v_{2}\dots\ldots,v_{k}\right\} $
+\end_inset
+
+ be an orthonormal subset of V and 
+\begin_inset Formula $y\in\operatorname{span}(S),$
+\end_inset
+
+ then 
+\begin_inset Formula 
+\[
+y=\sum_{i=1}^{k}\left\langle y,v_{i}\right\rangle v_{i}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Corollary.
+ 
+\emph on
+Let V be an inner product space, 
+\begin_inset Formula $y\in V,$
+\end_inset
+
+ and 
+\begin_inset Formula $\beta=\left\{ v_{1},v_{2}\dots\ldots,v_{k}\right\} $
+\end_inset
+
+ be an orthonormal basis for V.
+ Then 
+\begin_inset Formula 
+\[
+y=\sum_{i=1}^{k}\left\langle y,v_{i}\right\rangle v_{i}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Theorem 6.16.
+ Complex case: normal operator and orthonormal basis consisting of eigenvectors
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Let T be a linear operator on a finite-dimensional complex inner product
+ space V.
+ Then T is normal iff there exists an orthonormal basis for V consisting
+ of eigenvectors of T.
+\end_layout
+
+\begin_layout Section
+Theorem 6.17.
+ Real case: self-adjoint operator and orthonormal basis consisting of eigenvecto
+rs
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Let T be a linear operator on a finite-dimensional real inner product space
+ V.
+ Then T is self-adjoint iff there exists an orthonormal basis for V consisting
+ of eigenvectors of T.
+\end_layout
+
+\begin_layout Standard
+Corollary 6.17.
+ 
+\emph on
+Let T be a linear operator on a finite-dimensional complex [real] inner
+ product space V.
+ If T is normal [self-adjoint] then T is diagonalizable.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Proof.
+ 
+\emph default
+In either case, V has an orthonormal basis consisting of eigenvectors of
+ T.
+ By Theorem *6.3, this happens iff T is diagonalizable.
+ Oh, I already have this corollary as a corollary over there.
 \end_layout
 
 \begin_layout Section
@@ -129,8 +385,955 @@ Let T be a normal linear operator on an inner product space V with eigenvalue
 March
 \end_layout
 
+\begin_layout Section
+18156 2593 600 50 2018-04-04 Wed 23:55:16
+\end_layout
+
+\begin_layout Standard
+Theorem.
+ 
+\emph on
+The inner product is unique up to an orthonormal basis.
+ Specifically, let V be a finite-dimensional inner product on C or R, and
+ 
+\begin_inset Formula $\beta$
+\end_inset
+
+ and 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ be any orthonormal bases for V, and x, y be vectors in V.
+ Then 
+\begin_inset Formula 
+\[
+\left\langle x,y\right\rangle =\overline{y}^{T}x=[y]_{\beta}\cdot[x]_{\beta}=[y]_{\gamma}\cdot[x]_{\gamma}.
+\]
+
+\end_inset
+
+In other words, the dot product of two vectors is the same in any orthonormal
+ basis.
+\end_layout
+
+\begin_layout Standard
+Proof.
+ TODO.
+\end_layout
+
+\begin_layout Standard
+Definition.
+ 
+\emph on
+A linear operator 
+\begin_inset Formula $T$
+\end_inset
+
+ on a finite dimensional inner product space V is called positive definite
+ if T is self-adjoint and 
+\begin_inset Formula $\left\langle T(x),x\right\rangle >0$
+\end_inset
+
+ for all 
+\begin_inset Formula $x\neq0.$
+\end_inset
+
+ It's called positive semidefinite if 
+\begin_inset Formula $\left\langle T(x),x\right\rangle \geq0$
+\end_inset
+
+ for all 
+\begin_inset Formula $x\neq0.$
+\end_inset
+
+ Similarly for a square matrix 
+\begin_inset Formula $A.$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Exercise 6.4.17.
+ Positive semi/definite operator
+\end_layout
+
 \begin_layout Standard
 
+\emph on
+Let T and U be self-adjoint linear operators on an n-dimensional inner product
+ space V, and let 
+\begin_inset Formula $A=\left[T\right]_{\beta},$
+\end_inset
+
+ where 
+\begin_inset Formula $\beta$
+\end_inset
+
+ is an orthonormal basis for V.
+ Prove:
+\end_layout
+
+\begin_layout Enumerate
+
+\emph on
+T is positive definite (semidefinite) iff all of its eigenvalues are positive
+ (nonnegative).
+\end_layout
+
+\begin_layout Enumerate
+
+\emph on
+T is positive definite iff 
+\begin_inset Formula 
+\[
+\sum_{i,j}A_{ij}a_{j}\overline{a}_{i}>0
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $(a_{1},\ldots,a_{n})\neq0.$
+\end_inset
+
+ [What about semidefinite? Also true.]
+\end_layout
+
+\begin_layout Enumerate
+
+\emph on
+T is positive semidefinite iff 
+\begin_inset Formula $A=B^{*}B$
+\end_inset
+
+ for some square matrix B.
+\end_layout
+
+\begin_layout Enumerate
+
+\emph on
+If T and U are positive semidefinite operators s.t.
+ 
+\begin_inset Formula $T^{2}=U^{2},$
+\end_inset
+
+ then 
+\begin_inset Formula $T=U.$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+
+\emph on
+If T and U are positive definite (semidefinite?) operators s.t.
+ 
+\begin_inset Formula $TU=UT,$
+\end_inset
+
+ then 
+\begin_inset Formula $TU$
+\end_inset
+
+ is positive definite (semidefinite?).
+\end_layout
+
+\begin_layout Enumerate
+
+\emph on
+T is positive definite (semidefinite) iff A is.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Proof 1.
+ 
+\emph default
+We'll show definite, semi is similar.
+ Let T be positive definite, and let 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ be an eigenvalue, and 
+\begin_inset Formula $x\neq0.$
+\end_inset
+
+ Then 
+\begin_inset Formula 
+\begin{align*}
+\left\langle T(x),x\right\rangle  & >0\\
+\left\langle \lambda x,x\right\rangle  & >\\
+\lambda\left\langle x,x\right\rangle  & >\\
+\lambda\text{\left|x\right|}^{2} & >0.
+\end{align*}
+
+\end_inset
+
+Since 
+\begin_inset Formula $\text{\left|x\right|}>0,$
+\end_inset
+
+ 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ must also be 
+\begin_inset Formula $>0.$
+\end_inset
+
+ Conversely, suppose that all eigenvalues of T are positive.
+ Let 
+\begin_inset Formula $v_{i}$
+\end_inset
+
+ be the eigenvectors of T with corresponding eigenvalues 
+\begin_inset Formula $\lambda_{i}$
+\end_inset
+
+.
+ Then 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+T(v_{i})=\lambda_{i}v_{i}.
+\]
+
+\end_inset
+
+Now let 
+\begin_inset Formula $x$
+\end_inset
+
+ be any vector, and 
+\begin_inset Formula $x=\sum a_{i}v_{i}.$
+\end_inset
+
+ Then 
+\begin_inset Formula 
+\[
+\left\langle T(x),x\right\rangle =\left\langle T\left(\sum a_{i}v_{i}\right),\sum a_{i}v_{i}\right\rangle =\left\langle \sum a_{i}\lambda_{i}v_{i},\sum a_{i}v_{i}\right\rangle =\sum\lambda_{i}\left|v_{i}\right|^{2}
+\]
+
+\end_inset
+
+(because the 
+\begin_inset Formula $v_{i}$
+\end_inset
+
+'s are orthonormal).
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Proof 2.
+ 
+\emph default
+First note that
+\begin_inset Formula 
+\[
+\sum_{i,j}A_{ij}a_{j}\overline{a}_{i}=\text{\ensuremath{\overline{a}^{T}Aa=\overline{\begin{bmatrix}a_{1} & \cdots & a_{n}\end{bmatrix}}\left[A_{ij}\right]\begin{bmatrix}a_{1}\\
+\vdots\\
+a_{n}
+\end{bmatrix}.}}
+\]
+
+\end_inset
+
+This is equal to 
+\begin_inset Formula 
+\[
+\left\langle T\left(x\right),x\right\rangle 
+\]
+
+\end_inset
+
+since 
+\begin_inset Formula $\beta$
+\end_inset
+
+ is an orthonormal basis (recall that 
+\emph on
+the dot product of two vectors is the same in any orthonormal basis
+\emph default
+).
+\end_layout
+
+\begin_layout Section
+18151 2593 600 50 2018-04-09 Mon 23:13:09
+\end_layout
+
+\begin_layout Section
+Ex 6.4.18
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Let 
+\begin_inset Formula $T:V\longrightarrow W$
+\end_inset
+
+ be a linear transformation, where V and W are finite-dim.
+ Then
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $T^{*}T$
+\end_inset
+
+ and 
+\begin_inset Formula $TT^{*}$
+\end_inset
+
+ are positive semidefinite.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\rank(T^{*}T)=\rank(TT^{*})=\rank(T).$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Ex 6.4.19
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Let T and U be positive definite operators on an inner product space V.
+ Then
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $T+U$
+\end_inset
+
+ is positive definite.
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $c>0,$
+\end_inset
+
+ then 
+\begin_inset Formula $cT$
+\end_inset
+
+ is p.d.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $T^{-1}$
+\end_inset
+
+ is p.d.
+\end_layout
+
+\begin_layout Section
+18149 2592 600.
+ Unitary and orthogonal operators and their matrices
+\end_layout
+
+\begin_layout Standard
+Definition.
+ 
+\emph on
+Let T, n, 
+\begin_inset Formula $\left\langle \right\rangle ,V,F.$
+\end_inset
+
+ If 
+\begin_inset Formula $\left|\left|T(x)\right|\right|=\left|\left|x\right|\right|$
+\end_inset
+
+ for all 
+\begin_inset Formula $x,$
+\end_inset
+
+ we call T a unitary operator if 
+\begin_inset Formula $F=C,$
+\end_inset
+
+ and an orthogonal operator if 
+\begin_inset Formula $F=R.$
+\end_inset
+
+ T is also called an isometry, or length-preserving operator.
+\end_layout
+
+\begin_layout Standard
+E.g.
+ any rotation or reflection in 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ preserves length and hence is an orthogonal operator.
+\end_layout
+
+\begin_layout Standard
+E.g.
+ Recall the space H of continuous complex-valued functions defined on 
+\begin_inset Formula $[0,2\pi]$
+\end_inset
+
+ with the inner product
+\begin_inset Formula 
+\[
+\left\langle f,g\right\rangle =\frac{1}{2\pi}\int_{0}^{2\pi}f(t)\overline{g(t)}dt.
+\]
+
+\end_inset
+
+ Let 
+\begin_inset Formula $h\in H$
+\end_inset
+
+ satisfy 
+\begin_inset Formula $\left|h(x)\right|=1$
+\end_inset
+
+ for all 
+\begin_inset Formula $x.$
+\end_inset
+
+ Define T on H by 
+\begin_inset Formula $T(f)=hf.$
+\end_inset
+
+ Then 
+\begin_inset Formula 
+\[
+\left|\left|T(f)\right|\right|^{2}=\left|\left|hf\right|\right|^{2}=\frac{1}{2\pi}\int_{0}^{2\pi}h(t)f(t)\overline{h(t)f(t)}dt=\left|\left|f\right|\right|^{2}
+\]
+
+\end_inset
+
+since 
+\begin_inset Formula $\left|h(t)\right|^{2}=1.$
+\end_inset
+
+ So T is a unitary operator.
+ 
+\end_layout
+
+\begin_layout Section
+18143 2591 600 50 2018-04-17
+\end_layout
+
+\begin_layout Section
+Lemma 6.18
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Let U be self adjoint on 
+\begin_inset Formula $n,\left\langle \right\rangle ,V.$
+\end_inset
+
+ If 
+\begin_inset Formula $\left\langle x,U(x)\right\rangle =0$
+\end_inset
+
+ for all x, then 
+\begin_inset Formula $U=T_{0},$
+\end_inset
+
+ the zero operator.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Proof.
+ 
+\emph default
+By Theorem 6.16 or 6.17, there exists an orthonormal basis 
+\begin_inset Formula $\beta$
+\end_inset
+
+ for V consisting of eigenvectors of U.
+ Let 
+\begin_inset Formula $x\in\beta.$
+\end_inset
+
+ Then 
+\begin_inset Formula $U(x)=\lambda x$
+\end_inset
+
+ for some 
+\begin_inset Formula $\lambda.$
+\end_inset
+
+ Thus
+\begin_inset Formula 
+\[
+0=\left\langle x,U(x)\right\rangle =\left\langle x,\lambda x\right\rangle =\overline{\lambda}\left\langle x,x\right\rangle =\overline{\lambda}\left|\left|x\right|\right|^{2},
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula $\overline{\lambda}=0.$
+\end_inset
+
+ Hence 
+\begin_inset Formula $U(x)=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $x\in\beta$
+\end_inset
+
+ and 
+\begin_inset Formula $U=T_{0}.$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Nonexample of a non-self adjoint operator that has 
+\begin_inset Formula $\left\langle x,U(x)\right\rangle =0$
+\end_inset
+
+ but is not the zero op: U is the rotation by 90 degrees in the plane.
+\end_layout
+
+\begin_layout Section
+Theorem 6.18.
+ Characterizing unitary / orthogonal / isometric operators on a fin dim
+ inner product space
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Let T, n, 
+\begin_inset Formula $\left\langle \right\rangle ,V,F.$
+\end_inset
+
+ Then the following statements are equivalent:
+\end_layout
+
+\begin_layout Enumerate
+
+\emph on
+\begin_inset Formula $TT^{*}=T^{*}T=I.$
+\end_inset
+
+ In particular, T is normal and there exists an orthonormal basis for V
+ consisting of eigenvectors of T.
+\end_layout
+
+\begin_layout Enumerate
+
+\emph on
+\begin_inset Formula $\left\langle T(x),T(y)\right\rangle =\left\langle x,y\right\rangle $
+\end_inset
+
+ for all 
+\begin_inset Formula $x,y.$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+
+\emph on
+If 
+\begin_inset Formula $\beta$
+\end_inset
+
+ is an orthonormal basis, then 
+\begin_inset Formula $T(\beta)$
+\end_inset
+
+ is an orthonormal basis.
+\end_layout
+
+\begin_layout Enumerate
+
+\emph on
+There exists an orthonormal basis 
+\begin_inset Formula $\beta$
+\end_inset
+
+ s.t.
+ 
+\begin_inset Formula $T(\beta)$
+\end_inset
+
+ is an orthonormal basis.
+\end_layout
+
+\begin_layout Enumerate
+
+\emph on
+\begin_inset Formula $\left|\left|T(x)\right|\right|=\left|\left|x\right|\right|$
+\end_inset
+
+ for all 
+\begin_inset Formula $x.$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In other words, an operator is unitary / orthogonal iff it is normal and
+ its 
+\begin_inset Quotes eld
+\end_inset
+
+norm
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $TT^{*}$
+\end_inset
+
+ is 1.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Proof
+\emph default
+ (1) implies (2).
+ For any 
+\begin_inset Formula $x,y,$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\left\langle x,y\right\rangle =\left\langle T^{*}T(x),y\right\rangle =\left\langle T(x),T(y)\right\rangle .
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Proof 
+\emph default
+(2) implies (3).
+ Let 
+\begin_inset Formula $\beta=\left\{ v_{1},\ldots,v_{n}\right\} $
+\end_inset
+
+ be an orthonormal basis for V.
+ Then 
+\begin_inset Formula $T(\beta)=\left\{ T(v_{1}),\ldots,T(v_{n})\right\} $
+\end_inset
+
+ and 
+\begin_inset Formula 
+\[
+\left\langle T(v_{i}),T(v_{j})\right\rangle =\left\langle v_{i},v_{j}\right\rangle =\delta_{ij},
+\]
+
+\end_inset
+
+so 
+\begin_inset Formula $T(\beta)$
+\end_inset
+
+ is an orthonormal basis for V.
+\end_layout
+
+\begin_layout Standard
+Proof (3) implies (4).
+ [This one is a little odd?] Any orthonormal basis 
+\begin_inset Formula $\beta$
+\end_inset
+
+ satisfies this property, and there must be one because V is fin dim.
+\end_layout
+
+\begin_layout Standard
+Proof (4) implies (5).
+ Let 
+\begin_inset Formula $x\in V,\beta=\left\{ v_{1},\ldots,v_{n}\right\} .$
+\end_inset
+
+ Then
+\begin_inset Formula 
+\[
+x=\sum_{i=1}^{n}a_{i}v_{i}
+\]
+
+\end_inset
+
+for some 
+\begin_inset Formula $a_{i},$
+\end_inset
+
+ and 
+\begin_inset Formula 
+\[
+\left|\left|x\right|\right|^{2}=\left\langle \sum_{i=1}^{n}a_{i}v_{i},\sum_{i=1}^{n}a_{i}v_{i}\right\rangle =\sum_{i}\sum_{j}a_{i}\overline{a_{j}}\left\langle v_{i},v_{j}\right\rangle =\sum_{i=1}^{n}\left|a_{i}\right|^{2}.
+\]
+
+\end_inset
+
+Similarly,
+\begin_inset Formula 
+\[
+\left|\left|T(x)\right|\right|^{2}=\left\langle \sum_{i=1}^{n}a_{i}T(v_{i}),\sum_{i=1}^{n}a_{i}T(v_{i})\right\rangle =\sum_{i}\sum_{j}a_{i}\overline{a_{j}}\left\langle T(v_{i}),T(v_{j})\right\rangle =\sum_{i=1}^{n}\left|a_{i}\right|^{2},
+\]
+
+\end_inset
+
+since 
+\begin_inset Formula $T(\beta)$
+\end_inset
+
+ is also orthonormal.
+\end_layout
+
+\begin_layout Standard
+Proof (5) implies (1).
+ For any 
+\begin_inset Formula $x,$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\begin{aligned}\left\langle x,x\right\rangle  & =\left\langle T(x),T(x)\right\rangle =\left\langle x,T^{*}T(x)\right\rangle \\
+\left\langle x,(I-T^{*}T)(x)\right\rangle  & =0.
+\end{aligned}
+\]
+
+\end_inset
+
+Let 
+\begin_inset Formula $U=I-T^{*}T.$
+\end_inset
+
+ Then U is self-adjoint and 
+\begin_inset Formula $\left\langle x,U(x)\right\rangle =0$
+\end_inset
+
+ for all x.
+ By the previous lemma, 
+\begin_inset Formula $I-T^{*}T=U=T_{0}$
+\end_inset
+
+ and 
+\begin_inset Formula $I=T^{*}T.$
+\end_inset
+
+ [Why does this imply that 
+\begin_inset Formula $TT^{*}=I?$
+\end_inset
+
+ The referenced Exercise 2.4.10 is about invertible matrices, not adjoint
+ operators....
+ Ah, See next.] 
+\end_layout
+
+\begin_layout Section
+Proposition.
+ 
+\emph on
+The adjoint of a unitary / orthogonal operator is its inverse
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Let 
+\begin_inset Formula $Tn\left\langle \right\rangle VF,$
+\end_inset
+
+ and let 
+\begin_inset Formula $\beta$
+\end_inset
+
+ be an orthonormal basis for V.
+ Then 
+\begin_inset Formula $T^{*}=T^{-1}$
+\end_inset
+
+ iff 
+\begin_inset Formula $T(\beta)$
+\end_inset
+
+ is also an orthonormal basis for V.
+\end_layout
+
+\begin_layout Standard
+If that were true we can apply Exercise 2.4.10 and say that 
+\begin_inset Formula $TT^{*}=TT^{-1}=I$
+\end_inset
+
+ and therefore 
+\begin_inset Formula $T^{-1}T=T^{*}T=I.$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Proof.
+ Suppose 
+\begin_inset Formula $T^{*}=T^{-1}.$
+\end_inset
+
+ Then 
+\begin_inset Formula $TT^{*}=T^{*}T=I$
+\end_inset
+
+ and (3) implies that 
+\begin_inset Formula $T(\beta)$
+\end_inset
+
+ is an orthonormal basis.
+ Conversely suppose that 
+\begin_inset Formula $T(\beta)$
+\end_inset
+
+ is an orthonormal basis, 
+\begin_inset Formula 
+\[
+\beta=\left\{ v_{1},\ldots,v_{n}\right\} ,T(\beta)=\left\{ T(v_{1}),\ldots,T(v_{n})\right\} .
+\]
+
+\end_inset
+
+ To show that 
+\begin_inset Formula $T^{*}=T^{-1},$
+\end_inset
+
+ we want to show that 
+\begin_inset Formula 
+\[
+\left\langle T^{-1}(x),y\right\rangle =\left\langle T^{*}(x),y\right\rangle =\left\langle x,T(y)\right\rangle 
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $x,y\in V.$
+\end_inset
+
+ It suffices to show that this holds for all 
+\begin_inset Formula $x\in T(\beta),y\in\beta.$
+\end_inset
+
+ [Why? This feels right, but it's not quite the result I'm thinking about.]
+ There are two cases: either (1) 
+\begin_inset Formula $x=T(y)$
+\end_inset
+
+ or (2) 
+\begin_inset Formula $x\neq T(y).$
+\end_inset
+
+ In case (1), 
+\begin_inset Formula 
+\[
+\left\langle T^{-1}(x),y\right\rangle =\left\langle y,y\right\rangle =1=\left\langle x,T(y)\right\rangle .
+\]
+
+\end_inset
+
+ In case (2), 
+\begin_inset Formula 
+\[
+\left\langle x,T(y)\right\rangle =0=\left\langle T^{-1}(x),y\right\rangle .
+\]
+
+\end_inset
+
+ Therefore 
+\begin_inset Formula $T^{*}=T^{-1}.$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Section
+Conjecture.
+ Equality of two operators in an inner product
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Let 
+\begin_inset Formula $T,n\left\langle \right\rangle VF,$
+\end_inset
+
+ and let 
+\begin_inset Formula $\beta$
+\end_inset
+
+ and 
+\begin_inset Formula $T(\beta)$
+\end_inset
+
+ be orthonormal bases for V.
+ If 
+\begin_inset Formula 
+\[
+\left\langle T^{-1}(x),y\right\rangle =\left\langle x,T(y)\right\rangle 
+\]
+
+\end_inset
+
+ for all 
+\begin_inset Formula $y\in\beta,x\in T(\beta),$
+\end_inset
+
+ then 
+\begin_inset Formula $\left\langle T^{-1}(x),y\right\rangle =\left\langle x,T(y)\right\rangle $
+\end_inset
+
+ for all 
+\begin_inset Formula $x,y\in V.$
+\end_inset
+
+ In particular 
+\begin_inset Formula $\left\langle T^{-1}(x),y\right\rangle =\left\langle T^{*}(x),y\right\rangle $
+\end_inset
+
+ for all x, y, and therefore 
+\begin_inset Formula $T^{-1}=T^{*}.$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Proof.
+ TODO.
+\end_layout
+
+\begin_layout Standard
+We should apply abstract results on concrete examples.
+\end_layout
+
+\begin_layout Section
+Exercise 2.4.10.
+ TODO
 \end_layout
 
 \end_body
