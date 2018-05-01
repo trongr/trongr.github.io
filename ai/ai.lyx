@@ -11,7 +11,7 @@
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman "default" "default"
+\font_roman "ccfonts" "default"
 \font_sans "default" "default"
 \font_typewriter "default" "default"
 \font_math "auto" "auto"
@@ -27,6 +27,7 @@
 \bibtex_command default
 \index_command default
 \paperfontsize default
+\spacing single
 \use_hyperref false
 \papersize default
 \use_geometry false
@@ -71,15 +72,7 @@
 \begin_body
 
 \begin_layout Title
-AI
-\end_layout
-
-\begin_layout Author
-Trong
-\end_layout
-
-\begin_layout Date
-2018
+A.I.
 \end_layout
 
 \begin_layout Part

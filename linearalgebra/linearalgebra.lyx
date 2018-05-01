@@ -11,7 +11,7 @@
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman "default" "default"
+\font_roman "ccfonts" "default"
 \font_sans "default" "default"
 \font_typewriter "default" "default"
 \font_math "auto" "auto"
@@ -26,8 +26,18 @@
 \output_sync 0
 \bibtex_command default
 \index_command default
-\paperfontsize default
-\use_hyperref false
+\paperfontsize 12
+\spacing single
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle true
 \papersize default
 \use_geometry false
 \use_package amsmath 1
@@ -73,6 +83,16 @@
 \begin_layout Standard
 \begin_inset FormulaMacro
 \newcommand{\rank}{\operatorname{rank}}
+{rank}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\Var}{\operatorname{Var}}
+{Var}
 \end_inset
 
 
@@ -82,16 +102,45 @@
 Linear Algebra
 \end_layout
 
-\begin_layout Author
-Trong
-\end_layout
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
 
-\begin_layout Date
-2018
+\end_inset
+
+
 \end_layout
 
 \begin_layout Part
-January
+2017
+\end_layout
+
+\begin_layout Section
+Rank nullity theorem
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Let V be a finite dimensional vector space, and W be a (not necessarily
+ finite dimensional) vector space over some field and let T : V → W be a
+ linear map.
+ Then
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\operatorname{dim}(\operatorname{im}(T))+\operatorname{dim}(\operatorname{ker}(T))=\operatorname{dim}(V)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Part
+January 2018
 \end_layout
 
 \begin_layout Section
@@ -106,7 +155,7 @@ Let
 \begin_inset Formula $V\left\langle \right\rangle .$
 \end_inset
 
- Then
+ If
 \emph default
  
 \begin_inset Formula $\left\langle x,y\right\rangle =\left\langle x,z\right\rangle $
@@ -174,7 +223,7 @@ If two operators agree on a basis, they are equal.
 Theorem.
  
 \emph on
-Eigenvectors correspondiong to distinct eigenvalues of a normal operator
+Eigenvectors corresponding to distinct eigenvalues of a normal operator
  are orthogonal
 \end_layout
 
@@ -186,7 +235,7 @@ Let T be normal on V,
 \begin_inset Formula $\left\langle \cdot,\cdot\right\rangle .$
 \end_inset
 
- Then eigenvectors correspondiong to distinct eigenvalues of T are orthogonal.
+ Then eigenvectors corresponding to distinct eigenvalues of T are orthogonal.
 \end_layout
 
 \begin_layout Section
@@ -347,7 +396,12 @@ In either case, V has an orthonormal basis consisting of eigenvectors of
 \end_layout
 
 \begin_layout Section
-Eigenvectors of a normal operator
+
+\series bold
+Proposition.
+
+\series default
+ Eigenvectors and eigenvalues of the adjoint of a normal operator
 \end_layout
 
 \begin_layout Standard
@@ -386,15 +440,17 @@ March
 \end_layout
 
 \begin_layout Section
-18156 2593 600 50 2018-04-04 Wed 23:55:16
-\end_layout
-
-\begin_layout Standard
-Theorem.
+Conjecture.
  
 \emph on
 The inner product is unique up to an orthonormal basis.
- Specifically, let V be a finite-dimensional inner product on C or R, and
+ 
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Specifically, let V be a finite-dimensional inner product on C or R, and
  
 \begin_inset Formula $\beta$
 \end_inset
@@ -664,11 +720,8 @@ the dot product of two vectors is the same in any orthonormal basis
 \end_layout
 
 \begin_layout Section
-18151 2593 600 50 2018-04-09 Mon 23:13:09
-\end_layout
-
-\begin_layout Section
-Ex 6.4.18
+Ex 6.4.18.
+ Derived positive semidefinite matrices
 \end_layout
 
 \begin_layout Standard
@@ -701,7 +754,8 @@ Let
 \end_layout
 
 \begin_layout Section
-Ex 6.4.19
+Ex 6.4.19.
+ Properties of positive definite operators
 \end_layout
 
 \begin_layout Standard
@@ -738,8 +792,7 @@ If
 \end_layout
 
 \begin_layout Section
-18149 2592 600.
- Unitary and orthogonal operators and their matrices
+Unitary and orthogonal operators and their matrices
 \end_layout
 
 \begin_layout Standard
@@ -769,6 +822,15 @@ Let T, n,
  T is also called an isometry, or length-preserving operator.
 \end_layout
 
+\begin_layout Section
+Example 6.18.
+ Rotation in 
+\begin_inset Formula $R^{2}.$
+\end_inset
+
+ 
+\end_layout
+
 \begin_layout Standard
 E.g.
  any rotation or reflection in 
@@ -776,6 +838,62 @@ E.g.
 \end_inset
 
  preserves length and hence is an orthogonal operator.
+ Rotation by 
+\begin_inset Formula $\theta$
+\end_inset
+
+ given by 
+\begin_inset Formula 
+\[
+R_{\theta}=\begin{bmatrix}\cos\theta & -\sin\theta\\
+\sin\theta & \cos\theta
+\end{bmatrix}.
+\]
+
+\end_inset
+
+Rotation by 
+\begin_inset Formula $-\theta$
+\end_inset
+
+ is its inverse:
+\begin_inset Formula 
+\[
+R_{\theta}^{-1}=R_{-\theta}=\begin{bmatrix}\cos\theta & \sin\theta\\
+-\sin\theta & \cos\theta
+\end{bmatrix}=R_{\theta}^{T}.
+\]
+
+\end_inset
+
+Since rotation by 
+\begin_inset Formula $\theta$
+\end_inset
+
+ followed by rotation by 
+\begin_inset Formula $-\theta$
+\end_inset
+
+ is the identity, we have
+\begin_inset Formula 
+\[
+R_{\theta}^{T}R_{\theta}=R_{\theta}^{-1}R_{\theta}=I.
+\]
+
+\end_inset
+
+By Theorem 6.18 below, 
+\begin_inset Formula $R_{\theta}$
+\end_inset
+
+ is orthogonal.
+ By Theorem 6.18.b, it preserves the inner product and hence preserves the
+ angle between two vectors.
+ Since 
+\begin_inset Formula $R_{\theta}\neq R_{\theta}^{T}$
+\end_inset
+
+, it is not selfadjoint.
 \end_layout
 
 \begin_layout Standard
@@ -825,11 +943,12 @@ since
 \end_layout
 
 \begin_layout Section
-18143 2591 600 50 2018-04-17
-\end_layout
+Lemma 6.18.
+ 
+\begin_inset Formula $T_{0}$
+\end_inset
 
-\begin_layout Section
-Lemma 6.18
+ is the only self-adjoint operator that is orthogonal to all its inputs
 \end_layout
 
 \begin_layout Standard
@@ -901,11 +1020,11 @@ and
 \end_layout
 
 \begin_layout Standard
-Nonexample of a non-self adjoint operator that has 
+Nonexample of a nonselfadjoint operator that has 
 \begin_inset Formula $\left\langle x,U(x)\right\rangle =0$
 \end_inset
 
- but is not the zero op: U is the rotation by 90 degrees in the plane.
+ but is not the zero op: the rotation U by 90 degrees in the plane.
 \end_layout
 
 \begin_layout Section
@@ -983,10 +1102,11 @@ There exists an orthonormal basis
 \end_inset
 
  for all 
-\begin_inset Formula $x.$
+\begin_inset Formula $x,$
 \end_inset
 
-
+ i.e.
+ T is unitary / orthogonal.
 \end_layout
 
 \begin_layout Standard
@@ -1150,7 +1270,7 @@ Let
 \end_layout
 
 \begin_layout Section
-Proposition.
+Proposition *6.18.
  
 \emph on
 The adjoint of a unitary / orthogonal operator is its inverse
@@ -1167,7 +1287,11 @@ Let
 \begin_inset Formula $\beta$
 \end_inset
 
- be an orthonormal basis for V.
+ be an orthonormal basis for V, and suppose 
+\begin_inset Formula $T^{-1}$
+\end_inset
+
+ exists.
  Then 
 \begin_inset Formula $T^{*}=T^{-1}$
 \end_inset
@@ -1271,7 +1395,7 @@ for all
 \end_layout
 
 \begin_layout Section
-Conjecture.
+Proposition.
  Equality of two operators in an inner product
 \end_layout
 
@@ -1290,7 +1414,11 @@ Let
 \begin_inset Formula $T(\beta)$
 \end_inset
 
- be orthonormal bases for V.
+ be orthonormal bases for V and suppose that 
+\begin_inset Formula $T^{-1}$
+\end_inset
+
+ exists.
  If 
 \begin_inset Formula 
 \[
@@ -1324,7 +1452,40 @@ Let
 
 \begin_layout Standard
 Proof.
- TODO.
+ Let 
+\begin_inset Formula $\beta=\left\{ v_{1},\ldots,v_{n}\right\} ,T(\beta)=\left\{ T(v_{1}),\ldots,T(v_{n})\right\} ,$
+\end_inset
+
+ and let 
+\begin_inset Formula 
+\begin{align*}
+x & =\sum a_{i}T(v_{i})\\
+y & =\sum b_{i}v_{i}.
+\end{align*}
+
+\end_inset
+
+Expanding 
+\begin_inset Formula $\left\langle x,T(y)\right\rangle $
+\end_inset
+
+ and 
+\begin_inset Formula $\left\langle T^{-1}(x),y\right\rangle $
+\end_inset
+
+ we get
+\begin_inset Formula 
+\begin{align*}
+\left\langle x,T(y)\right\rangle  & =\left\langle \sum a_{i}T(v_{i}),T\left(\sum b_{i}v_{i}\right)\right\rangle \\
+ & =\left\langle \sum a_{i}T(v_{i}),\sum b_{i}T(v_{i})\right\rangle \\
+ & =\sum a_{i}\overline{b_{i}}\\
+\left\langle T^{-1}(x),y\right\rangle  & =\left\langle T^{-1}\left(\sum a_{i}T(v_{i})\right),\sum b_{i}v_{i}\right\rangle \\
+ & =\sum a_{i}\overline{b_{i}}.
+\end{align*}
+
+\end_inset
+
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1332,8 +1493,395 @@ We should apply abstract results on concrete examples.
 \end_layout
 
 \begin_layout Section
+Exercise 2.4.9.
+
+\emph on
+ AB invertible implies A and B are invertible for square matrices A and
+ B
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Let A and B be 
+\begin_inset Formula $n\times n$
+\end_inset
+
+ matrices such that AB is invertible.
+ Prove that A and B are invertible.
+ Give an example to show that arbitrary matrices A and B need not be invertible
+ if AB is invertible.
+\end_layout
+
+\begin_layout Standard
+Proof.
+ The columns of AB are of the form 
+\begin_inset Formula $\left[Ab_{1}\cdots Ab_{n}\right]$
+\end_inset
+
+ where 
+\begin_inset Formula $b_{i}$
+\end_inset
+
+ are the columns of 
+\begin_inset Formula $B.$
+\end_inset
+
+ Since AB is invertible, its columns are linearly independent.
+ By the rank-nullity theorem (
+\begin_inset Formula $\dim N_{A}+\dim R_{A}=\dim V=n$
+\end_inset
+
+), we have 
+\begin_inset Formula $\dim R_{A}=n,$
+\end_inset
+
+ so 
+\begin_inset Formula $\dim N_{A}=0,$
+\end_inset
+
+ and T is invertible.
+ This also means the 
+\begin_inset Formula $b_{i}$
+\end_inset
+
+ are linearly independent, so 
+\begin_inset Formula $B$
+\end_inset
+
+ is invertible.
+\end_layout
+
+\begin_layout Section
 Exercise 2.4.10.
- TODO
+ 
+\emph on
+One-sided inverse is a two-sided inverse
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Let A and B be 
+\begin_inset Formula $n\times n$
+\end_inset
+
+ matrices s.t.
+ 
+\begin_inset Formula $AB=I_{n}.$
+\end_inset
+
+ (a) Use previous to conclude that A and B are invertible.
+ (b) Prove 
+\begin_inset Formula $A=B^{-1}$
+\end_inset
+
+ and 
+\begin_inset Formula $B=A^{-1},$
+\end_inset
+
+ i.e.
+ for square matrices, a one-sided inverse is a two-sided inverse.
+\end_layout
+
+\begin_layout Standard
+Proof.
+ (a) By previous, A and B are invertible.
+ (b) Multiply on the left by 
+\begin_inset Formula $A^{-1}$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\begin{aligned}AB & =I\\
+A^{-1}AB & =A^{-1}\\
+B & =A^{-1}.
+\end{aligned}
+\]
+
+\end_inset
+
+Similarly for the other one.
+\end_layout
+
+\begin_layout Section
+Corollary 6.18.
+ Selfadjoint and orthogonal iff orthonormal basis of eigenvectors with eigenvalu
+es of absolute value 1
+\end_layout
+
+\begin_layout Standard
+Corollary
+\emph on
+.
+ Let 
+\begin_inset Formula $TnV\mathbf{R}\left\langle \right\rangle .$
+\end_inset
+
+ Then V has an orthonormal basis of eigenvectors of T with corresponding
+ eigenvalues of absolute value 1 iff T is both selfadjoint and orthogonal.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Proof.
+ 
+\begin_inset Formula $\left(\implies\right)$
+\end_inset
+
+ 
+\emph default
+Suppose 
+\begin_inset Formula $\beta=\left\{ v_{i}\right\} $
+\end_inset
+
+ is an orthonormal basis of eigenvectors of T with corresponding eigenvalues
+ of absolute value 1.
+ By Theorem 6.17 T is selfadjoint.
+ Let 
+\begin_inset Formula $x=\sum a_{i}v_{i}.$
+\end_inset
+
+ We want to show T is orthogonal, i.e.
+ 
+\begin_inset Formula $\left|\left|T(x)\right|\right|=\left|\left|x\right|\right|:$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\left|\left|T(x)\right|\right|^{2}=\left\langle T(x),T(x)\right\rangle =\left\langle \sum a_{i}T(v_{i}),\sum a_{i}T(v_{i})\right\rangle =\sum a_{i}^{2}=\left|\left|x\right|\right|
+\]
+
+\end_inset
+
+because the 
+\begin_inset Formula $T(v_{i})$
+\end_inset
+
+'s are orthonormal, thanks to a lemma we'll prove below.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $(\impliedby)$
+\end_inset
+
+ Suppose T is selfadjoint and orthogonal.
+ By Theorem 6.17 V has an orthonormal basis 
+\begin_inset Formula $\beta=\left\{ v_{i}\right\} $
+\end_inset
+
+ of eigenvectors of T.
+ WTS 
+\begin_inset Formula $\left|\lambda_{i}\right|=1.$
+\end_inset
+
+ We have 
+\begin_inset Formula $T(v_{i})=\lambda_{i}v_{i},$
+\end_inset
+
+ so
+\begin_inset Formula 
+\begin{align*}
+\left|\left|T(v_{i})\right|\right|=\left\langle T(v_{i}),T(v_{i})\right\rangle  & =\left\langle \lambda_{i}v_{i},\lambda_{i}v_{i}\right\rangle =\lambda_{i}^{2}\left\langle v_{i},v_{i}\right\rangle =\lambda_{i}^{2}\left|\left|v_{i}\right|\right|\\
+1 & =\lambda_{i}^{2},
+\end{align*}
+
+\end_inset
+
+because T is orthogonal.
+ Therefore 
+\begin_inset Formula $\left|\lambda_{i}\right|=1.$
+\end_inset
+
+ [NOTE.
+ We could've written the previous equation using norms instead of inner
+ products: 
+\begin_inset Formula $\left|\left|T(v_{i})\right|\right|=\left|\left|\lambda_{i}v_{i}\right|\right|=\left|\lambda_{i}\right|\left|\left|v\right|\right|.$
+\end_inset
+
+]
+\end_layout
+
+\begin_layout Section
+Corollary 6.18.1.
+ Unitary iff orthonormal basis of eigenvectors with eigenvalues of absolute
+ value 1
+\end_layout
+
+\begin_layout Standard
+Corollary
+\emph on
+.
+ Let 
+\begin_inset Formula $TnV\mathbf{C}\left\langle \right\rangle .$
+\end_inset
+
+ Then V has an orthonormal basis of eigenvectors of T with corresponding
+ eigenvalues of absolute value 1 iff T is unitary.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Proof similar to the real case.
+\end_layout
+
+\begin_layout Section
+Lemma *6.18.
+ Orthonormal basis of eigenvectors with eigenvalues of absolute value 1
+ implies T maps orthonormal basis to orthonormal basis
+\end_layout
+
+\begin_layout Standard
+Lemma
+\emph on
+.
+ Let 
+\begin_inset Formula $TnV\mathbf{R}\left\langle \right\rangle .$
+\end_inset
+
+ If V has an orthonormal basis 
+\begin_inset Formula $\beta$
+\end_inset
+
+ of eigenvectors with eigenvalues of absolute value 1, then 
+\begin_inset Formula $T(\beta)$
+\end_inset
+
+ is also an orthonormal basis.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Proof.
+ 
+\emph default
+Let 
+\begin_inset Formula $\beta=\left\{ v_{i}\right\} .$
+\end_inset
+
+ Then 
+\begin_inset Formula 
+\[
+\left\langle T(v_{i}),T(v_{j})\right\rangle =\left\langle \lambda_{i}v_{i},\lambda_{j}v_{j}\right\rangle =\lambda_{i}\lambda_{j}\delta_{ij}=\begin{cases}
+0 & \textrm{if }i\neq j\\
+1 & \textrm{if }i=j.
+\end{cases}
+\]
+
+\end_inset
+
+Therefore the 
+\begin_inset Formula $T(v_{i})$
+\end_inset
+
+'s are orthonormal and form an orthonormal basis.
+\end_layout
+
+\begin_layout Section
+Definition 6.18.
+ Reflection about a line in 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Let L be a one dimensional subspace of 
+\begin_inset Formula $R^{2}.$
+\end_inset
+
+ We may view L as a line in the plane through the origin.
+ A linear operator T on 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ is called a reflection of 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ about L if 
+\begin_inset Formula $T(x)=x$
+\end_inset
+
+ for all 
+\begin_inset Formula $x\in L$
+\end_inset
+
+ and 
+\begin_inset Formula $T(x)=-x$
+\end_inset
+
+ for all 
+\begin_inset Formula $x\in L^{\perp}.$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+T is an orthogonal operator: let 
+\begin_inset Formula $v_{1}\in L,v_{2}\in L^{\perp}$
+\end_inset
+
+ with length 1.
+ Then 
+\begin_inset Formula $T(v_{1})=v_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $T(v_{2})=-v_{2},$
+\end_inset
+
+ thus 
+\begin_inset Formula $v_{i}$
+\end_inset
+
+ are eigenvectors with eigenvalues 1 and 
+\begin_inset Formula $-1.$
+\end_inset
+
+ By Corollary 6.18 T is orthogonal.
+ We can also see that 
+\begin_inset Formula $\beta=\left\{ v_{i}\right\} $
+\end_inset
+
+ is an orthonormal basis for V, as is 
+\begin_inset Formula $T(\beta)=\left\{ T(v_{i})\right\} .$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Section
+Definition 6.18.1.
+ Orthogonal and unitary matrices
+\end_layout
+
+\begin_layout Standard
+Definition.
+ 
+\emph on
+A square matrix A is called an orthogonal matrix if 
+\begin_inset Formula $A^{t}A=AA^{t}=I$
+\end_inset
+
+ and unitary if 
+\begin_inset Formula $A^{*}A=AA^{*}=I.$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+
 \end_layout
 
 \end_body
