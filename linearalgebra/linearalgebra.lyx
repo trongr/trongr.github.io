@@ -111,10 +111,6 @@ LatexCommand tableofcontents
 
 \end_layout
 
-\begin_layout Part
-2017
-\end_layout
-
 \begin_layout Section
 Rank nullity theorem
 \end_layout
@@ -123,8 +119,11 @@ Rank nullity theorem
 
 \emph on
 Let V be a finite dimensional vector space, and W be a (not necessarily
- finite dimensional) vector space over some field and let T : V → W be a
- linear map.
+ finite dimensional) vector space over some field and let 
+\begin_inset Formula $T:V\longrightarrow W$
+\end_inset
+
+ be a linear map.
  Then
 \end_layout
 
@@ -137,10 +136,6 @@ Let V be a finite dimensional vector space, and W be a (not necessarily
 \end_inset
 
 
-\end_layout
-
-\begin_layout Part
-January 2018
 \end_layout
 
 \begin_layout Section
@@ -176,14 +171,6 @@ for all
 \end_inset
 
  
-\end_layout
-
-\begin_layout Part
-February
-\end_layout
-
-\begin_layout Section*
-M19F18
 \end_layout
 
 \begin_layout Section
@@ -271,7 +258,9 @@ Follows from Theorem 6.16 or 6.17.
 \end_layout
 
 \begin_layout Section
-Theorem 6.3
+Theorem 6.3.
+ Representing a vector as a linear combination of orthogonal vectors using
+ inner product projections
 \end_layout
 
 \begin_layout Standard
@@ -340,6 +329,42 @@ Let V be an inner product space,
 y=\sum_{i=1}^{k}\left\langle y,v_{i}\right\rangle v_{i}.
 \]
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Theorem 6.10.
+ Matrix of the adjoint and adjoint of the matrix under orthonormal basis
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Let 
+\begin_inset Formula $TVn\beta$
+\end_inset
+
+ be orthonormal.
+ Then 
+\begin_inset Formula $[T^{*}]_{\beta}=\left[T\right]_{\beta}^{*}.$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Corollary 6.10.
+ Matrix version
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Let A by an n by n matrix.
+ Then 
+\begin_inset Formula $L_{A^{*}}=(L_{A})^{*}.$
 \end_inset
 
 
@@ -433,10 +458,6 @@ Let T be a normal linear operator on an inner product space V with eigenvalue
 \end_inset
 
 
-\end_layout
-
-\begin_layout Part
-March
 \end_layout
 
 \begin_layout Section
@@ -889,6 +910,10 @@ By Theorem 6.18 below,
  is orthogonal.
  By Theorem 6.18.b, it preserves the inner product and hence preserves the
  angle between two vectors.
+ By Corollary 6.18.1, its rows and columns form orthonormal bases for 
+\begin_inset Formula $R^{2}.$
+\end_inset
+
  Since 
 \begin_inset Formula $R_{\theta}\neq R_{\theta}^{T}$
 \end_inset
@@ -1880,8 +1905,89 @@ A square matrix A is called an orthogonal matrix if
  
 \end_layout
 
+\begin_layout Subsection
+Corollary 6.18.1.
+ Square matrix is orthogonal iff its rows and columns form orthonormal bases
+ for 
+\begin_inset Formula $F^{n}.$
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
 
+\emph on
+\begin_inset Formula $AA^{*}=I$
+\end_inset
+
+ is equivalent to the statement that the rows of A form an orthonormal basis
+ for 
+\begin_inset Formula $F^{n},$
+\end_inset
+
+
+\emph default
+ 
+\emph on
+because 
+\begin_inset Formula 
+\[
+AA^{*}=I=\begin{bmatrix}A_{1}\\
+\vdots\\
+A_{n}
+\end{bmatrix}\begin{bmatrix}\overline{A_{1}^{t}} & \cdots & \overline{A_{n}^{t}}\end{bmatrix},
+\]
+
+\end_inset
+
+and so 
+\begin_inset Formula 
+\[
+\left\langle A_{i},A_{j}\right\rangle =A_{i}\overline{A_{j}^{t}}=\delta_{ij}.
+\]
+
+\end_inset
+
+Similarly the condition 
+\begin_inset Formula $A^{*}A=I$
+\end_inset
+
+ is equivalent to the statement that the columns of A form an orthonormal
+ basis for 
+\begin_inset Formula $F^{n}.$
+\end_inset
+
+ Therefore a square matrix is orthogonal iff its rows and columns form orthonorm
+al bases for 
+\begin_inset Formula $F^{n}.$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Corollary 6.18.2.
+ Operator is unitary / orthogonal iff its matrix under orthonormal basis
+ is unitary / orthogonal
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Let 
+\begin_inset Formula $TnV.$
+\end_inset
+
+ By Theorem 6.10, T is unitary / orthogonal iff 
+\begin_inset Formula $\left[T\right]_{\beta}$
+\end_inset
+
+ is unitary / orthogonal for some orthonormal basis 
+\begin_inset Formula $\beta$
+\end_inset
+
+ for V.
 \end_layout
 
 \end_body

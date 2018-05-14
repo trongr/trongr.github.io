@@ -26,9 +26,18 @@
 \output_sync 0
 \bibtex_command default
 \index_command default
-\paperfontsize default
+\paperfontsize 12
 \spacing single
-\use_hyperref false
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle true
 \papersize default
 \use_geometry false
 \use_package amsmath 1
@@ -75,13 +84,17 @@
 A.I.
 \end_layout
 
-\begin_layout Part
-February
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section*
-S180217.
- Simplified Softmax Loss for GAN
+Simplified Softmax Loss for GAN
 \end_layout
 
 \begin_layout Paragraph*
@@ -108,10 +121,9 @@ QUESTION
 \end_layout
 
 \begin_layout Section*
-O180218
+
 \emph on
-.
- The cost function in linear regression by gradient descent is convex
+The cost function in linear regression by gradient descent is convex
 \end_layout
 
 \begin_layout Standard
@@ -246,8 +258,7 @@ And finally the reason we care about convexity is that it guarantees we
 \end_layout
 
 \begin_layout Section*
-M180219.
- Encoding and triggering a GAN
+Encoding and triggering a GAN
 \end_layout
 
 \begin_layout Standard
@@ -298,8 +309,7 @@ Perhaps we can apply this principle to other fields, e.g.
 \end_layout
 
 \begin_layout Section
-W21.
- GAN Generator noise dimension
+GAN Generator noise dimension
 \end_layout
 
 \begin_layout Standard
@@ -320,8 +330,7 @@ WGAN-GP (Gradient Penalty)
 \end_layout
 
 \begin_layout Section
-R22.
- Fully Connected VS Convolutional Neural NetworksT20
+Fully Connected VS Convolutional Neural NetworksT20
 \end_layout
 
 \begin_layout Section
@@ -337,11 +346,6 @@ Question.
 Are fully connected and convolutional networks equivalent? Specifically
  can an FC network learn anything a conv network can, given enough training
  time and layers?
-\end_layout
-
-\begin_layout Section
-Name.
- The Neuralist
 \end_layout
 
 \begin_layout Section
@@ -392,8 +396,7 @@ Question.
 \end_layout
 
 \begin_layout Section
-W28.
- GAN as mode evolution
+GAN as mode evolution
 \end_layout
 
 \begin_layout Standard
@@ -474,13 +477,8 @@ One solution might be to train multiple generators, each learning a few
  Drop out?
 \end_layout
 
-\begin_layout Part
-March
-\end_layout
-
 \begin_layout Section
-R1.
- Modal collapse is natural
+Modal collapse is natural
 \end_layout
 
 \begin_layout Standard
@@ -511,8 +509,7 @@ How do you do that exactly?
 \end_layout
 
 \begin_layout Section
-O4.
- Having some trouble scaling
+Having some trouble scaling
 \end_layout
 
 \begin_layout Standard
@@ -522,8 +519,7 @@ the network from MNIST to CelebA, cause the images are a lot bigger and
 \end_layout
 
 \begin_layout Section
-M5.
- Cooperative Networks and emergence
+Cooperative Networks and emergence
 \end_layout
 
 \begin_layout Standard
@@ -536,8 +532,7 @@ How do you make networks that cooperate? How do you compose networks together?
 \end_layout
 
 \begin_layout Section
-T6.
- TODO.
+TODO.
  GAN Generalization
 \end_layout
 
@@ -552,8 +547,7 @@ Training a GAN to generate faces is not unlike Necromancy.
 \end_layout
 
 \begin_layout Section
-W7.
- Machine and Human Learning
+Machine and Human Learning
 \end_layout
 
 \begin_layout Standard
@@ -675,8 +669,7 @@ Adding FC layers after those conv layers should help prevent that.
 \end_layout
 
 \begin_layout Section
-F10.
- Generative models are powerful
+Generative models are powerful
 \end_layout
 
 \begin_layout Standard
@@ -728,8 +721,7 @@ In programming you don't understand things: you just use them.
 \end_layout
 
 \begin_layout Section
-T13.
- Been having trouble with GANs running out of MEM
+Been having trouble with GANs running out of MEM
 \end_layout
 
 \begin_layout Standard
@@ -744,8 +736,7 @@ last few days moving from MNIST to CelebA.
 \end_layout
 
 \begin_layout Section
-R16.
- Conv networks and entropy?
+Conv networks and entropy?
 \end_layout
 
 \begin_layout Standard
@@ -796,8 +787,7 @@ Another thing to try is to use an RNN to generate the images instead of
 \end_layout
 
 \begin_layout Section
-M19.
- Generative Adversarial Networks are .
+Generative Adversarial Networks are .
  .
  .
  well, adversarial
@@ -866,8 +856,7 @@ When you change the objective function, you change the game
 \end_layout
 
 \begin_layout Section
-O25.
- Recursive GANs don't work so well
+Recursive GANs don't work so well
 \end_layout
 
 \begin_layout Address
@@ -876,14 +865,6 @@ Tried feeding the generated images back to the front of the generator, worked
  Also tried feeding it near the end of the generator, but fails right off
  the bat.
  Let's put this one on the back burner for now.
-\end_layout
-
-\begin_layout Part
-April
-\end_layout
-
-\begin_layout Section
-18155 2593 600 50 2018-04-05 Thu
 \end_layout
 
 \begin_layout Section

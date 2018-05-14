@@ -26,9 +26,18 @@
 \output_sync 0
 \bibtex_command default
 \index_command default
-\paperfontsize default
+\paperfontsize 12
 \spacing single
-\use_hyperref false
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle true
 \papersize default
 \use_geometry false
 \use_package amsmath 2
@@ -75,8 +84,407 @@
 Abstract Algebra
 \end_layout
 
-\begin_layout Part
-April
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Proposition.
+ Subgroup test / criterion
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+A subset 
+\begin_inset Formula $H\subset G$
+\end_inset
+
+ is a subgroup iff H is nonempty and closed under multiplication and inverses.
+\end_layout
+
+\begin_layout Section
+Fiber of a homomorphism
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Let 
+\begin_inset Formula $\phi$
+\end_inset
+
+ be a homomorphism from G to H.
+ Then the fibers of 
+\begin_inset Formula $\phi$
+\end_inset
+
+ are the sets of elements of G projecting to a single element of H, i.e.
+ each fiber is the preimage 
+\begin_inset Formula $\phi^{-1}(h)$
+\end_inset
+
+ of a single element 
+\begin_inset Formula $h\in H.$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Group structure of the fiber of a homomorphism
+\end_layout
+
+\begin_layout Standard
+We can derive a multiplication operation on the set 
+\begin_inset Formula $G/H$
+\end_inset
+
+ of fibers of 
+\begin_inset Formula $\phi$
+\end_inset
+
+ from the multiplication in H: let 
+\begin_inset Formula $X_{a},X_{b}$
+\end_inset
+
+ be the fibers above 
+\begin_inset Formula $a,b\in H;$
+\end_inset
+
+ then define 
+\begin_inset Formula 
+\[
+X_{a}X_{b}=X_{ab}.
+\]
+
+\end_inset
+
+This makes 
+\begin_inset Formula $G/H$
+\end_inset
+
+ a group, and it is isomorphic by construction to 
+\begin_inset Formula $\phi(G).$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Subsection
+Example of fiber of a homomorphism
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $G=\mathbf{Z},$
+\end_inset
+
+ let 
+\begin_inset Formula $H=Z_{n}=\left\langle x\right\rangle $
+\end_inset
+
+ be the cyclic group of order 
+\begin_inset Formula $n$
+\end_inset
+
+ (the group 
+\begin_inset Formula $\mathbf{Z}/n\mathbf{Z}$
+\end_inset
+
+ of remainders mod 
+\begin_inset Formula $n$
+\end_inset
+
+) and define 
+\begin_inset Formula $\varphi:G\longrightarrow H$
+\end_inset
+
+ by 
+\begin_inset Formula $\varphi(a)=x^{a}.$
+\end_inset
+
+ Since 
+\begin_inset Formula $\varphi(a+b)=x^{a+b}=x^{a}x^{b}=\varphi(a)\varphi(b),$
+\end_inset
+
+ 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ is a homomorphism.
+ Note that 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ is surjective.
+ The fiber of 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ over 
+\begin_inset Formula $x^{a}$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\[
+\begin{aligned}\varphi^{-1}(x^{a}) & =\left\{ m\in G:\varphi(m)=x^{m}=x^{a}\right\} \\
+ & =\left\{ m\in G:x^{m-a}=1\right\} \\
+ & =\left\{ m\in G:n|m-a\right\} \\
+ & =\left\{ m\in G:m\equiv_{n}a\right\} .
+\end{aligned}
+\]
+
+\end_inset
+
+There are 
+\begin_inset Formula $n$
+\end_inset
+
+ such fibers, one for each of 
+\begin_inset Formula $a=0,1,\ldots,n-1,$
+\end_inset
+
+ the residue classes mod 
+\begin_inset Formula $n.$
+\end_inset
+
+ The identity of 
+\begin_inset Formula $H=\mathbf{Z}/n\mathbf{Z}$
+\end_inset
+
+ is the subgroup 
+\begin_inset Formula $n\mathbf{Z}$
+\end_inset
+
+ of all multiples of 
+\begin_inset Formula $n$
+\end_inset
+
+ in 
+\begin_inset Formula $\mathbf{Z}.$
+\end_inset
+
+ The remaining fibers are translates of this subgroup, 
+\begin_inset Formula $a+nZ.$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Section
+Definition.
+ Kernel of a homomorphism
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+The kernel of a homomorphism 
+\begin_inset Formula $\varphi:G\longrightarrow H$
+\end_inset
+
+ is the fiber above 
+\begin_inset Formula $e\in H,$
+\end_inset
+
+ namely
+\begin_inset Formula 
+\[
+\ker\varphi=\left\{ g\in G:\varphi(g)=e\in H\right\} .
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Examples of the kernel of a homomorphism
+\end_layout
+
+\begin_layout Standard
+See Ex 3.1.12 below.
+\end_layout
+
+\begin_layout Section
+Proposition.
+ Properties of homomorphisms
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Let 
+\begin_inset Formula $\varphi:G\longrightarrow H$
+\end_inset
+
+ be a group homomorphism.
+ Then
+\end_layout
+
+\begin_layout Enumerate
+
+\emph on
+\begin_inset Formula $\varphi(e)=e,$
+\end_inset
+
+ or in words: a homomorphism maps the identity to the identity.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\varphi(g^{-1})=\varphi(g)^{-1},$
+\end_inset
+
+ 
+\emph on
+a homomorphism preserves inverse.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\varphi(g^{n})=\varphi(g)^{n}$
+\end_inset
+
+ for all 
+\begin_inset Formula $n\in Z,$
+\end_inset
+
+ 
+\emph on
+or a homomorphism preserves taking powers.
+ Note that the previous result is a special case.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\ker\varphi\leq G.$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\varphi(G)\leq H.$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Proof of 1.
+ 
+\emph default
+Since 
+\begin_inset Formula $\varphi(e)=\varphi(ee)=\varphi(e)\varphi(e),$
+\end_inset
+
+ the cancellation law implies 
+\begin_inset Formula $e_{H}=\varphi(e_{G}).$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Proof of 2.
+ 
+\emph default
+We have 
+\begin_inset Formula $e=\varphi(e)=\varphi(gg^{-1})=\varphi(g)\varphi(g^{-1}).$
+\end_inset
+
+ Multiplying both sides by 
+\begin_inset Formula $\varphi(g)^{-1}$
+\end_inset
+
+ yields the result.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Proof of 3.
+ 
+\emph default
+Associativity of 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ yields the result for 
+\begin_inset Formula $n>0,$
+\end_inset
+
+ and the previous result + associativity proves it for 
+\begin_inset Formula $n<0.$
+\end_inset
+
+ Defining 
+\begin_inset Formula $g^{0}=e$
+\end_inset
+
+ shows result for all 
+\begin_inset Formula $n\in Z.$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Proof of 4 and 5.
+ 
+\emph default
+TODO.
+ Check that the subsets are nonempty and closed under multiplication and
+ inverses.
+\end_layout
+
+\begin_layout Section
+3.1.
+ Quotient group
+\end_layout
+
+\begin_layout Standard
+Quotient groups of G map one to one to the homomorphisms of G?
+\end_layout
+
+\begin_layout Subsection
+Def 3.1.1.
+ Quotient group
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Let 
+\begin_inset Formula $\phi:G\longrightarrow H$
+\end_inset
+
+ be a homomorphism with kernel K.
+ The quotient group / factor group 
+\begin_inset Formula $G/K$
+\end_inset
+
+ is the group whose elements are the fibers of 
+\begin_inset Formula $\phi$
+\end_inset
+
+ with group operation defined previous: if 
+\begin_inset Formula $X$
+\end_inset
+
+ is the fiber above a and Y is the fiber above b, then the product XY is
+ the fiber above ab.
 \end_layout
 
 \begin_layout Section
@@ -127,7 +535,8 @@ Z(G)=\{z\in G:zg=gz\text{ for all }g\in G\}.
 \end_layout
 
 \begin_layout Section
-Ex 3.1.12
+Ex 3.1.12.
+ Additive group R to multiplicative group of the circle in C
 \end_layout
 
 \begin_layout Standard
@@ -156,7 +565,7 @@ Let G be the additive group of real numbers, let H be the multiplicative
 \begin_layout Standard
 \begin_inset Formula 
 \[
-\ker\phi=\left\{ r:\phi(r)=e^{2\pi ir}=\cos2\pi r+i\sin2\pi r=1\right\} =\left\{ r=k:k\in\mathbf{N}\right\} .
+\ker\phi=\left\{ r:\phi(r)=e^{2\pi ir}=\cos2\pi r+i\sin2\pi r=1\right\} =\left\{ k:k\in\mathbf{N}\right\} .
 \]
 
 \end_inset
@@ -165,7 +574,8 @@ Let G be the additive group of real numbers, let H be the multiplicative
 \end_layout
 
 \begin_layout Section
-Ex 3.1.17
+Ex 3.1.17.
+ Dihedral group of order 16
 \end_layout
 
 \begin_layout Standard
@@ -249,6 +659,30 @@ Find the center of
 \end_inset
 
  
+\end_layout
+
+\begin_layout Standard
+The dihedral group of order 16 in full is 
+\begin_inset Formula 
+\[
+D_{16}=\left\{ 1,r,\ldots,r^{7},s,sr,\ldots,sr^{7}\right\} .
+\]
+
+\end_inset
+
+The group generated by 
+\begin_inset Formula $r^{4}$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\[
+\left\langle r^{4}\right\rangle =\left\{ 1,r^{4}\right\} .
+\]
+
+\end_inset
+
+
 \end_layout
 
 \end_body
