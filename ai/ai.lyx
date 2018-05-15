@@ -132,8 +132,9 @@ The cost function in linear regression by gradient descent is convex
 Proposition
 \series default
 .
+
 \emph on
-The cost function in linear regression by gradient descent is convex.
+ The cost function in linear regression by gradient descent is convex.
 \end_layout
 
 \begin_layout Standard
@@ -223,21 +224,21 @@ H_{ij}=\frac{\partial^{2}J}{\partial\theta_{i}\partial\theta_{j}}=\frac{1}{m}\su
 \end_layout
 
 \begin_layout Standard
-Looking at the formula for
+Looking at the formula for 
 \begin_inset Formula $H_{ij},$
 \end_inset
 
- we notice that H is precisely
+ we notice that H is precisely 
 \begin_inset Formula $\frac{1}{m}X^{T}X,$
 \end_inset
 
- where
+ where 
 \begin_inset Formula $X=[x_{i}^{(k)}]$
 \end_inset
 
  is the matrix of samples k by features i.
  Using H in matrix form makes it a lot easier to see that it’s positive
- semidefinite: note that
+ semidefinite: note that 
 \begin_inset Formula $\theta^{T}H\theta$
 \end_inset
 
@@ -267,9 +268,9 @@ TODO.
  different digits.
  That
 \emph on
-would
+ would
 \emph default
-be interesting, but not very useful because we want consistency between
+ be interesting, but not very useful because we want consistency between
  runs, so that we can encode different digits on the random distribution
 \begin_inset Formula $z.$
 \end_inset
