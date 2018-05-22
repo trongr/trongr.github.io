@@ -112,7 +112,172 @@ LatexCommand tableofcontents
 \end_layout
 
 \begin_layout Section
-Rank nullity theorem
+Theorem 2.23.
+ Change of coordinates: conjugation by change of coordinate matrix.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Let 
+\begin_inset Formula $TnV,$
+\end_inset
+
+ 
+\begin_inset Formula $\beta,\gamma$
+\end_inset
+
+ be ordered bases for V.
+ Suppose that 
+\begin_inset Formula $Q=I_{\gamma}^{\beta}$
+\end_inset
+
+ is the change of coordinate matrix that changes 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ coordinates to 
+\begin_inset Formula $\beta$
+\end_inset
+
+ coordinates.
+ Then 
+\begin_inset Formula 
+\[
+\left[T\right]_{\gamma}=Q^{-1}\left[T\right]_{\beta}Q.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Corollary 2.23.
+ Representing a matrix in a different basis / change of coordinate matrix.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Let 
+\begin_inset Formula $A\in M_{n\times n}(F),$
+\end_inset
+
+ and let 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ be an ordered basis for 
+\begin_inset Formula $F^{n}.$
+\end_inset
+
+ Then 
+\begin_inset Formula $\left[L_{A}\right]_{\gamma}=Q^{-1}AQ,$
+\end_inset
+
+ where Q is the 
+\begin_inset Formula $n\times n$
+\end_inset
+
+ matrix whose jth column is the jth vector of 
+\begin_inset Formula $\gamma.$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Trivial example: 
+\begin_inset Formula $\left[L_{A}\right]_{\beta}=I^{-1}AI=A,$
+\end_inset
+
+ where 
+\begin_inset Formula $\beta$
+\end_inset
+
+ is the standard ordered basis for 
+\begin_inset Formula $F^{n}.$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Given a 
+\begin_inset Formula $\gamma,$
+\end_inset
+
+ we can define a map 
+\begin_inset Formula $\Gamma:M_{n\times n}(F)\longrightarrow M_{n\times n}(F)$
+\end_inset
+
+ given by 
+\begin_inset Formula 
+\[
+\Gamma:A\longmapsto\left[L_{A}\right]_{\gamma}=Q^{-1}AQ.
+\]
+
+\end_inset
+
+What can we say about this map? Does it preserve properties of A and 
+\begin_inset Formula $M_{n\times n}(F)?$
+\end_inset
+
+ First of all, is this a linear transformation? Yes:
+\begin_inset Formula 
+\[
+\Gamma(aA+B)=Q^{-1}(aA+B)Q=aQ^{-1}AQ+Q^{-1}BQ=a\Gamma(A)+\Gamma(B).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Note that 
+\begin_inset Formula $\Gamma$
+\end_inset
+
+ maps operator to operator, not vectors in V.
+\end_layout
+
+\begin_layout Section
+Intuition.
+ Change of coordinates
+\end_layout
+
+\begin_layout Standard
+Change of coordinates basically maps each vector in the original basis to
+ a vector in the new basis.
+ Each matrix in the original space V is mapped to a new vector in the same
+ space V, but we should think of it really as a new space.
+\end_layout
+
+\begin_layout Section
+Definition 2.23.
+ Similar matrices
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Let A and B be matrices in 
+\begin_inset Formula $M_{n\times n}(F^{n}).$
+\end_inset
+
+ We say that B is similar to A if there exists an invertible matrix Q s.t.
+ 
+\begin_inset Formula $B=Q^{-1}AQ.$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Section
+Theorem 2.3.
+ Rank nullity theorem / Dimension theorem
 \end_layout
 
 \begin_layout Standard
@@ -147,7 +312,7 @@ Theorem 6.1.
 
 \emph on
 Let 
-\begin_inset Formula $V\left\langle \right\rangle .$
+\begin_inset Formula $V.$
 \end_inset
 
  If
@@ -207,6 +372,44 @@ If two operators agree on a basis, they are equal.
 \end_layout
 
 \begin_layout Section
+Def.
+ Normal operators
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Let 
+\begin_inset Formula $A:V\longrightarrow V$
+\end_inset
+
+.
+ Then A is normal iff it commutes with its adjoint: 
+\begin_inset Formula $AA^{*}=A^{*}A.$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+E.g.
+ of normal operators: unitary, selfadjoint, and real symmetric operators
+\end_layout
+
+\begin_layout Standard
+Unitary operators are normal: 
+\begin_inset Formula $A^{*}=A^{-1},$
+\end_inset
+
+ which commutes with A.
+ Selfadjoint [and therefore real symmetric] operators are normal: 
+\begin_inset Formula $A^{*}=A.$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Section
 Theorem.
  
 \emph on
@@ -223,6 +426,43 @@ Let T be normal on V,
 \end_inset
 
  Then eigenvectors corresponding to distinct eigenvalues of T are orthogonal.
+\end_layout
+
+\begin_layout Section
+Definition.
+ Adjoint operators
+\end_layout
+
+\begin_layout Standard
+are also called Hermitian adjoint, Hermitian conjugate or Hermitian transpose.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Let 
+\begin_inset Formula $A:V\longrightarrow W$
+\end_inset
+
+ be linear.
+ Then the adjoint of A is the unique linear operator 
+\begin_inset Formula $A^{*}:W\longrightarrow V$
+\end_inset
+
+ s.t.
+ 
+\begin_inset Formula 
+\[
+\left\langle Av,w\right\rangle _{W}=\left\langle v,A^{*}w\right\rangle _{V}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Existence and uniqueness to be proved.
 \end_layout
 
 \begin_layout Section
@@ -244,8 +484,8 @@ An operator T is diagonalizable iff there exists a basis of V consisting
 
 \emph on
 Corollary.
- If T is a self-adjoint operator, then there is a basis of V consisting
- of eigenvectors of T.
+ If T is a selfadjoint operator, then there is a basis of V consisting of
+ eigenvectors of T.
 \end_layout
 
 \begin_layout Standard
@@ -354,7 +594,7 @@ Let
 
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Section
 Corollary 6.10.
  Matrix version
 \end_layout
@@ -400,8 +640,20 @@ Let T be a linear operator on a finite-dimensional real inner product space
 \end_layout
 
 \begin_layout Standard
-Corollary 6.17.
+Note that a real selfadjoint matrix is symmetric, 
+\begin_inset Formula $A^{*}=A^{T}=A.$
+\end_inset
+
  
+\end_layout
+
+\begin_layout Section
+Corollary 6.17.
+ Normal / selfadjoint implies diagonalizable
+\end_layout
+
+\begin_layout Standard
+
 \emph on
 Let T be a linear operator on a finite-dimensional complex [real] inner
  product space V.
@@ -1295,7 +1547,7 @@ Let
 \end_layout
 
 \begin_layout Section
-Proposition *6.18.
+Corollary 6.18.0.
  
 \emph on
 The adjoint of a unitary / orthogonal operator is its inverse
@@ -1304,8 +1556,31 @@ The adjoint of a unitary / orthogonal operator is its inverse
 \begin_layout Standard
 
 \emph on
+Proof.
+ 
+\emph default
+Suppose T is uni./orthog.
+ Then 
+\begin_inset Formula $TT^{*}=I,$
+\end_inset
+
+ hence 
+\begin_inset Formula $T^{*}=T^{-1}.$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Proposition 6.18.0.
+ T adjoint is T inverse iff T maps orthonormal basis to orthonormal basis.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
 Let 
-\begin_inset Formula $Tn\left\langle \right\rangle VF,$
+\begin_inset Formula $TnVF,$
 \end_inset
 
  and let 
@@ -1886,6 +2161,123 @@ T is an orthogonal operator: let
 \end_layout
 
 \begin_layout Section
+Example 6.5.5.
+ Matrix representation of a reflection in 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Let T be a reflection about a line through the origin in 
+\begin_inset Formula $R^{2},$
+\end_inset
+
+ let 
+\begin_inset Formula $\beta$
+\end_inset
+
+ be the standard basis for 
+\begin_inset Formula $R^{2},$
+\end_inset
+
+ and let 
+\begin_inset Formula $A=\left[T\right]_{\beta}.$
+\end_inset
+
+ Then 
+\begin_inset Formula $T=L_{A}.$
+\end_inset
+
+ Since 
+\emph default
+[Corollary 6.18.2.]
+\emph on
+ T is an orthogonal operator and 
+\begin_inset Formula $\beta$
+\end_inset
+
+ is an orthonormal basis, 
+\begin_inset Formula $A$
+\end_inset
+
+ is an orthogonal matrix.
+ We want to know what A looks like.
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ be the angle from the positive x-axis to L.
+ Let 
+\begin_inset Formula $v_{1}=\left(\cos\alpha,\sin\alpha\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $v_{2}=\left(-\sin\alpha,\cos\alpha\right).$
+\end_inset
+
+ Then 
+\begin_inset Formula $\left|\left|v_{1}\right|\right|=\left|\left|v_{2}\right|\right|=1,v_{1}\in L,v_{2}\in L^{\perp}.$
+\end_inset
+
+ Hence 
+\begin_inset Formula $\gamma=\left\{ v_{1},v_{2}\right\} $
+\end_inset
+
+ is an orthonormal basis for 
+\begin_inset Formula $R^{2}.$
+\end_inset
+
+ Since 
+\begin_inset Formula $T(v_{1})=v_{1},T(v_{2})=-v_{2},$
+\end_inset
+
+ we have 
+\begin_inset Formula 
+\[
+\left[T\right]_{\gamma}=\begin{bmatrix}1 & 0\\
+0 & -1
+\end{bmatrix}.
+\]
+
+\end_inset
+
+Let 
+\begin_inset Formula 
+\[
+Q=\begin{bmatrix}\cos\alpha & -\sin\alpha\\
+\sin\alpha & \cos\alpha
+\end{bmatrix}
+\]
+
+\end_inset
+
+be the change of coordinates matrix from the standard basis to 
+\begin_inset Formula $\gamma.$
+\end_inset
+
+ By Corollary 2.23, 
+\begin_inset Formula 
+\[
+\begin{aligned}A & =Q\left[T\right]_{\gamma}Q^{-1}\\
+ & =\begin{bmatrix}\cos2\alpha & \sin2\alpha\\
+\sin2\alpha & -\cos2\alpha
+\end{bmatrix}.
+\end{aligned}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
 Definition 6.18.1.
  Orthogonal and unitary matrices
 \end_layout
@@ -1905,10 +2297,10 @@ A square matrix A is called an orthogonal matrix if
  
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Section
 Corollary 6.18.1.
- Square matrix is orthogonal iff its rows and columns form orthonormal bases
- for 
+ Square matrix is unitary / orthogonal iff its rows and columns form orthonormal
+ bases for 
 \begin_inset Formula $F^{n}.$
 \end_inset
 
@@ -1966,7 +2358,7 @@ al bases for
 
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Section
 Corollary 6.18.2.
  Operator is unitary / orthogonal iff its matrix under orthonormal basis
  is unitary / orthogonal
@@ -1988,6 +2380,240 @@ Let
 \end_inset
 
  for V.
+\end_layout
+
+\begin_layout Section
+Note 6.18.3.
+ Unitary / orthogonal equivalence by conjugation: 
+\begin_inset Formula $A=Q^{-1}DQ.$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+For a complex normal [real selfdjoint / symmetric] matrix A, there exists
+ an orrthonormal basis 
+\begin_inset Formula $\beta$
+\end_inset
+
+ consisting of eigenvectors of A [Theorem 6.17 and 6.18], so A is diagonalizable
+ and is similar to a diagonal matrix D: 
+\begin_inset Formula $A=Q^{-1}DQ,$
+\end_inset
+
+ where 
+\begin_inset Formula $Q$
+\end_inset
+
+ is the matrix whose columns are the vectors in 
+\begin_inset Formula $\beta$
+\end_inset
+
+ [Theorem 2.23].
+ Since the columns of Q form an orthonormal basis, by Corollary 6.18.1 Q is
+ unitary [orthogonal].
+ In this case, we say that A is unitarily / orthogonally equivalent to D.
+\end_layout
+
+\begin_layout Section
+Definition 6.18.3.
+ Unitary / orthogonal equivalence by conjugation
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+A and B are unitarily / orthogonally equivalent iff there exists a unitary
+ / orthogonal matrix P s.t.
+ 
+\begin_inset Formula $A=P^{*}BP.$
+\end_inset
+
+ If P also has an inverse [do we need this condition that 
+\begin_inset Formula $P^{-1}$
+\end_inset
+
+ exists? Isn't that implied if P is unitary / orthogonal?], then by Proposition
+ 6.18.1 we also have 
+\begin_inset Formula $A=P^{*}BP=P^{-1}BP.$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Ex 6.5.18.
+ Unitary / orthogonal equivalence is an equivalence relation on 
+\begin_inset Formula $M_{n\times n}(C)$
+\end_inset
+
+ and 
+\begin_inset Formula $M_{n\times n}(R)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Proof.
+ 
+\emph default
+We need to show reflexivity, symmetry, and transitivity.
+ Reflexivity: A unitarily equivalent to B means 
+\begin_inset Formula $A=Q^{-1}BQ,$
+\end_inset
+
+ so 
+\begin_inset Formula $QAQ^{-1}=B$
+\end_inset
+
+ and B u.eq.
+ A.
+ Symmetry: A u.eq.
+ with itself since 
+\begin_inset Formula $A=I^{-1}AI.$
+\end_inset
+
+ Transitivity: A u.eq.
+ B and B u.eq.
+ C means 
+\begin_inset Formula $A=Q^{-1}BQ$
+\end_inset
+
+ and 
+\begin_inset Formula $B=P^{-1}CP,$
+\end_inset
+
+ therefore 
+\begin_inset Formula $A=Q^{-1}P^{-1}CPQ=(PQ)^{-1}CPQ,$
+\end_inset
+
+ so A u.eq.
+ C.
+\end_layout
+
+\begin_layout Section
+The ideal state of mathematics: mechanical manipulation of symbols
+\end_layout
+
+\begin_layout Standard
+You want to develop mathematics to a stage where all you need to do is apply
+ some mechanical rule and execute a rote calculation.
+ Remove the need to think, and reduce mathematics to programming.
+ That might never happen in full, but that's the end goal of any small corner
+ of mathematics.
+\end_layout
+
+\begin_layout Section
+Question.
+ What is the link between normal operators and normal subgroups?
+\end_layout
+
+\begin_layout Section
+Theorem 6.19.
+ Normal iff unitarily equivalent to a diagonal matrix.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Let A be a complex 
+\begin_inset Formula $n\times n$
+\end_inset
+
+ matrix.
+ Then A is normal iff A is u.eq.
+ to a diagonal matrix.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Proof.
+ 
+\emph default
+The forward direction is already proved in Note 6.18.3: if A is normal, then
+ it is u.eq.
+ to a diagonal matrix D.
+ Conversely, suppose that A is u.eq.
+ to a diagonal matrix D.
+ Then there exists a unitary matrix P s.t.
+ 
+\begin_inset Formula $A=P^{*}DP.$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+AA^{*}=P^{*}DP(P^{*}DP)^{*}=P^{*}DPP^{*}D^{*}P=P^{*}DD^{*}P.
+\]
+
+\end_inset
+
+Similarly
+\begin_inset Formula 
+\[
+A^{*}A=P^{*}D^{*}PP^{*}DP=P^{*}D^{*}DP=P^{*}DD^{*}P.
+\]
+
+\end_inset
+
+The last equality holds because D is diagonal, hence 
+\begin_inset Formula $D^{*}D=DD^{*}.$
+\end_inset
+
+ Therefore A is normal.
+\end_layout
+
+\begin_layout Section
+Theorem 6.20.
+ Real symmetric iff orthogonally equivalent to a diagonal matrix.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Let A be a real 
+\begin_inset Formula $n\times n$
+\end_inset
+
+ matrix.
+ Then A is selfadjoint i.e.
+ symmetric iff A is orthogonally equivalent to a diagonal matrix D.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Proof.
+ 
+\emph default
+The forward direction is already proved in Note 6.18.3.
+ Conversely, suppose that A is ortho.
+ eq.
+ to a diagonal matrix D.
+ Then there exists an orthogonal matrix P s.t.
+ 
+\begin_inset Formula $A=P^{T}DP.$
+\end_inset
+
+ We want to show that A is symmetric: 
+\begin_inset Formula 
+\[
+A^{T}=(P^{T}DP)^{T}=P^{T}D^{T}P=P^{T}DP=A,
+\]
+
+\end_inset
+
+since D is diagonal.
+\end_layout
+
+\begin_layout Standard
+396
 \end_layout
 
 \end_body

@@ -170,7 +170,92 @@ E[X]=\int_{0}^{\infty}x\frac{1}{k}e^{-x/k}dx=k.
 \end_layout
 
 \begin_layout Section
-The expected value is a linear function
+Def.
+ Variance: the expected value of the spread / squared distance from the
+ mean.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+\begin_inset Formula 
+\[
+\Var(X)=E[(X-E[X])^{2}]=\sum_{i}(x_{i}-\mu)^{2}p_{i}.
+\]
+
+\end_inset
+
+ Or for a continuous variable:
+\begin_inset Formula 
+\[
+\Var(X)=\int(x-\mu)^{2}f(x)dx.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We have 
+\begin_inset Formula 
+\begin{align*}
+\Var(X) & =E[(X-\mu)^{2}]\\
+ & =\sum_{i}(x_{i}-\mu)^{2}p_{i}\\
+ & =\sum(x_{i}^{2}-2x_{i}\mu+\mu^{2})p_{i}\\
+ & =E[X^{2}]-2\mu E[X]+\mu^{2}E[1]\\
+ & =E[X^{2}]-2\mu^{2}+\mu^{2}\\
+ & =E[X^{2}]-\mu^{2}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+E.g.
+ Verify.
+ For 
+\begin_inset Formula $k=1,$
+\end_inset
+
+ 
+\begin_inset Formula $f(x)=\frac{1}{k}e^{-x/k}=e^{-x},$
+\end_inset
+
+ we have from before 
+\begin_inset Formula 
+\[
+\begin{aligned}E[X] & =\int_{0}^{\infty}xe^{-x}dx=1=\mu\\
+E[X^{2}] & =\int_{0}^{\infty}x^{2}e^{-x}dx=2\\
+\Var(X) & =\int_{0}^{\infty}(x-\mu)^{2}e^{-x}dx=1=2-1=E[X^{2}]-\mu.
+\end{aligned}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Let's calculate the third moment about the mean:
+\begin_inset Formula 
+\begin{align*}
+\mu^{(3)} & =E[(X-\mu)^{3}]\\
+ & =E[X^{3}-3\mu X^{2}+3\mu^{2}X-\mu^{3}]\\
+ & =E[X^{3}]-3\mu E[X^{2}]+3\mu^{2}E[X]-\mu^{3}\\
+ & =E[X^{3}]-3\mu E[X^{2}]+2\mu^{3}.
+\end{align*}
+
+\end_inset
+
+LOL Why?
+\end_layout
+
+\begin_layout Section
+Proposition.
+ The expected value is a linear function
 \end_layout
 
 \begin_layout Standard
@@ -185,42 +270,7 @@ E[kx+y]=E[kx]+E[y].
 \end_layout
 
 \begin_layout Section
-Variance: the expected value of the spread
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-\Var(X)=E[(X-E[X])^{2}]=\sum_{i}(x_{i}-\mu)^{2}p_{i}.
-\]
-
-\end_inset
-
- Or for a continuous variable
-\begin_inset Formula 
-\[
-\Var(X)=\int(x-\mu)^{2}f(x)dx.
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-We have 
-\begin_inset Formula 
-\[
-\Var(X)=\sum_{i}(x_{i}-\mu)^{2}p_{i}=\sum(x_{i}^{2}-2x_{i}\mu+\mu^{2})p_{i}=E[X^{2}]-2\mu E[X]+\mu^{2}E[1].
-\]
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Section
-Higher order moments
+Higher order moments about the mean
 \end_layout
 
 \begin_layout Standard
@@ -337,6 +387,99 @@ Population and sample
 
 \begin_layout Standard
 Hypothetical infinite population.
+\end_layout
+
+\begin_layout Section
+Sample estimates
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $x_{1},\ldots,x_{n}$
+\end_inset
+
+ represent a random sample of size N from any population.
+ Then the following formulas express the estimate of the mean 
+\begin_inset Formula $\mu$
+\end_inset
+
+ and variance 
+\begin_inset Formula $\sigma^{2}$
+\end_inset
+
+ of the population:
+\begin_inset Formula 
+\begin{align*}
+\hat{\mu} & =\frac{x_{1}+\cdots+x_{n}}{N}=\frac{\sum_{i}x_{i}}{N}\\
+\hat{\sigma}^{2} & =\frac{\sum_{i}\left(x_{i}-\hat{\mu}\right)^{2}}{N-1}.
+\end{align*}
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Section
+TODO.
+ Theorem.
+ Bayes's Theorem
+\end_layout
+
+\begin_layout Section
+TODO.
+ Probability mass function
+\end_layout
+
+\begin_layout Section
+Maximum likelihood function
+\end_layout
+
+\begin_layout Section
+Def.
+ Discrete probability distribution
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Let X be a discrete random variable with probability mass function p depending
+ on a parameter 
+\begin_inset Formula $\theta.$
+\end_inset
+
+ Then the function 
+\begin_inset Formula 
+\[
+L(\theta|x)=p_{\theta}(x)=P_{\theta}(X=x)
+\]
+
+\end_inset
+
+considered as a function of 
+\begin_inset Formula $\theta$
+\end_inset
+
+ is the likelihood function of 
+\begin_inset Formula $\theta$
+\end_inset
+
+ given the outcome x of the random variable X.
+ 
+\end_layout
+
+\begin_layout Section
+TODO.
+ Def.
+ Continuous p.d.
+\end_layout
+
+\begin_layout Standard
+https://en.wikipedia.org/wiki/Likelihood_function
+\end_layout
+
+\begin_layout Section
+TODO.
+ Maximum likelihood estimate
 \end_layout
 
 \end_body
