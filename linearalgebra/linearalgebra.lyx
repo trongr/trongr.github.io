@@ -673,6 +673,54 @@ In either case, V has an orthonormal basis consisting of eigenvectors of
 \end_layout
 
 \begin_layout Section
+Summary of normality V.S.
+ diagonalizability
+\end_layout
+
+\begin_layout Standard
+We have 
+\begin_inset Formula 
+\begin{align*}
+\text{Normal / selfadjoint\iff} & \text{Exists orthonormal eigenbasis}\\
+\implies & \text{Exists eigenbasis }\\
+\iff & \text{Diagonalizable.}
+\end{align*}
+
+\end_inset
+
+and it seems that the two are not equivalent.
+ QUESTION.
+ Are there diagonalizable operators that aren't normal / selfadjoint? We
+ just need to find one that has an eigenbasis that isn't orthonormal, How?
+\end_layout
+
+\begin_layout Section
+TODO.
+ Example of diagonalizable operator that isn't normal/selfadjoint
+\end_layout
+
+\begin_layout Section
+Example of a complex symmetric matrix that isn't normal
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula 
+\[
+A=\begin{bmatrix}1 & i\\
+i & -1
+\end{bmatrix}.
+\]
+
+\end_inset
+
+Then A is symmetric complex, but isn't normal, because it is not diagonalizable
+ [TODO.
+ Show this].
+ If it were normal, then it would be diagonalizable by Corollary 6.17.
+\end_layout
+
+\begin_layout Section
 
 \series bold
 Proposition.
@@ -2392,8 +2440,8 @@ Note 6.18.3.
 \end_layout
 
 \begin_layout Standard
-For a complex normal [real selfdjoint / symmetric] matrix A, there exists
- an orrthonormal basis 
+For a complex normal [R selfadjoint/symmetric] matrix A, there exists an
+ orrthonormal basis 
 \begin_inset Formula $\beta$
 \end_inset
 
@@ -2489,7 +2537,11 @@ We need to show reflexivity, symmetry, and transitivity.
 \end_inset
 
  therefore 
-\begin_inset Formula $A=Q^{-1}P^{-1}CPQ=(PQ)^{-1}CPQ,$
+\begin_inset Formula 
+\[
+A=Q^{-1}P^{-1}CPQ=(PQ)^{-1}CPQ,
+\]
+
 \end_inset
 
  so A u.eq.
