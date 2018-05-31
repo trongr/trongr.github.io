@@ -82,7 +82,7 @@ and $s = [w_1, \ldots, w_s] \in \bR^{d\times s}$ be the sentence matrix.
 <p>
     Let $m \in \bR^{d\times m}$ be a filter (weight) matrix. Then apply a wide
     convolution of $s$ with $m$:
-    
+
     $$m * s = c \sim d \times (s + m - 1).$$
 </p>
 
@@ -102,8 +102,8 @@ and $s = [w_1, \ldots, w_s] \in \bR^{d\times s}$ be the sentence matrix.
 </p>
 
 <p>
-    Using the heuristic, we can calculate 
-    
+    Using the heuristic, we can calculate
+
     $$k_0 = \max(k_{\rm top}, \lceil \frac{L - 0}{L} s \rceil) = s,$$
 
     assuming $s \geq k_{\rm top}.$ Therefore an output of a $k$-max operation
@@ -197,7 +197,7 @@ and $s = [w_1, \ldots, w_s] \in \bR^{d\times s}$ be the sentence matrix.
     F^2_1 &= m^2_1 * F^1_1 \\
     F^2_2 &= m^2_2 * F^1_2 \\
     F^2_3 &= m^2_3 * F^1_3, \\
-    \end{align*}    
+    \end{align*}
 
     then the second level features would simply be learning from each
     corresponding lower level feature, e.g. $F^2_1$ would only re-represent
@@ -222,7 +222,7 @@ and $s = [w_1, \ldots, w_s] \in \bR^{d\times s}$ be the sentence matrix.
 
 <p>
     Finally join the last set of feature maps along columns, e.g.
-    
+
     \begin{matrix}
     [F^z_1 & F^z_2 & F^z_3] \sim d \times ?
     \end{matrix}
@@ -250,12 +250,7 @@ and $s = [w_1, \ldots, w_s] \in \bR^{d\times s}$ be the sentence matrix.
 
 <h1>Word Embedding</h1>
 
-<h1>Reference</h1>
 
-<ol>
-<li>ML0120EN Online Course on Big Data University</li>
-<li>https://cs224d.stanford.edu</li>
-</ol>
 </div>
 </body>
 </html>

@@ -372,6 +372,33 @@ If two operators agree on a basis, they are equal.
 \end_layout
 
 \begin_layout Section
+Schur's Theorem 6.14.
+ Splitting characteristic polynomial and orthonormal basis s.t.
+ 
+\begin_inset Formula $[T]_{\beta}$
+\end_inset
+
+ upper triangular.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Let TnV.
+ Suppose that the characteristic polynomial of T splits.
+ Then there exists an orthonormal basis 
+\begin_inset Formula $\beta$
+\end_inset
+
+ for V s.t.
+ 
+\begin_inset Formula $[T]_{\beta}$
+\end_inset
+
+ is upper triangular.
+\end_layout
+
+\begin_layout Section
 Def.
  Normal operators
 \end_layout
@@ -410,7 +437,7 @@ Unitary operators are normal:
 \end_layout
 
 \begin_layout Section
-Theorem.
+Theorem 6.15.
  
 \emph on
 Eigenvectors corresponding to distinct eigenvalues of a normal operator
@@ -1613,10 +1640,10 @@ Suppose T is uni./orthog.
 \end_inset
 
  hence 
-\begin_inset Formula $T^{*}=T^{-1}.$
+\begin_inset Formula $T^{*}=T^{-1},$
 \end_inset
 
-
+ by Exercise 2.4.10.
 \end_layout
 
 \begin_layout Section
@@ -2346,9 +2373,8 @@ A square matrix A is called an orthogonal matrix if
 \end_layout
 
 \begin_layout Section
-Corollary 6.18.1.
- Square matrix is unitary / orthogonal iff its rows and columns form orthonormal
- bases for 
+Corollary 6.18.1.1 Square matrix is unitary / orthogonal iff its rows and columns
+ form orthonormal bases for 
 \begin_inset Formula $F^{n}.$
 \end_inset
 
@@ -2478,12 +2504,15 @@ A and B are unitarily / orthogonally equivalent iff there exists a unitary
 \begin_inset Formula $A=P^{*}BP.$
 \end_inset
 
- If P also has an inverse [do we need this condition that 
-\begin_inset Formula $P^{-1}$
+ Since P is unitary/orthogonal, we know by 
+\emph default
+Corollary 6.18.0
+\emph on
+ that 
+\begin_inset Formula $P^{*}=P^{-1}$
 \end_inset
 
- exists? Isn't that implied if P is unitary / orthogonal?], then by Proposition
- 6.18.1 we also have 
+, then by Proposition 6.18.1 we also have 
 \begin_inset Formula $A=P^{*}BP=P^{-1}BP.$
 \end_inset
 
@@ -2664,8 +2693,185 @@ A^{T}=(P^{T}DP)^{T}=P^{T}D^{T}P=P^{T}DP=A,
 since D is diagonal.
 \end_layout
 
+\begin_layout Section
+TODO.
+ Is R normal the same as R selfadjoint/symmetric?
+\end_layout
+
 \begin_layout Standard
-396
+In that case we can restate the last two theorems as simply that 
+\emph on
+A normal iff A un.
+ eq.
+ diagonal matrix.
+\end_layout
+
+\begin_layout Section
+Example 6.5.6.
+ Diagonalizing a symmetric matrix by an orthogonal matrix
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula 
+\[
+A=\left(\begin{array}{ccc}
+{4} & {2} & {2}\\
+{2} & {1} & {2}\\
+{2} & {2} & {4}
+\end{array}\right).
+\]
+
+\end_inset
+
+Since A is symmetric, Theorem 6.20 says that A is orthog.
+ eq.
+ to a diagonal matrix.
+ WTF orthogonal P and diagonal D s.t.
+ 
+\begin_inset Formula $P^{T}AP=D.$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+By Corollary 6.18.1.1, P is orthogonal iff its columns and rows form orthonormal
+ bases for 
+\begin_inset Formula $R^{3}.$
+\end_inset
+
+ To find P, we find an orthonormal basis for V.
+ It's easy to show that the eigenvalues of A are 2 and 8 (TODO.
+ Find 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ s.t.
+ 
+\begin_inset Formula $\det(A-\lambda I)=0$
+\end_inset
+
+ by expanding the eq into a polynomial eq of degree 3 and solve.) Once we
+ know the eigenvalues, we can find the eigenvectors by solving 
+\begin_inset Formula $(A-\lambda I)x=0$
+\end_inset
+
+ using Gaussian elimination.
+ Two eigenvectors corresponding to 2 are 
+\begin_inset Formula $\{(-1,1,0),(-1,0,1)\}.$
+\end_inset
+
+ This set is not orthogonal, so we apply Gram-Schmidt to obtain the orthogonal
+ set 
+\begin_inset Formula $\left\{ \left(-1,1,0\right),(1,1,-2)\right\} .$
+\end_inset
+
+ An eigenvector for 
+\begin_inset Formula $\lambda=8$
+\end_inset
+
+ is 
+\begin_inset Formula $(1,1,1).$
+\end_inset
+
+ Note that it is orthogonal to the two eigenvectors corresponding to 2,
+ by Theorem 6.15.
+ Normalizing all 3, we get the orthonormal basis for 
+\begin_inset Formula $R^{3}$
+\end_inset
+
+ consisting of eigenvectors of A
+\begin_inset Formula 
+\[
+\left\{ \frac{1}{\sqrt{2}}(-1,1,0),\frac{1}{\sqrt{6}}(1,1,-2),\frac{1}{\sqrt{3}}(1.1,1)\right\} .
+\]
+
+\end_inset
+
+Thus one choice for P is 
+\begin_inset Formula 
+\[
+P=\left(\begin{array}{ccc}
+{\frac{-1}{\sqrt{2}}} & {\frac{1}{\sqrt{6}}} & {\frac{1}{\sqrt{3}}}\\
+{\frac{1}{\sqrt{2}}} & {\frac{1}{\sqrt{6}}} & {\frac{1}{\sqrt{3}}}\\
+{0} & {\frac{-2}{\sqrt{6}}} & {\frac{1}{\sqrt{3}}}
+\end{array}\right),\quad\text{ and }\quad D=\left(\begin{array}{ccc}
+{2} & {0} & {0}\\
+{0} & {2} & {0}\\
+{0} & {0} & {8}
+\end{array}\right).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Question.
+ Suppose P is uni/orthog, and A is normal/selfadjoint.
+ Is 
+\begin_inset Formula $P^{*}AP$
+\end_inset
+
+ always diagonal?
+\end_layout
+
+\begin_layout Section
+Schur's Theorem 6.21
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Let 
+\begin_inset Formula $A\in M_{n\times n}(F)$
+\end_inset
+
+ be a matrix whose characteristic polynomial splits over F.
+ If 
+\begin_inset Formula $F=C,$
+\end_inset
+
+ then A is unitarily eq.
+ to a complex upper triangular matrix.
+ IF 
+\begin_inset Formula $F=R,$
+\end_inset
+
+ then A is orthogonally eq.
+ to a real upper triangular matrix.
+\end_layout
+
+\begin_layout Section
+Rigid motions
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Let VR.
+ A function 
+\begin_inset Formula $f:V\longrightarrow V$
+\end_inset
+
+ is called a rigid motion if 
+\begin_inset Formula 
+\[
+\|f(x)-f(y)\|=\|x-y\|
+\]
+
+\end_inset
+
+for all x, y in V.
+\end_layout
+
+\begin_layout Standard
+E.g.
+ Any orthogonal operator on a finite dimensional reall inner product space
+ is a rigid motion, e.g.
+ rotations, reflection by a line through the origin.
 \end_layout
 
 \end_body

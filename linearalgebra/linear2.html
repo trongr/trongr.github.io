@@ -45,12 +45,12 @@
 <p>
     <i>Example. Let $ V $ be the vector space of infinite sequences with finitely
         many nonzero entries in $ F = \bR $ or $ F = \bC. $ Define $ T: V
-        \longrightarrow V $ by 
-    
+        \longrightarrow V $ by
+
         $$ T(\s)_k = \sum_{i=k}^{\infty} \s_i $$
-    
+
         for $ k \geq 0. $ Then
-    
+
         <ol>
             <li>$ T $ is a linear operator on $ V. $</li>
             <li>For any $ n \geq 0, $ $ T(e_n) = \sum_{i=1}^n e_i. $</li>
@@ -58,10 +58,10 @@
         </ol></i>
 </p>
 <p>
-    1. $ T $ is linear. Let $ \s, \m \in V. $ Then 
+    1. $ T $ is linear. Let $ \s, \m \in V. $ Then
 
-    $$ T(\s + \m)_k = \sum_{i=k}^{\infty} (\s + \m)_i 
-    = \sum_{i=k}^{\infty} \s_i 
+    $$ T(\s + \m)_k = \sum_{i=k}^{\infty} (\s + \m)_i
+    = \sum_{i=k}^{\infty} \s_i
     + \sum_{i=k}^{\infty} \m_i. $$
 
     Scalar multiple is proved similarly.
@@ -81,14 +81,14 @@
     3. Suppose for contradiction that $ T^* $ exists. Then for any $ n, k $ we
     have
 
-    $$ \< T^*(e_n), e_k \> = \< e_n, T(e_k) \> = \< e_n, \sum_{i=1}^k e_i \> 
+    $$ \< T^*(e_n), e_k \> = \< e_n, T(e_k) \> = \< e_n, \sum_{i=1}^k e_i \>
     = \begin{cases}
     0 \text{ if } k < n \\
     1 \text{ if } k \geq n.
     \end{cases}. $$
 
     Fixing $ n $ and varying $ k $ over the positive integers, we find that $ \<
-    T^*(e_n), e_k \></n> $ has infinitely many nonzero entries. In fact 
+    T^*(e_n), e_k \></n> $ has infinitely many nonzero entries. In fact
 
     $$ T^*(e_n) = (0, 0,...,1,1,1,1,...). $$
 
@@ -128,7 +128,7 @@
 </p>
 <p>
     <i>Proof.</i> $ (\Longrightarrow) $ Suppose that $ TT^* = T^*T. $ By theorem
-    6.10, 
+    6.10,
 
     $$ [T^*]_\b = [T]_\b^*. $$ Use this fact to expand
 
@@ -141,13 +141,141 @@
     Therefore $ [T]_{\b} $ is normal. The converse is similar.
 </p>
 
-<h1>Reference</h1>
+<h2>Schur's Theorem Variant</h2>
 
+<p>
+    <i>Let $ A\in M_{n\times n}(F) $ be a matrix whose characteristic polynomial
+        splits over F. If $ F=C, $ then A is unitarily eq. to a complex upper triangular
+        matrix. IF $ F=R, $ then A is orthogonally eq. to a real upper triangular
+        matrix.</i>
+</p>
+
+<h2>Rigid Motions</h2>
+
+<p>
+    <i>Definition. Let VR. A function $ f:V\longrightarrow V $ is called a rigid
+    motion if
+
+    $$ \|f(x)-f(y)\|=\|x-y\| $$
+
+    for all x, y in V.
+</i>
+</p>
+<h3>Examples of rigid motions</h3>
+<p>
+    E.g. Any orthogonal operator ($ \left|\left| f(x) \right|\right| =
+    \left|\left| x \right|\right| $) on a finite dimensional real inner product
+    space is a rigid motion, e.g. rotations, reflection by a line through the
+    origin.
+</p>
+<p>
+    E.g. any translation is a rigid motion. A function $ g:V\longrightarrow V $
+    where $ V $ is a real inner product space, is called a translation if there
+    exists a vector $ v_{0} \in V $ s.t. $ g(x) = x + v_0 $ for all $ x\in V. $
+    We say that $ g $ is a translation by $ v_0. $
+</p>
+
+<h3>Proposition. Translations are rigid motions</h3>
+
+<p>
+    <i> Proof. </i> We want to show that
+
+    $$ \|g(x)-g(y)\| = || x + v_0 - y - v_0 || =\|x-y\|. $$
+</p>
+
+<h3>Proposition. Compositions of rigid motions are also rigid motions</h3>
+
+<p>
+    <i> Proof. </i> Let $ f,g:V\longrightarrow V $ be rigid motions. We want to
+    show that $$ \|f \circ g(x)-f \circ g(y)\| = | f(g(x)) - f(g(y)) | = | g(x)
+    - g(y) | = \|x-y\|. $$
+</p>
+
+<h2>Theorem 6.22. Every rigid motion is an orthogonal operator followed by a
+translation</h2>
+
+<p>
+    <i> Let $ f:V\longrightarrow V $ be a rigid motion on a finite-dimensional
+    real inner product space V. Then there exists a unique orthogonal operator T
+    and a unique translation g on V s.t. $ f = g \circ T. $ </i>
+</p>
+<p>
+    NOTE. Any translation is a special case of this composite, where the
+    operator is the identity, and any orthogonal operator is also a special case
+    where the translation is by 0.
+</p>
+<p>
+    <i> Proof. </i> Let $ T: V\longrightarrow V $ be defined by
+
+    $$ T(x) = f(x) - f(0). $$
+
+    We show that T is an orthogonal operator, from which it follows that $ f = g
+    \circ T, $ where g is the transaction by $ f(0). $ Observe that T is the
+    composite of $ f $ and the translation by $ -f(0); $ hence T is a rigid
+    motion. Furthermore, for any $ x \in V, $
+
+    $$ | T(x) |^2 = | f(x) - f(0) |^2 = | x - 0 |^2 = | x |^2, $$
+
+    and consequently $$ | T(x) | = | x |. $$ Thus for any $ x, y \in V, $
+
+    \begin{align*}
+    | T(x) - T(y) |^2 &= | T(x) |^2 - 2\< T(x), T(y) \> + | T(y) |^2 \\
+        &= | x |^2 - 2\< T(x), T(y) \> + | y |^2
+    \end{align*}
+
+    and
+
+    $$ | x - y |^2 = | x |^2 - 2\< x, y \> + | y |^2. $$
+
+    But $$ | T(x) - T(y) |^2 = | f(x) - f(y) |^2 = | x - y |^2, $$ and so
+
+    $$ \< T(x), T(y) \> = \< x, y \> $$
+
+    for all $ x, y \in V. $
+</p>
+<p>
+    Now we show that T is linear. Let $ x, y\in V, a \in \bbR. $ Then
+
+    \begin{align*}
+    | T(x+ay) - T(x) - aT(y) |^2 &= | (T(x+ay) - T(x)) - aT(y) | \\
+        &= | T(x+ay) - T(x) |^2 - 2a\< T(x+ay) - T(x), T(y) \> + a^2| T(y) |^2 \\
+        &= | (x+ay) - x |^2 - 2a\< T(x+ay) - T(x), T(y) \> + a^2| y |^2 \\
+        &= | ay |^2 - 2a(\< T(x+ay), T(y) \> - \< T(x), T(y) \>) + a^2| y |^2 \\
+        &= 2a^2| y |^2 - 2a(\< x+ay, y \> - \< x, y \>) \\
+        &= 0.
+    \end{align*}
+
+    Therefore $ T(x+ay) = T(x) + aT(y) $ and T is linear. Since T also preserves
+    inner products, it is also an orthogonal operator.
+</p>
+<p>
+    To show uniqueness, let $ u_0, v_0 \in V, $ let T and U be orthogonal
+    operators s.t.
+
+    $$ f(x) = T(x) + u_0 = U(x) + v_0. $$
+
+    Substituting $ x = 0 $ yields $ u_0 = v_0, $ and hence the translation is
+    unique. This equation then reduces to $  T(x) = U(x), $ therefore $ T = U. $
+</p>
+
+<h2>Theorem 6.23. Orthogonal operators on $ \bbR^2 $</h2>
+
+<p>
+    <i> Let T be an orthogonal operator on $ \bbR^2, $ and let $ A = [T]_\b $
+    where $ \b $ is the standard basis for $ \bbR^2. $ Then exactly one of the
+    following conditions is satisfied:
+
+    <ol>
+        <li>T is a rotation, and $ \det A = 1. $</li>
+        <li>T is a reflection about a line through the origin, and $ \det A = -1. $</li>
+    </ol></i>
+</p>
+
+<h1>Reference</h1>
 <ol>
 <li>Linear Algebra by Friedberg, Insel, and Spence.</li>
 <li>Linear Algebra video lectures by Gilbert Strang.</li>
 </ol>
-
 </div>
 </body>
 </html>
