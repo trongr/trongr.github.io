@@ -2,505 +2,529 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <title>Abstract Algebra</title>
-    <link rel="stylesheet" href="../css/global.css">
+<meta charset="utf-8">
+<title>Abstract Algebra</title>
+<link rel="stylesheet" href="../css/global.css">
 
-    <!-- this config must be before MathJax.js: -->
-    <script src="../js/mathjax.config.js"></script>
-    <script src="../js/MathJax/MathJax.js"></script>
-    <!-- <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js"></script> -->
+<!-- this config must be before MathJax.js: -->
+<script src="../js/mathjax.config.js"></script>
+<script src="../js/MathJax/MathJax.js"></script>
+<!-- <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js"></script> -->
 
-    <script src="../js/jquery-3.1.0.min.js"></script>
-    <script src="../js/smartquotes.js"></script>
-    <script src="../js/global.js"></script>
+<script src="../js/jquery-3.1.0.min.js"></script>
+<script src="../js/smartquotes.js"></script>
+<script src="../js/global.js"></script>
 
 </head>
 
 <body>
-    <div id="content">
+<div id="content">
 
-        <h1>Abstract Algebra</h1>
+<h1>Abstract Algebra</h1>
 <!--
-        <img src="images/prometheus.png">
-
-        <div class="epigraph">
-            <div class="quote">
-                Any sufficiently advanced Mathematics is indistinguishable from gibberish.
-            </div>
-            <hr>
-            <div class="author">
-                After Arthur C. Clarke
-            </div>
-        </div>-->
-
-        <h1>Cyclic groups and cyclic subgroups</h1>
-
-        <p>
-            <b>Theorem.</b> <i>Let $H = \< x \>$ be a cyclic group.
-
-    <ul>
-    <li>Every subgroup of $H$ is cyclic. More precisely, if $K \leq
-    H,$ then either $K = \{ 1 \}$ or $K = \< x^d
-    \>$ where $d$ is the smallest integer s.t. $x^d \in K.$</li>
-    <li>If $|H| = \infty,$ then for any distinct nonnegative integers
-    $a$ and $b,$ $\< x^a \> \neq \< x^b \>.$
-    Furthermore, for every integer $m,$ $\< x^m \> =
-    \< x^{|m|} \>,$ where $|m|$ denotes the absolute value
-    of $m,$ so that the nontrivial subgroups of $H$ correspond
-    bijectively with the integers $1,2,3,\ldots.$</li>
-    <li>If $|H| = n < \infty,$ then for each positive integer $a$
-    dividing $n$ there is a unique subgroup of $H$ of order $a.$ This
-    subgroup is the cyclic group $\< x^d \>$ where $d =
-    n/a.$ Furthermore, for every integer $m,$ $\< x^m \> =
-    \< x^{(m,n)} \>,$ so that the subgroups of $H$
-    correspond bijectively with the positive divisors of $n.$</li>
-    </ul></i>
-        </p>
-
-        <h3>Classification of groups of order $4$</h3>
-
-        <p>
-            <b>Proposition.</b> <i>Every group of order $4$ is isomorphic to
-    either $Z_4$ or $V_4 \cong Z_2 \times Z_2.$</i>
-        </p>
-
-        <h1>Group Actions</h1>
-
-        <p>
-            <b>Definition.</b> <i>A group action of a group $G$ on a set $A$
-    is a map from $G\times A$ to $A,$ written as $g \. a$ for all
-    $g\in G, a\in A$ satisfying:
-
-    <ul>
-    <li>$g_1 \. (g_2 \. a) = (g_1g_2) \. a$ for all $g_1,g_2\in G, a\in A.$</li>
-    <li>$1 \. a = a$ for all $a \in A.$</li>
-    </ul></i>
-        </p>
-
-        <div class="box">
-            <b>Theorem.</b> <i>Let $G$ act on $A,$ and let $g$ be a fixed
-    element of $G.$ Define the map $\s_g: A \longrightarrow A$ by
-
-    $$\s_g(a) = g \. a.$$
-
-    Then:
-
-    <ul>
-    <li>$\s_g$ is a permutation of $A$: $\s_g \in S_A.$</li>
-    <li>The map $\ff:G\longrightarrow S_A$ defined by $\ff(g) = \s_g$ is
-    a homomorphism.</li>
-    </ul></i>
-        </div>
-
-        <p>
-            The map $\ff$ completely characterizes an action of $G$ on $S,$ so we can define the kernel of the action to be the kernel
-            of $\ff:$
-        </p>
-
-        <p>
-            <b>Definition.</b> <i>The kernel of an action of $G$ on $A$ is
-
-    $$\ker \ff = \ker(G, A) = \{ g \in G : \ff(g) = \s_g = 1 \in S_A \},$$
-
-    i.e. it's the set
-
-    $$\{ g \in G : \s_g(a) = g \. a = a \text{ for all } a\in A \},$$
-
-    in other words elements that fix all $a \in A.$</i>
-        </p>
-
-        <h1>Quotient Groups</h1>
-
-        <h2>Centralizers, Centers, Normalizers, and Stabilizers</h2>
-
-        <p>
-            <b>Definition.</b> <i>Let $A$ be any nonempty subset of a group
-    $G.$ The centralizer of $A$ in $G$ is the set
-
-    $$C_G(A) = \{ g \in G : gag^{-1} = a \text{ for all } a \in A \},$$
-
-    i.e. it's the set of all elements in $G$ that commute with all
-    elements in $A.$ As a special case, the center of $G$ is
-
-    $$Z(G) = C_G(G) = \{ g \in G : gxg^{-1} = x \text{ for all } x \in G \},$$
-
-    i.e. elements that commute with everyone in $G.$ The normalizer of $A$
-    is the set
-
-    $$N_G(A) = \{ g \in G : gAg^{-1} = A \}.$$</i>
-        </p>
-
-        <p>
-            <b>Definition.</b> <i>Let $G$ be a group acting on a set $S$ and
-    let $s$ be some fixed element of $S.$ The stabilizer of $s$ in $G$
-    is the set
-
-    $$\stab_G(s) = \{ g \in G : g \. s = s \}.$$</i>
-        </p>
-
-        <p>
-            Now we'll show that normalizers are a special case of stabilizers: let $G$ act by conjugation on the power set $\PP(G)$ consisting
-            of all subsets of $G,$ so that for each $g\in G$ and $A \in \PP(G),$ $$g \. A = gAg^{-1}.$$ Then the stabilizer
-            of $A$ under this action is $$\stab_G(A) = \{ g \in G : g\. A = gAg^{-1} = A \} = N_G(A).$$
-        </p>
-
-        <p>
-            Let's see what the kernel of this action looks like: $$\ker(G, \PP(G)) = \{ g \in G : g \. A = gAg^{-1} = A \text{ for all
-            } A\in\PP(G) \},$$ or elements in $G$ that normalize all subsets of $G.$ Since elements of $Z(G) = C_G(G)$ commute
-            with all elements of $G,$ $$Z(G) \leq \ker(G, \PP(G)).$$ In fact, taking singleton subsets $A = \{ a \},$ we
-            have $$\ker(G, \PP(G)) \leq Z(G),$$ so the two are identical: $$\ker(G, \PP(G)) = Z(G).$$
-        </p>
-
-        <p>
-            Next we'll show that centralizers are kernels of actions: let $N_G(A)$ act on $A$ by conjugation. The kernel is $$\ker(N_G(A),
-            A) = \{ g \in N_G(A) : g \. a = gag^{-1} = a \text{ for all } a \in A \} = C_{N_G(A)}(A),$$ i.e. elements in
-            $N_G(A)$ that commute with all elements in $A.$ It's easy to see that $$C_{N_G(A)}(A) = C_G(A),$$ and so $$\ker(N_G(A),
-            A) = C_G(A).$$ While we're at it let's also calculate the stabilizer of an element $a \in A:$ $$\stab_{N_G(A)}(a)
-            = \{ g \in N_G(A) : g\. a = gag^{-1} = a \} = C_{N_G(A)}(a),$$ i.e. elements in $N_G(A)$ that commute with $a.$
-        </p>
-
-        <p>
-            Finally for completeness let $C_G(A)$ act on $A$ by conjugation. Then \begin{align*} \ker(C_G(A), A) &= \{ g \in C_G(A) :
-            g\. a = gag^{-1} = a \text{ for all } a\in A\} = C_G(A) \\ \stab_{C_G(A)}(a) &= \{ g \in C_G(A) : g\. a = gag^{-1}
-            = a \}. \end{align*}
-        </p>
-
-        <p>
-            <b>Corollary.</b> <i>For any subset $A$ of a group $G,$
-
-    $$C_G(A) = C_{N_G(A)}(A) \leq N_G(A).$$</i>
-        </p>
-
-        <p class="box">
-            <b>Summary.</b> <i>Normalizers are stabilizers and centralizers
-    are kernels of conjugate actions, and
-
-    \begin{align*}
-    \ker(G, \PP(G)) = Z(G) &\leq C_G(A) \\
-    &= \ker(N_G(A), A) = \ker(C_G(A), A) \\
-    &\leq N_G(A) = \stab_G(A).
-    \end{align*}
-
-    It's nice how you can line them up like that.</i>
-        </p>
-
-        <p>
-            <b>Corollary.</b> <i>Let $\ff$ be an action of $G$ on $A.$
-    Then
-
-    $$\ker(\ff, G, A) = \Cap_{a\in A} \stab_G(a).$$</i>
-        </p>
-
-        <h3>Cosets of a kernel</h3>
-
-        <p>
-            <b>Proposition.</b> <i>Let $\ff : G \longrightarrow H$ be a
-    homomorphism with kernel $K.$ Let $X \in G/K$ be the fiber above
-    $a,$ i.e. $X = \ff^{-1}(a).$ Then for any $u \in X,$
-
-    $$X = u K = K u,$$
-
-    i.e. every fiber is represented by any of its elements modulo the
-    kernel of the homomorphism.
-    </i>
-        </p>
-<!--
-        <div class="epigraph">
-            <img src="images/923.jpg">
-            <div class="quote">
-                Young man, in mathematics you don't understand things. You just remember lots of examples.
-            </div>
-            <hr>
-            <div class="author">John von Neumann</div>
-        </div>
-        <div class="clearboth"></div>-->
-
-        <h3>Modular Arithmetic</h3>
-
-        <p>
-            <b>Example.</b> Let $G = \ZZ, H = \ZZ/10\ZZ = \{ 0:9 \},$ and $\ff : G \longrightarrow H$ such that $$\ff(m)
-            = \bar{m} = m \mod 10.$$ Then \begin{align*} \ker \ff = K &= \text{ integers congruent 0 mod 10} \\ &= \{ \dots,
-            -10, 0, 10, 20, 30, \dots \} \end{align*} and the fiber $X$ above $\bar{1} \in H$ is the set of integers congruent
-            $1\mod 10,$ and \begin{align*} X &= 1 + K \\ &= 11 + K \\ &= 21 + K \\ &= \text{etc.} \end{align*}
-        </p>
-
-        <h3>$G/K$ is a group for kernel $K$</h3>
-
-        <p>
-            <b>Proposition.</b> <i>Let $G$ be a group and $K$ be the kernel of
-    some homomorphism from $G$ to another group. Then the set $G/K$ of
-    left cosets of $K$ with operation defined by
-
-    $$uK \cdot vK = (uv)K$$
-
-    is a group. Same for the set $G/K$ of right cosets of $K.$</i>
-        </p>
-
-        <p>
-            <b>Proposition.</b> <i>Let $N \leq G.$ The set of left cosets of
-    $N$ form a partition of $G.$ Furthermore, for any $u, v\in G,$
-
-    $$uN = vN \quad\text{ iff }\quad v^{-1}u \in N,$$
-
-    and in particular iff $u$ and $v$ are representatives of the same
-    coset.</i>
-        </p>
-
-        <p>
-            <b>Example.</b> Let $N = 4\ZZ \leq \ZZ.$ The left cosets of $N$ are \begin{align*} 0 + 4\ZZ &= \{ \dots, -4,
-            0, 4, 8,\dots \} \\ 1 + 4\ZZ &= \{ \dots, -3, 1, 5, 9,\dots \} \\ 2 + 4\ZZ &= \{ \dots, -2, 2, 6, 10,\dots \}
-            \\ 3 + 4\ZZ &= \{ \dots, -1, 3, 7, 11,\dots \} \end{align*} and e.g. $$5 + 4\ZZ = 1 + 4\ZZ,$$ because $$-1 +
-            5 \equiv 0 \mod 4,$$ or in other words $$-1 + 5 \in 4\ZZ.$$
-        </p>
-
-        <p>
-            <b>Proposition.</b> <i>Let $N \leq G.$
-
-    <ul>
-    <li>The operation on $G/N$ given by
-
-    $$uN \cdot vN = (uv)N$$
-
-    is well defined iff $gng^{-1} \in N$ for all $g \in G$ and $n \in
-    N,$ i.e. iff $N \normal G.$</li>
-    <li>If this operation is well defined, then $G/N$ is a group.</li>
-    </ul></i>
-        </p>
-
-        <h2>Equivalent Formulations of a Normal Subgroup</h2>
-
-        <p>
-            <b>Theorem.</b> <i>Let $N \leq G.$ The following are equivalent:
-
-    <ul>
-    <li>$N \normal G.$</li>
-    <li>$N_G(N) = G.$</li>
-    <li>$gN = Ng$ for all $g\in G.$</li>
-    <li>Multiplication of left cosets of $N$ makes $G/N$ a group.</li>
-    <li>$gNg^{-1} \subset N$ for all $g\in G.$</li>
-    </ul></i>
-        </p>
-
-        <p>
-            <b>Theorem.</b> <i>A subgroup $N \leq G$ is normal iff it is the
-    kernel of some homomorphism.</i>
-        </p>
-
-        <p>
-            Given a homomorphism $\ff: G \longrightarrow H,$ we can find its kernel $K,$ which is normal in $G$ and so $G/K$ is a group
-            and is isomorphic to the image of $G$ under $\ff:$ $$G/K \cong \ff(G).$$ This means that if we want to study
-            images of $G$ under any homomorphism $\ff,$ we can just study $G/K.$ It also means that all the homomorphisms
-            we can define on $G$ are determined by the structures of $G/K$ for $K \normal G,$ i.e. of $G$ and its normal
-            subgroups.
-        </p>
-
-        <p>
-            <b>Question.</b> <i>Are there groups so different that you can't
-    define any nontrivial homomorphism between them?</i>
-        </p>
-
-        <p>
-            <b>Example.</b> Ah yes: there is no nontrivial homomorphism of $Z_2$ into $\ZZ$ or vice versa because $Z_2$ has
-            an element of order $2$ and $\ZZ$ doesn't.
-        </p>
-
-        <h3>Examples of normal subgroups and quotients</h3>
-
-        <p>
-            <b>Example.</b> $1, G \normal G, G \cong G/1, 1 \cong G/G.$
-        </p>
-
-        <p>
-            <b>Example.</b> If $G$ is abelian, then any subgroup of $G$ is normal.
-        </p>
-
-        <p>
-            <b>Example.</b> Let $G = \ZZ.$ Then every subgroup $N \leq G$ is
-            cyclic and looks like $$N = \< n \> = \< -n \> = n\ZZ$$ for some
-            $n,$ and $$G/N = \ZZ/n\ZZ = \< \bar{1} \> = \< \bar{0}, \bar{1},
-            \ldots, \bar{n-1} \>$$ is the system of complete residues mod $n,$
-            where $\bar{k} = k + n\ZZ.$
-        </p>
-
-        <h3>Quaternion and dihedral group</h3>
-
-        <p>
-            <b>Example.</b> $Z(D_8) = \< r^2 \>$ and $Z(Q_8) = \< -1 \>,$ and
-            $$D_8 / Z(D_8) \cong Q_8 / Z(Q_8) \cong V_4 \cong Z_2 \times Z_2.$$
-        </p>
-
-        <h3>Quotient groups of a cyclic group</h3>
-
-        <p>
-            <b>Theorem.</b> <i>Quotient groups of a cyclic group are cyclic,
-    and the image of a generator $g$ for $G$ is $\bar{g} = gN,$ a
-    generator of the quotient $G/N.$ If in addition $G$ is a finite
-    cyclic group, then
-
-    $$|G/N| = \frac{|G|}{|N|}.$$</i>
-        </p>
-
-        <h1>Exercises</h1>
-
-        <h3>Homomorphic preimage of a subgroup</h3>
-
-        <p>
-            <b>Proposition.</b> <i>Let $\ff: G\longrightarrow H$ be a
-    homomorphism and let $E \leq H.$ Then $\ff^{-1}(E) \leq G,$
-    i.e. the homomorphic preimage of a subgroup is a subgroup. If $E$
-    is also normal in $H,$ then its preimage is also normal in
-    $G.$ Finally as a corollary $\ker \ff = \ff^{-1}(1) \normal G.$</i>
-        </p>
-
-        <h3>Cosets of the kernel are fibers of the homomorphism</h3>
-
-        <p>
-            <b>Proposition.</b> <i>Let $\ff:G\longrightarrow H$ be a
-    homomorphism with kernel $K.$ Then the elements of $G/K$ are of
-    the form $gK$ for some $g\in G,$ and for a fixed $gK \in G/K,$
-    $\ff$ maps all elements $x \in gK$ (and only those) to the same
-    element $h\in H,$ i.e. each coset of $K$ is the fiber above $h$
-    for some $h\in H.$</i>
-        </p>
-
-        <p>
-            <i>Proof.</i> Let $gK \in G/K,$ and $gk_1, gk_2 \in gK.$ Then $$\ff(gk_1) = \ff(g) \ff(k_1) = \ff(g) = \ff(g)
-            \ff(k_2) = \ff(gk_2),$$ so $gk_1$ and $gk_2$ map to the same element, say $h\in H.$ To show the converse, that
-            these are the only elements mapped to $h,$ let $\ff(x) = h.$ We want to show that $x \in gK.$ Consider $g^{-1}x:$
-            $$\ff(g^{-1} x) = \ff(g)^{-1} \ff(x) = h^{-1} h = 1 \in H,$$ so $g^{-1}x = k$ for some $k\in K,$ and so $x =
-            gk.$ \qed
-        </p>
-
-        <h3>Representatives of inverse elements in $G/K$</h3>
-
-        <p>
-            <b>Proposition.</b> <i>Let $\ff:G\longrightarrow H$ be a
-    homomorphism with kernel $K,$ let $X, Y \in G/K$ and $Z = XY.$ If
-    $x \in X, z\in Z,$ then there is a $y\in Y$ s.t. $xy = z,$ namely
-    $y = x^{-1} z.$</i>
-        </p>
-
-        <h3>Quotient of an abelian group</h3>
-
-        <p>
-            <b>Proposition.</b> <i>Let $A$ be an abelian group. Then any
-    subgroup $B$ is normal in $A,$ and $A/B$ is abelian.</i>
-        </p>
-
-        <h3>Nonabelian group $A$ s.t. quotient $A/B$ is abelian</h3>
-
-        <p>
-            <b>Nonexample.</b> $A = Q_8, B = \< -1 \>.$ Then $A/B \cong V_4
-            \cong Z_2 \times Z_2$ is abelian.
-        </p>
-
-        <h3>Order of elements of a quotient group</h3>
-
-        <p>
-            <b>Proposition.</b> <i>Let $G/N$ be a quotient. Then $|gN| = n,$
-    where $n$ is the smallest positive integer s.t. $g^n \in N.$ If no
-    such $n$ exists, then $gN$ has infinite order.</i>
-        </p>
-
-        <p>
-            <b>Nonexample.</b> We already know that $|gN| \leq |g|.$ An example of $gN$ having order strictly smaller than
-            $g$ is in $Q_8/\< -1 \> \cong Z_2 \times Z_2,$ whose nonidentity elements all have order 2, while $Q_8$ has elements of order $4,$ namely
-                $\pm i,\pm j,\pm k.$
-        </p>
-
-        <h3>More examples of homomorphisms, kernels, images, and fibers</h3>
-
-        <p>
-            <b>Example.</b> Define $\ff:\CC^\times \longrightarrow \RR^\times$ by $$\ff(a+ib) = a^2 + b^2.$$ Then $\ff$ is
-            a homomorphism, and \begin{align*} \ff(\CC^\times) &= \RR^+ \\ \ker \ff &= \{ z = a+ib \in \CC^\times: \ff(z)
-            = a^2 + b^2 = 1 \in \RR^\times \} \\ &= \text{unit circle in } \CC, \end{align*} and the fibers of $\ff$ over
-            $r \in \RR^\times$ are circles of radius $r.$
-        </p>
-
-        <h3>Quotient Group $ \bQ / \bZ $</h3>
-
-        <p><span>
-            <b>Definition.</b> <i>The torsion subgroup of an abelian group $ G $
-            is the subgroup consisting of all elements $ g\in G $ of finite
-            order.</i>
-        </span></p>
-
-        <p><span>
-            <b>Exercise.</b> <i>
-                <ol>
-                    <li>Every coset of $ \bZ $ in $ \bQ $ contains exactly one
-                    representative $ q \in \bQ $ in the range $ 0 \leq q < 1.
-                    $</li>
-                    <li>Every element of $ \QQ / \ZZ $ has finite order but
-                    there are elements of arbitrarily large order.</li>
-                    <li>$ \QQ/\ZZ $ is the torsion subgroup of $ \RR/\ZZ. $</li>
-                    <li>$ \QQ/\ZZ $ is isomorphic to the multiplicative group of
-                    root of unity in $ \CC^\times. $</li>
-                </ol>
-            </i>
-        </span></p>
-
-        <p><span>
-            <i>Proof of 4.</i> The roots of unity are precisely $ e^{2\pi i k/n}
-            $ where $ 0 \leq k < n. $ \qed
-        </span></p>
-
-        <p><span>
-            <b>Proposition.</b> <i>Every finitely generated subgroup of $ \QQ $ is
-            cyclic.</i>
-        </span></p>
-
-        <h3>Divisible Abelian Group</h3>
-
-        <p><span>
-            <b>Definition.</b> A nontrivial abelian group $ A $ written
-            multiplicatively is called divisible if for each element $ a\in A $
-            and each nonzero integer $ k $ there is an element $ x\in A $ s.t. $
-            x^k = a, $ i.e. every element $ a\in A $ has a $ k $-th root in $ A.
-            $ In additive notation, each element is the $ k $-th multiple of
-            some element of $ A. $
-        </span></p>
-
-        <p><span>
-            <b>Exercise.</b> <i>
-                <ol>
-                    <li>The additive group of rational numbers $ \QQ $ is
-                    divisible.</li>
-                    <li>No finite abelian group is divisible.</li>
-                    <li>Let $ A $ and $ B $ be nontrivial abelian groups. Then $
-                    A\times B $ is divisible iff both $ A $ and $ B $ are
-                    divisible.</li>
-                </ol>
-            </i>
-        </span></p>
-
-        <p><span>
-            Use Lagrange's theorem and proof by contradiction for 2.
-        </span></p>
-
-        <p><span>
-            <b>Exercise.</b> <i>The quotient of a divisible abelian group by any
-            proper subgroup is also divisible. Therefore $ \QQ/\ZZ $ is
-            divisible.</i>
-        </span></p>
-
-        <h3>Generators of a Quotient Group</h3>
-
-        <p><span>
-            <b>Exercise.</b> <i>Let G be a group, N be a normal subgroup of G,
-            and let $ \bar G = G/N. $ Prove that if $ G = \< x, y \>, $ then $
-            \bar G = \< \bar x, \bar y \>. $ More generally, if $ G = \< S \> $
-            for any subset S of G, then $ \bar G = \< \bar S \>. $</i>
-        </span></p>
-
-        <h1>Reference</h1>
-
-        <ol>
-            <li>Abstract Algebra by Dummit and Foote.</li>
-        </ol>
-
+<img src="images/prometheus.png">
+
+<div class="epigraph">
+    <div class="quote">
+        Any sufficiently advanced Mathematics is indistinguishable from gibberish.
     </div>
-</body>
+    <hr>
+    <div class="author">
+        After Arthur C. Clarke
+    </div>
+</div>-->
 
+<h1>Cyclic groups and cyclic subgroups</h1>
+
+<p>
+    <b>Theorem.</b> <i>Let $H = \< x \>$ be a cyclic group.
+
+<ul>
+<li>Every subgroup of $H$ is cyclic. More precisely, if $K \leq
+H,$ then either $K = \{ 1 \}$ or $K = \< x^d
+\>$ where $d$ is the smallest integer s.t. $x^d \in K.$</li>
+<li>If $|H| = \infty,$ then for any distinct nonnegative integers
+$a$ and $b,$ $\< x^a \> \neq \< x^b \>.$
+Furthermore, for every integer $m,$ $\< x^m \> =
+\< x^{|m|} \>,$ where $|m|$ denotes the absolute value
+of $m,$ so that the nontrivial subgroups of $H$ correspond
+bijectively with the integers $1,2,3,\ldots.$</li>
+<li>If $|H| = n < \infty,$ then for each positive integer $a$
+dividing $n$ there is a unique subgroup of $H$ of order $a.$ This
+subgroup is the cyclic group $\< x^d \>$ where $d =
+n/a.$ Furthermore, for every integer $m,$ $\< x^m \> =
+\< x^{(m,n)} \>,$ so that the subgroups of $H$
+correspond bijectively with the positive divisors of $n.$</li>
+</ul></i>
+</p>
+
+<h3>Classification of groups of order $4$</h3>
+
+<p>
+    <b>Proposition.</b> <i>Every group of order $4$ is isomorphic to
+either $Z_4$ or $V_4 \cong Z_2 \times Z_2.$</i>
+</p>
+
+<h1>Group Actions</h1>
+
+<p>
+    <b>Definition.</b> <i>A group action of a group $G$ on a set $A$
+is a map from $G\times A$ to $A,$ written as $g \. a$ for all
+$g\in G, a\in A$ satisfying:
+
+<ul>
+<li>$g_1 \. (g_2 \. a) = (g_1g_2) \. a$ for all $g_1,g_2\in G, a\in A.$</li>
+<li>$1 \. a = a$ for all $a \in A.$</li>
+</ul></i>
+</p>
+
+<div class="box">
+    <b>Theorem.</b> <i>Let $G$ act on $A,$ and let $g$ be a fixed
+element of $G.$ Define the map $\s_g: A \longrightarrow A$ by
+
+$$\s_g(a) = g \. a.$$
+
+Then:
+
+<ul>
+<li>$\s_g$ is a permutation of $A$: $\s_g \in S_A.$</li>
+<li>The map $\ff:G\longrightarrow S_A$ defined by $\ff(g) = \s_g$ is
+a homomorphism.</li>
+</ul></i>
+</div>
+
+<p>
+    The map $\ff$ completely characterizes an action of $G$ on $S,$ so we can define the kernel of the action to be the kernel
+    of $\ff:$
+</p>
+
+<p>
+    <b>Definition.</b> <i>The kernel of an action of $G$ on $A$ is
+
+$$\ker \ff = \ker(G, A) = \{ g \in G : \ff(g) = \s_g = 1 \in S_A \},$$
+
+i.e. it's the set
+
+$$\{ g \in G : \s_g(a) = g \. a = a \text{ for all } a\in A \},$$
+
+in other words elements that fix all $a \in A.$</i>
+</p>
+
+<h1>Quotient Groups</h1>
+
+<h2>Centralizers, Centers, Normalizers, and Stabilizers</h2>
+
+<p>
+    <b>Definition.</b> <i>Let $A$ be any nonempty subset of a group
+$G.$ The centralizer of $A$ in $G$ is the set
+
+$$C_G(A) = \{ g \in G : gag^{-1} = a \text{ for all } a \in A \},$$
+
+i.e. it's the set of all elements in $G$ that commute with all
+elements in $A.$ As a special case, the center of $G$ is
+
+$$Z(G) = C_G(G) = \{ g \in G : gxg^{-1} = x \text{ for all } x \in G \},$$
+
+i.e. elements that commute with everyone in $G.$ The normalizer of $A$
+is the set
+
+$$N_G(A) = \{ g \in G : gAg^{-1} = A \}.$$</i>
+</p>
+
+<p>
+    <b>Definition.</b> <i>Let $G$ be a group acting on a set $S$ and
+let $s$ be some fixed element of $S.$ The stabilizer of $s$ in $G$
+is the set
+
+$$\stab_G(s) = \{ g \in G : g \. s = s \}.$$</i>
+</p>
+
+<p>
+    Now we'll show that normalizers are a special case of stabilizers: let $G$ act by conjugation on the power set $\PP(G)$ consisting
+    of all subsets of $G,$ so that for each $g\in G$ and $A \in \PP(G),$ $$g \. A = gAg^{-1}.$$ Then the stabilizer
+    of $A$ under this action is $$\stab_G(A) = \{ g \in G : g\. A = gAg^{-1} = A \} = N_G(A).$$
+</p>
+
+<p>
+    Let's see what the kernel of this action looks like: $$\ker(G, \PP(G)) = \{ g \in G : g \. A = gAg^{-1} = A \text{ for all
+    } A\in\PP(G) \},$$ or elements in $G$ that normalize all subsets of $G.$ Since elements of $Z(G) = C_G(G)$ commute
+    with all elements of $G,$ $$Z(G) \leq \ker(G, \PP(G)).$$ In fact, taking singleton subsets $A = \{ a \},$ we
+    have $$\ker(G, \PP(G)) \leq Z(G),$$ so the two are identical: $$\ker(G, \PP(G)) = Z(G).$$
+</p>
+
+<p>
+    Next we'll show that centralizers are kernels of actions: let $N_G(A)$ act on $A$ by conjugation. The kernel is $$\ker(N_G(A),
+    A) = \{ g \in N_G(A) : g \. a = gag^{-1} = a \text{ for all } a \in A \} = C_{N_G(A)}(A),$$ i.e. elements in
+    $N_G(A)$ that commute with all elements in $A.$ It's easy to see that $$C_{N_G(A)}(A) = C_G(A),$$ and so $$\ker(N_G(A),
+    A) = C_G(A).$$ While we're at it let's also calculate the stabilizer of an element $a \in A:$ $$\stab_{N_G(A)}(a)
+    = \{ g \in N_G(A) : g\. a = gag^{-1} = a \} = C_{N_G(A)}(a),$$ i.e. elements in $N_G(A)$ that commute with $a.$
+</p>
+
+<p>
+    Finally for completeness let $C_G(A)$ act on $A$ by conjugation. Then \begin{align*} \ker(C_G(A), A) &= \{ g \in C_G(A) :
+    g\. a = gag^{-1} = a \text{ for all } a\in A\} = C_G(A) \\ \stab_{C_G(A)}(a) &= \{ g \in C_G(A) : g\. a = gag^{-1}
+    = a \}. \end{align*}
+</p>
+
+<p>
+    <b>Corollary.</b> <i>For any subset $A$ of a group $G,$
+
+$$C_G(A) = C_{N_G(A)}(A) \leq N_G(A).$$</i>
+</p>
+
+<p class="box">
+    <b>Summary.</b> <i>Normalizers are stabilizers and centralizers
+are kernels of conjugate actions, and
+
+\begin{align*}
+\ker(G, \PP(G)) = Z(G) &\leq C_G(A) \\
+&= \ker(N_G(A), A) = \ker(C_G(A), A) \\
+&\leq N_G(A) = \stab_G(A).
+\end{align*}
+
+It's nice how you can line them up like that.</i>
+</p>
+
+<p>
+    <b>Corollary.</b> <i>Let $\ff$ be an action of $G$ on $A.$
+Then
+
+$$\ker(\ff, G, A) = \Cap_{a\in A} \stab_G(a).$$</i>
+</p>
+
+<h3>Cosets of a kernel</h3>
+
+<p>
+    <b>Proposition.</b> <i>Let $\ff : G \longrightarrow H$ be a
+homomorphism with kernel $K.$ Let $X \in G/K$ be the fiber above
+$a,$ i.e. $X = \ff^{-1}(a).$ Then for any $u \in X,$
+
+$$X = u K = K u,$$
+
+i.e. every fiber is represented by any of its elements modulo the
+kernel of the homomorphism.
+</i>
+</p>
+<!--
+<div class="epigraph">
+    <img src="images/923.jpg">
+    <div class="quote">
+        Young man, in mathematics you don't understand things. You just remember lots of examples.
+    </div>
+    <hr>
+    <div class="author">John von Neumann</div>
+</div>
+<div class="clearboth"></div>-->
+
+<h3>Modular Arithmetic</h3>
+
+<p>
+    <b>Example.</b> Let $G = \ZZ, H = \ZZ/10\ZZ = \{ 0:9 \},$ and $\ff : G \longrightarrow H$ such that $$\ff(m)
+    = \bar{m} = m \mod 10.$$ Then \begin{align*} \ker \ff = K &= \text{ integers congruent 0 mod 10} \\ &= \{ \dots,
+    -10, 0, 10, 20, 30, \dots \} \end{align*} and the fiber $X$ above $\bar{1} \in H$ is the set of integers congruent
+    $1\mod 10,$ and \begin{align*} X &= 1 + K \\ &= 11 + K \\ &= 21 + K \\ &= \text{etc.} \end{align*}
+</p>
+
+<h3>$G/K$ is a group for kernel $K$</h3>
+
+<p>
+    <b>Proposition.</b> <i>Let $G$ be a group and $K$ be the kernel of
+some homomorphism from $G$ to another group. Then the set $G/K$ of
+left cosets of $K$ with operation defined by
+
+$$uK \cdot vK = (uv)K$$
+
+is a group. Same for the set $G/K$ of right cosets of $K.$</i>
+</p>
+
+<p>
+    <b>Proposition.</b> <i>Let $N \leq G.$ The set of left cosets of
+$N$ form a partition of $G.$ Furthermore, for any $u, v\in G,$
+
+$$uN = vN \quad\text{ iff }\quad v^{-1}u \in N,$$
+
+and in particular iff $u$ and $v$ are representatives of the same
+coset.</i>
+</p>
+
+<p>
+    <b>Example.</b> Let $N = 4\ZZ \leq \ZZ.$ The left cosets of $N$ are \begin{align*} 0 + 4\ZZ &= \{ \dots, -4,
+    0, 4, 8,\dots \} \\ 1 + 4\ZZ &= \{ \dots, -3, 1, 5, 9,\dots \} \\ 2 + 4\ZZ &= \{ \dots, -2, 2, 6, 10,\dots \}
+    \\ 3 + 4\ZZ &= \{ \dots, -1, 3, 7, 11,\dots \} \end{align*} and e.g. $$5 + 4\ZZ = 1 + 4\ZZ,$$ because $$-1 +
+    5 \equiv 0 \mod 4,$$ or in other words $$-1 + 5 \in 4\ZZ.$$
+</p>
+
+<p>
+    <b>Proposition.</b> <i>Let $N \leq G.$
+
+<ul>
+<li>The operation on $G/N$ given by
+
+$$uN \cdot vN = (uv)N$$
+
+is well defined iff $gng^{-1} \in N$ for all $g \in G$ and $n \in
+N,$ i.e. iff $N \normal G.$</li>
+<li>If this operation is well defined, then $G/N$ is a group.</li>
+</ul></i>
+</p>
+
+<h2>Equivalent Formulations of a Normal Subgroup</h2>
+
+<p>
+    <b>Theorem.</b> <i>Let $N \leq G.$ The following are equivalent:
+
+<ul>
+<li>$N \normal G.$</li>
+<li>$N_G(N) = G.$</li>
+<li>$gN = Ng$ for all $g\in G.$</li>
+<li>Multiplication of left cosets of $N$ makes $G/N$ a group.</li>
+<li>$gNg^{-1} \subset N$ for all $g\in G.$</li>
+</ul></i>
+</p>
+
+<p>
+    <b>Theorem.</b> <i>A subgroup $N \leq G$ is normal iff it is the
+kernel of some homomorphism.</i>
+</p>
+
+<p>
+    Given a homomorphism $\ff: G \longrightarrow H,$ we can find its kernel $K,$ which is normal in $G$ and so $G/K$ is a group
+    and is isomorphic to the image of $G$ under $\ff:$ $$G/K \cong \ff(G).$$ This means that if we want to study
+    images of $G$ under any homomorphism $\ff,$ we can just study $G/K.$ It also means that all the homomorphisms
+    we can define on $G$ are determined by the structures of $G/K$ for $K \normal G,$ i.e. of $G$ and its normal
+    subgroups.
+</p>
+
+<p>
+    <b>Question.</b> <i>Are there groups so different that you can't
+define any nontrivial homomorphism between them?</i>
+</p>
+
+<p>
+    <b>Example.</b> Ah yes: there is no nontrivial homomorphism of $Z_2$ into $\ZZ$ or vice versa because $Z_2$ has
+    an element of order $2$ and $\ZZ$ doesn't.
+</p>
+
+<h3>Examples of normal subgroups and quotients</h3>
+
+<p>
+    <b>Example.</b> $1, G \normal G, G \cong G/1, 1 \cong G/G.$
+</p>
+
+<p>
+    <b>Example.</b> If $G$ is abelian, then any subgroup of $G$ is normal.
+</p>
+
+<p>
+    <b>Example.</b> Let $G = \ZZ.$ Then every subgroup $N \leq G$ is
+    cyclic and looks like $$N = \< n \> = \< -n \> = n\ZZ$$ for some
+    $n,$ and $$G/N = \ZZ/n\ZZ = \< \bar{1} \> = \< \bar{0}, \bar{1},
+    \ldots, \bar{n-1} \>$$ is the system of complete residues mod $n,$
+    where $\bar{k} = k + n\ZZ.$
+</p>
+
+<h3>Quaternion and dihedral group</h3>
+
+<p>
+    <b>Example.</b> $Z(D_8) = \< r^2 \>$ and $Z(Q_8) = \< -1 \>,$ and
+    $$D_8 / Z(D_8) \cong Q_8 / Z(Q_8) \cong V_4 \cong Z_2 \times Z_2.$$
+</p>
+
+<h3>Quotient groups of a cyclic group</h3>
+
+<p>
+    <b>Theorem.</b> <i>Quotient groups of a cyclic group are cyclic,
+and the image of a generator $g$ for $G$ is $\bar{g} = gN,$ a
+generator of the quotient $G/N.$ If in addition $G$ is a finite
+cyclic group, then
+
+$$|G/N| = \frac{|G|}{|N|}.$$</i>
+</p>
+
+<h1>Exercises</h1>
+
+<h3>Homomorphic preimage of a subgroup</h3>
+
+<p>
+    <b>Proposition.</b> <i>Let $\ff: G\longrightarrow H$ be a
+homomorphism and let $E \leq H.$ Then $\ff^{-1}(E) \leq G,$
+i.e. the homomorphic preimage of a subgroup is a subgroup. If $E$
+is also normal in $H,$ then its preimage is also normal in
+$G.$ Finally as a corollary $\ker \ff = \ff^{-1}(1) \normal G.$</i>
+</p>
+
+<h3>Cosets of the kernel are fibers of the homomorphism</h3>
+
+<p>
+    <b>Proposition.</b> <i>Let $\ff:G\longrightarrow H$ be a
+homomorphism with kernel $K.$ Then the elements of $G/K$ are of
+the form $gK$ for some $g\in G,$ and for a fixed $gK \in G/K,$
+$\ff$ maps all elements $x \in gK$ (and only those) to the same
+element $h\in H,$ i.e. each coset of $K$ is the fiber above $h$
+for some $h\in H.$</i>
+</p>
+
+<p>
+    <i>Proof.</i> Let $gK \in G/K,$ and $gk_1, gk_2 \in gK.$ Then $$\ff(gk_1) = \ff(g) \ff(k_1) = \ff(g) = \ff(g)
+    \ff(k_2) = \ff(gk_2),$$ so $gk_1$ and $gk_2$ map to the same element, say $h\in H.$ To show the converse, that
+    these are the only elements mapped to $h,$ let $\ff(x) = h.$ We want to show that $x \in gK.$ Consider $g^{-1}x:$
+    $$\ff(g^{-1} x) = \ff(g)^{-1} \ff(x) = h^{-1} h = 1 \in H,$$ so $g^{-1}x = k$ for some $k\in K,$ and so $x =
+    gk.$ \qed
+</p>
+
+<h3>Representatives of inverse elements in $G/K$</h3>
+
+<p>
+    <b>Proposition.</b> <i>Let $\ff:G\longrightarrow H$ be a
+homomorphism with kernel $K,$ let $X, Y \in G/K$ and $Z = XY.$ If
+$x \in X, z\in Z,$ then there is a $y\in Y$ s.t. $xy = z,$ namely
+$y = x^{-1} z.$</i>
+</p>
+
+<h3>Quotient of an abelian group</h3>
+
+<p>
+    <b>Proposition.</b> <i>Let $A$ be an abelian group. Then any
+subgroup $B$ is normal in $A,$ and $A/B$ is abelian.</i>
+</p>
+
+<h3>Nonabelian group $A$ s.t. quotient $A/B$ is abelian</h3>
+
+<p>
+    <b>Nonexample.</b> $A = Q_8, B = \< -1 \>.$ Then $A/B \cong V_4
+    \cong Z_2 \times Z_2$ is abelian.
+</p>
+
+<h3>Order of elements of a quotient group</h3>
+
+<p>
+    <b>Proposition.</b> <i>Let $G/N$ be a quotient. Then $|gN| = n,$
+where $n$ is the smallest positive integer s.t. $g^n \in N.$ If no
+such $n$ exists, then $gN$ has infinite order.</i>
+</p>
+
+<p>
+    <b>Nonexample.</b> We already know that $|gN| \leq |g|.$ An example of $gN$ having order strictly smaller than
+    $g$ is in $Q_8/\< -1 \> \cong Z_2 \times Z_2,$ whose nonidentity elements all have order 2, while $Q_8$ has elements of order $4,$ namely
+        $\pm i,\pm j,\pm k.$
+</p>
+
+<h3>More examples of homomorphisms, kernels, images, and fibers</h3>
+
+<p>
+    <b>Example.</b> Define $\ff:\CC^\times \longrightarrow \RR^\times$ by $$\ff(a+ib) = a^2 + b^2.$$ Then $\ff$ is
+    a homomorphism, and \begin{align*} \ff(\CC^\times) &= \RR^+ \\ \ker \ff &= \{ z = a+ib \in \CC^\times: \ff(z)
+    = a^2 + b^2 = 1 \in \RR^\times \} \\ &= \text{unit circle in } \CC, \end{align*} and the fibers of $\ff$ over
+    $r \in \RR^\times$ are circles of radius $r.$
+</p>
+
+<h3>Quotient Group $ \bQ / \bZ $</h3>
+
+<p><span>
+    <b>Definition.</b> <i>The torsion subgroup of an abelian group $ G $
+    is the subgroup consisting of all elements $ g\in G $ of finite
+    order.</i>
+</span></p>
+
+<p><span>
+    <b>Exercise.</b> <i>
+        <ol>
+            <li>Every coset of $ \bZ $ in $ \bQ $ contains exactly one
+            representative $ q \in \bQ $ in the range $ 0 \leq q < 1.
+            $</li>
+            <li>Every element of $ \QQ / \ZZ $ has finite order but
+            there are elements of arbitrarily large order.</li>
+            <li>$ \QQ/\ZZ $ is the torsion subgroup of $ \RR/\ZZ. $</li>
+            <li>$ \QQ/\ZZ $ is isomorphic to the multiplicative group of
+            root of unity in $ \CC^\times. $</li>
+        </ol>
+    </i>
+</span></p>
+
+<p><span>
+    <i>Proof of 4.</i> The roots of unity are precisely $ e^{2\pi i k/n}
+    $ where $ 0 \leq k < n. $ \qed
+</span></p>
+
+<p><span>
+    <b>Proposition.</b> <i>Every finitely generated subgroup of $ \QQ $ is
+    cyclic.</i>
+</span></p>
+
+<h3>Divisible Abelian Group</h3>
+
+<p><span>
+    <b>Definition.</b> A nontrivial abelian group $ A $ written
+    multiplicatively is called divisible if for each element $ a\in A $
+    and each nonzero integer $ k $ there is an element $ x\in A $ s.t. $
+    x^k = a, $ i.e. every element $ a\in A $ has a $ k $-th root in $ A.
+    $ In additive notation, each element is the $ k $-th multiple of
+    some element of $ A. $
+</span></p>
+
+<p><span>
+    <b>Exercise.</b> <i>
+        <ol>
+            <li>The additive group of rational numbers $ \QQ $ is
+            divisible.</li>
+            <li>No finite abelian group is divisible.</li>
+            <li>Let $ A $ and $ B $ be nontrivial abelian groups. Then $
+            A\times B $ is divisible iff both $ A $ and $ B $ are
+            divisible.</li>
+        </ol>
+    </i>
+</span></p>
+
+<p><span>
+    Use Lagrange's theorem and proof by contradiction for 2.
+</span></p>
+
+<p><span>
+    <b>Exercise.</b> <i>The quotient of a divisible abelian group by any
+    proper subgroup is also divisible. Therefore $ \QQ/\ZZ $ is
+    divisible.</i>
+</span></p>
+
+<h3>Generators of a Quotient Group</h3>
+
+<p><span>
+    <b>Exercise.</b> <i>Let G be a group, N be a normal subgroup of G,
+    and let $ \bar G = G/N. $ Prove that if $ G = \< x, y \>, $ then $
+    \bar G = \< \bar x, \bar y \>. $ More generally, if $ G = \< S \> $
+    for any subset S of G, then $ \bar G = \< \bar S \>. $</i>
+</span></p>
+
+<h2>Definition. Special and General Orthogonal Group</h2>
+
+<p>
+    <i> The orthogonal group  $ O(n) $ is the set of $ n \times n $ orthogonal
+    matrices. The subgroup $ SO(n) $ consisting of orthogonal matrices with
+    determinant $ +1 $ is called the special orthogonal group. Its elements are
+    called special orthogonal matrices. As a linear transformation, every
+    special orthogonal matrix acts as a rotation. A general orthogonal matrix
+    may have determinant $ -1 $ or $ +1. $ </i>
+</p>
+
+<h3>Example. Special and General Orthogonal Matrices</h3>
+
+<p>
+    The matrix
+
+    $$ \frac{1}{\sqrt{2}}
+    \begin{bmatrix}
+        1 & -1 \\
+        1 & 1 \\
+    \end{bmatrix} $$
+
+    is a special orthogonal matrix because it is orthogonal and has determinant
+    1.
+</p>
+
+<h1>Reference</h1>
+<ol>
+<li>Abstract Algebra by Dummit and Foote.</li>
+<li>The Web.</li>
+</ol>
+</div>
+</body>
 </html>

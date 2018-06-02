@@ -258,7 +258,7 @@ translation</h2>
     unique. This equation then reduces to $  T(x) = U(x), $ therefore $ T = U. $
 </p>
 
-<h2>Theorem 6.23. Orthogonal operators on $ \bbR^2 $</h2>
+<h2>Theorem 6.23. Orthogonal operators on $ \bbR^2 $ are rotations or reflections</h2>
 
 <p>
     <i> Let T be an orthogonal operator on $ \bbR^2, $ and let $ A = [T]_\b $
@@ -271,10 +271,57 @@ translation</h2>
     </ol></i>
 </p>
 
+<h3>Corollary. Rigid motions in $ \bR^2 $ are compositions of rotations,
+reflections, and translations.</h3>
+
+<h2>Question. What do orthogonal operators look like in $ \bR^3 $ and $ \bR^n? $</h2>
+
+<h3>Example. Constructing orthogonal operators on $ \bR^3 $ from orthogonal operators on
+$ \bR^2. $</h3>
+
+<p>
+    Let
+
+    $$ A =
+    \begin{bmatrix}
+        \cos \th & -\sin \th \\
+        \sin \th & \cos \th \\
+    \end{bmatrix}
+    : \bR^2 \longrightarrow \bR^2 $$
+
+    be the rotation operator by $ \th $ in $ \bR^2. $ <i> Recall that this
+    operator is orthogonal, and hence its columns and rows form an orthonormal
+    basis for $ \bR^2. $ </i> We can construct orthogonal operators on $ \bR^3 $
+    as follows:
+
+    $$ \begin{bmatrix}
+        \cos \th & -\sin \th & 0 \\
+        \sin \th & \cos \th & 0 \\
+        0 & 0 & 1 \\
+    \end{bmatrix},
+    \begin{bmatrix}
+        \cos \th  & 0 & -\sin \th \\
+        0 & 1 & 0 \\
+        \sin \th  & 0 & \cos \th \\
+    \end{bmatrix},
+    \begin{bmatrix}
+        1 & 0 & 0 \\
+        0 & \cos \th & -\sin \th \\
+        0 & \sin \th & \cos \th \\
+    \end{bmatrix}, $$
+
+    and more by moving the 1 around. It's easy to see that these are orthogonal
+    because the columns (and rows) are orthonormal.
+</p>
+
+<h3>Question. Can all orthogonal operators in $ \bR^3 $ and higher dimensions be
+formed like this?</h3>
+
 <h1>Reference</h1>
 <ol>
 <li>Linear Algebra by Friedberg, Insel, and Spence.</li>
 <li>Linear Algebra video lectures by Gilbert Strang.</li>
+<li>The Web.</li>
 </ol>
 </div>
 </body>
