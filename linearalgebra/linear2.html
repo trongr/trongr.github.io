@@ -150,18 +150,27 @@
         matrix.</i>
 </p>
 
-<h2>Rigid Motions</h2>
+<h2>Isometry / Rigid Motions</h2>
 
 <p>
-    <i>Definition. Let VR. A function $ f:V\longrightarrow V $ is called a rigid
-    motion if
+    <i>Definition. Let VR. A function $ f:V\longrightarrow V $ is called an
+    isometry / rigid motion if
 
     $$ \|f(x)-f(y)\|=\|x-y\| $$
 
     for all x, y in V.
 </i>
 </p>
+
+<p>
+    (Rigid motions are examples of affine transformations, which include
+    translation, scaling, homothety (homogeneous dilation), similarity
+    transformation, reflection, rotation, shear mapping, and compositions of
+    them in any combination and sequence.)
+</p>
+
 <h3>Examples of rigid motions</h3>
+
 <p>
     E.g. Any orthogonal operator ($ \left|\left| f(x) \right|\right| =
     \left|\left| x \right|\right| $) on a finite dimensional real inner product
@@ -290,7 +299,7 @@ $ \bR^2. $</h3>
     : \bR^2 \longrightarrow \bR^2 $$
 
     be the rotation operator by $ \th $ in $ \bR^2. $ <i> Recall that this
-    operator is orthogonal, and hence its columns and rows form an orthonormal
+    operator is orthogonal because its columns and rows form an orthonormal
     basis for $ \bR^2. $ </i> We can construct orthogonal operators on $ \bR^3 $
     as follows:
 
@@ -311,11 +320,56 @@ $ \bR^2. $</h3>
     \end{bmatrix}, $$
 
     and more by moving the 1 around. It's easy to see that these are orthogonal
-    because the columns (and rows) are orthonormal.
+    because the columns and rows are orthonormal.
 </p>
 
-<h3>Question. Can all orthogonal operators in $ \bR^3 $ and higher dimensions be
-formed like this?</h3>
+<h4>Question. Does moving the 1 around correspond to orthogonal equivalence,
+i.e. the three matrices above are orthogonally equivalent? How to find the
+orthogonal transformation?</h4>
+
+<h4>Question. Can all orthogonal operators in $ \bR^3 $ and higher dimensions be
+formed like this?</h4>
+
+<p>
+    Probably not.
+</p>
+
+<h2>Theorem. Any orthogonal matrix is orthogonally equivalent to a diagonal
+block matrix of the form
+
+$$ \begin{bmatrix}
+    D_{\pm 1} & O & \cdots & O \\
+    O & R_1 & \cdots & O \\
+    \vdots & \vdots & \ddots & \vdots \\
+    O & O & \cdots & R_k \\
+\end{bmatrix} $$
+
+where $ D_{\pm 1} $ is a diagonal matrix whose diagonal entries are $ \pm 1, $
+and
+
+$$ R_j = \begin{bmatrix}
+    \cos \th_j & -\sin \th_j \\
+    \sin \th_j & \cos \th_j \\
+\end{bmatrix} $$ and $ \th_j \in \bR. $</h2>
+
+<p>
+    Proof TODO.
+</p>
+
+<h3>Example. Orthogonal matrices in $ \bR^3 $</h3>
+
+<p>
+    $$ \begin{bmatrix}
+        1 & 0 & 0 \\
+        0 & 1 & 0 \\
+        0 & 0 & 1 \\
+    \end{bmatrix},
+    \begin{bmatrix}
+        -1 & 0 & 0 \\
+        0 & 1 & 0 \\
+        0 & 0 & 1 \\
+    \end{bmatrix}, \ldots $$
+</p>
 
 <h1>Reference</h1>
 <ol>

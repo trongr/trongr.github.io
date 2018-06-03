@@ -55,7 +55,7 @@ h1 {
 h2 {
     clear: both;
     font-style: italic;
-    border-bottom: 1px solid;
+    /* border-bottom: 1px solid; */
     padding-bottom: 5px;
     /* color: #FFD557; */
     color: #0070c0;
@@ -75,7 +75,7 @@ h4 {
     font-style: italic;
 }
 
-p, li {
+h1, h2, h3, h4, p, li {
     text-align: justify;
     text-justify: inter-word;
 }
