@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<title>Analysis II</title>
+<link rel="stylesheet" href="../css/global.css">
+
+<!-- this config must be before MathJax.js: -->
+<script src="../js/mathjax.config.js"></script>
+<script src="../js/MathJax/MathJax.js"></script>
+<!-- <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js"></script> -->
+
+<script src="../js/jquery-3.1.0.min.js"></script>
+<script src="../js/toc.js"></script>
+<script src="../js/smartquotes.js"></script>
+<script src="../js/global.js"></script>
+
+</head>
+
+<body>
+<div id="content">
+
+<h1>Analysis II</h1>
+<!--
+<img src="images/Paarl Extra 1.jpg">
+
+<div class="epigraph">
+    <div class="quote">Let the Hunt begin!</div>
+    <div class="author"></div>
+</div>-->
+
+<div id="toc"></div>
+
+<h1>Cauchy Schwarz Variation</h1>
+
+<p>
+    <b>Proposition.</b> <i>Let $A\in M_{m\times n}(\bR), B\in
+M_{n\times p}(\bR).$ Define the norm of $A$ to be $|A| =
+\sqrt{\sum_{ij} A_{ij}^2},$ and similarly for $|B|.$ Then
+
+$$|AB| \leq |A||B|.$$</i>
+</p>
+
+<p>
+    <b>Corollary.</b> <i>If $T:\bR^n\longrightarrow \bR^m$ is linear,
+then there is an $M$ s.t. $$|T(h)| \leq M|h|$$ for all $h\in\bR^n.$</i>
+</p>
+
+<h1>Metric spaces</h1>
+
+<h3>Definition. Euclidean and sup metrics</h3>
+
+<p>
+<i>
+The Euclidean distance, also called the $ L^2 $ distance, between two points $ p
+= (p_i) $ and $ q = (q_i) $ is
+
+\begin{align*}
+\left| p - q \right|_2 = \left| q - p \right|_2
+    &= \sqrt { \left( q _ { 1} - p _ { 1} \right) ^ { 2} + \cdots + \left( q _ { n } - p _ { n } \right) ^ { 2} } \\
+    &= \sqrt { \sum _ { i = 1} ^ { n } \left( q _ { i } - p _ { i } \right) ^ { 2} }.
+\end{align*}
+
+The sup distance between p and q is defined to be
+
+\begin{align*}
+\left| p - q \right|_{\infty} = \left| q - p \right|_{\infty}
+    &= \sup \{ | p_i - q_i | \}. \\
+\end{align*}
+
+The $ L^1 $ distance is given by
+
+\begin{align*}
+\left| p - q \right|_1 = \left| q - p \right|_1
+    &= \sum _ { i = 1} ^ { n } \left| q _ { i } - p _ { i } \right| .
+\end{align*}
+</i>
+</p>
+
+<h1>Definition. $ \e $-neighbourhoods, open balls, and open cubes</h1>
+<p>
+<i> Let X, d be a metric space, $ a \in X, $ and $ \e > 0. $ Then the $ \e
+$-neighbourhood of a is the set
+
+\begin{align*}
+U\left( a ; \e \right) = \left\{ x : d \left( x ,a \right) < \e \right\}
+\end{align*}
+
+If $ d $ is the Euclidean metric, then $ U \left( a ; \e \right) $ is called the
+open ball, and denoted $ B(a, \e). $ If $ d $ is the sup metric, then U is
+called the open cube, and denoted $ C(a, \e). $
+</i>
+</p>
+
+<h3>Proposition. Relations between open balls and cubes</h3>
+<p>
+<i>
+\begin{align*}
+B ( a, \e ) \subset C ( a, \e ) \subset B ( a, \sqrt { n } \e )
+\end{align*}
+ </i>
+</p>
+<p>
+<i>Proof.</i> Follows from the relations
+
+$$ | x | \leq \| x \| \leq \sqrt { n } | x |. $$
+</p>
+
+<h1>Definition. Compact set</h1>
+
+<p>
+    <i> Let $ X \subset \bR^n. $ A covering of X is a collection of subsets of $
+    \bR^n $ whose union contains X. If each subset is open, we call it an open
+    covering. X is called compact if every open covering has a finite
+    subcollection that also forms an open cover of X. </i>
+</p>
+
+<h1>Compact subsets of $\bR^n$</h1>
+
+<p>
+    <b>Theorem.</b> <i>A subset of $\bR^n$ is compact iff it is closed and bounded.</i>
+</p>
+
+<p><span>
+    <i>Counterexample in arbitrary metric space.</i> Let $\RR^\infty$ be the set
+    of all infinite tuples $x = (x_1, x_2, \ldots)$ that end in an infinite
+    string of 0's. Define an inner product on $\RR^\infty$ by the rule $\< x, y
+    \> = \sum x_i y_i.$ (Note that this is a finite sum.) Let $|x - y| =
+    \sqrt{\< x - y, x - y \>}$ be the corresponding metric on $\RR^\infty.$
+    Define
+
+    $$e_i = (0,\ldots, 1, \ldots, 0, \ldots)$$
+
+    where $1$ appears in the $i$-th place, and let $X$ be the set of all the
+    $e_i$'s. Then $X$ is closed, bounded, and noncompact, since we can find an
+    open cover that has no finite subcover: for each $ e_i, $ find a small open
+    ball containing only it and no other $ e_j. $
+</span></p>
+
+<h3>Corollary 4.4. Every compact subset of $ \bR $ has a largest and smallest
+element.</h3>
+<p>
+    <i>Proof.</i> Since X is compact, it is bounded and closed. Since it is
+    bounded, it has a greatest lower bound and a least upper bound. Since it is
+    closed, they must belong to X.
+</p>
+
+<h1>Extreme value theorem 4.5. Continuous functions preserve compactness.</h1>
+
+<p>
+    <i> Let X be a compact subspace of $ \bR^n. $ If $ f: X \longrightarrow
+    \bR^n $ is continuous, then $ f(X) $ is a compact subspace of $ \bR^n. $ In
+    particular, if $ f: X \longrightarrow \bR $ is continuous, then $ f $ has a
+    maximum and minimum value.
+    </i>
+</p>
+<p>
+    <i> Proof.</i> Let $ \{ V_{\a} \} $ be an open cover of $ f(X). $ The
+    preimages $ f^{-1}(V_{\a}) $ form an open cover of $ X. $ Since X is
+    compact, there is a finite subcover, say for $ \a = \a_1, \ldots, \a_k. $
+    Then $\{ V_{\a_1}, \ldots, V_{\a_k} \} $ covers $ f(X), $ and $ f(X) $ is
+    compact.
+</p>
+<p>
+    If $ f: X \longrightarrow \bR, $ then $ f(X) $ is compact, and it has a
+    largest and smallest element by the previous Corollary. These are its max
+    and min values.
+</p>
+
+<h3>Sequential Compactness</h3>
+
+<p><span>
+    <b>Definition.</b> A metric space $X$ is sequentially compact if every
+    sequence in $X$ has a convergent subsequence to a point $x \in X.$
+</span></p>
+
+<p><span>
+    <b>Theorem.</b> <i>A metric space $X$ is compact iff it is sequentially
+    compact.</i>
+</span></p>
+
+<h1>The $\e$-neighbourhood Theorem</h1>
+
+<h3>Lemma. Distance to a subset of $ \bR^n $ is a continuous function</h3>
+
+<p>
+<i> Let $ C \subset \bR^n. $ For each $ x \in \bR^n, $ define the distance from $ x $ to C:
+
+$$ d ( \mathbf { x } ,C ) = \inf \{ | \mathbf { x } - \mathbf { c } | ; \mathbf { c } \in C \}. $$
+
+Then $ d $ is continuous.
+ </i>
+</p>
+
+<p>
+<i>Proof.</i> Let $ c \in C, x ,y \in \mathbb { R } ^ { n }. $
+
+\begin{align*}
+d(x, C) - | x - y | &\leq | x - c | - | x - y | \\
+    &\leq | y - c | \text{ by reverse triangle inequality } \\
+    &\leq d(y, C) \\
+d(x, C) - d(y, C) &\leq | x - y |.
+\end{align*}
+
+Since $d(x, C) \longrightarrow d(y, C) $ as $ x \longrightarrow y, $ $ d $ is
+continuous.
+</p>
+
+<p><span>
+    <b>Theorem.</b> <i>Let X be a compact subset of $\RR^n,$ and let $U$ be an
+    open subset of $\RR^n$ containing X. Then there is an $\e > 0$ s.t. the
+    $\e$-neighbourhood of X (in either Euclidean or sup metric) is contained in
+    U.</i>
+</span></p>
+
+<p>
+<i>Proof.</i> The $\e$-neighbourhood of X in the Euclidean metric is contained
+in the $\e$-neighbourhood in the sup metric [<i> Recall $ B ( a, \e ) \subset C
+( a, \e ) \subset B ( a, \sqrt { n } \e ) $ </i>], so it's enough to deal with
+the latter. [ <i> This proof doesn't actually use the fact that it's a sup
+metric though. </i> ]
+</p>
+
+<p>
+Define $ f: X \longrightarrow \bR $ by
+
+$$ f ( \mathbf { x } ) = d \left( \mathbf { x } ,\mathbf { R } ^ { n } - U \right). $$
+
+Then $ f $ is continuous by the previous Lemma. Let $ x \in X. $ Then some $ \d
+$-neighbourhood of $ x $ is contained in U, since U is open. Therefore $ f(x)
+\geq \d > 0 $ for all $ x \in X. $ Because X is compact, $ f $ has a minimum
+value $ \e. $ Since $ f > 0, $ $ \e > 0. $ Therefore every point $ x \in X $ is
+at least a distance $ \e $ from $ \bR^n - U, $ i.e. the $ \e $-neighbourhood of
+X is contained in U.
+</p>
+
+<h2>Nonexample. Counterexample when X is not compact.</h2>
+
+<p>
+Let $ X \subset \bR^2 $ be the $ x $-axis, and let
+
+$$ U = \left\{ ( x ,y ) : y ^ { 2} < 1 / (1 + x ^ { 2}) \right\}. $$
+
+Then there is no $ \e $ s.t. the $ \e $-neighbourhood of X is contained in U.
+</p>
+
+<h2>Theorem 4.7. Uniform Continuity. Let X be a compact subspace of $ \bR^m, $
+let $ f: X \longrightarrow \bR^n $ be continuous. Given $ \e > 0 $ there is a $
+\d > 0 $ s.t.
+
+$$ | x - y | < \d \implies | f(x) - f(y) | < \e $$
+
+for all $ x, y\in X. $</h2>
+
+<h1>Continuous functions on $\bR^n$</h1>
+
+<p>
+<b>Theorem.</b> <i>A function $f:\bR^n\longrightarrow \bR^m$ is continuous iff
+preimages of open sets are open.</i>
+</p>
+
+<p>
+<b>Theorem.</b> <i>A continuous function $f:A \subset \bR^n
+\longrightarrow \bR^m$ maps compact sets to compact sets.</i>
+</p>
+
+<h3>Connected Spaces</h3>
+
+<p><span>
+    <b>Definition.</b> <i>A metric space X is said to be connected if X cannot
+    be written as the union of two disjoint nonempty sets A and B, each of which
+    is open in X.</i>
+</span></p>
+
+<p><span>
+    <b>Theorem.</b> <i>The closed interval $[a, b]\subset \RR$ is connected.</i>
+</span></p>
+
+<h1>Intermediate Value Theorem</h1>
+
+<p><span>
+    <b>Theorem.</b> <i>Let X be connected. If $f: X \longrightarrow Y$ is
+    continuous, then $f(X)$ is a connected subspace of Y. In particular, if $f:
+    X \longrightarrow \RR$ is continuous, and $f(x_0) < r < f(x_1)$ for some
+    $x_0, x_1 \in X,$ then $f(x) = r$ for some $x \in X.$</i>
+</span></p>
+
+<p><span>
+    <b>Exercise.</b> <i>The open and closed balls and rectangles in $\RR^n$ are
+    convex.</i>
+</span></p>
+
+<p><span>
+    <i>Proof for open ball $B(0; 1).$</i> Let $a, b \in B(0; 1),$ and let $x =
+    ta + (1 - t)b$ for $t\in[0, 1].$ Then
+
+    \begin{align*}
+    |ta + (1 - t)b| &\leq |ta| + |(1 - t)b| \\
+                    &= t|a| + (1 - t)|b| \\
+                    &< t + (1 - t) \\
+                    &= 1.
+    \end{align*}
+
+    Therefore $x \in B$ and $B$ is convex.
+</span></p>
+
+<h1>Reference</h1>
+<ol>
+<li>Spivak's Calculus on Manifolds.</li>
+<li>Munkres's Analysis on Manifolds.</li>
+</ol>
+</div>
+</body>
+</html>
