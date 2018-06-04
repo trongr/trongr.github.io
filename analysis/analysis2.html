@@ -180,8 +180,6 @@ element.</h3>
     compact.</i>
 </span></p>
 
-<h1>The $\e$-neighbourhood Theorem</h1>
-
 <h3>Lemma. Distance to a subset of $ \bR^n $ is a continuous function</h3>
 
 <p>
@@ -207,12 +205,10 @@ Since $d(x, C) \longrightarrow d(y, C) $ as $ x \longrightarrow y, $ $ d $ is
 continuous.
 </p>
 
-<p><span>
-    <b>Theorem.</b> <i>Let X be a compact subset of $\RR^n,$ and let $U$ be an
-    open subset of $\RR^n$ containing X. Then there is an $\e > 0$ s.t. the
-    $\e$-neighbourhood of X (in either Euclidean or sup metric) is contained in
-    U.</i>
-</span></p>
+<h2>The $\e$-neighbourhood Theorem 4.6. Let X be a compact subset of $\RR^n,$
+and let $U$ be an open subset of $\RR^n$ containing X. Then there is an $\e > 0$
+s.t. the $\e$-neighbourhood of X (in either Euclidean or sup metric) is
+contained in U.</h2>
 
 <p>
 <i>Proof.</i> The $\e$-neighbourhood of X in the Euclidean metric is contained
@@ -245,27 +241,152 @@ $$ U = \left\{ ( x ,y ) : y ^ { 2} < 1 / (1 + x ^ { 2}) \right\}. $$
 Then there is no $ \e $ s.t. the $ \e $-neighbourhood of X is contained in U.
 </p>
 
-<h2>Theorem 4.7. Uniform Continuity. Let X be a compact subspace of $ \bR^m, $
-let $ f: X \longrightarrow \bR^n $ be continuous. Given $ \e > 0 $ there is a $
-\d > 0 $ s.t.
+<h2>Theorem 4.7. Uniform Continuity: a continuous map on a compact set is
+uniformly continuous there. Let X be a compact subspace of $ \bR^m, $ let $ f: X
+\longrightarrow \bR^n $ be continuous. Given $ \e > 0 $ there is a $ \d > 0 $
+s.t.
 
 $$ | x - y | < \d \implies | f(x) - f(y) | < \e $$
 
 for all $ x, y\in X. $</h2>
 
-<h1>Continuous functions on $\bR^n$</h1>
-
 <p>
-<b>Theorem.</b> <i>A function $f:\bR^n\longrightarrow \bR^m$ is continuous iff
-preimages of open sets are open.</i>
+NOTE. Uniform refers to the condition that given a $ \d, $ one $ \e $ can be
+found that will satisfy <i> all </i> $ x, y. $
 </p>
 
 <p>
-<b>Theorem.</b> <i>A continuous function $f:A \subset \bR^n
-\longrightarrow \bR^m$ maps compact sets to compact sets.</i>
+<i>Proof.</i> Consider the subspace $ X \times X \subset \bR^m \times \bR^m, $
+and within this the subspace
+
+$$ \D = \{ (x, x) : x \in X \}, $$
+
+called the diagonal of $ X \times X. $ $ \D $ is a compact subspace of $ \bR^m
+\times \bR^m $ because it is the image of the compact set $ X $ under the
+continuous map $ x \longmapsto (x, x). $
+</p>
+<p>
+We prove the theorem first for the Euclidean metric. Let $ g: X \times X
+\longrightarrow \bR $ be the function
+
+$$ g(x, y) = \left\lVert f(x) - f(y) \right\rVert. $$
+
+Consider the set of points $ x, y \in X \times X $ for which $ g(x, y) < \e. $
+Since $ g $ is continuous, this set is open in $ X \times X. $ [<i> Recall. The
+continuous preimage of an open set is open, and $ (- \infty, \e) $ is open in $
+\bR. $ </i>] Also it contains the diagonal $ \D, $ since $ g(x, x) = 0. $
+Therefore it is equal to the intersection of $ X \times X $ with an open set $ U
+\subset \bR^m \times \bR^m $ that contains $ \D. $
 </p>
 
-<h3>Connected Spaces</h3>
+<p>
+Compactness of $ \D $ implies that for some $ \d $ the $ \d $-neighbourhood of $
+\D $ is contained in U [<i> Recall. The $\e$-neighbourhood Theorem 4.6. </i>]
+This is the $ \d $ we're looking for. For if $ x, y\in X $ with $
+\left\lVert x - y \right\rVert < \d,
+$ then
+
+$$
+\| (  x , y ) - (  y , y ) \| = \| (  x -  y , 0) \| = \|  x -  y \| < \delta
+$$
+
+so that $ (x, y) $ belongs to the $ \d $-neighbourhood of $ \D, $ and $ (x, y) $
+belongs to U, hence $ g(x, y) = \left\lVert f(x) - f(y) \right\rVert < \e, $ as
+desired.
+</p>
+
+<p>
+The proof for sup norm is similar. Alternatively, note that if $
+| x - y | < \d / \sqrt{n},
+$ then $
+\left\lVert x - y \right\rVert < \d,
+$ hence
+
+$$
+| f(x) - f(y) | \leq \left\lVert f(x) - f(y) \right\rVert < \e.
+$$
+</p>
+
+<h1>Definition. Lipschitz continuity</h1>
+
+<p>
+<i> A function $ f: X \subset \bR^m \longrightarrow \bR^n $ is called Lipschitz
+continuous with Lipschitz constant K if for every pair $ x, y\in X $ we have
+
+$$
+\left\lVert f(x) - f(y) \right\rVert \leq K \left\lVert x - y \right\rVert.
+$$ </i>
+</p>
+
+<h3>Corollary. Lipschitz continuity $ \implies $ Uniform continuity.</h3>
+
+<p>
+<i>Proof.</i> Let $ f: X \longrightarrow \bR^n $ be a Lipschitz continuous
+function and let K be its Lipschitz constant. $ \e > 0. $ We want to find $ \d $
+s.t.
+
+$$
+\left\lVert x - y \right\rVert < \d \implies \left\lVert f(x) - f(y) \right\rVert < \e
+$$
+
+for all $ x, y\in X. $ Let $ \d = \frac{\e}{K}. $ Then for $
+x, y
+$ s.t.
+
+$$
+\left\lVert x - y \right\rVert < \d = \frac{\e}{K},
+$$
+
+we have
+
+$$
+\left\lVert f(x) - f(y) \right\rVert \leq K \left\lVert x - y \right\rVert < \e,
+$$
+
+and $ f $ is uniformly continuous.
+</p>
+
+<h3>Example. $ \sin, \cos $ are Lipschitz continuous.</h3>
+
+<h3>Converse counterexample. $ f(x) = \sqrt{x} $ is uniformly continuous but is
+not Lipschitz continuous on $ (0, \infty) $</h3>
+
+<p>
+<i>Proof.</i> Clearly $ f $ is not Lipschitz continuous on $ (0, \infty) $
+because $ f $ has unbounded derivative at 0. To show uniform continuity, let $
+\d = \e^2. $ We want to show that
+
+$$
+\left\lVert \sqrt{x} - \sqrt{y} \right\rVert \leq_? \sqrt{\left\lVert x - y \right\rVert} < \sqrt{\d} = \e.
+$$
+
+By symmetry, we may assume that $ x \geq y. $ Now
+
+\begin{align*}
+\sqrt{x} - \sqrt{y} &\leq_? \sqrt{x - y} \\
+(\sqrt{x} - \sqrt{y})^2 &\leq_? x - y \\
+x - 2 \sqrt{xy} + y &\leq_? x - y \\
+2y &\leq_? 2 \sqrt{xy}, \\
+\end{align*}
+
+which is true since we assumed $ x \geq y. $
+</p>
+
+<h3>Theorem. A function with bounded first derivative is uniformly
+continuous.</h3>
+
+<h3>Theorem. A continuously differentiable function is Lipschitz continuous</h3>
+
+<h3>Corollary. Continuously differentiable $ \implies $ Lipschitz continuous $
+\implies $ Uniformly continuous </h3>
+
+<h3>Theorem. A function $f:\bR^n\longrightarrow \bR^m$
+is continuous iff preimages of open sets are open.</h3>
+
+<h2>Theorem. A continuous function $f:A \subset \bR^n \longrightarrow \bR^m$
+maps compact sets to compact sets.</h2>
+
+<h1>Connected Spaces</h1>
 
 <p><span>
     <b>Definition.</b> <i>A metric space X is said to be connected if X cannot
@@ -280,29 +401,29 @@ preimages of open sets are open.</i>
 <h1>Intermediate Value Theorem</h1>
 
 <p><span>
-    <b>Theorem.</b> <i>Let X be connected. If $f: X \longrightarrow Y$ is
-    continuous, then $f(X)$ is a connected subspace of Y. In particular, if $f:
-    X \longrightarrow \RR$ is continuous, and $f(x_0) < r < f(x_1)$ for some
-    $x_0, x_1 \in X,$ then $f(x) = r$ for some $x \in X.$</i>
+<b>Theorem.</b> <i>Let X be connected. If $f: X \longrightarrow Y$ is
+continuous, then $f(X)$ is a connected subspace of Y. In particular, if $f:
+X \longrightarrow \RR$ is continuous, and $f(x_0) < r < f(x_1)$ for some
+$x_0, x_1 \in X,$ then $f(x) = r$ for some $x \in X.$</i>
 </span></p>
 
 <p><span>
-    <b>Exercise.</b> <i>The open and closed balls and rectangles in $\RR^n$ are
-    convex.</i>
+<b>Exercise.</b> <i>The open and closed balls and rectangles in $\RR^n$ are
+convex.</i>
 </span></p>
 
 <p><span>
-    <i>Proof for open ball $B(0; 1).$</i> Let $a, b \in B(0; 1),$ and let $x =
-    ta + (1 - t)b$ for $t\in[0, 1].$ Then
+<i>Proof for open ball $B(0; 1).$</i> Let $a, b \in B(0; 1),$ and let $x =
+ta + (1 - t)b$ for $t\in[0, 1].$ Then
 
-    \begin{align*}
-    |ta + (1 - t)b| &\leq |ta| + |(1 - t)b| \\
-                    &= t|a| + (1 - t)|b| \\
-                    &< t + (1 - t) \\
-                    &= 1.
-    \end{align*}
+\begin{align*}
+|ta + (1 - t)b| &\leq |ta| + |(1 - t)b| \\
+                &= t|a| + (1 - t)|b| \\
+                &< t + (1 - t) \\
+                &= 1.
+\end{align*}
 
-    Therefore $x \in B$ and $B$ is convex.
+Therefore $x \in B$ and $B$ is convex.
 </span></p>
 
 <h1>Reference</h1>

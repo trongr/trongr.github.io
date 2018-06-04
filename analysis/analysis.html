@@ -1316,10 +1316,13 @@ to $f'.$ Then $f_n$ converges uniformly to $f.$</i>
 <p>
 <i>Proof.</i> Uniform convergence of $f_n'$ means that for any $\e > 0,$ for
 sufficiently large $n$ we have $$|f_n'(x) - f'(x)|
-< \e$$ for all $x\in[a,b],$ i.e. \begin{align*} & \left| \lim_{h\to 0}
-\frac{f_n(x+h) - f_n(x)}{h} - \lim_{h\to 0} \frac{f(x+h) - f(x)}{h} \right| \\
-&=\ left| \lim_{h\to 0} \frac{f_n(x+h) - f(x+h) - f_n(x) + f(x)}{h} \right| \\
-&=\ left| g_n '(x) \right| \\ &< \e, \end{align*}
+< \e$$ for all $x\in[a,b],$ i.e.
+
+\begin{align*}
+\left| \lim_{h\to 0} \frac{f_n(x+h) - f_n(x)}{h} - \lim_{h\to 0} \frac{f(x+h) - f(x)}{h} \right|
+&= \left| \lim_{h\to 0} \frac{f_n(x+h) - f(x+h) - f_n(x) + f(x)}{h} \right| \\
+&= \left| g_n '(x) \right| \\ &< \e,
+\end{align*}
 
 where $g_n(x) := f_n(x) - f(x).$ In other words, $g_n'$ converges uniformly to
 0. By the previous lemma, $g_n$ converges uniformly to a constant function, and
@@ -2124,82 +2127,13 @@ $$\lim_{n\to\infty} \int_0^{1-1/n} f_n = \int_0^1 f.$$</i>
 </p>
 
 <p>
-<i>Proof.</i>                                                                                                                            Consider:
-\begin{align*}
-\left|
-\int_0^1
-f
--
-\int_0^{1-1/n}
-f_n
-\right|
-&=
-\left|
-\int_0^1
-(f
--
-f_n)
--
-\int_{1-1/n}^1
-f_n
-\right|
-\\
-&\leq
-\left|
-\int_0^1
-(f
--
-f_n)
-\right|
-+
-\left|
-\int_{1-1/n}^1
-f_n
-\right|.
-\end{align*}
-The
-first
-term
-goes
-to
-zero
-by
-the
-previous
-proposition.
-Since
-$f_n$
-are
-continous
-and
-converge
-uniformly
-to
-$f,$
-$f$
-is
-also
-continuous
-and
-thus
-bounded.
-Therefore
-for
-large
-$n,$
-$f_n$
-is
-also
-bounded,
-so
-the
-second
-term
-also
-goes
-to
-zero.
-\qed
+<i>Proof.</i>
+Consider: \begin{align*} \left| \int_0^1 f - \int_0^{1-1/n} f_n \right| &=
+\left| \int_0^1 (f - f_n) - \int_{1-1/n}^1 f_n \right| \\ &\leq \left| \int_0^1
+(f - f_n) \right| + \left| \int_{1-1/n}^1 f_n \right|. \end{align*} The first
+term goes to zero by the previous proposition. Since $f_n$ are continuous and
+converge uniformly to $f,$ $f$ is also continuous and thus bounded. Therefore
+for large $n,$ $f_n$ is also bounded, so the second term also goes to zero. \qed
 </p>
 
 <p>
