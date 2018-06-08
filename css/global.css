@@ -44,6 +44,11 @@ a {
     color: #0070c0;
 }
 
+#toc a {
+    text-decoration: none;
+    font-style: italic;
+}
+
 h1 {
     clear: both;
     /* color: #FFD557; */

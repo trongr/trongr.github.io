@@ -11,6 +11,7 @@
 <!-- <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js"></script> -->
 
 <script src="../js/jquery-3.1.0.min.js"></script>
+<script src="../js/toc.js"></script>
 <script src="../js/smartquotes.js"></script>
 <script src="../js/global.js"></script>
 
@@ -19,6 +20,8 @@
 <div id="content">
 
 <h1>Linear Algebra II</h1>
+
+<div id="toc"></div>
 
 <h1>Adjoint / complex conjugate</h1>
 
@@ -139,6 +142,29 @@
     \end{align*}
 
     Therefore $ [T]_{\b} $ is normal. The converse is similar.
+</p>
+
+<h2>Theorem 6.18. Characterizing unitary / orthogonal / isometric operators on a
+fin dim inner product space</h2>
+
+<p>
+<i>
+    Let $ T, n, \left\langle \right\rangle ,V,F. $ Then the following statements
+    are equivalent:
+
+    <ol>
+        <li>$ TT^{*}=T^{*}T=I. $ In particular, T is normal and there exists an
+        orthonormal basis for V consisting of eigenvectors of T.</li>
+        <li>$ \left\langle T(x),T(y)\right\rangle =\left\langle x,y\right\rangle
+        $  for all x,y.</li>
+        <li>If $ \beta $ is an orthonormal basis, then $ T(\beta) $ is an
+        orthonormal basis.</li>
+        <li>There exists an orthonormal basis $ \beta $ s.t. $ T(\beta) $ is an
+        orthonormal basis.</li>
+        <li>$ \left|\left|T(x)\right|\right|=\left|\left|x\right|\right| $ for
+        all x, i.e. T is unitary / orthogonal.</li>
+    </ol>
+</i>
 </p>
 
 <h2>Schur's Theorem Variant</h2>
@@ -267,7 +293,8 @@ translation</h2>
     unique. This equation then reduces to $  T(x) = U(x), $ therefore $ T = U. $
 </p>
 
-<h2>Theorem 6.23. Orthogonal operators on $ \bbR^2 $ are rotations or reflections</h2>
+<h2>Theorem 6.23. Orthogonal operators on $ \bbR^2 $ are rotations or
+reflections with determinant $ \pm 1. $</h2>
 
 <p>
     <i> Let T be an orthogonal operator on $ \bbR^2, $ and let $ A = [T]_\b $
@@ -280,8 +307,87 @@ translation</h2>
     </ol></i>
 </p>
 
+<p>
+<i>Proof.</i> By theorem 6.18, since
+<i>
+T is orthogonal, T maps orthonormal basis to orthonormal basis.
+</i> In particular, $ T(\b) = \{ T(e_1), T(e_2) \} $ is an orthonormal basis for
+$ \bR^2. $ Since $ e_1 $ is a unit vector, there exists a unique angle $ \th $
+with $ 0 \leq \th \leq 2 \pi $ s.t. $ T(e1) = (\sin \theta, \cos \theta). $
+Since $ T(e_2) $ is a unit vector and is orthogonal to $ T(e_1), $ there are
+only two choices for $ T(e_2). $ Either
+
+$$
+T(e_2) = (- \sin \theta, \cos \theta)
+$$
+
+or
+
+$$
+T(e_2) = (\sin \theta, - \cos \theta).
+$$
+
+First suppose that
+
+$$
+T(e_2) = (- \sin \theta, \cos \theta).
+$$
+
+Then
+
+$$
+A = \begin{bmatrix}
+    T(e_1) & T(e_2)
+\end{bmatrix} = \begin{bmatrix}
+    \cos \theta & - \sin \theta \\
+    \sin \theta & \cos \theta
+\end{bmatrix}.
+$$
+
+<i>Recall that this is a rotation by $ \theta, $</i> and
+
+$$
+\det A = \cos^2 \theta + \sin^2 \theta = 1.
+$$
+</p>
+
+<p>
+
+Now suppose that
+
+$$
+T(e_2) = (\sin \theta, - \cos \theta).
+$$
+
+Then
+
+$$
+A = \begin{bmatrix}
+    T(e_1) & T(e_2)
+\end{bmatrix} = \begin{bmatrix}
+    \cos \theta & \sin \theta \\
+    \sin \theta & - \cos \theta
+\end{bmatrix}.
+$$
+
+
+<i>
+Now recall that this is a reflection through a line through the origin at angle
+$ \theta / 2. $
+</i>
+
+Furthermore,
+
+$$
+\det A = - \cos^2 \theta - \sin^2 \theta = -1.
+$$
+
+</p>
+
 <h3>Corollary. Rigid motions in $ \bR^2 $ are compositions of rotations,
-reflections, and translations.</h3>
+reflections, and translations. In fact, a rigid motion in $ \bR^2 $ is either a
+rotation followed by a translation or a reflection about a line through the
+origin followed by a translation.</h3>
 
 <h2>Question. What do orthogonal operators look like in $ \bR^3 $ and $ \bR^n? $</h2>
 
@@ -331,7 +437,7 @@ orthogonal transformation?</h4>
 formed like this?</h4>
 
 <p>
-    Probably not.
+Something like that.
 </p>
 
 <h2>Theorem. Any orthogonal matrix is orthogonally equivalent to a diagonal
