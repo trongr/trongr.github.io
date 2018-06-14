@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>MongoDB</title>
+<link rel="stylesheet" href="../css/global.css">
+
+<link rel="stylesheet" href="../css/obsidian.min.css">
+<script src="../js/highlight.min.js"></script>
+
+<!-- this config must be before MathJax.js: -->
+<script src="../js/mathjax.config.js"></script>
+<script src="../js/MathJax/MathJax.js"></script>
+<!-- <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js"></script> -->
+
+<script src="../js/jquery-3.1.0.min.js"></script>
+<script src="../js/toc.js"></script>
+<script src="../js/smartquotes.js"></script>
+<script src="../js/global.js"></script>
+
+</head>
+<body>
+
+<div id="content">
+
+<h1>MongoDB</h1>
+
+<div id="toc"></div>
+
+<h1>Positional selector: matching and updating an item in a list within a list
+in a document</h1>
+
+<p>
+Example updating the status of the 0-th module with type "bio" in each part
+of each robot. NOTE the \$ sign in parts.\$.modules.0.status.
+</p>
+
+<pre><code>robots = [{
+    parts: [{
+        modules: [{
+            type: "bio"
+            status: 1
+        }, {
+            type: "bio"
+            status: 1
+        }]
+    }, {
+        modules: [{
+            type: "fuel",
+            status: 0
+        }, {
+            type: "bio",
+            status: 1
+        }]
+    }]
+}, {
+    ...
+}]
+
+...
+
+db.robots.update({"parts.modules.0.type":"bio"}, {$set:{"parts.$.modules.0.status":0}}, {multi:true})
+</code></pre>
+
+</div>
+</body>
+</html>
