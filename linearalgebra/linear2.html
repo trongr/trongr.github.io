@@ -18,10 +18,18 @@
 </head>
 <body>
 <div id="content">
+<a href="../index.html">HOME</a>
 
 <h1>Linear Algebra II</h1>
 
 <div id="toc"></div>
+
+<h1>Reference</h1>
+<ol>
+<li>Linear Algebra by Friedberg, Insel, and Spence.</li>
+<li>Linear Algebra video lectures by Gilbert Strang.</li>
+<li>The Web.</li>
+</ol>
 
 <h1>Adjoint / complex conjugate</h1>
 
@@ -167,13 +175,25 @@ fin dim inner product space</h2>
 </i>
 </p>
 
-<h2>Schur's Theorem Variant</h2>
+<h2>Schur's Theorem Variant. Let $ A\in M_{n\times n}(F) $ be a matrix whose
+characteristic polynomial splits over F. If $ F=C, $ then A is unitarily eq. to
+a complex upper triangular matrix. IF $ F=R, $ then A is orthogonally eq. to a
+real upper triangular matrix.</h2>
+
+<h2>Theorem 6.20. Let A be a real $ n\times n $ matrix. Then A is selfadjoint
+i.e. symmetric iff A is orthogonally equivalent to a diagonal matrix D.</h2>
 
 <p>
-    <i>Let $ A\in M_{n\times n}(F) $ be a matrix whose characteristic polynomial
-        splits over F. If $ F=C, $ then A is unitarily eq. to a complex upper triangular
-        matrix. IF $ F=R, $ then A is orthogonally eq. to a real upper triangular
-        matrix.</i>
+<i>Proof.</i>
+The forward direction is already proved in Note 6.18.3. Conversely, suppose that
+A is ortho. eq. to a diagonal matrix D. Then there exists an orthogonal matrix P
+s.t. $ A=P^{T}DP. $ We want to show that A is symmetric:
+
+$$
+A^{T}=(P^{T}DP)^{T}=P^{T}D^{T}P=P^{T}DP=A,
+$$
+
+since D is diagonal.
 </p>
 
 <h2>Isometry / Rigid Motions</h2>
@@ -215,15 +235,20 @@ fin dim inner product space</h2>
 <p>
     <i> Proof. </i> We want to show that
 
-    $$ \|g(x)-g(y)\| = || x + v_0 - y - v_0 || =\|x-y\|. $$
+    $$ \|g(x)-g(y)\| = || x + v_0 - y - v_0 || =\|x-y\|, $$
+
+    which is true.
 </p>
 
 <h3>Proposition. Compositions of rigid motions are also rigid motions</h3>
 
 <p>
     <i> Proof. </i> Let $ f,g:V\longrightarrow V $ be rigid motions. We want to
-    show that $$ \|f \circ g(x)-f \circ g(y)\| = | f(g(x)) - f(g(y)) | = | g(x)
-    - g(y) | = \|x-y\|. $$
+    show that $$ \|f \circ g(x)-f \circ g(y)\| = | f(g(x)) - f(g(y)) | =_1 | g(x)
+    - g(y) | =_2 \|x-y\|. $$
+
+    $ =_1 $ is true because $ f $ is a rigid motion, and $ =_2 $ is true because
+    $ g $ is a rigid motion.
 </p>
 
 <h2>Theorem 6.22. Every rigid motion is an orthogonal operator followed by a
@@ -389,6 +414,52 @@ reflections, and translations. In fact, a rigid motion in $ \bR^2 $ is either a
 rotation followed by a translation or a reflection about a line through the
 origin followed by a translation.</h3>
 
+<h3>Example. Reflection through a line in $ \bR^2: $
+
+$
+\begin{bmatrix}
+\frac{1}{\sqrt{5}} & \frac{2}{\sqrt{5}} \\
+\frac{2}{\sqrt{5}} & -\frac{1}{\sqrt{5}} \\
+\end{bmatrix}
+$
+
+</h3>
+<p>
+Let
+
+$$
+A = \begin{bmatrix}
+\frac{1}{\sqrt{5}} & \frac{2}{\sqrt{5}} \\
+\frac{2}{\sqrt{5}} & -\frac{1}{\sqrt{5}} \\
+\end{bmatrix}.
+$$
+
+<i>It's easy to verify that $ AA^* = A ^* A = I, $ hence A is orthogonal.
+Alternatively, we can also verify that the columns of A form an orthonormal
+basis of $ \bR^2. $ Furthermore, $ \det A = -1, $ so by Theorem 6.23, A must be
+a reflection through a line through the origin.
+</i>
+</p>
+
+<p>
+Now we'll find the line L that A reflects through. Note that L is the
+1-dimensional subspace where $ A x = x $ for all $ x \in L. $ To find L, it's
+enough to find a vector $ x $ (in this case an eigenvector of A) and we'll have
+$ L = \span\{ x \}. $
+<i>
+    One such eigenvector is $ x = (2, \sqrt{5} - 1), $ which we can
+    find by solving
+
+    $$ A x = x. $$
+</i>
+
+
+Alternatively, L is the line through the origin with slope $ m = \frac{\sqrt{5}
+- 1}{2}, $ and hence is the line with the equation
+
+$$ y = \frac{\sqrt{5} - 1}{2} x. $$
+</p>
+
 <h2>Question. What do orthogonal operators look like in $ \bR^3 $ and $ \bR^n? $</h2>
 
 <h3>Example. Constructing orthogonal operators on $ \bR^3 $ from orthogonal operators on
@@ -477,12 +548,10 @@ $$ R_j = \begin{bmatrix}
     \end{bmatrix}, \ldots $$
 </p>
 
-<h1>Reference</h1>
-<ol>
-<li>Linear Algebra by Friedberg, Insel, and Spence.</li>
-<li>Linear Algebra video lectures by Gilbert Strang.</li>
-<li>The Web.</li>
-</ol>
+<h1>Conic sections</h1>
+
+
+
 </div>
 </body>
 </html>
