@@ -12,7 +12,7 @@ body {
 #content {
     margin: 0 auto;
     padding-bottom: 100px;
-    max-width: 80%;
+    max-width: 70%;
 }
 
 table, th, td {
@@ -39,20 +39,18 @@ audio {
     width: 100%;
 }
 
-a {
-    /* color: #689EE3; */
-    color: #0070c0;
-}
-
 #toc a {
     text-decoration: none;
     font-style: italic;
 }
 
+a, h1, h2, h3, h4 {
+    color: #0070c0;
+}
+
 h1 {
     clear: both;
     /* color: #FFD557; */
-    color: #0070c0;
     border-bottom: 1px solid;
     padding-bottom: 5px;
 }
@@ -63,20 +61,17 @@ h2 {
     /* border-bottom: 1px solid; */
     padding-bottom: 5px;
     /* color: #FFD557; */
-    color: #0070c0;
 }
 
 h3 {
     clear: both;
     /* color: #FFD557; */
-    color: #0070c0;
     font-style: italic;
 }
 
 h4 {
     clear: both;
     /* color: #FFD557; */
-    color: #0070c0;
     font-style: italic;
 }
 

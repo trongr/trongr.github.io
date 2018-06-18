@@ -12,7 +12,6 @@
 <!-- <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js"></script> -->
 
 <script src="../js/jquery-3.1.0.min.js"></script>
-<script src="../js/toc.js"></script>
 <script src="../js/smartquotes.js"></script>
 <script src="../js/global.js"></script>
 
@@ -20,6 +19,8 @@
 
 <body>
 <div id="content">
+
+<a href="../index.html">HOME</a>
 
 <h1>Analysis II</h1>
 <!--
@@ -29,8 +30,14 @@
     <div class="quote">Let the Hunt begin!</div>
     <div class="author"></div>
 </div>-->
-
+<script src="../js/toc.js"></script>
 <div id="toc"></div>
+
+<h1>Reference</h1>
+<ol>
+<li>Spivak's Calculus on Manifolds.</li>
+<li>Munkres's Analysis on Manifolds.</li>
+</ol>
 
 <h1>Cauchy Schwarz Variation</h1>
 
@@ -398,19 +405,13 @@ maps compact sets to compact sets.</h2>
     <b>Theorem.</b> <i>The closed interval $[a, b]\subset \RR$ is connected.</i>
 </span></p>
 
-<h1>Intermediate Value Theorem</h1>
+<h2>Intermediate Value Theorem 4.11. Let X be connected. If $f: X \longrightarrow Y$
+is continuous, then $f(X)$ is a connected subspace of Y. In particular, if $f: X
+\longrightarrow \RR$ is continuous, and $f(x_0) < r < f(x_1)$ for some $x_0, x_1
+\in X,$ then $f(x) = r$ for some $x \in X.$</h2>
 
-<p><span>
-<b>Theorem.</b> <i>Let X be connected. If $f: X \longrightarrow Y$ is
-continuous, then $f(X)$ is a connected subspace of Y. In particular, if $f:
-X \longrightarrow \RR$ is continuous, and $f(x_0) < r < f(x_1)$ for some
-$x_0, x_1 \in X,$ then $f(x) = r$ for some $x \in X.$</i>
-</span></p>
-
-<p><span>
-<b>Exercise.</b> <i>The open and closed balls and rectangles in $\RR^n$ are
-convex.</i>
-</span></p>
+<h3>Exercise 1.4.4. The open and closed balls and rectangles in $\RR^n$ are
+convex</h3>
 
 <p><span>
 <i>Proof for open ball $B(0; 1).$</i> Let $a, b \in B(0; 1),$ and let $x =
@@ -426,11 +427,134 @@ ta + (1 - t)b$ for $t\in[0, 1].$ Then
 Therefore $x \in B$ and $B$ is convex.
 </span></p>
 
-<h1>Reference</h1>
-<ol>
-<li>Spivak's Calculus on Manifolds.</li>
-<li>Munkres's Analysis on Manifolds.</li>
-</ol>
+<h1>Differentiation</h1>
+
+<p>
+Recall the derivative of a single-variable function: let $ A \subset \bR $
+contain a neighbourhood of a point $ a, $ and let $ \phi: A \longrightarrow \bR.
+$
+</p>
+
+<h3>Define the derivative of $ \phi $ at $ a $ to be the limit
+
+$$
+\phi'(a) = \lim_{t\to 0} \frac{\phi(a + t) - \phi(a)}{t}
+$$
+
+if it exists.</h3>
+
+<h3>Definition. Directional derivative</h3>
+
+<h3>
+Let $ f: A \subset \bR^m \longrightarrow \bR^n, $ let A contain a neighbourhood
+of $ a, $ and $ 0 \neq u \in \bR^m. $ Then we define the directional derivative
+of $ f $ at $ a $ along $ u $ to be the limit
+
+$$
+f'(a; u) = \lim_{t\to 0} \frac{f(a + tu) - f(a)}{t}
+$$
+
+if it exists.
+</h3>
+
+<h3>Example. Directional derivative of $ f(x_1, x_2) = x_1 x_2 $</h3>
+
+<p>
+Let $ f: \bR^2 \longrightarrow \bR $ be the function $ f(x_1, x_2) = x_1 x_2. $
+Let $ a = (a_1, a_2), u = (1, 0). $ Then
+
+\begin{align*}
+f'(a; u) &= \lim_{t\to 0} \frac{f(a + tu) - f(a)}{t} \\
+    &= \lim_{t\to 0} \frac{f(a_1 + t, a_2) - f(a_1, a_2)}{t} \\
+    &= \lim_{t\to 0} \frac{(a_1 + t) a_2 - a_1 a_2}{t} \\
+    &= \lim_{t\to 0} \frac{t a_2}{t} \\
+    &= a_2.
+\end{align*}
+</p>
+
+<h3>NOTE. Existence of all Directional derivatives doesn't imply continuity, nor
+that composites of functions with all directional derivatives have all
+directional derivatives.</h3>
+
+<h3>Definition. Reformulation of the derivative for the single-variable case:
+Let $ f: A \subset \bR \longrightarrow \bR, $ let $ A $ contain a neighbourhood
+of $ a. $ We say that $ f $ is differentiable at $ a $ if there exists a number
+$ \lambda $ s.t.
+
+$$
+\frac{f(a + t) - f(a) - \lambda t}{t} \longrightarrow 0
+$$
+
+as $ t \longrightarrow 0. $
+</h3>
+
+<p>
+If $ \lambda $ exists, we denote it by $ f'(a). $ By Definition, $ \lambda $
+approximates the slope of $ f $ at $ a, $ and $ \lambda t $ approximates the
+increment $ f(a + t) - f(a) $ near $ a. $
+</p>
+
+<h1>Definition. Analogous definition of the derivative in the general case: Let
+$ f: A \subset \bR^m \longrightarrow \bR^n, $ let $ A $ contain a neighbourhood
+of $ a. $ We say that $ f $ is differentiable at $ a $ if there exists an $ n
+\times m $ matrix B s.t.
+
+$$
+\frac{f(a + h) - f(a) - Bh}{| h |} \longrightarrow 0
+$$
+
+as $ h \longrightarrow 0. $
+</h1>
+
+<p>
+If $ B $ exists, we call it the derivative of $ f $ at $ a, $ and denote it by
+$ Df(a). $
+</p>
+
+<h3>If B exists, then it is unique, so we can denote it by $ Df(a) $</h3>
+
+<p>
+<i>Proof.</i> Suppose C is another matrix that satisfies
+
+$$
+\frac{f(a + h) - f(a) - Ch}{| h |} \longrightarrow 0
+$$
+
+as $ h \longrightarrow 0. $ Subtracting, we get
+
+$$
+\frac{(B - C)h}{| h |} \longrightarrow 0.
+$$
+
+Let $ u \neq 0 $ be a fixed vector, and let $ h = tu $ for $ t \in \bR. $ Then
+
+$$
+\frac{(B - C)tu}{| tu |} = \frac{(B - C)u}{| u |} \longrightarrow 0.
+$$
+
+Therefore we must have $ B - C = 0. $
+</p>
+
+<h3>Example. Derivative of affine transformations: Let $ f: \bR^m
+\longrightarrow \bR^n $ be the function $ f(x) = Bx + b. $ Then $ f $ is
+differentiable and $ Df(a) = B $ for all $ a. $</h3>
+
+<p>
+<i>Proof.</i>
+
+$$
+f(a + h) - f(a) - Bh = B(a + h) + b - (Ba + b) - Bh = 0,
+$$
+
+so the quotient in the definition of the derivative vanishes identically.
+</p>
+
+<p>NOTE. This definition is nice because it implies known properties of the
+derivative in the single variable case</p>
+
+
+
+
 </div>
 </body>
 </html>
