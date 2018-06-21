@@ -1,0 +1,841 @@
+%% LyX 2.2.3 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[12pt,english]{article}
+\usepackage{ccfonts}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{babel}
+\usepackage{amsmath}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=false]
+ {hyperref}
+\begin{document}
+\global\long\def\rank{\operatorname{rank}}
+
+\global\long\def\Var{\operatorname{Var}}
+
+\title{Linear Algebra}
+
+\maketitle
+\tableofcontents{}
+
+\section{Theorem 2.23. Change of coordinates: conjugation by change of coordinate
+matrix.}
+
+\emph{Let $TnV,$ $\beta,\gamma$ be ordered bases for V. Suppose
+that $Q=I_{\gamma}^{\beta}$ is the change of coordinate matrix that
+changes $\gamma$ coordinates to $\beta$ coordinates. Then 
+\[
+\left[T\right]_{\gamma}=Q^{-1}\left[T\right]_{\beta}Q.
+\]
+}
+
+\section{Corollary 2.23. Representing a matrix in a different basis / change
+of coordinate matrix.}
+
+\emph{Let $A\in M_{n\times n}(F),$ and let $\gamma$ be an ordered
+basis for $F^{n}.$ Then $\left[L_{A}\right]_{\gamma}=Q^{-1}AQ,$
+where Q is the $n\times n$ matrix whose jth column is the jth vector
+of $\gamma.$ }
+
+Trivial example: $\left[L_{A}\right]_{\beta}=I^{-1}AI=A,$ where $\beta$
+is the standard ordered basis for $F^{n}.$ 
+
+Given a $\gamma,$ we can define a map $\Gamma:M_{n\times n}(F)\longrightarrow M_{n\times n}(F)$
+given by 
+\[
+\Gamma:A\longmapsto\left[L_{A}\right]_{\gamma}=Q^{-1}AQ.
+\]
+What can we say about this map? Does it preserve properties of A and
+$M_{n\times n}(F)?$ First of all, is this a linear transformation?
+Yes:
+\[
+\Gamma(aA+B)=Q^{-1}(aA+B)Q=aQ^{-1}AQ+Q^{-1}BQ=a\Gamma(A)+\Gamma(B).
+\]
+
+Note that $\Gamma$ maps operator to operator, not vectors in V.
+
+\section{Intuition. Change of coordinates}
+
+Change of coordinates basically maps each vector in the original basis
+to a vector in the new basis. Each matrix in the original space V
+is mapped to a new vector in the same space V, but we should think
+of it really as a new space.
+
+\section{Definition 2.23. Similar matrices}
+
+\emph{Let A and B be matrices in $M_{n\times n}(F^{n}).$ We say that
+B is similar to A if there exists an invertible matrix Q s.t. $B=Q^{-1}AQ.$ }
+
+\section{Theorem 2.3. Rank nullity theorem / Dimension theorem}
+
+\emph{Let V be a finite dimensional vector space, and W be a (not
+necessarily finite dimensional) vector space over some field and let
+$T:V\longrightarrow W$ be a linear map. Then}
+
+\[
+\operatorname{dim}(\operatorname{im}(T))+\operatorname{dim}(\operatorname{ker}(T))=\operatorname{dim}(V)
+\]
+
+\section{Theorem 6.1. Properties of inner products}
+
+\emph{Let $V.$ If} $\left\langle x,y\right\rangle =\left\langle x,z\right\rangle $
+\emph{for all $x,$ then $y=z.$ Similarly $\left\langle y,x\right\rangle =\left\langle z,x\right\rangle .$ }
+
+\section{Exercise 5.4.25. \emph{Simultaneously diagonalizable if }$UT=TU$}
+
+Proposition\emph{. If T and U are diagonalizable linear operators
+on a finite-dimensional vector space V s.t. $UT=TU,$ then T and U
+are simultaneously diagonalizable.}
+
+\section{Theorem. \emph{If two operators agree on a basis, they are equal.}}
+
+\section{Schur's Theorem 6.14. Splitting characteristic polynomial and orthonormal
+basis s.t. $[T]_{\beta}$ upper triangular.}
+
+\emph{Let TnV. Suppose that the characteristic polynomial of T splits.
+Then there exists an orthonormal basis $\beta$ for V s.t. $[T]_{\beta}$
+is upper triangular.}
+
+\section{Def. Normal operators}
+
+\emph{Let $A:V\longrightarrow V$. Then A is normal iff it commutes
+with its adjoint: $AA^{*}=A^{*}A.$}
+
+\section{E.g. of normal operators: unitary, selfadjoint, and real symmetric
+operators}
+
+Unitary operators are normal: $A^{*}=A^{-1},$ which commutes with
+A. Selfadjoint {[}and therefore real symmetric{]} operators are normal:
+$A^{*}=A.$ 
+
+\section{Theorem 6.15. \emph{Eigenvectors corresponding to distinct eigenvalues
+of a normal operator are orthogonal}}
+
+Theorem. \emph{Let T be normal on V, $\left\langle \cdot,\cdot\right\rangle .$
+Then eigenvectors corresponding to distinct eigenvalues of T are orthogonal.}
+
+\section{Definition. Adjoint operators}
+
+are also called Hermitian adjoint, Hermitian conjugate or Hermitian
+transpose.
+
+\emph{Let $A:V\longrightarrow W$ be linear. Then the adjoint of A
+is the unique linear operator $A^{*}:W\longrightarrow V$ s.t. 
+\[
+\left\langle Av,w\right\rangle _{W}=\left\langle v,A^{*}w\right\rangle _{V}.
+\]
+}
+
+Existence and uniqueness to be proved.
+
+\section{Theorem. \emph{Normal operators are diagonalizable}}
+
+\section{Theorem {*}6.3. \emph{An operator T is diagonalizable iff there exists
+a basis of V consisting of eigenvectors of T}}
+
+\emph{Corollary. If T is a selfadjoint operator, then there is a basis
+of V consisting of eigenvectors of T.}
+
+\emph{Proof. }Follows from Theorem 6.16 or 6.17.
+
+\section{Theorem 6.3. Representing a vector as a linear combination of orthogonal
+vectors using inner product projections}
+
+\emph{Theorem. Let V be an inner product space and $S=\left\{ v_{1},v_{2}\dots\ldots,v_{k}\right\} $
+be an orthogonal subset of V consisting of nonzero vectors. If $y\in\operatorname{span}(S)$
+then 
+\[
+y=\sum_{i=1}^{k}\frac{\left\langle y,v_{i}\right\rangle }{\|v_{i}\|^{2}}v_{i}.
+\]
+}
+
+Corollary. \emph{Let V be an inner product space and $S=\left\{ v_{1},v_{2}\dots\ldots,v_{k}\right\} $
+be an orthonormal subset of V and $y\in\operatorname{span}(S),$ then
+\[
+y=\sum_{i=1}^{k}\left\langle y,v_{i}\right\rangle v_{i}.
+\]
+}
+
+Corollary. \emph{Let V be an inner product space, $y\in V,$ and $\beta=\left\{ v_{1},v_{2}\dots\ldots,v_{k}\right\} $
+be an orthonormal basis for V. Then 
+\[
+y=\sum_{i=1}^{k}\left\langle y,v_{i}\right\rangle v_{i}.
+\]
+}
+
+\section{Theorem 6.10. Matrix of the adjoint and adjoint of the matrix under
+orthonormal basis}
+
+\emph{Let $TVn\beta$ be orthonormal. Then $[T^{*}]_{\beta}=\left[T\right]_{\beta}^{*}.$}
+
+\section{Corollary 6.10. Matrix version}
+
+\emph{Let A by an n by n matrix. Then $L_{A^{*}}=(L_{A})^{*}.$}
+
+\section{Theorem 6.16. Complex case: normal operator and orthonormal basis
+consisting of eigenvectors}
+
+\emph{Let T be a linear operator on a finite-dimensional complex inner
+product space V. Then T is normal iff there exists an orthonormal
+basis for V consisting of eigenvectors of T.}
+
+\section{Theorem 6.17. Real case: self-adjoint operator and orthonormal basis
+consisting of eigenvectors}
+
+\emph{Let T be a linear operator on a finite-dimensional real inner
+product space V. Then T is self-adjoint iff there exists an orthonormal
+basis for V consisting of eigenvectors of T.}
+
+Note that a real selfadjoint matrix is symmetric, $A^{*}=A^{T}=A.$ 
+
+\section{Corollary 6.17. Normal / selfadjoint implies diagonalizable}
+
+\emph{Let T be a linear operator on a finite-dimensional complex {[}real{]}
+inner product space V. If T is normal {[}self-adjoint{]} then T is
+diagonalizable.}
+
+\emph{Proof. }In either case, V has an orthonormal basis consisting
+of eigenvectors of T. By Theorem {*}6.3, this happens iff T is diagonalizable.
+Oh, I already have this corollary as a corollary over there.
+
+\section{Summary of normality V.S. diagonalizability}
+
+We have 
+\begin{align*}
+\text{Normal / selfadjoint\ensuremath{\iff}} & \text{Exists orthonormal eigenbasis}\\
+\implies & \text{Exists eigenbasis }\\
+\iff & \text{Diagonalizable.}
+\end{align*}
+and it seems that the two are not equivalent. QUESTION. Are there
+diagonalizable operators that aren't normal / selfadjoint? We just
+need to find one that has an eigenbasis that isn't orthonormal, How?
+
+\section{TODO. Example of diagonalizable operator that isn't normal/selfadjoint}
+
+\section{Example of a complex symmetric matrix that isn't normal}
+
+Let 
+\[
+A=\begin{bmatrix}1 & i\\
+i & -1
+\end{bmatrix}.
+\]
+Then A is symmetric complex, but isn't normal, because it is not diagonalizable
+{[}TODO. Show this{]}. If it were normal, then it would be diagonalizable
+by Corollary 6.17.
+
+\section{Proposition. Eigenvectors and eigenvalues of the adjoint of a normal
+operator}
+
+\textbf{Proposition. }\emph{Let T be a normal linear operator on an
+inner product space V with eigenvalue $\text{\ensuremath{\lambda}}$
+and eigenvector $x,$ then $x$ is an eigenvector of $T^{*}$ corresponding
+to eigenvalue $\overline{\lambda}.$}
+
+\section{Conjecture. \emph{The inner product is unique up to an orthonormal
+basis. }}
+
+\emph{Specifically, let V be a finite-dimensional inner product on
+C or R, and $\beta$ and $\gamma$ be any orthonormal bases for V,
+and x, y be vectors in V. Then 
+\[
+\left\langle x,y\right\rangle =\overline{y}^{T}x=[y]_{\beta}\cdot[x]_{\beta}=[y]_{\gamma}\cdot[x]_{\gamma}.
+\]
+In other words, the dot product of two vectors is the same in any
+orthonormal basis.}
+
+Proof. TODO.
+
+Definition. \emph{A linear operator $T$ on a finite dimensional inner
+product space V is called positive definite if T is self-adjoint and
+$\left\langle T(x),x\right\rangle >0$ for all $x\neq0.$ It's called
+positive semidefinite if $\left\langle T(x),x\right\rangle \geq0$
+for all $x\neq0.$ Similarly for a square matrix $A.$}
+
+\section{Exercise 6.4.17. Positive semi/definite operator}
+
+\emph{Let T and U be self-adjoint linear operators on an n-dimensional
+inner product space V, and let $A=\left[T\right]_{\beta},$ where
+$\beta$ is an orthonormal basis for V. Prove:}
+\begin{enumerate}
+\item \emph{T is positive definite (semidefinite) iff all of its eigenvalues
+are positive (nonnegative).}
+\item \emph{T is positive definite iff 
+\[
+\sum_{i,j}A_{ij}a_{j}\overline{a}_{i}>0
+\]
+for all $(a_{1},\ldots,a_{n})\neq0.$ {[}What about semidefinite?
+Also true.{]}}
+\item \emph{T is positive semidefinite iff $A=B^{*}B$ for some square matrix
+B.}
+\item \emph{If T and U are positive semidefinite operators s.t. $T^{2}=U^{2},$
+then $T=U.$}
+\item \emph{If T and U are positive definite (semidefinite?) operators s.t.
+$TU=UT,$ then $TU$ is positive definite (semidefinite?).}
+\item \emph{T is positive definite (semidefinite) iff A is.}
+\end{enumerate}
+\emph{Proof 1. }We'll show definite, semi is similar. Let T be positive
+definite, and let $\lambda$ be an eigenvalue, and $x\neq0.$ Then
+\begin{align*}
+\left\langle T(x),x\right\rangle  & >0\\
+\left\langle \lambda x,x\right\rangle  & >\\
+\lambda\left\langle x,x\right\rangle  & >\\
+\lambda\text{\ensuremath{\left|x\right|}}^{2} & >0.
+\end{align*}
+Since $\text{\ensuremath{\left|x\right|}}>0,$ $\lambda$ must also
+be $>0.$ Conversely, suppose that all eigenvalues of T are positive.
+Let $v_{i}$ be the eigenvectors of T with corresponding eigenvalues
+$\lambda_{i}$. Then 
+
+\[
+T(v_{i})=\lambda_{i}v_{i}.
+\]
+Now let $x$ be any vector, and $x=\sum a_{i}v_{i}.$ Then 
+\[
+\left\langle T(x),x\right\rangle =\left\langle T\left(\sum a_{i}v_{i}\right),\sum a_{i}v_{i}\right\rangle =\left\langle \sum a_{i}\lambda_{i}v_{i},\sum a_{i}v_{i}\right\rangle =\sum\lambda_{i}\left|v_{i}\right|^{2}
+\]
+(because the $v_{i}$'s are orthonormal).
+
+\emph{Proof 2. }First note that
+\[
+\sum_{i,j}A_{ij}a_{j}\overline{a}_{i}=\text{\ensuremath{\overline{a}^{T}Aa=\overline{\begin{bmatrix}a_{1} & \cdots & a_{n}\end{bmatrix}}\left[A_{ij}\right]\begin{bmatrix}a_{1}\\
+\vdots\\
+a_{n}
+\end{bmatrix}.}}
+\]
+This is equal to 
+\[
+\left\langle T\left(x\right),x\right\rangle 
+\]
+since $\beta$ is an orthonormal basis (recall that \emph{the dot
+product of two vectors is the same in any orthonormal basis}).
+
+\section{Ex 6.4.18. Derived positive semidefinite matrices}
+
+\emph{Let $T:V\longrightarrow W$ be a linear transformation, where
+V and W are finite-dim. Then}
+\begin{enumerate}
+\item $T^{*}T$ and $TT^{*}$ are positive semidefinite.
+\item $\rank(T^{*}T)=\rank(TT^{*})=\rank(T).$
+\end{enumerate}
+
+\section{Ex 6.4.19. Properties of positive definite operators}
+
+\emph{Let T and U be positive definite operators on an inner product
+space V. Then}
+\begin{enumerate}
+\item $T+U$ is positive definite.
+\item If $c>0,$ then $cT$ is p.d.
+\item $T^{-1}$ is p.d.
+\end{enumerate}
+
+\section{Unitary and orthogonal operators and their matrices}
+
+Definition. \emph{Let T, n, $\left\langle \right\rangle ,V,F.$ If
+$\left|\left|T(x)\right|\right|=\left|\left|x\right|\right|$ for
+all $x,$ we call T a unitary operator if $F=C,$ and an orthogonal
+operator if $F=R.$ T is also called an isometry, or length-preserving
+operator.}
+
+\section{Example 6.18. Rotation in $R^{2}.$ }
+
+E.g. any rotation or reflection in $R^{2}$ preserves length and hence
+is an orthogonal operator. Rotation by $\theta$ given by 
+\[
+R_{\theta}=\begin{bmatrix}\cos\theta & -\sin\theta\\
+\sin\theta & \cos\theta
+\end{bmatrix}.
+\]
+Rotation by $-\theta$ is its inverse:
+\[
+R_{\theta}^{-1}=R_{-\theta}=\begin{bmatrix}\cos\theta & \sin\theta\\
+-\sin\theta & \cos\theta
+\end{bmatrix}=R_{\theta}^{T}.
+\]
+Since rotation by $\theta$ followed by rotation by $-\theta$ is
+the identity, we have
+\[
+R_{\theta}^{T}R_{\theta}=R_{\theta}^{-1}R_{\theta}=I.
+\]
+By Theorem 6.18 below, $R_{\theta}$ is orthogonal. By Theorem 6.18.b,
+it preserves the inner product and hence preserves the angle between
+two vectors. By Corollary 6.18.1, its rows and columns form orthonormal
+bases for $R^{2}.$ Since $R_{\theta}\neq R_{\theta}^{T}$, it is
+not selfadjoint.
+
+E.g. Recall the space H of continuous complex-valued functions defined
+on $[0,2\pi]$ with the inner product
+\[
+\left\langle f,g\right\rangle =\frac{1}{2\pi}\int_{0}^{2\pi}f(t)\overline{g(t)}dt.
+\]
+ Let $h\in H$ satisfy $\left|h(x)\right|=1$ for all $x.$ Define
+T on H by $T(f)=hf.$ Then 
+\[
+\left|\left|T(f)\right|\right|^{2}=\left|\left|hf\right|\right|^{2}=\frac{1}{2\pi}\int_{0}^{2\pi}h(t)f(t)\overline{h(t)f(t)}dt=\left|\left|f\right|\right|^{2}
+\]
+since $\left|h(t)\right|^{2}=1.$ So T is a unitary operator. 
+
+\section{Lemma 6.18. $T_{0}$ is the only self-adjoint operator that is orthogonal
+to all its inputs}
+
+\emph{Let U be self adjoint on $n,\left\langle \right\rangle ,V.$
+If $\left\langle x,U(x)\right\rangle =0$ for all x, then $U=T_{0},$
+the zero operator.}
+
+\emph{Proof. }By Theorem 6.16 or 6.17, there exists an orthonormal
+basis $\beta$ for V consisting of eigenvectors of U. Let $x\in\beta.$
+Then $U(x)=\lambda x$ for some $\lambda.$ Thus
+\[
+0=\left\langle x,U(x)\right\rangle =\left\langle x,\lambda x\right\rangle =\overline{\lambda}\left\langle x,x\right\rangle =\overline{\lambda}\left|\left|x\right|\right|^{2},
+\]
+and $\overline{\lambda}=0.$ Hence $U(x)=0$ for all $x\in\beta$
+and $U=T_{0}.$ 
+
+Nonexample of a nonselfadjoint operator that has $\left\langle x,U(x)\right\rangle =0$
+but is not the zero op: the rotation U by 90 degrees in the plane.
+
+\section{Theorem 6.18. Characterizing unitary / orthogonal / isometric operators
+on a fin dim inner product space}
+
+\emph{Let T, n, $\left\langle \right\rangle ,V,F.$ Then the following
+statements are equivalent:}
+\begin{enumerate}
+\item \emph{$TT^{*}=T^{*}T=I.$ In particular, T is normal and there exists
+an orthonormal basis for V consisting of eigenvectors of T.}
+\item \emph{$\left\langle T(x),T(y)\right\rangle =\left\langle x,y\right\rangle $
+for all $x,y.$}
+\item \emph{If $\beta$ is an orthonormal basis, then $T(\beta)$ is an
+orthonormal basis.}
+\item \emph{There exists an orthonormal basis $\beta$ s.t. $T(\beta)$
+is an orthonormal basis.}
+\item \emph{$\left|\left|T(x)\right|\right|=\left|\left|x\right|\right|$
+for all $x,$ i.e. T is unitary / orthogonal.}
+\end{enumerate}
+In other words, an operator is unitary / orthogonal iff it is normal
+and its ``norm'' $TT^{*}$ is 1.
+
+\emph{Proof} (1) implies (2). For any $x,y,$ 
+\[
+\left\langle x,y\right\rangle =\left\langle T^{*}T(x),y\right\rangle =\left\langle T(x),T(y)\right\rangle .
+\]
+
+\emph{Proof }(2) implies (3). Let $\beta=\left\{ v_{1},\ldots,v_{n}\right\} $
+be an orthonormal basis for V. Then $T(\beta)=\left\{ T(v_{1}),\ldots,T(v_{n})\right\} $
+and 
+\[
+\left\langle T(v_{i}),T(v_{j})\right\rangle =\left\langle v_{i},v_{j}\right\rangle =\delta_{ij},
+\]
+so $T(\beta)$ is an orthonormal basis for V.
+
+Proof (3) implies (4). {[}This one is a little odd?{]} Any orthonormal
+basis $\beta$ satisfies this property, and there must be one because
+V is fin dim.
+
+Proof (4) implies (5). Let $x\in V,\beta=\left\{ v_{1},\ldots,v_{n}\right\} .$
+Then
+\[
+x=\sum_{i=1}^{n}a_{i}v_{i}
+\]
+for some $a_{i},$ and 
+\[
+\left|\left|x\right|\right|^{2}=\left\langle \sum_{i=1}^{n}a_{i}v_{i},\sum_{i=1}^{n}a_{i}v_{i}\right\rangle =\sum_{i}\sum_{j}a_{i}\overline{a_{j}}\left\langle v_{i},v_{j}\right\rangle =\sum_{i=1}^{n}\left|a_{i}\right|^{2}.
+\]
+Similarly,
+\[
+\left|\left|T(x)\right|\right|^{2}=\left\langle \sum_{i=1}^{n}a_{i}T(v_{i}),\sum_{i=1}^{n}a_{i}T(v_{i})\right\rangle =\sum_{i}\sum_{j}a_{i}\overline{a_{j}}\left\langle T(v_{i}),T(v_{j})\right\rangle =\sum_{i=1}^{n}\left|a_{i}\right|^{2},
+\]
+since $T(\beta)$ is also orthonormal.
+
+Proof (5) implies (1). For any $x,$
+\[
+\begin{aligned}\left\langle x,x\right\rangle  & =\left\langle T(x),T(x)\right\rangle =\left\langle x,T^{*}T(x)\right\rangle \\
+\left\langle x,(I-T^{*}T)(x)\right\rangle  & =0.
+\end{aligned}
+\]
+Let $U=I-T^{*}T.$ Then U is self-adjoint and $\left\langle x,U(x)\right\rangle =0$
+for all x. By the previous lemma, $I-T^{*}T=U=T_{0}$ and $I=T^{*}T.$
+{[}Why does this imply that $TT^{*}=I?$ The referenced Exercise 2.4.10
+is about invertible matrices, not adjoint operators.... Ah, See next.{]} 
+
+\section{Corollary 6.18.0. \emph{The adjoint of a unitary / orthogonal operator
+is its inverse}}
+
+\emph{Proof. }Suppose T is uni./orthog. Then $TT^{*}=I,$ hence $T^{*}=T^{-1},$
+by Exercise 2.4.10.
+
+\section{Proposition 6.18.0. T adjoint is T inverse iff T maps orthonormal
+basis to orthonormal basis.}
+
+\emph{Let $TnVF,$ and let $\beta$ be an orthonormal basis for V,
+and suppose $T^{-1}$ exists. Then $T^{*}=T^{-1}$ iff $T(\beta)$
+is also an orthonormal basis for V.}
+
+If that were true we can apply Exercise 2.4.10 and say that $TT^{*}=TT^{-1}=I$
+and therefore $T^{-1}T=T^{*}T=I.$ 
+
+Proof. Suppose $T^{*}=T^{-1}.$ Then $TT^{*}=T^{*}T=I$ and (3) implies
+that $T(\beta)$ is an orthonormal basis. Conversely suppose that
+$T(\beta)$ is an orthonormal basis, 
+\[
+\beta=\left\{ v_{1},\ldots,v_{n}\right\} ,T(\beta)=\left\{ T(v_{1}),\ldots,T(v_{n})\right\} .
+\]
+ To show that $T^{*}=T^{-1},$ we want to show that 
+\[
+\left\langle T^{-1}(x),y\right\rangle =\left\langle T^{*}(x),y\right\rangle =\left\langle x,T(y)\right\rangle 
+\]
+for all $x,y\in V.$ It suffices to show that this holds for all $x\in T(\beta),y\in\beta.$
+{[}Why? This feels right, but it's not quite the result I'm thinking
+about.{]} There are two cases: either (1) $x=T(y)$ or (2) $x\neq T(y).$
+In case (1), 
+\[
+\left\langle T^{-1}(x),y\right\rangle =\left\langle y,y\right\rangle =1=\left\langle x,T(y)\right\rangle .
+\]
+ In case (2), 
+\[
+\left\langle x,T(y)\right\rangle =0=\left\langle T^{-1}(x),y\right\rangle .
+\]
+ Therefore $T^{*}=T^{-1}.$ 
+
+\section{Proposition. Equality of two operators in an inner product}
+
+\emph{Let $T,n\left\langle \right\rangle VF,$ and let $\beta$ and
+$T(\beta)$ be orthonormal bases for V and suppose that $T^{-1}$
+exists. If 
+\[
+\left\langle T^{-1}(x),y\right\rangle =\left\langle x,T(y)\right\rangle 
+\]
+ for all $y\in\beta,x\in T(\beta),$ then $\left\langle T^{-1}(x),y\right\rangle =\left\langle x,T(y)\right\rangle $
+for all $x,y\in V.$ In particular $\left\langle T^{-1}(x),y\right\rangle =\left\langle T^{*}(x),y\right\rangle $
+for all x, y, and therefore $T^{-1}=T^{*}.$ }
+
+Proof. Let $\beta=\left\{ v_{1},\ldots,v_{n}\right\} ,T(\beta)=\left\{ T(v_{1}),\ldots,T(v_{n})\right\} ,$
+and let 
+\begin{align*}
+x & =\sum a_{i}T(v_{i})\\
+y & =\sum b_{i}v_{i}.
+\end{align*}
+Expanding $\left\langle x,T(y)\right\rangle $ and $\left\langle T^{-1}(x),y\right\rangle $
+we get
+\begin{align*}
+\left\langle x,T(y)\right\rangle  & =\left\langle \sum a_{i}T(v_{i}),T\left(\sum b_{i}v_{i}\right)\right\rangle \\
+ & =\left\langle \sum a_{i}T(v_{i}),\sum b_{i}T(v_{i})\right\rangle \\
+ & =\sum a_{i}\overline{b_{i}}\\
+\left\langle T^{-1}(x),y\right\rangle  & =\left\langle T^{-1}\left(\sum a_{i}T(v_{i})\right),\sum b_{i}v_{i}\right\rangle \\
+ & =\sum a_{i}\overline{b_{i}}.
+\end{align*}
+ 
+
+We should apply abstract results on concrete examples.
+
+\section{Exercise 2.4.9.\emph{ AB invertible implies A and B are invertible
+for square matrices A and B}}
+
+\emph{Let A and B be $n\times n$ matrices such that AB is invertible.
+Prove that A and B are invertible. Give an example to show that arbitrary
+matrices A and B need not be invertible if AB is invertible.}
+
+Proof. The columns of AB are of the form $\left[Ab_{1}\cdots Ab_{n}\right]$
+where $b_{i}$ are the columns of $B.$ Since AB is invertible, its
+columns are linearly independent. By the rank-nullity theorem ($\dim N_{A}+\dim R_{A}=\dim V=n$),
+we have $\dim R_{A}=n,$ so $\dim N_{A}=0,$ and T is invertible.
+This also means the $b_{i}$ are linearly independent, so $B$ is
+invertible.
+
+\section{Exercise 2.4.10. \emph{One-sided inverse is a two-sided inverse}}
+
+\emph{Let A and B be $n\times n$ matrices s.t. $AB=I_{n}.$ (a) Use
+previous to conclude that A and B are invertible. (b) Prove $A=B^{-1}$
+and $B=A^{-1},$ i.e. for square matrices, a one-sided inverse is
+a two-sided inverse.}
+
+Proof. (a) By previous, A and B are invertible. (b) Multiply on the
+left by $A^{-1}$
+\[
+\begin{aligned}AB & =I\\
+A^{-1}AB & =A^{-1}\\
+B & =A^{-1}.
+\end{aligned}
+\]
+Similarly for the other one.
+
+\section{Corollary 6.18. Selfadjoint and orthogonal iff orthonormal basis
+of eigenvectors with eigenvalues of absolute value 1}
+
+Corollary\emph{. Let $TnV\mathbf{R}\left\langle \right\rangle .$
+Then V has an orthonormal basis of eigenvectors of T with corresponding
+eigenvalues of absolute value 1 iff T is both selfadjoint and orthogonal.}
+
+\emph{Proof. $\left(\implies\right)$ }Suppose $\beta=\left\{ v_{i}\right\} $
+is an orthonormal basis of eigenvectors of T with corresponding eigenvalues
+of absolute value 1. By Theorem 6.17 T is selfadjoint. Let $x=\sum a_{i}v_{i}.$
+We want to show T is orthogonal, i.e. $\left|\left|T(x)\right|\right|=\left|\left|x\right|\right|:$
+\[
+\left|\left|T(x)\right|\right|^{2}=\left\langle T(x),T(x)\right\rangle =\left\langle \sum a_{i}T(v_{i}),\sum a_{i}T(v_{i})\right\rangle =\sum a_{i}^{2}=\left|\left|x\right|\right|
+\]
+because the $T(v_{i})$'s are orthonormal, thanks to a lemma we'll
+prove below.
+
+$(\impliedby)$ Suppose T is selfadjoint and orthogonal. By Theorem
+6.17 V has an orthonormal basis $\beta=\left\{ v_{i}\right\} $ of
+eigenvectors of T. WTS $\left|\lambda_{i}\right|=1.$ We have $T(v_{i})=\lambda_{i}v_{i},$
+so
+\begin{align*}
+\left|\left|T(v_{i})\right|\right|=\left\langle T(v_{i}),T(v_{i})\right\rangle  & =\left\langle \lambda_{i}v_{i},\lambda_{i}v_{i}\right\rangle =\lambda_{i}^{2}\left\langle v_{i},v_{i}\right\rangle =\lambda_{i}^{2}\left|\left|v_{i}\right|\right|\\
+1 & =\lambda_{i}^{2},
+\end{align*}
+because T is orthogonal. Therefore $\left|\lambda_{i}\right|=1.$
+{[}NOTE. We could've written the previous equation using norms instead
+of inner products: $\left|\left|T(v_{i})\right|\right|=\left|\left|\lambda_{i}v_{i}\right|\right|=\left|\lambda_{i}\right|\left|\left|v\right|\right|.${]}
+
+\section{Corollary 6.18.1. Unitary iff orthonormal basis of eigenvectors with
+eigenvalues of absolute value 1}
+
+Corollary\emph{. Let $TnV\mathbf{C}\left\langle \right\rangle .$
+Then V has an orthonormal basis of eigenvectors of T with corresponding
+eigenvalues of absolute value 1 iff T is unitary.}
+
+\emph{Proof similar to the real case.}
+
+\section{Lemma {*}6.18. Orthonormal basis of eigenvectors with eigenvalues
+of absolute value 1 implies T maps orthonormal basis to orthonormal
+basis}
+
+Lemma\emph{. Let $TnV\mathbf{R}\left\langle \right\rangle .$ If V
+has an orthonormal basis $\beta$ of eigenvectors with eigenvalues
+of absolute value 1, then $T(\beta)$ is also an orthonormal basis.}
+
+\emph{Proof. }Let $\beta=\left\{ v_{i}\right\} .$ Then 
+\[
+\left\langle T(v_{i}),T(v_{j})\right\rangle =\left\langle \lambda_{i}v_{i},\lambda_{j}v_{j}\right\rangle =\lambda_{i}\lambda_{j}\delta_{ij}=\begin{cases}
+0 & \textrm{if }i\neq j\\
+1 & \textrm{if }i=j.
+\end{cases}
+\]
+Therefore the $T(v_{i})$'s are orthonormal and form an orthonormal
+basis.
+
+\section{Definition 6.18. Reflection about a line in $R^{2}$}
+
+\emph{Let L be a one dimensional subspace of $R^{2}.$ We may view
+L as a line in the plane through the origin. A linear operator T on
+$R^{2}$ is called a reflection of $R^{2}$ about L if $T(x)=x$ for
+all $x\in L$ and $T(x)=-x$ for all $x\in L^{\perp}.$ }
+
+T is an orthogonal operator: let $v_{1}\in L,v_{2}\in L^{\perp}$
+with length 1. Then $T(v_{1})=v_{1}$ and $T(v_{2})=-v_{2},$ thus
+$v_{i}$ are eigenvectors with eigenvalues 1 and $-1.$ By Corollary
+6.18 T is orthogonal. We can also see that $\beta=\left\{ v_{i}\right\} $
+is an orthonormal basis for V, as is $T(\beta)=\left\{ T(v_{i})\right\} .$ 
+
+\section{Example 6.5.5. Matrix representation of a reflection in $R^{2}$ }
+
+\emph{Let T be a reflection about a line through the origin in $R^{2},$
+let $\beta$ be the standard basis for $R^{2},$ and let $A=\left[T\right]_{\beta}.$
+Then $T=L_{A}.$ Since }{[}Corollary 6.18.2.{]}\emph{ T is an orthogonal
+operator and $\beta$ is an orthonormal basis, $A$ is an orthogonal
+matrix. We want to know what A looks like.}
+
+Let $\alpha$ be the angle from the positive x-axis to L. Let $v_{1}=\left(\cos\alpha,\sin\alpha\right)$
+and $v_{2}=\left(-\sin\alpha,\cos\alpha\right).$ Then $\left|\left|v_{1}\right|\right|=\left|\left|v_{2}\right|\right|=1,v_{1}\in L,v_{2}\in L^{\perp}.$
+Hence $\gamma=\left\{ v_{1},v_{2}\right\} $ is an orthonormal basis
+for $R^{2}.$ Since $T(v_{1})=v_{1},T(v_{2})=-v_{2},$ we have 
+\[
+\left[T\right]_{\gamma}=\begin{bmatrix}1 & 0\\
+0 & -1
+\end{bmatrix}.
+\]
+Let 
+\[
+Q=\begin{bmatrix}\cos\alpha & -\sin\alpha\\
+\sin\alpha & \cos\alpha
+\end{bmatrix}
+\]
+be the change of coordinates matrix from the standard basis to $\gamma.$
+By Corollary 2.23, 
+\[
+\begin{aligned}A & =Q\left[T\right]_{\gamma}Q^{-1}\\
+ & =\begin{bmatrix}\cos2\alpha & \sin2\alpha\\
+\sin2\alpha & -\cos2\alpha
+\end{bmatrix}.
+\end{aligned}
+\]
+
+\section{Definition 6.18.1. Orthogonal and unitary matrices}
+
+Definition. \emph{A square matrix A is called an orthogonal matrix
+if $A^{t}A=AA^{t}=I$ and unitary if $A^{*}A=AA^{*}=I.$ }
+
+\section{Corollary 6.18.1.1 Square matrix is unitary / orthogonal iff its
+rows and columns form orthonormal bases for $F^{n}.$}
+
+\emph{$AA^{*}=I$ is equivalent to the statement that the rows of
+A form an orthonormal basis for $F^{n},$} \emph{because 
+\[
+AA^{*}=I=\begin{bmatrix}A_{1}\\
+\vdots\\
+A_{n}
+\end{bmatrix}\begin{bmatrix}\overline{A_{1}^{t}} & \cdots & \overline{A_{n}^{t}}\end{bmatrix},
+\]
+and so 
+\[
+\left\langle A_{i},A_{j}\right\rangle =A_{i}\overline{A_{j}^{t}}=\delta_{ij}.
+\]
+Similarly the condition $A^{*}A=I$ is equivalent to the statement
+that the columns of A form an orthonormal basis for $F^{n}.$ Therefore
+a square matrix is orthogonal iff its rows and columns form orthonormal
+bases for $F^{n}.$}
+
+\section{Corollary 6.18.2. Operator is unitary / orthogonal iff its matrix
+under orthonormal basis is unitary / orthogonal}
+
+\emph{Let $TnV.$ By Theorem 6.10, T is unitary / orthogonal iff $\left[T\right]_{\beta}$
+is unitary / orthogonal for some orthonormal basis $\beta$ for V.}
+
+\section{Note 6.18.3. Unitary / orthogonal equivalence by conjugation: $A=Q^{-1}DQ.$ }
+
+For a complex normal {[}R selfadjoint/symmetric{]} matrix A, there
+exists an orrthonormal basis $\beta$ consisting of eigenvectors of
+A {[}Theorem 6.17 and 6.18{]}, so A is diagonalizable and is similar
+to a diagonal matrix D: $A=Q^{-1}DQ,$ where $Q$ is the matrix whose
+columns are the vectors in $\beta$ {[}Theorem 2.23{]}. Since the
+columns of Q form an orthonormal basis, by Corollary 6.18.1 Q is unitary
+{[}orthogonal{]}. In this case, we say that A is unitarily / orthogonally
+equivalent to D.
+
+\section{Definition 6.18.3. Unitary / orthogonal equivalence by conjugation}
+
+\emph{A and B are unitarily / orthogonally equivalent iff there exists
+a unitary / orthogonal matrix P s.t. $A=P^{*}BP.$ Since P is unitary/orthogonal,
+we know by }Corollary 6.18.0\emph{ that $P^{*}=P^{-1}$, then by Proposition
+6.18.1 we also have $A=P^{*}BP=P^{-1}BP.$}
+
+\section{Ex 6.5.18. Unitary / orthogonal equivalence is an equivalence relation
+on $M_{n\times n}(C)$ and $M_{n\times n}(R)$. }
+
+\emph{Proof. }We need to show reflexivity, symmetry, and transitivity.
+Reflexivity: A unitarily equivalent to B means $A=Q^{-1}BQ,$ so $QAQ^{-1}=B$
+and B u.eq. A. Symmetry: A u.eq. with itself since $A=I^{-1}AI.$
+Transitivity: A u.eq. B and B u.eq. C means $A=Q^{-1}BQ$ and $B=P^{-1}CP,$
+therefore 
+\[
+A=Q^{-1}P^{-1}CPQ=(PQ)^{-1}CPQ,
+\]
+ so A u.eq. C.
+
+\section{The ideal state of mathematics: mechanical manipulation of symbols}
+
+You want to develop mathematics to a stage where all you need to do
+is apply some mechanical rule and execute a rote calculation. Remove
+the need to think, and reduce mathematics to programming. That might
+never happen in full, but that's the end goal of any small corner
+of mathematics.
+
+\section{Question. What is the link between normal operators and normal subgroups?}
+
+\section{Theorem 6.19. Normal iff unitarily equivalent to a diagonal matrix.}
+
+\emph{Let A be a complex $n\times n$ matrix. Then A is normal iff
+A is u.eq. to a diagonal matrix.}
+
+\emph{Proof. }The forward direction is already proved in Note 6.18.3:
+if A is normal, then it is u.eq. to a diagonal matrix D. Conversely,
+suppose that A is u.eq. to a diagonal matrix D. Then there exists
+a unitary matrix P s.t. $A=P^{*}DP.$ 
+\[
+AA^{*}=P^{*}DP(P^{*}DP)^{*}=P^{*}DPP^{*}D^{*}P=P^{*}DD^{*}P.
+\]
+Similarly
+\[
+A^{*}A=P^{*}D^{*}PP^{*}DP=P^{*}D^{*}DP=P^{*}DD^{*}P.
+\]
+The last equality holds because D is diagonal, hence $D^{*}D=DD^{*}.$
+Therefore A is normal.
+
+\section{Theorem 6.20. Real symmetric iff orthogonally equivalent to a diagonal
+matrix.}
+
+\emph{Let A be a real $n\times n$ matrix. Then A is selfadjoint i.e.
+symmetric iff A is orthogonally equivalent to a diagonal matrix D.}
+
+\emph{Proof. }The forward direction is already proved in Note 6.18.3.
+Conversely, suppose that A is ortho. eq. to a diagonal matrix D. Then
+there exists an orthogonal matrix P s.t. $A=P^{T}DP.$ We want to
+show that A is symmetric: 
+\[
+A^{T}=(P^{T}DP)^{T}=P^{T}D^{T}P=P^{T}DP=A,
+\]
+since D is diagonal.
+
+\section{TODO. Is R normal the same as R selfadjoint/symmetric?}
+
+In that case we can restate the last two theorems as simply that \emph{A
+normal iff A un. eq. diagonal matrix.}
+
+\section{Example 6.5.6. Diagonalizing a symmetric matrix by an orthogonal
+matrix}
+
+Let 
+\[
+A=\left(\begin{array}{ccc}
+{4} & {2} & {2}\\
+{2} & {1} & {2}\\
+{2} & {2} & {4}
+\end{array}\right).
+\]
+Since A is symmetric, Theorem 6.20 says that A is orthog. eq. to a
+diagonal matrix. WTF orthogonal P and diagonal D s.t. $P^{T}AP=D.$
+
+By Corollary 6.18.1.1, P is orthogonal iff its columns and rows form
+orthonormal bases for $R^{3}.$ To find P, we find an orthonormal
+basis for V. It's easy to show that the eigenvalues of A are 2 and
+8 (TODO. Find $\lambda$ s.t. $\det(A-\lambda I)=0$ by expanding
+the eq into a polynomial eq of degree 3 and solve.) Once we know the
+eigenvalues, we can find the eigenvectors by solving $(A-\lambda I)x=0$
+using Gaussian elimination. Two eigenvectors corresponding to 2 are
+$\{(-1,1,0),(-1,0,1)\}.$ This set is not orthogonal, so we apply
+Gram-Schmidt to obtain the orthogonal set $\left\{ \left(-1,1,0\right),(1,1,-2)\right\} .$
+An eigenvector for $\lambda=8$ is $(1,1,1).$ Note that it is orthogonal
+to the two eigenvectors corresponding to 2, by Theorem 6.15. Normalizing
+all 3, we get the orthonormal basis for $R^{3}$ consisting of eigenvectors
+of A
+\[
+\left\{ \frac{1}{\sqrt{2}}(-1,1,0),\frac{1}{\sqrt{6}}(1,1,-2),\frac{1}{\sqrt{3}}(1.1,1)\right\} .
+\]
+Thus one choice for P is 
+\[
+P=\left(\begin{array}{ccc}
+{\frac{-1}{\sqrt{2}}} & {\frac{1}{\sqrt{6}}} & {\frac{1}{\sqrt{3}}}\\
+{\frac{1}{\sqrt{2}}} & {\frac{1}{\sqrt{6}}} & {\frac{1}{\sqrt{3}}}\\
+{0} & {\frac{-2}{\sqrt{6}}} & {\frac{1}{\sqrt{3}}}
+\end{array}\right),\quad\text{ and }\quad D=\left(\begin{array}{ccc}
+{2} & {0} & {0}\\
+{0} & {2} & {0}\\
+{0} & {0} & {8}
+\end{array}\right).
+\]
+
+\section{Question. Suppose P is uni/orthog, and A is normal/selfadjoint. Is
+$P^{*}AP$ always diagonal?}
+
+\section{Schur's Theorem 6.21}
+
+\emph{Let $A\in M_{n\times n}(F)$ be a matrix whose characteristic
+polynomial splits over F. If $F=C,$ then A is unitarily eq. to a
+complex upper triangular matrix. IF $F=R,$ then A is orthogonally
+eq. to a real upper triangular matrix.}
+
+\section{Rigid motions}
+
+\emph{Let VR. A function $f:V\longrightarrow V$ is called a rigid
+motion if 
+\[
+\|f(x)-f(y)\|=\|x-y\|
+\]
+for all x, y in V.}
+
+E.g. Any orthogonal operator on a finite dimensional reall inner product
+space is a rigid motion, e.g. rotations, reflection by a line through
+the origin.
+\end{document}

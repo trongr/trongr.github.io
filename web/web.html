@@ -449,23 +449,6 @@ var id = purl(url).param("id")</code></pre>
 
 <pre><code>NODE_ENV=production PORT=8080 forever start -a --uid live server.js</code></pre>
 
-<h1>Request</h1>
-
-<pre><code>request.post({
-    url: "http://IP:PORT/asdf?q=asdf",
-    headers: {
-        "Client-ID": "1234",
-    },
-    body: {
-        asdf: 123
-    },
-    json: true,
-    timeout: 60 * 1000 // ms
-}, function(er, res, body){
-    if (er) console.log("ERROR", er, body)
-})
-</code></pre>
-
 <h1>Kue</h1>
 
 <p>
