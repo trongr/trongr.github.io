@@ -1,0 +1,9 @@
+body {
+    background-color: burlywood;
+}
+
+canvas {
+    /* onCanvasMouseMove() needs this to get position of mouse relative to
+	canvas. */
+    position: relative;
+}

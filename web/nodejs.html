@@ -17,9 +17,36 @@
 <body>
 <div id='content'>
 <a href='../index.html'>HOME</a>
-<h1>Node.js</h1>
+<h1>Javascript and Node.js</h1>
 <script src='../js/toc.js'></script>
 <div id='toc'></div>
+
+<h1>jQuery</h1>
+
+<p>
+    Ajax POST:
+</p>
+
+<pre><code>$.post("/book", {
+    title: "Testing is the future"
+}, function(res){
+    console.log(res.book)
+}).fail(function(er){ // server responds with {info:"Error msg"}
+    console.log(er.responseJSON.info)
+})
+</code></pre>
+
+<h3>Getting URL params client-side</h3>
+
+<p>
+    Use <code>purl.js</code>: <a href="https://github.com/allmarkedup/purl/">source</a>
+    <a href="https://github.com/trongr/purl">mirror.</a>
+</p>
+
+<pre><code>&lt;script src="js/purl.js"&gt;&lt;/script&gt;</code></pre>
+
+<pre><code>var url = window.location.href // "http://example.com?id=123"
+var id = purl(url).param("id")</code></pre>
 
 <h1>Request</h1>
 
@@ -67,6 +94,50 @@ child.on('error', (er) => console.error(er))
 child.stdout.on('data', (data) => console.log(data.toString()))
 child.stderr.on('data', (data) => console.error(data.toString()))
 child.on('exit', (code, signal) => assert(code == 0))
+</code></pre>
+
+<h1>Lodash</h1>
+
+<h2>Sorting list of objects by subfield</h2>
+
+<pre><code>var newitems = _.sortBy(items, function(item){
+    try {
+        return item.a.b.time
+    } catch (er){
+        return Number.NEGATIVE_INFINITY
+    }
+})</code></pre>
+
+<h2>Getting biggest object by subfield</h2>
+
+<pre><code>var m = _.max(items, function(item){
+    try {
+        return item.a.b.time
+    } catch (er){
+        return Number.NEGATIVE_INFINITY
+    }
+})
+</code></pre>
+
+<h2>Merging JSONs</h2>
+
+<p>
+    Merging object <code>a</code> with another object in place:
+</p>
+
+<pre><code>&gt; var _ = require("lodash")
+&gt; var a = {asdf:123}
+&gt; _.merge(a, {oij:32})
+&gt; a
+{ asdf: 123, oij: 32 }
+</code></pre>
+
+<p>
+    Make an array of objects unique (not by key but) by deep object comparison,
+    i.e. two objects are equal if they contain the same keys and values.
+</p>
+<pre><code>const myArray = [{id:0}, {id:1}, {id:0}]
+_.uniqWith(myArray, _.isEqual) // [{id:0}, {id:1}]
 </code></pre>
 
 </div>

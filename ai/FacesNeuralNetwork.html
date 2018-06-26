@@ -33,13 +33,31 @@
 <li></li>
 </ol> -->
 
-<h1>The workflow</h1>
+<h1>Iterative generative workflow</h1>
 
 <p>
-    TODO.
+    Given what the Face GAN can do [taking in an encoding and turning it into
+    learned faces], we can create a tool that lets you iteratively build a
+    likeness from scratch. First have the model generate a random set of faces,
+    then choose from among those which ones are most similar to the one you have
+    in mind. Then have the network perturb that face's encoding slightly to
+    generate faces similar to that. Finally choose among those the one most
+    similar to your target face, and repeat.
 </p>
 
-<h1>Tweaking one encoding parameter at a time</h1>
+<h1>Dynamic iterative generative models</h1>
+
+<p>
+    This notion of generating similar things and iteratively approaching your
+    desired solution is very powerful. We can apply it to other things, e.g.
+    building design: we can have a model generating a set of random buildings,
+    then you pick one and it'll generate buildings similar to that, and so on
+    and so on. The one prerequisite is that the model has to contain the whole
+    space of potential solutions. How can you create a model that doesn't know
+    all solutions, but can explore them on the fly, just like a human?
+</p>
+
+<h1>Samples: tweaking one encoding parameter at a time</h1>
 
 <img src="images/tumblr_p8fyu1c8dp1tf905ho1_1280.jpg">
 <img src="images/tumblr_p8fyu1c8dp1tf905ho2_1280.jpg">
@@ -61,6 +79,8 @@
 <img src="images/anadfn.jpg">
 <img src="images/hfdhoidfh.jpg">
 <img src="images/kara-hasduh.jpg">
+
+
 
 </div>
 </body>

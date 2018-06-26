@@ -376,69 +376,6 @@ console.log = function() {
 [ 'Orange', 'Apple', 'Mango' ]
 </code></pre>
 
-<h1>jQuery</h1>
-
-<p>
-    Ajax POST:
-</p>
-
-<pre><code>$.post("/book", {
-    title: "Testing is the future"
-}, function(res){
-    console.log(res.book)
-}).fail(function(er){ // server responds with {info:"Error msg"}
-    console.log(er.responseJSON.info)
-})
-</code></pre>
-
-<h3>Getting URL params client-side</h3>
-
-<p>
-    Use <code>purl.js</code>: <a href="https://github.com/allmarkedup/purl/">source</a>
-    <a href="https://github.com/trongr/purl">mirror.</a>
-</p>
-
-<pre><code>&lt;script src="js/purl.js"&gt;&lt;/script&gt;</code></pre>
-
-<pre><code>var url = window.location.href // "http://example.com?id=123"
-var id = purl(url).param("id")</code></pre>
-
-<h1>Lodash</h1>
-
-<h3>Sorting list of objects by subfield</h3>
-
-<pre><code>var newitems = _.sortBy(items, function(item){
-    try {
-        return item.a.b.time
-    } catch (er){
-        return Number.NEGATIVE_INFINITY
-    }
-})</code></pre>
-
-<h3>Getting biggest object by subfield</h3>
-
-<pre><code>var m = _.max(items, function(item){
-    try {
-        return item.a.b.time
-    } catch (er){
-        return Number.NEGATIVE_INFINITY
-    }
-})
-</code></pre>
-
-<h3>Merging JSONs</h3>
-
-<p>
-    Merging object <code>a</code> with another object in place:
-</p>
-
-<pre><code>&gt; var _ = require("lodash")
-&gt; var a = {asdf:123}
-&gt; _.merge(a, {oij:32})
-&gt; a
-{ asdf: 123, oij: 32 }
-</code></pre>
-
 <h1>Forever</h1>
 
 <p>
