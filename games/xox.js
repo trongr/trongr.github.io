@@ -1,8 +1,11 @@
-var CANVAS_WIDTH = 888;
-var CANVAS_HEIGHT = 888;
-var NUM_CELLS = 22; // Number of cells on each side of the grid.
-var SIZE_CELL = Math.floor(CANVAS_WIDTH / (NUM_CELLS + 1));
-var SIZE_HALF_CELL = Math.floor(SIZE_CELL / 2);
+/**
+ * Wrote this early 2013.
+ */
+var CANVAS_WIDTH = 0;
+var CANVAS_HEIGHT = 0;
+var SIZE_CELL = 0;
+var SIZE_HALF_CELL = 0;
+var NUM_CELLS = 19; // Number of cells on each side of the grid.
 
 var canvas;
 var canvasContext;
@@ -29,8 +32,15 @@ var KEY_DOWN = 40;
 var KEY_ENTER = 13;
 var KEY_ESC = 27;
 
+var moveSound // Move sound
+
 window.onload = function () {
     canvas = document.getElementById("Grid");
+
+    CANVAS_WIDTH = $("#content").width()
+    CANVAS_HEIGHT = $("#content").width()
+    SIZE_CELL = Math.floor(CANVAS_WIDTH / (NUM_CELLS + 1));
+    SIZE_HALF_CELL = Math.floor(SIZE_CELL / 2);
 
     canvas.width = CANVAS_WIDTH;
     canvas.height = CANVAS_HEIGHT;
@@ -45,7 +55,15 @@ window.onload = function () {
     initBoard();
     drawGrid();
     initReticulum();
+
+    initAudio()
 };
+
+function initAudio() {
+    moveSound = document.createElement('audio')
+    // moveSound.setAttribute('src', './audio/ethniclodrum2.mp3')
+    moveSound.setAttribute('src', './audio/knockwood2.mp3')
+}
 
 function initReticulum() {
     gridX2 = Math.floor(NUM_CELLS / 2);
@@ -116,6 +134,7 @@ function getMoving2(keyCode) {
             clickX2 = gridX2;
             clickY2 = gridY2;
             move2(clickX2, clickY2, prevClickX2, prevClickY2);
+            moveSound.play()
             break;
         case KEY_ESC:
             key = "ESC";
@@ -124,26 +143,15 @@ function getMoving2(keyCode) {
     }
     redrawCell2(prevGridX2, prevGridY2);
     redrawCell2(gridX2, gridY2);
-
-    // TODO. Remove:
-    var coordinates = document.getElementById("Keypress");
-    coordinates.innerHTML = "[" + key + "]";
 }
 
 function onCanvasClick(e) {
     prevClickX = clickX;
     prevClickY = clickY;
-
     clickX = gridX;
     clickY = gridY;
-
-    // TODO. Remove
-    var coordinates = document.getElementById("ClickPosition");
-    coordinates.innerHTML = "[" + clickX + ", " + clickY + "]";
-    var coordinates = document.getElementById("PrevClickPosition");
-    coordinates.innerHTML = "[" + prevClickX + ", " + prevClickY + "]";
-
     move(clickX, clickY, prevClickX, prevClickY);
+    moveSound.play()
 }
 
 function getGridCoordinate(canvasCoord) {
@@ -401,8 +409,6 @@ function onCanvasMouseMove(e) {
     // TODO. Remove
     var coordinates = document.getElementById("MousePosition");
     coordinates.innerHTML = "[" + gridX + ", " + gridY + "]";
-    var coordinates = document.getElementById("PrevMousePosition");
-    coordinates.innerHTML = "[" + prevGridX + ", " + prevGridY + "]";
 
     redrawCanvas(gridX, gridY, prevGridX, prevGridY);
 }
