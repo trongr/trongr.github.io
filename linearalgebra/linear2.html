@@ -4,16 +4,13 @@
 <meta charset="utf-8">
 <title>Linear Algebra II</title>
 <link rel="stylesheet" href="../css/global.css">
-
 <!-- this config must be before MathJax.js: -->
 <script src="../js/mathjax.config.js"></script>
 <script src="../js/MathJax/MathJax.js"></script>
 <!-- <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js"></script> -->
-
 <script src="../js/jquery-3.1.0.min.js"></script>
 <script src="../js/smartquotes.js"></script>
 <script src="../js/global.js"></script>
-
 </head>
 <body>
 <div id="content">
@@ -173,6 +170,127 @@ fin dim inner product space</h2>
         all x, i.e. T is unitary / orthogonal.</li>
     </ol>
 </i>
+</p>
+
+<p>
+    In other words, an operator is unitary / orthogonal iff it is normal
+    and its "norm" $TT^{*}$ is 1.
+</p>
+<p>
+<i>Proof (1) implies (2).</i> For any $x,y,$
+
+    $$
+    \left\langle x,y\right\rangle =\left\langle T^{*}T(x),y\right\rangle =\left\langle T(x),T(y)\right\rangle .
+    $$
+</p>
+
+<p>
+<i>Proof (2) implies (3).</i> Let $\beta=\left\{ v_{1},\ldots,v_{n}\right\} $ be
+an orthonormal basis for V. Then $T(\beta)=\left\{
+T(v_{1}),\ldots,T(v_{n})\right\} $ and
+
+$$
+\left\langle T(v_{i}),T(v_{j})\right\rangle =\left\langle v_{i},v_{j}\right\rangle =\delta_{ij},
+$$
+
+so $T(\beta)$ is an orthonormal basis for V.
+</p>
+
+<p>
+<i>Proof (3) implies (4).</i> Any orthonormal basis $\beta$ satisfies this
+property, and there must be one because V is fin dim.
+</p>
+
+<p>
+<i>Proof (4) implies (5).</i> Let $x\in V,\beta=\left\{
+v_{1},\ldots,v_{n}\right\} .$ Then
+
+$$
+x=\sum_{i=1}^{n}a_{i}v_{i}
+$$
+
+for some $a_{i},$ and
+
+$$
+\left|\left|x\right|\right|^{2}=\left\langle \sum_{i=1}^{n}a_{i}v_{i},\sum_{i=1}^{n}a_{i}v_{i}\right\rangle =\sum_{i}\sum_{j}a_{i}\overline{a_{j}}\left\langle v_{i},v_{j}\right\rangle =\sum_{i=1}^{n}\left|a_{i}\right|^{2}.
+$$
+
+Similarly,
+
+$$
+\left|\left|T(x)\right|\right|^{2}=\left\langle \sum_{i=1}^{n}a_{i}T(v_{i}),\sum_{i=1}^{n}a_{i}T(v_{i})\right\rangle =\sum_{i}\sum_{j}a_{i}\overline{a_{j}}\left\langle T(v_{i}),T(v_{j})\right\rangle =\sum_{i=1}^{n}\left|a_{i}\right|^{2},
+$$
+
+since $T(\beta)$ is also orthonormal.
+</p>
+
+<p>
+<i>Proof (5) implies (1).</i> For any $x,$
+
+$$
+\begin{aligned}\left\langle x,x\right\rangle  & =\left\langle T(x),T(x)\right\rangle =\left\langle x,T^{*}T(x)\right\rangle \\
+\left\langle x,(I-T^{*}T)(x)\right\rangle  & =0.
+\end{aligned}
+$$
+
+Let $U=I-T^{*}T.$ Then U is self-adjoint and $\left\langle x,U(x)\right\rangle
+=0$ for all x. By the previous lemma, $I-T^{*}T=U=T_{0}$ and $I=T^{*}T.$ [ Why
+does this imply that $TT^{*}=I?$ The referenced Exercise 2.4.10 is about
+invertible matrices, not adjoint operators.... Ah, See next. ]
+</p>
+
+<h2>Corollary 6.18.0. The adjoint of a unitary / orthogonal operator is
+its inverse</h2>
+
+<p>
+<i>Proof.</i> Suppose T is uni./orthog. Then $TT^{*}=I,$ hence $T^{*}=T^{-1},$
+by Exercise 2.4.10.
+</p>
+
+<h2>Exercise 2.4.10. One-sided inverse is a two-sided inverse. Let A and B be
+$n\times n$ matrices s.t. $AB=I_{n}.$ (a) Use previous to conclude that A and B
+are invertible. (b) Prove $A=B^{-1}$ and $B=A^{-1},$ i.e. for square matrices, a
+one-sided inverse is a two-sided inverse.</h2>
+
+<p>
+<i>Proof.</i> (a) By previous, A and B are invertible. (b) Multiply on the
+left by $A^{-1}$
+
+$$
+\begin{aligned}AB & =I\\
+A^{-1}AB & =A^{-1}\\
+B & =A^{-1}.
+\end{aligned}
+$$
+
+Similarly for the other one.
+</p>
+
+<h2>Corollary 6.18.1.1. Square matrix is unitary / orthogonal iff its rows and
+columns form orthonormal bases for $F^{n}.$</h2>
+
+<p>
+    <i>Proof.</i>
+    $AA^{*}=I$ is equivalent to the statement that the rows of
+    A form an orthonormal basis for $F^{n},$ because
+
+    $$
+    AA^{*}=I=\begin{bmatrix}A_{1}\\
+    \vdots\\
+    A_{n}
+    \end{bmatrix}\begin{bmatrix}\overline{A_{1}^{t}} & \cdots & \overline{A_{n}^{t}}\end{bmatrix},
+    $$
+
+    and so
+
+    $$
+    \left\langle A_{i},A_{j}\right\rangle =A_{i}\overline{A_{j}^{t}}=\delta_{ij}.
+    $$
+
+    Similarly the condition $A^{*}A=I$ is equivalent to the statement
+    that the columns of A form an orthonormal basis for $F^{n}.$ Therefore
+    a square matrix is orthogonal iff its rows and columns form orthonormal
+    bases for $F^{n}.$
 </p>
 
 <h2>Schur's Theorem Variant. Let $ A\in M_{n\times n}(F) $ be a matrix whose
@@ -550,7 +668,197 @@ $$ R_j = \begin{bmatrix}
 
 <h1>Conic sections</h1>
 
+<p>
+    Consider the quadratic equation
 
+    $$
+    ax^2 + 2bxy + cy^2 + dx + ey + f = 0. \tag 2
+    $$
+
+    For different constants $ a, b, c, d, e, f $ we get different conic
+    sections. E.g. for $ a = c = 1, b = d = e = 0, f = -1 $ we get the circle $
+    x^2 + y^2 = 1. $ Similarly we have the ellipses $ \frac { x ^ { 2 } } { a ^
+    { 2 } } + \frac { y ^ { 2 } } { b ^ { 2 } } = 1, $ the parabola $ y ^ { 2 }
+    = 4 a x, $ and the hyperbola $ \frac { x ^ { 2 } } { a ^ { 2 } } - \frac { y
+    ^ { 2 } } { b ^ { 2 } } = 1, $ give or take the constant $ f. $
+</p>
+
+<p>
+    If $ b = 0, $ then we can complete the square to get
+
+    \begin{align*}
+    ax^2 + 2bxy + cy^2 + dx + ey + f &=
+        \left[ a \left(x + \frac{d}{2a}\right)^2 + \frac{f}{2} - \frac{b^2}{4a} \right] +
+        \left[ c \left(y + \frac{e}{2c}\right)^2 + \frac{f}{2} - \frac{e^2}{4c} \right] \\
+
+    &= a \left(x + \frac{d}{2a}\right)^2 + c \left(y + \frac{e}{2c}\right)^2
+        + f - \frac{b^2}{4a} - \frac{e^2}{4c}.
+    \end{align*}
+
+    IOW, if $ b = 0, $ we can eliminate the $ x $ and $ y $ terms by changing
+    the variables $ x \longrightarrow x' = x + \frac{d}{2a}, y \longrightarrow
+    y' = y + \frac{e}{2c}. $ This corresponds to translating the coordinate
+    system.
+</p>
+
+<h3>Quadratic form</h3>
+
+<p>
+    Now we'll try to get rid of the $ xy $ term. Consider the expression
+
+    $$
+    ax^2 + 2bxy + cy^2, \tag 3
+    $$
+
+    which is called the associated quadratic form of (2).
+</p>
+<p>
+    Let
+
+    $$
+    A = \begin{bmatrix}
+    a & b \\
+    b & c
+    \end{bmatrix}, X = \begin{bmatrix}
+    x \\
+    y
+    \end{bmatrix}.
+    $$
+
+    Then (3) may be written as $ X^T AX = \< AX, X \>. $ [This is easy to
+    verify.] Since $ A $ is symmetric, by theorem 6.20, it is orthogonally equivalent to a diagonal matrix, i.e. there is an orthogonal matrix $ P $ and a diagonal matrix $ D $ s.t. $ P^T A P = D, $ where $ D = \begin{bmatrix}
+    \lambda_1 & 0 \\
+    0 & \lambda_2 \\
+    \end{bmatrix}. $
+</p>
+<p>
+    Define $ X' = \begin{bmatrix}
+    x' \\
+    y'
+    \end{bmatrix} $ by $ X' = P^T X, $ or equivalently by
+
+    $$
+    PX' = PP^T X = X,
+    $$
+
+    [Since $ P^T = P ^{-1}, $ because $ P $ is orthogonal by Corollary 6.18.0.]
+    Then
+
+    $$
+    X^t A X = (P X')^t A (P X')
+    = (X')^t (P^t A P) X'
+    = (X')^t D X'
+    =_{(4)} \lambda_1 (x')^2 + \lambda_2 (y')^2.
+    $$
+
+    Note that we can verify (4) without calculating by comparing
+
+    $$
+    (X')^t D X' = (X')^t \begin{bmatrix}
+    \lambda_1 & 0 \\
+    0 & \lambda_2 \\
+    \end{bmatrix} X'
+    = \lambda_1 (x')^2 + \lambda_2 (y')^2
+    $$
+
+    with (3):
+
+    $$
+    X^T AX = X^T \begin{bmatrix}
+    a & b \\
+    b & c \\
+    \end{bmatrix} X
+    = ax^2 + 2bxy + cy^2.
+    $$
+</p>
+<p>
+    Therefore, by making the transformation $ X \longrightarrow X' = P^t X, $ we
+    can eliminate the $ xy $ term from (3), and hence also from (2).
+</p>
+<p>
+    <i>In summary, by applying an orthogonal transformation to $ X $, we can
+    remove the $ xy $ term. Then by a translation, we can remove the $ x $ and $
+    y $ terms, reducing
+
+    $$
+    ax^2 + 2bxy + cy^2 + dx + ey + f = 0
+    $$
+
+    to just
+
+    $$
+    ax^2 + cy^2 + f = 0.
+    $$
+
+    </i>
+</p>
+
+<p>
+    <i>We already know that an orthogonal transformation P in $ \bR^2 $ is
+    either a rotation or a reflection with determinant $ \pm 1 $ [ Theorem 6.23
+    ].</i> Now we'll show that in this case we can assume $ P $ is a rotation.
+</p>
+
+<p>
+    If $ \det P = 1, $ then $ P $ is a rotation and we're done. OTW suppose $ P
+    $ is a reflection with $ \det P = -1. $ Since $ P $ is orthogonal, its
+    columns form an orthonormal basis for $ \bR^2 $ [Corollary 6.18.1.1]. By
+    interchanging the columns of $ P, $ we obtain a matrix $ Q $ which has the
+    same property and so is also orthogonal.
+</p>
+<p>
+    <i>Recall that interchanging two columns in $ \bR^2 $ is performed by right
+    multiplying $ P $ by
+
+    $ E = \begin{bmatrix}
+    0 & 1 \\
+    1 & 0 \\
+    \end{bmatrix}, $ i.e.
+
+    $$ PE = Q $$
+
+    or equivalently
+
+    $$
+    P = QE.
+    $$
+
+    </i>
+
+    Now
+
+    \begin{align*}
+
+    \begin{bmatrix}
+    \lambda_1 & 0 \\
+    0 & \lambda_2 \\
+    \end{bmatrix} = P^T A P = (QE)^T A (QE) &= E^T Q^T A Q E \\
+
+    E \begin{bmatrix}
+    \lambda_1 & 0 \\
+    0 & \lambda_2
+    \end{bmatrix} E &= Q^T A Q \\
+
+    \begin{bmatrix}
+    \lambda_2 & 0 \\
+    0 & \lambda_1
+    \end{bmatrix} &=_{(5)} Q^T A Q
+
+    \end{align*}
+
+    [ <i>(5). Recall that right multiplying by E interchanges the columns, and
+    left multiplying by E interchanges the rows.</i> ]
+</p>
+
+<p>
+    <i>In summary, the $ xy $ term may be eliminated by a rotation $ X' = P^TX, $ and the equation for the conic section can be simplified to
+
+    $$
+    \lambda_1 x^2 + \lambda_2 y^2 = f.
+    $$
+
+    </i>
+</p>
 
 </div>
 </body>

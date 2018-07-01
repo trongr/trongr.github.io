@@ -175,9 +175,9 @@ function move(clickX, clickY, prevClickX, prevClickY) {
 
     var coordinates = document.getElementById("WhoseTurnIsIt");
     if (turn == TURN_BLACK) {
-        coordinates.innerHTML = "[BLACK]";
+        coordinates.innerHTML = "[ BLACK ]";
     } else {
-        coordinates.innerHTML = "[WHITE]";
+        coordinates.innerHTML = "[ WHITE ]";
     }
 
     redrawCell(clickX, clickY);
@@ -408,7 +408,7 @@ function onCanvasMouseMove(e) {
 
     // TODO. Remove
     var coordinates = document.getElementById("MousePosition");
-    coordinates.innerHTML = "[" + gridX + ", " + gridY + "]";
+    coordinates.innerHTML = "[ " + gridX + ", " + gridY + " ]";
 
     redrawCanvas(gridX, gridY, prevGridX, prevGridY);
 }
