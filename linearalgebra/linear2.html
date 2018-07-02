@@ -683,16 +683,18 @@ $$ R_j = \begin{bmatrix}
     ^ { 2 } } { b ^ { 2 } } = 1, $ give or take the constant $ f. $
 </p>
 
+<h3>Simplification by translating</h3>
+
 <p>
     If $ b = 0, $ then we can complete the square to get
 
     \begin{align*}
     ax^2 + 2bxy + cy^2 + dx + ey + f &=
-        \left[ a \left(x + \frac{d}{2a}\right)^2 + \frac{f}{2} - \frac{b^2}{4a} \right] +
+        \left[ a \left(x + \frac{d}{2a}\right)^2 + \frac{f}{2} - \frac{d^2}{4a} \right] +
         \left[ c \left(y + \frac{e}{2c}\right)^2 + \frac{f}{2} - \frac{e^2}{4c} \right] \\
 
     &= a \left(x + \frac{d}{2a}\right)^2 + c \left(y + \frac{e}{2c}\right)^2
-        + f - \frac{b^2}{4a} - \frac{e^2}{4c}.
+        + f - \frac{d^2}{4a} - \frac{e^2}{4c}.
     \end{align*}
 
     IOW, if $ b = 0, $ we can eliminate the $ x $ and $ y $ terms by changing
@@ -701,7 +703,7 @@ $$ R_j = \begin{bmatrix}
     system.
 </p>
 
-<h3>Quadratic form</h3>
+<h3>Simplification by orthogonal transformation</h3>
 
 <p>
     Now we'll try to get rid of the $ xy $ term. Consider the expression
@@ -726,10 +728,14 @@ $$ R_j = \begin{bmatrix}
     $$
 
     Then (3) may be written as $ X^T AX = \< AX, X \>. $ [This is easy to
-    verify.] Since $ A $ is symmetric, by theorem 6.20, it is orthogonally equivalent to a diagonal matrix, i.e. there is an orthogonal matrix $ P $ and a diagonal matrix $ D $ s.t. $ P^T A P = D, $ where $ D = \begin{bmatrix}
+    verify.] <i>Since $ A $ is symmetric, by theorem 6.20, it is orthogonally
+    equivalent to a diagonal matrix, i.e. there is an orthogonal matrix $ P $
+    and a diagonal matrix $ D $ s.t. $ P^T A P = D, $ where
+
+    $ D = \begin{bmatrix}
     \lambda_1 & 0 \\
     0 & \lambda_2 \\
-    \end{bmatrix}. $
+    \end{bmatrix}. $</i>
 </p>
 <p>
     Define $ X' = \begin{bmatrix}
@@ -741,7 +747,8 @@ $$ R_j = \begin{bmatrix}
     PX' = PP^T X = X,
     $$
 
-    [Since $ P^T = P ^{-1}, $ because $ P $ is orthogonal by Corollary 6.18.0.]
+    <i>[Since $ P^T = P ^{-1}, $ because $ P $ is orthogonal and by Corollary
+    6.18.0.]</i>
     Then
 
     $$
@@ -793,6 +800,8 @@ $$ R_j = \begin{bmatrix}
     </i>
 </p>
 
+<h3>The orthogonal transformation can be a rotation</h3>
+
 <p>
     <i>We already know that an orthogonal transformation P in $ \bR^2 $ is
     either a rotation or a reflection with determinant $ \pm 1 $ [ Theorem 6.23
@@ -801,14 +810,14 @@ $$ R_j = \begin{bmatrix}
 
 <p>
     If $ \det P = 1, $ then $ P $ is a rotation and we're done. OTW suppose $ P
-    $ is a reflection with $ \det P = -1. $ Since $ P $ is orthogonal, its
-    columns form an orthonormal basis for $ \bR^2 $ [Corollary 6.18.1.1]. By
+    $ is a reflection with $ \det P = -1. $ <i>Since $ P $ is orthogonal, its
+    columns form an orthonormal basis for $ \bR^2 $ [Corollary 6.18.1.1].</i> By
     interchanging the columns of $ P, $ we obtain a matrix $ Q $ which has the
     same property and so is also orthogonal.
 </p>
 <p>
     <i>Recall that interchanging two columns in $ \bR^2 $ is performed by right
-    multiplying $ P $ by
+    multiplying $ P $ by the elementary operation
 
     $ E = \begin{bmatrix}
     0 & 1 \\
@@ -842,22 +851,21 @@ $$ R_j = \begin{bmatrix}
     \begin{bmatrix}
     \lambda_2 & 0 \\
     0 & \lambda_1
-    \end{bmatrix} &=_{(5)} Q^T A Q
+    \end{bmatrix} &=_{(5)} Q^T A Q.
 
     \end{align*}
 
     [ <i>(5). Recall that right multiplying by E interchanges the columns, and
-    left multiplying by E interchanges the rows.</i> ]
+    left multiplying by E interchanges the rows.</i> ] IOW, we've found an
+    orthogonal matrix $ Q $ with determinant $ +1 $ that diagonalizes A. By Theorem 6.23, Q is a rotation.
 </p>
 
 <p>
-    <i>In summary, the $ xy $ term may be eliminated by a rotation $ X' = P^TX, $ and the equation for the conic section can be simplified to
 
-    $$
-    \lambda_1 x^2 + \lambda_2 y^2 = f.
-    $$
-
-    </i>
+    <i>In summary, the $ xy $ term may be eliminated by a rotation $ X' = P^TX,
+    $ and the $ x $ and $ y $ terms can be eliminated by a translation, and the
+    equation for the conic section can be simplified to $$ \lambda_1 x^2 +
+    \lambda_2 y^2 = f. $$</i>
 </p>
 
 </div>
