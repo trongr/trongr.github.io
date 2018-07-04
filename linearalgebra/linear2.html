@@ -122,12 +122,19 @@
     matrix $ [T]_\b $ is upper triangular.</i>
 </p>
 
-<h3>Normal operator</h3>
+<h1>Normal operator</h1>
+
+<h3>Definition. Let $ V $ be an inner product space and $ T $
+be a linear operator on $ V. $ Then $ T $ is called normal if $ TT^* = T^*T. $
+Similarly for an $ n\times n $ matrix $ A. $</h3>
+
+<h3>E.g. of normal operators: unitary, selfadjoint, and real symmetric operators</h3>
 
 <p>
-    <i>Definition. Let $ V $ be an inner product space and $ T $ be a linear
-    operator on $ V. $ Then $ T $ is called normal if $ TT^* = T^*T. $ Similarly
-    for an $ n\times n $ matrix $ A. $</i>
+    Unitary operators are normal: <i>recall that unitary and orthogonal
+    operators satisfy  $ A^{*}=A^{-1} $ by Corollary 6.18.0,</i> so $ A^* $
+    commutes with A. Selfadjoint [and therefore real symmetric] operators are
+    normal: $ A^{*}= A^t = A. $
 </p>
 <p>
     <i>Corollary. Let $ V $ be an inner product space and $ T $ be a linear
@@ -861,11 +868,33 @@ $$ R_j = \begin{bmatrix}
 </p>
 
 <p>
-
     <i>In summary, the $ xy $ term may be eliminated by a rotation $ X' = P^TX,
     $ and the $ x $ and $ y $ terms can be eliminated by a translation, and the
     equation for the conic section can be simplified to $$ \lambda_1 x^2 +
     \lambda_2 y^2 = f. $$</i>
+</p>
+
+<h1>Summary of Summary of orthogonality, normality, and diagonalizability</h1>
+
+<p>
+    We have
+
+
+\begin{align*}
+\textrm{ Unitary / Orthogonal } \implies & \text{Normal / selfadjoint} \\
+    \iff &	\text{Exists orthonormal eigenbasis} \\
+    \implies &	\text{Exists eigenbasis } \\
+    \iff &	\text{Diagonalizable.} \\
+\end{align*}
+
+
+    and it seems that the two are not equivalent.
+</p>
+
+<p>
+    QUESTION. Are there diagonalizable operators that aren't normal /
+    selfadjoint? We just need to find one that has an eigenbasis that isn't
+    orthonormal, How?
 </p>
 
 </div>
