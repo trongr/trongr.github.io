@@ -1,902 +1,518 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="utf-8">
-<title>Linear Algebra II</title>
-<link rel="stylesheet" href="../css/global.css">
-<!-- this config must be before MathJax.js: -->
-<script src="../js/mathjax.config.js"></script>
-<script src="../js/MathJax/MathJax.js"></script>
-<!-- <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js"></script> -->
-<script src="../js/jquery-3.1.0.min.js"></script>
-<script src="../js/smartquotes.js"></script>
-<script src="../js/global.js"></script>
+    <meta charset="utf-8">
+    <title>Linear Algebra II</title>
+    <link rel="stylesheet" href="../css/global.css">
+    <!-- this config must be before MathJax.js: -->
+    <script src="../js/mathjax.config.js"></script>
+    <script src="../js/MathJax/MathJax.js"></script>
+    <!-- <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js"></script> -->
+    <script src="../js/jquery-3.1.0.min.js"></script>
+    <script src="../js/smartquotes.js"></script>
+    <script src="../js/global.js"></script>
 </head>
+
 <body>
-<div id="content">
-<a href="../index.html">HOME</a>
+    <div id="content">
+        <a href="../index.html">HOME</a>
 
-<h1>Linear Algebra II</h1>
+        <h1>Linear Algebra II</h1>
 
-<script src="../js/toc.js"></script>
-<div id="toc"></div>
+        <script src="../js/toc.js"></script>
+        <div id="toc"></div>
 
-<h1>Reference</h1>
-<ol>
-<li>Linear Algebra by Friedberg, Insel, and Spence.</li>
-<li>Linear Algebra video lectures by Gilbert Strang.</li>
-<li>The Web.</li>
-</ol>
-
-<h1>Adjoint / complex conjugate</h1>
-
-<p>
-    <i>Exercise. Let $ A $ be an $ n \times n $ matrix. Then $ \det A^* = \overline{\det A}. $</i>
-</p>
-<p>
-    Use Leibniz's formula for determinants.
-</p>
-
-<p>
-    <i>Ex. Suppose that $ A $ is an $ m \times n $ matrix in which no two
-    columns are identical. Then $ A^* A $ is diagonal iff every pair of columns
-    of A is orthogonal.
-    </i>
-</p>
-<p>
-    Write out the entries of $ A^* A $ in terms of inner products of the rows of
-    $ A^* $ and columns of $ A. $
-</p>
-
-<h3>Example of linear operator without an adjoint</h3>
-
-<p>
-    <i>Example. Let $ V $ be the vector space of infinite sequences with finitely
-        many nonzero entries in $ F = \bR $ or $ F = \bC. $ Define $ T: V
-        \longrightarrow V $ by
-
-        $$ T(\s)_k = \sum_{i=k}^{\infty} \s_i $$
-
-        for $ k \geq 0. $ Then
-
+        <h1>Reference</h1>
         <ol>
-            <li>$ T $ is a linear operator on $ V. $</li>
-            <li>For any $ n \geq 0, $ $ T(e_n) = \sum_{i=1}^n e_i. $</li>
-            <li>$ T $ has no adjoint.</li>
-        </ol></i>
-</p>
-<p>
-    1. $ T $ is linear. Let $ \s, \m \in V. $ Then
-
-    $$ T(\s + \m)_k = \sum_{i=k}^{\infty} (\s + \m)_i
-    = \sum_{i=k}^{\infty} \s_i
-    + \sum_{i=k}^{\infty} \m_i. $$
-
-    Scalar multiple is proved similarly.
-</p>
-<p>
-    2. Explicitly,
-
-    \begin{align*}
-        e_n &= (0, 0,..., 0, 1, 0,...) \\
-        T(e_n) &= \left(\sum_{i=1}^{\infty} (e_n)_i, \sum_{i=2}^{\infty} (e_n)_i,...,
-        \sum_{i=n}^{\infty} (e_n)_i,...\right) \\
-        &= \left(1, 1,..., 1, 0, 0,...\right) \\
-        &= \sum_{i=1}^n e_i.
-    \end{align*}
-</p>
-<p>
-    3. Suppose for contradiction that $ T^* $ exists. Then for any $ n, k $ we
-    have
-
-    $$ \< T^*(e_n), e_k \> = \< e_n, T(e_k) \> = \< e_n, \sum_{i=1}^k e_i \>
-    = \begin{cases}
-    0 \text{ if } k < n \\
-    1 \text{ if } k \geq n.
-    \end{cases}. $$
-
-    Fixing $ n $ and varying $ k $ over the positive integers, we find that $ \<
-    T^*(e_n), e_k \></n> $ has infinitely many nonzero entries. In fact
-
-    $$ T^*(e_n) = (0, 0,...,1,1,1,1,...). $$
-
-    Therefore $ T^* $ is not a map on $ V $ and we have a contradiction.
-</p>
-
-<h1>Normal and self-adjoint operators</h1>
-
-<p>
-    <i>Lemma. Let $ T $ be a linear operator on a finite-dimensional inner
-    product space $ V. $ If $ T $ has an eigenvector, then so does $ T^*. $ If $
-    \l $ is an eigenvalue of $ T, $ then $ \bar \l $ is an eigenvalue of $ T^*.
-    $
-    </i>
-</p>
-
-<h1>Schur's Theorem</h1>
-
-<p>
-    <i>Theorem. Let $ T $ be a linear operator on a finite-dimensional inner
-    product space $ V. $ Suppose that the characteristic polynomial of $ T $
-    splits. Then there exists an orthonormal basis $ \b $ for $ V $ s.t. the
-    matrix $ [T]_\b $ is upper triangular.</i>
-</p>
-
-<h1>Normal operator</h1>
-
-<h3>Definition. Let $ V $ be an inner product space and $ T $
-be a linear operator on $ V. $ Then $ T $ is called normal if $ TT^* = T^*T. $
-Similarly for an $ n\times n $ matrix $ A. $</h3>
-
-<h3>E.g. of normal operators: unitary, selfadjoint, and real symmetric operators</h3>
-
-<p>
-    Unitary operators are normal: <i>recall that unitary and orthogonal
-    operators satisfy  $ A^{*}=A^{-1} $ by Corollary 6.18.0,</i> so $ A^* $
-    commutes with A. Selfadjoint [and therefore real symmetric] operators are
-    normal: $ A^{*}= A^t = A. $
-</p>
-<p>
-    <i>Corollary. Let $ V $ be an inner product space and $ T $ be a linear
-    operator on $ V. $ Then $ T $ is normal iff $ [T]_{\b} $ is normal, where $
-    \b $ is an orthonormal basis for $ V. $</i>
-</p>
-<p>
-    <i>Proof.</i> $ (\Longrightarrow) $ Suppose that $ TT^* = T^*T. $ By theorem
-    6.10,
-
-    $$ [T^*]_\b = [T]_\b^*. $$ Use this fact to expand
-
-    \begin{align*}
-        [TT^*]_{\b} &= [T^*T]_{\b} \\
-        [T]_{\b} [T^*]_{\b} &= [T^*]_{\b} [T]_{\b} \\
-        [T]_{\b} [T]^*_{\b} &= [T]^*_{\b} [T]_{\b}. \\
-    \end{align*}
-
-    Therefore $ [T]_{\b} $ is normal. The converse is similar.
-</p>
-
-<h2>Theorem 6.18. Characterizing unitary / orthogonal / isometric operators on a
-fin dim inner product space</h2>
-
-<p>
-<i>
-    Let $ T, n, \left\langle \right\rangle ,V,F. $ Then the following statements
-    are equivalent:
-
-    <ol>
-        <li>$ TT^{*}=T^{*}T=I. $ In particular, T is normal and there exists an
-        orthonormal basis for V consisting of eigenvectors of T.</li>
-        <li>$ \left\langle T(x),T(y)\right\rangle =\left\langle x,y\right\rangle
-        $  for all x,y.</li>
-        <li>If $ \beta $ is an orthonormal basis, then $ T(\beta) $ is an
-        orthonormal basis.</li>
-        <li>There exists an orthonormal basis $ \beta $ s.t. $ T(\beta) $ is an
-        orthonormal basis.</li>
-        <li>$ \left|\left|T(x)\right|\right|=\left|\left|x\right|\right| $ for
-        all x, i.e. T is unitary / orthogonal.</li>
-    </ol>
-</i>
-</p>
-
-<p>
-    In other words, an operator is unitary / orthogonal iff it is normal
-    and its "norm" $TT^{*}$ is 1.
-</p>
-<p>
-<i>Proof (1) implies (2).</i> For any $x,y,$
-
-    $$
-    \left\langle x,y\right\rangle =\left\langle T^{*}T(x),y\right\rangle =\left\langle T(x),T(y)\right\rangle .
-    $$
-</p>
-
-<p>
-<i>Proof (2) implies (3).</i> Let $\beta=\left\{ v_{1},\ldots,v_{n}\right\} $ be
-an orthonormal basis for V. Then $T(\beta)=\left\{
-T(v_{1}),\ldots,T(v_{n})\right\} $ and
-
-$$
-\left\langle T(v_{i}),T(v_{j})\right\rangle =\left\langle v_{i},v_{j}\right\rangle =\delta_{ij},
-$$
-
-so $T(\beta)$ is an orthonormal basis for V.
-</p>
-
-<p>
-<i>Proof (3) implies (4).</i> Any orthonormal basis $\beta$ satisfies this
-property, and there must be one because V is fin dim.
-</p>
-
-<p>
-<i>Proof (4) implies (5).</i> Let $x\in V,\beta=\left\{
-v_{1},\ldots,v_{n}\right\} .$ Then
-
-$$
-x=\sum_{i=1}^{n}a_{i}v_{i}
-$$
-
-for some $a_{i},$ and
-
-$$
-\left|\left|x\right|\right|^{2}=\left\langle \sum_{i=1}^{n}a_{i}v_{i},\sum_{i=1}^{n}a_{i}v_{i}\right\rangle =\sum_{i}\sum_{j}a_{i}\overline{a_{j}}\left\langle v_{i},v_{j}\right\rangle =\sum_{i=1}^{n}\left|a_{i}\right|^{2}.
-$$
-
-Similarly,
-
-$$
-\left|\left|T(x)\right|\right|^{2}=\left\langle \sum_{i=1}^{n}a_{i}T(v_{i}),\sum_{i=1}^{n}a_{i}T(v_{i})\right\rangle =\sum_{i}\sum_{j}a_{i}\overline{a_{j}}\left\langle T(v_{i}),T(v_{j})\right\rangle =\sum_{i=1}^{n}\left|a_{i}\right|^{2},
-$$
-
-since $T(\beta)$ is also orthonormal.
-</p>
-
-<p>
-<i>Proof (5) implies (1).</i> For any $x,$
-
-$$
-\begin{aligned}\left\langle x,x\right\rangle  & =\left\langle T(x),T(x)\right\rangle =\left\langle x,T^{*}T(x)\right\rangle \\
-\left\langle x,(I-T^{*}T)(x)\right\rangle  & =0.
-\end{aligned}
-$$
-
-Let $U=I-T^{*}T.$ Then U is self-adjoint and $\left\langle x,U(x)\right\rangle
-=0$ for all x. By the previous lemma, $I-T^{*}T=U=T_{0}$ and $I=T^{*}T.$ [ Why
-does this imply that $TT^{*}=I?$ The referenced Exercise 2.4.10 is about
-invertible matrices, not adjoint operators.... Ah, See next. ]
-</p>
-
-<h2>Corollary 6.18.0. The adjoint of a unitary / orthogonal operator is
-its inverse</h2>
-
-<p>
-<i>Proof.</i> Suppose T is uni./orthog. Then $TT^{*}=I,$ hence $T^{*}=T^{-1},$
-by Exercise 2.4.10.
-</p>
-
-<h2>Exercise 2.4.10. One-sided inverse is a two-sided inverse. Let A and B be
-$n\times n$ matrices s.t. $AB=I_{n}.$ (a) Use previous to conclude that A and B
-are invertible. (b) Prove $A=B^{-1}$ and $B=A^{-1},$ i.e. for square matrices, a
-one-sided inverse is a two-sided inverse.</h2>
-
-<p>
-<i>Proof.</i> (a) By previous, A and B are invertible. (b) Multiply on the
-left by $A^{-1}$
-
-$$
-\begin{aligned}AB & =I\\
-A^{-1}AB & =A^{-1}\\
-B & =A^{-1}.
-\end{aligned}
-$$
-
-Similarly for the other one.
-</p>
-
-<h2>Corollary 6.18.1.1. Square matrix is unitary / orthogonal iff its rows and
-columns form orthonormal bases for $F^{n}.$</h2>
-
-<p>
-    <i>Proof.</i>
-    $AA^{*}=I$ is equivalent to the statement that the rows of
-    A form an orthonormal basis for $F^{n},$ because
-
-    $$
-    AA^{*}=I=\begin{bmatrix}A_{1}\\
-    \vdots\\
-    A_{n}
-    \end{bmatrix}\begin{bmatrix}\overline{A_{1}^{t}} & \cdots & \overline{A_{n}^{t}}\end{bmatrix},
-    $$
-
-    and so
-
-    $$
-    \left\langle A_{i},A_{j}\right\rangle =A_{i}\overline{A_{j}^{t}}=\delta_{ij}.
-    $$
-
-    Similarly the condition $A^{*}A=I$ is equivalent to the statement
-    that the columns of A form an orthonormal basis for $F^{n}.$ Therefore
-    a square matrix is orthogonal iff its rows and columns form orthonormal
-    bases for $F^{n}.$
-</p>
-
-<h2>Schur's Theorem Variant. Let $ A\in M_{n\times n}(F) $ be a matrix whose
-characteristic polynomial splits over F. If $ F=C, $ then A is unitarily eq. to
-a complex upper triangular matrix. IF $ F=R, $ then A is orthogonally eq. to a
-real upper triangular matrix.</h2>
-
-<h2>Theorem 6.20. Let A be a real $ n\times n $ matrix. Then A is selfadjoint
-i.e. symmetric iff A is orthogonally equivalent to a diagonal matrix D.</h2>
-
-<p>
-<i>Proof.</i>
-The forward direction is already proved in Note 6.18.3. Conversely, suppose that
-A is ortho. eq. to a diagonal matrix D. Then there exists an orthogonal matrix P
-s.t. $ A=P^{T}DP. $ We want to show that A is symmetric:
-
-$$
-A^{T}=(P^{T}DP)^{T}=P^{T}D^{T}P=P^{T}DP=A,
-$$
-
-since D is diagonal.
-</p>
-
-<h2>Isometry / Rigid Motions</h2>
-
-<p>
-    <i>Definition. Let VR. A function $ f:V\longrightarrow V $ is called an
-    isometry / rigid motion if
-
-    $$ \|f(x)-f(y)\|=\|x-y\| $$
-
-    for all x, y in V.
-</i>
-</p>
-
-<p>
-    (Rigid motions are examples of affine transformations, which include
-    translation, scaling, homothety (homogeneous dilation), similarity
-    transformation, reflection, rotation, shear mapping, and compositions of
-    them in any combination and sequence.)
-</p>
-
-<h3>Examples of rigid motions</h3>
-
-<p>
-    E.g. Any orthogonal operator ($ \left|\left| f(x) \right|\right| =
-    \left|\left| x \right|\right| $) on a finite dimensional real inner product
-    space is a rigid motion, e.g. rotations, reflection by a line through the
-    origin.
-</p>
-<p>
-    E.g. any translation is a rigid motion. A function $ g:V\longrightarrow V $
-    where $ V $ is a real inner product space, is called a translation if there
-    exists a vector $ v_{0} \in V $ s.t. $ g(x) = x + v_0 $ for all $ x\in V. $
-    We say that $ g $ is a translation by $ v_0. $
-</p>
-
-<h3>Proposition. Translations are rigid motions</h3>
-
-<p>
-    <i> Proof. </i> We want to show that
-
-    $$ \|g(x)-g(y)\| = || x + v_0 - y - v_0 || =\|x-y\|, $$
-
-    which is true.
-</p>
-
-<h3>Proposition. Compositions of rigid motions are also rigid motions</h3>
-
-<p>
-    <i> Proof. </i> Let $ f,g:V\longrightarrow V $ be rigid motions. We want to
-    show that $$ \|f \circ g(x)-f \circ g(y)\| = | f(g(x)) - f(g(y)) | =_1 | g(x)
-    - g(y) | =_2 \|x-y\|. $$
-
-    $ =_1 $ is true because $ f $ is a rigid motion, and $ =_2 $ is true because
-    $ g $ is a rigid motion.
-</p>
-
-<h2>Theorem 6.22. Every rigid motion is an orthogonal operator followed by a
-translation</h2>
-
-<p>
-    <i> Let $ f:V\longrightarrow V $ be a rigid motion on a finite-dimensional
-    real inner product space V. Then there exists a unique orthogonal operator T
-    and a unique translation g on V s.t. $ f = g \circ T. $ </i>
-</p>
-<p>
-    NOTE. Any translation is a special case of this composite, where the
-    operator is the identity, and any orthogonal operator is also a special case
-    where the translation is by 0.
-</p>
-<p>
-    <i> Proof. </i> Let $ T: V\longrightarrow V $ be defined by
-
-    $$ T(x) = f(x) - f(0). $$
-
-    We show that T is an orthogonal operator, from which it follows that $ f = g
-    \circ T, $ where g is the transaction by $ f(0). $ Observe that T is the
-    composite of $ f $ and the translation by $ -f(0); $ hence T is a rigid
-    motion. Furthermore, for any $ x \in V, $
-
-    $$ | T(x) |^2 = | f(x) - f(0) |^2 = | x - 0 |^2 = | x |^2, $$
-
-    and consequently $$ | T(x) | = | x |. $$ Thus for any $ x, y \in V, $
-
-    \begin{align*}
-    | T(x) - T(y) |^2 &= | T(x) |^2 - 2\< T(x), T(y) \> + | T(y) |^2 \\
-        &= | x |^2 - 2\< T(x), T(y) \> + | y |^2
-    \end{align*}
-
-    and
-
-    $$ | x - y |^2 = | x |^2 - 2\< x, y \> + | y |^2. $$
-
-    But $$ | T(x) - T(y) |^2 = | f(x) - f(y) |^2 = | x - y |^2, $$ and so
-
-    $$ \< T(x), T(y) \> = \< x, y \> $$
-
-    for all $ x, y \in V. $
-</p>
-<p>
-    Now we show that T is linear. Let $ x, y\in V, a \in \bbR. $ Then
-
-    \begin{align*}
-    | T(x+ay) - T(x) - aT(y) |^2 &= | (T(x+ay) - T(x)) - aT(y) | \\
-        &= | T(x+ay) - T(x) |^2 - 2a\< T(x+ay) - T(x), T(y) \> + a^2| T(y) |^2 \\
-        &= | (x+ay) - x |^2 - 2a\< T(x+ay) - T(x), T(y) \> + a^2| y |^2 \\
-        &= | ay |^2 - 2a(\< T(x+ay), T(y) \> - \< T(x), T(y) \>) + a^2| y |^2 \\
-        &= 2a^2| y |^2 - 2a(\< x+ay, y \> - \< x, y \>) \\
-        &= 0.
-    \end{align*}
-
-    Therefore $ T(x+ay) = T(x) + aT(y) $ and T is linear. Since T also preserves
-    inner products, it is also an orthogonal operator.
-</p>
-<p>
-    To show uniqueness, let $ u_0, v_0 \in V, $ let T and U be orthogonal
-    operators s.t.
-
-    $$ f(x) = T(x) + u_0 = U(x) + v_0. $$
-
-    Substituting $ x = 0 $ yields $ u_0 = v_0, $ and hence the translation is
-    unique. This equation then reduces to $  T(x) = U(x), $ therefore $ T = U. $
-</p>
-
-<h2>Theorem 6.23. Orthogonal operators on $ \bbR^2 $ are rotations or
-reflections with determinant $ \pm 1. $</h2>
-
-<p>
-    <i> Let T be an orthogonal operator on $ \bbR^2, $ and let $ A = [T]_\b $
-    where $ \b $ is the standard basis for $ \bbR^2. $ Then exactly one of the
-    following conditions is satisfied:
-
-    <ol>
-        <li>T is a rotation, and $ \det A = 1. $</li>
-        <li>T is a reflection about a line through the origin, and $ \det A = -1. $</li>
-    </ol></i>
-</p>
-
-<p>
-<i>Proof.</i> By theorem 6.18, since
-<i>
-T is orthogonal, T maps orthonormal basis to orthonormal basis.
-</i> In particular, $ T(\b) = \{ T(e_1), T(e_2) \} $ is an orthonormal basis for
-$ \bR^2. $ Since $ e_1 $ is a unit vector, there exists a unique angle $ \th $
-with $ 0 \leq \th \leq 2 \pi $ s.t. $ T(e1) = (\sin \theta, \cos \theta). $
-Since $ T(e_2) $ is a unit vector and is orthogonal to $ T(e_1), $ there are
-only two choices for $ T(e_2). $ Either
-
-$$
-T(e_2) = (- \sin \theta, \cos \theta)
-$$
-
-or
-
-$$
-T(e_2) = (\sin \theta, - \cos \theta).
-$$
-
-First suppose that
-
-$$
-T(e_2) = (- \sin \theta, \cos \theta).
-$$
-
-Then
-
-$$
-A = \begin{bmatrix}
-    T(e_1) & T(e_2)
-\end{bmatrix} = \begin{bmatrix}
-    \cos \theta & - \sin \theta \\
-    \sin \theta & \cos \theta
-\end{bmatrix}.
-$$
-
-<i>Recall that this is a rotation by $ \theta, $</i> and
-
-$$
-\det A = \cos^2 \theta + \sin^2 \theta = 1.
-$$
-</p>
-
-<p>
-
-Now suppose that
-
-$$
-T(e_2) = (\sin \theta, - \cos \theta).
-$$
-
-Then
-
-$$
-A = \begin{bmatrix}
-    T(e_1) & T(e_2)
-\end{bmatrix} = \begin{bmatrix}
-    \cos \theta & \sin \theta \\
-    \sin \theta & - \cos \theta
-\end{bmatrix}.
-$$
-
-
-<i>
-Now recall that this is a reflection through a line through the origin at angle
-$ \theta / 2. $
-</i>
-
-Furthermore,
-
-$$
-\det A = - \cos^2 \theta - \sin^2 \theta = -1.
-$$
-
-</p>
-
-<h3>Corollary. Rigid motions in $ \bR^2 $ are compositions of rotations,
-reflections, and translations. In fact, a rigid motion in $ \bR^2 $ is either a
-rotation followed by a translation or a reflection about a line through the
-origin followed by a translation.</h3>
-
-<h3>Example. Reflection through a line in $ \bR^2: $
-
-$
-\begin{bmatrix}
-\frac{1}{\sqrt{5}} & \frac{2}{\sqrt{5}} \\
-\frac{2}{\sqrt{5}} & -\frac{1}{\sqrt{5}} \\
-\end{bmatrix}
-$
-
-</h3>
-<p>
-Let
-
-$$
-A = \begin{bmatrix}
-\frac{1}{\sqrt{5}} & \frac{2}{\sqrt{5}} \\
-\frac{2}{\sqrt{5}} & -\frac{1}{\sqrt{5}} \\
-\end{bmatrix}.
-$$
-
-<i>It's easy to verify that $ AA^* = A ^* A = I, $ hence A is orthogonal.
-Alternatively, we can also verify that the columns of A form an orthonormal
-basis of $ \bR^2. $ Furthermore, $ \det A = -1, $ so by Theorem 6.23, A must be
-a reflection through a line through the origin.
-</i>
-</p>
-
-<p>
-Now we'll find the line L that A reflects through. Note that L is the
-1-dimensional subspace where $ A x = x $ for all $ x \in L. $ To find L, it's
-enough to find a vector $ x $ (in this case an eigenvector of A) and we'll have
-$ L = \span\{ x \}. $
-<i>
-    One such eigenvector is $ x = (2, \sqrt{5} - 1), $ which we can
-    find by solving
-
-    $$ A x = x. $$
-</i>
-
-
-Alternatively, L is the line through the origin with slope $ m = \frac{\sqrt{5}
-- 1}{2}, $ and hence is the line with the equation
-
-$$ y = \frac{\sqrt{5} - 1}{2} x. $$
-</p>
-
-<h2>Question. What do orthogonal operators look like in $ \bR^3 $ and $ \bR^n? $</h2>
-
-<h3>Example. Constructing orthogonal operators on $ \bR^3 $ from orthogonal operators on
-$ \bR^2. $</h3>
-
-<p>
-    Let
-
-    $$ A =
-    \begin{bmatrix}
-        \cos \th & -\sin \th \\
-        \sin \th & \cos \th \\
-    \end{bmatrix}
-    : \bR^2 \longrightarrow \bR^2 $$
-
-    be the rotation operator by $ \th $ in $ \bR^2. $ <i> Recall that this
-    operator is orthogonal because its columns and rows form an orthonormal
-    basis for $ \bR^2. $ </i> We can construct orthogonal operators on $ \bR^3 $
-    as follows:
-
-    $$ \begin{bmatrix}
-        \cos \th & -\sin \th & 0 \\
-        \sin \th & \cos \th & 0 \\
-        0 & 0 & 1 \\
-    \end{bmatrix},
-    \begin{bmatrix}
-        \cos \th  & 0 & -\sin \th \\
-        0 & 1 & 0 \\
-        \sin \th  & 0 & \cos \th \\
-    \end{bmatrix},
-    \begin{bmatrix}
-        1 & 0 & 0 \\
-        0 & \cos \th & -\sin \th \\
-        0 & \sin \th & \cos \th \\
-    \end{bmatrix}, $$
-
-    and more by moving the 1 around. It's easy to see that these are orthogonal
-    because the columns and rows are orthonormal.
-</p>
-
-<h4>Question. Does moving the 1 around correspond to orthogonal equivalence,
-i.e. the three matrices above are orthogonally equivalent? How to find the
-orthogonal transformation?</h4>
-
-<h4>Question. Can all orthogonal operators in $ \bR^3 $ and higher dimensions be
-formed like this?</h4>
-
-<p>
-Something like that.
-</p>
-
-<h2>Theorem. Any orthogonal matrix is orthogonally equivalent to a diagonal
-block matrix of the form
-
-$$ \begin{bmatrix}
-    D_{\pm 1} & O & \cdots & O \\
-    O & R_1 & \cdots & O \\
-    \vdots & \vdots & \ddots & \vdots \\
-    O & O & \cdots & R_k \\
-\end{bmatrix} $$
-
-where $ D_{\pm 1} $ is a diagonal matrix whose diagonal entries are $ \pm 1, $
-and
-
-$$ R_j = \begin{bmatrix}
-    \cos \th_j & -\sin \th_j \\
-    \sin \th_j & \cos \th_j \\
-\end{bmatrix} $$ and $ \th_j \in \bR. $</h2>
-
-<p>
-    Proof TODO.
-</p>
-
-<h3>Example. Orthogonal matrices in $ \bR^3 $</h3>
-
-<p>
-    $$ \begin{bmatrix}
-        1 & 0 & 0 \\
-        0 & 1 & 0 \\
-        0 & 0 & 1 \\
-    \end{bmatrix},
-    \begin{bmatrix}
-        -1 & 0 & 0 \\
-        0 & 1 & 0 \\
-        0 & 0 & 1 \\
-    \end{bmatrix}, \ldots $$
-</p>
-
-<h1>Conic sections</h1>
-
-<p>
-    Consider the quadratic equation
-
-    $$
-    ax^2 + 2bxy + cy^2 + dx + ey + f = 0. \tag 2
-    $$
-
-    For different constants $ a, b, c, d, e, f $ we get different conic
-    sections. E.g. for $ a = c = 1, b = d = e = 0, f = -1 $ we get the circle $
-    x^2 + y^2 = 1. $ Similarly we have the ellipses $ \frac { x ^ { 2 } } { a ^
-    { 2 } } + \frac { y ^ { 2 } } { b ^ { 2 } } = 1, $ the parabola $ y ^ { 2 }
-    = 4 a x, $ and the hyperbola $ \frac { x ^ { 2 } } { a ^ { 2 } } - \frac { y
-    ^ { 2 } } { b ^ { 2 } } = 1, $ give or take the constant $ f. $
-</p>
-
-<h3>Simplification by translating</h3>
-
-<p>
-    If $ b = 0, $ then we can complete the square to get
-
-    \begin{align*}
-    ax^2 + 2bxy + cy^2 + dx + ey + f &=
-        \left[ a \left(x + \frac{d}{2a}\right)^2 + \frac{f}{2} - \frac{d^2}{4a} \right] +
-        \left[ c \left(y + \frac{e}{2c}\right)^2 + \frac{f}{2} - \frac{e^2}{4c} \right] \\
-
-    &= a \left(x + \frac{d}{2a}\right)^2 + c \left(y + \frac{e}{2c}\right)^2
-        + f - \frac{d^2}{4a} - \frac{e^2}{4c}.
-    \end{align*}
-
-    IOW, if $ b = 0, $ we can eliminate the $ x $ and $ y $ terms by changing
-    the variables $ x \longrightarrow x' = x + \frac{d}{2a}, y \longrightarrow
-    y' = y + \frac{e}{2c}. $ This corresponds to translating the coordinate
-    system.
-</p>
-
-<h3>Simplification by orthogonal transformation</h3>
-
-<p>
-    Now we'll try to get rid of the $ xy $ term. Consider the expression
-
-    $$
-    ax^2 + 2bxy + cy^2, \tag 3
-    $$
-
-    which is called the associated quadratic form of (2).
-</p>
-<p>
-    Let
-
-    $$
-    A = \begin{bmatrix}
-    a & b \\
-    b & c
-    \end{bmatrix}, X = \begin{bmatrix}
-    x \\
-    y
-    \end{bmatrix}.
-    $$
-
-    Then (3) may be written as $ X^T AX = \< AX, X \>. $ [This is easy to
-    verify.] <i>Since $ A $ is symmetric, by theorem 6.20, it is orthogonally
-    equivalent to a diagonal matrix, i.e. there is an orthogonal matrix $ P $
-    and a diagonal matrix $ D $ s.t. $ P^T A P = D, $ where
-
-    $ D = \begin{bmatrix}
-    \lambda_1 & 0 \\
-    0 & \lambda_2 \\
-    \end{bmatrix}. $</i>
-</p>
-<p>
-    Define $ X' = \begin{bmatrix}
-    x' \\
-    y'
-    \end{bmatrix} $ by $ X' = P^T X, $ or equivalently by
-
-    $$
-    PX' = PP^T X = X,
-    $$
-
-    <i>[Since $ P^T = P ^{-1}, $ because $ P $ is orthogonal and by Corollary
-    6.18.0.]</i>
-    Then
-
-    $$
-    X^t A X = (P X')^t A (P X')
-    = (X')^t (P^t A P) X'
-    = (X')^t D X'
-    =_{(4)} \lambda_1 (x')^2 + \lambda_2 (y')^2.
-    $$
-
-    Note that we can verify (4) without calculating by comparing
-
-    $$
-    (X')^t D X' = (X')^t \begin{bmatrix}
-    \lambda_1 & 0 \\
-    0 & \lambda_2 \\
-    \end{bmatrix} X'
-    = \lambda_1 (x')^2 + \lambda_2 (y')^2
-    $$
-
-    with (3):
-
-    $$
-    X^T AX = X^T \begin{bmatrix}
-    a & b \\
-    b & c \\
-    \end{bmatrix} X
-    = ax^2 + 2bxy + cy^2.
-    $$
-</p>
-<p>
-    Therefore, by making the transformation $ X \longrightarrow X' = P^t X, $ we
-    can eliminate the $ xy $ term from (3), and hence also from (2).
-</p>
-<p>
-    <i>In summary, by applying an orthogonal transformation to $ X $, we can
-    remove the $ xy $ term. Then by a translation, we can remove the $ x $ and $
-    y $ terms, reducing
-
-    $$
-    ax^2 + 2bxy + cy^2 + dx + ey + f = 0
-    $$
-
-    to just
-
-    $$
-    ax^2 + cy^2 + f = 0.
-    $$
-
-    </i>
-</p>
-
-<h3>The orthogonal transformation can be a rotation</h3>
-
-<p>
-    <i>We already know that an orthogonal transformation P in $ \bR^2 $ is
-    either a rotation or a reflection with determinant $ \pm 1 $ [ Theorem 6.23
-    ].</i> Now we'll show that in this case we can assume $ P $ is a rotation.
-</p>
-
-<p>
-    If $ \det P = 1, $ then $ P $ is a rotation and we're done. OTW suppose $ P
-    $ is a reflection with $ \det P = -1. $ <i>Since $ P $ is orthogonal, its
-    columns form an orthonormal basis for $ \bR^2 $ [Corollary 6.18.1.1].</i> By
-    interchanging the columns of $ P, $ we obtain a matrix $ Q $ which has the
-    same property and so is also orthogonal.
-</p>
-<p>
-    <i>Recall that interchanging two columns in $ \bR^2 $ is performed by right
-    multiplying $ P $ by the elementary operation
-
-    $ E = \begin{bmatrix}
-    0 & 1 \\
-    1 & 0 \\
-    \end{bmatrix}, $ i.e.
-
-    $$ PE = Q $$
-
-    or equivalently
-
-    $$
-    P = QE.
-    $$
-
-    </i>
-
-    Now
-
-    \begin{align*}
-
-    \begin{bmatrix}
-    \lambda_1 & 0 \\
-    0 & \lambda_2 \\
-    \end{bmatrix} = P^T A P = (QE)^T A (QE) &= E^T Q^T A Q E \\
-
-    E \begin{bmatrix}
-    \lambda_1 & 0 \\
-    0 & \lambda_2
-    \end{bmatrix} E &= Q^T A Q \\
-
-    \begin{bmatrix}
-    \lambda_2 & 0 \\
-    0 & \lambda_1
-    \end{bmatrix} &=_{(5)} Q^T A Q.
-
-    \end{align*}
-
-    [ <i>(5). Recall that right multiplying by E interchanges the columns, and
-    left multiplying by E interchanges the rows.</i> ] IOW, we've found an
-    orthogonal matrix $ Q $ with determinant $ +1 $ that diagonalizes A. By Theorem 6.23, Q is a rotation.
-</p>
-
-<p>
-    <i>In summary, the $ xy $ term may be eliminated by a rotation $ X' = P^TX,
-    $ and the $ x $ and $ y $ terms can be eliminated by a translation, and the
-    equation for the conic section can be simplified to $$ \lambda_1 x^2 +
-    \lambda_2 y^2 = f. $$</i>
-</p>
-
-<h1>Summary of Summary of orthogonality, normality, and diagonalizability</h1>
-
-<p>
-    We have
-
-
-\begin{align*}
-\textrm{ Unitary / Orthogonal } \implies & \text{Normal / selfadjoint} \\
-    \iff &	\text{Exists orthonormal eigenbasis} \\
-    \implies &	\text{Exists eigenbasis } \\
-    \iff &	\text{Diagonalizable.} \\
-\end{align*}
-
-
-    and it seems that the two are not equivalent.
-</p>
-
-<p>
-    QUESTION. Are there diagonalizable operators that aren't normal /
-    selfadjoint? We just need to find one that has an eigenbasis that isn't
-    orthonormal, How?
-</p>
-
-</div>
+            <li>Linear Algebra by Friedberg, Insel, and Spence.</li>
+            <li>Linear Algebra video lectures by Gilbert Strang.</li>
+            <li>The Web.</li>
+        </ol>
+
+        <h1>Adjoint / complex conjugate</h1>
+
+        <p>
+            <i>Exercise. Let $ A $ be an $ n \times n $ matrix. Then $ \det A^* = \overline{\det A}. $</i>
+        </p>
+        <p>
+            Use Leibniz's formula for determinants.
+        </p>
+
+        <p>
+            <i>Ex. Suppose that $ A $ is an $ m \times n $ matrix in which no two columns are identical. Then $ A^* A $ is diagonal
+                iff every pair of columns of A is orthogonal.
+            </i>
+        </p>
+        <p>
+            Write out the entries of $ A^* A $ in terms of inner products of the rows of $ A^* $ and columns of $ A. $
+        </p>
+
+        <h3>Example of linear operator without an adjoint</h3>
+
+        <p>
+            <i>Example. Let $ V $ be the vector space of infinite sequences with finitely many nonzero entries in $ F = \bR
+                $ or $ F = \bC. $ Define $ T: V \longrightarrow V $ by $$ T(\s)_k = \sum_{i=k}^{\infty} \s_i $$ for $ k \geq
+                0. $ Then
+
+                <ol>
+                    <li>$ T $ is a linear operator on $ V. $</li>
+                    <li>For any $ n \geq 0, $ $ T(e_n) = \sum_{i=1}^n e_i. $</li>
+                    <li>$ T $ has no adjoint.</li>
+                </ol>
+            </i>
+        </p>
+        <p>
+            1. $ T $ is linear. Let $ \s, \m \in V. $ Then $$ T(\s + \m)_k = \sum_{i=k}^{\infty} (\s + \m)_i = \sum_{i=k}^{\infty} \s_i
+            + \sum_{i=k}^{\infty} \m_i. $$ Scalar multiple is proved similarly.
+        </p>
+        <p>
+            2. Explicitly, \begin{align*} e_n &= (0, 0,..., 0, 1, 0,...) \\ T(e_n) &= \left(\sum_{i=1}^{\infty} (e_n)_i, \sum_{i=2}^{\infty}
+            (e_n)_i,..., \sum_{i=n}^{\infty} (e_n)_i,...\right) \\ &= \left(1, 1,..., 1, 0, 0,...\right) \\ &= \sum_{i=1}^n
+            e_i. \end{align*}
+        </p>
+        <p>
+            3. Suppose for contradiction that $ T^* $ exists. Then for any $ n, k $ we have $$ \
+            < T^*(e_n), e_k \> = \
+                < e_n, T(e_k) \> = \
+                    < e_n, \sum_{i=1}^k e_i \>
+                        = \begin{cases} 0 \text{ if } k
+                        < n \\ 1 \text{ if } k \geq n. \end{cases}. $$ Fixing $ n $ and varying
+                            $ k $ over the positive integers, we find that $ \< T^*(e_n), e_k \></n> $ has infinitely many nonzero entries. In fact $$ T^*(e_n) = (0, 0,...,1,1,1,1,...). $$ Therefore
+                            $ T^* $ is not a map on $ V $ and we have a contradiction.
+        </p>
+
+        <h1>Normal and self-adjoint operators</h1>
+
+        <p>
+            <i>Lemma. Let $ T $ be a linear operator on a finite-dimensional inner product space $ V. $ If $ T $ has an eigenvector,
+                then so does $ T^*. $ If $ \l $ is an eigenvalue of $ T, $ then $ \bar \l $ is an eigenvalue of $ T^*. $
+            </i>
+        </p>
+
+        <h1>Schur's Theorem</h1>
+
+        <p>
+            <i>Theorem. Let $ T $ be a linear operator on a finite-dimensional inner product space $ V. $ Suppose that the characteristic
+                polynomial of $ T $ splits. Then there exists an orthonormal basis $ \b $ for $ V $ s.t. the matrix $ [T]_\b
+                $ is upper triangular.</i>
+        </p>
+
+        <h1>Normal operator</h1>
+
+        <h3>Definition. Let $ V $ be an inner product space and $ T $ be a linear operator on $ V. $ Then $ T $ is called normal
+            if $ TT^* = T^*T. $ Similarly for an $ n\times n $ matrix $ A. $</h3>
+
+        <h3>E.g. of normal operators: unitary, selfadjoint, and real symmetric operators</h3>
+
+        <p>
+            Unitary operators are normal:
+            <i>recall that unitary and orthogonal operators satisfy $ A^{*}=A^{-1} $ by Corollary 6.18.0,</i> so $ A^* $ commutes
+            with A. Selfadjoint [and therefore real symmetric] operators are normal: $ A^{*}= A^t = A. $
+        </p>
+        <p>
+            <i>Corollary. Let $ V $ be an inner product space and $ T $ be a linear operator on $ V. $ Then $ T $ is normal
+                iff $ [T]_{\b} $ is normal, where $ \b $ is an orthonormal basis for $ V. $</i>
+        </p>
+        <p>
+            <i>Proof.</i> $ (\Longrightarrow) $ Suppose that $ TT^* = T^*T. $ By theorem 6.10, $$ [T^*]_\b = [T]_\b^*. $$ Use
+            this fact to expand \begin{align*} [TT^*]_{\b} &= [T^*T]_{\b} \\ [T]_{\b} [T^*]_{\b} &= [T^*]_{\b} [T]_{\b} \\
+            [T]_{\b} [T]^*_{\b} &= [T]^*_{\b} [T]_{\b}. \\ \end{align*} Therefore $ [T]_{\b} $ is normal. The converse is
+            similar.
+        </p>
+
+        <h2>Theorem 6.18. Characterizing unitary / orthogonal / isometric operators on a fin dim inner product space</h2>
+
+        <p>
+            <i>
+                Let $ T, n, \left\langle \right\rangle ,V,F. $ Then the following statements are equivalent:
+
+                <ol>
+                    <li>$ TT^{*}=T^{*}T=I. $ In particular, T is normal and there exists an orthonormal basis for V consisting
+                        of eigenvectors of T.</li>
+                    <li>$ \left\langle T(x),T(y)\right\rangle =\left\langle x,y\right\rangle $ for all x,y.</li>
+                    <li>If $ \beta $ is an orthonormal basis, then $ T(\beta) $ is an orthonormal basis.</li>
+                    <li>There exists an orthonormal basis $ \beta $ s.t. $ T(\beta) $ is an orthonormal basis.</li>
+                    <li>$ \left|\left|T(x)\right|\right|=\left|\left|x\right|\right| $ for all x, i.e. T is unitary / orthogonal.</li>
+                </ol>
+            </i>
+        </p>
+
+        <p>
+            In other words, an operator is unitary / orthogonal iff it is normal and its "norm" $TT^{*}$ is 1.
+        </p>
+        <p>
+            <i>Proof (1) implies (2).</i> For any $x,y,$ $$ \left\langle x,y\right\rangle =\left\langle T^{*}T(x),y\right\rangle
+            =\left\langle T(x),T(y)\right\rangle . $$
+        </p>
+
+        <p>
+            <i>Proof (2) implies (3).</i> Let $\beta=\left\{ v_{1},\ldots,v_{n}\right\} $ be an orthonormal basis for V. Then
+            $T(\beta)=\left\{ T(v_{1}),\ldots,T(v_{n})\right\} $ and $$ \left\langle T(v_{i}),T(v_{j})\right\rangle =\left\langle
+            v_{i},v_{j}\right\rangle =\delta_{ij}, $$ so $T(\beta)$ is an orthonormal basis for V.
+        </p>
+
+        <p>
+            <i>Proof (3) implies (4).</i> Any orthonormal basis $\beta$ satisfies this property, and there must be one because
+            V is fin dim.
+        </p>
+
+        <p>
+            <i>Proof (4) implies (5).</i> Let $x\in V,\beta=\left\{ v_{1},\ldots,v_{n}\right\} .$ Then $$ x=\sum_{i=1}^{n}a_{i}v_{i}
+            $$ for some $a_{i},$ and $$ \left|\left|x\right|\right|^{2}=\left\langle \sum_{i=1}^{n}a_{i}v_{i},\sum_{i=1}^{n}a_{i}v_{i}\right\rangle
+            =\sum_{i}\sum_{j}a_{i}\overline{a_{j}}\left\langle v_{i},v_{j}\right\rangle =\sum_{i=1}^{n}\left|a_{i}\right|^{2}.
+            $$ Similarly, $$ \left|\left|T(x)\right|\right|^{2}=\left\langle \sum_{i=1}^{n}a_{i}T(v_{i}),\sum_{i=1}^{n}a_{i}T(v_{i})\right\rangle
+            =\sum_{i}\sum_{j}a_{i}\overline{a_{j}}\left\langle T(v_{i}),T(v_{j})\right\rangle =\sum_{i=1}^{n}\left|a_{i}\right|^{2},
+            $$ since $T(\beta)$ is also orthonormal.
+        </p>
+
+        <p>
+            <i>Proof (5) implies (1).</i> For any $x,$ $$ \begin{aligned}\left\langle x,x\right\rangle & =\left\langle T(x),T(x)\right\rangle
+            =\left\langle x,T^{*}T(x)\right\rangle \\ \left\langle x,(I-T^{*}T)(x)\right\rangle & =0. \end{aligned} $$ Let
+            $U=I-T^{*}T.$ Then U is self-adjoint and $\left\langle x,U(x)\right\rangle =0$ for all x. By the previous lemma,
+            $I-T^{*}T=U=T_{0}$ and $I=T^{*}T.$ [ Why does this imply that $TT^{*}=I?$ The referenced Exercise 2.4.10 is about
+            invertible matrices, not adjoint operators.... Ah, See next. ]
+        </p>
+
+        <h2>Corollary 6.18.0. The adjoint of a unitary / orthogonal operator is its inverse</h2>
+
+        <p>
+            <i>Proof.</i> Suppose T is uni./orthog. Then $TT^{*}=I,$ hence $T^{*}=T^{-1},$ by Exercise 2.4.10.
+        </p>
+
+        <h2>Exercise 2.4.10. One-sided inverse is a two-sided inverse. Let A and B be $n\times n$ matrices s.t. $AB=I_{n}.$ (a)
+            Use previous to conclude that A and B are invertible. (b) Prove $A=B^{-1}$ and $B=A^{-1},$ i.e. for square matrices,
+            a one-sided inverse is a two-sided inverse.</h2>
+
+        <p>
+            <i>Proof.</i> (a) By previous, A and B are invertible. (b) Multiply on the left by $A^{-1}$ $$ \begin{aligned}AB
+            & =I\\ A^{-1}AB & =A^{-1}\\ B & =A^{-1}. \end{aligned} $$ Similarly for the other one.
+        </p>
+
+        <h2>Corollary 6.18.1.1. Square matrix is unitary / orthogonal iff its rows and columns form orthonormal bases for $F^{n}.$</h2>
+
+        <p>
+            <i>Proof.</i>
+            $AA^{*}=I$ is equivalent to the statement that the rows of A form an orthonormal basis for $F^{n},$ because $$ AA^{*}=I=\begin{bmatrix}A_{1}\\
+            \vdots\\ A_{n} \end{bmatrix}\begin{bmatrix}\overline{A_{1}^{t}} & \cdots & \overline{A_{n}^{t}}\end{bmatrix},
+            $$ and so $$ \left\langle A_{i},A_{j}\right\rangle =A_{i}\overline{A_{j}^{t}}=\delta_{ij}. $$ Similarly the condition
+            $A^{*}A=I$ is equivalent to the statement that the columns of A form an orthonormal basis for $F^{n}.$ Therefore
+            a square matrix is orthogonal iff its rows and columns form orthonormal bases for $F^{n}.$
+        </p>
+
+        <h2>Schur's Theorem Variant. Let $ A\in M_{n\times n}(F) $ be a matrix whose characteristic polynomial splits over F.
+            If $ F=C, $ then A is unitarily eq. to a complex upper triangular matrix. IF $ F=R, $ then A is orthogonally
+            eq. to a real upper triangular matrix.</h2>
+
+        <h2>Theorem 6.20. Let A be a real $ n\times n $ matrix. Then A is selfadjoint i.e. symmetric iff A is orthogonally equivalent
+            to a diagonal matrix D.</h2>
+
+        <p>
+            <i>Proof.</i>
+            The forward direction is already proved in Note 6.18.3. Conversely, suppose that A is ortho. eq. to a diagonal matrix D.
+            Then there exists an orthogonal matrix P s.t. $ A=P^{T}DP. $ We want to show that A is symmetric: $$ A^{T}=(P^{T}DP)^{T}=P^{T}D^{T}P=P^{T}DP=A,
+            $$ since D is diagonal.
+        </p>
+
+        <h2>Isometry / Rigid Motions</h2>
+
+        <p>
+            <i>Definition. Let VR. A function $ f:V\longrightarrow V $ is called an isometry / rigid motion if $$ \|f(x)-f(y)\|=\|x-y\|
+                $$ for all x, y in V.
+            </i>
+        </p>
+
+        <p>
+            (Rigid motions are examples of affine transformations, which include translation, scaling, homothety (homogeneous dilation),
+            similarity transformation, reflection, rotation, shear mapping, and compositions of them in any combination and
+            sequence.)
+        </p>
+
+        <h3>Examples of rigid motions</h3>
+
+        <p>
+            E.g. Any orthogonal operator ($ \left|\left| f(x) \right|\right| = \left|\left| x \right|\right| $) on a finite dimensional
+            real inner product space is a rigid motion, e.g. rotations, reflection by a line through the origin.
+        </p>
+        <p>
+            E.g. any translation is a rigid motion. A function $ g:V\longrightarrow V $ where $ V $ is a real inner product space, is
+            called a translation if there exists a vector $ v_{0} \in V $ s.t. $ g(x) = x + v_0 $ for all $ x\in V. $ We
+            say that $ g $ is a translation by $ v_0. $
+        </p>
+
+        <h3>Proposition. Translations are rigid motions</h3>
+
+        <p>
+            <i> Proof. </i> We want to show that $$ \|g(x)-g(y)\| = || x + v_0 - y - v_0 || =\|x-y\|, $$ which is true.
+        </p>
+
+        <h3>Proposition. Compositions of rigid motions are also rigid motions</h3>
+
+        <p>
+            <i> Proof. </i> Let $ f,g:V\longrightarrow V $ be rigid motions. We want to show that $$ \|f \circ g(x)-f \circ g(y)\|
+            = | f(g(x)) - f(g(y)) | =_1 | g(x) - g(y) | =_2 \|x-y\|. $$ $ =_1 $ is true because $ f $ is a rigid motion,
+            and $ =_2 $ is true because $ g $ is a rigid motion.
+        </p>
+
+        <h2>Theorem 6.22. Every rigid motion is an orthogonal operator followed by a translation
+        </h2>
+
+        <p>
+            <i> Let $ f:V\longrightarrow V $ be a rigid motion on a finite-dimensional real inner product space V. Then there
+                exists a unique orthogonal operator T and a unique translation g on V s.t. $ f = g \circ T. $ </i>
+        </p>
+        <p>
+            NOTE. Any translation is a special case of this composite, where the operator is the identity, and any orthogonal operator
+            is also a special case where the translation is by 0.
+        </p>
+        <p>
+            <i> Proof. </i> Let $ T: V\longrightarrow V $ be defined by $$ T(x) = f(x) - f(0). $$ We show that T is an orthogonal
+            operator, from which it follows that $ f = g \circ T, $ where g is the transaction by $ f(0). $ Observe that
+            T is the composite of $ f $ and the translation by $ -f(0); $ hence T is a rigid motion. Furthermore, for any
+            $ x \in V, $ $$ | T(x) |^2 = | f(x) - f(0) |^2 = | x - 0 |^2 = | x |^2, $$ and consequently $$ | T(x) | = | x
+            |. $$ Thus for any $ x, y \in V, $ \begin{align*} | T(x) - T(y) |^2 &= | T(x) |^2 - 2\
+            < T(x), T(y) \> + | T(y) |^2 \\ &= | x |^2 - 2\
+                < T(x), T(y) \> + | y |^2 \end{align*} and $$ | x - y |^2 = | x |^2 - 2\
+                    < x, y \> + | y |^2. $$ But $$ | T(x) - T(y) |^2 = | f(x) - f(y) |^2 = | x - y |^2, $$ and so $$ \
+                        < T(x), T(y)
+                            \> = \
+                            < x, y \> $$ for all $ x, y \in V. $
+        </p>
+        <p>
+            Now we show that T is linear. Let $ x, y\in V, a \in \bbR. $ Then \begin{align*} | T(x+ay) - T(x) - aT(y) |^2 &= | (T(x+ay)
+            - T(x)) - aT(y) | \\ &= | T(x+ay) - T(x) |^2 - 2a\
+            < T(x+ay) - T(x), T(y) \> + a^2| T(y) |^2 \\ &= | (x+ay) - x |^2 - 2a\
+                < T(x+ay) - T(x), T(y) \> + a^2| y |^2 \\ &= | ay |^2 - 2a(\
+                    < T(x+ay), T(y) \> - \
+                        < T(x), T(y) \>) + a^2| y |^2 \\ &= 2a^2| y |^2 - 2a(\
+                            < x+ay, y \> - \
+                                < x, y \>) \\ &= 0. \end{align*} Therefore $ T(x+ay) = T(x) + aT(y) $ and T is linear. Since T also
+                                    preserves inner products, it is also an orthogonal operator.
+        </p>
+        <p>
+            To show uniqueness, let $ u_0, v_0 \in V, $ let T and U be orthogonal operators s.t. $$ f(x) = T(x) + u_0 = U(x) + v_0. $$
+            Substituting $ x = 0 $ yields $ u_0 = v_0, $ and hence the translation is unique. This equation then reduces
+            to $ T(x) = U(x), $ therefore $ T = U. $
+        </p>
+
+        <h2>Theorem 6.23. Orthogonal operators on $ \bbR^2 $ are rotations or reflections with determinant $ \pm 1. $</h2>
+
+        <p>
+            <i> Let T be an orthogonal operator on $ \bbR^2, $ and let $ A = [T]_\b $ where $ \b $ is the standard basis for
+                $ \bbR^2. $ Then exactly one of the following conditions is satisfied:
+
+                <ol>
+                    <li>T is a rotation, and $ \det A = 1. $</li>
+                    <li>T is a reflection about a line through the origin, and $ \det A = -1. $</li>
+                </ol>
+            </i>
+        </p>
+
+        <p>
+            <i>Proof.</i> By theorem 6.18, since
+            <i>
+                T is orthogonal, T maps orthonormal basis to orthonormal basis.
+            </i> In particular, $ T(\b) = \{ T(e_1), T(e_2) \} $ is an orthonormal basis for $ \bR^2. $ Since $ e_1 $ is
+            a unit vector, there exists a unique angle $ \th $ with $ 0 \leq \th \leq 2 \pi $ s.t. $ T(e1) = (\sin \theta,
+            \cos \theta). $ Since $ T(e_2) $ is a unit vector and is orthogonal to $ T(e_1), $ there are only two choices
+            for $ T(e_2). $ Either $$ T(e_2) = (- \sin \theta, \cos \theta) $$ or $$ T(e_2) = (\sin \theta, - \cos \theta).
+            $$ First suppose that $$ T(e_2) = (- \sin \theta, \cos \theta). $$ Then $$ A = \begin{bmatrix} T(e_1) & T(e_2)
+            \end{bmatrix} = \begin{bmatrix} \cos \theta & - \sin \theta \\ \sin \theta & \cos \theta \end{bmatrix}. $$
+
+            <i>Recall that this is a rotation by $ \theta, $</i> and $$ \det A = \cos^2 \theta + \sin^2 \theta = 1. $$
+        </p>
+
+        <p>
+
+            Now suppose that $$ T(e_2) = (\sin \theta, - \cos \theta). $$ Then $$ A = \begin{bmatrix} T(e_1) & T(e_2) \end{bmatrix} =
+            \begin{bmatrix} \cos \theta & \sin \theta \\ \sin \theta & - \cos \theta \end{bmatrix}. $$
+
+
+            <i>
+                Now recall that this is a reflection through a line through the origin at angle $ \theta / 2. $
+            </i>
+
+            Furthermore, $$ \det A = - \cos^2 \theta - \sin^2 \theta = -1. $$
+
+        </p>
+
+        <h3>Corollary. Rigid motions in $ \bR^2 $ are compositions of rotations, reflections, and translations. In fact, a rigid
+            motion in $ \bR^2 $ is either a rotation followed by a translation or a reflection about a line through the origin
+            followed by a translation.</h3>
+
+        <h3>Example. Reflection through a line in $ \bR^2: $ $ \begin{bmatrix} \frac{1}{\sqrt{5}} & \frac{2}{\sqrt{5}} \\ \frac{2}{\sqrt{5}}
+            & -\frac{1}{\sqrt{5}} \\ \end{bmatrix} $
+
+        </h3>
+        <p>
+            Let $$ A = \begin{bmatrix} \frac{1}{\sqrt{5}} & \frac{2}{\sqrt{5}} \\ \frac{2}{\sqrt{5}} & -\frac{1}{\sqrt{5}} \\ \end{bmatrix}.
+            $$
+
+            <i>It's easy to verify that $ AA^* = A ^* A = I, $ hence A is orthogonal. Alternatively, we can also verify that
+                the columns of A form an orthonormal basis of $ \bR^2. $ Furthermore, $ \det A = -1, $ so by Theorem 6.23,
+                A must be a reflection through a line through the origin.
+            </i>
+        </p>
+
+        <p>
+            Now we'll find the line L that A reflects through. Note that L is the 1-dimensional subspace where $ A x = x $ for all $
+            x \in L. $ To find L, it's enough to find a vector $ x $ (in this case an eigenvector of A) and we'll have $
+            L = \span\{ x \}. $
+            <i>
+                One such eigenvector is $ x = (2, \sqrt{5} - 1), $ which we can find by solving $$ A x = x. $$
+            </i>
+
+
+            Alternatively, L is the line through the origin with slope $ m = \frac{\sqrt{5} - 1}{2}, $ and hence is the line with the
+            equation $$ y = \frac{\sqrt{5} - 1}{2} x. $$
+        </p>
+
+        <h2>Question. What do orthogonal operators look like in $ \bR^3 $ and $ \bR^n? $</h2>
+
+        <h3>Example. Constructing orthogonal operators on $ \bR^3 $ from orthogonal operators on $ \bR^2. $</h3>
+
+        <p>
+            Let $$ A = \begin{bmatrix} \cos \th & -\sin \th \\ \sin \th & \cos \th \\ \end{bmatrix} : \bR^2 \longrightarrow \bR^2 $$
+            be the rotation operator by $ \th $ in $ \bR^2. $
+            <i> Recall that this operator is orthogonal because its columns and rows form an orthonormal basis for $ \bR^2. $
+                </i> We can construct orthogonal operators on $ \bR^3 $ as follows: $$ \begin{bmatrix} \cos \th & -\sin \th
+            & 0 \\ \sin \th & \cos \th & 0 \\ 0 & 0 & 1 \\ \end{bmatrix}, \begin{bmatrix} \cos \th & 0 & -\sin \th \\ 0 &
+            1 & 0 \\ \sin \th & 0 & \cos \th \\ \end{bmatrix}, \begin{bmatrix} 1 & 0 & 0 \\ 0 & \cos \th & -\sin \th \\ 0
+            & \sin \th & \cos \th \\ \end{bmatrix}, $$ and more by moving the 1 around. It's easy to see that these are orthogonal
+            because the columns and rows are orthonormal.
+        </p>
+
+        <h4>Question. Does moving the 1 around correspond to orthogonal equivalence, i.e. the three matrices above are orthogonally
+            equivalent? How to find the orthogonal transformation?</h4>
+
+        <h4>Question. Can all orthogonal operators in $ \bR^3 $ and higher dimensions be formed like this?</h4>
+
+        <p>
+            Something like that.
+        </p>
+
+        <h2>Theorem. Any orthogonal matrix is orthogonally equivalent to a diagonal block matrix of the form $$ \begin{bmatrix}
+            D_{\pm 1} & O & \cdots & O \\ O & R_1 & \cdots & O \\ \vdots & \vdots & \ddots & \vdots \\ O & O & \cdots & R_k
+            \\ \end{bmatrix} $$ where $ D_{\pm 1} $ is a diagonal matrix whose diagonal entries are $ \pm 1, $ and $$ R_j
+            = \begin{bmatrix} \cos \th_j & -\sin \th_j \\ \sin \th_j & \cos \th_j \\ \end{bmatrix} $$ and $ \th_j \in \bR.
+            $</h2>
+
+        <p>
+            Proof TODO.
+        </p>
+
+        <h3>Example. Orthogonal matrices in $ \bR^3 $</h3>
+
+        <p>
+            $$ \begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \\ \end{bmatrix}, \begin{bmatrix} -1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0
+            & 1 \\ \end{bmatrix}, \ldots $$
+        </p>
+
+        <h1>Conic sections</h1>
+
+        <p>
+            Consider the quadratic equation $$ ax^2 + 2bxy + cy^2 + dx + ey + f = 0. \tag 2 $$ For different constants $ a, b, c, d,
+            e, f $ we get different conic sections. E.g. for $ a = c = 1, b = d = e = 0, f = -1 $ we get the circle $ x^2
+            + y^2 = 1. $ Similarly we have the ellipses $ \frac { x ^ { 2 } } { a ^ { 2 } } + \frac { y ^ { 2 } } { b ^ {
+            2 } } = 1, $ the parabola $ y ^ { 2 } = 4 a x, $ and the hyperbola $ \frac { x ^ { 2 } } { a ^ { 2 } } - \frac
+            { y ^ { 2 } } { b ^ { 2 } } = 1, $ give or take the constant $ f. $
+        </p>
+
+        <h3>Simplification by translating</h3>
+
+        <p>
+            If $ b = 0, $ then we can complete the square to get \begin{align*} ax^2 + 2bxy + cy^2 + dx + ey + f &= \left[ a \left(x
+            + \frac{d}{2a}\right)^2 + \frac{f}{2} - \frac{d^2}{4a} \right] + \left[ c \left(y + \frac{e}{2c}\right)^2 + \frac{f}{2}
+            - \frac{e^2}{4c} \right] \\ &= a \left(x + \frac{d}{2a}\right)^2 + c \left(y + \frac{e}{2c}\right)^2 + f - \frac{d^2}{4a}
+            - \frac{e^2}{4c}. \end{align*} IOW, if $ b = 0, $ we can eliminate the $ x $ and $ y $ terms by changing the
+            variables $ x \longrightarrow x' = x + \frac{d}{2a}, y \longrightarrow y' = y + \frac{e}{2c}. $ This corresponds
+            to translating the coordinate system.
+        </p>
+
+        <h3>Simplification by orthogonal transformation</h3>
+
+        <p>
+            Now we'll try to get rid of the $ xy $ term. Consider the expression $$ ax^2 + 2bxy + cy^2, \tag 3 $$ which is called the
+            associated quadratic form of (2).
+        </p>
+        <p>
+            Let $$ A = \begin{bmatrix} a & b \\ b & c \end{bmatrix}, X = \begin{bmatrix} x \\ y \end{bmatrix}. $$ Then (3) may be written
+            as $ X^T AX = \
+            < AX, X \>. $ [This is easy to verify.]
+                <i>Since $ A $ is symmetric, by theorem 6.20, it is orthogonally equivalent to a diagonal matrix, i.e. there
+                    is an orthogonal matrix $ P $ and a diagonal matrix $ D $ s.t. $ P^T A P = D, $ where $ D = \begin{bmatrix}
+                    \lambda_1 & 0 \\ 0 & \lambda_2 \\ \end{bmatrix}. $</i>
+        </p>
+        <p>
+            Define $ X' = \begin{bmatrix} x' \\ y' \end{bmatrix} $ by $ X' = P^T X, $ or equivalently by $$ PX' = PP^T X = X, $$
+
+            <i>[Since $ P^T = P ^{-1}, $ because $ P $ is orthogonal and by Corollary 6.18.0.]
+            </i>
+            Then $$ X^t A X = (P X')^t A (P X') = (X')^t (P^t A P) X' = (X')^t D X' =_{(4)} \lambda_1 (x')^2 + \lambda_2 (y')^2. $$ Note
+            that we can verify (4) without calculating by comparing $$ (X')^t D X' = (X')^t \begin{bmatrix} \lambda_1 & 0
+            \\ 0 & \lambda_2 \\ \end{bmatrix} X' = \lambda_1 (x')^2 + \lambda_2 (y')^2 $$ with (3): $$ X^T AX = X^T \begin{bmatrix}
+            a & b \\ b & c \\ \end{bmatrix} X = ax^2 + 2bxy + cy^2. $$
+        </p>
+        <p>
+            Therefore, by making the transformation $ X \longrightarrow X' = P^t X, $ we can eliminate the $ xy $ term from (3), and
+            hence also from (2).
+        </p>
+        <p>
+            <i>In summary, by applying an orthogonal transformation to $ X $, we can remove the $ xy $ term. Then by a translation,
+                we can remove the $ x $ and $ y $ terms, reducing $$ ax^2 + 2bxy + cy^2 + dx + ey + f = 0 $$ to just $$ ax^2
+                + cy^2 + f = 0. $$
+
+            </i>
+        </p>
+
+        <h3>The orthogonal transformation can be a rotation</h3>
+
+        <p>
+            <i>We already know that an orthogonal transformation P in $ \bR^2 $ is either a rotation or a reflection with determinant
+                $ \pm 1 $ [ Theorem 6.23 ].
+            </i> Now we'll show that in this case we can assume $ P $ is a rotation.
+        </p>
+
+        <p>
+            If $ \det P = 1, $ then $ P $ is a rotation and we're done. OTW suppose $ P $ is a reflection with $ \det P = -1. $
+            <i>Since $ P $ is orthogonal, its columns form an orthonormal basis for $ \bR^2 $ [Corollary 6.18.1.1].</i> By interchanging
+            the columns of $ P, $ we obtain a matrix $ Q $ which has the same property and so is also orthogonal.
+        </p>
+        <p>
+            <i>Recall that interchanging two columns in $ \bR^2 $ is performed by right multiplying $ P $ by the elementary
+                operation $ E = \begin{bmatrix} 0 & 1 \\ 1 & 0 \\ \end{bmatrix}, $ i.e. $$ PE = Q $$ or equivalently $$ P
+                = QE. $$
+
+            </i>
+
+            Now \begin{align*} \begin{bmatrix} \lambda_1 & 0 \\ 0 & \lambda_2 \\ \end{bmatrix} = P^T A P = (QE)^T A (QE) &= E^T Q^T A
+            Q E \\ E \begin{bmatrix} \lambda_1 & 0 \\ 0 & \lambda_2 \end{bmatrix} E &= Q^T A Q \\ \begin{bmatrix} \lambda_2
+            & 0 \\ 0 & \lambda_1 \end{bmatrix} &=_{(5)} Q^T A Q. \end{align*} [
+            <i>(5). Recall that right multiplying by E interchanges the columns, and left multiplying by E interchanges the
+                rows.</i> ] IOW, we've found an orthogonal matrix $ Q $ with determinant $ +1 $ that diagonalizes A. By Theorem
+            6.23, Q is a rotation.
+        </p>
+
+        <p>
+            <i>In summary, the $ xy $ term may be eliminated by a rotation $ X' = P^TX, $ and the $ x $ and $ y $ terms can
+                be eliminated by a translation, and the equation for the conic section can be simplified to $$ \lambda_1
+                x^2 + \lambda_2 y^2 = f. $$</i>
+        </p>
+
+        <h1>Summary of Summary of orthogonality, normality, and diagonalizability</h1>
+
+        <p>
+            We have \begin{align*} \textrm{ Unitary / Orthogonal } \implies & \text{Normal / selfadjoint} \\ \iff & \text{Exists orthonormal
+            eigenbasis} \\ \implies & \text{Exists eigenbasis } \\ \iff & \text{Diagonalizable.} \\ \end{align*} and it seems
+            that the two are not equivalent.
+        </p>
+
+        <p>
+            QUESTION. Are there diagonalizable operators that aren't normal / selfadjoint? We just need to find one that has an eigenbasis
+            that isn't orthonormal, How?
+        </p>
+
+    </div>
 </body>
+
 </html>

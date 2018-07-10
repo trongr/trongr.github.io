@@ -43,6 +43,99 @@
     for conic sections when the $ xy $ term is missing.
 </p>
 
+<h1>Wrapping a number around an interval</h1>
+
+<p>
+    <i>Problem. Given $ x \in \bR, $ we want to wrap it inside $ [a, b), $ i.e.
+    we want a function $ \rho $ s.t. $ \rho(x) = x $ for $ x \in [a, b), $ and
+    if it goes above $ b $ it comes out at the other end of the interval from $
+    a. $ Similarly if it goes below $ a, $ it comes out at the other end from $
+    b. $</i>
+</p>
+<p>
+    E.g. $ \rho(1.3) = -0.7, $ and $ \rho(-1.3) = 0.7. $
+</p>
+
+<img src='images/180706WrapAroundInterval.svg'>
+
+<p>
+    First, we'll solve a simpler problem of wrapping $ x $ around $ [0, 1). $
+    Then we'll map $ [a, b) $ to $ [0, 1), $ where we know how to solve the
+    problem, and map the answer back to $ [a, b). $
+</p>
+<p>
+    Before that we need to define the remainder operator $ \%. $
+</p>
+
+<h2>Definition. Remainder operator</h2>
+
+<p>
+    <i>Let $ 0 < m \in \bR $ and $ \alpha \in \bR. $ Then the remainder of $
+    \alpha $ after division by $ m $ is the smallest non-negative number $ b $
+    s.t. $ \alpha = q m + b, $ where $ q \in \bZ. $ We denote $ b $ by $ \alpha
+    \% m. $
+    </i>
+</p>
+<p>
+    E.g. $ 1.3 = 1 \cdot 1 + 0.3,$ and $ 0.3 $ is the smallest such non-negative
+    number, so $ 1.3 \% 1 = 0.3. $ Similarly, $ -1.3 = -2 \cdot 1 + 0.7, $ so $
+    -1.3 \% 1 = 0.7. $
+</p>
+<p>
+    Note that some languages define $ \% $ differently, e.g. JavaScript defines
+    $ \% $ s.t. $ -1.3 \% 1 = -0.3, $ whereas in Python it is $ 0.7, $ like our
+    definition here.
+</p>
+
+<p>
+    Now we'll solve the problem. By definition, we can already solve for the
+    case when $ [a, b) = [0, 1). $ We have
+
+    $$
+    f(x) = x \% 1.
+    $$
+
+    For completeness, in JavaScript the formula is
+
+    $$
+    f(x) = \left(  \left( x \% 1 \right) + 1 \right) \% 1.
+    $$
+</p>
+
+<h2>Transforming one interval to another</h2>
+
+<p>
+    Next we need to map our initial interval $ [a, b) $ to $ [0, 1). $ We can do
+    that by the formula
+
+    $$
+    g(x) = \frac{x - a}{b - a}.
+    $$
+
+    E.g. $ g(a) = 0, g(b) = 1, g(x) < 0$ if $ x < a, $ and $ g(x) > 1 $ if $ x >
+    b. $
+</p>
+<p>
+    The reverse transformation is $ g^{-1}(y) = y(b - a) + a. $
+</p>
+
+<p>
+    Combining $ f $ and $ g, $ we get
+
+    $$
+    \rho(x) = g^{-1} \circ f \circ g(x) = (b - a) \left( \frac{x - a}{b - a} \% 1 \right) + a.
+    $$
+</p>
+
+<p>
+    E.g. if $ [a, b) = [1, 3), $ then $ \rho(3.3) = 2 \left( \frac{3.3 - 1}{2}
+    \% 1 \right) + 1 = 1.3.$
+</p>
+<p>
+    E.g. if $ [a, b) = [-1, 1), $ then $ \rho(1.3) = 2 \left( \frac{1.3 + 1}{2}
+    \% 1 \right) - 1 = -0.7.$
+</p>
+
 </div>
 </body>
 </html>
