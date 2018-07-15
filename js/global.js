@@ -11,7 +11,7 @@
     try {
       $("#toc").toc()
     } catch (error) {
-      console.error("Cannot generate Table of Contents", error)
+      // console.error("Cannot generate Table of Contents", error)
     }
   }
 
