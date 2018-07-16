@@ -120,6 +120,10 @@ ol {
     margin-left: 40px;
 }
 
+#biglist a {
+    text-decoration: none;
+}
+
 .red {
     /* color: #FF5C5C; */
     color: #c00000;
