@@ -1,0 +1,15 @@
+html, body {
+  /*
+   * Need to set height for these guys so empty div#WorldBoxId below gets 100%
+   * height.
+   */
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+#WorldBoxId {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
