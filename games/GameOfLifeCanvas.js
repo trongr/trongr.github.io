@@ -153,6 +153,9 @@ const WorldModel = (() => {
 
   WorldModel.update = () => {
     /** Calculate new state from World and populate NewWorld. */
+    // Important that we clone so we don't modify the current world during
+    // calculation. Would be interesting to see what the game looks like if we
+    // modify the world as we are calculating the cells:
     const NewWorld = _.cloneDeep(World)
     const m = Conf.NUM_CELLS_VERTICAL
     const n = Conf.NUM_CELLS_HORIZONTAL
