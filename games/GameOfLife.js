@@ -109,15 +109,19 @@ const WorldModel = (() => {
         return Conf.DEAD // Underpopulation
       } else if (
         // liveNeighbours === 2 ||
-        liveNeighbours === 3 ||
-        liveNeighbours === 4
+        // liveNeighbours === 3 ||
+        // liveNeighbours === 4 ||
+        // liveNeighbours === 5 ||
+        // liveNeighbours === 6 ||
+        // liveNeighbours === 7 ||
+        liveNeighbours === 8
       ) {
         return Conf.ALIVE // Just right
       } else {
         return Conf.DEAD // Overpopulation
       }
     } else {
-      if (liveNeighbours === 2) {
+      if (liveNeighbours === 1) {
         return Conf.ALIVE // I like this rule.
       } else {
         return Conf.DEAD
