@@ -249,14 +249,14 @@ const WorldView = (() => {
   }
 
   WorldView.initBoard = () => {
-    const width = $("#WorldBoxId").width()
-    const height = $("#WorldBoxId").height()
-    const m = (Conf.NUM_CELLS_VERTICAL = parseInt(height / Conf.CELL_SIZE))
+    // Make a square board using min width height.
+    const width = Math.min($("#WorldBoxId").width(), $("#WorldBoxId").height())
+    const m = (Conf.NUM_CELLS_VERTICAL = parseInt(width / Conf.CELL_SIZE))
     const n = (Conf.NUM_CELLS_HORIZONTAL = parseInt(width / Conf.CELL_SIZE))
 
     Canvas = document.getElementById("WorldCanvasId")
     Canvas.width = width
-    Canvas.height = height
+    Canvas.height = width
     CanvasContext = Canvas.getContext("2d")
     // This avoids anti-aliasing, so two overlapping lines don't appear darker:
     CanvasContext.translate(0.5, 0.5)
