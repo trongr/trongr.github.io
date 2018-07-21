@@ -10,12 +10,12 @@ const Conf = (() => {
     // DEAD_COLOR: "#000000", // Dark
     // ALIVE_COLOR: "#000000",
     // DEAD_COLOR: "#ffffff",
-    // ALIVE_COLOR: "#f45b69",
-    // DEAD_COLOR: "#ebebeb",
+    ALIVE_COLOR: "#f45b69",
+    DEAD_COLOR: "#ebebeb",
     // ALIVE_COLOR: "#094074",
     // DEAD_COLOR: "#ffdd4a",
-    ALIVE_COLOR: "#35a7ff",
-    DEAD_COLOR: "#ffffff",
+    // ALIVE_COLOR: "#35a7ff",
+    // DEAD_COLOR: "#ffffff",
   }
 
   return Conf
@@ -186,11 +186,27 @@ const WorldModel = (() => {
    * @param {*} n How many cells horizontally on the board.
    */
   WorldModel.init = (m, n) => {
+    /** Initialize board with dead cells */
     for (let i = 0; i < m; i++) {
       for (let j = 0; j < n; j++) {
         World[i] = World[i] || []
-        World[i][j] = Math.random() > 0.5 ? Conf.ALIVE : Conf.DEAD
+        World[i][j] = Conf.DEAD
       }
+    }
+    /**
+     * Put some live cells in the center. If dimension is odd, put a single live
+     * cell in the center. If dimension is even, put 4 live cells in the center.
+     */
+    if (m % 2 === 0) {
+      const right = parseInt(m / 2)
+      const left = right - 1
+      World[left][left] = Conf.ALIVE // Top left
+      World[left][right] = Conf.ALIVE // Top right
+      World[right][left] = Conf.ALIVE // Bottom left
+      World[right][right] = Conf.ALIVE // Bottom right
+    } else {
+      const center = parseInt(m / 2)
+      World[center][center] = Conf.ALIVE
     }
   }
 
@@ -275,7 +291,7 @@ const Game = (() => {
   const Game = {}
 
   let IsGamePaused = false
-  let FPS = 4 // Frames / iterations per second
+  let FPS = 8 // Frames / iterations per second
   let MSPF // ms per frame.
   let LastFrameTime // Time in ms of last frame
 
