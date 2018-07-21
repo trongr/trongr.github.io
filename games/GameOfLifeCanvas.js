@@ -32,6 +32,10 @@ const GameBinding = (() => {
       const code = e.keyCode || e.which
       if (code === 32) {
         Game.togglePause() // SPACE KEY
+      } else if (code === 37) {
+        Game.slowDown() // LEFT
+      } else if (code === 39) {
+        Game.speedUp() // RIGHT
       }
     })
   }
@@ -270,19 +274,42 @@ const WorldView = (() => {
 const Game = (() => {
   const Game = {}
 
-  let isGamePaused = false
+  let IsGamePaused = false
+  let FPS = 4 // Frames / iterations per second
+  let MSPF // ms per frame.
+  let LastFrameTime // Time in ms of last frame
 
   Game.togglePause = () => {
-    isGamePaused = !isGamePaused
-    if (!isGamePaused) Game.loop() // Continue the game
+    IsGamePaused = !IsGamePaused
+    if (!IsGamePaused) Game.loop() // Continue the game
+  }
+
+  Game.speedUp = () => {
+    FPS *= 2
+    MSPF = Game.calculateMSPF(FPS)
+  }
+
+  Game.slowDown = () => {
+    FPS /= 2
+    MSPF = Game.calculateMSPF(FPS)
+  }
+
+  Game.calculateMSPF = (FPS) => {
+    return (1 / FPS) * 1000
   }
 
   Game.getIsGamePaused = () => {
-    return isGamePaused
+    return IsGamePaused
   }
 
   Game.loop = () => {
-    if (isGamePaused) return
+    if (IsGamePaused) return
+
+    // Skip this frame if game is running faster than desired FPS
+    if (Date.now() - LastFrameTime < MSPF)
+      return requestAnimationFrame(Game.loop)
+    else LastFrameTime = Date.now()
+
     WorldModel.update()
     WorldView.render(WorldModel.getWorld())
     requestAnimationFrame(Game.loop)
@@ -291,6 +318,9 @@ const Game = (() => {
   Game.init = () => {
     GameBinding.init()
     WorldView.init()
+
+    MSPF = Game.calculateMSPF(FPS)
+    LastFrameTime = Date.now()
     Game.loop()
   }
 
