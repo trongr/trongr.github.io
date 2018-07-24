@@ -225,12 +225,12 @@ const Seed = (() => {
   }
 
   Seed.init = (World) => {
-    // Seed.centerCells(World)
+    Seed.centerCells(World)
     // Seed.centerThreeFourSquare(World)
     // Seed.verticalLineCenter(World)
     // Seed.verticalHorizontalLine(World)
     // Seed.random(World)
-    Seed.randomVerticalLineCenter(World)
+    // Seed.randomVerticalLineCenter(World)
     // Seed.randomHorizontalVerticalLineCenter(World)
   }
 
@@ -240,15 +240,31 @@ const Seed = (() => {
 const LifeRules = (() => {
   const LifeRules = {}
 
-  // Conway rule
+  /** Conway rule */
   // const Rules = [
   //   [0, 0, 0, 1, 0, 0, 0, 0, 0], // Rules for dead cells (0)
   //   [0, 0, 1, 1, 0, 0, 0, 0, 0], // Rules for living cells (1)
   // ]
-  const Rules = [
-    [0, 1, 0, 0, 0, 0, 0, 0, 0], // Rules for dead cells
-    [0, 0, 0, 0, 0, 0, 0, 0, 1], // Rules for living cells
-  ]
+  // const Rules = [[1, 1, 1, 1, 1, 0, 1, 1, 0], [0, 1, 0, 1, 1, 1, 0, 0, 1]]
+  const Rules = [[], []] // Rules[0] is for dead cells, Rules[1] for live.
+
+  LifeRules.randomize = () => {
+    for (let i = 0; i < 9; i++) {
+      Rules[0][i] = Seed.FlipCoin()
+      Rules[1][i] = Seed.FlipCoin()
+    }
+  }
+
+  LifeRules.init = () => {
+    for (let i = 0; i < 9; i++) {
+      Rules[0].push(Seed.FlipCoin())
+      Rules[1].push(Seed.FlipCoin())
+    }
+    setInterval(() => {
+      LifeRules.randomize()
+    }, 5000)
+  }
+  LifeRules.init()
 
   LifeRules.calculateNewCellState = (cell, neighbours) => {
     const liveNeighbours = WorldModel.countLiveNeighbours(cell, neighbours)
