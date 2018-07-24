@@ -3,15 +3,13 @@ const Conf = (() => {
     CELL_SIZE: 10, // px
     NUM_CELLS_HORIZONTAL: 0, // Wait for WorldView to tell Conf these
     NUM_CELLS_VERTICAL: 0,
-    ALIVE: 1,
-    DEAD: 0,
     /** Use a lib to generate themes automatically! */
     // ALIVE_COLOR: "#ffffff", // Light
     // DEAD_COLOR: "#000000", // Dark
-    // ALIVE_COLOR: "#000000",
-    // DEAD_COLOR: "#ffffff",
-    ALIVE_COLOR: "#f45b69",
-    DEAD_COLOR: "#ebebeb",
+    ALIVE_COLOR: "#000000",
+    DEAD_COLOR: "#ffffff",
+    // ALIVE_COLOR: "#f45b69",
+    // DEAD_COLOR: "#ebebeb",
     // ALIVE_COLOR: "#094074",
     // DEAD_COLOR: "#ffdd4a",
     // ALIVE_COLOR: "#35a7ff",
@@ -45,6 +43,219 @@ const GameBinding = (() => {
   }
 
   return GameBinding
+})()
+
+const Seed = (() => {
+  const Seed = {}
+
+  /**
+   * Return 0 or 1 randomly.
+   */
+  Seed.FlipCoin = () => {
+    return Math.random() > 0.5 ? 1 : 0
+  }
+
+  /**
+   * Put some live cells in the center. If dimension is odd, put a single live
+   * cell in the center. If dimension is even, put 4 live cells in the center.
+   * This assumes that the world is square.
+   * @param {*} World
+   */
+  Seed.centerCells = (World) => {
+    const m = World.length
+    if (m % 2 === 0) {
+      const right = parseInt(m / 2)
+      const left = right - 1
+      World[left][left] = 1 // Top left
+      World[left][right] = 1 // Top right
+      World[right][left] = 1 // Bottom left
+      World[right][right] = 1 // Bottom right
+    } else {
+      const center = parseInt(m / 2)
+      World[center][center] = 1
+    }
+  }
+
+  /**
+   * Seed center vertical line having width 1 if world dimension is odd, width 2
+   * if even.
+   * @param {*} World
+   */
+  Seed.verticalLineCenter = (World) => {
+    const m = World.length
+    if (m % 2 === 0) {
+      const right = parseInt(m / 2)
+      const left = right - 1
+      for (let i = 0; i < m; i++) {
+        World[i][left] = 1
+        World[i][right] = 1
+      }
+    } else {
+      const center = parseInt(m / 2)
+      for (let i = 0; i < m; i++) {
+        World[i][center] = 1
+      }
+    }
+  }
+
+  /**
+   * Vertical line top to bottom with cells in this line randomly 1 or 0. If
+   * dimension is even, create two lines mirrored across the center.
+   * @param {*} World
+   */
+  Seed.randomVerticalLineCenter = (World) => {
+    const m = World.length
+    if (m % 2 === 0) {
+      const right = parseInt(m / 2)
+      const left = right - 1
+      for (let i = 0; i < m; i++) {
+        const life = Seed.FlipCoin()
+        World[i][left - 1] = life
+        World[i][left] = life
+        World[i][right] = life
+        World[i][right + 1] = life
+      }
+    } else {
+      const center = parseInt(m / 2)
+      for (let i = 0; i < m; i++) {
+        const life = Seed.FlipCoin()
+        World[i][center - 1] = life
+        World[i][center] = life
+        World[i][center + 1] = life
+      }
+    }
+  }
+
+  /**
+   * Vertical line top to bottom with cells in this line randomly 1 or 0. If
+   * dimension is even, create two lines mirrored across the center.
+   * @param {*} World
+   */
+  Seed.randomHorizontalVerticalLineCenter = (World) => {
+    const m = World.length
+    if (m % 2 === 0) {
+      const right = parseInt(m / 2)
+      const left = right - 1
+      for (let i = 0; i < m; i++) {
+        const life = Seed.FlipCoin()
+
+        World[i][left - 1] = life
+        World[i][left] = life
+        World[i][right] = life
+        World[i][right + 1] = life
+
+        World[left - 1][i] = life
+        World[left][i] = life
+        World[right][i] = life
+        World[right + 1][i] = life
+      }
+    } else {
+      const center = parseInt(m / 2)
+      for (let i = 0; i < m; i++) {
+        const life = Seed.FlipCoin()
+
+        World[i][center - 1] = life
+        World[i][center] = life
+        World[i][center + 1] = life
+
+        World[center - 1][i] = life
+        World[center][i] = life
+        World[center + 1][i] = life
+      }
+    }
+  }
+
+  /**
+   * Seed center vertical line having width 1 if world dimension is odd, width 2
+   * if even.
+   * @param {*} World
+   */
+  Seed.verticalHorizontalLine = (World) => {
+    const m = World.length
+    if (m % 2 === 0) {
+      const right = parseInt(m / 2)
+      const left = right - 1
+      for (let i = 0; i < m; i++) {
+        World[i][left] = 1
+        World[i][right] = 1
+      }
+      for (let i = 0; i < m; i++) {
+        World[left][i] = 1
+        World[right][i] = 1
+      }
+    } else {
+      const center = parseInt(m / 2)
+      for (let i = 0; i < m; i++) {
+        World[i][center] = 1
+      }
+      for (let i = 0; i < m; i++) {
+        World[center][i] = 1
+      }
+    }
+  }
+
+  Seed.centerThreeFourSquare = (World) => {
+    const m = World.length
+    if (m % 2 === 0) {
+      const start = parseInt(m / 2) - 2
+      for (let i = 0; i < 4; i++) {
+        for (let j = 0; j < 4; j++) {
+          World[start + i][start + j] = 1
+        }
+      }
+    } else {
+      const start = parseInt(m / 2) - 1
+      for (let i = 0; i < 3; i++) {
+        for (let j = 0; j < 3; j++) {
+          World[start + i][start + j] = 1
+        }
+      }
+    }
+  }
+
+  Seed.random = (World) => {
+    const m = World.length
+    const n = World[0].length
+    for (let i = 0; i < m; i++) {
+      for (let j = 0; j < n; j++) {
+        World[i] = World[i] || []
+        World[i][j] = Seed.FlipCoin()
+      }
+    }
+  }
+
+  Seed.init = (World) => {
+    // Seed.centerCells(World)
+    // Seed.centerThreeFourSquare(World)
+    // Seed.verticalLineCenter(World)
+    // Seed.verticalHorizontalLine(World)
+    // Seed.random(World)
+    Seed.randomVerticalLineCenter(World)
+    // Seed.randomHorizontalVerticalLineCenter(World)
+  }
+
+  return Seed
+})()
+
+const LifeRules = (() => {
+  const LifeRules = {}
+
+  // Conway rule
+  // const Rules = [
+  //   [0, 0, 0, 1, 0, 0, 0, 0, 0], // Rules for dead cells (0)
+  //   [0, 0, 1, 1, 0, 0, 0, 0, 0], // Rules for living cells (1)
+  // ]
+  const Rules = [
+    [0, 1, 0, 0, 0, 0, 0, 0, 0], // Rules for dead cells
+    [0, 0, 0, 0, 0, 0, 0, 0, 1], // Rules for living cells
+  ]
+
+  LifeRules.calculateNewCellState = (cell, neighbours) => {
+    const liveNeighbours = WorldModel.countLiveNeighbours(cell, neighbours)
+    return Rules[cell][liveNeighbours]
+  }
+
+  return LifeRules
 })()
 
 const WorldModel = (() => {
@@ -86,7 +297,7 @@ const WorldModel = (() => {
   }
 
   WorldModel.isCellAlive = (cell) => {
-    return cell === Conf.ALIVE
+    return cell === 1
   }
 
   /**
@@ -103,58 +314,6 @@ const WorldModel = (() => {
     else return liveCount
   }
 
-  /**
-   * poij
-   * @param {Number} cell Cell value.
-   * @param {[Number]} neighbours List of cell neighbour values.
-   * @returns New cell value based on Game of Life rule.
-   */
-  // WorldModel.calculateNewCellState = (cell, neighbours) => {
-  //   const liveNeighbours = WorldModel.countLiveNeighbours(cell, neighbours)
-  //   if (WorldModel.isCellAlive(cell)) {
-  //     if (liveNeighbours < 2) {
-  //       return Conf.DEAD // Underpopulation
-  //     } else if (liveNeighbours === 2 || liveNeighbours === 3) {
-  //       return Conf.ALIVE // Just right
-  //     } else {
-  //       return Conf.DEAD // Overpopulation
-  //     }
-  //   } else {
-  //     if (liveNeighbours === 3) {
-  //       return Conf.ALIVE
-  //     } else {
-  //       return Conf.DEAD
-  //     }
-  //   }
-  // }
-
-  WorldModel.calculateNewCellState = (cell, neighbours) => {
-    const liveNeighbours = WorldModel.countLiveNeighbours(cell, neighbours)
-    if (WorldModel.isCellAlive(cell)) {
-      if (liveNeighbours < 2) {
-        return Conf.DEAD // Underpopulation
-      } else if (
-        // liveNeighbours === 2 ||
-        // liveNeighbours === 3 ||
-        // liveNeighbours === 4 ||
-        // liveNeighbours === 5 ||
-        // liveNeighbours === 6 ||
-        // liveNeighbours === 7 ||
-        liveNeighbours === 8
-      ) {
-        return Conf.ALIVE // Just right
-      } else {
-        return Conf.DEAD // Overpopulation
-      }
-    } else {
-      if (liveNeighbours === 1) {
-        return Conf.ALIVE // I like this rule.
-      } else {
-        return Conf.DEAD
-      }
-    }
-  }
-
   WorldModel.update = () => {
     /** Calculate new state from World and populate NewWorld. */
     // Important that we clone so we don't modify the current world during
@@ -167,7 +326,7 @@ const WorldModel = (() => {
       for (let j = 0; j < n; j++) {
         const cell = WorldModel.getCell(World, i, j)
         const neighbours = WorldModel.getCellNeighboursTorus(World, i, j, m, n)
-        NewWorld[i][j] = WorldModel.calculateNewCellState(cell, neighbours)
+        NewWorld[i][j] = LifeRules.calculateNewCellState(cell, neighbours)
       }
     }
     World = NewWorld // It's OK to assign this here without cloning.
@@ -190,24 +349,10 @@ const WorldModel = (() => {
     for (let i = 0; i < m; i++) {
       for (let j = 0; j < n; j++) {
         World[i] = World[i] || []
-        World[i][j] = Conf.DEAD
+        World[i][j] = 0
       }
     }
-    /**
-     * Put some live cells in the center. If dimension is odd, put a single live
-     * cell in the center. If dimension is even, put 4 live cells in the center.
-     */
-    if (m % 2 === 0) {
-      const right = parseInt(m / 2)
-      const left = right - 1
-      World[left][left] = Conf.ALIVE // Top left
-      World[left][right] = Conf.ALIVE // Top right
-      World[right][left] = Conf.ALIVE // Bottom left
-      World[right][right] = Conf.ALIVE // Bottom right
-    } else {
-      const center = parseInt(m / 2)
-      World[center][center] = Conf.ALIVE
-    }
+    Seed.init(World)
   }
 
   return WorldModel
