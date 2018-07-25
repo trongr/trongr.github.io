@@ -36,6 +36,8 @@ const GameBinding = (() => {
         Game.speedUp() // RIGHT
       } else if (code === 13) {
         LifeRules.randomize() // ENTER
+      } else if (code === 46) {
+        Seed.deleteCenterSquare(WorldModel.getWorld()) // DELETE
       }
     })
   }
@@ -226,6 +228,30 @@ const Seed = (() => {
     }
   }
 
+  /**
+   * See how the rules handle boundary areas
+   * @param {*} World
+   */
+  Seed.deleteCenterSquare = (World) => {
+    const m = World.length
+    const half = parseInt(m / 3)
+    let middle, start, end
+    if (m % 2 === 0) {
+      middle = parseInt(m / 2)
+      start = middle - half
+      end = middle + half - 1
+    } else {
+      middle = parseInt(m / 2)
+      start = middle - half
+      end = middle + half
+    }
+    for (let i = start; i <= end; i++) {
+      for (let j = start; j <= end; j++) {
+        World[i][j] = 0
+      }
+    }
+  }
+
   Seed.init = (World) => {
     // Seed.centerCells(World)
     Seed.centerThreeFourSquare(World)
@@ -276,11 +302,11 @@ const LifeRules = (() => {
       Rules[0].push(Seed.FlipCoin())
       Rules[1].push(Seed.FlipCoin())
     }
-    setInterval(() => {
-      LifeRules.randomize()
-      // LifeRules.randomizeOneBit()
-      console.log(JSON.stringify(Rules))
-    }, 30000)
+    // setInterval(() => {
+    //   LifeRules.randomize()
+    //   // LifeRules.randomizeOneBit()
+    //   console.log(JSON.stringify(Rules))
+    // }, 15000)
   }
   LifeRules.init()
 
