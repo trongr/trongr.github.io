@@ -248,11 +248,24 @@ const LifeRules = (() => {
   // const Rules = [[1, 1, 1, 1, 1, 0, 1, 1, 0], [0, 1, 0, 1, 1, 1, 0, 0, 1]]
   const Rules = [[], []] // Rules[0] is for dead cells, Rules[1] for live.
 
+  /**
+   * Randomizes the rules mid-game.
+   */
   LifeRules.randomize = () => {
     for (let i = 0; i < 9; i++) {
       Rules[0][i] = Seed.FlipCoin()
       Rules[1][i] = Seed.FlipCoin()
     }
+  }
+
+  /**
+   * Randomizes the rules mid-game, but only one random bit at a time.
+   */
+  LifeRules.randomizeOneBit = () => {
+    const randomIdx = Seed.FlipCoin()
+    const randomIntBetween0And9 = Math.floor(Math.random() * 9)
+    const oldVal = Rules[randomIdx][randomIntBetween0And9]
+    Rules[randomIdx][randomIntBetween0And9] = (oldVal + 1) % 2
   }
 
   LifeRules.init = () => {
@@ -261,11 +274,19 @@ const LifeRules = (() => {
       Rules[1].push(Seed.FlipCoin())
     }
     setInterval(() => {
-      LifeRules.randomize()
+      // LifeRules.randomize()
+      LifeRules.randomizeOneBit()
+      console.log(JSON.stringify(Rules))
     }, 5000)
   }
   LifeRules.init()
 
+  /**
+   * Calculate the new cell state given the old cell and its neighbours,
+   * according to the Rules.
+   * @param {*} cell
+   * @param {*} neighbours
+   */
   LifeRules.calculateNewCellState = (cell, neighbours) => {
     const liveNeighbours = WorldModel.countLiveNeighbours(cell, neighbours)
     return Rules[cell][liveNeighbours]
