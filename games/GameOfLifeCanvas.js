@@ -4,10 +4,10 @@ const Conf = (() => {
     NUM_CELLS_HORIZONTAL: 0, // Wait for WorldView to tell Conf these
     NUM_CELLS_VERTICAL: 0,
     /** Use a lib to generate themes automatically! */
-    // ALIVE_COLOR: "#ffffff", // Light
-    // DEAD_COLOR: "#000000", // Dark
-    ALIVE_COLOR: "#000000",
-    DEAD_COLOR: "#ffffff",
+    ALIVE_COLOR: "#ffffff", // Light
+    DEAD_COLOR: "#000000", // Dark
+    // ALIVE_COLOR: "#000000",
+    // DEAD_COLOR: "#ffffff",
     // ALIVE_COLOR: "#f45b69",
     // DEAD_COLOR: "#ebebeb",
     // ALIVE_COLOR: "#094074",
@@ -34,6 +34,8 @@ const GameBinding = (() => {
         Game.slowDown() // LEFT
       } else if (code === 39) {
         Game.speedUp() // RIGHT
+      } else if (code === 13) {
+        LifeRules.randomize() // ENTER
       }
     })
   }
@@ -225,8 +227,8 @@ const Seed = (() => {
   }
 
   Seed.init = (World) => {
-    Seed.centerCells(World)
-    // Seed.centerThreeFourSquare(World)
+    // Seed.centerCells(World)
+    Seed.centerThreeFourSquare(World)
     // Seed.verticalLineCenter(World)
     // Seed.verticalHorizontalLine(World)
     // Seed.random(World)
@@ -266,6 +268,7 @@ const LifeRules = (() => {
     const randomIntBetween0And9 = Math.floor(Math.random() * 9)
     const oldVal = Rules[randomIdx][randomIntBetween0And9]
     Rules[randomIdx][randomIntBetween0And9] = (oldVal + 1) % 2
+    console.log(JSON.stringify(Rules))
   }
 
   LifeRules.init = () => {
@@ -274,10 +277,10 @@ const LifeRules = (() => {
       Rules[1].push(Seed.FlipCoin())
     }
     setInterval(() => {
-      // LifeRules.randomize()
-      LifeRules.randomizeOneBit()
+      LifeRules.randomize()
+      // LifeRules.randomizeOneBit()
       console.log(JSON.stringify(Rules))
-    }, 5000)
+    }, 30000)
   }
   LifeRules.init()
 
