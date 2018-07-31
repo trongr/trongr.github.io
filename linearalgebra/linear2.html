@@ -72,10 +72,7 @@
             e_i. \end{align*}
         </p>
         <p>
-            3. Suppose for contradiction that $ T^* $ exists. Then for any $ n, k $ we have $$ \
-            < T^*(e_n), e_k \> = \
-                < e_n, T(e_k) \> = \
-                    < e_n, \sum_{i=1}^k e_i \>
+            3. Suppose for contradiction that $ T^* $ exists. Then for any $ n, k $ we have $$ \< T^*(e_n), e_k \> = \< e_n, T(e_k) \> = \< e_n, \sum_{i=1}^k e_i \>
                         = \begin{cases} 0 \text{ if } k
                         < n \\ 1 \text{ if } k \geq n. \end{cases}. $$ Fixing $ n $ and varying
                             $ k $ over the positive integers, we find that $ \< T^*(e_n), e_k \></n> $ has infinitely many nonzero entries. In fact $$ T^*(e_n) = (0, 0,...,1,1,1,1,...). $$ Therefore
@@ -270,23 +267,12 @@
             operator, from which it follows that $ f = g \circ T, $ where g is the transaction by $ f(0). $ Observe that
             T is the composite of $ f $ and the translation by $ -f(0); $ hence T is a rigid motion. Furthermore, for any
             $ x \in V, $ $$ | T(x) |^2 = | f(x) - f(0) |^2 = | x - 0 |^2 = | x |^2, $$ and consequently $$ | T(x) | = | x
-            |. $$ Thus for any $ x, y \in V, $ \begin{align*} | T(x) - T(y) |^2 &= | T(x) |^2 - 2\
-            < T(x), T(y) \> + | T(y) |^2 \\ &= | x |^2 - 2\
-                < T(x), T(y) \> + | y |^2 \end{align*} and $$ | x - y |^2 = | x |^2 - 2\
-                    < x, y \> + | y |^2. $$ But $$ | T(x) - T(y) |^2 = | f(x) - f(y) |^2 = | x - y |^2, $$ and so $$ \
-                        < T(x), T(y)
-                            \> = \
-                            < x, y \> $$ for all $ x, y \in V. $
+            |. $$ Thus for any $ x, y \in V, $ \begin{align*} | T(x) - T(y) |^2 &= | T(x) |^2 - 2\< T(x), T(y) \> + | T(y) |^2 \\ &= | x |^2 - 2\< T(x), T(y) \> + | y |^2 \end{align*} and $$ | x - y |^2 = | x |^2 - 2\< x, y \> + | y |^2. $$ But $$ | T(x) - T(y) |^2 = | f(x) - f(y) |^2 = | x - y |^2, $$ and so $$ \< T(x), T(y)
+                            \> = \< x, y \> $$ for all $ x, y \in V. $
         </p>
         <p>
             Now we show that T is linear. Let $ x, y\in V, a \in \bbR. $ Then \begin{align*} | T(x+ay) - T(x) - aT(y) |^2 &= | (T(x+ay)
-            - T(x)) - aT(y) | \\ &= | T(x+ay) - T(x) |^2 - 2a\
-            < T(x+ay) - T(x), T(y) \> + a^2| T(y) |^2 \\ &= | (x+ay) - x |^2 - 2a\
-                < T(x+ay) - T(x), T(y) \> + a^2| y |^2 \\ &= | ay |^2 - 2a(\
-                    < T(x+ay), T(y) \> - \
-                        < T(x), T(y) \>) + a^2| y |^2 \\ &= 2a^2| y |^2 - 2a(\
-                            < x+ay, y \> - \
-                                < x, y \>) \\ &= 0. \end{align*} Therefore $ T(x+ay) = T(x) + aT(y) $ and T is linear. Since T also
+            - T(x)) - aT(y) | \\ &= | T(x+ay) - T(x) |^2 - 2a\< T(x+ay) - T(x), T(y) \> + a^2| T(y) |^2 \\ &= | (x+ay) - x |^2 - 2a\< T(x+ay) - T(x), T(y) \> + a^2| y |^2 \\ &= | ay |^2 - 2a(\< T(x+ay), T(y) \> - \< T(x), T(y) \>) + a^2| y |^2 \\ &= 2a^2| y |^2 - 2a(\< x+ay, y \> - \< x, y \>) \\ &= 0. \end{align*} Therefore $ T(x+ay) = T(x) + aT(y) $ and T is linear. Since T also
                                     preserves inner products, it is also an orthogonal operator.
         </p>
         <p>
@@ -437,8 +423,7 @@
         </p>
         <p>
             Let $$ A = \begin{bmatrix} a & b \\ b & c \end{bmatrix}, X = \begin{bmatrix} x \\ y \end{bmatrix}. $$ Then (3) may be written
-            as $ X^T AX = \
-            < AX, X \>. $ [This is easy to verify.]
+            as $ X^T AX = \< AX, X \>. $ [This is easy to verify.]
                 <i>Since $ A $ is symmetric, by theorem 6.20, it is orthogonally equivalent to a diagonal matrix, i.e. there
                     is an orthogonal matrix $ P $ and a diagonal matrix $ D $ s.t. $ P^T A P = D, $ where $ D = \begin{bmatrix}
                     \lambda_1 & 0 \\ 0 & \lambda_2 \\ \end{bmatrix}. $</i>
@@ -502,8 +487,7 @@
         <h1>Summary of Summary of orthogonality, normality, and diagonalizability</h1>
 
         <p>
-            We have \begin{align*} \textrm{ Unitary / Orthogonal } \implies & \text{Normal / selfadjoint} \\ \iff & \text{Exists orthonormal
-            eigenbasis} \\ \implies & \text{Exists eigenbasis } \\ \iff & \text{Diagonalizable.} \\ \end{align*} and it seems
+            We have \begin{align*} \textrm{ Unitary / Orthogonal } \implies & \text{Normal / selfadjoint} \\ \iff & \text{Exists orthonormal eigenbasis} \\ \implies & \text{Exists eigenbasis } \\ \iff & \text{Diagonalizable.} \\ \end{align*} and it seems
             that the two are not equivalent.
         </p>
 
