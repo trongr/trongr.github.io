@@ -19,36 +19,6 @@ const Conf = (() => {
   return Conf
 })()
 
-/**
- * Binds user actions relating to the game, e.g. pause, start.
- */
-const GameBinding = (() => {
-  const GameBinding = {}
-
-  GameBinding.bindPauseStartGame = () => {
-    $(window).on("keydown", function Listener(e) {
-      const code = e.keyCode || e.which
-      if (code === 32) {
-        Game.togglePause() // SPACE KEY
-      } else if (code === 37) {
-        Game.slowDown() // LEFT
-      } else if (code === 39) {
-        Game.speedUp() // RIGHT
-      } else if (code === 13) {
-        LifeRules.randomize() // ENTER
-      } else if (code === 46) {
-        Seed.deleteCenterSquare(WorldModel.getWorld()) // DELETE
-      }
-    })
-  }
-
-  GameBinding.init = () => {
-    GameBinding.bindPauseStartGame()
-  }
-
-  return GameBinding
-})()
-
 const Seed = (() => {
   const Seed = {}
 
@@ -235,7 +205,9 @@ const Seed = (() => {
   Seed.deleteCenterSquare = (World) => {
     const m = World.length
     const half = parseInt(m / 3)
-    let middle, start, end
+    let middle
+    let start
+    let end
     if (m % 2 === 0) {
       middle = parseInt(m / 2)
       start = middle - half
@@ -280,6 +252,11 @@ const LifeRules = (() => {
    * Randomizes the rules mid-game.
    */
   LifeRules.randomize = () => {
+    LifeRules.randomizeAll()
+    console.log("Rules", JSON.stringify(Rules))
+  }
+
+  LifeRules.randomizeAll = () => {
     for (let i = 0; i < 9; i++) {
       Rules[0][i] = Seed.FlipCoin()
       Rules[1][i] = Seed.FlipCoin()
@@ -310,6 +287,24 @@ const LifeRules = (() => {
   }
   LifeRules.init()
 
+  LifeRules.isCellAlive = (cell) => {
+    return cell === 1
+  }
+
+  /**
+   *
+   * @param {*} cell
+   * @param {*} neighbours
+   * @returns The number of live neighbours cell has.
+   */
+  LifeRules.countLiveNeighbours = (cell, neighbours) => {
+    const liveCount = neighbours.filter((c) => {
+      return LifeRules.isCellAlive(c)
+    }).length
+    if (LifeRules.isCellAlive(cell)) return liveCount - 1
+    return liveCount
+  }
+
   /**
    * Calculate the new cell state given the old cell and its neighbours,
    * according to the Rules.
@@ -317,7 +312,7 @@ const LifeRules = (() => {
    * @param {*} neighbours
    */
   LifeRules.calculateNewCellState = (cell, neighbours) => {
-    const liveNeighbours = WorldModel.countLiveNeighbours(cell, neighbours)
+    const liveNeighbours = LifeRules.countLiveNeighbours(cell, neighbours)
     return Rules[cell][liveNeighbours]
   }
 
@@ -360,24 +355,6 @@ const WorldModel = (() => {
       }
     }
     return neighbours
-  }
-
-  WorldModel.isCellAlive = (cell) => {
-    return cell === 1
-  }
-
-  /**
-   *
-   * @param {*} cell
-   * @param {*} neighbours
-   * @returns The number of live neighbours cell has.
-   */
-  WorldModel.countLiveNeighbours = (cell, neighbours) => {
-    const liveCount = neighbours.filter((c) => {
-      return WorldModel.isCellAlive(c)
-    }).length
-    if (WorldModel.isCellAlive(cell)) return liveCount - 1
-    else return liveCount
   }
 
   WorldModel.update = () => {
@@ -427,7 +404,8 @@ const WorldModel = (() => {
 const WorldView = (() => {
   const WorldView = {}
 
-  let Canvas, CanvasContext
+  let Canvas
+  let CanvasContext
 
   /**
    *
@@ -535,7 +513,7 @@ const Game = (() => {
     // Skip this frame if game is running faster than desired FPS
     if (Date.now() - LastFrameTime < MSPF)
       return requestAnimationFrame(Game.loop)
-    else LastFrameTime = Date.now()
+    LastFrameTime = Date.now()
 
     WorldModel.update()
     WorldView.render(WorldModel.getWorld())
@@ -543,7 +521,6 @@ const Game = (() => {
   }
 
   Game.init = () => {
-    GameBinding.init()
     WorldView.init()
 
     MSPF = Game.calculateMSPF(FPS)
@@ -554,6 +531,37 @@ const Game = (() => {
   return Game
 })()
 
+/**
+ * Binds user actions relating to the game, e.g. pause, start.
+ */
+const GameBinding = (() => {
+  const GameBinding = {}
+
+  GameBinding.bindPauseStartGame = () => {
+    $(window).on("keydown", function Listener(e) {
+      const code = e.keyCode || e.which
+      if (code === 32) {
+        Game.togglePause() // SPACE KEY
+      } else if (code === 37) {
+        Game.slowDown() // LEFT
+      } else if (code === 39) {
+        Game.speedUp() // RIGHT
+      } else if (code === 13) {
+        LifeRules.randomize() // ENTER
+      } else if (code === 46) {
+        Seed.deleteCenterSquare(WorldModel.getWorld()) // DELETE
+      }
+    })
+  }
+
+  GameBinding.init = () => {
+    GameBinding.bindPauseStartGame()
+  }
+
+  return GameBinding
+})()
+
 $(window).on("load", () => {
+  GameBinding.init()
   Game.init()
 })
