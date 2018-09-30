@@ -1,12 +1,12 @@
 \documentclass[12pt]{article}
 \usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
-\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+\geometry{letterpaper}                   % ... or a4paper or a5paper or ...
 %\geometry{landscape}                % Activate for for rotated page geometry
 %\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
 \usepackage{float}
 \usepackage{graphicx}
 \graphicspath{{images/}}
-\usepackage{amsmath,amssymb,amsfonts,amsthm} 
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
 \usepackage{epstopdf}
 \usepackage{epigraph}
 \usepackage{url}
@@ -58,8 +58,8 @@
 \newcommand*{\defeq}{\mathrel{\vcenter{\baselineskip0.5ex \lineskiplimit0pt
                      \hbox{\scriptsize.}\hbox{\scriptsize.}}}
                      =}
-\newcommand{\N}{\mathbf N} 
-\newcommand{\Q}{\mathbf Q} 
+\newcommand{\N}{\mathbf N}
+\newcommand{\Q}{\mathbf Q}
 \newcommand{\R}{\mathbf R}
 
 \title{Analysis}
@@ -75,7 +75,7 @@
 \part{Polynomial Approximation}
 
 \begin{theorem}[Taylor's Theorem]
-If $f', \ldots, f^{(n+1)}$ are defined on $[a, x]$, then 
+If $f', \ldots, f^{(n+1)}$ are defined on $[a, x]$, then
 $$f(x) = f(a) + f'(a)(x - a) + \cdots + \frac{f^{(n)}(a)}{n!}(x - a)^n + R_n(x)$$
 where $R_n(x) = \frac{f^{(n+1)}(t)}{(n+1)!}(x - a)^{n+1}$ for some $t$ in $(a, x)$.
 \end{theorem}
@@ -103,11 +103,11 @@ The uniform limit of uniformly continuous functions is uniformly continuous.
 \end{proposition}
 
 \begin{question}
-What about differentiability, i.e. if $f_n$ are differentiable and approach $f$ uniformly, is $f$ always differentiable, and is $\lim f_n' = f'$? 
+What about differentiability, i.e. if $f_n$ are differentiable and approach $f$ uniformly, is $f$ always differentiable, and is $\lim f_n' = f'$?
 \end{question}
 
 \begin{example}
-No to the second question: the functions $f_n(x) = \frac{1}{n} \sin(nx)$ converge uniformly to the zero function, which \textit{is} differentiable. But, the limit of the derivatives don't exist. What about just differentiability? 
+No to the second question: the functions $f_n(x) = \frac{1}{n} \sin(nx)$ converge uniformly to the zero function, which \textit{is} differentiable. But, the limit of the derivatives don't exist. What about just differentiability?
 \end{example}
 
 \centerline{\includegraphics[width=1.0\textwidth]{uniformconvergence1}}
@@ -141,7 +141,7 @@ If $s$ is a step function on $[0, 1]$, and $\{a_n\}$ is uniformly distributed in
 \end{proposition}
 
 \begin{proof}
-Let $\Delta_1, \ldots, \Delta_m$ be a partition of $[0, 1]$ corresponding to the steps in $s.$ Then (with a slight abuse of notation) we have 
+Let $\Delta_1, \ldots, \Delta_m$ be a partition of $[0, 1]$ corresponding to the steps in $s.$ Then (with a slight abuse of notation) we have
 \begin{align*}
 \int_0^1 s &= \sum_{i=1}^m s(\Delta_i) \Delta_i \\
 &= \sum_{i=1}^m s(\Delta_i) \lim_{n \to \infty} \frac{1}{n} N(n; \Delta_i) \\
@@ -195,8 +195,8 @@ The condition $$|\lim\limits_{y\to a} f(y) - f(a)| > \epsilon$$ means that for $
 \end{proof}
 
 \begin{proof}[Sketch 2]
-Another way to see this is to let $a_n$ be the convergent subsequence given by Bolzano-Weierstrass, and choose $y_n$ close to $a_n$ so that $|f(y_n) - f(a_n)|$ is big. Since $|f(a_n) - L|$ is small, the triangle inequality 
-$$|f(y_n) - L| \geq |f(y_n) - f(a_n)| - |f(a_n) - L|$$ 
+Another way to see this is to let $a_n$ be the convergent subsequence given by Bolzano-Weierstrass, and choose $y_n$ close to $a_n$ so that $|f(y_n) - f(a_n)|$ is big. Since $|f(a_n) - L|$ is small, the triangle inequality
+$$|f(y_n) - L| \geq |f(y_n) - f(a_n)| - |f(a_n) - L|$$
 says $|f(y_n) - L|$ is big, thus contradiction.
 \end{proof}
 
@@ -219,6 +219,8 @@ Uniform Limit Theorem, point-wise, uniform convergence, metric space, Cauchy cri
 \part{Infinite Series}
 
 \epigraph{\textit{Infinite growth of material consumption in a finite world is an impossibility.}}{E. F. Schumacher}
+
+Testing latex reload $$asdf.$$ This isn't updating live.
 
 \begin{thebibliography}{99}
 
