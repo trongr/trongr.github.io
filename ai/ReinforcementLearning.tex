@@ -1,0 +1,403 @@
+\documentclass[12pt]{article}
+\usepackage{geometry}
+\geometry{letterpaper}
+\usepackage{float}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{epstopdf}
+\usepackage{epigraph}
+\usepackage{url}
+\usepackage{mathtools}
+
+\usepackage{pdfrender,xcolor}
+
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+
+% Computer Concrete
+% \usepackage{concmath}
+% \usepackage[T1]{fontenc}
+
+% Times variants
+%
+% \usepackage{mathptmx}
+% \usepackage[T1]{fontenc}
+%
+% \usepackage[T1]{fontenc}
+% \usepackage{stix}
+%
+% Needs to typeset using LuaLaTeX:
+% \usepackage{unicode-math}
+% \setmainfont{XITS}
+% \setmathfont{XITS Math}
+
+% garamond
+% \usepackage[cmintegrals,cmbraces]{newtxmath}
+% \usepackage{ebgaramond-maths}
+% \usepackage[T1]{fontenc}
+
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{question}[theorem]{Question}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{keywords}{Keywords}
+\newtheorem{reference}{Reference}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{note}[theorem]{Note}
+
+%\newcommand{\defeq}{\coloneqq}
+\newcommand*{\defeq}{\mathrel{\vcenter{\baselineskip0.5ex \lineskiplimit0pt
+                     \hbox{\scriptsize.}\hbox{\scriptsize.}}}
+                     =}
+
+\newcommand{\N}{\mathbf N}
+\newcommand{\Q}{\mathbf Q}
+\newcommand{\R}{\mathbf R}
+
+\title{Reinforcement Learning}
+\author{Trong Truong}
+\date{\today}
+
+\begin{document}
+\pdfrender{StrokeColor=black,TextRenderingMode=2,LineWidth=0.3pt}
+\sloppy
+\maketitle
+
+\section{Cumulative reward}
+
+
+Cumulative reward is sometimes called return. The return from time \( t \) is the expected reward starting from time \( t \):
+\[
+R _ { t } = r _ { t + 1 } + r _ { t + 2 } + r _ { t + 3 } + r _ { t + 4 } + \ldots = \sum _ { k = 0 } ^ { \infty } r _ { t + k + 1 }.
+\]
+
+We can also add the discount factor:
+\[
+R _ { t } = r _ { t + 1 } + \gamma r _ { t + 2 } + \gamma ^ { 2 } r _ { t + 3 } + \gamma ^ { 3 } r _ { t + 4 } + \ldots = \sum _ { k = 0 } ^ { \infty } \gamma ^ { k } r _ { t + k + 1 },
+\]
+where \( 0 < \gamma < 1. \)
+
+\section{Temporal difference update}
+
+\begin{align*}
+V(s) &= V(s) + \alpha (V(s') - V(s)) \\
+     &= (1 - \alpha) V(s) + \alpha V(s'),
+\end{align*}
+essentially a weighted average between the old and the new values.
+
+\section{Law of Effect}
+
+Of several responses made to the same situation,  those which are accompanied or closely followed by satisfaction to the animal will, other things being equal, be more firmly connected with the situation, so that, when it recurs, they will be more likely to recur; those which are accompanied or closely followed by discomfort to the animal will, other things being equal, have their connections with that situation weakened, so that, when it recurs, they will be less likely to occur.  The greater the satisfaction or discomfort, the greater the strengthening or weakening of the bond.---Thorndike, 1911, p. 244.
+
+\section{Policy Function}
+
+\begin{definition}
+  A policy \( \pi \) is a probability distribution over actions given states:
+\[
+  \pi(a|s) = P[A_t = a | S_t = s].
+\]
+I.e. Given the current state, what is the most likely action to take. A policy fully defines the behavior of an agent.
+\end{definition}
+
+
+
+Given an MDP \( M = (S, A, P, R, \gamma): \)
+
+\begin{itemize}
+\item The state sequence \( S_1, S_2, \ldots \) is a Markov process \( S, P^\pi. \) IOW, the policy defines the particular Markov process, given the set of all possible states S and actions A.
+
+\item The state reward sequence \( S_1, R_2, S_2, \ldots \) is a Markov reward process \( S, P^\pi, R^\pi, \gamma, \)
+where
+\begin{align*}
+\mathcal { P } _ { s s ^ { \prime } } ^ { \pi } &= \sum _ { a \in \mathcal { A } } \pi ( a | s ) \mathcal { P } _ { s s ^ { \prime } } ^ { a } \\
+\mathcal { R } _ { s } ^ { \pi } &= \sum _ { a \in \mathcal { A } } \pi ( a | s ) \mathcal { R } _ { s } ^ { a }.
+\end{align*}
+\end{itemize}
+
+\section{State value function and action value function}
+
+
+State value function: \( V(s) \) is the expected return when starting from state \( s \) acting according to policy \( \pi: \)
+\[
+V ^ { \pi } ( s ) = \mathbb { E } _ { \pi } \left[ G _ { t } | s _ { t } = s \right].
+\]
+
+Action value function: \( Q(s, a) \) is the value of an action in a given state and acting under a policy \( \pi: \)
+\[
+Q ^ { \pi } ( s , a ) = \mathbb { E } _ { \pi } \left[ G _ { t } | s _ { t } = s , a _ { t } = a \right].
+\]
+
+Note that \( Q \) is more specific than \( V, \) in the sense that \( V \) takes into account all possible actions.
+
+
+\section{Markov Decision Process}
+
+\begin{definition}
+  A Markov Decision Process is a tuple \( (S, A, P, R, \gamma), \) where S is a finite set of states, A is a finite set of actions, P is a state transition probability matrix, R is a reward function, and \( \gamma \) is a discount factor.
+\end{definition}
+
+Given a state \( s \in S \) and an action \( a \in A, \) the probability of
+transitioning into a new state \( s' \) is given by \( P(s, a), \) the reward of
+the transition is given by \( R(s, a). \) This assumes that the environment is
+responding deterministically, not stochastically, i.e. taking action \( a \) in
+state \( s \) will always bring you to a particular and the same \( s' \) every
+time.
+
+\section{Discrete Markov Chain}
+
+\begin{definition}
+  Given a finite set of states \( \Omega = \{ X_0, \ldots, X_N \}, \) a discrete Markov chain is a stochastic process that satisfies
+\[
+P \left( X _ { n + 1 } = x _ { n + 1 } | X _ { n } = x _ { n } , \ldots , X _ { 0 } = x _ { 0 } \right) = P \left( X _ { n + 1 } = x _ { n + 1 } | X _ { n } = x _ { n } \right),
+\]
+i.e. the present is enough to determine the future.
+\end{definition}
+
+Question. Are we working with finitely many states? (It's always finite in the real world.)
+
+Notation: the probability of moving from state i to state j at time n is written
+
+\[
+p _ { i j } ( n ) = P \left( X _ { n + 1 } = j | X _ { n } = i \right).
+\]
+
+\begin{definition}
+Transition matrix:
+\[
+P ( n ) = \left(
+\begin{array}{ c c c c c c }
+{ p _ { 00 } ( n ) } & { p _ { 01 } ( n ) } & { p _ { 02 } ( n ) } & { \dots } & { p _ { 0 j } ( n ) } & { \dots } \\
+{ p _ { 10 } ( n ) } & { p _ { 11 } ( n ) } & { p _ { 12 } ( n ) } & { \dots } & { p _ { 1 j } ( n ) } & { \dots } \\
+{ p _ { 20 } ( n ) } & { p _ { 21 } ( n ) } & { p _ { 22 } ( n ) } & { \dots } & { p _ { 2 j } ( n ) } & { \dots } \\
+{ \vdots } & { \vdots } & { \vdots } & { \vdots } & { \vdots } & { \vdots } \\
+{ p _ { i 0 } ( n ) } & { p _ { i 1 } ( n ) } & { p _ { i 2 } ( n ) } & { \dots } & { p _ { i j } ( n ) } & { \dots } \\
+{ \vdots } & { \vdots } & { \vdots } & { \vdots } & { \vdots } & { \vdots }
+\end{array}
+\right).
+\]
+\end{definition}
+
+Properties:
+
+\begin{itemize}
+\item \( P(n) \) is a square matrix.
+\item \( \sum_{j} p_{ij} (n) = 1 \) for all \( j \in \Omega. \) Row \( i \) gives the probabilities of moving from state \( i \) to all states, so they should all add up to \( 1. \)
+\item \( p_{ij}(n) \geq 0. \)
+\end{itemize}
+
+
+Note that in this example, the transition matrix is the same for all time steps \( n: \) \( P = P(n). \)
+
+\section{State vector}
+
+
+We can describe the state of a Markov chain with a state vector \( \pi^{(n)} \) where \( \pi^{(n)}_{j} \) represents the probability of being in state \( j \) at time \( n. \)
+
+E.g. Suppose the starting state is \( \pi ^ { ( 0 ) } = ( 1,0,0,0 ), \) then the next state vector is just the first row of the transition matrix, which is \( (0.90, 0.07, 0.02, 0.01). \) In general,
+
+\[
+\pi ^ { ( n ) } = \pi ^ { ( 0 ) } P ^ { n }.
+\]
+
+\section{Transient and steady state distribution}
+
+
+\[
+\frac { d \pi ( t ) } { d t } = \pi ( t ) Q
+\]
+
+\[
+\pi ( t ) = \pi ( 0 ) e ^ { Q t } = \pi ( 0 ) \left( \mathbb { I } + \sum _ { k = 1 } ^ { \infty } \frac { Q ^ { k } t ^ { k } } { k ! } \right)
+\]
+
+The steady state distribution (if it exists) can be found by solving
+
+\[
+\pi Q = 0.
+\]
+
+
+\section{N-armed bandit}
+
+
+Simple case: only action affects reward. Compared with Contextual bandit where
+state and action both together affect reward. Full RL problem: action affects
+state and reward, and state affects reward.
+
+E.g. \( k \) slot machines are an example of a \( k \)-armed bandit.
+
+Question. What is the diff between having multiple bandits and a \( k \)-armed
+bandit?
+
+\section{\( \epsilon \)-greedy algorithm}
+
+Picks the best currently available option without taking into consideration the
+long-term effect of that decision: randomly pick the best available option with
+probability \( 1 - \epsilon; \) OTW randomly pick a random action with
+probability $ \epsilon. $
+
+\section{Bellman Equation}
+
+
+State-value function can be decomposed into immediate reward plus discounted value of successor state:
+
+
+\[
+V _ { \pi } ( s ) = \mathbb { E } _ { \pi } \left[ R _ { t + 1 } + \gamma V _ { \pi } \left( S _ { t + 1 } \right) | S _ { t } = s \right]
+\]
+
+Similarly for the action-value function:
+
+\[
+Q _ { \pi } ( s , a ) = \mathbb { E } _ { \pi } \left[ R _ { t + 1 } + \gamma Q _ { \pi } \left( S _ { t + 1 } , A _ { t + 1 } \right) | S _ { t } = s , A _ { t } = a \right].
+\]
+
+\section{Notation}
+
+
+NOTE. The environment can be stochastic as well: taking action \( a \) at state \( s \) might not always get you to the same state \( s'. \) E.g.
+\[
+\mathcal { P } _ { s s ^ { \prime } } ^ { a } = \operatorname { Pr } \left( s _ { t + 1 } = s ^ { \prime } | s _ { t } = s , a _ { t } = a \right)
+\]
+is the probability of ending up in state \( s' \) by taking action \( a \) at state \( s. \)
+
+Similarly,
+
+\[
+\mathcal { R } _ { s s ^ { \prime } } ^ { a } = \mathbb { E } \left[ r _ { t + 1 } | s _ { t } = s , s _ { t + 1 } = s ^ { \prime } , a _ { t } = a \right].
+\]
+
+\section{Deriving the Bellman Equation}
+
+\begin{align*}
+V ^ { \pi } ( s ) &= \mathbb { E } _ { \pi } \left[ R _ { t } | s _ { t } = s \right] \\
+&= \mathbb { E } _ { \pi } \left[ r _ { t + 1 } + \gamma r _ { t + 2 } + \gamma ^ { 2 } r _ { t + 3 } + \ldots | s _ { t } = s \right] \\
+&= \mathbb { E } _ { \pi } \left[ \sum _ { k = 0 } ^ { \infty } \gamma ^ { k } r _ { t + k + 1 } \bigg| s _ { t } = s \right] \\
+&= \mathbb { E } _ { \pi } \left[ r _ { t + 1 } + \gamma \sum _ { k = 0 } ^ { \infty } \gamma ^ { k } r _ { t + k + 2 } \bigg| s _ { t } = s \right] \\
+&= \mathbb { E } _ { \pi } \left[ r _ { t + 1 } | s _ { t } = s \right] + \mathbb { E } _ { \pi } \left[ \gamma \sum _ { k = 0 } ^ { \infty } \gamma ^ { k } r _ { t + k + 2 } \bigg| s _ { t } = s \right] \quad (*)
+\end{align*}
+
+The first term is
+
+\[
+\mathbb { E } _ { \pi } \left[ r _ { t + 1 } | s _ { t } = s \right] = \sum _ { a } \pi ( s , a ) \sum _ { s ^ { \prime } } \mathcal { P } _ { s s ^ { \prime } } ^ { a } \mathcal { R } _ { s s ^ { \prime } } ^ { a }.
+\]
+
+And the second term:
+
+\[
+\mathbb { E } _ { \pi } \left[ \gamma \sum _ { k = 0 } ^ { \infty } \gamma ^ { k } r _ { t + k + 2 } \bigg| s _ { t } = s \right] = \sum _ { a } \pi ( s , a ) \sum _ { s ^ { \prime } } \mathcal { P } _ { s s ^ { \prime } } ^ { a } \gamma \mathbb { E } _ { \pi } \left[ \sum _ { k = 0 } ^ { \infty } \gamma ^ { k } r _ { t + k + 2 } \bigg| s _ { t + 1 } = s ^ { \prime } \right].
+\]
+
+Putting these back in \( (*) \) and refactor, we get
+
+\begin{align*}
+V ^ { \pi } ( s ) &= \sum _ { a } \pi ( s , a ) \sum _ { s ^ { \prime } } \mathcal { P } _ { s s ^ { \prime } } ^ { a } \left( \mathcal { R } _ { s s ^ { \prime } } ^ { a } + \gamma \mathbb { E } _ { \pi } \left[ \sum _ { k = 0 } ^ { \infty } \gamma ^ { k } r _ { t + k + 2 } \bigg| s _ { t + 1 } = s ^ { \prime } \right] \right) \\
+&= \sum _ { a } \pi ( s , a ) \sum _ { s ^ { \prime } } \mathcal { P } _ { s s ^ { \prime } } ^ { a } \left[ \mathcal { R } _ { s s ^ { \prime } } ^ { a } + \gamma V ^ { \pi } \left( s ^ { \prime } \right) \right].
+\end{align*}
+
+Similarly, the Bellman equation for the action value function is
+
+\[
+Q ^ { \pi } ( s , a ) = \sum _ { s ^ { \prime } } \mathcal { P } _ { s s ^ { \prime } } ^ { a } \left[ \mathcal { R } _ { s s ^ { \prime } } ^ { a } + \gamma \sum _ { a ^ { \prime } } \pi \left( s ^ { \prime } , a ^ { \prime } \right) Q ^ { \pi } \left( s ^ { \prime } , a ^ { \prime } \right) \right].
+\]
+
+These equations give us an iterative way of calculating value functions: knowing the next state gives us the value of the current state. (So you can calculate backwards.)
+
+\section{Alternative forms for the Bellman equations for V and Q}
+
+\begin{align*}
+v _ { \pi } ( s ) &= \sum _ { a \in \mathcal { A } } \pi ( a | s ) \left( \mathcal { R } _ { s } ^ { a } + \gamma \sum _ { s ^ { \prime } \in S } \mathcal { P } _ { s s ^ { \prime } } ^ { a } v _ { \pi } \left( s ^ { \prime } \right) \right) \\
+q _ { \pi } ( s , a ) &= \mathcal { R } _ { s } ^ { a } + \gamma \sum _ { s ^ { \prime } \in \mathcal { S } } \mathcal { P } _ { s s ^ { \prime } } ^ { a } \sum _ { a ^ { \prime } \in \mathcal { A } } \pi \left( a ^ { \prime } | s ^ { \prime } \right) q _ { \pi } \left( s ^ { \prime } , a ^ { \prime } \right). \\
+\end{align*}
+
+Can write the Bellman equation as an induced Markov Reward Process:
+\[
+v _ { \pi } = \mathcal { R } ^ { \pi } + \gamma \mathcal { P } ^ { \pi } v _ { \pi },
+\]
+with direct solution
+\[
+v _ { \pi } = \left( I - \gamma \mathcal { P } ^ { \pi } \right) ^ { - 1 } \mathcal { R } ^ { \pi }.
+\]
+
+
+\section{Q-Learning Algorithm}
+
+The Q-table is initialized to a matrix where the columns correspond to actions
+and the rows to states. In this table, higher values are better. Given state \(
+s \) and action \( a, \) the new Q-value for \( s,  a \) is
+\begin{align*}
+Q_{sa} &\gets Q_{sa} + \alpha (r_{sa} + \gamma \max_{a'} Q_{s'a'} - Q_{sa}) \\
+&= (1 - \alpha) Q_{sa} + \alpha (r_{sa} + \gamma \max_{a'} Q_{s'a'}),
+\end{align*}
+where \( \alpha \) is the learning rate, \( \gamma \) is the discount factor.
+
+In other words, the new Q-value is an average between the old Q-value \( Q_{sa}
+\) and the reward plus the discounted expected reward in the new state. The
+value of the action is based on a combination of its previous value and how much
+reward the action gave us, plus a little bit of future reward. A higher \(\alpha
+\) means we're putting more stock on the present and future, and less on the
+previously learned values; a higher \( \gamma \) means we're putting more stock
+in the future.
+
+Inefficient for large state spaces.
+
+This looks like a special case of the temporal difference update rule we had
+before. It's also derived from the Bellman Equation. We should do that.
+
+\section{Deep Q-Learning: Q-Learning + Deep Neural Network}
+
+Replace the Q-Table / agent with a neural network.
+
+\section{Experience replay / replay buffer: separating experience from learning}
+
+This solves two things: (1) Reduces forgetting and (2) reduces correlating experience.
+
+(1) because you're constantly learning from old experiences, not just the most recent ones.
+
+(2). Correlating experiences means that if you learn things sequentially,
+consecutive experiences are highly correlated. This causes you to rely on your
+correlated bias to react to an experience, instead of treating each experience
+as independent and explore other more optimal actions.
+
+The general strategy is to separate learning from interaction. First you interact with the environment to gather experience, but you only start learning after you've filled the experience / replay buffer. ``This helps avoid being fixated on one region of the state space. This prevents reinforcing the same action over and over.'' Variety is key!
+
+(Learning V.S. Performing is often called Explore V.S. Exploit. This one is about separating Seeing/Experience from Believing/Learning LOL.)
+
+\section{Temporal difference update for DQN}
+
+$$
+\Delta w = \alpha \left[ \left( R + \gamma \max _ { a } Q \left( s ^ { \prime } , a , w \right) \right) - Q ( s , a , w ) \right] \nabla _ { w } Q ( s , a , w ).
+$$
+
+Recall how this is similar to the update rule for the Q-Table:
+\begin{align*}
+Q_{sa} &\gets Q_{sa} + \alpha (r_{sa} + \gamma \max_{a'} Q_{s'a'} - Q_{sa}) \\
+&= (1 - \alpha) Q_{sa} + \alpha (r_{sa} + \gamma \max_{a'} Q_{s'a'}),
+\end{align*}
+which can be written as
+\begin{align*}
+Q^{\text{new}}_{sa} - Q^{\text{old}}_{sa} &= \alpha (r_{sa} + \gamma \max_{a'} Q_{s'a'} - Q^{\text{old}}_{sa}) \\
+\Delta Q_{sa} &= \alpha (r_{sa} + \gamma \max_{a'} Q_{s'a'} - Q_{sa}).
+\end{align*}
+
+This multiply gradient $ \nabla _ { w } Q ( s , a , w ) $ doesn't make sense though. Shouldn't it be a quotient, like this?
+$$
+\Delta w = \frac{\alpha \left[ \left( R + \gamma \max _ { a } Q \left( s ^ { \prime } , a , w \right) \right) - Q ( s , a , w ) \right]}{\nabla _ { w } Q ( s , a , w )},
+$$
+because $ \nabla _ { w } Q ( s , a , w ) $ should look like $ \frac{\Delta Q }{\Delta w}. $
+
+\end{document}

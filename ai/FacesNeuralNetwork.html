@@ -28,10 +28,6 @@
 
 <script src="../js/toc.js"></script>
 <div id="toc"></div>
-<!-- <h1>Reference</h1> -->
-<!-- <ol>
-<li></li>
-</ol> -->
 
 <h1>Iterative generative workflow</h1>
 
@@ -39,10 +35,9 @@
     Given what the Face GAN can do [taking in an encoding and turning it into
     learned faces], we can create a tool that lets you iteratively build a
     likeness from scratch. First have the model generate a random set of faces,
-    then choose from among those which ones are most similar to the one you have
-    in mind. Then have the network perturb that face's encoding slightly to
-    generate faces similar to that. Finally choose among those the one most
-    similar to your target face, and repeat.
+    then choose from among those one most similar to the face you have in mind.
+    Then have the network perturb that face's encoding slightly to generate
+    faces similar to that, and so on.
 </p>
 
 <h1>Dynamic iterative generative models</h1>

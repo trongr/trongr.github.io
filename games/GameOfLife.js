@@ -74,11 +74,11 @@ const WorldModel = (() => {
       return WorldModel.isCellAlive(c)
     }).length
     if (WorldModel.isCellAlive(cell)) return liveCount - 1
-    else return liveCount
+    return liveCount
   }
 
   /**
-   * poij
+   * TODO@trong
    * @param {Number} cell Cell value.
    * @param {[Number]} neighbours List of cell neighbour values.
    * @returns New cell value based on Game of Life rule.
@@ -107,7 +107,8 @@ const WorldModel = (() => {
     if (WorldModel.isCellAlive(cell)) {
       if (liveNeighbours < 2) {
         return Conf.DEAD // Underpopulation
-      } else if (
+      }
+      if (
         // liveNeighbours === 2 ||
         // liveNeighbours === 3 ||
         // liveNeighbours === 4 ||
@@ -117,9 +118,9 @@ const WorldModel = (() => {
         liveNeighbours === 8
       ) {
         return Conf.ALIVE // Just right
-      } else {
+      } 
         return Conf.DEAD // Overpopulation
-      }
+      
     } else {
       if (liveNeighbours === 1) {
         return Conf.ALIVE // I like this rule.
@@ -234,7 +235,7 @@ const WorldView = (() => {
 const Game = (() => {
   const Game = {}
 
-  // poij https://isaacsukin.com/news/2015/01/detailed-explanation-javascript-game-loops-and-timing#timing-problems
+  // TODO@trong https://isaacsukin.com/news/2015/01/detailed-explanation-javascript-game-loops-and-timing#timing-problems
   // TODO. Add stop start button
   Game.loop = () => {
     WorldModel.update()

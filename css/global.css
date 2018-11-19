@@ -1,222 +1,223 @@
 body {
-    font-family: "CMU Concrete", times, "Times New Roman", serif;
-    font-size: 1.2em;
-    /* color: white; */
-    /* background-color: #171621; */
-    /* color: black; */
-    /*background-color: #f5ebc4;*/
-    color: black;
-    background-color: white;
+  /* font-family: "CMU Concrete", times, "Times New Roman", serif; */
+  font-family: times, "Times New Roman", serif;
+  font-size: 1.2em;
+  /* color: white; */
+  /* background-color: #171621; */
+  /* color: black; */
+  /*background-color: #f5ebc4;*/
+  color: black;
+  background-color: white;
 }
 
 #content {
-    margin: 0 auto;
-    padding: 30px;
-    max-width: 666px;
+  margin: 0 auto;
+  padding: 30px;
+  max-width: 666px;
 }
 
 table, th, td {
-    margin: 0 auto;
-    border: 1px solid white;
-    border-collapse: collapse;
+  margin: 0 auto;
+  border: 1px solid white;
+  border-collapse: collapse;
 }
 
 th, td {
-    padding: 10px;
+  padding: 10px;
 }
 
 pre code {
-    font-size: 0.8em;
+  font-size: 0.8em;
 }
 
 code {
-    font-family: consolas, "courier new", courier, monospace;
-    /* color: #7DFF88; */
-    color: #007808;
+  font-family: consolas, "courier new", courier, monospace;
+  /* color: #7DFF88; */
+  color: #007808;
 }
 
 audio {
-    width: 100%;
+  width: 100%;
 }
 
 #toc a {
-    text-decoration: none;
-    font-style: italic;
+  text-decoration: none;
+  font-style: italic;
 }
 
 a, h1, h2, h3, h4 {
-    color: #0070c0;
+  color: #0070c0;
 }
 
 h1 {
-    clear: both;
-    /* color: #FFD557; */
-    border-bottom: 1px solid;
-    padding-bottom: 5px;
+  clear: both;
+  /* color: #FFD557; */
+  border-bottom: 1px solid;
+  padding-bottom: 5px;
 }
 
 h2 {
-    clear: both;
-    font-style: italic;
-    /* border-bottom: 1px solid; */
-    padding-bottom: 5px;
-    /* color: #FFD557; */
+  clear: both;
+  font-style: italic;
+  /* border-bottom: 1px solid; */
+  padding-bottom: 5px;
+  /* color: #FFD557; */
 }
 
 h3 {
-    clear: both;
-    /* color: #FFD557; */
-    font-style: italic;
+  clear: both;
+  /* color: #FFD557; */
+  font-style: italic;
 }
 
 h4 {
-    clear: both;
-    /* color: #FFD557; */
-    font-style: italic;
+  clear: both;
+  /* color: #FFD557; */
+  font-style: italic;
 }
 
 h1, h2, h3, h4, p, li {
-    text-align: justify;
-    text-justify: inter-word;
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 b {
-    /* color: #FF5C5C; */
-    color: #c00000;
+  /* color: #FF5C5C; */
+  color: #c00000;
 }
 
 i {
-    /* color: #6BFF86; */
-    color: #c00000;
+  /* color: #6BFF86; */
+  color: #c00000;
 }
 
 video {
-    width: 100%;
+  width: 100%;
 }
 
 img {
-    width: 100%;
-    background-color: white;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 5px;
-    margin-bottom: 5px;
+  width: 100%;
+  background-color: white;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 figcaption {
-    width: 100%;
-    text-align: center;
+  width: 100%;
+  text-align: center;
 }
 
 ol {
-    overflow: hidden;
-    /* cause list items don't get pushed aside by floating elements, only
+  overflow: hidden;
+  /* cause list items don't get pushed aside by floating elements, only
                          by their contents */
 }
 
 #biglist li {
-    /* in index.html */
-    margin-left: 40px;
+  /* in index.html */
+  margin-left: 40px;
 }
 
 #biglist a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .red {
-    /* color: #FF5C5C; */
-    color: #c00000;
+  /* color: #FF5C5C; */
+  color: #c00000;
 }
 
 .yellow {
-    /* color: #FFD557; */
-    color: #E66B00;
+  /* color: #FFD557; */
+  color: #E66B00;
 }
 
 .green {
-    /*color: #6BFF86;*/
-    color: #109942;
+  /*color: #6BFF86;*/
+  color: #109942;
 }
 
 .epigraph {
-    max-width: 50%;
-    float: right;
-    margin: 0 0 20px 0;
-    /* background-color: #171621; */
-    margin: 5px 0 5px 10px;
-    padding: 10px;
-    border: 1px dotted;
+  max-width: 50%;
+  float: right;
+  margin: 0 0 20px 0;
+  /* background-color: #171621; */
+  margin: 5px 0 5px 10px;
+  padding: 10px;
+  border: 1px dotted;
 }
 
 .quote {
-    font-style: italic;
-    text-align: justify;
-    text-justify: inter-word;
+  font-style: italic;
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 .author {
-    text-align: right;
+  text-align: right;
 }
 
 .bside {
-    clear: both;
-    max-width: 50%;
-    float: right;
-    margin: 5px 0 5px 10px;
-    padding: 10px;
-    /* border: 1px dotted; */
-    font-size: 0.8em;
-    text-align: justify;
-    text-justify: inter-word;
-    /* background-color: #171621; */
+  clear: both;
+  max-width: 50%;
+  float: right;
+  margin: 5px 0 5px 10px;
+  padding: 10px;
+  /* border: 1px dotted; */
+  font-size: 0.8em;
+  text-align: justify;
+  text-justify: inter-word;
+  /* background-color: #171621; */
 }
 
 .aside {
-    clear: both;
-    max-width: 40%;
-    float: left;
-    margin: 5px 10px 5px 0;
-    padding: 10px;
-    /* border: 1px dotted; */
-    font-size: 0.8em;
-    text-align: justify;
-    text-justify: inter-word;
-    /* background-color: #171621; */
+  clear: both;
+  max-width: 40%;
+  float: left;
+  margin: 5px 10px 5px 0;
+  padding: 10px;
+  /* border: 1px dotted; */
+  font-size: 0.8em;
+  text-align: justify;
+  text-justify: inter-word;
+  /* background-color: #171621; */
 }
 
 .clearboth {
-    clear: both;
+  clear: both;
 }
 
 .justify {
-    text-align: justify;
-    text-justify: inter-word;
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 .center {
-    text-align: center;
+  text-align: center;
 }
 
 .right {
-    text-align: right;
+  text-align: right;
 }
 
 .box {
-    border: 1px solid;
-    padding: 20px;
-    text-align: justify;
-    text-justify: inter-word;
+  border: 1px solid;
+  padding: 20px;
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 .normal {
-    font-style: normal;
+  font-style: normal;
 }
 
 .ja {
-    font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", sans-serif;
+  font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", sans-serif;
 }
 
 .zh {
-    font-family: Tahoma, Arial, Helvetica, "Microsoft YaHei New", "Microsoft Yahei", "微软雅黑", 宋体, SimSun, STXihei, "华文细黑", sans-serif;
+  font-family: Tahoma, Arial, Helvetica, "Microsoft YaHei New", "Microsoft Yahei", "微软雅黑", 宋体, SimSun, STXihei, "华文细黑", sans-serif;
 }
