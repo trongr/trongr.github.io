@@ -10,6 +10,10 @@
 *.synctex.gz
 *.toc
 
+# Latex aux files
+*.fdb_latexmk
+*.fls
+
 *.pyc
 .ipynb_checkpoints
 
