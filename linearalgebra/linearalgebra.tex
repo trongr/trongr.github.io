@@ -25,7 +25,7 @@ matrix.}
 
 \emph{Let $TnV,$ $\beta,\gamma$ be ordered bases for V. Suppose
 that $Q=I_{\gamma}^{\beta}$ is the change of coordinate matrix that
-changes $\gamma$ coordinates to $\beta$ coordinates. Then 
+changes $\gamma$ coordinates to $\beta$ coordinates. Then
 \[
 \left[T\right]_{\gamma}=Q^{-1}\left[T\right]_{\beta}Q.
 \]
@@ -40,10 +40,10 @@ where Q is the $n\times n$ matrix whose jth column is the jth vector
 of $\gamma.$ }
 
 Trivial example: $\left[L_{A}\right]_{\beta}=I^{-1}AI=A,$ where $\beta$
-is the standard ordered basis for $F^{n}.$ 
+is the standard ordered basis for $F^{n}.$
 
 Given a $\gamma,$ we can define a map $\Gamma:M_{n\times n}(F)\longrightarrow M_{n\times n}(F)$
-given by 
+given by
 \[
 \Gamma:A\longmapsto\left[L_{A}\right]_{\gamma}=Q^{-1}AQ.
 \]
@@ -108,7 +108,7 @@ operators}
 
 Unitary operators are normal: $A^{*}=A^{-1},$ which commutes with
 A. Selfadjoint {[}and therefore real symmetric{]} operators are normal:
-$A^{*}=A.$ 
+$A^{*}=A.$
 
 \section{Theorem 6.15. \emph{Eigenvectors corresponding to distinct eigenvalues
 of a normal operator are orthogonal}}
@@ -122,7 +122,7 @@ are also called Hermitian adjoint, Hermitian conjugate or Hermitian
 transpose.
 
 \emph{Let $A:V\longrightarrow W$ be linear. Then the adjoint of A
-is the unique linear operator $A^{*}:W\longrightarrow V$ s.t. 
+is the unique linear operator $A^{*}:W\longrightarrow V$ s.t.
 \[
 \left\langle Av,w\right\rangle _{W}=\left\langle v,A^{*}w\right\rangle _{V}.
 \]
@@ -145,7 +145,7 @@ vectors using inner product projections}
 
 \emph{Theorem. Let V be an inner product space and $S=\left\{ v_{1},v_{2}\dots\ldots,v_{k}\right\} $
 be an orthogonal subset of V consisting of nonzero vectors. If $y\in\operatorname{span}(S)$
-then 
+then
 \[
 y=\sum_{i=1}^{k}\frac{\left\langle y,v_{i}\right\rangle }{\|v_{i}\|^{2}}v_{i}.
 \]
@@ -159,7 +159,7 @@ y=\sum_{i=1}^{k}\left\langle y,v_{i}\right\rangle v_{i}.
 }
 
 Corollary. \emph{Let V be an inner product space, $y\in V,$ and $\beta=\left\{ v_{1},v_{2}\dots\ldots,v_{k}\right\} $
-be an orthonormal basis for V. Then 
+be an orthonormal basis for V. Then
 \[
 y=\sum_{i=1}^{k}\left\langle y,v_{i}\right\rangle v_{i}.
 \]
@@ -188,7 +188,7 @@ consisting of eigenvectors}
 product space V. Then T is self-adjoint iff there exists an orthonormal
 basis for V consisting of eigenvectors of T.}
 
-Note that a real selfadjoint matrix is symmetric, $A^{*}=A^{T}=A.$ 
+Note that a real selfadjoint matrix is symmetric, $A^{*}=A^{T}=A.$
 
 \section{Corollary 6.17. Normal / selfadjoint implies diagonalizable}
 
@@ -202,7 +202,7 @@ Oh, I already have this corollary as a corollary over there.
 
 \section{Summary of normality V.S. diagonalizability}
 
-We have 
+We have
 \begin{align*}
 \text{Normal / selfadjoint\ensuremath{\iff}} & \text{Exists orthonormal eigenbasis}\\
 \implies & \text{Exists eigenbasis }\\
@@ -216,7 +216,7 @@ need to find one that has an eigenbasis that isn't orthonormal, How?
 
 \section{Example of a complex symmetric matrix that isn't normal}
 
-Let 
+Let
 \[
 A=\begin{bmatrix}1 & i\\
 i & -1
@@ -239,7 +239,7 @@ basis. }}
 
 \emph{Specifically, let V be a finite-dimensional inner product on
 C or R, and $\beta$ and $\gamma$ be any orthonormal bases for V,
-and x, y be vectors in V. Then 
+and x, y be vectors in V. Then
 \[
 \left\langle x,y\right\rangle =\overline{y}^{T}x=[y]_{\beta}\cdot[x]_{\beta}=[y]_{\gamma}\cdot[x]_{\gamma}.
 \]
@@ -262,7 +262,7 @@ $\beta$ is an orthonormal basis for V. Prove:}
 \begin{enumerate}
 \item \emph{T is positive definite (semidefinite) iff all of its eigenvalues
 are positive (nonnegative).}
-\item \emph{T is positive definite iff 
+\item \emph{T is positive definite iff
 \[
 \sum_{i,j}A_{ij}a_{j}\overline{a}_{i}>0
 \]
@@ -287,12 +287,12 @@ definite, and let $\lambda$ be an eigenvalue, and $x\neq0.$ Then
 Since $\text{\ensuremath{\left|x\right|}}>0,$ $\lambda$ must also
 be $>0.$ Conversely, suppose that all eigenvalues of T are positive.
 Let $v_{i}$ be the eigenvectors of T with corresponding eigenvalues
-$\lambda_{i}$. Then 
+$\lambda_{i}$. Then
 
 \[
 T(v_{i})=\lambda_{i}v_{i}.
 \]
-Now let $x$ be any vector, and $x=\sum a_{i}v_{i}.$ Then 
+Now let $x$ be any vector, and $x=\sum a_{i}v_{i}.$ Then
 \[
 \left\langle T(x),x\right\rangle =\left\langle T\left(\sum a_{i}v_{i}\right),\sum a_{i}v_{i}\right\rangle =\left\langle \sum a_{i}\lambda_{i}v_{i},\sum a_{i}v_{i}\right\rangle =\sum\lambda_{i}\left|v_{i}\right|^{2}
 \]
@@ -305,9 +305,9 @@ Now let $x$ be any vector, and $x=\sum a_{i}v_{i}.$ Then
 a_{n}
 \end{bmatrix}.}}
 \]
-This is equal to 
+This is equal to
 \[
-\left\langle T\left(x\right),x\right\rangle 
+\left\langle T\left(x\right),x\right\rangle
 \]
 since $\beta$ is an orthonormal basis (recall that \emph{the dot
 product of two vectors is the same in any orthonormal basis}).
@@ -342,7 +342,7 @@ operator.}
 \section{Example 6.18. Rotation in $R^{2}.$ }
 
 E.g. any rotation or reflection in $R^{2}$ preserves length and hence
-is an orthogonal operator. Rotation by $\theta$ given by 
+is an orthogonal operator. Rotation by $\theta$ given by
 \[
 R_{\theta}=\begin{bmatrix}\cos\theta & -\sin\theta\\
 \sin\theta & \cos\theta
@@ -371,11 +371,11 @@ on $[0,2\pi]$ with the inner product
 \left\langle f,g\right\rangle =\frac{1}{2\pi}\int_{0}^{2\pi}f(t)\overline{g(t)}dt.
 \]
  Let $h\in H$ satisfy $\left|h(x)\right|=1$ for all $x.$ Define
-T on H by $T(f)=hf.$ Then 
+T on H by $T(f)=hf.$ Then
 \[
 \left|\left|T(f)\right|\right|^{2}=\left|\left|hf\right|\right|^{2}=\frac{1}{2\pi}\int_{0}^{2\pi}h(t)f(t)\overline{h(t)f(t)}dt=\left|\left|f\right|\right|^{2}
 \]
-since $\left|h(t)\right|^{2}=1.$ So T is a unitary operator. 
+since $\left|h(t)\right|^{2}=1.$ So T is a unitary operator.
 
 \section{Lemma 6.18. $T_{0}$ is the only self-adjoint operator that is orthogonal
 to all its inputs}
@@ -391,7 +391,7 @@ Then $U(x)=\lambda x$ for some $\lambda.$ Thus
 0=\left\langle x,U(x)\right\rangle =\left\langle x,\lambda x\right\rangle =\overline{\lambda}\left\langle x,x\right\rangle =\overline{\lambda}\left|\left|x\right|\right|^{2},
 \]
 and $\overline{\lambda}=0.$ Hence $U(x)=0$ for all $x\in\beta$
-and $U=T_{0}.$ 
+and $U=T_{0}.$
 
 Nonexample of a nonselfadjoint operator that has $\left\langle x,U(x)\right\rangle =0$
 but is not the zero op: the rotation U by 90 degrees in the plane.
@@ -416,14 +416,14 @@ for all $x,$ i.e. T is unitary / orthogonal.}
 In other words, an operator is unitary / orthogonal iff it is normal
 and its ``norm'' $TT^{*}$ is 1.
 
-\emph{Proof} (1) implies (2). For any $x,y,$ 
+\emph{Proof} (1) implies (2). For any $x,y,$
 \[
 \left\langle x,y\right\rangle =\left\langle T^{*}T(x),y\right\rangle =\left\langle T(x),T(y)\right\rangle .
 \]
 
 \emph{Proof }(2) implies (3). Let $\beta=\left\{ v_{1},\ldots,v_{n}\right\} $
 be an orthonormal basis for V. Then $T(\beta)=\left\{ T(v_{1}),\ldots,T(v_{n})\right\} $
-and 
+and
 \[
 \left\langle T(v_{i}),T(v_{j})\right\rangle =\left\langle v_{i},v_{j}\right\rangle =\delta_{ij},
 \]
@@ -438,7 +438,7 @@ Then
 \[
 x=\sum_{i=1}^{n}a_{i}v_{i}
 \]
-for some $a_{i},$ and 
+for some $a_{i},$ and
 \[
 \left|\left|x\right|\right|^{2}=\left\langle \sum_{i=1}^{n}a_{i}v_{i},\sum_{i=1}^{n}a_{i}v_{i}\right\rangle =\sum_{i}\sum_{j}a_{i}\overline{a_{j}}\left\langle v_{i},v_{j}\right\rangle =\sum_{i=1}^{n}\left|a_{i}\right|^{2}.
 \]
@@ -457,7 +457,7 @@ Proof (5) implies (1). For any $x,$
 Let $U=I-T^{*}T.$ Then U is self-adjoint and $\left\langle x,U(x)\right\rangle =0$
 for all x. By the previous lemma, $I-T^{*}T=U=T_{0}$ and $I=T^{*}T.$
 {[}Why does this imply that $TT^{*}=I?$ The referenced Exercise 2.4.10
-is about invertible matrices, not adjoint operators.... Ah, See next.{]} 
+is about invertible matrices, not adjoint operators.... Ah, See next.{]}
 
 \section{Corollary 6.18.0. \emph{The adjoint of a unitary / orthogonal operator
 is its inverse}}
@@ -473,45 +473,45 @@ and suppose $T^{-1}$ exists. Then $T^{*}=T^{-1}$ iff $T(\beta)$
 is also an orthonormal basis for V.}
 
 If that were true we can apply Exercise 2.4.10 and say that $TT^{*}=TT^{-1}=I$
-and therefore $T^{-1}T=T^{*}T=I.$ 
+and therefore $T^{-1}T=T^{*}T=I.$
 
 Proof. Suppose $T^{*}=T^{-1}.$ Then $TT^{*}=T^{*}T=I$ and (3) implies
 that $T(\beta)$ is an orthonormal basis. Conversely suppose that
-$T(\beta)$ is an orthonormal basis, 
+$T(\beta)$ is an orthonormal basis,
 \[
 \beta=\left\{ v_{1},\ldots,v_{n}\right\} ,T(\beta)=\left\{ T(v_{1}),\ldots,T(v_{n})\right\} .
 \]
- To show that $T^{*}=T^{-1},$ we want to show that 
+ To show that $T^{*}=T^{-1},$ we want to show that
 \[
-\left\langle T^{-1}(x),y\right\rangle =\left\langle T^{*}(x),y\right\rangle =\left\langle x,T(y)\right\rangle 
+\left\langle T^{-1}(x),y\right\rangle =\left\langle T^{*}(x),y\right\rangle =\left\langle x,T(y)\right\rangle
 \]
 for all $x,y\in V.$ It suffices to show that this holds for all $x\in T(\beta),y\in\beta.$
 {[}Why? This feels right, but it's not quite the result I'm thinking
 about.{]} There are two cases: either (1) $x=T(y)$ or (2) $x\neq T(y).$
-In case (1), 
+In case (1),
 \[
 \left\langle T^{-1}(x),y\right\rangle =\left\langle y,y\right\rangle =1=\left\langle x,T(y)\right\rangle .
 \]
- In case (2), 
+ In case (2),
 \[
 \left\langle x,T(y)\right\rangle =0=\left\langle T^{-1}(x),y\right\rangle .
 \]
- Therefore $T^{*}=T^{-1}.$ 
+ Therefore $T^{*}=T^{-1}.$
 
 \section{Proposition. Equality of two operators in an inner product}
 
 \emph{Let $T,n\left\langle \right\rangle VF,$ and let $\beta$ and
 $T(\beta)$ be orthonormal bases for V and suppose that $T^{-1}$
-exists. If 
+exists. If
 \[
-\left\langle T^{-1}(x),y\right\rangle =\left\langle x,T(y)\right\rangle 
+\left\langle T^{-1}(x),y\right\rangle =\left\langle x,T(y)\right\rangle
 \]
  for all $y\in\beta,x\in T(\beta),$ then $\left\langle T^{-1}(x),y\right\rangle =\left\langle x,T(y)\right\rangle $
 for all $x,y\in V.$ In particular $\left\langle T^{-1}(x),y\right\rangle =\left\langle T^{*}(x),y\right\rangle $
 for all x, y, and therefore $T^{-1}=T^{*}.$ }
 
 Proof. Let $\beta=\left\{ v_{1},\ldots,v_{n}\right\} ,T(\beta)=\left\{ T(v_{1}),\ldots,T(v_{n})\right\} ,$
-and let 
+and let
 \begin{align*}
 x & =\sum a_{i}T(v_{i})\\
 y & =\sum b_{i}v_{i}.
@@ -525,7 +525,7 @@ we get
 \left\langle T^{-1}(x),y\right\rangle  & =\left\langle T^{-1}\left(\sum a_{i}T(v_{i})\right),\sum b_{i}v_{i}\right\rangle \\
  & =\sum a_{i}\overline{b_{i}}.
 \end{align*}
- 
+
 
 We should apply abstract results on concrete examples.
 
@@ -606,7 +606,7 @@ Lemma\emph{. Let $TnV\mathbf{R}\left\langle \right\rangle .$ If V
 has an orthonormal basis $\beta$ of eigenvectors with eigenvalues
 of absolute value 1, then $T(\beta)$ is also an orthonormal basis.}
 
-\emph{Proof. }Let $\beta=\left\{ v_{i}\right\} .$ Then 
+\emph{Proof. }Let $\beta=\left\{ v_{i}\right\} .$ Then
 \[
 \left\langle T(v_{i}),T(v_{j})\right\rangle =\left\langle \lambda_{i}v_{i},\lambda_{j}v_{j}\right\rangle =\lambda_{i}\lambda_{j}\delta_{ij}=\begin{cases}
 0 & \textrm{if }i\neq j\\
@@ -627,7 +627,7 @@ T is an orthogonal operator: let $v_{1}\in L,v_{2}\in L^{\perp}$
 with length 1. Then $T(v_{1})=v_{1}$ and $T(v_{2})=-v_{2},$ thus
 $v_{i}$ are eigenvectors with eigenvalues 1 and $-1.$ By Corollary
 6.18 T is orthogonal. We can also see that $\beta=\left\{ v_{i}\right\} $
-is an orthonormal basis for V, as is $T(\beta)=\left\{ T(v_{i})\right\} .$ 
+is an orthonormal basis for V, as is $T(\beta)=\left\{ T(v_{i})\right\} .$
 
 \section{Example 6.5.5. Matrix representation of a reflection in $R^{2}$ }
 
@@ -640,20 +640,20 @@ matrix. We want to know what A looks like.}
 Let $\alpha$ be the angle from the positive x-axis to L. Let $v_{1}=\left(\cos\alpha,\sin\alpha\right)$
 and $v_{2}=\left(-\sin\alpha,\cos\alpha\right).$ Then $\left|\left|v_{1}\right|\right|=\left|\left|v_{2}\right|\right|=1,v_{1}\in L,v_{2}\in L^{\perp}.$
 Hence $\gamma=\left\{ v_{1},v_{2}\right\} $ is an orthonormal basis
-for $R^{2}.$ Since $T(v_{1})=v_{1},T(v_{2})=-v_{2},$ we have 
+for $R^{2}.$ Since $T(v_{1})=v_{1},T(v_{2})=-v_{2},$ we have
 \[
 \left[T\right]_{\gamma}=\begin{bmatrix}1 & 0\\
 0 & -1
 \end{bmatrix}.
 \]
-Let 
+Let
 \[
 Q=\begin{bmatrix}\cos\alpha & -\sin\alpha\\
 \sin\alpha & \cos\alpha
 \end{bmatrix}
 \]
 be the change of coordinates matrix from the standard basis to $\gamma.$
-By Corollary 2.23, 
+By Corollary 2.23,
 \[
 \begin{aligned}A & =Q\left[T\right]_{\gamma}Q^{-1}\\
  & =\begin{bmatrix}\cos2\alpha & \sin2\alpha\\
@@ -671,14 +671,14 @@ if $A^{t}A=AA^{t}=I$ and unitary if $A^{*}A=AA^{*}=I.$ }
 rows and columns form orthonormal bases for $F^{n}.$}
 
 \emph{$AA^{*}=I$ is equivalent to the statement that the rows of
-A form an orthonormal basis for $F^{n},$} \emph{because 
+A form an orthonormal basis for $F^{n},$} \emph{because
 \[
 AA^{*}=I=\begin{bmatrix}A_{1}\\
 \vdots\\
 A_{n}
 \end{bmatrix}\begin{bmatrix}\overline{A_{1}^{t}} & \cdots & \overline{A_{n}^{t}}\end{bmatrix},
 \]
-and so 
+and so
 \[
 \left\langle A_{i},A_{j}\right\rangle =A_{i}\overline{A_{j}^{t}}=\delta_{ij}.
 \]
@@ -718,7 +718,7 @@ on $M_{n\times n}(C)$ and $M_{n\times n}(R)$. }
 Reflexivity: A unitarily equivalent to B means $A=Q^{-1}BQ,$ so $QAQ^{-1}=B$
 and B u.eq. A. Symmetry: A u.eq. with itself since $A=I^{-1}AI.$
 Transitivity: A u.eq. B and B u.eq. C means $A=Q^{-1}BQ$ and $B=P^{-1}CP,$
-therefore 
+therefore
 \[
 A=Q^{-1}P^{-1}CPQ=(PQ)^{-1}CPQ,
 \]
@@ -742,7 +742,7 @@ A is u.eq. to a diagonal matrix.}
 \emph{Proof. }The forward direction is already proved in Note 6.18.3:
 if A is normal, then it is u.eq. to a diagonal matrix D. Conversely,
 suppose that A is u.eq. to a diagonal matrix D. Then there exists
-a unitary matrix P s.t. $A=P^{*}DP.$ 
+a unitary matrix P s.t. $A=P^{*}DP.$
 \[
 AA^{*}=P^{*}DP(P^{*}DP)^{*}=P^{*}DPP^{*}D^{*}P=P^{*}DD^{*}P.
 \]
@@ -762,7 +762,7 @@ symmetric iff A is orthogonally equivalent to a diagonal matrix D.}
 \emph{Proof. }The forward direction is already proved in Note 6.18.3.
 Conversely, suppose that A is ortho. eq. to a diagonal matrix D. Then
 there exists an orthogonal matrix P s.t. $A=P^{T}DP.$ We want to
-show that A is symmetric: 
+show that A is symmetric:
 \[
 A^{T}=(P^{T}DP)^{T}=P^{T}D^{T}P=P^{T}DP=A,
 \]
@@ -776,7 +776,7 @@ normal iff A un. eq. diagonal matrix.}
 \section{Example 6.5.6. Diagonalizing a symmetric matrix by an orthogonal
 matrix}
 
-Let 
+Let
 \[
 A=\left(\begin{array}{ccc}
 {4} & {2} & {2}\\
@@ -803,7 +803,7 @@ of A
 \[
 \left\{ \frac{1}{\sqrt{2}}(-1,1,0),\frac{1}{\sqrt{6}}(1,1,-2),\frac{1}{\sqrt{3}}(1.1,1)\right\} .
 \]
-Thus one choice for P is 
+Thus one choice for P is
 \[
 P=\left(\begin{array}{ccc}
 {\frac{-1}{\sqrt{2}}} & {\frac{1}{\sqrt{6}}} & {\frac{1}{\sqrt{3}}}\\
@@ -829,7 +829,7 @@ eq. to a real upper triangular matrix.}
 \section{Rigid motions}
 
 \emph{Let VR. A function $f:V\longrightarrow V$ is called a rigid
-motion if 
+motion if
 \[
 \|f(x)-f(y)\|=\|x-y\|
 \]

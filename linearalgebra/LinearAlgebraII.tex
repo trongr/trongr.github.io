@@ -1,0 +1,289 @@
+\documentclass[14pt]{extarticle}
+\usepackage{geometry}
+\geometry{letterpaper}
+
+\usepackage{float}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{epstopdf}
+\usepackage{epigraph}
+\usepackage{url}
+\usepackage{mathtools}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=red,
+    filecolor=red,
+    linkcolor=red,
+    urlcolor=red
+}
+
+\usepackage{pdfrender,xcolor}
+
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+
+% Computer Concrete
+%\usepackage{concmath}
+%\usepackage[T1]{fontenc}
+
+% Times variants
+%
+% \usepackage{mathptmx}
+% \usepackage[T1]{fontenc}
+%
+% \usepackage[T1]{fontenc}
+% \usepackage{stix}
+%
+% Needs to typeset using LuaLaTeX:
+% \usepackage{unicode-math}
+% \setmainfont{XITS}
+% \setmathfont{XITS Math}
+
+% garamond
+% \usepackage[cmintegrals,cmbraces]{newtxmath}
+% \usepackage{ebgaramond-maths}
+% \usepackage[T1]{fontenc}
+
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+% Environments
+
+% Redefine enumerate environment to have less spacing between items
+\let\oldBeginEnumerate=\enumerate
+\let\oldEndEnumerate=\endenumerate
+\renewenvironment{enumerate}{
+\oldBeginEnumerate
+  \setlength{\itemsep}{0pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+}{\oldEndEnumerate}
+
+% Italics body
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{exercise}[theorem]{Exercise}
+
+% Regular body
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{keywords}{Keywords}
+\newtheorem{reference}{Reference}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{note}[theorem]{Note}
+
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+
+% Operators
+
+\DeclareMathOperator{\argmax}{argmax}
+
+% Bold math
+
+\newcommand{\bN}{\mathbf N}
+\newcommand{\bQ}{\mathbf Q}
+\newcommand{\bR}{\mathbf R}
+
+% Blackboard (hollow) math
+
+\newcommand{\hE}{\mathbb E}
+\newcommand{\hP}{\mathbb P}
+
+% Greek and misc symbols
+
+\newcommand{\0}{\varnothing}
+\newcommand{\e}{\varepsilon}
+\newcommand{\f}{\varphi}
+
+% Delimiters
+
+%\newcommand{\defeq}{\coloneqq}
+\newcommand*{\defeq}{\mathrel{\vcenter{\baselineskip0.5ex \lineskiplimit0pt
+                     \hbox{\scriptsize.}\hbox{\scriptsize.}}}
+                     =}
+\newcommand{\<}{\langle}
+\renewcommand{\>}{\rangle}
+
+\title{Linear Algebra II}
+\author{Trong}
+\date{December 1, 2018---\today}
+
+\begin{document}
+\pdfrender{StrokeColor=black,TextRenderingMode=2,LineWidth=0.3pt}
+\sloppy
+\maketitle
+
+% \usepackage{hyperref} for hyper links in table of contents. Remember to
+% compile twice to update table of contents
+\tableofcontents
+
+
+\section{Orthogonal Matrix}
+
+\begin{definition}
+  A matrix \( Q \) is orthogonal iff its columns are orthonormal, IOW,
+  \[
+  Q^{T} Q = I.
+  \]
+\end{definition}
+
+\begin{corollary}
+  If \( Q \) is an orthogonal matrix, then its inverse is its transpose.
+\end{corollary}
+
+\begin{corollary}
+  If \( Q \) is an orthogonal matrix, then
+\[
+\det Q = \pm 1.
+\]
+\end{corollary}
+
+\begin{proof}
+  \[
+\begin{aligned}
+1 &= \det I \\
+  &= \det(Q^{T} Q) \\
+  &= \det Q^{T} \det Q \\
+  &= \det Q \det Q \\
+  &= (\det Q)^{2} \\
+\end{aligned}
+\]
+Therefore \( \det Q = \pm 1. \)
+\end{proof}
+
+\begin{note}
+  This is why people like orthogonal matrices, because they're easy to invert.
+\end{note}
+
+\begin{theorem}
+  If \( Q \) is orthogonal, then
+\[
+Q^{T} Q = Q Q^{T} = I.
+\]
+\end{theorem}
+
+\begin{proof}
+  Recall that \( Q^{T} = Q^{-1}, \) and inverses commute with each other, i.e.
+\[
+Q^{T} Q = Q Q^{T}. \qedhere
+\]
+\end{proof}
+
+\begin{theorem}
+  If the columns of a square matrix are orthonormal, then its rows are also orthonormal, and vice versa.
+\end{theorem}
+
+\begin{problem}[6.11.]
+  Find an orthogonal matrix whose first row is \( (\frac{1}{3}, \frac{2}{3}, \frac{2}{3}). \)
+\end{problem}
+
+\begin{solution}
+  Find two other independent vectors by trial and error, then use Gram-Schmidt to orthogonalize the set, then normalize to get orthonormal set.
+\end{solution}
+
+\section{Normal Matrix}
+
+\begin{theorem}
+  A matrix is normal iff it is unitarily diagonalizable.
+\end{theorem}
+
+\begin{exercise}[6.12.]
+  Let \( A \) be an \( n \times n \) real symmetric or complex normal matrix. Prove that
+  \[
+  \det A = \prod_{i=1}^n \lambda_i,
+  \]
+  where the \( \lambda_i \)s are the [not necessarily distinct] eigenvalues of \( A. \)
+\end{exercise}
+
+\begin{proof}
+  Recall that a symmetric / normal matrix is diagonalizable, i.e. it is similar to a diagonal matrix. IOW there are matrices \( P \) and \( P^* \) s.t.
+  \[
+  P A P^* = D.
+  \]
+  Then
+  \[
+  \det A = \det (P A P^*) = \det D = \prod \lambda_i. \qedhere
+  \]
+\end{proof}
+
+\begin{exercise}[6.13.]
+  Suppose that A and B are diagonalizable matrices. Prove or disprove that A is similar to B iff A and B are unitarily equivalent.
+\end{exercise}
+
+\begin{proof}
+  The converse is true: if A and B are unitarily equivalent, then immediately they are similar. The forward direction is false: e.g. the two matrices
+  \[
+  \left( \begin{array} { c c } { 1 } & { - 1 } \\ { 0 } & { 0 } \end{array} \right)
+  \]
+  and
+  \[
+  \left( \begin{array} { c c } { 1 } & { 0 } \\ { 0 } & { 0 } \end{array} \right) = \left( \begin{array} { c c } { 1 } & { 1 } \\ { 0 } & { 1 } \end{array} \right) ^ { - 1 } \left( \begin{array} { c c } { 1 } & { - 1 } \\ { 0 } & { 0 } \end{array} \right) \left( \begin{array} { c c } { 1 } & { 1 } \\ { 0 } & { 1 } \end{array} \right)
+  \]
+  are similar, but they are not unitarily equivalent, because one is symmetric and the other is not. The conclusion follows from the following Proposition:
+\end{proof}
+
+\begin{proposition}
+  If A and B are orthogonally equivalent on a vector space over R, then either they are both symmetric or neither is. IOW, orthogonal equivalence preserves symmetry.
+\end{proposition}
+
+\begin{proof}
+  Let \( A = W^t B W = W^{-1} B W  \) with \( W^t = W^{-1}. \) Suppose A is symmetric: \( A = A^t. \) Then
+\begin{align*}
+B &= W A W^{-1} \\
+B^t &= (W A W^{-1})^t \\
+&= (W^{-1})^t A^t W^t \\
+&= W A W^{-1} \\
+&= B. \qedhere
+\end{align*}
+\end{proof}
+
+\begin{proposition}
+  If A and B are unitarily equivalent, then either they are both self-adjoint or neither is. IOW, unitary equivalence preserves self-adjoint-ness.
+\end{proposition}
+
+\begin{exercise}[Ex. 6.14. Unitary equivalence preserves positive semi/definiteness]
+Prove that if A and B are Hermitian matrices and unitarily equivalent, then A is positive semi/definite iff B is.
+\end{exercise}
+
+\begin{proof}
+Recall that a Hermitian matrix is positive semi/definite iff all its eigenvalues are positive/non-negative; also recall that similar matrices have the same eigenvalues. Since $ A $ and $ B $ are unitarily equivalent, they are similar: there exists a matrix $ P $ with $ P^{-1} = P^{*} $ s.t. $$
+  A = P^{-1} B P.
+$$
+Therefore $ A $ and $ B $ have the same eigenvalues, so they are either both positive semi/definite or neither is.
+\end{proof}
+
+\begin{proposition}[Ex. 6.15.]
+Let $ U $ be a unitary operator on an inner product space $ V, $ and let $ W $ be a finite-dimensional $ U $-invariant subspace of $ V. $ Then:
+\begin{enumerate}
+  \item $ U(W) = W. $
+  \item $ W^\perp $ is also $ U $-invariant.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(1) follows immediately from the facts that $ U $ is invertible and $ W $ has finite dimension, and the Rank-Nullity Theorem. Note that this means $ W $ is also $ U^{-1} $-invariant: \[
+W = U^{-1} (W).\tag{$ * $}
+\]
+
+To prove (2), let $ v \in W^{\perp};$ we want to show that $ U(v) \in W^\perp, $ i.e. that $ U(v) $ is perpendicular to vectors in $ W. $ Let $ w $ be any vector in $ W. $ Then \begin{align*}
+\< U(v), w \> &= \< v, U^*(w) \> = \< v, U^{-1}(w) \> = \< v, x \>
+\end{align*}
+for some $ x \in W, $ since by $ (*) $ we know that $ W $ is $ U^{-1} $-invariant. Finally \[
+  \< U(v), w \> = \< v, x \> = 0
+\]
+since $ v \in W^{\perp} $ and $ x \in W, $ therefore $ U(v) $ and $ w $ are perpendicular.
+\end{proof}
+
+\end{document}

@@ -2,14 +2,14 @@
 \usepackage[
     marginparwidth=2.5cm, marginparsep=3mm
 ]{geometry} % See geometry.pdf to learn the layout options. There are lots.
-\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+\geometry{letterpaper}                   % ... or a4paper or a5paper or ...
 %\geometry{landscape}                % Activate for for rotated page geometry
 %\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
 \usepackage{caption} % lets you put \caption{} for empty caption in figure
 \usepackage{float}
 \usepackage{graphicx}
 \graphicspath{{images/}}
-\usepackage{amsmath,amssymb,amsfonts,amsthm} 
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
 \usepackage{epstopdf}
 \usepackage{epigraph}
 \usepackage{url}
@@ -61,8 +61,8 @@
 \newcommand*{\defeq}{\mathrel{\vcenter{\baselineskip0.5ex \lineskiplimit0pt
                      \hbox{\scriptsize.}\hbox{\scriptsize.}}}
                      =}
-\newcommand{\N}{\mathbf N} 
-\newcommand{\Q}{\mathbf Q} 
+\newcommand{\N}{\mathbf N}
+\newcommand{\Q}{\mathbf Q}
 \newcommand{\R}{\mathbf R}
 
 \DeclareMathOperator{\tr}{tr}
@@ -98,11 +98,6 @@ Let $B$ be an $n \times n$ invertible matrix. Then the map $\Phi_B: M_{n\times n
 For any invertible matrix $B$ there exist bases $\beta, \gamma$ s.t. $B = [I]^\beta_\gamma,$ i.e. every invertible matrix is a change of coordinates matrix.
 \end{proposition}
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=.7\textwidth]{377px-3d_basis_transformation}
-\end{figure}
-
 \section*{Keywords}
 
 Change of coordinates matrix, basis representation, trace.
@@ -132,7 +127,7 @@ A matrix $A$ is diagonalizable iff the dimensions of its eigenspaces---i.e. the 
 \end{corollary}
 
 \begin{proof}
-By Proposition \ref{eigenindependence}, the eigenspaces are linearly independent. If their dimensions added up to less than $n$, we'd have too few eigenvectors to make a basis for $V$, and by Theorem \ref{diagonalizable}, $A$ would not be diagonalizable. If they added up to more than $n$, we'd have too many linearly independent vectors in $V$. Conversely if they do add up to $n$, then the union of bases for the eigenspaces forms an eigenbasis for $V$, and $A$ is diagonalizable. 
+By Proposition \ref{eigenindependence}, the eigenspaces are linearly independent. If their dimensions added up to less than $n$, we'd have too few eigenvectors to make a basis for $V$, and by Theorem \ref{diagonalizable}, $A$ would not be diagonalizable. If they added up to more than $n$, we'd have too many linearly independent vectors in $V$. Conversely if they do add up to $n$, then the union of bases for the eigenspaces forms an eigenbasis for $V$, and $A$ is diagonalizable.
 \end{proof}
 
 \begin{proposition}
@@ -227,7 +222,7 @@ Similar matrices have the same characteristic polynomial.
 \end{proposition}
 
 \begin{proof}
-Let $A = Q^{-1} B Q$. Then 
+Let $A = Q^{-1} B Q$. Then
 \begin{align*}
 \det(A - tI) &= \det(Q^{-1} B Q - Q^{-1} tI Q) \\
 &= \det(Q^{-1}(B - tI)Q) \\
@@ -298,8 +293,8 @@ Let $T$ be the linear operator on $M_{n\times n}(\R)$ defined by $T(A) = A^t.$ T
 \end{proposition}
 
 \begin{example}
-In two dimensions, an ordered basis for $M_{2 \times 2}(\R)$ consisting of eigenvectors of $T$ so that $[T]_\beta$ is a diagonal matrix is 
-$$\beta = \left\{ 
+In two dimensions, an ordered basis for $M_{2 \times 2}(\R)$ consisting of eigenvectors of $T$ so that $[T]_\beta$ is a diagonal matrix is
+$$\beta = \left\{
 \begin{bmatrix}
 1 & 0 \\
 0 & 0
@@ -330,10 +325,6 @@ More generally, in $n$ dimensions an eigenbasis consists of symmetric matrices o
 A scalar matrix is a square matrix of the form $\lambda I$ for some scalar $\lambda$.
 \end{definition}
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=.2\textwidth]{scalarmatrix}
-\end{figure}
 
 \begin{proposition}
 If a square matrix $A$ is similar to a scalar matrix $\lambda I$, then $A = \lambda I$.
@@ -357,15 +348,5 @@ $\begin{bmatrix}
 0 & 1 \\
 \end{bmatrix}$ is not diagonalizable.
 \end{example}
-
-\section*{Keywords}
-
-Eigenvectors, eigenvalues, eigenspace, eigenbasis, differential operator, eigenfunctions, algebraic and geometric multiplicities, scalar matrix, characteristic polynomial, skew / anti-symmetric matrix.
-
-\begin{thebibliography}{99}
-
-\bibitem{FIS} Linear Algebra by Friedberg, Insel, and Spence.
-
-\end{thebibliography}
 
 \end{document}

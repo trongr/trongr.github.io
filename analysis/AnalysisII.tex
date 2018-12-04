@@ -1,0 +1,197 @@
+% \documentclass[14pt]{extarticle}
+\documentclass[17pt]{extarticle}
+\usepackage{geometry}
+\geometry{letterpaper}
+\usepackage{float}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{epstopdf}
+\usepackage{epigraph}
+\usepackage{url}
+\usepackage{mathtools}
+
+\usepackage{pdfrender,xcolor}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=red,
+    filecolor=red,
+    linkcolor=red,
+    urlcolor=red
+}
+
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+
+% Computer Concrete
+% \usepackage{concmath}
+% \usepackage[T1]{fontenc}
+
+% Times variants
+%
+% \usepackage{mathptmx}
+% \usepackage[T1]{fontenc}
+%
+% \usepackage[T1]{fontenc}
+% \usepackage{stix}
+%
+% Needs to typeset using LuaLaTeX:
+% \usepackage{unicode-math}
+% \setmainfont{XITS}
+% \setmathfont{XITS Math}
+
+% garamond
+% \usepackage[cmintegrals,cmbraces]{newtxmath}
+% \usepackage{ebgaramond-maths}
+% \usepackage[T1]{fontenc}
+
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{question}[theorem]{Question}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{keywords}{Keywords}
+\newtheorem{reference}{Reference}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{note}[theorem]{Note}
+
+%\newcommand{\defeq}{\coloneqq}
+\newcommand*{\defeq}{\mathrel{\vcenter{\baselineskip0.5ex \lineskiplimit0pt
+                     \hbox{\scriptsize.}\hbox{\scriptsize.}}}
+                     =}
+
+\newcommand{\bN}{\mathbf N}
+\newcommand{\bQ}{\mathbf Q}
+\newcommand{\bR}{\mathbf R}
+
+\title{Analysis II}
+\author{Trong}
+\date{December 1, 2018---\today}
+
+\begin{document}
+\pdfrender{StrokeColor=black,TextRenderingMode=2,LineWidth=0.3pt}
+\sloppy
+\maketitle
+
+% \usepackage{hyperref} for hyper links in table of contents. Remember to
+% compile twice to update table of contents
+\tableofcontents
+
+\section{Differentiation}
+
+\begin{definition}[Directional derivative]
+  Let \( A \subset \bR^m, f: A\longrightarrow \bR^n. \) Suppose $A$ contains a neighbourhood of \( a. \) Given \( u \in \bR^m \) with \( u \neq 0, \) define the directional derivative of \( f \) at \( a \) in the direction of \( u \) to be
+  \[
+  f'(a; u) = \lim_{t\to 0} \frac{f(a+u) - f(a)}{t}
+  \]
+if it exists.
+\end{definition}
+
+\begin{definition}[Derivative]
+  Let \( A \subset \bR^m, f: A\longrightarrow \bR^n. \) Suppose $A$ contains a
+  neighbourhood of a. We say that \( f \) is differentiable at \( a \) if there
+  is an \( n\times m \) matrix $B$ s.t.
+\[
+\frac{f(a+h) - f(a) - B\cdot h}{|h|} \longrightarrow 0
+\]
+as \( h \longrightarrow 0. \) The matrix $B$ is unique and is denoted \( D f(a).
+\) Sometimes people also call the derivative the gradient, and write \( D f(a) =
+\nabla f(a). \)
+\end{definition}
+
+\begin{theorem}[Relating directional derivatives to the derivative of \( f \)]
+  Let \( A \subset \bR^m, f: A\longrightarrow \bR^n. \) If f is differentiable at \( a, \) then all the directional derivatives of \( f \) at \( a \) exists, and
+\[
+f'(a; u) = D f(a) \cdot u.
+\]
+\end{theorem}
+
+\begin{definition}[Partial derivative]
+  Let \( A \subset \bR^m, f: A \longrightarrow \bR. \) Define the \( j \)-th partial derivative of \( f \) at \( a \) to be directional derivative of \( f \) at \( a \) with respect to the vector \( e_j, \) provided it exists; and we denote it by \( D_j f(a): \)
+  \[
+  D_j f(a) = \lim_{t\to 0} \frac{f(a + t e_j) - f(a)}{t}.
+  \]
+\end{definition}
+
+IOW, partial derivatives are directional derivatives along coordinate axes. Note
+that if we define \( \phi(t) = f(a_1,\ldots, a_{j-1}, t, a_{j+1},\ldots,a_m), \)
+then
+\[
+D_j f(a) = \phi'(a_j).
+\]
+
+\begin{theorem}[Derivative of a real-valued function]
+  Let \( A \subset \bR^m, f: A \longrightarrow \bR. \) If \( f \) is differentiable at \( a, \) then the derivative of \( f \) is the row matrix
+\[
+Df(a) = [D_1 f(a) \quad \cdots \quad D_m f(a)].
+\]
+\end{theorem}
+
+\begin{theorem}
+Let \( A \subset \bR^m, f: A \longrightarrow \bR^n. \) Suppose \( A \) contains a neighbourhood of \( a. \) Let \( f_i: A \longrightarrow R \) be the \( i \)-th component function of \( f, \) so that
+\[
+f(x) = \begin{bmatrix}
+f_1 (x) \\
+\vdots \\
+f_n (x)
+\end{bmatrix}.
+\]
+\begin{itemize}
+\item Then \( f \) is differentiable at \( a \) iff each component \( f_i \) is differentiable at \( a. \)
+
+\item If \( f \) is differentiable at \( a, \) then its derivative is the \( n \times m \) matrix whose \( i \)-th row is the derivative of \( f_i,  \) i.e.
+\[
+D f(a) = \begin{bmatrix}
+D f_1 (a) \\
+\vdots \\
+D f_n (a)
+\end{bmatrix} = \begin{bmatrix}
+D_1 f_1 (a) & \cdots & D_m f_1 (a) \\
+\vdots & & \vdots \\
+D_1 f_n (a) & \cdots & D_m f_n (a)
+\end{bmatrix}.
+\]
+  This matrix is called the Jacobian matrix of \( f. \)
+\end{itemize}
+\end{theorem}
+
+Roughly: Differentiability of \( f: \bR^m \longrightarrow \bR^n \) is equivalent
+to differentiability of each component, because the components are independent
+of each other as far as taking limits is concerned. Note that this doesn't imply
+that the partial derivatives of the components must be continuous, only that
+they exist.
+
+\section{Continuously differentiable functions}
+
+\begin{theorem}[Mean value theorem]
+If $ \phi: [a, b] \longrightarrow \bR $ is continuous at each point of the closed interval $ [a, b], $ and differentiable at each point of the interval $ (a, b), $ then there exists a point $ c $ of $ (a, b) $ s.t. $$
+  \phi(b) - \phi(a) = \phi'(c) (b - a).
+$$
+\end{theorem}
+
+\begin{theorem}[Continuously differentiable functions]
+  Let $ A $ be open in $ \bR^m. $ Suppose that the partial derivatives $ D_j f_i(x) $ of the component functions of $ f $ exist at each point $ x \in A $ and are continuous on $ A. $ Then $ f $ is differentiable at each point of $ A. $
+\end{theorem}
+
+This theorem guarantees differentiability of $ f $ if its partial derivatives exist and are continuous. Such a function is called continuously differentiable, or $ C^1 $ on $ A. $
+
+\begin{theorem}
+  Let $ A $ be open in $ \bR^m, f: A \longrightarrow \bR $ be a function of class $ C^2. $ Then for each $ a \in A, $ the mixed second order partial derivatives are equal: $$
+    D_k D_j f(a) = D_j D_k f(a).
+  $$
+\end{theorem}
+
+\end{document}

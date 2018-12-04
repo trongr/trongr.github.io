@@ -1,0 +1,192 @@
+\documentclass[17pt]{extarticle}
+\usepackage{geometry}
+\geometry{letterpaper}
+\usepackage{float}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{epstopdf}
+\usepackage{epigraph}
+\usepackage{url}
+\usepackage{mathtools}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=red,
+    filecolor=red,
+    linkcolor=red,
+    urlcolor=red
+}
+
+\usepackage{pdfrender,xcolor}
+
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+
+% Computer Concrete
+% \usepackage{concmath}
+% \usepackage[T1]{fontenc}
+
+% Times variants
+%
+% \usepackage{mathptmx}
+% \usepackage[T1]{fontenc}
+%
+% \usepackage[T1]{fontenc}
+% \usepackage{stix}
+%
+% Needs to typeset using LuaLaTeX:
+% \usepackage{unicode-math}
+% \setmainfont{XITS}
+% \setmathfont{XITS Math}
+
+% garamond
+% \usepackage[cmintegrals,cmbraces]{newtxmath}
+% \usepackage{ebgaramond-maths}
+% \usepackage[T1]{fontenc}
+
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+% Environments
+
+% Redefine enumerate environment to have less spacing between items
+\let\oldBeginEnumerate=\enumerate
+\let\oldEndEnumerate=\endenumerate
+\renewenvironment{enumerate}{
+\oldBeginEnumerate
+  \setlength{\itemsep}{0pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+}{\oldEndEnumerate}
+
+% Italics body
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{exercise}[theorem]{Exercise}
+
+% Regular body
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{keywords}{Keywords}
+\newtheorem{reference}{Reference}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{note}[theorem]{Note}
+
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+
+% Operators
+
+\DeclareMathOperator{\argmax}{argmax}
+
+% Bold math
+
+\newcommand{\bN}{\mathbf N}
+\newcommand{\bQ}{\mathbf Q}
+\newcommand{\bR}{\mathbf R}
+
+% Blackboard (hollow) math
+
+\newcommand{\hE}{\mathbb E}
+\newcommand{\hP}{\mathbb P}
+
+% Greek and misc symbols
+
+\newcommand{\0}{\varnothing}
+\newcommand{\e}{\varepsilon}
+\newcommand{\f}{\varphi}
+
+% Delimiters
+
+%\newcommand{\defeq}{\coloneqq}
+\newcommand*{\defeq}{\mathrel{\vcenter{\baselineskip0.5ex \lineskiplimit0pt
+                     \hbox{\scriptsize.}\hbox{\scriptsize.}}}
+                     =}
+\newcommand{\<}{\langle}
+\renewcommand{\>}{\rangle}
+
+\title{Number Theory}
+\author{Trong}
+\date{Sat Dec 1, 2018---\today}
+
+\begin{document}
+\pdfrender{StrokeColor=black,TextRenderingMode=2,LineWidth=0.3pt}
+\sloppy
+\maketitle
+\tableofcontents % remember to compile twice to update table of contents
+\pagebreak
+
+\section{Congruences}
+
+\begin{theorem}[Divisor Sum]
+  For any natural number $ n, $
+\[
+\sum _ { d | n } \f ( d ) = n,
+\]
+where \( \f(d) \) is the Euler Totient function.
+\end{theorem}
+
+\begin{proof}
+Consider the set \( A(d) = \{ k: (k, n) = d \}. \) For each \( k, \) define \( l \) s.t. \( k = dl. \) Then it's easy to see that \( (l, \frac{n}{d}) = 1. \) In fact, there is a one-to-one correspondence between \( k \) and \( l, \) so that \( | A(d) | = | \{ k \} | = | \{ l \} |. \) Now the \( l \)'s are numbers less than \( \frac{n}{d} \) and coprime with it, so \( | A(d) | = \f(\frac{n}{d}). \)
+
+Next, note that the sets \( A(d) \) for distinct \( d|n \) are disjoint and their union is \( {1, \ldots, n}. \) Therefore
+\[
+n = \sum_{d|n} |A(d)| = \sum_{d|n} \f\left(\frac{n}{d}\right).
+\]
+
+Finally
+\[
+n = \sum_{d|n} \f\left(\frac{n}{d}\right) = \sum_{d|n} \f(d),
+\]
+since the divisors \( \frac{n}{d} \) in the first sum are the same as the divisors \( d \) in the second sum.
+\end{proof}
+
+\begin{problem}
+Find integers $ a_1, \ldots, a_5 $ s.t. every integer $ x $ satisfies at least one of the congruences \begin{align*}
+  x &\equiv a_1 \bmod 2 \\
+  x &\equiv a_2 \bmod 3 \\
+  x &\equiv a_3 \bmod 4 \\
+  x &\equiv a_4 \bmod 6 \\
+  x &\equiv a_5 \bmod 12. \tag{$ * $}
+\end{align*}
+\end{problem}
+
+\begin{solution}
+Consider the remainder classes mod 3: \begin{align*}
+  & 3 n \\
+  & 3 n + 1 \\
+  & 3 n + 2.
+\end{align*}
+Substitute $ 2k $ and $ 2k + 1 $ for $ n, $ and take their remainders mod 2, 3, and 6: \begin{align*}
+3 \cdot 2 k &\equiv 0 \bmod 2 \\
+3 (2k + 1) = 6k + 3 &\equiv 0 \bmod 3 \\
+3 \cdot 2k + 1 = 6k + 1 &\equiv 1 \bmod 6 \\
+3 (2k + 1) + 1 = 6k + 4 &\equiv 0 \bmod 2 \\
+3 \cdot 2k + 2 &\equiv 0 \bmod 2 \\
+3 (2k + 1) + 2 = 6k + 5 &\equiv 5 \bmod 6.
+\end{align*}
+We've now covered every integer with mods 2, 3, and 6; if we can somehow write integers $ 5 \bmod 6 $ as either $ a_3 \bmod 4 $ or $ a_5 \bmod 12, $ then we will have expressed every integer in the form $(*).$ Let's do that: \begin{align*}
+6 \cdot 2k + 5 = 12k + 5 = 4(3k + 1) + 1 &\equiv 1 \bmod 4 \\
+6(2k + 1) + 5 = 12k + 11 &\equiv 11 \bmod 12.
+\end{align*}
+
+Therefore every integer $ x $ satisfies at least one of
+\begin{align*}
+  x &\equiv 0 \bmod 2 \\
+  x &\equiv 0 \bmod 3 \\
+  x &\equiv 1 \bmod 4 \\
+  x &\equiv 1 \bmod 6 \\
+  x &\equiv 11 \bmod 12. \qedhere
+\end{align*}
+\end{solution}
+
+\end{document}

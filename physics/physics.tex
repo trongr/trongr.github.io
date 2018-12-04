@@ -1,10 +1,8 @@
 \documentclass[12pt]{article}
-\usepackage[
-    marginparwidth=2.5cm, marginparsep=3mm
-]{geometry}                % See geometry.pdf to learn the layout options. There are lots.
-\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
-%\geometry{landscape}                % Activate for for rotated page geometry
-%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{geometry}
+\geometry{letterpaper}
+%\geometry{landscape}
+%\usepackage[parfill]{parskip}
 \usepackage{float}
 \usepackage{graphicx}
 \graphicspath{{images/}}
@@ -14,12 +12,22 @@
 \usepackage{url}
 \usepackage{mathtools}
 \usepackage{tikz-cd}
+
 \usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=red,
+    filecolor=red,
+    linkcolor=red,
+    urlcolor=red
+}
+
 %\usepackage{cleveref}
 \usepackage[linewidth=0.2mm]{mdframed}
 \usepackage{marginnote}
-\renewcommand*{\marginfont}{\footnotesize}
 \reversemarginpar
+
+\usepackage{pdfrender,xcolor}
 
 % Computer Concrete
 %\usepackage{concmath}
@@ -65,10 +73,11 @@
 \newtheorem{intuition}[theorem]{Intuition}
 
 \title{Physics}
-\author{Nhan Trong}
-\date{July 5, 2016---\today}                                           % Activate to display a given date or no date
+\author{Trong}
+\date{\today}
 
 \begin{document}
+\pdfrender{StrokeColor=black,TextRenderingMode=2,LineWidth=0.3pt}
 \sloppy
 \maketitle
 
@@ -96,11 +105,13 @@ The third prong of the plug in electrical sockets connect to a wire that runs de
 \section{Some Special Field Configurations}
 
 \begin{figure}[H]
-\marginnote{Note that field lines usually don't describe the path of a charge moving in the field.}
 \centering
 \includegraphics[width=1.0\textwidth]{201518-14415791-1040-instructionallab_manualsphysics6bexperiment_56b-exp4_fig2}
 \caption{Electric Field}
 \end{figure}
+
+Note that field lines usually don't describe the path of a charge moving in the
+field.
 
 \subsection{Dipoles}
 
@@ -111,21 +122,21 @@ The third prong of the plug in electrical sockets connect to a wire that runs de
 The electric field of a dipole varies inversely as the distance cubed: $$F \propto \frac{Xx}{R^3}.$$
 \end{proposition}
 \end{mdframed}
-\footnote{While researching Inverse Cube Law online I came across another unrelated but interesting law: the Square Cube Law due to Galileo: ``\textit{as a shape grows in size, its volume grows faster than its surface area. When applied to the real world this principle has many implications which are important in fields ranging from mechanical engineering to biomechanics. It helps explain phenomena including why large mammals like elephants have a harder time cooling themselves than small ones like mice, and why building taller and taller skyscrapers is increasingly difficult.}'' Hence this puts a limit on how big perfectly round land animals can be. You can be big, as long as you have complicated non-round shapes, like trees, or live in the water so it's easier to cool, like whales. (Of course there're other forces at work keeping an animal small, not just heating and cooling.)\\ \indent I wonder what the equivalent is in software engineering projects: the volume of code grows faster than the feature set, so that in order to make more features, you need to write more and more code? LOL Maybe this is why all software projects must end.}
 
 \begin{proof}
-\marginnote{What happens when they aren't?}
-For simplicity assume the dipole and the test charge are aligned horizontally, so let the charge configuration be as follows:
+For simplicity assume the dipole and the test charge are aligned horizontally (What happens when they aren't?), so let the charge configuration be as follows:
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.7\textwidth]{inversecubedipole}
 \end{figure}
 
 Then the force acting on $X$ is $$F = \frac{KXx}{(R - \frac{\delta}{2})^2} - \frac{KXx}{(R + \frac{\delta}{2})^2} = \frac{KXx}{R^2(1 - \frac{\delta}{2R})^2} - \frac{KXx}{R^2(1 + \frac{\delta}{2R})^2}.$$
-\marginnote{The Binomial Approximation is very useful and physicists use it a lot. I've seen it twice now.}To simplify this expression we'll use the Binomial Approximation, which says that if $x$ is a small number close to 0 and $\alpha$ is a real number, then $$(1 + x)^\alpha \approx 1 + \alpha x.$$
+To simplify this expression we'll use the Binomial Approximation, which says that if $x$ is a small number close to 0 and $\alpha$ is a real number, then $$(1 + x)^\alpha \approx 1 + \alpha x.$$
 Applying this to the denominator, we get $$\left(1 \pm \frac{\delta}{2R}\right)^{-2} \approx 1 \mp \frac{\delta}{R}.$$
 
-Now $F$ simplifies to $$F \approx \frac{KXx}{R^2}\left(1 + \frac{\delta}{R}\right) - \frac{KXx}{R^2}\left(1 - \frac{\delta}{R}\right) = \frac{2\delta KXx}{R^3}.\qedhere$$
+Now $F$ simplifies to $$
+F \approx \frac{KXx}{R^2}\left(1 + \frac{\delta}{R}\right) - \frac{KXx}{R^2}\left(1 - \frac{\delta}{R}\right) = \frac{2\delta KXx}{R^3}. \qedhere
+$$
 \end{proof}
 
 \begin{corollary}
@@ -145,6 +156,30 @@ An atom in an electric field becomes a dipole since electrons will want to spend
 \centering
 \includegraphics[width=.7\textwidth]{chapter-10-chemical-bonding-ii-molecular-geometry-and-hybridization-of-atomic-orbitals-31-638}
 \end{figure}
+
+\section{How things grow}
+
+While researching The Inverse Cube Law online I came across another unrelated
+but interesting law: The Square Cube Law due to Galileo:
+
+\begin{quote}
+As a shape grows in size, its volume grows faster than its surface area. When
+applied to the real world this principle has many implications which are
+important in fields ranging from mechanical engineering to biomechanics. It
+helps explain phenomena including why large mammals like elephants have a harder
+time cooling themselves than small ones like mice, and why building taller and
+taller skyscrapers is increasingly difficult.
+\end{quote}
+
+This law puts a limit on how big perfectly round land animals can be. You can be
+big, as long as you have complicated non-round shapes, like trees, or live in
+the water so it's easier to cool, like whales. (Of course there're other forces
+at work keeping an animal small, not just heating and cooling.)
+
+I wonder what the equivalent is in software engineering projects: the volume of
+code grows faster than the feature set, so that in order to make more features,
+you need to write more and more code? LOL Maybe this is why all software
+projects must end.
 
 \subsection{Infinite Uniformly Charged Plates}
 
@@ -170,16 +205,33 @@ What does the rest of the field look like? Do the field lines converge towards t
 If you had two parallel plates---instead of one---of opposite and equal charge densities, the electric field between the two plates would be twice as big: $$E = \pi k \sigma = \frac{\sigma}{\epsilon}.$$ Beyond those plates the field is zero because the plates cancel each other out.
 \end{corollary}
 
-\section*{Keywords}
+\section{Ohm's Law}
 
-Coulomb's Law, electric field, dipole, superposition, infinite uniformly charged plate, parallel plates, charge density, Gaussian surface, Gauss's Law / Flux Theorem, vacuum permittivity / electric constant, Coulomb's Constant, vacuum permeability / magnetic constant. Induction, Van de Graaff generator.
+\begin{theorem}[Relating the current, voltage, and resistance in an eletrical
+circuit]
+\[
+  I = \frac { V } { R }.
+\]
+\end{theorem}
 
-\begin{thebibliography}{99}
+\section{Kirchhoff's current law}
 
-\bibitem{lewin} Walter Lewin's Physics Lectures.
+\begin{theorem}
+  In an electrical circuit, the sum of currents flowing into any node is equal
+  to the sum of currents flowing out of that node:
+  \[
+  \sum _ { k = 1 } ^ { n } I _ { k } = 0.
+  \]
+\end{theorem}
 
-\bibitem{} Images and everything else from the Internet.
+\section{Kirchhoff's voltage law}
 
-\end{thebibliography}
+\begin{theorem}
+  The directed sum of the electrical potential differences / voltage around any
+closed network is zero:
+\[
+\sum _ { k = 1 } ^ { n } V _ { k } = 0.
+\]
+\end{theorem}
 
 \end{document}

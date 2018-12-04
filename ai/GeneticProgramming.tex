@@ -1,0 +1,141 @@
+% \documentclass[12pt]{article}
+% \documentclass[14pt]{extarticle}
+\documentclass[17pt]{extarticle}
+\usepackage{geometry}
+\geometry{letterpaper}
+
+\usepackage{float}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{epstopdf}
+\usepackage{epigraph}
+\usepackage{url}
+\usepackage{mathtools}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=red,
+    filecolor=red,
+    linkcolor=red,
+    urlcolor=red
+}
+
+\usepackage{pdfrender,xcolor}
+
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+
+% Computer Concrete
+%\usepackage{concmath}
+%\usepackage[T1]{fontenc}
+
+% Times variants
+%
+% \usepackage{mathptmx}
+% \usepackage[T1]{fontenc}
+%
+% \usepackage[T1]{fontenc}
+% \usepackage{stix}
+%
+% Needs to typeset using LuaLaTeX:
+% \usepackage{unicode-math}
+% \setmainfont{XITS}
+% \setmathfont{XITS Math}
+
+% garamond
+% \usepackage[cmintegrals,cmbraces]{newtxmath}
+% \usepackage{ebgaramond-maths}
+% \usepackage[T1]{fontenc}
+
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+% Environments
+
+% Redefine enumerate environment to have less spacing between items
+\let\oldBeginEnumerate=\enumerate
+\let\oldEndEnumerate=\endenumerate
+\renewenvironment{enumerate}{
+\oldBeginEnumerate
+  \setlength{\itemsep}{0pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+}{\oldEndEnumerate}
+
+% Italics body
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{exercise}[theorem]{Exercise}
+
+% Regular body
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{keywords}{Keywords}
+\newtheorem{reference}{Reference}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{note}[theorem]{Note}
+
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+
+% Operators
+
+\DeclareMathOperator{\argmax}{argmax}
+
+% Bold math
+
+\newcommand{\bN}{\mathbf N}
+\newcommand{\bQ}{\mathbf Q}
+\newcommand{\bR}{\mathbf R}
+
+% Blackboard (hollow) math
+
+\newcommand{\hE}{\mathbb E}
+\newcommand{\hP}{\mathbb P}
+
+% Greek and misc symbols
+
+\newcommand{\0}{\varnothing}
+\newcommand{\e}{\varepsilon}
+\newcommand{\f}{\varphi}
+
+% Delimiters
+
+%\newcommand{\defeq}{\coloneqq}
+\newcommand*{\defeq}{\mathrel{\vcenter{\baselineskip0.5ex \lineskiplimit0pt
+                     \hbox{\scriptsize.}\hbox{\scriptsize.}}}
+                     =}
+\newcommand{\<}{\langle}
+\renewcommand{\>}{\rangle}
+
+\title{Genetic Programming}
+\author{Trong}
+\date{December 2, 2018---\today}
+
+\begin{document}
+\pdfrender{StrokeColor=black,TextRenderingMode=2,LineWidth=0.3pt}
+\sloppy
+\maketitle
+
+% \usepackage{hyperref} for hyper links in table of contents. Remember to
+% compile twice to update table of contents
+\tableofcontents
+\pagebreak
+
+\section{Should Evolution be aware of Organizational Hierarchies?}
+
+\begin{question}
+We know that in organisms there are multiple levels of organization: molecules, organelles, cells, organs, etc.; we also see tiered organization in other places, e.g. in software we have files and folders, or we can look at it from another perspective, from primitive classes to higher level constructs. The question is how can we simulate evolution so that it is aware of these natural levels in the underlying structure of the problem? We might want to do this so that good building blocks can be reused, so that evolution can start from the lowest level and move on to higher and higher planes of abstractions, instead of everything being one mass of unorganized blob. Should we even make it aware, or maybe we should just let things unfold blindly, and organizational hierarchy will just come out on its own.
+\end{question}
+
+\end{document}

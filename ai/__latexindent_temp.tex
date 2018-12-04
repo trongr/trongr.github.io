@@ -4,14 +4,21 @@
 \usepackage{float}
 \usepackage{graphicx}
 \graphicspath{{images/}}
-
 \usepackage{amsmath,amssymb,amsfonts,amsthm}
 \usepackage{epstopdf}
 \usepackage{epigraph}
 \usepackage{url}
 \usepackage{mathtools}
-
 \usepackage{pdfrender,xcolor}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=red,
+    filecolor=red,
+    linkcolor=red,
+    urlcolor=red
+}
 
 \usepackage{lmodern}
 \usepackage[T1]{fontenc}
@@ -63,9 +70,13 @@
                      \hbox{\scriptsize.}\hbox{\scriptsize.}}}
                      =}
 
-\newcommand{\N}{\mathbf N}
-\newcommand{\Q}{\mathbf Q}
-\newcommand{\R}{\mathbf R}
+\newcommand{\bN}{\mathbf N}
+\newcommand{\bQ}{\mathbf Q}
+\newcommand{\bR}{\mathbf R}
+\newcommand{\hE}{\mathbb E}
+\newcommand{\hP}{\mathbb P}
+
+\DeclareMathOperator{\argmax}{argmax}
 
 \title{Reinforcement Learning}
 \author{Trong Truong}
@@ -75,6 +86,10 @@
 \pdfrender{StrokeColor=black,TextRenderingMode=2,LineWidth=0.3pt}
 \sloppy
 \maketitle
+
+% \usepackage{hyperref} for hyper links in table of contents. Remember to
+% compile twice to update table of contents
+\tableofcontents
 
 \section{Cumulative reward}
 
@@ -341,17 +356,24 @@ and the rows to states. In this table, higher values are better. Given state \(
 s \) and action \( a, \) the new Q-value for \( s,  a \) is
 \begin{align*}
 Q_{sa} &\gets Q_{sa} + \alpha (r_{sa} + \gamma \max_{a'} Q_{s'a'} - Q_{sa}) \\
-&= (1 - \alpha) Q_{sa} + \alpha (r_{sa} + \gamma \max_{a'} Q_{s'a'}),
+&= (1 - \alpha) Q_{sa} + \alpha (r_{sa} + \gamma \max_{a'} Q_{s'a'}) \\
+&= (1 - \alpha) Q_{sa} + \alpha Q_{\text{target}},
 \end{align*}
 where \( \alpha \) is the learning rate, \( \gamma \) is the discount factor.
 
 In other words, the new Q-value is an average between the old Q-value \( Q_{sa}
 \) and the reward plus the discounted expected reward in the new state. The
-value of the action is based on a combination of its previous value and how much
-reward the action gave us, plus a little bit of future reward. A higher \(\alpha
-\) means we're putting more stock on the present and future, and less on the
-previously learned values; a higher \( \gamma \) means we're putting more stock
-in the future.
+value of the action is based on a combination of its previous value and (*) how much
+reward the action gave us, plus a little bit of future reward.
+
+This latter value (*) can also be interpreted as the target Q-value:
+$$
+Q_{\text{target}} = r_{sa} + \gamma \max_{a'} Q_{s'a'}.
+$$
+
+A higher \(\alpha \) means we're
+putting more stock on the present and future, and less on the previously learned
+values; a higher \( \gamma \) means we're putting more stock in the future.
 
 Inefficient for large state spaces.
 
@@ -385,13 +407,13 @@ $$
 
 Recall how this is similar to the update rule for the Q-Table:
 \begin{align*}
-Q_{sa} &\gets Q_{sa} + \alpha (r_{sa} + \gamma \max_{a'} Q_{s'a'} - Q_{sa}) \\
-&= (1 - \alpha) Q_{sa} + \alpha (r_{sa} + \gamma \max_{a'} Q_{s'a'}),
+Q_{sa} &\gets Q_{sa} + \alpha (Q_{\text{target}} - Q_{sa}) \\
+&= (1 - \alpha) Q_{sa} + \alpha Q_{\text{target}},
 \end{align*}
 which can be written as
 \begin{align*}
-Q^{\text{new}}_{sa} - Q^{\text{old}}_{sa} &= \alpha (r_{sa} + \gamma \max_{a'} Q_{s'a'} - Q^{\text{old}}_{sa}) \\
-\Delta Q_{sa} &= \alpha (r_{sa} + \gamma \max_{a'} Q_{s'a'} - Q_{sa}).
+Q^{\text{new}}_{sa} - Q^{\text{old}}_{sa} &= \alpha (Q_{\text{target}} - Q^{\text{old}}_{sa}) \\
+\Delta Q_{sa} &= \alpha (Q_{\text{target}} - Q_{sa}).
 \end{align*}
 
 This multiply gradient $ \nabla _ { w } Q ( s , a , w ) $ doesn't make sense though. Shouldn't it be a quotient, like this?
@@ -399,5 +421,154 @@ $$
 \Delta w = \frac{\alpha \left[ \left( R + \gamma \max _ { a } Q \left( s ^ { \prime } , a , w \right) \right) - Q ( s , a , w ) \right]}{\nabla _ { w } Q ( s , a , w )},
 $$
 because $ \nabla _ { w } Q ( s , a , w ) $ should look like $ \frac{\Delta Q }{\Delta w}. $
+
+\section{Optimal state and action-value function}
+
+\( v _ { * } ( s ) \) is the maximum value function over all policies
+
+\[
+v _ { * } ( s ) = \max _ { \pi } v _ { \pi } ( s ).
+\]
+
+Similarly for the action-value function
+
+\[
+q _ { * } ( s , a ) = \max _ { \pi } q _ { \pi } ( s , a ).
+\]
+
+\section{Partial ordering of policies}
+
+Define \( \pi \geq \pi ^ { \prime } \) if \( v _ { \pi } ( s ) \geq v _ { \pi ^ { \prime } } ( s ) , \forall s. \) Define similar ordering on action value functions?
+
+\begin{theorem}[An optimal policy exists]
+  For any MDP,
+  \begin{itemize}
+    \item There exists an optimal policy \( \pi_* \) s.t. \( \pi_* \geq \pi \)
+    for all \( \pi. \)
+    \item All optimal policies achieve the optimal value function: \( v_{\pi_*}
+    (s) = v_*(s). \)
+    \item All optimal policies achieve the optimal action value function: \(
+    q_{\pi_*} (s, a) = q_*(s, a). \)
+  \end{itemize}
+\end{theorem}
+
+\section{Finding an optimal policy}
+
+Knowing the optimal action value function gives us a deterministic optimal policy:
+\[
+\pi _ { * } ( a | s ) = \left\{
+  \begin{array} { ll }
+    { 1 } & { \text { if } a = \operatorname { argmax }_{a\in A} q_*(s, a) } \\
+    { 0 } & { \text { otherwise. } }
+  \end{array}
+\right.
+\]
+Well this is pretty obvious: the best policy is to take the action with the most
+value.
+
+\section{Bellman optimality equations}
+
+\begin{align*}
+v _ { * } ( s ) &= \max _ { a } q _ { * } ( s , a ) \\
+q _ { * } ( s , a ) &= \mathcal { R } _ { s } ^ { a } + \gamma \sum _ { s ^ { \prime } \in S } \mathcal { P } _ { s s ^ { ' } } ^ { a } v _ { * } \left( s ^ { \prime } \right)
+\end{align*}
+Putting those together we get the Bellman optimality equation for \( v_*: \)
+\[
+v _ { * } ( s ) = \max _ { a } \mathcal { R } _ { s } ^ { a } + \gamma \sum _ { s ^ { \prime } \in \mathcal { S } } \mathcal { P } _ { s s ^ { \prime } } ^ { a } v _ { * } \left( s ^ { \prime } \right).
+\]
+Similarly for the optimal action:
+\[
+q _ { * } ( s , a ) = \mathcal { R } _ { s } ^ { a } + \gamma \sum _ { s ^ { \prime } \in \mathcal { S } } \mathcal { P } _ { s s ^ { \prime } } ^ { a } \max _ { a ^ { \prime } } q _ { * } \left( s ^ { \prime } , a ^ { \prime } \right).
+\]
+
+\section{Negative log-likelihood and cross-entropy loss function}
+
+\[
+\text{Loss} = - A \log(\pi),
+\]
+where \( A \) represents ``advantage'', a measure of how much better an action was
+compared to a base line. \( \pi \) is the policy, in this case corresponds to
+the chosen action's weight. Intuitively, a better action decreases loss and vice
+versa.
+
+A more general version for binary classification:
+\[
+C = - \frac { 1 } { n } \sum _ { x } \left( \ln a _ { y } ^ { L } \right)
+\]
+Even more general is the cross-entropy loss for multi-class classification problems:
+\[
+C = - \frac { 1 } { n } \sum _ { x } ( y \ln a + ( 1 - y ) \ln ( 1 - a ) )
+\]
+
+\section{Fixed Q-targets}
+
+Clone the DQNetwork every once in a while and use it to generate targets, so that targets don't move while we're training. Will this really help?
+
+\section{Double DQN}
+
+Decouple action selection from target Q generation. One network for each task.
+
+\section{Dueling DQN (DDQN)}
+
+Recall that the Q-value $ Q(s, a) $ represents the value of taking an action $ a
+$ at state $ s. $ We can decompose this into the value of being in state $ s, $
+plus the value (also called advantage) of taking action $ a $ at $ s: $ $$
+  Q(s, a) = V(s) + A(s, a)
+$$
+
+These 3 techniques break up / refactor a monolith network into smaller components. Good programming strategy in general. Nice to see how it's applied in Machine Learning.
+
+\section{Prioritized Experience Replay}
+
+Learn rare but important experiences, by prioritizing ones with a big difference between predicted and target Q: $$
+p _ { t } = \left| \delta _ { t } \right| + e,
+$$
+where $ \delta_t $ is the magnitude of the temporal difference error, and $ e $ is a small number to ensure that all experiences have positive probability of being chosen, i.e. none has zero probability of being chosen. The experience replay buffer then looks like: $$
+\begin{bmatrix}
+S_t & A_t & R_{t+1} & S_{t+1} & p_t \\
+S_{t+1} & A_{t+1} & R_{t+2} & S_{t+2} & p_{t+1} \\
+& & \vdots & & \\
+\end{bmatrix}
+$$
+
+OTOH, we also don't want to prioritize them all the time, which leads to overfitting. Therefore we introduce stochastic prioritization, where we define the probability of being chosen for replay: $$
+P(t) = \frac{p_t^a}{\sum_k p_k^a},
+$$
+where the sum is over all experiences in the replay buffer, and $ a \in [0, 1] $ is a hyperparameter we choose to adjust how random we want the selection to be. E.g. $ a = 0 $ means that all experiences in the buffer are equally likely; $ a = 1 $ means we always choose the experience with the highest priority.
+
+Even though there's some randomness in the prioritization, it is still biased towards the higher priority experiences. We can try and solve that with Importance Sampling.
+
+\section{Importance sampling}
+
+TODO. Need to read more about this.
+
+
+\section{Policy Gradients}
+
+Learning the policy (the best action to take in any given state) directly from the states, as opposed to learning the value of each state and each action to take in that state like we did in Q-Learning.
+
+\begin{question}
+  Can we combine both approaches: learn both the best states and the best actions to take in each state?
+\end{question}
+
+\subsection{Deterministic V.S. Stochastic Policies}
+
+A stochastic policy takes in the state and outputs a distribution over actions to take: $$
+  \pi_\theta(a|s) = \hP[a = a_t | s = s_t].
+$$ We use a stochastic policy when the environment is uncertain, e.g. taking the same action won't necessarily bring you to the same state every time. Such a process is called a Partially Observable Markov Decision Process (POMDP).
+
+\subsection{Policy Gradient Objective Function}
+
+Finding the optimal policy is an optimization problem where we maximize the expected gain from each state:
+where
+\begin{align*}
+& \argmax_\theta  J(\theta) \\
+J(\theta) &= \hE_{\pi_\theta}[V(s)] = \sum_s \hP[s] V(s) \\
+V(s) &= \sum_r \gamma r,
+\end{align*}
+where $$
+  \hP(s) = \frac{N(s)}{\sum_{\sigma\in S} N(\sigma)}
+$$
+is the probability of each state occurring.
 
 \end{document}
