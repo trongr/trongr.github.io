@@ -55,9 +55,9 @@
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{conjecture}[theorem]{Conjecture}
 \newtheorem{question}[theorem]{Question}
+\newtheorem{definition}[theorem]{Definition}
 
 \theoremstyle{definition}
-\newtheorem{definition}[theorem]{Definition}
 \newtheorem{example}[theorem]{Example}
 \newtheorem{keywords}{Keywords}
 \newtheorem{reference}{Reference}
@@ -68,22 +68,32 @@
 
 \newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
 
+\DeclareMathOperator{\argmax}{argmax}
+
+\newcommand{\bE}{\mathbf E}
+\newcommand{\bN}{\mathbf N}
+\newcommand{\bQ}{\mathbf Q}
+\newcommand{\bR}{\mathbf R}
+
+% Blackboard (hollow) math
+
+\newcommand{\hE}{\mathbb E}
+\newcommand{\hP}{\mathbb P}
+
+% Greek and misc symbols
+
+\newcommand{\0}{\varnothing}
+\newcommand{\e}{\varepsilon}
+\newcommand{\f}{\varphi}
+
+% Delimiters
+
 %\newcommand{\defeq}{\coloneqq}
 \newcommand*{\defeq}{\mathrel{\vcenter{\baselineskip0.5ex \lineskiplimit0pt
                      \hbox{\scriptsize.}\hbox{\scriptsize.}}}
                      =}
-
-\newcommand{\bN}{\mathbf N}
-\newcommand{\bQ}{\mathbf Q}
-\newcommand{\bR}{\mathbf R}
-\newcommand{\hE}{\mathbb E}
-\newcommand{\hP}{\mathbb P}
-
-\renewcommand{\epsilon}{\varepsilon}
-\renewcommand{\phi}{\varphi}
-\renewcommand{\emptyset}{\varnothing}
-
-\DeclareMathOperator{\argmax}{argmax}
+\newcommand{\<}{\langle}
+\renewcommand{\>}{\rangle}
 
 \title{Reinforcement Learning}
 \author{Trong}
@@ -638,5 +648,27 @@ This rule says that $ \theta $ changes in the direction that most increases the 
 \begin{quote}
   The idea of artificial evolution was suggested by one of the founders of computer science, Alan Turing, in 1948. Turing wrote an essay while working on the construction of an electronic computer called the Automatic Computing Engine (ACE) at the National Physical Laboratory in the UK. His employer happened to be Sir Charles Darwin, the grandson of Charles Darwin, the author of `On the Origin of Species'. Sir Charles dismissed the article as a ``schoolboy essay''! It has since been recognized that in the article Turing not only proposed artificial neural networks but the field of artificial intelligence itself.---Julian F. Miller, \emph{Cartesian Genetic Programming.}
 \end{quote}
+
+\section{Intuition for Cross Entropy}
+
+\begin{definition}
+Given two discrete distributions $ p $ and $ q, $ the Cross Entropy of $ p $ and $ q $ is defined as \[
+H(p, q) = \bE_p[\log q] = - \sum_x p(x) \log q(x).
+\]
+\end{definition}
+
+We'd like to know what this formula means.
+
+Recall that the inner product is a measure of how close two vectors in $ \bR^n $ are; e.g. if $ v $ and $ w $ are unit vectors, then their dot product is $ -1 $ if they point in opposite directions (i.e. they are very far apart), $ 0 $ if they are perpendicular (moderately far), and $ 1 $ if they point in the same direction (very close to each other). In addition, the inner product also encodes information about their relative lengths, according to \[
+\< v, w \> = | v | | w | \cos \f,
+\]
+where $ \f $ is the angle between $ v $ and $ w. $ In short, the inner product of two vectors tells us their relative ``difference'' with respect to length and angle, i.e. it tells us how they're situated relative to each other in $ n $-dimensional space, in the same way that the difference between two real numbers tells us how they're situated relative to each other on the real line.
+
+Now notice that \[
+H(p, q) = - \sum_x p(x) \log q(x) = - \< p, \log q \>.
+\]
+In other words, $ H(p, q) $ is a measure of how close the two distributions $ p $ and $ \log q $ are: the closer they are (hence the closer $ p $ and $ q $ are), the larger $ \< p, \log q \> $ is, and the smaller $ H(p, q) = - \< p, \log q \> $ is.
+
+Finally, in Machine Learning we often want to make predictions about the world, and these predictions will come out to follow a certain distribution $ p, $ and we want to know how well these predictions compare to ground truths, which obey another distribution $ q. $ In that case, we want to train the network to gradually push $ p $ towards $ q, $ i.e. we want to make $ p $ as close to $ q $ as possible, which means we want to minimize the Cross Entropy $ H(p, q) $ e.g. using Gradient Descent.
 
 \end{document}

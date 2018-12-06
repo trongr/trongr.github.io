@@ -1,4 +1,5 @@
-\documentclass[12pt]{article}
+% \documentclass[14pt]{extarticle}
+\documentclass[17pt]{extarticle}
 \usepackage{geometry}
 \geometry{letterpaper}
 \usepackage{float}
@@ -65,6 +66,8 @@
 \newtheorem{remark}[theorem]{Remark}
 \newtheorem{note}[theorem]{Note}
 
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+
 %\newcommand{\defeq}{\coloneqq}
 \newcommand*{\defeq}{\mathrel{\vcenter{\baselineskip0.5ex \lineskiplimit0pt
                      \hbox{\scriptsize.}\hbox{\scriptsize.}}}
@@ -76,11 +79,15 @@
 \newcommand{\hE}{\mathbb E}
 \newcommand{\hP}{\mathbb P}
 
+\renewcommand{\epsilon}{\varepsilon}
+\renewcommand{\phi}{\varphi}
+\renewcommand{\emptyset}{\varnothing}
+
 \DeclareMathOperator{\argmax}{argmax}
 
 \title{Reinforcement Learning}
-\author{Trong Truong}
-\date{\today}
+\author{Trong}
+\date{November 1, 2018---\today}
 
 \begin{document}
 \pdfrender{StrokeColor=black,TextRenderingMode=2,LineWidth=0.3pt}
@@ -166,7 +173,7 @@ Note that \( Q \) is more specific than \( V, \) in the sense that \( V \) takes
 
 Given a state \( s \in S \) and an action \( a \in A, \) the probability of
 transitioning into a new state \( s' \) is given by \( P(s, a), \) the reward of
-the transition is given by \( R(s, a). \) This assumes that the environment is
+the transition is given by \( R_s^a. \) This assumes that the environment is
 responding deterministically, not stochastically, i.e. taking action \( a \) in
 state \( s \) will always bring you to a particular and the same \( s' \) every
 time.
@@ -259,10 +266,8 @@ bandit?
 
 \section{\( \epsilon \)-greedy algorithm}
 
-Picks the best currently available option without taking into consideration the
-long-term effect of that decision: randomly pick the best available option with
-probability \( 1 - \epsilon; \) OTW randomly pick a random action with
-probability $ \epsilon. $
+Pick the best action with probability \( 1 - \epsilon; \) OTW pick a random
+action with probability $ \epsilon. $
 
 \section{Bellman Equation}
 
@@ -513,7 +518,7 @@ Decouple action selection from target Q generation. One network for each task.
 Recall that the Q-value $ Q(s, a) $ represents the value of taking an action $ a
 $ at state $ s. $ We can decompose this into the value of being in state $ s, $
 plus the value (also called advantage) of taking action $ a $ at $ s: $ $$
-  Q(s, a) = V(s) + A(s, a)
+  Q(s, a) = V(s) + A(s, a).
 $$
 
 These 3 techniques break up / refactor a monolith network into smaller components. Good programming strategy in general. Nice to see how it's applied in Machine Learning.
@@ -553,22 +558,85 @@ Learning the policy (the best action to take in any given state) directly from t
 
 \subsection{Deterministic V.S. Stochastic Policies}
 
-A stochastic policy takes in the state and outputs a distribution over actions to take: $$
+\begin{definition}
+  A stochastic policy takes in the state and outputs a distribution over actions to take: $$
   \pi_\theta(a|s) = \hP[a = a_t | s = s_t].
 $$ We use a stochastic policy when the environment is uncertain, e.g. taking the same action won't necessarily bring you to the same state every time. Such a process is called a Partially Observable Markov Decision Process (POMDP).
+\end{definition}
 
 \subsection{Policy Gradient Objective Function}
 
 Finding the optimal policy is an optimization problem where we maximize the expected gain from each state:
-where
-\begin{align*}
-& \argmax_\theta  J(\theta) \\
-J(\theta) &= \hE_{\pi_\theta}[V(s)] = \sum_s \hP[s] V(s) \\
-V(s) &= \sum_r \gamma r,
-\end{align*}
+\begin{gather*}
+\argmax_\theta  J(\theta) \\
+J(\theta) = \hE_{\pi_\theta}[V(S)] = \sum_{s\in S} \hP[s] V(s)
+\end{gather*}
 where $$
   \hP(s) = \frac{N(s)}{\sum_{\sigma\in S} N(\sigma)}
 $$
-is the probability of each state occurring.
+is the probability of each state occurring and $$
+  V(s) = \sum_{a} \pi_\theta(a|s) q_\pi(s, a),
+$$
+where $ q_\pi(s, a) $ is the reward of taking action $ a $ in state $ s, $ and recall that $ \pi_\theta(a|s) $ is the probability of taking $ a $ in $ s. $ IOW, the value of state $ s $ is just the sum of the values of taking all the actions $ a $ available at $ s $ weighted by their probability of occurring.
+
+Putting it all together, we have the objective function $$
+J(\theta) = \sum_{s\in S} \hP[s] \sum_{a} \pi_\theta(a|s) q_\pi(s, a).
+$$
+
+\subsection{Gradient Ascent}
+
+Now that we have the objective function, we can perform gradient ascent on it, using the update rule $$
+  \theta \gets \theta + \alpha \nabla_\theta J(\theta).
+$$
+But first, we'll need to calculate $ \nabla_\theta J(\theta). $
+
+\section{Policy Gradient Theorem}
+
+\begin{theorem}
+The gradient of the objective function does not depend on the gradient of the state distribution $ \hP $, only on that of the action distribution $ \pi_\theta $:
+\[
+\nabla J(\theta) \propto \sum_{s\in S} \hP[s] \sum_{a} q_\pi(s, a) \nabla \pi_\theta(a|s). \tag{$ * $}
+\]
+\end{theorem}
+
+\begin{note}
+  Proportionality $ \propto $ in the theorem is essentially equality, because any constant of proportionality will be absorbed by the learning rate $ \alpha, $ which is arbitrary and decays as we train.
+\end{note}
+
+\section{REINFORCE: Monte Carlo Policy Gradient}
+
+Note that the RHS of $ (*) $ is a sum weighted by how often the states occur under policy $ \pi; $ therefore if $ \pi $ is used to sample actions, the states will occur with the same distribution $ \pi $:
+$$
+\nabla J(\theta) \propto \sum_{s\in S} \hP[s] \sum_{a} q_\pi(s, a) \nabla \pi_\theta(a|s) = \hE_\pi \big[ \sum_{a} q_\pi(s_t, a) \nabla \pi_\theta(a|s_t) \big].
+$$
+
+We can do the same thing for the actions: \begin{align*}
+\hE_\pi \big[ \sum_{a} q_\pi(s_t, a) \nabla \pi(a|s_t) \big] &= \hE_\pi \Big[ \sum_{a} \pi(a|s_t) q_\pi(s_t, a) \frac{\nabla \pi(a|s_t)}{\pi(a|s_t)} \Big] \\
+&= \hE_\pi \Big[ q_\pi(s_t, a_t) \frac{\nabla \pi(a_t|s_t)}{\pi(a_t|s_t)} \Big] \\
+&= \hE_\pi [ q_\pi(s_t, a_t) \nabla \ln \pi(a_t|s_t) ] \tag{$ * $}\\
+&= \hE_\pi [ G_t \nabla \ln \pi(a_t|s_t) ] \tag{$ ** $},
+\end{align*}
+where $ G_t = r_t + \gamma r_{t+1} + \gamma^2 r_{t+2} + \cdots $ is the return starting from time $ t. $ $ (*) $ follows from the chain rule: $ \nabla \ln f = \frac{\nabla f}{f}; $ and $ (**) $ follows from $ \hE_\pi [ G_t | s_t, a_t ] = q_\pi(s_t, a_t). $
+
+We can't calculate the real gradient directly, but in batches we can use $ G_t \nabla \ln \pi(a_t|s_t) $ instead, whose expected value is equal to the gradient. Therefore the update rule becomes $$
+\theta_{t+1} = \theta_t + \alpha G_t \nabla \ln \pi(a_t|s_t).
+$$
+
+\begin{question}
+  I wonder if using the random variable instead of the expected value works in other situations in Machine Learning. It should as long as we're sampling randomly, e.g. as in mini-batch updates.
+\end{question}
+
+\section{Intuition for the REINFORCE update rule}
+
+Consider the update rule \[
+\theta_{t+1} = \theta_t + \alpha G_t \nabla \ln \pi(a_t|s_t) = \theta_t + \alpha G_t  \frac{\nabla \pi(a_t|s_t)}{\pi(a_t|s_t)}.
+\]
+This rule says that $ \theta $ changes in the direction that most increases the probability of taking action $ a_t $ (according to $ \nabla \pi(a_t|s_t) $) proportional to $ G_t $ (because we want actions that maximize return) and inversely proportional to $ \pi(a_t|s_t)$ (because if an action occurs often, we want to dampen its effect so that rare events have a fighting chance).
+
+\section{Alan Turing}
+
+\begin{quote}
+  The idea of artificial evolution was suggested by one of the founders of computer science, Alan Turing, in 1948. Turing wrote an essay while working on the construction of an electronic computer called the Automatic Computing Engine (ACE) at the National Physical Laboratory in the UK. His employer happened to be Sir Charles Darwin, the grandson of Charles Darwin, the author of `On the Origin of Species'. Sir Charles dismissed the article as a ``schoolboy essay''! It has since been recognized that in the article Turing not only proposed artificial neural networks but the field of artificial intelligence itself.---Julian F. Miller, \emph{Cartesian Genetic Programming.}
+\end{quote}
 
 \end{document}
