@@ -2,9 +2,14 @@
 \documentclass[17pt]{extarticle}
 \usepackage{geometry}
 \geometry{letterpaper}
+
 \usepackage{float}
 \usepackage{graphicx}
 \graphicspath{{images/}}
+
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily, aboveskip=\bigskipamount, belowskip=\bigskipamount}
+
 \usepackage{amsmath,amssymb,amsfonts,amsthm}
 \usepackage{epstopdf}
 \usepackage{epigraph}
@@ -14,11 +19,11 @@
 
 \usepackage{hyperref}
 \hypersetup{
-    colorlinks,
-    citecolor=red,
-    filecolor=red,
-    linkcolor=red,
-    urlcolor=red
+  colorlinks,
+  citecolor=red,
+  filecolor=red,
+  linkcolor=red,
+  urlcolor=red
 }
 
 \usepackage{lmodern}
@@ -47,6 +52,16 @@
 % \usepackage[T1]{fontenc}
 
 \DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+% Redefine enumerate environment to have less spacing between items
+\let\oldBeginEnumerate=\enumerate
+\let\oldEndEnumerate=\endenumerate
+\renewenvironment{enumerate}{
+\oldBeginEnumerate
+  \setlength{\itemsep}{0pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+}{\oldEndEnumerate}
 
 \theoremstyle{plain}
 \newtheorem{theorem}{Theorem}
@@ -90,8 +105,8 @@
 
 %\newcommand{\defeq}{\coloneqq}
 \newcommand*{\defeq}{\mathrel{\vcenter{\baselineskip0.5ex \lineskiplimit0pt
-                     \hbox{\scriptsize.}\hbox{\scriptsize.}}}
-                     =}
+           \hbox{\scriptsize.}\hbox{\scriptsize.}}}
+           =}
 \newcommand{\<}{\langle}
 \renewcommand{\>}{\rangle}
 
@@ -126,7 +141,7 @@ where \( 0 < \gamma < 1. \)
 
 \begin{align*}
 V(s) &= V(s) + \alpha (V(s') - V(s)) \\
-     &= (1 - \alpha) V(s) + \alpha V(s'),
+   &= (1 - \alpha) V(s) + \alpha V(s'),
 \end{align*}
 essentially a weighted average between the old and the new values.
 
@@ -458,12 +473,12 @@ Define \( \pi \geq \pi ^ { \prime } \) if \( v _ { \pi } ( s ) \geq v _ { \pi ^ 
 \begin{theorem}[An optimal policy exists]
   For any MDP,
   \begin{itemize}
-    \item There exists an optimal policy \( \pi_* \) s.t. \( \pi_* \geq \pi \)
-    for all \( \pi. \)
-    \item All optimal policies achieve the optimal value function: \( v_{\pi_*}
-    (s) = v_*(s). \)
-    \item All optimal policies achieve the optimal action value function: \(
-    q_{\pi_*} (s, a) = q_*(s, a). \)
+  \item There exists an optimal policy \( \pi_* \) s.t. \( \pi_* \geq \pi \)
+  for all \( \pi. \)
+  \item All optimal policies achieve the optimal value function: \( v_{\pi_*}
+  (s) = v_*(s). \)
+  \item All optimal policies achieve the optimal action value function: \(
+  q_{\pi_*} (s, a) = q_*(s, a). \)
   \end{itemize}
 \end{theorem}
 
@@ -473,8 +488,8 @@ Knowing the optimal action value function gives us a deterministic optimal polic
 \[
 \pi _ { * } ( a | s ) = \left\{
   \begin{array} { ll }
-    { 1 } & { \text { if } a = \operatorname { argmax }_{a\in A} q_*(s, a) } \\
-    { 0 } & { \text { otherwise. } }
+  { 1 } & { \text { if } a = \operatorname { argmax }_{a\in A} q_*(s, a) } \\
+  { 0 } & { \text { otherwise. } }
   \end{array}
 \right.
 \]
@@ -649,7 +664,7 @@ This rule says that $ \theta $ changes in the direction that most increases the 
   The idea of artificial evolution was suggested by one of the founders of computer science, Alan Turing, in 1948. Turing wrote an essay while working on the construction of an electronic computer called the Automatic Computing Engine (ACE) at the National Physical Laboratory in the UK. His employer happened to be Sir Charles Darwin, the grandson of Charles Darwin, the author of `On the Origin of Species'. Sir Charles dismissed the article as a ``schoolboy essay''! It has since been recognized that in the article Turing not only proposed artificial neural networks but the field of artificial intelligence itself.---Julian F. Miller, \emph{Cartesian Genetic Programming.}
 \end{quote}
 
-\section{Intuition for Cross Entropy}
+\section{Intuition for the Cross Entropy Loss Function}
 
 \begin{definition}
 Given two discrete distributions $ p $ and $ q, $ the Cross Entropy of $ p $ and $ q $ is defined as \[
@@ -670,5 +685,174 @@ H(p, q) = - \sum_x p(x) \log q(x) = - \< p, \log q \>.
 In other words, $ H(p, q) $ is a measure of how close the two distributions $ p $ and $ \log q $ are: the closer they are (hence the closer $ p $ and $ q $ are), the larger $ \< p, \log q \> $ is, and the smaller $ H(p, q) = - \< p, \log q \> $ is.
 
 Finally, in Machine Learning we often want to make predictions about the world, and these predictions will come out to follow a certain distribution $ p, $ and we want to know how well these predictions compare to ground truths, which obey another distribution $ q. $ In that case, we want to train the network to gradually push $ p $ towards $ q, $ i.e. we want to make $ p $ as close to $ q $ as possible, which means we want to minimize the Cross Entropy $ H(p, q) $ e.g. using Gradient Descent.
+
+\section{Policy Gradient with Cross Entropy on Cartpole}
+
+Consider the following implementation of Cartpole using Policy Gradient with Cross Entropy:
+
+\scriptsize
+\begin{lstlisting}
+class Agent:
+  def __init__(self, sess, STATE_SIZE, ACTION_SIZE, name='Agent'):
+    self.sess = sess
+    with tf.variable_scope(name):
+      self.inputs = inputs = tf.placeholder(
+        tf.float32, [None, STATE_SIZE], name="inputs")
+      self.actions = actions = tf.placeholder(
+        tf.int32, [None, ACTION_SIZE], name="actions")
+      self.discountedRewards = discountedRewards = tf.placeholder(
+        tf.float32, [None, ], name="discountedRewards")
+
+      fc1 = tf.contrib.layers.fully_connected(
+        inputs=inputs,
+        num_outputs=10,
+        activation_fn=tf.nn.relu,
+        weights_initializer=tf.contrib.layers.xavier_initializer())
+
+      fc2 = tf.contrib.layers.fully_connected(
+        inputs=fc1,
+        num_outputs=10,
+        activation_fn=tf.nn.relu,
+        weights_initializer=tf.contrib.layers.xavier_initializer())
+
+      fc3 = tf.contrib.layers.fully_connected(
+        inputs=fc2,
+        num_outputs=ACTION_SIZE,
+        activation_fn=None,
+        weights_initializer=tf.contrib.layers.xavier_initializer())
+
+      self.actionDistr = tf.nn.softmax(fc3)
+
+      negLogProb = tf.nn.softmax_cross_entropy_with_logits_v2(
+        logits=fc3, labels=actions)
+      self.loss = loss = tf.reduce_mean(negLogProb * discountedRewards)
+
+      optimizer = tf.train.AdamOptimizer(LEARNING_RATE)
+      self.minimize = optimizer.minimize(loss)
+
+  @staticmethod
+  def discountNormalizeRewards(EpisodeRewards):
+    discountedRewards = np.zeros_like(EpisodeRewards)
+    cumulative = 0.0
+    for i in reversed(range(len(EpisodeRewards))):
+      cumulative = cumulative * GAMMA + EpisodeRewards[i]
+      discountedRewards[i] = cumulative
+
+    mean = np.mean(discountedRewards)
+    std = np.std(discountedRewards)
+    discountedRewards = (discountedRewards - mean) / std
+
+    return discountedRewards
+\end{lstlisting}
+\normalsize
+
+To summarize, the network takes in state inputs, maps them to action predictions (fc3), and compares them to ``ground truth'' actions using the Cross Entropy:
+
+\tiny
+\begin{lstlisting}
+negLogProb = tf.nn.softmax_cross_entropy_with_logits_v2(logits=fc3, labels=actions)
+\end{lstlisting}
+\normalsize
+Then it takes into account the discounted rewards to form the loss:
+
+\footnotesize
+\begin{lstlisting}
+loss = tf.reduce_mean(negLogProb * discountedRewards)
+\end{lstlisting}
+\normalsize
+
+We want to make sense of the loss function and how it causes the agent to learn via Gradient Descent.
+
+\subsection{Cartpole Background}
+
+In Cartpole, the agent is given one point reward for every extra step taken. To make things concrete, in a single episode, action predictions (fc3), actions, raw episode rewards, discounted rewards, and the cross entropy negLogProb look like
+
+\scriptsize
+\begin{lstlisting}
+fc3 = [
+  [ 0.02386748 -0.04044494]
+  [ 0.00657506 -0.01413923]
+  [ 0.01565559 -0.03301657]
+  [ 0.0252676  -0.05284684]
+  [ 0.0191054  -0.038988  ]
+  [ 0.01111583 -0.02329292]
+  [ 0.01875739 -0.0180726 ]
+  [ 0.01143455 -0.02348156]
+  [ 0.02049933 -0.04157549]
+  [ 0.0294909  -0.06044051]
+  [ 0.03897711 -0.08020715]
+  [ 0.03263206 -0.06620266]
+  [ 0.02537303 -0.05065311]
+  [ 0.03361636 -0.06837433]
+  [ 0.04239355 -0.08706529]
+  [ 0.03523387 -0.07183101]
+  [ 0.03210401 -0.05775316]
+  [ 0.03719867 -0.07324304]
+  [ 0.04349663 -0.0900949 ]
+]
+
+actions = [
+  [1., 0.]
+  [1., 0.]
+  [1., 0.]
+  [0., 1.]
+  [0., 1.]
+  [0., 1.]
+  [1., 0.]
+  [1., 0.]
+  [1., 0.]
+  [1., 0.]
+  [0., 1.]
+  [0., 1.]
+  [1., 0.]
+  [1., 0.]
+  [0., 1.]
+  [0., 1.]
+  [1., 0.]
+  [1., 0.]
+  [1., 0.]
+]
+
+EpisodeRewards = [1.0 1.0 . . . 1.0]
+
+discountedRewards = discountNormalizeRewards(EpisodeRewards) == [
+  1.41340597  1.29896618  1.17850325  1.05170017
+  0.91822324  0.77772121  0.62982433  0.47414341
+  0.31026875  0.13776911 -0.04380945 -0.23494478
+  -0.43613987 -0.64792417 -0.87085502 -1.10551906
+  -1.35253385 -1.61254941 -1.88625
+]
+
+negLogProb = [
+  0.79828846 0.37360975 0.59066236 0.5557426  0.6059689  0.87303066
+  0.45209357 0.9313073  0.44665492 0.46960846 0.7693604  0.99207836
+  0.4362965  1.007341   1.0459526  1.0709308  1.0972168  1.125012
+  0.37752238
+]
+\end{lstlisting}
+\normalsize
+
+Recall from before that the cross entropy
+
+\tiny
+\begin{lstlisting}
+negLogProb = tf.nn.softmax_cross_entropy_with_logits_v2(logits=fc3, labels=actions)
+\end{lstlisting}
+\normalsize
+measures the difference between the action predictions fc3 and the ``ground truth'' actions. ``Ground truth,'' because these are not the optimal actions we're feeding the agent; rather they're actions that caused the discounted rewards in a previous episode. By formulating the loss as
+
+\footnotesize
+\begin{lstlisting}
+loss = tf.reduce_mean(negLogProb * discountedRewards)
+\end{lstlisting}
+\normalsize
+we want to train the agent to produce actions that do two things:
+
+\begin{enumerate}
+  \item Come as close as possible to the ground truth actions, in order to produce the discounted rewards.
+  \item Increase the length of the episode.
+\end{enumerate}
+
+It's clear how (1) is achieved: the closer fc3 is to actions, the smaller negLogProb is, and the smaller is the loss. It's less clear how the loss causes the length of the episode to increase. Increasing the length of the episodes is the thing we're trying to learn in Cartpole, allowing the agent to balance the pole for longer and longer.
 
 \end{document}
