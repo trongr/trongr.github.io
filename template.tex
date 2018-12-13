@@ -1,8 +1,10 @@
+% Converting a PDF into JPGs: gs -dFirstPage=26 -dLastPage=33 -dBATCH -dNOPAUSE -sDEVICE=jpeg -r300 -dUseCropBox -o images/OUT-%04d.jpg IN.pdf
+
 % \documentclass[12pt]{article}
 % \documentclass[14pt]{extarticle}
-\documentclass[17pt]{extarticle}
-\usepackage{geometry}
-\geometry{letterpaper}
+% \documentclass[17pt]{extarticle}
+\documentclass[20pt]{extarticle}
+\usepackage[a3paper,margin=1.5cm,paperwidth=8.5in,paperheight=11in]{geometry}
 
 % Font sizes for reference
 % \tiny
@@ -125,6 +127,8 @@
 \newcommand{\0}{\varnothing}
 \newcommand{\e}{\varepsilon}
 \newcommand{\f}{\varphi}
+\newcommand{\m}{\mu}
+\newcommand{\s}{\sigma}
 
 % Delimiters
 
@@ -143,6 +147,8 @@
 \pdfrender{StrokeColor=black,TextRenderingMode=2,LineWidth=0.3pt}
 \sloppy
 \maketitle
+\thispagestyle{empty}
+\pagestyle{empty}
 
 % \usepackage{hyperref} for hyper links in table of contents. Remember to
 % compile twice to update table of contents

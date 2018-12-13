@@ -1,9 +1,4 @@
-class A {
-  a = 1
-
-  get a() {
-    return this.a
-  }
-}
-
-const a = new A()
+new Promise((resolve) => {
+  console.log("resolving")
+  resolve()
+}).then(null)

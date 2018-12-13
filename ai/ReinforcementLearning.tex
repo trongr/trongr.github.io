@@ -1,7 +1,8 @@
+% Converting a PDF into JPGs: gs -dFirstPage=26 -dLastPage=33 -dBATCH -dNOPAUSE -sDEVICE=jpeg -r300 -dUseCropBox -o images/OUT-%04d.jpg IN.pdf
+
 % \documentclass[14pt]{extarticle}
-\documentclass[17pt]{extarticle}
-\usepackage{geometry}
-\geometry{letterpaper}
+\documentclass[20pt]{extarticle}
+\usepackage[a3paper,margin=1.5cm,paperwidth=8.5in,paperheight=11in]{geometry}
 
 \usepackage{float}
 \usepackage{graphicx}
@@ -100,6 +101,8 @@
 \newcommand{\0}{\varnothing}
 \newcommand{\e}{\varepsilon}
 \newcommand{\f}{\varphi}
+\newcommand{\m}{\mu}
+\newcommand{\s}{\sigma}
 
 % Delimiters
 
@@ -118,6 +121,8 @@
 \pdfrender{StrokeColor=black,TextRenderingMode=2,LineWidth=0.3pt}
 \sloppy
 \maketitle
+\thispagestyle{empty}
+\pagestyle{empty}
 
 % \usepackage{hyperref} for hyper links in table of contents. Remember to
 % compile twice to update table of contents
@@ -207,10 +212,12 @@ time.
 
 \begin{definition}
   Given a finite set of states \( \Omega = \{ X_0, \ldots, X_N \}, \) a discrete Markov chain is a stochastic process that satisfies
-\[
-P \left( X _ { n + 1 } = x _ { n + 1 } | X _ { n } = x _ { n } , \ldots , X _ { 0 } = x _ { 0 } \right) = P \left( X _ { n + 1 } = x _ { n + 1 } | X _ { n } = x _ { n } \right),
-\]
-i.e. the present is enough to determine the future.
+\small
+\begin{align*}
+  P \left( X _ { n + 1 } = x _ { n + 1 } | X _ { n } = x _ { n } , \ldots , X _ { 0 } = x _ { 0 } \right) = P \left( X _ { n + 1 } = x _ { n + 1 } | X _ { n } = x _ { n } \right),
+\end{align*}
+\normalsize
+  i.e. the present is enough to determine the future.
 \end{definition}
 
 Question. Are we working with finitely many states? (It's always finite in the real world.)
@@ -342,11 +349,11 @@ The first term is
 \]
 
 And the second term:
-
+\small
 \[
 \mathbb { E } _ { \pi } \left[ \gamma \sum _ { k = 0 } ^ { \infty } \gamma ^ { k } r _ { t + k + 2 } \bigg| s _ { t } = s \right] = \sum _ { a } \pi ( s , a ) \sum _ { s ^ { \prime } } \mathcal { P } _ { s s ^ { \prime } } ^ { a } \gamma \mathbb { E } _ { \pi } \left[ \sum _ { k = 0 } ^ { \infty } \gamma ^ { k } r _ { t + k + 2 } \bigg| s _ { t + 1 } = s ^ { \prime } \right].
 \]
-
+\normalsize
 Putting these back in \( (*) \) and refactor, we get
 
 \begin{align*}
@@ -686,6 +693,7 @@ In other words, $ H(p, q) $ is a measure of how close the two distributions $ p 
 
 Finally, in Machine Learning we often want to make predictions about the world, and these predictions will come out to follow a certain distribution $ p, $ and we want to know how well these predictions compare to ground truths, which obey another distribution $ q. $ In that case, we want to train the network to gradually push $ p $ towards $ q, $ i.e. we want to make $ p $ as close to $ q $ as possible, which means we want to minimize the Cross Entropy $ H(p, q) $ e.g. using Gradient Descent.
 
+\break
 \section{Policy Gradient with Cross Entropy on Cartpole}
 
 Consider the following implementation of Cartpole using Policy Gradient with Cross Entropy:
@@ -746,7 +754,7 @@ class Agent:
 \end{lstlisting}
 \normalsize
 
-To summarize, the network takes in state inputs, maps them to action predictions (fc3), and compares them to ``ground truth'' actions using the Cross Entropy:
+To summarize, the network takes in state inputs, maps them to action predictions \lstinline{fc3}, and compares them to ``ground truth'' actions using the Cross Entropy:
 
 \tiny
 \begin{lstlisting}
@@ -765,7 +773,7 @@ We want to make sense of the loss function and how it causes the agent to learn 
 
 \subsection{Cartpole Background}
 
-In Cartpole, the agent is given one point reward for every extra step taken. To make things concrete, in a single episode, action predictions (fc3), actions, raw episode rewards, discounted rewards, and the cross entropy negLogProb look like
+In Cartpole, the agent is given one point reward for every extra step taken. To make things concrete, in a single episode, action predictions \lstinline{fc3}, actions, raw episode rewards, discounted rewards, and the cross entropy \lstinline{negLogProb} look like:
 
 \scriptsize
 \begin{lstlisting}
@@ -816,11 +824,10 @@ actions = [
 EpisodeRewards = [1.0 1.0 . . . 1.0]
 
 discountedRewards = discountNormalizeRewards(EpisodeRewards) == [
-  1.41340597  1.29896618  1.17850325  1.05170017
-  0.91822324  0.77772121  0.62982433  0.47414341
-  0.31026875  0.13776911 -0.04380945 -0.23494478
-  -0.43613987 -0.64792417 -0.87085502 -1.10551906
-  -1.35253385 -1.61254941 -1.88625
+  1.41340597  1.29896618  1.17850325  1.05170017  0.91822324
+  0.77772121  0.62982433  0.47414341  0.31026875  0.13776911
+  -0.04380945 -0.23494478 -0.43613987 -0.64792417 -0.87085502
+  -1.10551906 -1.35253385 -1.61254941 -1.88625
 ]
 
 negLogProb = [
@@ -832,27 +839,100 @@ negLogProb = [
 \end{lstlisting}
 \normalsize
 
-Recall from before that the cross entropy
+\subsection{How the Loss Function causes the agent to learn}
+
+Recall from before that the Cross Entropy
 
 \tiny
 \begin{lstlisting}
 negLogProb = tf.nn.softmax_cross_entropy_with_logits_v2(logits=fc3, labels=actions)
 \end{lstlisting}
 \normalsize
-measures the difference between the action predictions fc3 and the ``ground truth'' actions. ``Ground truth,'' because these are not the optimal actions we're feeding the agent; rather they're actions that caused the discounted rewards in a previous episode. By formulating the loss as
+measures the difference between the action predictions \lstinline{fc3} and the ``ground truth'' actions. ``Ground truth,'' because these are not the optimal actions we're feeding the agent; rather they're actions that caused the discounted rewards in a previous episode. By formulating the loss as
 
 \footnotesize
 \begin{lstlisting}
 loss = tf.reduce_mean(negLogProb * discountedRewards)
 \end{lstlisting}
 \normalsize
-we want to train the agent to produce actions that do two things:
+we're telling the agent to produce actions that compromise between two tasks:
 
 \begin{enumerate}
-  \item Come as close as possible to the ground truth actions, in order to produce the discounted rewards.
+  \item Come as close as possible to the ground truth actions, in order to receive the discounted rewards.
   \item Increase the length of the episode.
 \end{enumerate}
 
-It's clear how (1) is achieved: the closer fc3 is to actions, the smaller negLogProb is, and the smaller is the loss. It's less clear how the loss causes the length of the episode to increase. Increasing the length of the episodes is the thing we're trying to learn in Cartpole, allowing the agent to balance the pole for longer and longer.
+It's clear how (1) is achieved: the closer \lstinline{fc3} is to \lstinline{actions}, the smaller \lstinline{negLogProb} is, and the smaller is the loss, roughly speaking. It's less clear how the loss causes the length of the episode to increase. Increasing the length of the episodes is the thing we're trying to learn in Cartpole, i.e. allowing the agent to balance the pole longer.
+
+To see how the loss function forces the network to increase the episode length, let's look at the discounted rewards:
+
+\tiny
+\begin{lstlisting}
+discountedRewards = discountNormalizeRewards(EpisodeRewards) == [
+  1.41340597  1.29896618  1.17850325  1.05170017  0.91822324  ]
+  0.77772121  0.62982433  0.47414341  0.31026875  0.13776911  ] positive
+  -0.04380945 -0.23494478 -0.43613987 -0.64792417 -0.87085502 }
+  -1.10551906 -1.35253385 -1.61254941 -1.88625                } negative
+]
+\end{lstlisting}
+\normalsize
+Note that because of the way \lstinline{discountNormalizeRewards()} operates on \lstinline{EpisodeRewards = [1.0 1.0 . . . 1.0]}, by discounting each step with a \lstinline{GAMMA} factor and normalization against the \lstinline{mean} and \lstinline{std}, \lstinline{discountedRewards} has two parts: a positive head and a negative tail. In general, regardless of the length of the episode, \lstinline{discountedRewards} will have the following shape:
+
+\centerline{\includegraphics[width=1.0\textwidth]{CartpoleDiscountedNormalizedRewards}}
+
+Therefore, when we multiply \lstinline{discountedRewards} with \lstinline{negLogProb}, the positive head will force the corresponding head entries in \lstinline{negLogProb} to become small, i.e. forcing the head of \lstinline{fc3} to become more like the head of \lstinline{actions}, while the negative tail will force the corresponding tail entries in \lstinline{negLogProb} to become large, i.e. forcing the tail of \lstinline{fc3} to become \emph{less} like the tail of \lstinline{actions}.
+
+\subsection{Why train the network to be unlike the ``Ground Truth''?}
+
+This latter behavior might at first sound like a bad idea: why would you want your network to behave differently than the ``ground truth'' actions?---until we remember that
+
+\large
+\begin{quote}
+\emph{the tail ``ground truth'' actions aren't that good to begin with: the tail end is when the cart fails to balance the pole and makes it fall over.}
+\end{quote}
+\normalsize
+Making the network behave differently than the ``ground truth'' is akin to trying new things. Sometimes the new behavior will cause a shorter episode, and sometimes a longer one. When it is longer, the tail end of \lstinline{discountedRewards} will be deeper and more negative, thus causing the loss to decrease and the network to favor it.
+
+To emphasize the point, this positive head and negative tail behavior is the reason why we normalize \lstinline{EpisodeRewards} against the \lstinline{mean} and \lstinline{std} in
+
+\footnotesize
+\begin{lstlisting}
+@staticmethod
+def discountNormalizeRewards(EpisodeRewards):
+  discountedRewards = np.zeros_like(EpisodeRewards)
+  cumulative = 0.0
+  for i in reversed(range(len(EpisodeRewards))):
+    cumulative = cumulative * GAMMA + EpisodeRewards[i]
+    discountedRewards[i] = cumulative
+
+  mean = np.mean(discountedRewards)
+  std = np.std(discountedRewards)
+  discountedRewards = (discountedRewards - mean) / std
+
+  return discountedRewards
+\end{lstlisting}
+\normalsize
+so that we could have the positive head and negative tail. If we didn't, then \lstinline{discountedRewards} would simply be a list of positive numbers, and when we multiply it with \lstinline{negLogProb} in the \lstinline{loss}, it would cause all entries of \lstinline{negLogProb} to become small, causing \lstinline{fc3} to become more like \lstinline{actions} everywhere, including near the end of the episode when it should behave otherwise and be less like \lstinline{actions}.
+
+\subsection{Summary}
+
+Finally, the loss function
+
+\scriptsize
+\begin{lstlisting}
+negLogProb = tf.nn.softmax_cross_entropy_with_logits_v2(fc3, actions)
+loss = tf.reduce_mean(negLogProb * discountedRewards)
+\end{lstlisting}
+\normalsize
+or in shorthand:
+\begin{align*}
+L &= - \frac{1}{n} \sum_{i} \< A, \log s(\pi) \> \cdot G \\
+G &= \frac{[G_0 \ \cdots \ G_n] - \m}{\s}
+\end{align*}
+is good for games where the goal is to keep playing, where every step provides a reward.
+
+\begin{question}
+Can we use it for other kinds of games?
+\end{question}
 
 \end{document}
