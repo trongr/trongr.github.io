@@ -1,8 +1,8 @@
-% Converting a PDF into JPGs: gs -dFirstPage=26 -dLastPage=33 -dBATCH -dNOPAUSE -sDEVICE=jpeg -r300 -dUseCropBox -o images/OUT-%04d.jpg IN.pdf
+% Converting a PDF into JPGs: gs -dFirstPage=26 -dLastPage=33 -dBATCH -dNOPAUSE -sDEVICE=jpeg -r500 -dUseCropBox -o images/OUT-%04d.jpg IN.pdf
 
 % \documentclass[14pt]{extarticle}
 \documentclass[20pt]{extarticle}
-\usepackage[a3paper,margin=1.5cm,paperwidth=8.5in,paperheight=11in]{geometry}
+\usepackage[a4paper,margin=1cm,paperwidth=8.5in,paperheight=11in]{geometry}
 
 \usepackage{float}
 \usepackage{graphicx}
@@ -118,7 +118,7 @@
 \date{November 1, 2018---\today}
 
 \begin{document}
-\pdfrender{StrokeColor=black,TextRenderingMode=2,LineWidth=0.3pt}
+\pdfrender{StrokeColor=black,TextRenderingMode=2,LineWidth=0.5pt}
 \sloppy
 \maketitle
 \thispagestyle{empty}
