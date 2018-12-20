@@ -1,24 +1,8 @@
 % Converting a PDF into JPGs: gs -dFirstPage=26 -dLastPage=33 -dBATCH -dNOPAUSE -sDEVICE=jpeg -r666 -dUseCropBox -o images/OUT-%04d.jpg IN.pdf
 
-% \documentclass[12pt]{article}
 % \documentclass[14pt]{extarticle}
-% \documentclass[17pt]{extarticle}
 \documentclass[20pt]{extarticle}
 \usepackage[margin=1cm,paperwidth=7in,paperheight=7in]{geometry}
-% \usepackage[margin=1cm,paperwidth=8in,paperheight=10in]{geometry}
-% \usepackage[a4paper,margin=1cm,paperwidth=8.5in,paperheight=11in]{geometry}
-
-% Font sizes for reference
-% \tiny
-% \scriptsize
-% \footnotesize
-% \small
-% \normalsize
-% \large
-% \Large
-% \LARGE
-% \huge
-% \Huge
 
 \usepackage{float}
 \usepackage{graphicx}
@@ -27,30 +11,28 @@
 \usepackage{listings}
 \lstset{basicstyle=\ttfamily, aboveskip=\bigskipamount, belowskip=\bigskipamount}
 
-
 \usepackage{amsmath,amssymb,amsfonts,amsthm}
 \usepackage{epstopdf}
 \usepackage{epigraph}
 \usepackage{url}
 \usepackage{mathtools}
+\usepackage{pdfrender,xcolor}
 
 \usepackage{hyperref}
 \hypersetup{
-    colorlinks,
-    citecolor=red,
-    filecolor=red,
-    linkcolor=red,
-    urlcolor=red
+  colorlinks,
+  citecolor=red,
+  filecolor=red,
+  linkcolor=red,
+  urlcolor=red
 }
-
-\usepackage{pdfrender,xcolor}
 
 \usepackage{lmodern}
 \usepackage[T1]{fontenc}
 
 % Computer Concrete
-%\usepackage{concmath}
-%\usepackage[T1]{fontenc}
+% \usepackage{concmath}
+% \usepackage[T1]{fontenc}
 
 % Times variants
 %
@@ -72,8 +54,6 @@
 
 \DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
 
-% Environments
-
 % Redefine enumerate environment to have less spacing between items
 \let\oldBeginEnumerate=\enumerate
 \let\oldEndEnumerate=\endenumerate
@@ -84,7 +64,6 @@
   \setlength{\parsep}{0pt}
 }{\oldEndEnumerate}
 
-% Italics body
 \theoremstyle{plain}
 \newtheorem{theorem}{Theorem}
 \newtheorem{corollary}[theorem]{Corollary}
@@ -92,11 +71,8 @@
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{conjecture}[theorem]{Conjecture}
 \newtheorem{question}[theorem]{Question}
-\newtheorem{problem}[theorem]{Problem}
-\newtheorem{exercise}[theorem]{Exercise}
 \newtheorem{definition}[theorem]{Definition}
 
-% Regular body
 \theoremstyle{definition}
 \newtheorem{example}[theorem]{Example}
 \newtheorem{keywords}{Keywords}
@@ -108,11 +84,7 @@
 
 \newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
 
-% Operators
-
 \DeclareMathOperator{\argmax}{argmax}
-
-% Bold math
 
 \newcommand{\bE}{\mathbf E}
 \newcommand{\bN}{\mathbf N}
@@ -136,14 +108,14 @@
 
 %\newcommand{\defeq}{\coloneqq}
 \newcommand*{\defeq}{\mathrel{\vcenter{\baselineskip0.5ex \lineskiplimit0pt
-                     \hbox{\scriptsize.}\hbox{\scriptsize.}}}
-                     =}
+           \hbox{\scriptsize.}\hbox{\scriptsize.}}}
+           =}
 \newcommand{\<}{\langle}
 \renewcommand{\>}{\rangle}
 
-\title{}
+\title{Reinforcement Learning}
 \author{Trong}
-\date{\today}
+\date{November 1, 2018---\today}
 
 \begin{document}
 \pdfrender{StrokeColor=black,TextRenderingMode=2,LineWidth=0.5pt}
@@ -151,11 +123,20 @@
 \maketitle
 \thispagestyle{empty}
 \pagestyle{empty}
-
 % \usepackage{hyperref} for hyper links in table of contents. Remember to
 % compile twice to update table of contents
 \tableofcontents
-\pagebreak
 
+\section{DOOM: Health Gathering in Acid Lake}
+
+Agent seems to converge to a specific behavior, e.g. if in the beginning it tends to turn left, it will gradually turn tighter and tighter corners until it's spinning in one place. I suspect this is a property of the loss function
+\begin{align*}
+  L &= - \frac{1}{n} \sum_{i} \< A, \log s(\pi) \> \cdot G \\
+  G &= \frac{[G_0 \ \cdots \ G_n] - \m}{\s}
+\end{align*}
+and not the network architecture. This is because the loss function's main goal via the \( \< A, \log s(\pi) \> \) factor is to create actions that conform with previous behavior.
+
+Adding randomness in the loss function, e.g. in the way we generate the discounted rewards, seems to help, but that only delays the pathological behavior.
 
 \end{document}
+

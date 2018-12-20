@@ -1,8 +1,8 @@
-% Converting a PDF into JPGs: gs -dFirstPage=26 -dLastPage=33 -dBATCH -dNOPAUSE -sDEVICE=jpeg -r500 -dUseCropBox -o images/OUT-%04d.jpg IN.pdf
+% Converting a PDF into JPGs: gs -dFirstPage=26 -dLastPage=33 -dBATCH -dNOPAUSE -sDEVICE=jpeg -r666 -dUseCropBox -o images/OUT-%04d.jpg IN.pdf
 
 % \documentclass[14pt]{extarticle}
 \documentclass[20pt]{extarticle}
-\usepackage[a4paper,margin=1cm,paperwidth=8.5in,paperheight=11in]{geometry}
+\usepackage[margin=1cm,paperwidth=8.5in,paperheight=10in]{geometry}
 
 \usepackage{float}
 \usepackage{graphicx}
@@ -935,6 +935,12 @@ is good for games where the goal is to keep playing, where every step provides a
 
 \begin{question}
 Can we use it for other kinds of games?
+\end{question}
+
+\section{The big question}
+
+\begin{question}
+How to teach concepts to machines? What concepts should we teach first? What are the primitive concepts?
 \end{question}
 
 \end{document}
