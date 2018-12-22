@@ -1,4 +1,12 @@
-% Converting a PDF into JPGs: gs -dFirstPage=26 -dLastPage=33 -dBATCH -dNOPAUSE -sDEVICE=jpeg -r666 -dUseCropBox -o images/OUT-%04d.jpg IN.pdf
+% Converting a PDF into JPGs:
+%
+% gs -dFirstPage=26 -dLastPage=33 -dBATCH -dNOPAUSE -sDEVICE=jpeg -r666 -dUseCropBox -o images/OUT-%04d.jpg IN.pdf
+
+% Alternatively, output at a lower resolution, and use convert to blur, for a
+% more book-like effect:
+%
+% gs -dFirstPage=1 -dLastPage=10 -dBATCH -dNOPAUSE -sDEVICE=jpeg -r150 -dUseCropBox -o images/RLII-%04d.jpg ReinforcementLearningII.pdf
+% mogrify -blur 0x0.5 images/RLII-*.jpg
 
 % \documentclass[12pt]{article}
 % \documentclass[14pt]{extarticle}
@@ -127,10 +135,17 @@
 % Greek and misc symbols
 
 \newcommand{\0}{\varnothing}
+
+\renewcommand{\a}{\alpha}
+\renewcommand{\b}{\beta}
 \newcommand{\e}{\varepsilon}
 \newcommand{\f}{\varphi}
+\newcommand{\g}{\gamma}
 \newcommand{\m}{\mu}
 \newcommand{\s}{\sigma}
+\renewcommand{\th}{\theta}
+
+\newcommand{\D}{\Delta}
 
 % Delimiters
 

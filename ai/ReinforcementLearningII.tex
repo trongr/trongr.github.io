@@ -99,10 +99,17 @@
 % Greek and misc symbols
 
 \newcommand{\0}{\varnothing}
+
+\renewcommand{\a}{\alpha}
+\renewcommand{\b}{\beta}
 \newcommand{\e}{\varepsilon}
 \newcommand{\f}{\varphi}
+\newcommand{\g}{\gamma}
 \newcommand{\m}{\mu}
 \newcommand{\s}{\sigma}
+\renewcommand{\th}{\theta}
+
+\newcommand{\D}{\Delta}
 
 % Delimiters
 
@@ -134,9 +141,59 @@ Agent seems to converge to a specific behavior, e.g. if in the beginning it tend
   L &= - \frac{1}{n} \sum_{i} \< A, \log s(\pi) \> \cdot G \\
   G &= \frac{[G_0 \ \cdots \ G_n] - \m}{\s}
 \end{align*}
-and not the network architecture. This is because the loss function's main goal via the \( \< A, \log s(\pi) \> \) factor is to create actions that conform with previous behavior.
+and not the network architecture. This is because the loss function's main goal via the \( \< A, \log s(\pi) \> \) factor is to create actions that conform with previous behavior. Adding randomness in the loss function, e.g. in the way we generate the discounted rewards, seems to help, but that only delays the pathological behavior.
 
-Adding randomness in the loss function, e.g. in the way we generate the discounted rewards, seems to help, but that only delays the pathological behavior.
+\break
+\section{Actor Critic}
+
+Kinda similar to GAN's. The Critic network measures the value of the actions, while the Actor network outputs actions. The Actor Critic Model updates parameters at each step instead of waiting for the entire episode to finish.
+
+Recall the update rule
+\[
+\D \th = \a G_t \nabla_{\th} \ln \pi(a_t|s_t),
+\]
+where $ G $ is the reward function. In Actor Critic, we want the Critic to learn $ G $ instead of soft-coding it. The loss function then becomes: \[
+\D \th = \a q(s_t, a_t) \nabla_{\th} \ln \pi(a_t|s_t),
+\]
+where $ q $ is the value of taking action $ a_t $ at $ s_t. $
+
+In addition to updating $ \th $ for $ \pi $ during training, we must also independently train and update \[
+\D w = \b (q_{\rm target} - q(s_t, a_t)) \nabla_{w} q(s_t, a_t),
+\]
+where \[
+q_{\rm target} = R(s_t, a_t) + \g q(s_{t+1}, a_{t+1})
+\]
+is the target value we've seen before. The difference \[
+q_{\rm target} - q(s_t, a_t)
+\]
+is also called the Temporal Difference Error.
+
+\section{Advantage Function}
+
+\begin{definition}
+Define the Advantage Function to be \[
+A(s, a) = Q(s, a) - V(s),
+\]
+where $ V(s) $ is the average value of state $ s, $ i.e. the average value of all actions at $ s. $ In other words, $ A(s, a) $ measures how well action $ a $ performs compared to all other actions at $ s. $
+\end{definition}
+
+Turns out that the Advantage Function can be approximated by the Temporal Difference Error we just saw: \begin{align*}
+    A(s, a) &= Q(s, a) - V(s) \\
+    &\approx R(s_t, a_t) + \g q(s_{t+1}, a_{t+1}) - q(s_t, a_t).
+\end{align*}
+The interpretation is that in a minibatch, on average \begin{align*}
+    V(s) &\approx q(s_t, a_t),
+\end{align*}
+and
+\begin{align*}
+    Q(s, a) &\approx R(s_t, a_t) + \g q(s_{t+1}, a_{t+1}).
+\end{align*}
+IOW the value of taking action $ a $ at $ s $ is the sum of the immediate reward plus the discounted expected future reward.
+
+\section{A2C and A3C}
+
+In A3C / Asynchronous Advantage Actor Critic, multiple agents execute in parallel, each updating the global model asynchronously. In contrast, in A2C / Advantage Actor Critic, we wait until all the agents have finished calculating their gradients before averaging them and updating the network all at once.
 
 \end{document}
+
 
