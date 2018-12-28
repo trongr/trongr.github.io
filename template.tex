@@ -61,19 +61,21 @@
 %\usepackage[T1]{fontenc}
 
 % Times variants
-%
+
 % \usepackage{mathptmx}
 % \usepackage[T1]{fontenc}
-%
+
 % \usepackage[T1]{fontenc}
 % \usepackage{stix}
-%
+
 % Needs to typeset using LuaLaTeX:
+
 % \usepackage{unicode-math}
 % \setmainfont{XITS}
 % \setmathfont{XITS Math}
 
 % garamond
+
 % \usepackage[cmintegrals,cmbraces]{newtxmath}
 % \usepackage{ebgaramond-maths}
 % \usepackage[T1]{fontenc}
@@ -115,6 +117,12 @@
 \newtheorem{note}[theorem]{Note}
 
 \newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+
+% Black square for QED symbol
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+% Thicker fraction divider
+\renewcommand\frac[2]{\genfrac{}{}{1pt}{}{#1}{#2}}
 
 % Operators
 
@@ -170,7 +178,7 @@
 % \usepackage{hyperref} for hyper links in table of contents. Remember to
 % compile twice to update table of contents
 \tableofcontents
-\pagebreak
+\break
 
 
 \end{document}

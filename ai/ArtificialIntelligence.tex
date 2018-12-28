@@ -1,0 +1,181 @@
+% Converting a PDF into JPGs:
+%
+% gs -dFirstPage=26 -dLastPage=33 -dBATCH -dNOPAUSE -sDEVICE=jpeg -r666 -dUseCropBox -o images/OUT-%04d.jpg IN.pdf
+
+% Alternatively, output at a lower resolution, and use convert to blur, for a
+% more book-like effect:
+%
+% gs -dFirstPage=1 -dLastPage=10 -dBATCH -dNOPAUSE -sDEVICE=jpeg -r150 -dUseCropBox -o images/RLII-%04d.jpg ReinforcementLearningII.pdf
+% mogrify -blur 0x0.5 images/RLII-*.jpg
+
+% \documentclass[12pt]{article}
+% \documentclass[14pt]{extarticle}
+% \documentclass[17pt]{extarticle}
+\documentclass[20pt]{extarticle}
+\usepackage[margin=1cm,paperwidth=7in,paperheight=7in]{geometry}
+% \usepackage[margin=1cm,paperwidth=8in,paperheight=10in]{geometry}
+% \usepackage[a4paper,margin=1cm,paperwidth=8.5in,paperheight=11in]{geometry}
+
+% Font sizes for reference
+% \tiny
+% \scriptsize
+% \footnotesize
+% \small
+% \normalsize
+% \large
+% \Large
+% \LARGE
+% \huge
+% \Huge
+
+\usepackage{float}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily, aboveskip=\bigskipamount, belowskip=\bigskipamount}
+
+
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{epstopdf}
+\usepackage{epigraph}
+\usepackage{url}
+\usepackage{mathtools}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=red,
+    filecolor=red,
+    linkcolor=red,
+    urlcolor=red
+}
+
+\usepackage{pdfrender,xcolor}
+
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+
+% Computer Concrete
+%\usepackage{concmath}
+%\usepackage[T1]{fontenc}
+
+% Times variants
+
+% \usepackage{mathptmx}
+% \usepackage[T1]{fontenc}
+
+% \usepackage[T1]{fontenc}
+% \usepackage{stix}
+
+% Needs to typeset using LuaLaTeX:
+
+% \usepackage{unicode-math}
+% \setmainfont{XITS}
+% \setmathfont{XITS Math}
+
+% garamond
+
+% \usepackage[cmintegrals,cmbraces]{newtxmath}
+% \usepackage{ebgaramond-maths}
+% \usepackage[T1]{fontenc}
+
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+% Environments
+
+% Redefine enumerate environment to have less spacing between items
+\let\oldBeginEnumerate=\enumerate
+\let\oldEndEnumerate=\endenumerate
+\renewenvironment{enumerate}{
+\oldBeginEnumerate
+  \setlength{\itemsep}{0pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+}{\oldEndEnumerate}
+
+% Italics body
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{definition}[theorem]{Definition}
+
+% Regular body
+\theoremstyle{definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{keywords}{Keywords}
+\newtheorem{reference}{Reference}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{note}[theorem]{Note}
+
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+
+% Operators
+
+\DeclareMathOperator{\argmax}{argmax}
+
+% Bold math
+
+\newcommand{\bE}{\mathbf E}
+\newcommand{\bN}{\mathbf N}
+\newcommand{\bQ}{\mathbf Q}
+\newcommand{\bR}{\mathbf R}
+
+% Blackboard (hollow) math
+
+\newcommand{\hE}{\mathbb E}
+\newcommand{\hP}{\mathbb P}
+
+% Greek and misc symbols
+
+\newcommand{\0}{\varnothing}
+
+\renewcommand{\a}{\alpha}
+\renewcommand{\b}{\beta}
+\newcommand{\e}{\varepsilon}
+\newcommand{\f}{\varphi}
+\newcommand{\g}{\gamma}
+\newcommand{\m}{\mu}
+\newcommand{\s}{\sigma}
+\renewcommand{\th}{\theta}
+
+\newcommand{\D}{\Delta}
+
+% Delimiters
+
+%\newcommand{\defeq}{\coloneqq}
+\newcommand*{\defeq}{\mathrel{\vcenter{\baselineskip0.5ex \lineskiplimit0pt
+                     \hbox{\scriptsize.}\hbox{\scriptsize.}}}
+                     =}
+\newcommand{\<}{\langle}
+\renewcommand{\>}{\rangle}
+
+\title{Artificial Intelligence}
+\author{Trong}
+\date{December 26, 2018---\today}
+
+\begin{document}
+\pdfrender{StrokeColor=black,TextRenderingMode=2,LineWidth=0.5pt}
+\sloppy
+\maketitle
+\thispagestyle{empty}
+\pagestyle{empty}
+
+% \usepackage{hyperref} for hyper links in table of contents. Remember to
+% compile twice to update table of contents
+\tableofcontents
+\break
+
+\section{How to make A.I. agents more life-like}
+
+Currently all AI agents trained using Reinforcement Learning suffer from unnatural or extraneous movements, e.g. skeletons trained to walk will flail their arms about. What we need is to tell the agents to achieve their goals, but with the minimal amount of energy, i.e. we have to incorporate physics into their loss functions.
+
+\end{document}
