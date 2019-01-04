@@ -102,9 +102,11 @@
 
 \renewcommand{\a}{\alpha}
 \renewcommand{\b}{\beta}
+\renewcommand{\d}{\delta}
 \newcommand{\e}{\varepsilon}
 \newcommand{\f}{\varphi}
 \newcommand{\g}{\gamma}
+\renewcommand{\l}{\lambda}
 \newcommand{\m}{\mu}
 \newcommand{\s}{\sigma}
 \renewcommand{\th}{\theta}
@@ -193,6 +195,29 @@ IOW the value of taking action $ a $ at $ s $ is the sum of the immediate reward
 \section{A2C and A3C}
 
 In A3C / Asynchronous Advantage Actor Critic, multiple agents execute in parallel, each updating the global model asynchronously. In contrast, in A2C / Advantage Actor Critic, we wait until all the agents have finished calculating their gradients before averaging them and updating the network all at once.
+
+\subsection*{General Advantage Estimation}
+
+\begin{definition}
+Define the $ 1, \ldots, k $-step advantages starting from step $ t $ to be
+\small
+\[
+\begin{array}{llrl}
+\hat{A}^{(1)}_{t} &\defeq \d^{V}_{t} &\defeq & -V(s_t) + r_t + \g V(s_{t+1}) \\
+\hat{A}^{(2)}_{t} &\defeq \d^{V}_{t} + \g \d^{V}_{t+1} &= & -V(s_t) + r_t + + \g r_{t+1} + \g^2 V(s_{t+2}) \\
+& \cdots \\
+\hat{A}^{(k)}_{t} &\defeq \displaystyle\sum _ { l = 0 } ^ { k - 1 } \gamma ^ { l } \delta _ { t + l } ^ { V } &= & - V \left( s _ { t } \right) + \displaystyle\sum^{k-1}_{l=0 }\gamma ^ { l } r _ { t + l } + \gamma ^ { k } V \left( s _ { t + k } \right).
+\end{array}
+\]
+\normalsize
+Next define the generalized advantage estimator to be the exponentially weighted sum
+\begin{align*}
+\hat{A}^{\rm{GAE}(\g, \l)}_{t} &= (1 - \l) (\hat{A}^{(1)}_{t} + \l \hat{A}^{(2)}_{t} + \l^2 \hat{A}^{(3)}_{t} + \cdots) \\
+&= \sum^{\infty}_{l=0} (\g\l)^l \d^V_{t+l}.
+\end{align*}
+\end{definition}
+
+In other words, the $ k $-step advantage $ \hat{A}^{(k)}_{t} $ measures the advantage taking into account $ k $ steps into the future (discounted by $ \g $) and the GAE adds another level of averaging (discounted by $ \l $) on those advantages.
 
 \end{document}
 
