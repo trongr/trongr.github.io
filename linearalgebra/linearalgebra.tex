@@ -1,19 +1,22 @@
-%% LyX 2.2.3 created this file.  For more info, see http://www.lyx.org/.
-%% Do not edit unless you really know what you are doing.
 \documentclass[12pt,english]{article}
-\usepackage{ccfonts}
-\usepackage[T1]{fontenc}
-\usepackage[latin9]{inputenc}
-\usepackage{babel}
+% \usepackage{ccfonts}
+% \usepackage[T1]{fontenc}
+% \usepackage[latin9]{inputenc}
+% \usepackage{babel}
 \usepackage{amsmath}
 \usepackage[unicode=true,pdfusetitle,
  bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
  breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=false]
  {hyperref}
-\begin{document}
+
+ \usepackage{pdfrender,xcolor}
+
+ \begin{document}
 \global\long\def\rank{\operatorname{rank}}
 
 \global\long\def\Var{\operatorname{Var}}
+
+\pdfrender{StrokeColor=black,TextRenderingMode=2,LineWidth=0.1pt}
 
 \title{Linear Algebra}
 

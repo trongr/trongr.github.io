@@ -103,17 +103,6 @@
   \setlength{\parsep}{0pt}
 }{\oldEndEnumerate}
 
-% The same for itemize environment.
-
-\let\oldBeginItemize=\itemize
-\let\oldEndItemize=\enditemize
-\renewenvironment{itemize}{
-\oldBeginItemize
-  \setlength{\itemsep}{0pt}
-  \setlength{\parskip}{0pt}
-  \setlength{\parsep}{0pt}
-}{\oldEndItemize}
-
 % Italics body
 \theoremstyle{plain}
 \newtheorem{theorem}{Theorem}
@@ -186,9 +175,9 @@
 \newcommand{\<}{\langle}
 \renewcommand{\>}{\rangle}
 
-\title{Number Theory}
+\title{Abstract Algebra}
 \author{Trong}
-\date{Sat Dec 1, 2018---\today}
+\date{\today}
 
 \begin{document}
 \pdfrender{StrokeColor=black,TextRenderingMode=2,LineWidth=0.1pt}
@@ -201,98 +190,77 @@
 % compile twice to update table of contents
 \tableofcontents
 
-\section{Congruences}
+\section{M\"obius Function}
 
-\begin{theorem}[Divisor Sum]
-  For any natural number $ n, $
+\begin{proposition}
+For every natural number $ n $ define the M\"obius function
 \[
-\sum _ { d | n } \f ( d ) = n,
+\m(n) = \left\{
+\begin{array}{llr}
+1 & \text{ if $ n = 1 $} & (I) \\
+0 & \text{ if $ p^2 | n $ for some prime $ p $} & (II) \\
+(-1)^k & \text{ if $ n = p_1 \cdots p_k $ for distinct primes $ p_i. $} & (III)
+\end{array}
+\right.
 \]
-where \( \f(d) \) is the Euler Totient function.
-\end{theorem}
+Then $ \m $ is multiplicative, i.e. for $ (m, n) = 1, $ \[
+\m(mn) = \m(m) \m(n).
+\]
+Furthermore, \[
+\f(n) = \sum_{d|n} \m(d) \frac{n}{d}. \tag{IV}
+\]
+\end{proposition}
 
 \begin{proof}
-Consider the set \( A(d) = \{ k: (k, n) = d \}. \) For each \( k, \) define \( l \) s.t. \( k = dl. \) Then it's easy to see that \( (l, \frac{n}{d}) = 1. \) In fact, there is a one-to-one correspondence between \( k \) and \( l, \) so that \( | A(d) | = | \{ k \} | = | \{ l \} |. \) Now the \( l \)'s are numbers less than \( \frac{n}{d} \) and coprime with it, so \( | A(d) | = \f(\frac{n}{d}). \)
+Multiplicativity is easy to check if either $ m $ or $ n $ satisfies (I) or (II). Therefore suppose $ m = p_1 \cdots p_k $ and $ n = q_1 \cdots q_l $ are each a product of distinct primes. Since $ (m, n) = 1, $ $ p_1, \ldots, p_k, q_1, \ldots, q_l $ are in fact all distinct primes. Then \begin{align*}
+\m(mn) = (-1)^{k+l} = (-1)^{k} (-1)^{l} = \m(m)\m(n).
+\end{align*}
 
-Next, note that the sets \( A(d) \) for distinct \( d|n \) are disjoint and their union is \( {1, \ldots, n}. \) Therefore
-\[
-n = \sum_{d|n} |A(d)| = \sum_{d|n} \f\left(\frac{n}{d}\right).
+To show (IV), recall the formula
+\begin{align*}
+\f(n) &= n \Big(1 - \frac{1}{p_1}\Big) \cdots \Big(1 - \frac{1}{p_k}\Big) \\
+&= n - \frac{n}{p_1} - \cdots + \frac{n}{p_1 p_2} + \cdots + (-1)^{k} \frac{n}{p_1\cdots p_k}, \tag{V}
+\end{align*}
+where $ p_i $ are all the distinct primes of $ n. $ Note that every term in this expansion has the form \[
+  (-1)^{j} \frac{n}{q_1 \cdots q_j} = \m(d) \frac{n}{d}
 \]
-
-Finally
-\[
-n = \sum_{d|n} \f\left(\frac{n}{d}\right) = \sum_{d|n} \f(d),
-\]
-since the divisors \( \frac{n}{d} \) in the first sum are the same as the divisors \( d \) in the second sum.
+where the $ q_i $ are some subset of $ p_1,\ldots,p_k. $ This accounts for the divisors $ d $ of $ n $ of the form (I) and (III). We can ignore divisors of the form (II) in (IV) since in those cases $ \m(d) = 0. $ Therefore the terms in (V) are precisely the same ones in (IV).
 \end{proof}
 
-\begin{proposition}[NZM Ex. 2.1.15.]
-Find integers $ a_1, \ldots, a_5 $ s.t. every integer $ x $ satisfies at least one of the congruences \begin{align*}
-  x &\equiv a_1 \bmod 2 \\
-  x &\equiv a_2 \bmod 3 \\
-  x &\equiv a_3 \bmod 4 \\
-  x &\equiv a_4 \bmod 6 \\
-  x &\equiv a_5 \bmod 12. \tag{$ * $}
-\end{align*}
-\end{proposition}
+\section{Semigroup}
 
-\begin{solution}
-Consider the remainder classes mod 3: \begin{align*}
-  & 3 n \\
-  & 3 n + 1 \\
-  & 3 n + 2.
-\end{align*}
-Substitute $ 2k $ and $ 2k + 1 $ for $ n, $ and take their remainders mod 2, 3, and 6: \begin{align*}
-3 \cdot 2 k &\equiv 0 \bmod 2 \\
-3 (2k + 1) = 6k + 3 &\equiv 0 \bmod 3 \\
-3 \cdot 2k + 1 = 6k + 1 &\equiv 1 \bmod 6 \\
-3 (2k + 1) + 1 = 6k + 4 &\equiv 0 \bmod 2 \\
-3 \cdot 2k + 2 &\equiv 0 \bmod 2 \\
-3 (2k + 1) + 2 = 6k + 5 &\equiv 5 \bmod 6.
-\end{align*}
-We've now covered every integer with mods 2, 3, and 6; if we can somehow write integers $ 5 \bmod 6 $ as either $ a_3 \bmod 4 $ or $ a_5 \bmod 12, $ then we will have expressed every integer in the form $(*).$ Let's do that: \begin{align*}
-6 \cdot 2k + 5 = 12k + 5 = 4(3k + 1) + 1 &\equiv 1 \bmod 4 \\
-6(2k + 1) + 5 = 12k + 11 &\equiv 11 \bmod 12.
-\end{align*}
+\begin{definition}
+A semigroup is a set $ S $ with a product which associates to each ordered pair $ a, b\in S $ a product $ ab $ s.t. associativity holds: $ (ab)c = a(bc) $ for any $ a,b,c \in S. $ In other words, a semigroup is like a group without existence of an identity or inverses.
+\end{definition}
 
-Therefore every integer $ x $ satisfies at least one of
-\begin{align*}
-  x &\equiv 0 \bmod 2 \\
-  x &\equiv 0 \bmod 3 \\
-  x &\equiv 1 \bmod 4 \\
-  x &\equiv 1 \bmod 6 \\
-  x &\equiv 11 \bmod 12. \qedhere
-\end{align*}
-\end{solution}
+\begin{example}
+The set of all mappings of a set $ X $ to itself forms a semigroup in which the product is composition of mappings. The set of all one-to-one mappings of a set $ X $ to itself forms a group under composition.
+\end{example}
 
-\begin{theorem}[NZM 2.9]
-If $ (a, m) = 1, $ then there is an $ x $ s.t. $ ax \equiv 1 \bmod m. $ Any two such $ x $ are congruent mod $ m. $ If $ (a, m) > 1,$ then there is no such $ x. $
-\end{theorem}
+\begin{proof}
+Composition of mappings is associative. One-to-one mappings furnish the identity map and inverses.
+\end{proof}
 
-In other words, if $ a $ and $ m $ are relatively prime, then $ a $ has an inverse mod $ m. $
-
-\begin{theorem}[Wilson's Theorem]
-If $ p $ is prime, then $ p - 1 \equiv -1 \bmod p. $
-\end{theorem}
-
-\begin{proposition}[NZM Ex. 2.1.34. Wilson's Theorem revisited]
-An integer $ p > 1 $ is prime iff $ p | (p - 1)! + 1. $
+\begin{proposition}
+Suppose $ S $ is a semigroup with a finite number of elements that obey the Cancellation Laws: if either $ ab = ac $ or $ ba = ca, $ then $ b = c. $ Then $ S $ is a group.
 \end{proposition}
 
 \begin{proof}
-Suppose $ p $ is prime. By Wilson's Theorem, \[
-p - 1 \equiv -1 \bmod p. \tag{WT}
+For simplicity let $ S = \{ a, b, c, d, e \} $ consist of 5 elements, where 5 is arbitrary. First we want to show that $ S $ contains an identity element. Consider the elements \[
+a, aa, aaa, 4a, 5a, 6a.
 \]
-We want to show that \begin{align*}
-(p - 1)! &\equiv -1 \bmod p \\
-(p - 1) \underbracket{(p - 2)(p - 3) \cdots 1}_{G} &\equiv -1. \tag{WT2}
+Since $ S $ is finite, by Pigeonhole two of these must be the same, say \[
+2a = 5a.
+\]
+By Cancellation, \[
+a = 4a,
+\]
+so $ 3a $ is our tentative identity, at least as far as $ a $ is concerned. Now to show that it works for $ b $ as well: \begin{align*}
+2a &= 5a \\
+2a b &= 5a b \\
+b &= 3a b,
 \end{align*}
-Since $ p $ is prime, by NZM 2.9, every factor in $ G $ has an inverse mod $ p $ in $ G, $ so they cancel each other out. Therefore we can go back and forth between $ WT $ and $ WT2. $
-
-Conversely, suppose that $ p | (p - 1)! + 1 $ and $ p = aq $ is composite. Then \[
-(p - 1)! + 1 = aqk
-\]
-for some $ k. $ Now note that $ a $ divides the RHS, and also the first term on the LHS, therefore it must divide the $ 1 $ on the LHS, which is impossible since $ a \neq 1. $
+IOW, $ 3a $ is an identity for $ b $ too. Arguing similarly for the other elements, we see that $ 3a $ is an identity for $ S. $ Similar arguments will show that every element of $ S $ has an inverse, and hence $ S $ is a group.
 \end{proof}
 
 \end{document}

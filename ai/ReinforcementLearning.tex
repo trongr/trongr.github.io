@@ -1,8 +1,9 @@
 % Converting a PDF into JPGs: gs -dFirstPage=26 -dLastPage=33 -dBATCH -dNOPAUSE -sDEVICE=jpeg -r666 -dUseCropBox -o images/OUT-%04d.jpg IN.pdf
 
+\documentclass[10pt]{article}
 % \documentclass[14pt]{extarticle}
-\documentclass[20pt]{extarticle}
-\usepackage[margin=1cm,paperwidth=8.5in,paperheight=10in]{geometry}
+% \documentclass[20pt]{extarticle}
+\usepackage[letterpaper,top=2.75in,bottom=2.75in,right=2.125in,left=2.125in]{geometry}
 
 \usepackage{float}
 \usepackage{graphicx}
@@ -84,6 +85,9 @@
 
 \newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
 
+% Thicker fraction divider
+\renewcommand\frac[2]{\genfrac{}{}{0.5pt}{}{#1}{#2}}
+
 \DeclareMathOperator{\argmax}{argmax}
 
 \newcommand{\bE}{\mathbf E}
@@ -118,11 +122,11 @@
 \date{November 1, 2018---\today}
 
 \begin{document}
-\pdfrender{StrokeColor=black,TextRenderingMode=2,LineWidth=0.5pt}
+\pdfrender{StrokeColor=black,TextRenderingMode=2,LineWidth=0.1pt}
 \sloppy
 \maketitle
-\thispagestyle{empty}
-\pagestyle{empty}
+% \thispagestyle{empty}
+% \pagestyle{empty}
 
 % \usepackage{hyperref} for hyper links in table of contents. Remember to
 % compile twice to update table of contents

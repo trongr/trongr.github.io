@@ -1,8 +1,10 @@
 % Converting a PDF into JPGs: gs -dFirstPage=26 -dLastPage=33 -dBATCH -dNOPAUSE -sDEVICE=jpeg -r666 -dUseCropBox -o images/OUT-%04d.jpg IN.pdf
 
+\documentclass[12pt]{article}
 % \documentclass[14pt]{extarticle}
-\documentclass[20pt]{extarticle}
-\usepackage[margin=1cm,paperwidth=7in,paperheight=7in]{geometry}
+% \documentclass[20pt]{extarticle}
+% \usepackage[margin=1cm,paperwidth=7in,paperheight=7in]{geometry}
+% \usepackage[letterpaper,top=2.75in,bottom=2.75in,right=2.125in,left=2.125in]{geometry}
 
 \usepackage{float}
 \usepackage{graphicx}
@@ -84,6 +86,9 @@
 
 \newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
 
+% Thicker fraction
+\renewcommand\frac[2]{\genfrac{}{}{0.5pt}{}{#1}{#2}}
+
 \DeclareMathOperator{\argmax}{argmax}
 
 \newcommand{\bE}{\mathbf E}
@@ -127,11 +132,11 @@
 \date{November 1, 2018---\today}
 
 \begin{document}
-\pdfrender{StrokeColor=black,TextRenderingMode=2,LineWidth=0.5pt}
+\pdfrender{StrokeColor=black,TextRenderingMode=2,LineWidth=0.1pt}
 \sloppy
 \maketitle
-\thispagestyle{empty}
-\pagestyle{empty}
+% \thispagestyle{empty}
+% \pagestyle{empty}
 % \usepackage{hyperref} for hyper links in table of contents. Remember to
 % compile twice to update table of contents
 \tableofcontents
@@ -145,7 +150,6 @@ Agent seems to converge to a specific behavior, e.g. if in the beginning it tend
 \end{align*}
 and not the network architecture. This is because the loss function's main goal via the \( \< A, \log s(\pi) \> \) factor is to create actions that conform with previous behavior. Adding randomness in the loss function, e.g. in the way we generate the discounted rewards, seems to help, but that only delays the pathological behavior.
 
-\break
 \section{Actor Critic}
 
 Kinda similar to GAN's. The Critic network measures the value of the actions, while the Actor network outputs actions. The Actor Critic Model updates parameters at each step instead of waiting for the entire episode to finish.
@@ -196,11 +200,10 @@ IOW the value of taking action $ a $ at $ s $ is the sum of the immediate reward
 
 In A3C / Asynchronous Advantage Actor Critic, multiple agents execute in parallel, each updating the global model asynchronously. In contrast, in A2C / Advantage Actor Critic, we wait until all the agents have finished calculating their gradients before averaging them and updating the network all at once.
 
-\subsection*{General Advantage Estimation}
+\section{General Advantage Estimation}
 
 \begin{definition}
 Define the $ 1, \ldots, k $-step advantages starting from step $ t $ to be
-\small
 \[
 \begin{array}{llrl}
 \hat{A}^{(1)}_{t} &\defeq \d^{V}_{t} &\defeq & -V(s_t) + r_t + \g V(s_{t+1}) \\
@@ -209,7 +212,6 @@ Define the $ 1, \ldots, k $-step advantages starting from step $ t $ to be
 \hat{A}^{(k)}_{t} &\defeq \displaystyle\sum _ { l = 0 } ^ { k - 1 } \gamma ^ { l } \delta _ { t + l } ^ { V } &= & - V \left( s _ { t } \right) + \displaystyle\sum^{k-1}_{l=0 }\gamma ^ { l } r _ { t + l } + \gamma ^ { k } V \left( s _ { t + k } \right).
 \end{array}
 \]
-\normalsize
 Next define the generalized advantage estimator to be the exponentially weighted sum
 \begin{align*}
 \hat{A}^{\rm{GAE}(\g, \l)}_{t} &= (1 - \l) (\hat{A}^{(1)}_{t} + \l \hat{A}^{(2)}_{t} + \l^2 \hat{A}^{(3)}_{t} + \cdots) \\
@@ -218,6 +220,10 @@ Next define the generalized advantage estimator to be the exponentially weighted
 \end{definition}
 
 In other words, the $ k $-step advantage $ \hat{A}^{(k)}_{t} $ measures the advantage taking into account $ k $ steps into the future (discounted by $ \g $) and the GAE adds another level of averaging (discounted by $ \l $) on those advantages.
+
+\section{Proximal Policy Optimization}
+
+
 
 \end{document}
 

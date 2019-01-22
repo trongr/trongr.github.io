@@ -8,11 +8,12 @@
 % gs -dFirstPage=1 -dLastPage=10 -dBATCH -dNOPAUSE -sDEVICE=jpeg -r150 -dUseCropBox -o images/RLII-%04d.jpg ReinforcementLearningII.pdf
 % mogrify -blur 0x0.5 images/RLII-*.jpg
 
-% \documentclass[12pt]{article}
+\documentclass[12pt]{article}
 % \documentclass[14pt]{extarticle}
 % \documentclass[17pt]{extarticle}
-\documentclass[20pt]{extarticle}
-\usepackage[margin=1cm,paperwidth=7in,paperheight=7in]{geometry}
+% \documentclass[20pt]{extarticle}
+% \usepackage[margin=0.5cm,paperwidth=4in,paperheight=4in]{geometry}
+% \usepackage[margin=1cm,paperwidth=7in,paperheight=7in]{geometry}
 % \usepackage[margin=1cm,paperwidth=8in,paperheight=10in]{geometry}
 % \usepackage[a4paper,margin=1cm,paperwidth=8.5in,paperheight=11in]{geometry}
 
@@ -102,6 +103,17 @@
   \setlength{\parsep}{0pt}
 }{\oldEndEnumerate}
 
+% The same for itemize environment.
+
+\let\oldBeginItemize=\itemize
+\let\oldEndItemize=\enditemize
+\renewenvironment{itemize}{
+\oldBeginItemize
+  \setlength{\itemsep}{0pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+}{\oldEndItemize}
+
 % Italics body
 \theoremstyle{plain}
 \newtheorem{theorem}{Theorem}
@@ -130,7 +142,7 @@
 \renewcommand{\qedsymbol}{$\blacksquare$}
 
 % Thicker fraction divider
-\renewcommand\frac[2]{\genfrac{}{}{1pt}{}{#1}{#2}}
+\renewcommand\frac[2]{\genfrac{}{}{0.6pt}{}{#1}{#2}}
 
 % Operators
 
@@ -179,16 +191,15 @@
 \date{\today}
 
 \begin{document}
-\pdfrender{StrokeColor=black,TextRenderingMode=2,LineWidth=0.5pt}
+\pdfrender{StrokeColor=black,TextRenderingMode=2,LineWidth=0.1pt}
 \sloppy
 \maketitle
-\thispagestyle{empty}
-\pagestyle{empty}
+% \thispagestyle{empty}
+% \pagestyle{empty}
 
 % \usepackage{hyperref} for hyper links in table of contents. Remember to
 % compile twice to update table of contents
 \tableofcontents
-\break
 
 
 \end{document}

@@ -1,10 +1,10 @@
 % Converting a PDF into JPGs: gs -dFirstPage=26 -dLastPage=33 -dBATCH -dNOPAUSE -sDEVICE=jpeg -r666 -dUseCropBox -o images/OUT-%04d.jpg IN.pdf
 
-% \documentclass[12pt]{article}
+\documentclass[12pt]{article}
 % \documentclass[14pt]{extarticle}
 % \documentclass[17pt]{extarticle}
-\documentclass[20pt]{extarticle}
-\usepackage[margin=1cm,paperwidth=7in,paperheight=7in]{geometry}
+% \documentclass[20pt]{extarticle}
+% \usepackage[margin=1cm,paperwidth=7in,paperheight=7in]{geometry}
 % \usepackage[margin=1cm,paperwidth=8in,paperheight=10in]{geometry}
 % \usepackage[a4paper,margin=1cm,paperwidth=8.5in,paperheight=11in]{geometry}
 
@@ -108,6 +108,9 @@
 
 \newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
 
+% Thicker fraction divider
+\renewcommand\frac[2]{\genfrac{}{}{0.6pt}{}{#1}{#2}}
+
 % Operators
 
 \DeclareMathOperator{\argmax}{argmax}
@@ -147,7 +150,7 @@
 \date{\today}
 
 \begin{document}
-\pdfrender{StrokeColor=black,TextRenderingMode=2,LineWidth=0.5pt}
+\pdfrender{StrokeColor=black,TextRenderingMode=2,LineWidth=0.1pt}
 \sloppy
 \maketitle
 \thispagestyle{empty}
@@ -155,8 +158,8 @@
 
 % \usepackage{hyperref} for hyper links in table of contents. Remember to
 % compile twice to update table of contents
-\tableofcontents
-\pagebreak
+% \tableofcontents
+% \pagebreak
 
 \section{Orthogonal Matrix}
 
@@ -221,7 +224,6 @@ Q^{T} Q = Q Q^{T}. \qedhere
   Find two other independent vectors by trial and error, then use Gram-Schmidt to orthogonalize the set, then normalize to get orthonormal set.
 \end{solution}
 
-\break
 \section*{Normal Matrix}
 
 \begin{theorem}

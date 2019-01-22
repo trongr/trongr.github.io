@@ -1,18 +1,55 @@
+% Converting a PDF into JPGs:
+%
+% gs -dFirstPage=26 -dLastPage=33 -dBATCH -dNOPAUSE -sDEVICE=jpeg -r666 -dUseCropBox -o images/OUT-%04d.jpg IN.pdf
+
+% Alternatively, output at a lower resolution, and use convert to blur, for a
+% more book-like effect:
+%
+% gs -dFirstPage=1 -dLastPage=10 -dBATCH -dNOPAUSE -sDEVICE=jpeg -r150 -dUseCropBox -o images/RLII-%04d.jpg ReinforcementLearningII.pdf
+% mogrify -blur 0x0.5 images/RLII-*.jpg
+
+\documentclass[12pt]{article}
 % \documentclass[14pt]{extarticle}
-\documentclass[17pt]{extarticle}
-\usepackage{geometry}
-\geometry{letterpaper}
+% \documentclass[17pt]{extarticle}
+% \documentclass[20pt]{extarticle}
+% \usepackage[margin=0.5cm,paperwidth=4in,paperheight=4in]{geometry}
+% \usepackage[margin=1cm,paperwidth=7in,paperheight=7in]{geometry}
+% \usepackage[margin=1cm,paperwidth=8in,paperheight=10in]{geometry}
+% \usepackage[a4paper,margin=1cm,paperwidth=8.5in,paperheight=11in]{geometry}
+
+% Font sizes for reference
+% \tiny
+% \scriptsize
+% \footnotesize
+% \small
+% \normalsize
+% \large
+% \Large
+% \LARGE
+% \huge
+% \Huge
+
+% Languages: English, Vietnamese, Chinese, Japanese, Korean.
+
+% \usepackage[english,vietnamese]{babel}
+% \usepackage[utf8]{inputenc}
+% \usepackage[T1,T2A]{fontenc}
+% \usepackage{CJKutf8}
+% % Options for fonts: Chinese: gbsn, gkai; Japanese: min, goth, maru
+% \begin{CJK}{UTF8}{gbsn}天下人都\end{CJK}
+
 \usepackage{float}
 \usepackage{graphicx}
 \graphicspath{{images/}}
+
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily, aboveskip=\bigskipamount, belowskip=\bigskipamount}
 
 \usepackage{amsmath,amssymb,amsfonts,amsthm}
 \usepackage{epstopdf}
 \usepackage{epigraph}
 \usepackage{url}
 \usepackage{mathtools}
-
-\usepackage{pdfrender,xcolor}
 
 \usepackage{hyperref}
 \hypersetup{
@@ -23,33 +60,61 @@
     urlcolor=red
 }
 
+\usepackage{pdfrender,xcolor}
+
 \usepackage{lmodern}
 \usepackage[T1]{fontenc}
 
 % Computer Concrete
-% \usepackage{concmath}
-% \usepackage[T1]{fontenc}
+%\usepackage{concmath}
+%\usepackage[T1]{fontenc}
 
 % Times variants
-%
+
 % \usepackage{mathptmx}
 % \usepackage[T1]{fontenc}
-%
+
 % \usepackage[T1]{fontenc}
 % \usepackage{stix}
-%
+
 % Needs to typeset using LuaLaTeX:
+
 % \usepackage{unicode-math}
 % \setmainfont{XITS}
 % \setmathfont{XITS Math}
 
 % garamond
+
 % \usepackage[cmintegrals,cmbraces]{newtxmath}
 % \usepackage{ebgaramond-maths}
 % \usepackage[T1]{fontenc}
 
 \DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
 
+% Environments
+
+% Redefine enumerate environment to have less spacing between items
+\let\oldBeginEnumerate=\enumerate
+\let\oldEndEnumerate=\endenumerate
+\renewenvironment{enumerate}{
+\oldBeginEnumerate
+  \setlength{\itemsep}{0pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+}{\oldEndEnumerate}
+
+% The same for itemize environment.
+
+\let\oldBeginItemize=\itemize
+\let\oldEndItemize=\enditemize
+\renewenvironment{itemize}{
+\oldBeginItemize
+  \setlength{\itemsep}{0pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+}{\oldEndItemize}
+
+% Italics body
 \theoremstyle{plain}
 \newtheorem{theorem}{Theorem}
 \newtheorem{corollary}[theorem]{Corollary}
@@ -57,9 +122,12 @@
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{conjecture}[theorem]{Conjecture}
 \newtheorem{question}[theorem]{Question}
-
-\theoremstyle{definition}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{exercise}[theorem]{Exercise}
 \newtheorem{definition}[theorem]{Definition}
+
+% Regular body
+\theoremstyle{definition}
 \newtheorem{example}[theorem]{Example}
 \newtheorem{keywords}{Keywords}
 \newtheorem{reference}{Reference}
@@ -68,21 +136,62 @@
 \newtheorem{remark}[theorem]{Remark}
 \newtheorem{note}[theorem]{Note}
 
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+
+% Black square for QED symbol
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+% Thicker fraction divider
+\renewcommand\frac[2]{\genfrac{}{}{0.6pt}{}{#1}{#2}}
+
+% Operators
+
+\DeclareMathOperator{\argmax}{argmax}
+
+% Bold math
+
+\newcommand{\bE}{\mathbf E}
+\newcommand{\bN}{\mathbf N}
+\newcommand{\bQ}{\mathbf Q}
+\newcommand{\bR}{\mathbf R}
+
+% Blackboard (hollow) math
+
+\newcommand{\hE}{\mathbb E}
+\newcommand{\hP}{\mathbb P}
+
+% Greek and misc symbols
+
+\newcommand{\0}{\varnothing}
+
+\renewcommand{\a}{\alpha}
+\renewcommand{\b}{\beta}
+\renewcommand{\d}{\delta}
+\newcommand{\e}{\varepsilon}
+\newcommand{\f}{\varphi}
+\newcommand{\g}{\gamma}
+\renewcommand{\l}{\lambda}
+\newcommand{\m}{\mu}
+\newcommand{\s}{\sigma}
+\renewcommand{\th}{\theta}
+
+\newcommand{\D}{\Delta}
+
+% Delimiters
+
 %\newcommand{\defeq}{\coloneqq}
 \newcommand*{\defeq}{\mathrel{\vcenter{\baselineskip0.5ex \lineskiplimit0pt
                      \hbox{\scriptsize.}\hbox{\scriptsize.}}}
                      =}
-
-\newcommand{\bN}{\mathbf N}
-\newcommand{\bQ}{\mathbf Q}
-\newcommand{\bR}{\mathbf R}
+\newcommand{\<}{\langle}
+\renewcommand{\>}{\rangle}
 
 \title{Analysis II}
 \author{Trong}
 \date{December 1, 2018---\today}
 
 \begin{document}
-\pdfrender{StrokeColor=black,TextRenderingMode=2,LineWidth=0.3pt}
+\pdfrender{StrokeColor=black,TextRenderingMode=2,LineWidth=0.1pt}
 \sloppy
 \maketitle
 
@@ -153,6 +262,8 @@ f_n (x)
 \item Then \( f \) is differentiable at \( a \) iff each component \( f_i \) is differentiable at \( a. \)
 
 \item If \( f \) is differentiable at \( a, \) then its derivative is the \( n \times m \) matrix whose \( i \)-th row is the derivative of \( f_i,  \) i.e.
+
+\footnotesize
 \[
 D f(a) = \begin{bmatrix}
 D f_1 (a) \\
@@ -164,6 +275,7 @@ D_1 f_1 (a) & \cdots & D_m f_1 (a) \\
 D_1 f_n (a) & \cdots & D_m f_n (a)
 \end{bmatrix}.
 \]
+\normalsize
   This matrix is called the Jacobian matrix of \( f. \)
 \end{itemize}
 \end{theorem}
@@ -193,5 +305,99 @@ This theorem guarantees differentiability of $ f $ if its partial derivatives ex
     D_k D_j f(a) = D_j D_k f(a).
   $$
 \end{theorem}
+
+\break
+
+\section{Homogeneous functions and the Chain Rule}
+
+\begin{proposition}
+A function $ f: \bR^n \longrightarrow \bR $ is called homogeneous of degree $ m $ if $ f(tx) = t^m f(x) $ for all $ x $ and $ t. $ If $ f $ is also differentiable, then \[
+\sum_{i=1}^n x_i D_i f(x) = m f(x). \tag{1}
+\]
+\end{proposition}
+
+\begin{proof}
+Let $ g(t) = f(tx) = t^m f(x). $ By the Chain Rule, \begin{align*}
+g'(t) &= \sum_{i} D_i f(tx) \frac{d}{dt} (tx_i) \\
+&= \sum_{i} x_i D_i f(tx) \\
+&= m t^{m-1} f(x).
+\end{align*}
+Plugging in $ t = 1 $ yields the desired result.
+\end{proof}
+
+\begin{example}
+Intuitively a homogeneous function transforms scaling from its arguments to its value. Examples are linear operators: $ T(ax) = aT(x), $ which are homogeneous of order 1.
+
+Another example is the function \[
+  f(x_1, x_2) = x_1^2 + x_2^2,
+\]
+which is homogeneous of order 2, since \[
+f(t x_1, t x_2) = t^2 x_1^2 + t^2 x_2^2 = t^2 f(x_1, x_2).
+\]
+Let's verify (1): \begin{align*}
+\sum_{i=1}^n x_i D_i f(x) &= 2x_1 x_1 + 2x_2 x_2 = 2 f(x).
+\end{align*}
+\end{example}
+
+\begin{proposition}
+If $ f: \bR^n \longrightarrow \bR $ is differentiable and $ f(0) = 0, $ then there exist $ g_i: \bR^n \longrightarrow \bR $ s.t. \[
+f(x) = \sum_{i=1}^n x_i g_i (x). \tag{2}
+\]
+Specifically, \[
+f(x) = \sum_{i=1}^n x_i \int_0^1 D_i f(tx) dt. \tag{3}
+\]
+\end{proposition}
+
+\begin{proof}
+Let $ h(t) = f(tx). $ Then \begin{align*}
+\int_0^1 h'(t) dt = h(1) - h(0) = f(x) - f(0) = f(x).
+\end{align*}
+On the other hand, by the Chain Rule, \[
+h'(t) = \sum_{i=1}^n x_i D_i f(tx),
+\]
+hence \begin{align*}
+\int_0^1 h'(t) dt &= \int_0^1 \sum_{i=1}^n x_i D_i f(tx) dt \\
+&= \sum_{i=1}^n x_i \int_0^1 D_i f(tx) dt.
+\end{align*}
+Thus \[
+g_i (x) = \int_0^1 D_i f(tx) dt
+\] are the functions we're looking for.
+\end{proof}
+
+\begin{example}
+It's always good to verify an abstract result on a simple example: \[
+f(x_1, x_2) = x_1^2 + x_2^2.
+\]
+Formula (2) says \[
+f(x) = x_1 g_1 (x) + x_2 g_2 (x),
+\]
+which would suggest that \[
+g_1(x) = x_1 \quad \text{and} \quad g_2(x) = x_2.
+\]
+Let's check: \[
+D_1 f(tx) = 2 x_1 |_{tx} = 2 t x_1,
+\]
+which we plug into $ g_1 $: \begin{align*}
+g_1 (x) &= \int_0^1 D_1 f(tx) dt \\
+&= \int_0^1 2 t x_1 dt \\
+&= t^2 x_1 |_0^1 \\
+&= x_1.
+\end{align*}
+Similarly we find that $ g_2 (x) = x_2, $ as required.
+\end{example}
+
+\begin{note}
+If $ f: \bR^n \longrightarrow \bR $ is differentiable and homogeneous of degree $ m, $ then $ f(0) = 0 $ since $ f(0) = f(t \cdot 0) = t^m f(0). $ Therefore (3) holds: \[
+  f(x) = \sum_{i=1}^n x_i \int_0^1 D_i f(tx) dt.
+\]
+Combining it with (1)--- \[
+\sum_{i=1}^n x_i D_i f(x) = m f(x),
+\] we're led to believe that \[
+\frac{D_i f(x)}{m} = \int_0^1 D_i f(tx) dt.
+\]
+This we can easily check for $ f(x_1, x_2) = x_1^2 + x_2^2 $ by reusing some of our previous calculations, e.g. \[
+  \frac{D_1 f(x)}{m} = \frac{2 x_1}{2} = x_1 = \int_0^1 D_1 f(tx) dt.
+\]
+\end{note}
 
 \end{document}
