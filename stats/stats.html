@@ -196,45 +196,50 @@
     $$P(A|B) = \frac{P(A\cap B)}{P(B)}.$$</i>
 </p>
 
-<h3>Simulating de Mere's Bets</h3>
+<h1>The center of a probability distribution</h1>
 
-<pre><code>bool throws_a_pair_of_sixes() {
-    int r = rand() % 6 + 1;
-    int s = rand() % 6 + 1;
-    if (r == 6 && s == 6) {
-        return true;
-    } else {
-        return false;
-    }
-}
+<h3>Mean for discrete distribution</h3>
 
-bool throws_a_pair_of_sixes_in_n_throws(int n) {
-    for (int i = 0; i < n; i++) {
-        if (throws_a_pair_of_sixes()) {
-            return true;
-        }
-    }
-    return false;
-}
+<p>
+  $$
+    \bar{x} = \frac{1}{n} \sum_{i} x_i,
+  $$
 
-int main() {
-    srand(time(NULL)); // should only be called once
+  or alternatively:
 
-    int NUM_RUNS = 100000;
-    int NUM_THROWS = 24;
-    int win_count = 0;
+  $$
+    \bar{x} = \frac{1}{n} \sum_{x} x n(x),
+  $$
+where $ n(x) $ is the number of occurrences of $ x. $ This becomes $$
+  \bar{x} = \sum_{x} x \frac{n(x)}{n} = \sum_{x} x p(x),
+$$
+where $ p(x) := \frac{n(x)}{n} $ is the observed frequency of $ x. $ This mean approaches the true mean $$
+  \mu = \sum_{x} x P(x),
+$$
+where $ P(x) $ is the true probability of $ x. $
+</p>
 
-    for (int i = 0; i < NUM_RUNS; i++) {
-        if (throws_a_pair_of_sixes_in_n_throws(NUM_THROWS)) {
-            win_count++;
-        }
-    }
-    printf("Win count: %d. Num runs: %d\n", win_count, NUM_RUNS);
+<h3>Mean for continuous distribution</h3>
 
-    return 0;
-}</code></pre>
+<p>
+  The probability function $ P(x) $ is replaced by the infinitesimal $ f(x) dx, $ where $ f(x) $ is the probability density function, and the sum is replaced by the integral: $$
+    \mu = \int x f(x) dx.
+  $$
+</p>
 
+<h1>Measures of dispersion of a distribution</h1>
 
+<h2>Deviation from the mean</h2>
+
+<p>
+  The average of deviations from the mean of all samples: $$
+    d = \sum_{x} \left| x - \mu \right| P(x)
+  $$
+  for the discrete case, and $$
+    d = \int \left| x - \mu \right| f(x) dx
+  $$
+  for the continuous case.
+</p>
 
 </div>
 </body>

@@ -31,19 +31,26 @@ class MetaExperiment {
       const tailCount = sampleSize - headCount
       const headRatio = headCount / sampleSize
       const tailRatio = tailCount / sampleSize
-      const ratioDiff = Math.abs(headRatio - tailRatio)
-      const biasDiff = Math.abs(bias - headRatio)
+      const observedBias = headRatio
+      const trueBias = bias
+      const biasErr = Math.abs(trueBias - observedBias)
 
-      const result = {
+      let result = {
         headCount,
         tailCount,
         headRatio,
         tailRatio,
-        ratioDiff,
-        biasDiff,
+        observedBias,
+        trueBias,
+        biasErr,
       }
 
-      if (showHist) result.history = hist.join("")
+      if (showHist) {
+        result = {
+          history: hist.join(""),
+          ...result,
+        }
+      }
 
       history.push(result)
     }

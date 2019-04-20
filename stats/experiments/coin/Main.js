@@ -11,18 +11,29 @@ function main() {
   }
   const showHist = true
 
-  const [, , bias, sampleSize, numExperiments] = process.argv
+  let [, , bias, sampleSize, numExperiments] = process.argv
+  bias = parseFloat(bias)
+  sampleSize = parseInt(sampleSize)
+  numExperiments = parseInt(numExperiments)
+
   const meta = new MetaExperiment({ bias, sampleSize })
   const hist = meta.run(numExperiments, showHist)
 
-  const maxRatioDiff = _.maxBy(hist, (exp) => exp.ratioDiff).ratioDiff * 100
-  const maxBiasDiff = _.maxBy(hist, (exp) => exp.biasDiff).biasDiff * 100
+  const maxBiasErrExp = _.maxBy(hist, (exp) => exp.biasErr)
+  const maxBiasErr = 100 * maxBiasErrExp.biasErr
+  const avgBiasErr = (100 * _.sumBy(hist, (exp) => exp.biasErr)) / hist.length
 
-  console.log("History:", hist)
+  console.log("History:", JSON.stringify(hist, null, 4))
   console.log("")
 
-  console.log(`Max Abs Ratio Diff: ${maxRatioDiff}%`)
-  console.log(`Max Abs Bias Diff: ${maxBiasDiff}%`)
+  console.log(
+    "Experiment with max abs bias error:",
+    JSON.stringify(maxBiasErrExp, null, 4),
+  )
+  console.log("")
+
+  console.log(`Max abs bias error: ${maxBiasErr}%`)
+  console.log(`Avg abs bias error: ${avgBiasErr}%`)
 }
 
 if (require.main === module) {
