@@ -1,0 +1,24 @@
+html, body {
+  /*
+   * Need to set height for these guys so empty div#canvasBox below gets 100%
+   * height.
+   */
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+#canvasBox {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+#canvas {
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}

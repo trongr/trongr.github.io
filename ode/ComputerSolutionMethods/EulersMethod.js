@@ -1,6 +1,13 @@
 /**
- * Solve the ODE dx/dt = x with x = 1 at t = 0. With h = 0.00001, the solution
- * at t = tmax = 1 is x = 2.7182682371744953, accurate to 4 decimal places.
+ * Solve the ODE dx/dt = x with x = 1 at t = 0. The analytical solution is
+ *
+ *  x = e^t.
+ *
+ * With h = 0.00001, the solution at t = tmax = 1 is
+ *
+ *  x = 2.7182682371744953 = e === 2.7182...
+ *
+ * up to 4 decimal places.
  */
 function solve() {
   const h = 0.00001
