@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Differential Equations</title>
+<link rel="stylesheet" href="../../css/global.css">
+
+<!-- this config must be before MathJax.js: -->
+<script src="../../js/mathjax.config.js"></script>
+<script src="../../js/MathJax/MathJax.js"></script>
+<!-- <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js"></script> -->
+
+<script src="../../js/jquery-3.1.0.min.js"></script>
+<script src="../../js/smartquotes.js"></script>
+<script src="../../js/global.js"></script>
+
+</head>
+<body>
+<div id="content">
+
+<h1>Differential Equations: Computer Solutions Methods</h1>
+
+<h2>Euler's Method</h2>
+
+<p>
+  We want to solve the first order problem $$
+    \frac{dx}{dt} = f(x, t)
+  $$
+
+  with $ x = x_0 $ at $ t = 0. $ Euler's method involves iteratively solving for $ x_{n+1} $ using $ x_n: $ $$
+    x_{n+1} = x_n + h f(x_n, t_n),
+  $$
+
+  where $ f $ is the slope at $ (x_n, t_n), $ $ h f(x_n, t_n) $ is the change in
+  $ x, $ and $ h $ is the change in $ t, $ i.e. from $ x_0 $ we advance in steps
+  of $ h $ along $ t $ and calculate successively $ x_n. $
+</p>
+
+<p>
+<i>Example. Solve
+
+    $$
+      \frac{dx}{dt} = ax
+    $$
+
+    with $ x = x_0 $ at $ t = 0. $</i>
+</p>
+
+<p>
+  Solution. We have
+
+  $$
+    \begin{align*}
+      x_{n+1} &= x_n + h a x_n \\
+              &= (1 + h a) x_n \\
+              &= (1 + h a)^n x_0.
+    \end{align*}
+  $$
+
+  At time $ t = t_n = nh, $ we have
+
+  $$
+  \begin{align*}
+  x_{n+1} &= x_0 \bigg(1 + \frac{at}{n}\bigg)^n.
+  \end{align*}
+  $$
+
+  Letting $ h \longrightarrow 0 $ while keeping $ t $ fixed, so that $ n \longrightarrow \infty: $
+
+  $$
+  \lim_{h\to 0} x_{n+1} = \lim_{n\to\infty} x_0 \bigg(1 + \frac{at}{n}\bigg)^n
+    = x_0 e^{at},
+  $$
+
+  by a well-known equality.
+</p>
+
+</div>
+</body>
+</html>
