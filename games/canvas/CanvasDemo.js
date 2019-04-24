@@ -17,6 +17,9 @@ function __initCanvasElmt(canvasId, canvasBoxId) {
 $(window).on("load", () => {
   const $canvas = __initCanvasElmt("#canvas", "#canvasBox")
   const canvas = new CanvasWrapper($canvas)
-  const COLOR = "#000000"
-  canvas.drawRect(100, 100, 1, 1, COLOR)
+
+  const width = canvas.getWidth()
+  const height = canvas.getHeight()
+  const COLOR = "#ff0000"
+  canvas.drawRect(width / 2, height / 2, 10, 10, COLOR)
 })

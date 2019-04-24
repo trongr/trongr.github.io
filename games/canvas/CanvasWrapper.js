@@ -16,6 +16,14 @@ class CanvasWrapper {
     this.context = context
   }
 
+  getWidth() {
+    return this.canvas.width
+  }
+
+  getHeight() {
+    return this.canvas.height
+  }
+
   /**
    * Draw a rectangle on the canvas.
    * @param {*} x position of top left corner.

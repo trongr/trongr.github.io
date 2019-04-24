@@ -21,14 +21,6 @@
 <script src="../js/toc.js"></script>
 <div id="toc"></div>
 
-<!-- <img src="images/sTUY5ni.gif">
-
-<div class="epigraph">
-     <div class="quote">
-        When you play the game of thrones, you win or you die.
-     </div><hr><div class="author">Cersei Lannister</div>
-</div> -->
-
 <h1>Let there be light!</h1>
 
 <p>
@@ -38,74 +30,9 @@
 
 <h3>Rolling ball</h3>
 
-<p>
-    PlayerCtrl.cs:
-</p>
-
-<pre><code data-content='using UnityEngine;
-using System.Collections;
-
-public class PlayerCtrl : MonoBehaviour {
-
-    public float speed;
-    private Rigidbody rb;
-
-    // Use this for initialization
-    void Start () {
-        rb = GetComponent<Rigidbody>();
-    }
-
-    // Update is called once per frame
-    void Update () {
-
-    }
-
-    void FixedUpdate() {
-        float moveHor = Input.GetAxis("Horizontal");
-        float moveVer = Input.GetAxis("Vertical");
-        Vector3 movement = new Vector3(moveHor, 0, moveVer);
-        rb.AddForce(movement * speed);
-    }
-}
-'></code></pre>
-
 <img src="images/ballground.png">
 
-<h3>Camera offset</h3>
-
-<p>
-    CameraCtrl.cs:
-</p>
-
-<pre><code>using UnityEngine;
-using System.Collections;
-
-public class CameraCtrl : MonoBehaviour {
-
-    public GameObject player;
-    private Vector3 offset;
-
-    // Use this for initialization
-    void Start () {
-        offset = transform.position - player.transform.position;
-    }
-
-    // LateUpdate is called once per frame after all other updates have finished
-    void LateUpdate () {
-        transform.position = player.transform.position + offset;
-    }
-}</code></pre>
-
 <img src="images/ballcomplete.png">
-
-<h3>If you move fast enough you can pass through walls</h3>
-<p>
-I wonder if the real world is like that.
-</p>
-<img src="images/HighSpeedPassesThroughWalls.png">
-<p>
-[Image source: Sebastian Lague.]
-</p>
 
 <h1>Rigidbody collision and collecting coins</h1>
 

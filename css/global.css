@@ -116,12 +116,7 @@ ol {
                          by their contents */
 }
 
-#biglist li {
-  /* in index.html */
-  margin-left: 40px;
-}
-
-#biglist a {
+.biglist a {
   text-decoration: none;
 }
 
