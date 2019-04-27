@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<title>Genetic Programming</title>
+<link rel="stylesheet" href="../css/global.css">
+
+<link rel="stylesheet" href="../css/obsidian.min.css">
+<script src="../js/highlight.min.js"></script>
+
+<!-- this config must be before MathJax.js: -->
+<script src="../js/mathjax.config.js"></script>
+<script src="../js/MathJax/MathJax.js"></script>
+<!-- <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js"></script> -->
+
+<script src="../js/jquery-3.1.0.min.js"></script>
+<script src="../js/smartquotes.js"></script>
+<script src="../js/global.js"></script>
+
+</head>
+
+<body>
+<div id="content">
+
+<h1>Genetic Programming: Overview</h1>
+
+<h2>A genetic algorithm</h2>
+
+<ol>
+  <li>Randomly generate a collection of chromosomes, called the population.</li>
+  <li>Evaluate each chromosome in the population to determine fitness.</li>
+  <li>Based on the fitness, select members of the population that will be used
+  to create the next generation of the population, i.e. selecting who will get
+  to breed children. One strategy for creating children is called recombination,
+  or crossover, where a child is created by combining the genes of the two
+  parents.</li>
+  <li>Mutate some parents and offspring.</li>
+  <li>Form new population from mutated parents and offspring.</li>
+  <li>Optional: promote some unaltered parents from to the next generation. This
+  process is called Elitism.</li>
+  <li>Repeat as required (until max number of generation or fitness is
+  acceptable).</li>
+</ol>
+
+<h2>Bloat</h2>
+
+<p>
+  As a population evolves over time, the chromosomes may grow in size without
+  improving fitness. This is similar to how real software becomes bloated over
+  time as you add more and more code to a project. Productivity stagnates
+  because the system has to overcome friction created by old code, e.g. it's
+  hard to remove old legacy code, data has to flow through more and more code in
+  order to get from input to output, etc.
+</p>
+
+</div>
+</body>
+</html>

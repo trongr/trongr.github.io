@@ -3,7 +3,6 @@
     smartquotes()
     escapeHTMLInCodeBlocks()
     highlightPreCode()
-    toggleConsole()
     initTOC()
   })
 
@@ -12,15 +11,6 @@
       $("#toc").toc()
     } catch (error) {
       // console.error("Cannot generate Table of Contents", error)
-    }
-  }
-
-  function toggleConsole() {
-    try {
-      var show = purl(window.location.href).param("console") == "1"
-      CLI.toggleConsole(show)
-    } catch (er) {
-      console.log("WARNING. toggleConsole: most likely lib not defined:", er)
     }
   }
 
