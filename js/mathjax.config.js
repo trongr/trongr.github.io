@@ -68,6 +68,7 @@ window.MathJax = {
       dd: "\\partial",
       D: "\\Delta",
       e: "\\varepsilon",
+      E: "\\mathbf E",
       g: "\\gamma",
       G: "\\Gamma",
       // gg is >>, do not redefine.

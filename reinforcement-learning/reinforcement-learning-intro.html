@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Reinforcement Learning</title>
+<link rel="stylesheet" href="../css/global.css" />
+<link rel="stylesheet" href="../css/obsidian.min.css" />
+<script src="../js/highlight.min.js"></script>
+<!-- this config must be before MathJax.js: -->
+<script src="../js/mathjax.config.js"></script>
+<script src="../js/MathJax/MathJax.js"></script>
+<!--
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+-->
+<script src="../js/jquery-3.1.0.min.js"></script>
+<script src="../js/smartquotes.js"></script>
+<script src="../js/global.js"></script>
+</head>
+<body>
+<div id="content">
+<h1>Reinforcement Learning</h1>
+
+<h2>Action, observation, reward, history, and state</h2>
+
+<p>
+  <i>Definition. Action $ a_t, $ observation $ o_t, $ reward $ r_t. $ History is
+  a tuple $ (a_1, o_1, r_1, \ldots, a_t, o_t, r_t). $ The agent has a model of
+  the world, which is a function of the history: $ s_t = f(h_t). $</i>
+</p>
+
+<h2>Markov property</h2>
+
+<p>
+  <i>The future is independent of the past given the present, i.e. you only need
+  to know the present to predict the future. Specifically, a state $ s_t $ is
+  Markov if
+
+      $$
+        p(s_{t+1} | s_t, a_t) = p(s_{t+1} | h_t, a_t).
+      $$
+
+    In other words, if the state is Markov, then you don't need to know the full
+    history in order to predict the future, only the current state.</i>
+</p>
+
+<p>
+  <i>Example.</i> If we define the state $ s_t $ as the full history $ h_t $, then it is Markov.
+</p>
+
+<h2>Markov models</h2>
+
+<h3>Full observability: Markov Decision Process (MDP)</h3>
+
+<p>
+  We can also define the state $ s_t = o_t, $ i.e. we're assuming that the
+  current observation is enough to predict the future, i.e. what we're seeing
+  right now gives us complete information about the world (e.g. as in chess).
+</p>
+
+<h3>Partial observability: Partially Observable Markov Decision Process (POMDP)</h3>
+
+<p>
+  Here the agent's state is not the same as the world state, because the agent
+  doesn't have complete knowledge of the world (e.g. as in poker) and has to
+  build its own model from observables, e.g. it might use the full history $ s_t
+  = h_t, $ beliefs of world state, RNN, etc.
+</p>
+
+<h3>Bandits</h3>
+
+<p>
+  In a bandit game, actions have no influence on future observations, e.g.
+  pulling on a slot machine does not affect how the slot machine will respond in
+  the future. In addition, there is no delayed reward: the slot machine rewards
+  immediately.
+</p>
+
+<p>
+  In MDP's and POMDP's, actions influence future observations, and there may be
+  delayed rewards, which makes credit assignment difficult (which previous
+  actions caused the delayed reward).
+</p>
+
+<h2>How the world changes: deterministic v.s. stochastic</h2>
+
+<p>
+  In a deterministic world, given a history, each action maps to a single world
+  state, observation, and possible reward. In a stochastic world, given a
+  history, an action may lead to one of many possible futures; we model this
+  uncertainty by defining a probability distribution on these futures.
+</p>
+
+<p>
+  Deterministic systems are often modeled as stochastic because we don't have a
+  good enough deterministic model for them, e.g. flipping a coin is
+  deterministic: if you know the starting position and velocity of the coin, the
+  type of coin, the type of floor it lands on, etc., and the dynamics of
+  coin-flipping, you can predict with 100% certainty whether it will be head or
+  tail. Nobody has done it because it's hard.
+</p>
+
+<h2>Components of an RL algorithm</h2>
+
+<h3>Model</h3>
+
+<p>
+  An agent's representation of how the world changes in response to agent's
+  actions. A transition / dynamics model predicts the agent's next state given the current state and action:
+
+  $$
+    p(s_{t+1} = s' | s_t = s, a_t = a).
+  $$
+
+  A reward model predicts the immediate reward:
+
+  $$
+    r(s_t = s, a_t = a) = \E[r_t | s_t = s, a_t = a],
+  $$
+
+  i.e. it's the expected value of the reward given a state and action e.g. in a
+  deterministic world, there would be a unique reward given $ (s, a): $ $ r(s_t
+  = s, a_t = a) = \E[r_t | s_t = s, a_t = a] = r_t, $ but in a stochastic world,
+  there would be more than one, each with an associated probability, and here
+  we're taking their weighted average.
+</p>
+
+<h3>Policy function</h3>
+
+<p>
+  A policy $ \p: S \longrightarrow A $ determines how the agent chooses actions. We can have a deterministic policy, which maps a state to a single action:
+
+  $$
+    \p(s) = a,
+  $$
+
+  or a stochastic policy, which maps states to actions over a distribution:
+
+  $$
+    \p(a|s) = p(a_t = a | s_t = s).
+  $$
+
+
+</p>
+
+<h3>Value function</h3>
+
+<p>
+  A value function $ V^\p $ tells us how good a state $ s $ is, by measuring the
+  expected immediate plus discounted future rewards under a particular policy $
+  \p $ acting from $ s: $
+
+  $$
+    V^\p(s) = \E_\p [r_t + \g r_{t+1} + \g^2 r_{t+2} + \cdots | s_t = s].
+  $$
+
+  The discount factor $ \g \in [0, 1] $ specifies how much we care about
+  immediate v.s. future rewards, e.g. $ \g = 0 $ means we only care about the
+  immediate reward $ r_t, $ and larger $ \g $ means we care more about future
+  rewards.
+</p>
+
+<p>
+  We can also define a value function on an action, or on a combination of state
+  and action:
+
+  $$
+    V^\p(s, a) = \E_\p [r_t + \g r_{t+1} + \g^2 r_{t+2} + \cdots | s_t = s, a_t = a].
+  $$
+</p>
+
+<p>
+  Having a value function allows us to compare different policies, and choose
+  the best one.
+</p>
+
+<h2>Exploitation v.s. exploration</h2>
+
+<p>
+  Performance v.s. practice.
+</p>
+
+</div>
+</body>
+</html>
