@@ -39,6 +39,7 @@ window.MathJax = {
       lf: "\\lfloor",
 
       // functions and operators
+      argmax: "\\mathop{\\rm argmax}",
       Lim: "\\lim\\limits",
       Sum: "\\sum\\limits",
       Prod: "\\prod\\limits",

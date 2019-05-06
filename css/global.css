@@ -45,7 +45,11 @@ audio {
   font-style: italic;
 }
 
-a, h1, h2, h3, h4 {
+h1, h2, h3, h4 {
+  /* color: #0070c0; */
+}
+
+a {
   color: #0070c0;
 }
 
@@ -87,12 +91,12 @@ li {
 
 b {
   /* color: #FF5C5C; */
-  color: #c00000;
+  /* color: #c00000; */
 }
 
 i {
   /* color: #6BFF86; */
-  color: #c00000;
+  /* color: #c00000; */
 }
 
 video {
