@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Reinforcement Learning</title>
+<link rel="stylesheet" href="../css/global.css" />
+<link rel="stylesheet" href="../css/obsidian.min.css" />
+<script src="../js/highlight.min.js"></script>
+<!-- this config must be before MathJax.js: -->
+<script src="../js/mathjax.config.js"></script>
+<script src="../js/MathJax/MathJax.js"></script>
+<!--
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+-->
+<script src="../js/jquery-3.1.0.min.js"></script>
+<script src="../js/smartquotes.js"></script>
+<script src="../js/global.js"></script>
+</head>
+<body>
+<div id="content">
+<h1>Bellman equation of a Markov Reward Process</h1>
+
+<h2>Calculating state value function of a MRP: Bellman equation</h2>
+
+<p>
+  We can calculate the state value function by simulating the episodes and
+  calculate each return value, then averaging them together. Alternatively, we
+  can use the Bellman equation
+
+  $$
+    V(s) = R(s) + \g \sum_{s'\in S} p(s'|s) V(s').
+  $$
+</p>
+
+<p>
+  For a finite state MRP, we can express $ V $ in matrix notation:
+
+  $$
+  \begin{aligned}
+  \left( \begin{array} { c }
+  { V \left( s _ { 1 } \right) } \\
+  { \vdots } \\
+  { V \left( s _ { N } \right) } \end{array} \right) &=
+
+  \left( \begin{array} { c } { R \left( s _ { 1 } \right) } \\
+  { \vdots } \\
+  { R \left( s _ { N } \right) } \end{array} \right)
+
+  + \gamma \left( \begin{array} { c c c } { P \left( s _ { 1 } | s _ { 1 } \right) } & { \cdots } & { P \left( s _ { N } | s _ { 1 } \right) } \\
+  { P \left( s _ { 1 } | s _ { 2 } \right) } & { \cdots } & { P \left( s _ { N } | s _ { 2 } \right) } \\
+  { \vdots } & { \ddots } & { \vdots } \\
+  { P \left( s _ { 1 } | s _ { N } \right) } & { \cdots } & { P \left( s _ { N } | s _ { N } \right) } \end{array} \right)
+
+  \left( \begin{array} { c } { V \left( s _ { 1 } \right) } \\
+  { \vdots } \\
+  { V \left( s _ { N } \right) } \end{array} \right) \\
+
+  V &= R + \gamma P V.
+  \end{aligned}
+  $$
+
+  (Note that here $ P $ is the transpose of our previous convention for $ P $ from
+  before.)
+</p>
+
+<p>
+  Now we want to solve for $ V, $ given that $ R $ and $ P $ are known:
+
+  $$
+    \begin{align*}
+    V &= R + \gamma P V \\
+    (I - \g P) V &= R \\
+    V &= (I - \g P)^{-1} R.
+    \end{align*}
+  $$
+
+  This is the analytic solution, which takes somewhere between $ O(N^2) $ and $ O(N^3) $
+  depending on the inversion algorithm used.
+</p>
+
+<h2>Dynamic Programming: Iterative algorithm for computing value of an MRP</h2>
+
+<p>
+  Alternative to the analytic solution is the iterative solution:
+</p>
+
+<p>
+  Initialize $ V_0(s) = 0 $  for all $ s. $ <br/>
+
+  For $ k = 1 $ until convergence: <br/>
+
+  &nbsp;&nbsp;For all $ s \in S $:
+
+  $$
+  V _ { k } ( s ) = R ( s ) + \gamma \sum _ { s ^ { \prime } \in S } P \left( s ^ { \prime } | s \right) V _ { k - 1 } \left( s ^ { \prime } \right).
+  $$
+
+  Computational complexity $ O(N^2) $ for each iteration. Why does this work and
+  how fast does it converge?
+</p>
+
+</div>
+</body>
+</html>

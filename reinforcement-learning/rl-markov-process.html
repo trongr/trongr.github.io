@@ -117,9 +117,60 @@
 
 <h2>Markov reward process (MRP)</h2>
 
-<h2>Markov models</h2>
+<p>
+  <i>Definition. A Markov chain with rewards: $ (S, P, R) $ where $ S $ and $ P $ are a Markov chain, and $ R: S \longrightarrow \bR $ is a reward function, e.g.
 
-<h3>Full observability: Markov Decision Process (MDP)</h3>
+  $$
+    R(s_t = s) = \E[r_t | s_t = s].
+  $$
+  </i>
+</p>
+
+<p>
+  Note that in a Markov reward process, $ R $ is a function only of the state
+  and not an action because there isn't any action.
+</p>
+
+<p>
+  <i>Definition. The horizon is the number of time steps in each episode. Can be
+  infinite. If it is finite, the process is called a finite Markov process.
+  </i>
+</p>
+
+<p>
+  <i>Definition. The return $ G_t $ for a Markov reward process is the
+  discounted sum of rewards from $ t $ to the horizon:
+
+  $$
+    G_t = r_t + \g r_{t+1} + \g^2 r_{t+2} + \cdots.
+  $$
+
+  </i>
+</p>
+
+<p>
+  <i>Definition. The state value function $ V(s) $ for an MRP is the expected
+  return starting from $ s: $
+
+  $$
+    V(s) = \E[G_t | s_t = s] = \E[r_t + \g r_{t+1} + \g^2 r_{t+2} + \cdots | s_t = s].
+  $$
+
+  </i>
+</p>
+
+<p>
+  The state value function $ V $ takes into account the future, whereas the
+  reward function $ R $ only looks at the immediate reward.
+</p>
+
+<h2>Discount factor $ \g $</h2>
+
+<p>
+  Humans empirically act as if there is a discount factor $ \g < 1, $ i.e. the near future is more important than the distant future.
+</p>
+
+<h2>Full observability: Markov Decision Process (MDP)</h2>
 
 <p>
   We can also define the state $ s_t = o_t, $ i.e. we're assuming that the
@@ -127,7 +178,7 @@
   right now gives us complete information about the world (e.g. as in chess).
 </p>
 
-<h3>Partial observability: Partially Observable Markov Decision Process (POMDP)</h3>
+<h2>Partial observability: Partially Observable Markov Decision Process (POMDP)</h2>
 
 <p>
   Here the agent's state is not the same as the world state, because the agent
@@ -136,7 +187,7 @@
   = h_t, $ beliefs of world state, RNN, etc.
 </p>
 
-<h3>Bandits</h3>
+<h2>Bandits</h2>
 
 <p>
   In a bandit game, actions have no influence on future observations, e.g.
