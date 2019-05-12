@@ -78,7 +78,8 @@
   depending on the inversion algorithm used.
 </p>
 
-<h2>Dynamic Programming: Iterative algorithm for computing value of an MRP</h2>
+<h2>Dynamic Programming: Iterative algorithm for computing value of an MRP:
+Bellman backup</h2>
 
 <p>
   Alternative to the analytic solution is the iterative solution:
@@ -95,8 +96,14 @@
   V _ { k } ( s ) = R ( s ) + \gamma \sum _ { s ^ { \prime } \in S } P \left( s ^ { \prime } | s \right) V _ { k - 1 } \left( s ^ { \prime } \right).
   $$
 
-  Computational complexity $ O(N^2) $ for each iteration. Why does this work and
-  how fast does it converge?
+  Computational complexity $ O(N^2) $ for each iteration.
+</p>
+
+<p>
+  The intuition for this algorithm is that we associate a value of zero for each
+  state (initialization), then for each iteration, we add that value to the
+  value of the state before it, i.e. we travel back in time to the previous
+  state (for every state). This is why this algorithm is called Bellman backup.
 </p>
 
 </div>

@@ -39,6 +39,38 @@
   <i>Example.</i> If we define the state $ s_t $ as the full history $ h_t $, then it is Markov.
 </p>
 
+
+<h2>Full v.s. partial observability</h2>
+
+<p>
+  We can  define the state $ s_t = o_t, $ i.e. we're assuming that the current
+  observation is enough to predict the future, i.e. what we're seeing right now
+  gives us complete information about the world (e.g. as in chess).
+</p>
+
+<p>
+  In partially observable Markov processes, the agent's state is not the same as
+  the world state, because the agent doesn't have complete knowledge of the
+  world (e.g. as in poker) and has to build its own model from observables, e.g.
+  it might use the full history $ s_t = h_t, $ beliefs of world state, RNN, etc.
+</p>
+
+<p>
+  In MDP's and POMDP's, actions influence future observations, and there may be
+  delayed rewards, which makes credit assignment difficult (which previous
+  actions caused the delayed reward).
+</p>
+
+<h2>Bandits</h2>
+
+<p>
+  In a bandit game, actions have no influence on future observations, e.g.
+  pulling on a slot machine does not affect how the slot machine will respond in
+  the future. In addition, there is no delayed reward: the slot machine rewards
+  immediately.
+</p>
+
+
 <h2>Markov process or Markov chain</h2>
 
 <p>
@@ -170,37 +202,95 @@
   Humans empirically act as if there is a discount factor $ \g < 1, $ i.e. the near future is more important than the distant future.
 </p>
 
-<h2>Full observability: Markov Decision Process (MDP)</h2>
+<h2> Markov Decision Process (MDP) </h2>
 
 <p>
-  We can also define the state $ s_t = o_t, $ i.e. we're assuming that the
-  current observation is enough to predict the future, i.e. what we're seeing
-  right now gives us complete information about the world (e.g. as in chess).
-</p>
+  <i>Definition. A Markov Decision Process is a tuple $ (S, P, R, A, \g) $ where $
+  (S, P, R) $ is a Markov Reward Process and $ A $ is a set of actions. $ P $ is a dynamics / transition model for each state action pair $ (s, a): $
 
-<h2>Partial observability: Partially Observable Markov Decision Process (POMDP)</h2>
+  $$
+  P \left( s _ { t + 1 } = s ^ { \prime } | s _ { t } = s , a _ { t } = a \right).
+  $$
 
-<p>
-  Here the agent's state is not the same as the world state, because the agent
-  doesn't have complete knowledge of the world (e.g. as in poker) and has to
-  build its own model from observables, e.g. it might use the full history $ s_t
-  = h_t, $ beliefs of world state, RNN, etc.
-</p>
+  $ R $ is the reward function on $ (s, a): $
 
-<h2>Bandits</h2>
+  $$
+  R \left( s _ { t } = s , a _ { t } = a \right) = \mathbb { E } \left[ r _ { t } | s _ { t } = s , a _ { t } = a \right].
+  $$
 
-<p>
-  In a bandit game, actions have no influence on future observations, e.g.
-  pulling on a slot machine does not affect how the slot machine will respond in
-  the future. In addition, there is no delayed reward: the slot machine rewards
-  immediately.
+  $ \g \in [0, 1] $ is the discount factor used to calculate the return $ G_t. $
+  </i>
 </p>
 
 <p>
-  In MDP's and POMDP's, actions influence future observations, and there may be
-  delayed rewards, which makes credit assignment difficult (which previous
-  actions caused the delayed reward).
+  Note that actions add another dimension to the transition model. One way to
+  represent this model is as a series of transition matrices, one for each
+  action, e.g. the transition model for action $ a_1 $ is
+
+  $$
+  P \left( s ^ { \prime } | s , a _ { 1 } \right) = \left( \begin{array} { l l l l l l l } { 1 } & { 0 } & { 0 } & { 0 } & { 0 } & { 0 } & { 0 } \\ { 1 } & { 0 } & { 0 } & { 0 } & { 0 } & { 0 } & { 0 } \\ { 0 } & { 1 } & { 0 } & { 0 } & { 0 } & { 0 } & { 0 } \\ { 0 } & { 0 } & { 1 } & { 0 } & { 0 } & { 0 } & { 0 } \\ { 0 } & { 0 } & { 0 } & { 1 } & { 0 } & { 0 } & { 0 } \\ { 0 } & { 0 } & { 0 } & { 0 } & { 1 } & { 0 } & { 0 } \\ { 0 } & { 0 } & { 0 } & { 0 } & { 0 } & { 1 } & { 0 } \end{array} \right).
+  $$
+
+  with rows and columns representing starting and ending states, just like
+  before. Similarly the transition model for action $ a_2 $ is
+
+  $$
+  P \left( s ^ { \prime } | s , a _ { 2 } \right) = \left( \begin{array} { l l l l l l l } { 0 } & { 1 } & { 0 } & { 0 } & { 0 } & { 0 } & { 0 } \\ { 0 } & { 0 } & { 1 } & { 0 } & { 0 } & { 0 } & { 0 } \\ { 0 } & { 0 } & { 0 } & { 1 } & { 0 } & { 0 } & { 0 } \\ { 0 } & { 0 } & { 0 } & { 0 } & { 1 } & { 0 } & { 0 } \\ { 0 } & { 0 } & { 0 } & { 0 } & { 0 } & { 1 } & { 0 } \\ { 0 } & { 0 } & { 0 } & { 0 } & { 0 } & { 0 } & { 1 } \\ { 0 } & { 0 } & { 0 } & { 0 } & { 0 } & { 0 } & { 1 } \end{array} \right).
+  $$
+
+  The full transition model would then be a 3-dimensional array.
 </p>
+
+<h2>MDP with policy $ \p $</h2>
+
+<p>
+  An MDP with a policy $ \p $ induces a MRP $ (S, R^\p, P^\p, \g) $ where
+
+  $$
+  \begin{aligned} R ^ { \pi } ( s ) & = \sum _ { a \in A } \pi ( a | s ) R ( s , a ) \\ P ^ { \pi } \left( s ^ { \prime } | s \right) & = \sum _ { a \in A } \pi ( a | s ) P \left( s ^ { \prime } | s , a \right), \end{aligned}
+  $$
+
+  i.e. the immediate reward of a state $ s $ under policy $ \p $ is the sum of
+  the rewards of taking action $ a $ in state $ s $ weighted by the probability
+  of taking $ a $ in $ s; $ similarly, the probability of getting to $ s' $ from
+  $ s $ is the sum of the probabilities of getting to $ s' $ from $ s $ by
+  taking action $ a $ weighted by the probability of taking action $ a $ in $ s.
+  $
+</p>
+
+<p>
+  Being able to induce an MRP from an MDP means we can compute the value of a
+  policy of an MDP using the same techniques as we would to compute the value of
+  an MRP, namely evaluation by brute force simulation, analytic solution, or
+  iteratively using dynamic programming. For example, we can adapt Bellman
+  backup from MRP to evaluate a policy of an MDP:
+</p>
+
+<h2>MDP policy evaluation: Bellman backup iterative algorithm</h2>
+
+<p>
+  Initialize $ V_0(s) = 0 $  for all $ s. $ <br/>
+
+  For $ k = 1 $ until convergence: <br/>
+
+  &nbsp;&nbsp;For all $ s \in S $:
+
+  $$
+  \begin{align*}
+  V _ { k } ^ { \pi } ( s )
+
+  &= r ( s , \pi ( s ) ) + \gamma \sum _ { s ^ { \prime } \in S } p \left( s ^ { \prime } | s , \pi ( s ) \right) V _ { k - 1 } ^ { \pi } \left( s ^ { \prime } \right) \\
+
+  &= r ( s , a ) + \gamma \sum _ { s ^ { \prime } \in S } p \left( s ^ { \prime } | s , a \right) V _ { k - 1 } ^ { \pi } \left( s ^ { \prime } \right). \\
+
+  \end{align*}
+
+  $$
+
+  For simplicity we're assuming $ \p $ is deterministic, so that $ \p(s) = a $
+  is fixed for each $ s. $
+</p>
+
 
 </div>
 </body>
