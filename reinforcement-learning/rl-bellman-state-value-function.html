@@ -106,6 +106,164 @@ Bellman backup</h2>
   state (for every state). This is why this algorithm is called Bellman backup.
 </p>
 
+
+<h2>MDP with policy $ \p $</h2>
+
+<p>
+  An MDP with a policy $ \p $ induces a MRP $ (S, R^\p, P^\p, \g) $ where
+
+  $$
+  \begin{aligned} R ^ { \pi } ( s ) & = \sum _ { a \in A } \pi ( a | s ) R ( s , a ) \\ P ^ { \pi } \left( s ^ { \prime } | s \right) & = \sum _ { a \in A } \pi ( a | s ) P \left( s ^ { \prime } | s , a \right), \end{aligned}
+  $$
+
+  i.e. the immediate reward of a state $ s $ under policy $ \p $ is the sum of
+  the rewards of taking action $ a $ in state $ s $ weighted by the probability
+  of taking $ a $ in $ s; $ similarly, the probability of getting to $ s' $ from
+  $ s $ is the sum of the probabilities of getting to $ s' $ from $ s $ by
+  taking action $ a $ weighted by the probability of taking action $ a $ in $ s.
+  $
+</p>
+
+<p>
+  Being able to induce an MRP from an MDP means we can compute the value of a
+  policy of an MDP using the same techniques as we would to compute the value of
+  an MRP, namely evaluation by brute force simulation, analytic solution, or
+  iteratively using dynamic programming. For example, we can adapt Bellman
+  backup from MRP to evaluate a policy of an MDP:
+</p>
+
+<h2>MDP policy evaluation: Bellman backup iterative algorithm</h2>
+
+<p>
+  Initialize $ V_0(s) = 0 $  for all $ s. $ <br/>
+
+  For $ k = 1 $ until convergence: <br/>
+
+  &nbsp;&nbsp;For all $ s \in S $:
+
+  $$
+  \begin{align*}
+  V _ { k } ^ { \pi } ( s )
+
+  &= r ( s , \pi ( s ) ) + \gamma \sum _ { s ^ { \prime } \in S } p \left( s ^ { \prime } | s , \pi ( s ) \right) V _ { k - 1 } ^ { \pi } \left( s ^ { \prime } \right) \\
+
+  &= r ( s , a ) + \gamma \sum _ { s ^ { \prime } \in S } p \left( s ^ { \prime } | s , a \right) V _ { k - 1 } ^ { \pi } \left( s ^ { \prime } \right). \\
+
+  \end{align*}
+
+  $$
+
+  For simplicity we're assuming $ \p $ is deterministic, so that $ \p(s) = a $
+  is fixed for each $ s. $
+</p>
+
+<h2>MDP Control</h2>
+
+<p>
+  Assuming the state and action sets are finite, there exists a unique optimal
+  value function over all policies $ \p, $ since we can enumerate out all the
+  possible policies and evaluate $ V^\p(s) $ for all $ \p $ and $ s, $ and
+  choose the largest one. Now we can calculate an optimal policy: given a state
+  $ s, $ pick any action $ \p(s) $ that gives the optimal value $ V^{\p}(s), $
+  and that gives us an optimal policy:
+
+  $$
+  \pi ^ { * } ( s ) = \argmax _ { \pi } V ^ { \pi } ( s ).
+  $$
+
+  Note that the optimal value function is unique, but the optimal policy
+  function is not.
+</p>
+
+<p>
+  Example. There are $ |A|^{|S|} $ possible policies (perhaps not all are valid
+  because some actions are impossible to do in certain states) given actions $ A
+  $ and states $ S. $
+</p>
+
+<h2>Policy Search: Iterative</h2>
+
+<p>
+  One way to compute the best policy is by enumeration (brute-force), which
+  takes a long time, $ O(|A|^{|S|}) $. The other is Policy Iteration, which is
+  usually more efficient:
+</p>
+<p>
+  Set $ i = 0. $<br/>
+  Initialize $ \p_0 (s) $ randomly for all states $ s. $<br/>
+  While $ i = 0 $ or $ \left\| \pi _ { i } - \pi _ { i - 1 } \right\| _ { 1 } > 0 $:<br/>
+  &nbsp;&nbsp;Evaluate $ V^{\p_i} $.<br/>
+  &nbsp;&nbsp;Somehow improve $ \p_i $ to get $ \p_{i+1}. $<br/>
+  &nbsp;&nbsp;$ i = i+1. $<br/>
+</p>
+<p>
+  The L1-norm in the while clause measures if the policy changed for any state.
+</p>
+
+<h2>State-action value function of a policy</h2>
+
+<p>
+  In order to improve the policy, we need to define the state-action value function of a policy:
+
+  $$
+  Q ^ { \pi } ( s , a ) = R ( s , a ) + \gamma \sum _ { s ^ { \prime } \in S } P \left( s ^ { \prime } | s , a \right) V ^ { \pi } \left( s ^ { \prime } \right).
+  $$
+
+  This says that we first take action $ a $ in $ s, $ then calculate the value
+  of following policy $ \p $ from then onwards. This function measures the value
+  of a policy starting at state $ s $ and taking action $ a. $
+</p>
+
+<h2>Policy improvement</h2>
+
+<p>
+  The algorithm for improving a policy is:
+</p>
+<p>
+  Calculate the state-value of policy $ \p_i $: for every $ s, a: $
+
+  $$
+  Q ^ { \pi _ { i } } ( s , a ) = R ( s , a ) + \gamma \sum _ { s ^ { \prime } \in S } P \left( s ^ { \prime } | s , a \right) V ^ { \pi _ { i } } \left( s ^ { \prime } \right).
+  $$
+
+  Compute new policy $ \p_{i+1}: $ for every state $ s $:
+
+  $$
+  \pi _ { i + 1 } ( s ) = \argmax _ { a } Q ^ { \pi _ { i } } ( s , a ) .
+  $$
+
+</p>
+<p>
+  This says that given the policy we have right now, the next best policy is to
+  take the action that yields the most immediate reward, and then follow the old
+  policy for future time steps, i.e. delay using the old policy one time step
+  into the future, i.e. we're calculating the best policy backwards in time from
+  positive infinity.
+</p>
+
+<p>
+  This makes sense because in the distant future, things are kinda hazy so it
+  doesn't matter what you do ($ \p_0 $ initialized randomly). As you get closer
+  to the present, your policies are slightly improved at each time step, and you
+  stop policy improvement when you see no discernible improvement.
+</p>
+
+<p>
+  Proposition. <i>Iterative policy improvement yields monotonically better
+  policies, i.e.
+
+  $$
+  V ^ { \pi _ { i + 1 } } \geq V ^ { \pi _ { i } }
+  $$
+
+  with strict inequality if $ \pi _ { i }  $ is suboptimal.
+  </i>
+</p>
+
+<p>
+  TODO. https://youtu.be/E3f2Camj0Is?t=3570
+</p>
+
 </div>
 </body>
 </html>

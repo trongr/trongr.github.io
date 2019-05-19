@@ -241,57 +241,6 @@
   The full transition model would then be a 3-dimensional array.
 </p>
 
-<h2>MDP with policy $ \p $</h2>
-
-<p>
-  An MDP with a policy $ \p $ induces a MRP $ (S, R^\p, P^\p, \g) $ where
-
-  $$
-  \begin{aligned} R ^ { \pi } ( s ) & = \sum _ { a \in A } \pi ( a | s ) R ( s , a ) \\ P ^ { \pi } \left( s ^ { \prime } | s \right) & = \sum _ { a \in A } \pi ( a | s ) P \left( s ^ { \prime } | s , a \right), \end{aligned}
-  $$
-
-  i.e. the immediate reward of a state $ s $ under policy $ \p $ is the sum of
-  the rewards of taking action $ a $ in state $ s $ weighted by the probability
-  of taking $ a $ in $ s; $ similarly, the probability of getting to $ s' $ from
-  $ s $ is the sum of the probabilities of getting to $ s' $ from $ s $ by
-  taking action $ a $ weighted by the probability of taking action $ a $ in $ s.
-  $
-</p>
-
-<p>
-  Being able to induce an MRP from an MDP means we can compute the value of a
-  policy of an MDP using the same techniques as we would to compute the value of
-  an MRP, namely evaluation by brute force simulation, analytic solution, or
-  iteratively using dynamic programming. For example, we can adapt Bellman
-  backup from MRP to evaluate a policy of an MDP:
-</p>
-
-<h2>MDP policy evaluation: Bellman backup iterative algorithm</h2>
-
-<p>
-  Initialize $ V_0(s) = 0 $  for all $ s. $ <br/>
-
-  For $ k = 1 $ until convergence: <br/>
-
-  &nbsp;&nbsp;For all $ s \in S $:
-
-  $$
-  \begin{align*}
-  V _ { k } ^ { \pi } ( s )
-
-  &= r ( s , \pi ( s ) ) + \gamma \sum _ { s ^ { \prime } \in S } p \left( s ^ { \prime } | s , \pi ( s ) \right) V _ { k - 1 } ^ { \pi } \left( s ^ { \prime } \right) \\
-
-  &= r ( s , a ) + \gamma \sum _ { s ^ { \prime } \in S } p \left( s ^ { \prime } | s , a \right) V _ { k - 1 } ^ { \pi } \left( s ^ { \prime } \right). \\
-
-  \end{align*}
-
-  $$
-
-  For simplicity we're assuming $ \p $ is deterministic, so that $ \p(s) = a $
-  is fixed for each $ s. $
-</p>
-
-
 </div>
 </body>
 </html>
