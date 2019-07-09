@@ -1,6 +1,6 @@
-function add(a: number, b: number) {
+function add(a: number, b: number): number {
   return a + b
 }
 
-const a = add(1, 3)
+export const a = add(1, 3)
 console.log(a)

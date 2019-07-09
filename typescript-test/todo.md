@@ -1,1 +1,0 @@
-https://angular-2-training-book.rangle.io/handout/features/interfaces.html
