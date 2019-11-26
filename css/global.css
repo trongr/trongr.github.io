@@ -10,10 +10,18 @@ body {
   background-color: white;
 }
 
-#content {
+#content, #indexBigList {
   margin: 0 auto;
   padding: 30px;
   max-width: 555px;
+}
+
+#indexBigList ol a {
+  text-decoration: none;
+}
+
+#indexBigList ol li {
+  margin: 0 0 0 0;
 }
 
 table, th, td {
@@ -122,14 +130,6 @@ ol {
   overflow: hidden;
   /* cause list items don't get pushed aside by floating elements, only
                          by their contents */
-}
-
-.biglist a {
-  text-decoration: none;
-}
-
-.biglist li {
-  margin: 0 0 0 0;
 }
 
 .red {

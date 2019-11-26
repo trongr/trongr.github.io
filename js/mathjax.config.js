@@ -54,6 +54,7 @@ window.MathJax = {
       char: "\\mathop{\\rm char}",
       mod: "\\bmod",
       Mod: "\\mod",
+      Oplus: "\\bigoplus\\limits",
 
       // symbols
       0: "\\varnothing",
