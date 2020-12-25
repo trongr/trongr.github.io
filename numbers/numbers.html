@@ -20,93 +20,6 @@
 <body>
 <div id="content">
 
-<h1>Number Theory</h1>
-
-<!--<img src="images/ficcal1.png">
-<div class="epigraph">
-    <div class="quote">
-    </div>
-    <div class="author">
-        Calvin and Hobbes
-    </div>
-</div>-->
-
-<h3>Bezout's Identity</h3>
-
-<p><span>
-    <b>Lemma.</b> <i>Let d be the greatest common divisor of nonzero
-    integers a and b. Then there exist integers x and y s.t.
-
-    $$ax + by = d.$$</i>
-</span></p>
-
-<h1>Congruences</h1>
-
-<p>
-    <b>Definition.</b> <i>If a nonzero integer $m$ divides $a-b,$ then
-we say that $a$ is congruent to $b$ modulo $m$ and write
-
-$$a \equiv b \mod m.$$</i>
-</p>
-
-<p>
-    <b>Theorem.</b> <i>
-<ul>
-<li>Congruence respects addition and multiplication: if $a \eq b
-\mod m$ and $c \eq d \mod m,$ then
-
-\begin{align*}
-a + c &\eq b + d && \mod m \\
-ac &\eq bd && \mod m.
-\end{align*}</li>
-<li>If $a \eq b \mod m$ and $d \mid m,$ then $a \eq b \mod d.$</li>
-<li>If $a \eq b \mod m$ and $c \neq 0,$ then $ac \eq bc \mod mc.$</li>
-</ul>
-</i>
-</p>
-
-<p>
-    Note. We're allowing the divisor $d$ and $mc$ to be negative.
-</p>
-
-<p>
-    <b>Corollary.</b> <i>Let $f$ be a polynomial with integer
-coefficients. If
-
-$$a \eq b \mod m$$
-
-then
-
-$$f(a) \eq f(b) \mod m.$$</i>
-</p>
-
-<p>
-    <b>Theorem.</b> <i>
-
-<ul>
-<li>$ax \eq ay \mod m$ iff $x \eq y \mod \frac{m}{(a, m)}.$</li>
-<li>Let $(a, m) = 1.$ Then $ax \eq ay \mod m$ iff $x \eq y \mod m.$</li>
-<li>$x \eq y \mod m_i$ for $i=1,\ldots,r$ iff $x \eq y \mod [m_1,\ldots,m_r].$</li>
-</ul></i>
-</p>
-
-<h3>Complete residue system</h3>
-
-<p>
-    <b>Definition.</b> <i>If $x \eq y \mod m,$ then $y$ is called a
-residue of $x$ modulo $m.$ A set $x_1,\dots,x_m$ is called a
-complete residue system mod $m$ if for every integer $y$ there is
-an $x_j$ s.t. $y \eq x_j \mod m.$</i>
-</p>
-
-<p>
-    A set of $m$ integers forms a complete residue system mod $m$ iff all integers in the set are distinct mod $m.$
-</p>
-
-<p>
-    <b>Theorem.</b> <i>If $b \equiv c \mod m,$ then $(b, m) = (c, m).$</i>
-</p>
-
 <h3>Fermat's Theorem</h3>
 
 <p>
@@ -165,9 +78,13 @@ $$a^{\f(m)} \equiv 1 \mod m.$$</i>
 </span></p>
 
 <p><span>
-    <b>Lemma.</b> <i>Let q be a prime factor of $a^2 + b^2.$ If $q
+    <b>Lemma 2.14.</b> <i>Let q be a prime factor of $a^2 + b^2.$ If $q
     \equiv 3 \mod 4,$ then $q|a$ and $q|b.$</i>
 </span></p>
+
+<p>
+  Furthermore, since $ q|a, $ we have $ q^2|a^2, $ and similarly $ q^2|b^2. $ Hence $ q^2 | a^2 + b^2. $
+</p>
 
 <p><span>
     <b>Theorem (Fermat).</b> <i>Write the canonical factorization of n
@@ -188,10 +105,11 @@ $$a^{\f(m)} \equiv 1 \mod m.$$</i>
 <p><span>
     <b>Exercise.</b> <i>
         <ul>
-            <li>Any number that is a square must have one of the
-            following for its units digit: $0, 1, 4, 5, 6, 9.$</li>
-            <li>Any number that is a fourth power must have one of the
-            following for its units digit: $0, 1, 5, 6.$</li>
+            <li>Any number that is a square must have one of the following for
+            its units digit: $0, 1, 4, 5, 6, 9.$</li>
+
+            <li>Any number that is a fourth power must have one of the following
+            for its units digit: $0, 1, 5, 6.$</li>
         </ul>
     </i>
 </span></p>
@@ -212,8 +130,6 @@ $$a^{\f(m)} \equiv 1 \mod m.$$</i>
     Rewrite $3^{2n+1} + 2^{n+2} = 9^{n}3 + 2^{n}4 \equiv 2^{n}3 + 2^{n}4 \equiv
     2^{n}(3 + 4) \equiv 0 \mod 7.$
 </span></p>
-
-
 
 </div>
 </body>
